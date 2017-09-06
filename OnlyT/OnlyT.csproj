@@ -74,15 +74,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EventArgs\TimerChangedEventArgs.cs" />
+    <Compile Include="Models\DisplayDeviceData.cs" />
+    <Compile Include="Models\MonitorItem.cs" />
+    <Compile Include="Services\Monitors\DisplayDevices.cs" />
+    <Compile Include="Services\Monitors\IMonitorsService.cs" />
+    <Compile Include="Services\Monitors\MonitorsService.cs" />
+    <Compile Include="Services\Monitors\NativeMethods.cs" />
     <Compile Include="Timer\ITalkTimerService.cs" />
     <Compile Include="Timer\TalkTimerService.cs" />
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />
     <Compile Include="ViewModel\OperatorPageViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TimerOutputWindowViewModel.cs" />
     <Compile Include="Windows\OperatorPage.xaml.cs">
       <DependentUpon>OperatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TimerOutputWindow.xaml.cs">
       <DependentUpon>TimerOutputWindow.xaml</DependentUpon>
@@ -102,6 +112,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\OperatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

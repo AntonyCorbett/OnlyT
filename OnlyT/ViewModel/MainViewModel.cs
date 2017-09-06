@@ -22,9 +22,14 @@ namespace OnlyT.ViewModel
       {
          Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
          _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
-         
+         _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
+
          Messenger.Default.Send(new NavigateMessage(OperatorPageViewModel.PageName, null));
-         OpenTimerWindow();
+
+         if (!IsInDesignMode)
+         {
+            OpenTimerWindow();
+         }
       }
 
       private void OnNavigate(NavigateMessage message)

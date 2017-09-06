@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="OnlyT.Windows.SettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OnlyT.Windows"
+             DataContext="{Binding Settings, Mode=OneWay, Source={StaticResource Locator}}"             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="Margin" Value="-5,0,0,0" />
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard >
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="259*"/>
+        </Grid.RowDefinitions>
+        
+        <Button Grid.Row="0" Command="{Binding NavigateOperatorCommand}">
+            <Path Fill="Black" Data="M12.98431,0.00039917452C13.39189,0.014400231,13.670029,0.39642023,13.670029,1.0964207L13.670029,6.1874495C13.670029,6.4934812,13.874008,6.6964851,14.180038,6.6964851L31.491013,6.6964851C31.796005,6.6964851,31.999985,6.900466,31.999985,7.2064977L31.999985,14.334524C31.999985,14.639518,31.796005,14.843499,31.491013,14.843499L14.180038,14.843499C13.874008,14.843499,13.670029,15.04754,13.670029,15.352535L13.670029,20.138568C13.670029,21.360561,12.957992,21.767545,11.939011,20.953577L0.5339815,11.788491C-0.17799383,11.279516,-0.17799383,10.159515,0.5339815,9.6504799L12.14299,0.38346564C12.448616,0.11608436,12.739762,-0.0080016943,12.98431,0.00039917452z"></Path>
+        </Button>
+
+        <ScrollViewer Grid.Row="1" Padding="5,0,5,10">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="0,10,0,0" Text="{Binding AppVersionStr}" Foreground="CadetBlue"/>
+
+                <Label Style="{StaticResource LabelStyle}">Monitor:</Label>
+                <ComboBox ItemsSource="{Binding Monitors}" 
+                          DisplayMemberPath="MonitorName" 
+                          SelectedValuePath="MonitorId" 
+                          SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using OnlyT.Timer;
+using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
 {
@@ -14,8 +16,6 @@ namespace OnlyT.ViewModel
    {
       public static string PageName => "OperatorPage";
       private static readonly int _secsPerMinute = 60;
-      private static readonly int _minsPerHour = 60;
-      private static readonly int _secsPerHour = _secsPerMinute * _minsPerHour;
       private static readonly int _tenMinsInSecs = 600;
       private static readonly string _unknownTalkTitle = "Unknown";
 
@@ -32,6 +32,12 @@ namespace OnlyT.ViewModel
 
          StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
+         SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
+      }
+
+      private void NavigateSettings()
+      {
+         Messenger.Default.Send(new NavigateMessage(SettingsPageViewModel.PageName, null));
       }
 
       private void StopTimer()
@@ -128,5 +134,6 @@ namespace OnlyT.ViewModel
 
       public RelayCommand StartCommand { get; set; }
       public RelayCommand StopCommand { get; set; }
+      public RelayCommand SettingsCommand { get; set; }
    }
 }
