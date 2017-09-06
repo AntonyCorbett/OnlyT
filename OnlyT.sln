@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT", "OnlyT\OnlyT.csproj", "{4A02D18A-0956-40FA-A4EC-9CB27A72B455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT.AnalogueClock", "OnlyT.AnalogueClock\OnlyT.AnalogueClock.csproj", "{5A65FEAF-791D-417C-A355-3155A1B1DF19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4A02D18A-0956-40FA-A4EC-9CB27A72B455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A02D18A-0956-40FA-A4EC-9CB27A72B455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A02D18A-0956-40FA-A4EC-9CB27A72B455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A65FEAF-791D-417C-A355-3155A1B1DF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A65FEAF-791D-417C-A355-3155A1B1DF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A65FEAF-791D-417C-A355-3155A1B1DF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A65FEAF-791D-417C-A355-3155A1B1DF19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

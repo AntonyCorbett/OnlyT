@@ -1,0 +1,18 @@
+﻿<Window x:Class="OnlyT.TimerOutputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
+        xmlns:local="clr-namespace:OnlyT"
+        mc:Ignorable="d"
+        Title="TimerOutputWindow" Height="300" Width="384.878" Loaded="Window_Loaded" WindowStyle="None" Background="Black">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="248*"/>
+            <ColumnDefinition Width="129*"/>
+        </Grid.ColumnDefinitions>
+
+        <clock:Clock Margin="10,52,10,39" />
+    </Grid>
+</Window>

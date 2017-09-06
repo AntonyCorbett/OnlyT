@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="OnlyT.Windows.OperatorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      DataContext="{Binding Operator, Mode=OneWay, Source={StaticResource Locator}}"             
+      xmlns:local="clr-namespace:OnlyT.Windows"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="131*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="39*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock TextWrapping="NoWrap" Grid.Row="0" FontSize="24" Text="{Binding TalkTitle}" />
+
+
+        <Border Grid.Row="1" Background="Black" CornerRadius="10" Margin="0,0,0,10" Padding="10" >
+            <TextBlock TextWrapping="NoWrap" 
+                       FontSize="76" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold" 
+                       Foreground="Chartreuse"
+                       Text="{Binding CurrentTimerValueString}" />
+        </Border>
+
+        <Button Grid.Row="2" Command="{Binding StartCommand}" 
+                Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BoolToVis}}">
+            <Viewbox Margin="10">
+                <Path Data="M0,0L25.194,16 0,32z" Stretch="Uniform" Fill="ForestGreen" 
+                      Width="48" Height="48" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                </Path>
+            </Viewbox>
+        </Button>
+
+        <Button Grid.Row="2" Command="{Binding StopCommand}"
+                Visibility="{Binding Path=IsRunning, Converter={StaticResource BoolToVis}}">
+            <Viewbox Margin="10">
+                <Path Data="M0,0L32,0 32,32 0,32z" Stretch="Uniform" Fill="Brown" 
+                      Width="48" Height="48" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                </Path>
+            </Viewbox>
+        </Button>
+
+    </Grid>
+</UserControl>
