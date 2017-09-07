@@ -9,6 +9,10 @@ namespace OnlyT.ViewModel
 {
    internal class TimerOutputWindowViewModel : ViewModelBase
    {
+      public TimerOutputWindowViewModel()
+      {
+
+      }
 
       public override void Cleanup()
       {

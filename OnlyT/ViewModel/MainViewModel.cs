@@ -8,6 +8,8 @@ using System;
 using OnlyT.Windows;
 using System.ComponentModel;
 using OnlyT.Timer;
+using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace OnlyT.ViewModel
 {
@@ -25,9 +27,14 @@ namespace OnlyT.ViewModel
          _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
 
          Messenger.Default.Send(new NavigateMessage(OperatorPageViewModel.PageName, null));
+         LaunchTimerWindowAsync();
+      }
 
+      private async Task LaunchTimerWindowAsync()
+      {
          if (!IsInDesignMode)
          {
+            await Task.Delay(1500);
             OpenTimerWindow();
          }
       }
@@ -42,10 +49,7 @@ namespace OnlyT.ViewModel
       private FrameworkElement _currentPage;
       public FrameworkElement CurrentPage
       {
-         get
-         {
-            return _currentPage;
-         }
+         get => _currentPage;
          set
          {
             if (_currentPage != value)
@@ -74,6 +78,9 @@ namespace OnlyT.ViewModel
          var area = System.Windows.Forms.Screen.AllScreens[1].WorkingArea;
          _timerWindow.Left = area.Left;
          _timerWindow.Top = area.Top;
+         _timerWindow.Width = 0;
+         _timerWindow.Height = 0;
+
          _timerWindow.Topmost = true;
          _timerWindow.Show();
       }

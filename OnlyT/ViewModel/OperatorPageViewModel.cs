@@ -27,8 +27,8 @@ namespace OnlyT.ViewModel
          _timerService = timerService;
          _timerService.TimerChangedEvent += TimerChangedHandler;
 
-         TargetSeconds = _tenMinsInSecs;
-         TalkTitle = _unknownTalkTitle;
+         _targetSeconds= _tenMinsInSecs;
+         _talkTitle = _unknownTalkTitle;
 
          StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
