@@ -37,5 +37,9 @@ namespace OnlyT.Services.Monitors
          return devices.SingleOrDefault(x => x.Name.StartsWith(screen.DeviceName));
       }
 
+      public MonitorItem GetMonitorItem(string monitorId)
+      {
+         return GetSystemMonitors().SingleOrDefault(x => x.MonitorId.Equals(monitorId));
+      }
    }
 }

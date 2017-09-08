@@ -120,4 +120,7 @@
   <data name="APP_VER" xml:space="preserve">
     <value>Version {0}</value>
   </data>
+  <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
+    <value>Could not create folder {0}</value>
+  </data>
 </root>

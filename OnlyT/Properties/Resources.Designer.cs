@@ -68,5 +68,14 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("APP_VER", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not create folder {0}.
+        /// </summary>
+        internal static string CREATE_FOLDER_ERROR {
+            get {
+                return ResourceManager.GetString("CREATE_FOLDER_ERROR", resourceCulture);
+            }
+        }
     }
 }

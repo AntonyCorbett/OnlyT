@@ -40,8 +40,8 @@
 
                 <Label Style="{StaticResource LabelStyle}">Monitor:</Label>
                 <ComboBox ItemsSource="{Binding Monitors}" 
-                          DisplayMemberPath="MonitorName" 
                           SelectedValuePath="MonitorId" 
+                          DisplayMemberPath="MonitorName"
                           SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
 
             </StackPanel>

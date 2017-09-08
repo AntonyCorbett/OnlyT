@@ -138,9 +138,7 @@ namespace OnlyT.AnalogueClock
          _animationCurrentAngles.SecondsAngle = AnimateHand(_secondHand, _animationCurrentAngles.SecondsAngle, _animationTargetAngles.SecondsAngle);
          _animationCurrentAngles.MinutesAngle = AnimateHand(_minuteHand, _animationCurrentAngles.MinutesAngle, _animationTargetAngles.MinutesAngle);
          _animationCurrentAngles.HoursAngle = AnimateHand(_hourHand, _animationCurrentAngles.HoursAngle, _animationTargetAngles.HoursAngle);
-
-         _animationTargetAngles = GenerateTargetAngles();
-
+         
          if (AnimationShouldContinue())
          {
             ((DispatcherTimer) sender).Start();
@@ -155,7 +153,7 @@ namespace OnlyT.AnalogueClock
       {
          if (Math.Abs(currentAngle - targetAngle) > _angleTolerance)
          {
-            double delta = (targetAngle - currentAngle) / 10;
+            double delta = (targetAngle - currentAngle) / 5;
             currentAngle += delta;
             
             ((DropShadowEffect)hand.Effect).Direction = currentAngle;
