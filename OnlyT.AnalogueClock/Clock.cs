@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Converters;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -175,6 +176,139 @@ namespace OnlyT.AnalogueClock
       {
          base.OnApplyTemplate();
 
+         GetHandRefs();
+
+         if (GetTemplateChild("ClockCanvas") is Canvas cc)
+         {
+            GenerateHourMarkers(cc);
+            GenerateHourNumbers(cc);
+         }
+      }
+
+      private TextBlock CreateHourNumberTextBlock(int hour)
+      {
+         return new TextBlock
+         {
+            Text = hour.ToString(),
+            FontSize = 36,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            FontWeight = FontWeights.Bold,
+            Foreground = Brushes.DarkSlateBlue
+         };
+      }
+
+      private void GenerateHourNumbers(Canvas canvas)
+      {
+         double clockRadius = canvas.Width / 2;
+         double centrePointRadius = clockRadius - 50;
+         double borderSize = 80;
+
+         for (int n=0; n<12; ++n)
+         {
+            var angle = n * 30;
+            var angleRadians = angle * Math.PI / 180;
+
+            var hour = n == 0 ? 12 : n;
+
+            var t = CreateHourNumberTextBlock(hour);
+            var b = new Border
+            {
+               Width = borderSize,
+               Height = borderSize,
+               Child = t
+            };
+            
+            var x = centrePointRadius * Math.Sin(angleRadians);
+            var y = Math.Sqrt(centrePointRadius * centrePointRadius - x * x);
+
+            if (n > 3 && n < 9)
+            {
+               y = -y;
+            }
+
+            canvas.Children.Add(b);
+            Canvas.SetLeft(b, clockRadius + x - borderSize / 2);
+            Canvas.SetTop(b, clockRadius - y - borderSize / 2);
+         }
+      }
+
+      private void GenerateHourMarkers(Canvas canvas)
+      {
+         var angle = 0;
+         for (var n = 0; n < 4; ++n)
+         {
+            var line = CreateMajorHourMarker();
+            line.RenderTransform = new RotateTransform(angle += 90, 250, 250);
+            canvas.Children.Add(line);
+         }
+
+         for (var n = 0; n < 12; ++n)
+         {
+            if (n % 3 > 0)
+            {
+               var line = CreateMinorHourMarker();
+               line.RenderTransform = new RotateTransform(angle, 250, 250);
+               canvas.Children.Add(line);
+            }
+
+            angle += 30;
+         }
+
+         for (var n = 0; n < 60; ++n)
+         {
+            if (n % 5 > 0)
+            {
+               var line = CreateMinuteMarker();
+               line.RenderTransform = new RotateTransform(angle, 250, 250);
+               canvas.Children.Add(line);
+            }
+
+            angle += 6;
+         }
+      }
+
+      private Line CreateMajorHourMarker()
+      {
+         return new Line
+         {
+            Stroke = Brushes.Black,
+            StrokeThickness = 7,
+            X1 = 250,
+            Y1 = 19,
+            X2 = 250,
+            Y2 = 27
+         };
+      }
+
+      private Line CreateMinorHourMarker()
+      {
+         return new Line
+         {
+            Stroke = Brushes.Black,
+            StrokeThickness = 3,
+            X1 = 250,
+            Y1 = 19,
+            X2 = 250,
+            Y2 = 25
+         };
+      }
+
+      private Line CreateMinuteMarker()
+      {
+         return new Line
+         {
+            Stroke = Brushes.Black,
+            StrokeThickness = 1,
+            X1 = 250,
+            Y1 = 19,
+            X2 = 250,
+            Y2 = 25
+         };
+      }
+
+      private void GetHandRefs()
+      {
          if (GetTemplateChild("MinuteHand") is Line line1)
          {
             _minuteHand = line1;
@@ -211,6 +345,5 @@ namespace OnlyT.AnalogueClock
             };
          }
       }
-
    }
 }

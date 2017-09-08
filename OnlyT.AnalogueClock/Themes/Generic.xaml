@@ -3,26 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:OnlyT.AnalogueClock">
 
-    <Style x:Key="HourMarkerMajor" TargetType="Line">
-        <Setter Property="Stroke" Value="Black" />
-        <Setter Property="StrokeThickness" Value="7" />
-        <Setter Property="X1" Value="250" />
-        <Setter Property="Y1" Value="19" />
-        <Setter Property="X2" Value="250" />
-        <Setter Property="Y2" Value="27" />
-    </Style>
-
-    <Style x:Key="HourMarkerMinor" TargetType="Line">
-        <Setter Property="Stroke" Value="Black"/>
-        <Setter Property="StrokeThickness" Value="3" />
-        <Setter Property="X1" Value="250" />
-        <Setter Property="Y1" Value="19" />
-        <Setter Property="X2" Value="250" />
-        <Setter Property="Y2" Value="25" />
-    </Style>
-
     <Style x:Key="HourNumber" TargetType="TextBlock">
         <Setter Property="FontSize" Value="36" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="DarkBlue" />
+    </Style>
+
+    <Style x:Key="SmallHourNumber" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="28" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="DarkBlue" />
     </Style>
@@ -36,7 +24,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
 
-                            <Grid>
+                            <Canvas Width="500" Height="500" x:Name="ClockCanvas">
                                 <Ellipse x:Name="OuterDial" Width="500" Height="500" >
                                     <Ellipse.Fill>
                                         <LinearGradientBrush EndPoint="0.0,0.5" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -46,7 +34,7 @@
                                         </LinearGradientBrush>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <Ellipse x:Name="MiddleDial" Width="480" Height="480" >
+                                <Ellipse x:Name="MiddleDial" Width="480" Height="480" Margin="10,10,0,0">
                                     <Ellipse.Fill>
                                         <LinearGradientBrush EndPoint="0.0,0.5" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                             <GradientStop Color="#FF151515" Offset="0"/>
@@ -55,7 +43,7 @@
                                         </LinearGradientBrush>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <Ellipse x:Name="InnerDial" Width="465" Height="465" Fill="White" />
+                                <Ellipse x:Name="InnerDial" Width="466" Height="466" Fill="White" Margin="17,17,0,0"/>
 
                                 <Line x:Name="HourHand" X1="250" Y1="250" X2="250" Y2="130" 
                                       StrokeEndLineCap="Triangle"
@@ -71,92 +59,20 @@
                                       Stroke="Firebrick" StrokeThickness="2" >
                                 </Line>
 
-                                <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="3" Fill="#FFD1D1D1">
+                                <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="3" 
+                                         Fill="#FFD1D1D1" Margin="235,235,0,0">
                                     <Ellipse.Effect>
                                         <DropShadowEffect ShadowDepth="-15"></DropShadowEffect>
                                     </Ellipse.Effect>
                                 </Ellipse>
 
-                                <Line Style="{StaticResource HourMarkerMajor}" />
+                                <!--<TextBlock Canvas.Left="228" Canvas.Top="22" Style="{StaticResource HourNumber}" Text="12" />
+                                <TextBlock Canvas.Left="445" Canvas.Top="224" Style="{StaticResource HourNumber}" Text="3" />
+                                <TextBlock Canvas.Left="240" Canvas.Top="425" Style="{StaticResource HourNumber}" Text="6" />
+                                <TextBlock Canvas.Left="35" Canvas.Top="224" Style="{StaticResource HourNumber}" Text="9" />-->
+                                
 
-                                <Line Style="{StaticResource HourMarkerMajor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="90" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMajor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="180" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMajor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="270" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="30" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="60" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="120" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="150" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="210" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="240" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="300" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <Line Style="{StaticResource HourMarkerMinor}" >
-                                    <Line.RenderTransform>
-                                        <RotateTransform Angle="330" CenterX="250" CenterY="250"/>
-                                    </Line.RenderTransform>
-                                </Line>
-
-                                <TextBlock Style="{StaticResource HourNumber}" Text="12" Margin="0,22,0,0" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Top"/>
-
-                                <TextBlock Style="{StaticResource HourNumber}" Text="3" Margin="0,0,30,0" 
-                                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
-
-                                <TextBlock Style="{StaticResource HourNumber}" Text="6" Margin="0,0,0,25" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-
-                                <TextBlock Style="{StaticResource HourNumber}" Text="9" Margin="30,0,0,0" 
-                                           HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            </Grid>
+                            </Canvas>
 
                         </Border>
                     </Viewbox>
