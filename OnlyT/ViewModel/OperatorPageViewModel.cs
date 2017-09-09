@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -18,8 +23,8 @@ namespace OnlyT.ViewModel
       public static string PageName => "OperatorPage";
       private static readonly int _tenMinsInSecs = 600;
       private static readonly string _unknownTalkTitle = "Unknown";
-
       private readonly ITalkTimerService _timerService;
+      private static readonly System.Windows.Media.Brush _whiteBrush = System.Windows.Media.Brushes.White;
 
 
       public OperatorPageViewModel(ITalkTimerService timerService)
@@ -44,6 +49,8 @@ namespace OnlyT.ViewModel
       {
          _timerService.Stop();
 
+         TextColor = _whiteBrush;
+
          RaisePropertyChanged(nameof(IsRunning));
          RaisePropertyChanged(nameof(IsNotRunning));
 
@@ -56,6 +63,18 @@ namespace OnlyT.ViewModel
 
       private void StartTimer()
       {
+         RunFlashAnimation = false;
+         RunFlashAnimation = true;
+
+         int ms = DateTime.Now.Millisecond;
+         if (ms > 100)
+         {
+            // sync to the second (so that the timer window clock and countdown
+            // seconds are in sync)...
+
+            Task.Delay(1000 - ms).Wait();
+         }
+
          _timerService.Start(_targetSeconds);
 
          RaisePropertyChanged(nameof(IsRunning));
@@ -63,6 +82,32 @@ namespace OnlyT.ViewModel
 
          StartCommand.RaiseCanExecuteChanged();
          StopCommand.RaiseCanExecuteChanged();
+      }
+
+      private bool _runFlashAnimation;
+      public bool RunFlashAnimation
+      {
+         get => _runFlashAnimation;
+         set
+         {
+            if (_runFlashAnimation != value)
+            {
+               TextColor = new SolidColorBrush(Colors.White);
+               _runFlashAnimation = value;
+               RaisePropertyChanged(nameof(RunFlashAnimation));
+            }
+         }
+      }
+
+      private System.Windows.Media.Brush _textColor = System.Windows.Media.Brushes.White;
+      public System.Windows.Media.Brush TextColor
+      {
+         get => _textColor;
+         set
+         {
+            _textColor = value;
+            RaisePropertyChanged(nameof(TextColor));
+         }
       }
 
       private void TimerChangedHandler(object sender, EventArgs.TimerChangedEventArgs e)

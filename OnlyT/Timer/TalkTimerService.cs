@@ -34,7 +34,7 @@ namespace OnlyT.Timer
 
       private void UpdateTimerValue()
       {
-         CurrentSecondsElapsed = (int)_stopWatch.Elapsed.TotalSeconds;
+         CurrentSecondsElapsed = (int) _stopWatch.Elapsed.TotalSeconds;
       }
 
       public void Start(int targetSecs)
@@ -44,7 +44,6 @@ namespace OnlyT.Timer
          UpdateTimerValue();
          _timer.Start();
       }
-
 
       public void Stop()
       {
