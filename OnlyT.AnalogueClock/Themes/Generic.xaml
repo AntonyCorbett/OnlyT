@@ -3,18 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:OnlyT.AnalogueClock">
 
-    <Style x:Key="HourNumber" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="36" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="DarkBlue" />
-    </Style>
-
-    <Style x:Key="SmallHourNumber" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="28" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="DarkBlue" />
-    </Style>
-
     <Style TargetType="{x:Type local:Clock}">
         <Setter Property="Template">
             <Setter.Value>
@@ -65,15 +53,7 @@
                                         <DropShadowEffect ShadowDepth="-15"></DropShadowEffect>
                                     </Ellipse.Effect>
                                 </Ellipse>
-
-                                <!--<TextBlock Canvas.Left="228" Canvas.Top="22" Style="{StaticResource HourNumber}" Text="12" />
-                                <TextBlock Canvas.Left="445" Canvas.Top="224" Style="{StaticResource HourNumber}" Text="3" />
-                                <TextBlock Canvas.Left="240" Canvas.Top="425" Style="{StaticResource HourNumber}" Text="6" />
-                                <TextBlock Canvas.Left="35" Canvas.Top="224" Style="{StaticResource HourNumber}" Text="9" />-->
-                                
-
                             </Canvas>
-
                         </Border>
                     </Viewbox>
                 </ControlTemplate>

@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OnlyT.Timer;
+using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
@@ -15,7 +16,6 @@ namespace OnlyT.ViewModel
    public class OperatorPageViewModel : ViewModelBase, IPage
    {
       public static string PageName => "OperatorPage";
-      private static readonly int _secsPerMinute = 60;
       private static readonly int _tenMinsInSecs = 600;
       private static readonly string _unknownTalkTitle = "Unknown";
 
@@ -68,6 +68,7 @@ namespace OnlyT.ViewModel
       private void TimerChangedHandler(object sender, EventArgs.TimerChangedEventArgs e)
       {
          SecondsRemaining = e.RemainingSecs;
+         Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs));
       }
 
       private int _targetSeconds = 0;
@@ -101,16 +102,7 @@ namespace OnlyT.ViewModel
          }
       }
 
-      public string CurrentTimerValueString
-      {
-         get
-         {
-            int mins = _secondsRemaining / _secsPerMinute;
-            int secs = _secondsRemaining % _secsPerMinute;
-
-            return $"{mins:D2}:{secs:D2}";
-         }
-      }
+      public string CurrentTimerValueString => TimeFormatter.FormatTimeRemaining(_secondsRemaining);
 
       private string _talkTitle;
       public string TalkTitle

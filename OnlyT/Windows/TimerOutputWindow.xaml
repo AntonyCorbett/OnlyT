@@ -6,14 +6,20 @@
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:local="clr-namespace:OnlyT"
         mc:Ignorable="d"
-        Title="TimerOutputWindow" Height="300" Width="384.878" Loaded="Window_Loaded" WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
+        Title="TimerOutputWindow" Height="300" Width="441.885" Loaded="Window_Loaded" WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="248*"/>
-            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="96*"/>
+            <ColumnDefinition Width="125*"/>
         </Grid.ColumnDefinitions>
-
-        <clock:Clock x:Name="TheClock" Margin="10,45,10,50" />
+        <clock:Clock x:Name="TheClock" Grid.Column="0" Margin="10"/>
+        <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <TextBlock Foreground="White" 
+                       Text="{Binding TimeString}"
+                       FontSize="40"
+                       FontWeight="Bold"/>
+        </Viewbox>
     </Grid>
+
 </Window>

@@ -100,10 +100,12 @@
     <Compile Include="Utils\CommandLineParser.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
+    <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />
+    <Compile Include="ViewModel\Messages\TimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerMonitorChangedMessage.cs" />
     <Compile Include="ViewModel\OperatorPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
