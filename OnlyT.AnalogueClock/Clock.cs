@@ -22,6 +22,7 @@ namespace OnlyT.AnalogueClock
    public class Clock : Control
    {
       private static readonly int _clockRadius = 250;
+      private static readonly Point _clockOrigin = new Point(_clockRadius, _clockRadius);
       private static readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
       private static readonly TimeSpan _animationTimerInterval = TimeSpan.FromMilliseconds(20);
       private static readonly double _angleTolerance = 0.75;
@@ -125,27 +126,22 @@ namespace OnlyT.AnalogueClock
          }
          else
          {
-            var startAngleRadians = sector.StartAngle * Math.PI / 180;
-            var endAngleRadians = sector.EndAngle * Math.PI / 180;
             var sectorRadius = 233;
-            
-            double x1Offset = sectorRadius * Math.Sin(startAngleRadians);
-            double y1Offset = Math.Sqrt(sectorRadius * sectorRadius - x1Offset * x1Offset);
-
-            double x1 = _clockRadius + x1Offset;
-            double y1 = (sector.StartAngle <= 90 || sector.StartAngle >= 270) 
-               ? _clockRadius - y1Offset : _clockRadius + y1Offset;
-
-            double x2Offset = sectorRadius * Math.Sin(endAngleRadians);
-            double y2Offset = Math.Sqrt(sectorRadius * sectorRadius - x2Offset * x2Offset);
-
-            double x2 = _clockRadius + x2Offset;
-            double y2 = (sector.EndAngle <= 90 || sector.EndAngle >= 270) 
-               ? _clockRadius - y2Offset : _clockRadius + y2Offset;
+            Point ptStart = PointOnCircle(sectorRadius, sector.StartAngle, _clockOrigin);
+            Point ptEnd = PointOnCircle(sectorRadius, sector.EndAngle, _clockOrigin);
 
             string largeArc = sector.IsLargeArc ? "1" : "0";
-            c._sectorPath.Data = Geometry.Parse($"M{_clockRadius},{_clockRadius} L{x1},{y1} A{sectorRadius},{sectorRadius} 0 {largeArc} 1 {x2},{y2} z");
+            c._sectorPath.Data = Geometry.Parse($"M{_clockRadius},{_clockRadius} L{ptStart.X},{ptStart.Y} A{sectorRadius},{sectorRadius} 0 {largeArc} 1 {ptEnd.X},{ptEnd.Y} z");
          }
+      }
+
+      private static Point PointOnCircle(double radius, double angleInDegrees, Point origin)
+      {
+         // NB - angleInDegrees is from 12 o'clock rather than from 3 o'clock
+         double x = radius * Math.Cos((angleInDegrees - 90) * Math.PI / 180F) + origin.X;
+         double y = radius * Math.Sin((angleInDegrees - 90) * Math.PI / 180F) + origin.Y;
+
+         return new Point(x, y);
       }
 
       public DurationSector DurationSector
@@ -253,7 +249,7 @@ namespace OnlyT.AnalogueClock
          for (int n=0; n<12; ++n)
          {
             var angle = n * 30;
-            var angleRadians = angle * Math.PI / 180;
+            Point pt = PointOnCircle(centrePointRadius, angle, _clockOrigin);
 
             var hour = n == 0 ? 12 : n;
 
@@ -265,17 +261,9 @@ namespace OnlyT.AnalogueClock
                Child = t
             };
             
-            var x = centrePointRadius * Math.Sin(angleRadians);
-            var y = Math.Sqrt(centrePointRadius * centrePointRadius - x * x);
-
-            if (n > 3 && n < 9)
-            {
-               y = -y;
-            }
-
             canvas.Children.Add(b);
-            Canvas.SetLeft(b, clockRadius + x - borderSize / 2);
-            Canvas.SetTop(b, clockRadius - y - borderSize / 2);
+            Canvas.SetLeft(b, pt.X - borderSize / 2);
+            Canvas.SetTop(b, pt.Y - borderSize / 2);
          }
       }
 
