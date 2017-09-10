@@ -6,16 +6,46 @@
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:local="clr-namespace:OnlyT"
         mc:Ignorable="d"
-        Title="TimerOutputWindow" Height="300" Width="441.885" Loaded="Window_Loaded" WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
+        Title="TimerOutputWindow" Height="300" Width="441.885" Loaded="Window_Loaded" 
+        WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <Style x:Key="FadingTextBlockStyle" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)"
+                                                 From="0.0" To="1.0" Duration="0:0:0.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)"
+                                                 From="1.0" To="0.0" Duration="0:0:0.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="96*"/>
             <ColumnDefinition Width="125*"/>
         </Grid.ColumnDefinitions>
-        <clock:Clock x:Name="TheClock" Grid.Column="0" Margin="10"/>
+        <clock:Clock x:Name="TheClock" Grid.Column="0" Margin="10" DurationSector="{Binding DurationSector}"/>
         <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
-            <TextBlock Foreground="White" 
+            
+            <TextBlock Style="{StaticResource FadingTextBlockStyle}" 
+                       Foreground="{Binding TextColor}" 
                        Text="{Binding TimeString}"
                        FontSize="40"
                        FontWeight="Bold"/>
@@ -23,3 +53,4 @@
     </Grid>
 
 </Window>
+

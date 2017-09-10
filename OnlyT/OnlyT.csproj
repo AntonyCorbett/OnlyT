@@ -88,6 +88,7 @@
     <Compile Include="EventArgs\TimerChangedEventArgs.cs" />
     <Compile Include="Models\DisplayDeviceData.cs" />
     <Compile Include="Models\MonitorItem.cs" />
+    <Compile Include="Models\TalkScheduleItem.cs" />
     <Compile Include="Services\Monitors\DisplayDevices.cs" />
     <Compile Include="Services\Monitors\IMonitorsService.cs" />
     <Compile Include="Services\Monitors\MonitorsService.cs" />
@@ -95,10 +96,15 @@
     <Compile Include="Services\Options\IOptionsService.cs" />
     <Compile Include="Services\Options\Options.cs" />
     <Compile Include="Services\Options\OptionsService.cs" />
+    <Compile Include="Services\TalkSchedule\ITalkScheduleService.cs" />
+    <Compile Include="Services\TalkSchedule\TalkScheduleFile.cs" />
+    <Compile Include="Services\TalkSchedule\TalkScheduleService.cs" />
+    <Compile Include="Services\TalkSchedule\TalkScheduleSource.cs" />
     <Compile Include="Timer\ITalkTimerService.cs" />
     <Compile Include="Timer\TalkTimerService.cs" />
     <Compile Include="Utils\CommandLineParser.cs" />
     <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\GreenYellowRedSelector.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
@@ -107,6 +113,8 @@
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerMonitorChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\TimerStartMessage.cs" />
+    <Compile Include="ViewModel\Messages\TimerStopMessage.cs" />
     <Compile Include="ViewModel\OperatorPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TimerOutputWindowViewModel.cs" />

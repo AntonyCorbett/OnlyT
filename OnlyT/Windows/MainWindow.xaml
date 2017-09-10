@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OnlyT"
         mc:Ignorable="d"
         DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
-        Title="O N L Y - T" Height="350" Width="394.39" ResizeMode="CanMinimize" Closing="Window_Closing" Topmost="True">
+        Title="O N L Y - T" Height="350" Width="395" ResizeMode="CanMinimize" Closing="Window_Closing" Topmost="True">
     
     <ContentControl Content="{Binding CurrentPage}" />
     

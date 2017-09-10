@@ -33,6 +33,8 @@
                                 </Ellipse>
                                 <Ellipse x:Name="InnerDial" Width="466" Height="466" Fill="White" Margin="17,17,0,0"/>
 
+                                <Path x:Name="SectorPath" Data="" Fill="Chartreuse" Opacity="0.5"/>
+                                
                                 <Line x:Name="HourHand" X1="250" Y1="250" X2="250" Y2="130" 
                                       StrokeEndLineCap="Triangle"
                                       Stroke="Black" StrokeThickness="18" >

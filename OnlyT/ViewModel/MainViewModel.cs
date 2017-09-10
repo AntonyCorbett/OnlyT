@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
+using OnlyT.Services.TalkSchedule;
 
 namespace OnlyT.ViewModel
 {
@@ -21,16 +22,19 @@ namespace OnlyT.ViewModel
       private TimerOutputWindow _timerWindow;
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
+      private readonly ITalkScheduleService _scheduleService;
       private string _currentPageName;
 
 
       public MainViewModel(
          ITalkTimerService timerService, 
          IOptionsService optionsService, 
+         ITalkScheduleService scheduleService,
          IMonitorsService monitorsService)
       {
          _optionsService = optionsService;
          _monitorsService = monitorsService;
+         _scheduleService = scheduleService;
 
          Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
          Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
@@ -62,7 +66,7 @@ namespace OnlyT.ViewModel
       {
          if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
          {
-            await Task.Delay(1500);
+            await Task.Delay(1000);
             OpenTimerWindow();
          }
       }

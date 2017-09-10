@@ -70,10 +70,10 @@ namespace OnlyT.Utils
       }
 
       /// <summary>
-      /// Gets the application's MyDocs folder, e.g. "...MyDocuments\OnlyR"
+      /// Gets the application's MyDocs folder, e.g. "...MyDocuments\OnlyT"
       /// </summary>
       /// <returns>Folder path</returns>
-      public static string GetDefaultMyDocsDestinationFolder()
+      public static string GetOnlyTMyDocsFolder()
       {
          return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _appNamePathSegment);
       }

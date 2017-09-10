@@ -21,6 +21,7 @@ namespace OnlyT.AnalogueClock
 {
    public class Clock : Control
    {
+      private static readonly int _clockRadius = 250;
       private static readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
       private static readonly TimeSpan _animationTimerInterval = TimeSpan.FromMilliseconds(20);
       private static readonly double _angleTolerance = 0.75;
@@ -31,6 +32,7 @@ namespace OnlyT.AnalogueClock
       private Line _minuteHand;
       private Line _hourHand;
       private Line _secondHand;
+      private Path _sectorPath;
       private readonly DispatcherTimer _timer;
       private readonly DispatcherTimer _animationTimer;
 
@@ -72,15 +74,15 @@ namespace OnlyT.AnalogueClock
 
          double secondAngle = CalculateAngleSeconds(now);
          ((DropShadowEffect)_secondHand.Effect).Direction = secondAngle;
-         _secondHand.RenderTransform = new RotateTransform(secondAngle, 250, 250);
+         _secondHand.RenderTransform = new RotateTransform(secondAngle, _clockRadius, _clockRadius);
 
          double minuteAngle = CalculateAngleMinutes(now);
          ((DropShadowEffect)_minuteHand.Effect).Direction = minuteAngle;
-         _minuteHand.RenderTransform = new RotateTransform(minuteAngle, 250, 250);
+         _minuteHand.RenderTransform = new RotateTransform(minuteAngle, _clockRadius, _clockRadius);
 
          double hourAngle = CalculateAngleHours(now);
          ((DropShadowEffect)_hourHand.Effect).Direction = hourAngle;
-         _hourHand.RenderTransform = new RotateTransform(hourAngle, 250, 250);
+         _hourHand.RenderTransform = new RotateTransform(hourAngle, _clockRadius, _clockRadius);
       }
 
       public static readonly DependencyProperty IsRunningProperty =
@@ -108,6 +110,50 @@ namespace OnlyT.AnalogueClock
          }
       }
 
+      public static readonly DependencyProperty DurationSectorProperty =
+         DependencyProperty.Register("DurationSector", typeof(DurationSector), typeof(Clock),
+            new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
+
+      private static void DurationSectorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+      {
+         DurationSector sector = (DurationSector) e.NewValue;
+         Clock c = (Clock)d;
+
+         if (sector == null)
+         {
+            c._sectorPath.Data = null;
+         }
+         else
+         {
+            var startAngleRadians = sector.StartAngle * Math.PI / 180;
+            var endAngleRadians = sector.EndAngle * Math.PI / 180;
+            var sectorRadius = 233;
+            
+            double x1Offset = sectorRadius * Math.Sin(startAngleRadians);
+            double y1Offset = Math.Sqrt(sectorRadius * sectorRadius - x1Offset * x1Offset);
+
+            double x1 = _clockRadius + x1Offset;
+            double y1 = (sector.StartAngle <= 90 || sector.StartAngle >= 270) 
+               ? _clockRadius - y1Offset : _clockRadius + y1Offset;
+
+            double x2Offset = sectorRadius * Math.Sin(endAngleRadians);
+            double y2Offset = Math.Sqrt(sectorRadius * sectorRadius - x2Offset * x2Offset);
+
+            double x2 = _clockRadius + x2Offset;
+            double y2 = (sector.EndAngle <= 90 || sector.EndAngle >= 270) 
+               ? _clockRadius - y2Offset : _clockRadius + y2Offset;
+
+            string largeArc = sector.IsLargeArc ? "1" : "0";
+            c._sectorPath.Data = Geometry.Parse($"M{_clockRadius},{_clockRadius} L{x1},{y1} A{sectorRadius},{sectorRadius} 0 {largeArc} 1 {x2},{y2} z");
+         }
+      }
+
+      public DurationSector DurationSector
+      {
+         get => (DurationSector)GetValue(DurationSectorProperty);
+         set => SetValue(DurationSectorProperty, value);
+      }
+      
       private void StartupAnimation()
       {
          _animationTargetAngles = GenerateTargetAngles();
@@ -158,7 +204,7 @@ namespace OnlyT.AnalogueClock
             currentAngle += delta;
             
             ((DropShadowEffect)hand.Effect).Direction = currentAngle;
-            hand.RenderTransform = new RotateTransform(currentAngle, 250, 250);
+            hand.RenderTransform = new RotateTransform(currentAngle, _clockRadius, _clockRadius);
          }
 
          return currentAngle;
@@ -176,7 +222,7 @@ namespace OnlyT.AnalogueClock
       {
          base.OnApplyTemplate();
 
-         GetHandRefs();
+         GetElementRefs();
 
          if (GetTemplateChild("ClockCanvas") is Canvas cc)
          {
@@ -239,7 +285,7 @@ namespace OnlyT.AnalogueClock
          for (var n = 0; n < 4; ++n)
          {
             var line = CreateMajorHourMarker();
-            line.RenderTransform = new RotateTransform(angle += 90, 250, 250);
+            line.RenderTransform = new RotateTransform(angle += 90, _clockRadius, _clockRadius);
             canvas.Children.Add(line);
          }
 
@@ -248,7 +294,7 @@ namespace OnlyT.AnalogueClock
             if (n % 3 > 0)
             {
                var line = CreateMinorHourMarker();
-               line.RenderTransform = new RotateTransform(angle, 250, 250);
+               line.RenderTransform = new RotateTransform(angle, _clockRadius, _clockRadius);
                canvas.Children.Add(line);
             }
 
@@ -260,7 +306,7 @@ namespace OnlyT.AnalogueClock
             if (n % 5 > 0)
             {
                var line = CreateMinuteMarker();
-               line.RenderTransform = new RotateTransform(angle, 250, 250);
+               line.RenderTransform = new RotateTransform(angle, _clockRadius, _clockRadius);
                canvas.Children.Add(line);
             }
 
@@ -274,9 +320,9 @@ namespace OnlyT.AnalogueClock
          {
             Stroke = Brushes.Black,
             StrokeThickness = 7,
-            X1 = 250,
+            X1 = _clockRadius,
             Y1 = 19,
-            X2 = 250,
+            X2 = _clockRadius,
             Y2 = 27
          };
       }
@@ -287,9 +333,9 @@ namespace OnlyT.AnalogueClock
          {
             Stroke = Brushes.Black,
             StrokeThickness = 3,
-            X1 = 250,
+            X1 = _clockRadius,
             Y1 = 19,
-            X2 = 250,
+            X2 = _clockRadius,
             Y2 = 25
          };
       }
@@ -300,14 +346,14 @@ namespace OnlyT.AnalogueClock
          {
             Stroke = Brushes.Black,
             StrokeThickness = 1,
-            X1 = 250,
+            X1 = _clockRadius,
             Y1 = 19,
-            X2 = 250,
+            X2 = _clockRadius,
             Y2 = 25
          };
       }
 
-      private void GetHandRefs()
+      private void GetElementRefs()
       {
          if (GetTemplateChild("MinuteHand") is Line line1)
          {
@@ -344,6 +390,12 @@ namespace OnlyT.AnalogueClock
                Opacity = 0.3
             };
          }
+
+         if (GetTemplateChild("SectorPath") is Path sectorPath)
+         {
+            _sectorPath = sectorPath;
+         }
       }
+
    }
 }

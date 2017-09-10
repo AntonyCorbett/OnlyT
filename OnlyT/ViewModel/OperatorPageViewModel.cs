@@ -12,6 +12,8 @@ using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using OnlyT.Models;
+using OnlyT.Services.TalkSchedule;
 using OnlyT.Timer;
 using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
@@ -21,23 +23,34 @@ namespace OnlyT.ViewModel
    public class OperatorPageViewModel : ViewModelBase, IPage
    {
       public static string PageName => "OperatorPage";
-      private static readonly int _tenMinsInSecs = 600;
       private static readonly string _unknownTalkTitle = "Unknown";
       private readonly ITalkTimerService _timerService;
+      private readonly ITalkScheduleService _scheduleService;
       private static readonly System.Windows.Media.Brush _whiteBrush = System.Windows.Media.Brushes.White;
 
 
-      public OperatorPageViewModel(ITalkTimerService timerService)
+      public OperatorPageViewModel(ITalkTimerService timerService, ITalkScheduleService scheduleService)
       {
+         _scheduleService = scheduleService;
+         SelectFirstTalk();
+
          _timerService = timerService;
          _timerService.TimerChangedEvent += TimerChangedHandler;
 
-         _targetSeconds= _tenMinsInSecs;
          _talkTitle = _unknownTalkTitle;
 
          StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
          SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
+      }
+
+      private void SelectFirstTalk()
+      {
+         var talks = _scheduleService.GetTalkScheduleItems();
+         if (talks != null && talks.Any())
+         {
+            TalkId = talks.First().Id;
+         }
       }
 
       private void NavigateSettings()
@@ -48,40 +61,82 @@ namespace OnlyT.ViewModel
       private void StopTimer()
       {
          _timerService.Stop();
-
+         _isStarting = false;
+         
          TextColor = _whiteBrush;
 
          RaisePropertyChanged(nameof(IsRunning));
          RaisePropertyChanged(nameof(IsNotRunning));
 
-         StartCommand.RaiseCanExecuteChanged();
-         StopCommand.RaiseCanExecuteChanged();
+         Messenger.Default.Send(new TimerStopMessage());
+         RaiseCanExecuteChanged();
       }
 
-      public bool IsRunning => _timerService.IsRunning;
+      public bool IsRunning => _timerService.IsRunning || _isStarting;
       public bool IsNotRunning => !IsRunning;
+
+      private bool _isStarting;
 
       private void StartTimer()
       {
+         _isStarting = true;
+
          RunFlashAnimation = false;
          RunFlashAnimation = true;
-
-         int ms = DateTime.Now.Millisecond;
-         if (ms > 100)
-         {
-            // sync to the second (so that the timer window clock and countdown
-            // seconds are in sync)...
-
-            Task.Delay(1000 - ms).Wait();
-         }
-
-         _timerService.Start(_targetSeconds);
 
          RaisePropertyChanged(nameof(IsRunning));
          RaisePropertyChanged(nameof(IsNotRunning));
 
+         RaiseCanExecuteChanged();
+
+         Messenger.Default.Send(new TimerStartMessage(_targetSeconds));
+
+         Task.Run(() =>
+         {
+            int ms = DateTime.Now.Millisecond;
+            if (ms > 100)
+            {
+               // sync to the second (so that the timer window clock and countdown
+               // seconds are in sync)...
+
+               Task.Delay(1000 - ms).Wait();
+            }
+
+            if (_isStarting)
+            {
+               _timerService.Start(_targetSeconds);
+            }
+         });
+      }
+
+      private void RaiseCanExecuteChanged()
+      {
          StartCommand.RaiseCanExecuteChanged();
          StopCommand.RaiseCanExecuteChanged();
+         SettingsCommand.RaiseCanExecuteChanged();
+      }
+
+      public IEnumerable<TalkScheduleItem> Talks => _scheduleService.GetTalkScheduleItems();
+
+      private int _talkId;
+      public int TalkId
+      {
+         get => _talkId;
+         set
+         {
+            if (_talkId != value)
+            {
+               _talkId = value;
+               TargetSeconds = GetTargetSecondsFromTalkSchedule(_talkId);
+               RaisePropertyChanged(nameof(TalkId));
+            }
+         }
+      }
+
+      private int GetTargetSecondsFromTalkSchedule(int talkId)
+      {
+         var talk = _scheduleService.GetTalkScheduleItem(talkId);
+         return talk?.GetDurationSeconds() ?? 0;
       }
 
       private bool _runFlashAnimation;
@@ -112,11 +167,12 @@ namespace OnlyT.ViewModel
 
       private void TimerChangedHandler(object sender, EventArgs.TimerChangedEventArgs e)
       {
+         TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
          SecondsRemaining = e.RemainingSecs;
          Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs));
       }
 
-      private int _targetSeconds = 0;
+      private int _targetSeconds;
       public int TargetSeconds
       {
          get => _targetSeconds;
@@ -132,7 +188,7 @@ namespace OnlyT.ViewModel
          }
       }
 
-      private int _secondsRemaining = 0;
+      private int _secondsRemaining;
       public int SecondsRemaining
       {
          get => _secondsRemaining;
