@@ -59,6 +59,7 @@ namespace OnlyT.ViewModel
 
       private void OnTimerChanged(TimerChangedMessage message)
       {
+         IsRunning = true;
          TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
          TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
 
@@ -130,12 +131,6 @@ namespace OnlyT.ViewModel
                RaisePropertyChanged(nameof(DurationSector));
             }
          }
-      }
-
-      public override void Cleanup()
-      {
-         // todo: amy cleanup here
-         base.Cleanup();
       }
    }
 }

@@ -24,7 +24,8 @@ namespace OnlyT.ViewModel
       private readonly IMonitorsService _monitorsService;
       private readonly ITalkScheduleService _scheduleService;
       private string _currentPageName;
-
+      private TimerOutputWindowViewModel _timerWindowViewModel;
+      
 
       public MainViewModel(
          ITalkTimerService timerService, 
@@ -42,6 +43,8 @@ namespace OnlyT.ViewModel
          
          _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
          _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
+
+         _timerWindowViewModel = new TimerOutputWindowViewModel();
 
          Messenger.Default.Send(new NavigateMessage(OperatorPageViewModel.PageName, null));
 
@@ -133,7 +136,7 @@ namespace OnlyT.ViewModel
          var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
          if (timerMonitor != null)
          {
-            _timerWindow = new TimerOutputWindow {DataContext = new TimerOutputWindowViewModel()};
+            _timerWindow = new TimerOutputWindow { DataContext = _timerWindowViewModel };
 
             var area = timerMonitor.Monitor.WorkingArea;
             _timerWindow.Left = area.Left;
@@ -155,8 +158,6 @@ namespace OnlyT.ViewModel
       {
          if (_timerWindow != null)
          {
-            var model = (TimerOutputWindowViewModel) _timerWindow.DataContext;
-            model.Cleanup();
             _timerWindow.Close();
             _timerWindow = null;
          }
