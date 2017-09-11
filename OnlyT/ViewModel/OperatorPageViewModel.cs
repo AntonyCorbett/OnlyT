@@ -13,8 +13,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OnlyT.Models;
+using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
-using OnlyT.Timer;
+using OnlyT.Services.Timer;
 using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
 
@@ -26,22 +27,36 @@ namespace OnlyT.ViewModel
       private static readonly string _unknownTalkTitle = "Unknown";
       private readonly ITalkTimerService _timerService;
       private readonly ITalkScheduleService _scheduleService;
+      private readonly IOptionsService _optionsService;
       private static readonly System.Windows.Media.Brush _whiteBrush = System.Windows.Media.Brushes.White;
 
 
-      public OperatorPageViewModel(ITalkTimerService timerService, ITalkScheduleService scheduleService)
+      public OperatorPageViewModel(
+         ITalkTimerService timerService, 
+         ITalkScheduleService scheduleService, 
+         IOptionsService optionsService)
       {
          _scheduleService = scheduleService;
-         SelectFirstTalk();
-
+         _optionsService = optionsService;
          _timerService = timerService;
          _timerService.TimerChangedEvent += TimerChangedHandler;
+
+         SelectFirstTalk();
 
          _talkTitle = _unknownTalkTitle;
 
          StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
          SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
+
+         // subscriptions...
+         Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
+      }
+
+      private void OnOperatingModeChanged(OperatingModeChangedMessage message)
+      {
+         RaisePropertyChanged(nameof(IsManualMode));
+         RaisePropertyChanged(nameof(IsNotManualMode));
       }
 
       private void SelectFirstTalk()
@@ -71,6 +86,10 @@ namespace OnlyT.ViewModel
          Messenger.Default.Send(new TimerStopMessage());
          RaiseCanExecuteChanged();
       }
+
+      public bool IsManualMode => _optionsService.Options.OperatingMode == OperatingMode.Manual;
+      public bool IsNotManualMode => _optionsService.Options.OperatingMode != OperatingMode.Manual;
+
 
       public bool IsRunning => _timerService.IsRunning || _isStarting;
       public bool IsNotRunning => !IsRunning;
@@ -221,7 +240,6 @@ namespace OnlyT.ViewModel
 
       public void Activated(object state)
       {
-         // todo:
 
       }
 

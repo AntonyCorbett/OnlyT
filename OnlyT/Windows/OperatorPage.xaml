@@ -24,18 +24,24 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="31*"/>
+            <RowDefinition Height="31*" />
             <RowDefinition Height="130*"/>
             <RowDefinition Height="73*"/>
             <RowDefinition Height="62*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox ItemsSource="{Binding Talks}" 
-                  IsEnabled="{Binding IsNotRunning}"
-                  FontSize="14"
-                  SelectedValuePath="Id" 
-                  DisplayMemberPath="Name"
-                  SelectedValue="{Binding TalkId, Mode=TwoWay}"/>
+        <Grid>
+            <ComboBox ItemsSource="{Binding Talks}" 
+                      IsEnabled="{Binding IsNotRunning}"
+                      FontSize="14"
+                      SelectedValuePath="Id" 
+                      DisplayMemberPath="Name"
+                      Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BoolToVis}}"
+                      SelectedValue="{Binding TalkId, Mode=TwoWay}"/>
+
+            <TextBlock Text="Manual mode" FontSize="14" 
+                       Visibility="{Binding Path=IsManualMode, Converter={StaticResource BoolToVis}}"/>
+        </Grid>
 
         <Grid Grid.Row="1" Margin="0,10,0,10">
             <Grid.ColumnDefinitions>

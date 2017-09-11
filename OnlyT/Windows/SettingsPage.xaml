@@ -44,6 +44,12 @@
                           DisplayMemberPath="MonitorName"
                           SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
 
+                <Label Style="{StaticResource LabelStyle}">Mode:</Label>
+                <ComboBox ItemsSource="{Binding OperatingModes}" 
+                          SelectedValuePath="Mode" 
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
+
             </StackPanel>
         </ScrollViewer>
 

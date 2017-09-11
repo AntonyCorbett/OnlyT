@@ -19,6 +19,7 @@ namespace OnlyT.ViewModel
    {
       public static string PageName => "SettingsPage";
       private readonly MonitorItem[] _monitors;
+      private readonly OperatingModeItem[] _operatingModes;
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
 
@@ -29,7 +30,19 @@ namespace OnlyT.ViewModel
          _monitorsService = monitorsService;
 
          _monitors = GetSystemMonitors().ToArray();
+         _operatingModes = GetOperatingModes().ToArray();
+
          NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
+      }
+
+      private IEnumerable<OperatingModeItem> GetOperatingModes()
+      {
+         return new List<OperatingModeItem>
+         {
+            new OperatingModeItem {Name = "Manual", Mode = OperatingMode.Manual},
+            new OperatingModeItem {Name = "File-based", Mode = OperatingMode.ScheduleFile},
+            new OperatingModeItem {Name = "Automatic", Mode = OperatingMode.Automatic}
+         };
       }
 
       private IEnumerable<MonitorItem> GetSystemMonitors()
@@ -57,6 +70,22 @@ namespace OnlyT.ViewModel
                _optionsService.Options.TimerMonitorId = value;
                RaisePropertyChanged(nameof(MonitorId));
                Messenger.Default.Send(new TimerMonitorChangedMessage());
+            }
+         }
+      }
+
+      public IEnumerable<OperatingModeItem> OperatingModes => _operatingModes;
+
+      public OperatingMode OperatingMode
+      {
+         get => _optionsService.Options.OperatingMode;
+         set
+         {
+            if (_optionsService.Options.OperatingMode != value)
+            {
+               _optionsService.Options.OperatingMode = value;
+               RaisePropertyChanged(nameof(OperatingMode));
+               Messenger.Default.Send(new OperatingModeChangedMessage());
             }
          }
       }

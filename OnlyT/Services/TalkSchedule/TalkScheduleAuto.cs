@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlyT.Services.TalkSchedule
 {
-   enum TalkScheduleSource
+   class TalkScheduleAuto
    {
-      Unknown,
-      FromFile,
-      HardCoded
    }
 }

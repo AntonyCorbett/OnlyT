@@ -7,12 +7,12 @@ using OnlyT.ViewModel.Messages;
 using System;
 using OnlyT.Windows;
 using System.ComponentModel;
-using OnlyT.Timer;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
+using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {
@@ -36,6 +36,7 @@ namespace OnlyT.ViewModel
          _monitorsService = monitorsService;
          _scheduleService = scheduleService;
 
+         // subscriptions...
          Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
          Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
          

@@ -14,6 +14,8 @@ namespace OnlyT.ViewModel
 {
    internal class TimerOutputWindowViewModel : ViewModelBase
    {
+      private static int _secsPerHour = 60 * 60 * 60;
+
       public TimerOutputWindowViewModel()
       {
          Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
@@ -43,13 +45,34 @@ namespace OnlyT.ViewModel
          DateTime endTime = now.AddSeconds(message.TargetSeconds);
          double endAngle = CalcAngleFromTime(endTime);
 
-         DurationSector = new DurationSector { StartAngle = startAngle, EndAngle = endAngle };
+         if (message.TargetSeconds <= _secsPerHour) // can't display duration sector effectively when > 1 hr
+         {
+            DurationSector = new DurationSector
+            {
+               StartAngle = startAngle,
+               EndAngle = endAngle,
+               CurrentAngle = startAngle,
+               IsOvertime = false
+            };
+         }
       }
 
       private void OnTimerChanged(TimerChangedMessage message)
       {
          TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
          TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
+
+         if (DurationSector != null)
+         {
+            var currentAngle = CalcAngleFromTime(DateTime.Now);
+            if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15) // prevent gratuitous updates
+            {
+               var d = DurationSector.Clone();
+               d.CurrentAngle = currentAngle;
+               d.IsOvertime = message.RemainingSecs < 0;
+               DurationSector = d;
+            }
+         }
       }
 
       private string _timeString;
@@ -101,7 +124,7 @@ namespace OnlyT.ViewModel
          get => _durationSector;
          set
          {
-            if (_durationSector != value)
+            if (!ReferenceEquals(_durationSector, value))
             {
                _durationSector = value;
                RaisePropertyChanged(nameof(DurationSector));

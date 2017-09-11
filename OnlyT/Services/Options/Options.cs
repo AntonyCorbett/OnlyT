@@ -14,11 +14,12 @@ namespace OnlyT.Services.Options
    {
       public Options()
       {
-         
+         OperatingMode = OperatingMode.Manual;
       }
 
       public string TimerMonitorId { get; set; }
       public string AppWindowPlacement { get; set; }
+      public OperatingMode OperatingMode { get; set; }
 
 
       /// <summary>

@@ -21,7 +21,9 @@ namespace OnlyT.AnalogueClock
 {
    public class Clock : Control
    {
-      private static readonly int _clockRadius = 250;
+      private static readonly double _clockRadius = 250;
+      private static readonly double _sectorRadius = 230;
+      private static readonly double _smallAngleTolerance = 0.01;
       private static readonly Point _clockOrigin = new Point(_clockRadius, _clockRadius);
       private static readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
       private static readonly TimeSpan _animationTimerInterval = TimeSpan.FromMilliseconds(20);
@@ -33,7 +35,9 @@ namespace OnlyT.AnalogueClock
       private Line _minuteHand;
       private Line _hourHand;
       private Line _secondHand;
-      private Path _sectorPath;
+      private Path _sectorPath1;
+      private Path _sectorPath2;
+      private Path _sectorPath3;
       private readonly DispatcherTimer _timer;
       private readonly DispatcherTimer _animationTimer;
 
@@ -122,17 +126,44 @@ namespace OnlyT.AnalogueClock
 
          if (sector == null)
          {
-            c._sectorPath.Data = null;
+            c._sectorPath1.Data = null;
+            c._sectorPath2.Data = null;
+            c._sectorPath3.Data = null;
          }
          else
          {
-            var sectorRadius = 233;
-            Point ptStart = PointOnCircle(sectorRadius, sector.StartAngle, _clockOrigin);
-            Point ptEnd = PointOnCircle(sectorRadius, sector.EndAngle, _clockOrigin);
+            // we may have 1, 2 or 3 sectors to draw...
 
-            string largeArc = sector.IsLargeArc ? "1" : "0";
-            c._sectorPath.Data = Geometry.Parse($"M{_clockRadius},{_clockRadius} L{ptStart.X},{ptStart.Y} A{sectorRadius},{sectorRadius} 0 {largeArc} 1 {ptEnd.X},{ptEnd.Y} z");
+            // green sector...
+            DrawSector(c._sectorPath1, sector.StartAngle, sector.EndAngle, IsLargeArc(sector.StartAngle, sector.EndAngle));
+
+            // light green sector...
+            DrawSector(c._sectorPath2, sector.StartAngle, sector.CurrentAngle, IsLargeArc(sector.StartAngle, sector.CurrentAngle));
+            
+            if (sector.IsOvertime)
+            {
+               // red sector...
+               DrawSector(c._sectorPath3, sector.EndAngle, sector.CurrentAngle, IsLargeArc(sector.EndAngle, sector.CurrentAngle));
+            }
          }
+      }
+
+      private static bool IsLargeArc(double startAngle, double endAngle)
+      {
+         if (endAngle < startAngle)
+         {
+            return (360 - startAngle + endAngle) > 180;
+         }
+
+         return endAngle - startAngle >= 180.0;
+      }
+
+      private static void DrawSector(Path sectorPath, double startAngle, double endAngle, bool isLargeArc)
+      {
+         Point ptStart = PointOnCircle(_sectorRadius, startAngle, _clockOrigin);
+         Point ptEnd = PointOnCircle(_sectorRadius, endAngle, _clockOrigin);
+         string largeArc = isLargeArc ? "1" : "0";
+         sectorPath.Data = Geometry.Parse($"M{_clockRadius},{_clockRadius} L{ptStart.X},{ptStart.Y} A{_sectorRadius},{_sectorRadius} 0 {largeArc} 1 {ptEnd.X},{ptEnd.Y} z");
       }
 
       private static Point PointOnCircle(double radius, double angleInDegrees, Point origin)
@@ -379,9 +410,19 @@ namespace OnlyT.AnalogueClock
             };
          }
 
-         if (GetTemplateChild("SectorPath") is Path sectorPath)
+         if (GetTemplateChild("SectorPath1") is Path sectorPath1)
          {
-            _sectorPath = sectorPath;
+            _sectorPath1 = sectorPath1;
+         }
+
+         if (GetTemplateChild("SectorPath2") is Path sectorPath2)
+         {
+            _sectorPath2 = sectorPath2;
+         }
+
+         if (GetTemplateChild("SectorPath3") is Path sectorPath3)
+         {
+            _sectorPath3 = sectorPath3;
          }
       }
 

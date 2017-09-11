@@ -33,7 +33,9 @@
                                 </Ellipse>
                                 <Ellipse x:Name="InnerDial" Width="466" Height="466" Fill="White" Margin="17,17,0,0"/>
 
-                                <Path x:Name="SectorPath" Data="" Fill="Chartreuse" Opacity="0.5"/>
+                                <Path x:Name="SectorPath1" Data="" Fill="#99FF99" Stroke="#dddddd" StrokeThickness="1"/>
+                                <Path x:Name="SectorPath2" Data="" Fill="#E6FFE6" Stroke="#dddddd" StrokeThickness="1"/>
+                                <Path x:Name="SectorPath3" Data="" Fill="#FFB399" Stroke="#dddddd" StrokeThickness="1"/>
                                 
                                 <Line x:Name="HourHand" X1="250" Y1="250" X2="250" Y2="130" 
                                       StrokeEndLineCap="Triangle"

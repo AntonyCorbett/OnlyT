@@ -1,33 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
+using System.Windows.Threading;
 using OnlyT.EventArgs;
 
-
-namespace OnlyT.Timer
+namespace OnlyT.Services.Timer
 {
    class TalkTimerService : ITalkTimerService
    {
       private readonly Stopwatch _stopWatch = new Stopwatch();
-      private readonly System.Timers.Timer _timer = new System.Timers.Timer();
+      private readonly DispatcherTimer _timer = new DispatcherTimer(DispatcherPriority.Render);
       private int _targetSecs = 600;
-      private readonly int _timerIntervalMilliSecs = 250;
+      private readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
 
       public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
 
       public TalkTimerService()
       {
-         _timer.AutoReset = false;
-         _timer.Interval = _timerIntervalMilliSecs;
-         _timer.Elapsed += TimerElapsedHandler;
+         _timer.Interval = _timerInterval;
+         _timer.Tick += TimerElapsedHandler;
       }
 
-      private void TimerElapsedHandler(object sender, System.Timers.ElapsedEventArgs e)
+      private void TimerElapsedHandler(object sender, System.EventArgs e)
       {
+         _timer.Stop();
          UpdateTimerValue();
          _timer.Start();
       }

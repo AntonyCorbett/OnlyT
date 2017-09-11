@@ -4,7 +4,7 @@ using Microsoft.Practices.ServiceLocation;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
-using OnlyT.Timer;
+using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {
