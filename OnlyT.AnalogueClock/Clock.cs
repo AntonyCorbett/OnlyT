@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,7 +140,7 @@ namespace OnlyT.AnalogueClock
 
             // light green sector...
             DrawSector(c._sectorPath2, sector.StartAngle, sector.CurrentAngle, IsLargeArc(sector.StartAngle, sector.CurrentAngle));
-            
+
             if (sector.IsOvertime)
             {
                // red sector...
@@ -163,7 +164,9 @@ namespace OnlyT.AnalogueClock
          Point ptStart = PointOnCircle(_sectorRadius, startAngle, _clockOrigin);
          Point ptEnd = PointOnCircle(_sectorRadius, endAngle, _clockOrigin);
          string largeArc = isLargeArc ? "1" : "0";
-         sectorPath.Data = Geometry.Parse($"M{_clockRadius},{_clockRadius} L{ptStart.X},{ptStart.Y} A{_sectorRadius},{_sectorRadius} 0 {largeArc} 1 {ptEnd.X},{ptEnd.Y} z");
+
+         // use InvariantCulture to ensure that decimal separator is '.'
+         sectorPath.Data = Geometry.Parse($"M{_clockRadius.ToString(CultureInfo.InvariantCulture)},{_clockRadius.ToString(CultureInfo.InvariantCulture)} L{ptStart.X.ToString(CultureInfo.InvariantCulture)},{ptStart.Y.ToString(CultureInfo.InvariantCulture)} A{_sectorRadius.ToString(CultureInfo.InvariantCulture)},{_sectorRadius.ToString(CultureInfo.InvariantCulture)} 0 {largeArc} 1 {ptEnd.X.ToString(CultureInfo.InvariantCulture)},{ptEnd.Y.ToString(CultureInfo.InvariantCulture)} z");
       }
 
       private static Point PointOnCircle(double radius, double angleInDegrees, Point origin)
