@@ -92,8 +92,16 @@
                 </TextBlock>
             </Border>
             <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="10,5,0,5">
-                <Button Height="35" VerticalAlignment="Top" Margin="0,0,0,2"></Button>
-                <Button Height="35" VerticalAlignment="Bottom" Margin="0,2,0,0"></Button>
+                <Button Height="35" VerticalAlignment="Top" Margin="0,0,0,2" Command="{Binding IncrementTimerCommand}">
+                    <Viewbox Margin="5">
+                        <Path Stretch="Uniform" Fill="Black" Data="M0,25 L20,25 20,45 25,45 25,25 45,25 45,20 25,20 25,0 20,0 20,20 0,20 z" />
+                    </Viewbox>
+                </Button>
+                <Button Height="35" VerticalAlignment="Bottom" Margin="0,2,0,0" Command="{Binding DecrementTimerCommand}">
+                    <Viewbox Margin="8">
+                        <Path Stretch="Uniform" Fill="Black" Data="M0,26 L45,26 45,20 0,20 z" />
+                    </Viewbox>
+                </Button>
             </StackPanel>
         </Grid>
 

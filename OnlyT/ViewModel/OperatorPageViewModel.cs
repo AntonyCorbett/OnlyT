@@ -29,6 +29,8 @@ namespace OnlyT.ViewModel
       private readonly ITalkScheduleService _scheduleService;
       private readonly IOptionsService _optionsService;
       private static readonly System.Windows.Media.Brush _whiteBrush = System.Windows.Media.Brushes.White;
+      private static readonly int _maxTimerMins = 99;
+      private static readonly int _maxTimerSecs = _maxTimerMins * 60;
 
 
       public OperatorPageViewModel(
@@ -48,9 +50,29 @@ namespace OnlyT.ViewModel
          StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
          SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
+         IncrementTimerCommand = new RelayCommand(IncrementTimer, () => IsNotRunning);
+         DecrementTimerCommand = new RelayCommand(DecrementTimer, () => IsNotRunning);
 
          // subscriptions...
          Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
+      }
+
+      private void DecrementTimer()
+      {
+         var newSecs = TargetSeconds - 60;
+         if (newSecs >= 0)
+         {
+            TargetSeconds = newSecs;
+         }
+      }
+
+      private void IncrementTimer()
+      {
+         var newSecs = TargetSeconds + 60;
+         if (newSecs <= _maxTimerSecs)
+         {
+            TargetSeconds = newSecs;
+         }
       }
 
       private void OnOperatingModeChanged(OperatingModeChangedMessage message)
@@ -133,6 +155,8 @@ namespace OnlyT.ViewModel
          StartCommand.RaiseCanExecuteChanged();
          StopCommand.RaiseCanExecuteChanged();
          SettingsCommand.RaiseCanExecuteChanged();
+         IncrementTimerCommand.RaiseCanExecuteChanged();
+         DecrementTimerCommand.RaiseCanExecuteChanged();
       }
 
       public IEnumerable<TalkScheduleItem> Talks => _scheduleService.GetTalkScheduleItems();
@@ -246,5 +270,7 @@ namespace OnlyT.ViewModel
       public RelayCommand StartCommand { get; set; }
       public RelayCommand StopCommand { get; set; }
       public RelayCommand SettingsCommand { get; set; }
+      public RelayCommand IncrementTimerCommand { get; set; }
+      public RelayCommand DecrementTimerCommand { get; set; }
    }
 }
