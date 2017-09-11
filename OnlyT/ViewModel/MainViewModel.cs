@@ -122,6 +122,10 @@ namespace OnlyT.ViewModel
                _timerWindow.Show();
             }
          }
+         else
+         {
+            OpenTimerWindow();
+         }
       }
       
       private void OpenTimerWindow()
