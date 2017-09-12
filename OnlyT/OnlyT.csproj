@@ -92,6 +92,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="EventArgs\TimerChangedEventArgs.cs" />
+    <Compile Include="Models\AutoMeetingTime.cs" />
     <Compile Include="Models\DisplayDeviceData.cs" />
     <Compile Include="Models\MonitorItem.cs" />
     <Compile Include="Models\OperatingModeItem.cs" />
@@ -101,13 +102,15 @@
     <Compile Include="Services\Monitors\MonitorsService.cs" />
     <Compile Include="Services\Monitors\NativeMethods.cs" />
     <Compile Include="Services\Options\IOptionsService.cs" />
+    <Compile Include="Services\Options\MidWeekOrWeekend.cs" />
     <Compile Include="Services\Options\OperatingMode.cs" />
     <Compile Include="Services\Options\Options.cs" />
     <Compile Include="Services\Options\OptionsService.cs" />
     <Compile Include="Services\TalkSchedule\ITalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleAuto.cs" />
-    <Compile Include="Services\TalkSchedule\TalkScheduleFile.cs" />
+    <Compile Include="Services\TalkSchedule\TalkScheduleFileBased.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleService.cs" />
+    <Compile Include="Services\TalkSchedule\TalkTypesAutoMode.cs" />
     <Compile Include="Services\Timer\ITalkTimerService.cs" />
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\CommandLineParser.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
     <Compile Include="ViewModel\IPage.cs" />
+    <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />

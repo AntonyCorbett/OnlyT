@@ -14,13 +14,14 @@ namespace OnlyT.Services.Options
    {
       public Options()
       {
-         OperatingMode = OperatingMode.Manual;
+         OperatingMode = OperatingMode.Automatic;
       }
 
       public string TimerMonitorId { get; set; }
       public string AppWindowPlacement { get; set; }
       public OperatingMode OperatingMode { get; set; }
-
+      public MidWeekOrWeekend MidWeekOrWeekend { get; set; }
+      public bool IsCircuitVisit { get; set; }
 
       /// <summary>
       /// Validates the data, correcting automatically as required

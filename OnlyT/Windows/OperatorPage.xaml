@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <ComboBox ItemsSource="{Binding Talks}" 
+            <ComboBox ItemsSource="{Binding Talks, Mode=OneWay}" 
                       IsEnabled="{Binding IsNotRunning}"
                       FontSize="14"
                       SelectedValuePath="Id" 

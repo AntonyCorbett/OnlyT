@@ -55,6 +55,13 @@ namespace OnlyT.ViewModel
 
          // subscriptions...
          Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
+         Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
+      }
+
+      private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
+      {
+         _scheduleService.Reset();
+         RaisePropertyChanged(nameof(Talks));
       }
 
       private void DecrementTimer()
@@ -79,6 +86,7 @@ namespace OnlyT.ViewModel
       {
          RaisePropertyChanged(nameof(IsManualMode));
          RaisePropertyChanged(nameof(IsNotManualMode));
+         Messenger.Default.Send(new AutoMeetingChangedMessage());
       }
 
       private void SelectFirstTalk()

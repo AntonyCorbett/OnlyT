@@ -12,7 +12,7 @@ using Serilog;
 
 namespace OnlyT.Services.TalkSchedule
 {
-   internal static class TalkScheduleFile
+   internal static class TalkScheduleFileBased
    {
       private static readonly string _fileName = "talk_schedule.xml";
 

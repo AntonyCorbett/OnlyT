@@ -20,6 +20,7 @@ namespace OnlyT.ViewModel
       public static string PageName => "SettingsPage";
       private readonly MonitorItem[] _monitors;
       private readonly OperatingModeItem[] _operatingModes;
+      private readonly AutoMeetingTime[] _autoMeetingTimes;
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
 
@@ -31,8 +32,18 @@ namespace OnlyT.ViewModel
 
          _monitors = GetSystemMonitors().ToArray();
          _operatingModes = GetOperatingModes().ToArray();
+         _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
 
          NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
+      }
+
+      private IEnumerable<AutoMeetingTime> GetAutoMeetingTimes()
+      {
+         return new List<AutoMeetingTime>
+         {
+            new AutoMeetingTime {Name = "Midweek", Id = MidWeekOrWeekend.MidWeek },
+            new AutoMeetingTime {Name = "Weekend", Id = MidWeekOrWeekend.Weekend }
+         };
       }
 
       private IEnumerable<OperatingModeItem> GetOperatingModes()
@@ -86,6 +97,36 @@ namespace OnlyT.ViewModel
                _optionsService.Options.OperatingMode = value;
                RaisePropertyChanged(nameof(OperatingMode));
                Messenger.Default.Send(new OperatingModeChangedMessage());
+            }
+         }
+      }
+
+      public IEnumerable<AutoMeetingTime> AutoMeetingTimes => _autoMeetingTimes;
+
+      public MidWeekOrWeekend MidWeekOrWeekend
+      {
+         get => _optionsService.Options.MidWeekOrWeekend;
+         set
+         {
+            if (_optionsService.Options.MidWeekOrWeekend != value)
+            {
+               _optionsService.Options.MidWeekOrWeekend = value;
+               RaisePropertyChanged(nameof(MidWeekOrWeekend));
+               Messenger.Default.Send(new AutoMeetingChangedMessage());
+            }
+         }
+      }
+
+      public bool IsCircuitVisit
+      {
+         get => _optionsService.Options.IsCircuitVisit;
+         set
+         {
+            if (_optionsService.Options.IsCircuitVisit != value)
+            {
+               _optionsService.Options.IsCircuitVisit = value;
+               RaisePropertyChanged(nameof(IsCircuitVisit));
+               Messenger.Default.Send(new AutoMeetingChangedMessage());
             }
          }
       }

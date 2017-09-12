@@ -50,7 +50,7 @@
                 <Viewbox>
                     <TextBlock VerticalAlignment="Bottom" Margin="10,0,10,0">
                         <Run Foreground="White" FontSize="24" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
-                        <Run Foreground="Bisque" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
+                        <Run Foreground="#FFCBABAB" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
                     </TextBlock>
                 </Viewbox>
             </StackPanel>

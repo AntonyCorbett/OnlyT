@@ -76,9 +76,26 @@ namespace OnlyT.Services.Options
             {
                JsonSerializer serializer = new JsonSerializer();
                _options = (Options)serializer.Deserialize(file, typeof(Options));
+               SetMidWeekOrWeekend();
                _options.Sanitize();
             }
          }
+      }
+
+      private bool IsWeekend()
+      {
+         var now = DateTime.Now;
+         return now.DayOfWeek == DayOfWeek.Saturday || now.DayOfWeek == DayOfWeek.Sunday;
+      }
+
+      private void SetMidWeekOrWeekend()
+      {
+         // when the settings are read we ignore this saved setting 
+         // and reset according to current day of week...
+
+         _options.MidWeekOrWeekend = IsWeekend()
+            ? MidWeekOrWeekend.Weekend
+            : MidWeekOrWeekend.MidWeek;
       }
 
       private void WriteDefaultOptions()

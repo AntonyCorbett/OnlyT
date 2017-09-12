@@ -50,6 +50,19 @@
                           DisplayMemberPath="Name"
                           SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
 
+                <GroupBox Margin="5" Header="Automatic mode" Padding="5" >
+                    <StackPanel>
+                        <Label Style="{StaticResource LabelStyle}">Meeting:</Label>
+                        <ComboBox ItemsSource="{Binding AutoMeetingTimes}" 
+                            SelectedValuePath="Id" 
+                            DisplayMemberPath="Name"
+                            SelectedValue="{Binding MidWeekOrWeekend, Mode=TwoWay}"/>
+                        
+                        <CheckBox IsChecked="{Binding IsCircuitVisit, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Circuit visit" />
+                    </StackPanel>
+                </GroupBox>
+
             </StackPanel>
         </ScrollViewer>
 
