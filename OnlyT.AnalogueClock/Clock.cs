@@ -89,7 +89,22 @@ namespace OnlyT.AnalogueClock
          double hourAngle = CalculateAngleHours(now);
          ((DropShadowEffect)_hourHand.Effect).Direction = hourAngle;
          _hourHand.RenderTransform = new RotateTransform(hourAngle, _clockRadius, _clockRadius);
+
+         CurrentTimeHrMin = FormatTimeOfDayHoursAndMins(now);
+         CurrentTimeSec = FormatTimeOfDaySeconds(now);
       }
+
+      private static string FormatTimeOfDayHoursAndMins(DateTime dt)
+      {
+         // todo: cater for 24 hr and 12 hr clocks...
+         return $"{dt.Hour:D2}:{dt.Minute:D2}";
+      }
+      private static string FormatTimeOfDaySeconds(DateTime dt)
+      {
+         return dt.Second.ToString("D2");
+      }
+
+
 
       public static readonly DependencyProperty IsRunningProperty =
          DependencyProperty.Register("IsRunning", typeof(bool), typeof(Clock),
@@ -114,6 +129,27 @@ namespace OnlyT.AnalogueClock
          {
             c._timer.IsEnabled = false;
          }
+      }
+
+      public static readonly DependencyProperty CurrentTimeHrMinProperty =
+         DependencyProperty.Register("CurrentTimeHrMin", typeof(string), typeof(Clock));
+
+      public static readonly DependencyProperty CurrentTimeSecProperty =
+         DependencyProperty.Register("CurrentTimeSec", typeof(string), typeof(Clock));
+           
+
+      private string CurrentTimeHrMin
+      {
+         // ReSharper disable once PossibleNullReferenceException
+         get => (string)GetValue(CurrentTimeHrMinProperty);
+         set => SetValue(CurrentTimeHrMinProperty, value);
+      }
+
+      private string CurrentTimeSec
+      {
+         // ReSharper disable once PossibleNullReferenceException
+         get => (string)GetValue(CurrentTimeSecProperty);
+         set => SetValue(CurrentTimeSecProperty, value);
       }
 
       public static readonly DependencyProperty DurationSectorProperty =

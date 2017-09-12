@@ -59,13 +59,14 @@ namespace OnlyT.ViewModel
 
       private void OnTimerChanged(TimerChangedMessage message)
       {
-         IsRunning = true;
          TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
          TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
 
+         DateTime now = DateTime.Now;
+
          if (DurationSector != null)
          {
-            var currentAngle = CalcAngleFromTime(DateTime.Now);
+            var currentAngle = CalcAngleFromTime(now);
             if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15) // prevent gratuitous updates
             {
                var d = DurationSector.Clone();
@@ -104,7 +105,7 @@ namespace OnlyT.ViewModel
             }
          }
       }
-
+      
       private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
       public Brush TextColor
       {

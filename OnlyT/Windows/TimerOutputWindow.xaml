@@ -41,7 +41,22 @@
             <ColumnDefinition Width="96*"/>
             <ColumnDefinition Width="125*"/>
         </Grid.ColumnDefinitions>
-        <clock:Clock x:Name="TheClock" Grid.Column="0" Margin="10" DurationSector="{Binding DurationSector}"/>
+        
+        <Border CornerRadius="20" Grid.Column="0" BorderBrush="Beige" Margin="10" BorderThickness="3" Padding="10">
+            
+            <StackPanel Orientation="Vertical">
+                
+                <clock:Clock x:Name="TheClock" Margin="15" DurationSector="{Binding DurationSector, Mode=OneWay}"/>
+                <Viewbox>
+                    <TextBlock VerticalAlignment="Bottom" Margin="10,0,10,0">
+                        <Run Foreground="White" FontSize="24" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
+                        <Run Foreground="Bisque" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
+                    </TextBlock>
+                </Viewbox>
+            </StackPanel>
+            
+        </Border>
+        
         <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
             
             <TextBlock Style="{StaticResource FadingTextBlockStyle}" 
