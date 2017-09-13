@@ -55,12 +55,15 @@ namespace OnlyT.Services.TalkSchedule
 
       public int GetNext(int currentTalkId)
       {
-         var talks = GetTalkScheduleItems().ToArray();
-         for (int n = 0; n < talks.Length; ++n)
+         var talks = GetTalkScheduleItems()?.ToArray();
+         if (talks != null)
          {
-            if (talks[n].Id.Equals(currentTalkId) && n != talks.Length - 1)
+            for (int n = 0; n < talks.Length; ++n)
             {
-               return talks[n + 1].Id;
+               if (talks[n].Id.Equals(currentTalkId) && n != talks.Length - 1)
+               {
+                  return talks[n + 1].Id;
+               }
             }
          }
 
