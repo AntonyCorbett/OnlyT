@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OnlyT.Utils
 {
+   /// <summary>
+   /// Misc Native methods 
+   /// </summary>
    internal static class NativeMethods
    {
       [DllImport("user32.dll")]

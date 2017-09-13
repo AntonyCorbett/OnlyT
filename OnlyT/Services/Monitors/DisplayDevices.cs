@@ -8,9 +8,15 @@ using OnlyT.Models;
 
 namespace OnlyT.Services.Monitors
 {
+   /// <summary>
+   /// Queries the system for information regarding display devices
+   /// </summary>
    public static class DisplayDevices
    {
-      
+      /// <summary>
+      /// Gets system display devices
+      /// </summary>
+      /// <returns>Collection of DisplayDeviceData</returns>
       public static IEnumerable<DisplayDeviceData> ReadDisplayDevices()
       {
          var result = new List<DisplayDeviceData>();

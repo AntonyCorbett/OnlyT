@@ -21,6 +21,9 @@ using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
 {
+   /// <summary>
+   /// View model for the Operator page
+   /// </summary>
    public class OperatorPageViewModel : ViewModelBase, IPage
    {
       public static string PageName => "OperatorPage";

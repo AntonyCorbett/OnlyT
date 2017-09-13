@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlyT.ViewModel.Messages
 {
+   /// <summary>
+   /// When we navigate between pages (e.g. from Operator page to Settings page)
+   /// </summary>
    internal class NavigateMessage
    {
       /// <summary>

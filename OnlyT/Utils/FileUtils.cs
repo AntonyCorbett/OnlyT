@@ -93,6 +93,10 @@ namespace OnlyT.Utils
              _optionsFileName);
       }
 
+      /// <summary>
+      /// Gets the OnlyT application data folder
+      /// </summary>
+      /// <returns></returns>
       public static string GetAppDataFolder()
       {
          // NB - user-specific folder

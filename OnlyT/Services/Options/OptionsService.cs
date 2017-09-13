@@ -10,6 +10,9 @@ using Serilog;
 
 namespace OnlyT.Services.Options
 {
+   /// <summary>
+   /// Service to deal with program settings
+   /// </summary>
    public class OptionsService : IOptionsService
    {
       private Options _options;
@@ -140,7 +143,9 @@ namespace OnlyT.Services.Options
          }
       }
 
-
+      /// <summary>
+      /// Determines if the timer monitor is specified
+      /// </summary>
       public bool IsTimerMonitorSpecified
       {
          get

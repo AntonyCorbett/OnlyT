@@ -12,6 +12,11 @@ using Serilog;
 
 namespace OnlyT.MeetingSongsFile
 {
+
+   /// <summary>
+   /// Finds meeting songs numbers and talk timers for use in "Automatic" mode.
+   /// This code adapted from SoundBox.
+   /// </summary>
    internal class MeetingSongsFinder
    {
       private static readonly string _fileName = "mtg_songs_1.xml";
@@ -26,6 +31,12 @@ namespace OnlyT.MeetingSongsFile
          _localMtgSongsFile = Path.Combine(FileUtils.GetAppDataFolder(), _fileName);
       }
 
+      /// <summary>
+      /// Gets the song numbers and meeting timers for today's date. Assumes
+      /// that the "midweek" meeting occurs midweek and the "weekend" meeting is 
+      /// at the weekend!
+      /// </summary>
+      /// <returns></returns>
       public MeetingSongsAndTimers GetSongNumbersAndTimersForToday()
       {
          DateTime now = DateTime.Now;

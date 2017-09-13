@@ -16,6 +16,11 @@ namespace OnlyT.Utils
          return "OnlyT (+http://cv8.org.uk/soundbox)";
       }
 
+      /// <summary>
+      /// Downloads an xml file, specifying a user agent string
+      /// </summary>
+      /// <param name="url">Address of file</param>
+      /// <returns>File as XDocument</returns>
       public static XDocument XDocLoadWithUserAgent(string url)
       {
          using (WebClient wc = new WebClient())

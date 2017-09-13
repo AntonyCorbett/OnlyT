@@ -5,6 +5,9 @@ using OnlyT.EventArgs;
 
 namespace OnlyT.Services.Timer
 {
+   /// <summary>
+   /// Timer service
+   /// </summary>
    class TalkTimerService : ITalkTimerService
    {
       private readonly Stopwatch _stopWatch = new Stopwatch();
@@ -32,6 +35,10 @@ namespace OnlyT.Services.Timer
          CurrentSecondsElapsed = (int) _stopWatch.Elapsed.TotalSeconds;
       }
 
+      /// <summary>
+      /// Starts the timer
+      /// </summary>
+      /// <param name="targetSecs">The target duration of the talk</param>
       public void Start(int targetSecs)
       {
          _targetSecs = targetSecs;
@@ -40,6 +47,9 @@ namespace OnlyT.Services.Timer
          _timer.Start();
       }
 
+      /// <summary>
+      /// Stops the timer
+      /// </summary>
       public void Stop()
       {
          _timer.Stop();
@@ -47,7 +57,11 @@ namespace OnlyT.Services.Timer
          UpdateTimerValue();
       }
 
-      private int _currentSecondsElapsed = 0;
+      private int _currentSecondsElapsed;
+
+      /// <summary>
+      /// The current number of seconds elapsed
+      /// </summary>
       public int CurrentSecondsElapsed
       {
          get => _currentSecondsElapsed;
@@ -61,6 +75,9 @@ namespace OnlyT.Services.Timer
          }
       }
 
+      /// <summary>
+      /// Is the timer running?
+      /// </summary>
       public bool IsRunning => _stopWatch.IsRunning;
 
       protected virtual void OnTimerChangedEvent(TimerChangedEventArgs e)

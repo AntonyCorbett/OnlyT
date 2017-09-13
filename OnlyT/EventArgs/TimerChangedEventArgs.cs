@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlyT.EventArgs
 {
+   /// <summary>
+   /// Event args for change in timer values
+   /// </summary>
    public class TimerChangedEventArgs : System.EventArgs
    {
       public int TargetSecs { get; set; }

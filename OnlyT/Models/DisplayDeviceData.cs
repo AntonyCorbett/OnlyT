@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlyT.Models
 {
+   /// <summary>
+   /// Used when reading monitor device info from system
+   /// </summary>
    public class DisplayDeviceData
    {
       public string Name { get; set; }

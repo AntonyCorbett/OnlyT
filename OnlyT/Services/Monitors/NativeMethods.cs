@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OnlyT.Services.Monitors
 {
+   /// <summary>
+   /// Native methods associated with retrieval of display device data
+   /// </summary>
    public static class NativeMethods
    {
       [DllImport("user32.dll")]

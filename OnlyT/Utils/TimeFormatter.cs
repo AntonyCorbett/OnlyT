@@ -6,10 +6,18 @@ using System.Threading.Tasks;
 
 namespace OnlyT.Utils
 {
+   /// <summary>
+   /// Formats time values
+   /// </summary>
    internal static class TimeFormatter
    {
       private static readonly int _secsPerMinute = 60;
 
+      /// <summary>
+      /// Gets a time remaining string
+      /// </summary>
+      /// <param name="secsRemaining">Seconds remaining in talk (can be negative)</param>
+      /// <returns>Formatted time (mins and secs)</returns>
       public static string FormatTimeRemaining(int secsRemaining)
       {
          int mins = Math.Abs(secsRemaining) / _secsPerMinute;
@@ -17,16 +25,5 @@ namespace OnlyT.Utils
 
          return $"{mins:D2}:{secs:D2}";
       }
-
-      //public static string FormatTimeOfDayHoursAndMins(DateTime dt)
-      //{
-      //   // todo: cater for 24 hr and 12 hr clocks...
-      //   return $"{dt.Hour:D2}:{dt.Minute:D2}";
-      //}
-
-      //public static string FormatTimeOfDaySeconds(DateTime dt)
-      //{
-      //   return dt.Second.ToString("D2");
-      //}
    }
 }

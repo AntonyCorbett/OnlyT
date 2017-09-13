@@ -16,6 +16,9 @@ using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {
+   /// <summary>
+   /// View model for the main page (which is a placeholder for the Operator or Settings page)
+   /// </summary>
    public class MainViewModel : ViewModelBase
    {
       private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
@@ -24,7 +27,7 @@ namespace OnlyT.ViewModel
       private readonly IMonitorsService _monitorsService;
       private readonly ITalkScheduleService _scheduleService;
       private string _currentPageName;
-      private TimerOutputWindowViewModel _timerWindowViewModel;
+      private readonly TimerOutputWindowViewModel _timerWindowViewModel;
       
 
       public MainViewModel(
@@ -54,6 +57,10 @@ namespace OnlyT.ViewModel
 #pragma warning restore 4014
       }
 
+      /// <summary>
+      /// Responds to a change in timer monitor
+      /// </summary>
+      /// <param name="message"></param>
       private void OnTimerMonitorChanged(TimerMonitorChangedMessage message)
       {
          if (_optionsService.IsTimerMonitorSpecified)
@@ -70,11 +77,16 @@ namespace OnlyT.ViewModel
       {
          if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
          {
+            // on launch we display the timer window after a short delay (for aesthetics only)
             await Task.Delay(1000);
             OpenTimerWindow();
          }
       }
 
+      /// <summary>
+      /// Responds to the NavigateMessage and swaps out one page for another
+      /// </summary>
+      /// <param name="message"></param>
       private void OnNavigate(NavigateMessage message)
       {
          CurrentPage = _pages[message.TargetPage];
@@ -106,6 +118,10 @@ namespace OnlyT.ViewModel
          }
       }
 
+      /// <summary>
+      /// If the timer window is open when we change the timer display then relocate it;
+      /// otherwise open it
+      /// </summary>
       private void RelocateTimerWindow()
       {
          if (_timerWindow != null)

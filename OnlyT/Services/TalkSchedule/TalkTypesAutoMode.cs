@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlyT.Services.TalkSchedule
 {
+   /// <summary>
+   /// Talk types for automatic mode
+   /// </summary>
    public enum TalkTypesAutoMode
    {
       Unknown,

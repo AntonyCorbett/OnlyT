@@ -12,6 +12,9 @@ using Serilog;
 
 namespace OnlyT.Services.TalkSchedule
 {
+   /// <summary>
+   /// The talk schedule when using "File-based" operating mode
+   /// </summary>
    internal static class TalkScheduleFileBased
    {
       private static readonly string _fileName = "talk_schedule.xml";

@@ -13,8 +13,16 @@ using Serilog;
 
 namespace OnlyT.Services.TalkSchedule
 {
+   /// <summary>
+   /// The talk schedule when in "Automatic" operating mode
+   /// </summary>
    internal static class TalkScheduleAuto
    {
+      /// <summary>
+      /// Gets the talk schedule
+      /// </summary>
+      /// <param name="optionsService"></param>
+      /// <returns>A collection of TalkScheduleItem</returns>
       public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)
       {
          bool isCircuitVisit = optionsService.Options.IsCircuitVisit;

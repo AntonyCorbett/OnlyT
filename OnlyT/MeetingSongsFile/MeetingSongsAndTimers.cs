@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace OnlyT.MeetingSongsFile
 {
+   /// <summary>
+   /// Stores the meeting songs and talk timers for use in "Automatic mode". These
+   /// values are read from an online xml feed. This code extracted from SoundBox.
+   /// </summary>
    internal class MeetingSongsAndTimers
    {
       public const string LIVING_TIMER1_KEY = "timerL1";
