@@ -122,13 +122,15 @@ namespace OnlyT.Services.TalkSchedule
          result.Add(new TalkScheduleItem(TalkTypesAutoMode.LivingPart1)
          {
             Name = Properties.Resources.TALK_LIVING1,
-            Duration = TimeSpan.FromMinutes(timerPart1)
+            Duration = TimeSpan.FromMinutes(timerPart1),
+            Editable = true
          });
 
          result.Add(new TalkScheduleItem(TalkTypesAutoMode.LivingPart2)
          {
             Name = Properties.Resources.TALK_LIVING2,
-            Duration = TimeSpan.FromMinutes(timerPart2)
+            Duration = TimeSpan.FromMinutes(timerPart2),
+            Editable = true
          });
 
          if (isCircuitVisit)
@@ -136,7 +138,8 @@ namespace OnlyT.Services.TalkSchedule
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.ConcludingComments)
             {
                Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
-               Duration = TimeSpan.FromMinutes(3)
+               Duration = TimeSpan.FromMinutes(3),
+               Editable = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.CircuitServiceTalk)
@@ -150,13 +153,15 @@ namespace OnlyT.Services.TalkSchedule
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.CongBibleStudy)
             {
                Name = Properties.Resources.TALK_CONG_STUDY,
-               Duration = TimeSpan.FromMinutes(30)
+               Duration = TimeSpan.FromMinutes(30),
+               Editable = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.ConcludingComments)
             {
                Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
-               Duration = TimeSpan.FromMinutes(3)
+               Duration = TimeSpan.FromMinutes(3),
+               Editable = true
             });
          }
 
@@ -191,19 +196,22 @@ namespace OnlyT.Services.TalkSchedule
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.PublicTalk)
             {
                Name = Properties.Resources.TALK_PUBLIC,
-               Duration = TimeSpan.FromMinutes(30)
+               Duration = TimeSpan.FromMinutes(30),
+               Editable = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.Watchtower)
             {
                Name = Properties.Resources.TALK_WT,
-               Duration = TimeSpan.FromMinutes(30)
+               Duration = TimeSpan.FromMinutes(30),
+               Editable = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.CircuitServiceTalk)
             {
                Name = Properties.Resources.TALK_CONCLUDING,
-               Duration = TimeSpan.FromMinutes(30)
+               Duration = TimeSpan.FromMinutes(30),
+               Editable = true
             });
          }
          else
@@ -211,13 +219,15 @@ namespace OnlyT.Services.TalkSchedule
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.PublicTalk)
             {
                Name = Properties.Resources.TALK_PUBLIC,
-               Duration = TimeSpan.FromMinutes(30)
+               Duration = TimeSpan.FromMinutes(30),
+               Editable = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.Watchtower)
             {
                Name = Properties.Resources.TALK_WT,
-               Duration = TimeSpan.FromMinutes(60)
+               Duration = TimeSpan.FromMinutes(60),
+               Editable = true
             });
          }
 

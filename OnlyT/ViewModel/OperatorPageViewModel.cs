@@ -53,12 +53,38 @@ namespace OnlyT.ViewModel
          StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
          SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
-         IncrementTimerCommand = new RelayCommand(IncrementTimer, () => IsNotRunning);
-         DecrementTimerCommand = new RelayCommand(DecrementTimer, () => IsNotRunning);
+         IncrementTimerCommand = new RelayCommand(IncrementTimer, CanIncreaseTimerValue);
+         DecrementTimerCommand = new RelayCommand(DecrementTimer, CanDecreaseTimerValue);
 
          // subscriptions...
          Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
          Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
+      }
+
+      private bool CanIncreaseTimerValue()
+      {
+         if (IsRunning || TargetSeconds >= _maxTimerSecs)
+         {
+            return false;
+         }
+
+         return CurrentTalkTimerIsEditable();
+      }
+
+      private bool CanDecreaseTimerValue()
+      {
+         if (IsRunning || TargetSeconds <= 0)
+         {
+            return false;
+         }
+
+         return CurrentTalkTimerIsEditable();
+      }
+
+      private bool CurrentTalkTimerIsEditable()
+      {
+         var talk = GetCurrentTalk();
+         return talk == null || talk.Editable;
       }
 
       private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
@@ -196,6 +222,11 @@ namespace OnlyT.ViewModel
          }
       }
 
+      private TalkScheduleItem GetCurrentTalk()
+      {
+         return _scheduleService.GetTalkScheduleItem(TalkId);
+      }
+
       private int GetTargetSecondsFromTalkSchedule(int talkId)
       {
          var talk = _scheduleService.GetTalkScheduleItem(talkId);
@@ -247,7 +278,21 @@ namespace OnlyT.ViewModel
                SecondsRemaining = _targetSeconds;
                RaisePropertyChanged(nameof(TargetSeconds));
                RaisePropertyChanged(nameof(CurrentTimerValueString));
+
+               AdjustTalkTimeForThisSession();
+
+               IncrementTimerCommand?.RaiseCanExecuteChanged();
+               DecrementTimerCommand?.RaiseCanExecuteChanged();
             }
+         }
+      }
+
+      private void AdjustTalkTimeForThisSession()
+      {
+         var talk = GetCurrentTalk();
+         if (talk != null && talk.Editable)
+         {
+            talk.Duration = TimeSpan.FromSeconds(TargetSeconds);
          }
       }
 

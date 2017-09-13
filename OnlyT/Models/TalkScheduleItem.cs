@@ -14,7 +14,29 @@ namespace OnlyT.Models
    {
       public int Id { get; set; }
       public string Name { get; set; }
-      public TimeSpan Duration { get; set; }
+
+      /// <summary>
+      /// Original duration (before any user modification)
+      /// </summary>
+      public TimeSpan OriginalDuration { get; private set; }
+
+      private TimeSpan _duration;
+      public TimeSpan Duration
+      {
+         get => _duration;
+         set
+         {
+            if (_duration != value)
+            {
+               _duration = value;
+               if (OriginalDuration == default(TimeSpan))
+               {
+                  OriginalDuration = Duration;
+               }
+            }
+         }
+      }
+
       public bool Editable { get; set; }  // can the timer be modified manually?
       public bool Bell { get; set; } // should a bell be sounded at time-up?
 
