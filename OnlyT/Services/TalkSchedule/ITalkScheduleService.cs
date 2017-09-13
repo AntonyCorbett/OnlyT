@@ -11,6 +11,7 @@ namespace OnlyT.Services.TalkSchedule
    {
       IEnumerable<TalkScheduleItem> GetTalkScheduleItems();
       TalkScheduleItem GetTalkScheduleItem(int id);
+      int GetNext(int currentTalkId);
       void Reset();
    }
 }

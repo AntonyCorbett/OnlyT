@@ -116,6 +116,14 @@ namespace OnlyT.ViewModel
 
          Messenger.Default.Send(new TimerStopMessage());
          RaiseCanExecuteChanged();
+
+         AutoAdvance();
+      }
+
+      private void AutoAdvance()
+      {
+         // advance to next item...
+         TalkId = _scheduleService.GetNext(TalkId);
       }
 
       public bool IsManualMode => _optionsService.Options.OperatingMode == OperatingMode.Manual;

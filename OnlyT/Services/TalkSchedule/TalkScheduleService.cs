@@ -49,5 +49,19 @@ namespace OnlyT.Services.TalkSchedule
       {
          return GetTalkScheduleItems()?.SingleOrDefault(n => n.Id == id);
       }
+
+      public int GetNext(int currentTalkId)
+      {
+         var talks = GetTalkScheduleItems().ToArray();
+         for (int n = 0; n < talks.Length; ++n)
+         {
+            if (talks[n].Id.Equals(currentTalkId) && n != talks.Length - 1)
+            {
+               return talks[n + 1].Id;
+            }
+         }
+
+         return 0;
+      }
    }
 }
