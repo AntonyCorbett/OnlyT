@@ -25,7 +25,6 @@ namespace OnlyT.AnalogueClock
    {
       private static readonly double _clockRadius = 250;
       private static readonly double _sectorRadius = 230;
-      private static readonly double _smallAngleTolerance = 0.01;
       private static readonly Point _clockOrigin = new Point(_clockRadius, _clockRadius);
       private static readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
       private static readonly TimeSpan _animationTimerInterval = TimeSpan.FromMilliseconds(20);
