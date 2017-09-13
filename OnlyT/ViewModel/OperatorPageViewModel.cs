@@ -218,6 +218,9 @@ namespace OnlyT.ViewModel
                _talkId = value;
                TargetSeconds = GetTargetSecondsFromTalkSchedule(_talkId);
                RaisePropertyChanged(nameof(TalkId));
+
+               IncrementTimerCommand?.RaiseCanExecuteChanged();
+               DecrementTimerCommand?.RaiseCanExecuteChanged();
             }
          }
       }
@@ -276,13 +279,11 @@ namespace OnlyT.ViewModel
             {
                _targetSeconds = value;
                SecondsRemaining = _targetSeconds;
+
                RaisePropertyChanged(nameof(TargetSeconds));
                RaisePropertyChanged(nameof(CurrentTimerValueString));
 
                AdjustTalkTimeForThisSession();
-
-               IncrementTimerCommand?.RaiseCanExecuteChanged();
-               DecrementTimerCommand?.RaiseCanExecuteChanged();
             }
          }
       }
