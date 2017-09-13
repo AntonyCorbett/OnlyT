@@ -62,6 +62,7 @@ namespace OnlyT.ViewModel
       {
          _scheduleService.Reset();
          RaisePropertyChanged(nameof(Talks));
+         SelectFirstTalk();
       }
 
       private void DecrementTimer()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,7 @@ namespace OnlyT.AnalogueClock
       private Path _sectorPath3;
       private readonly DispatcherTimer _timer;
       private readonly DispatcherTimer _animationTimer;
+      private readonly bool _isInDesignMode;
 
 
       static Clock()
@@ -51,11 +53,19 @@ namespace OnlyT.AnalogueClock
 
       public Clock()
       {
+         _isInDesignMode = DesignerProperties.GetIsInDesignMode(this);
+
          _timer = new DispatcherTimer(DispatcherPriority.Render) {Interval = _timerInterval};
          _timer.Tick += TimerCallback;
 
          _animationTimer = new DispatcherTimer(DispatcherPriority.Render) { Interval = _animationTimerInterval };
          _animationTimer.Tick += AnimationCallback;
+
+         if (_isInDesignMode)
+         {
+            CurrentTimeHrMin = "13:50";
+            CurrentTimeSec = "20";
+         }
       }
 
       private double CalculateAngleSeconds(DateTime dt)
@@ -136,8 +146,8 @@ namespace OnlyT.AnalogueClock
 
       public static readonly DependencyProperty CurrentTimeSecProperty =
          DependencyProperty.Register("CurrentTimeSec", typeof(string), typeof(Clock));
-           
 
+      
       private string CurrentTimeHrMin
       {
          // ReSharper disable once PossibleNullReferenceException

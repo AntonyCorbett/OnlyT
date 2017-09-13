@@ -92,6 +92,8 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="EventArgs\TimerChangedEventArgs.cs" />
+    <Compile Include="MeetingSongsFile\MeetingSongsFinder.cs" />
+    <Compile Include="MeetingSongsFile\MeetingSongsAndTimers.cs" />
     <Compile Include="Models\AutoMeetingTime.cs" />
     <Compile Include="Models\DisplayDeviceData.cs" />
     <Compile Include="Models\MonitorItem.cs" />
@@ -114,10 +116,12 @@
     <Compile Include="Services\Timer\ITalkTimerService.cs" />
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\CommandLineParser.cs" />
+    <Compile Include="Utils\DateTimeExtensions.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\GreenYellowRedSelector.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Utils\TimeFormatter.cs" />
+    <Compile Include="Utils\WebUtils.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />

@@ -93,5 +93,15 @@ namespace OnlyT.Utils
              _optionsFileName);
       }
 
+      public static string GetAppDataFolder()
+      {
+         // NB - user-specific folder
+         // e.g. C:\Users\Antony\AppData\Roaming\OnlyT
+         string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), _appNamePathSegment);
+         Directory.CreateDirectory(folder);
+         return folder;
+      }
+
+
    }
 }

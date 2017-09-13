@@ -6,7 +6,7 @@
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:local="clr-namespace:OnlyT"
         mc:Ignorable="d"
-        Title="TimerOutputWindow" Height="300" Width="441.885" Loaded="Window_Loaded" 
+        Title="TimerOutputWindow" Height="300" Width="457.562" Loaded="Window_Loaded" 
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
 
     <Window.Resources>
@@ -41,24 +41,37 @@
             <ColumnDefinition Width="96*"/>
             <ColumnDefinition Width="125*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Border CornerRadius="20" Grid.Column="0" BorderBrush="Beige" Margin="10" BorderThickness="3" Padding="10">
-            
-            <StackPanel Orientation="Vertical">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FF5D4343"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <clock:Clock x:Name="TheClock" Grid.Row="0 " 
+                             Margin="15" 
+                             DurationSector="{Binding DurationSector, Mode=OneWay}" />
                 
-                <clock:Clock x:Name="TheClock" Margin="15" DurationSector="{Binding DurationSector, Mode=OneWay}"/>
-                <Viewbox>
+                <Viewbox Grid.Row="1">
                     <TextBlock VerticalAlignment="Bottom" Margin="10,0,10,0">
-                        <Run Foreground="White" FontSize="24" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
+                        <Run Foreground="White" FontSize="24" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
                         <Run Foreground="#FFCBABAB" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
                     </TextBlock>
                 </Viewbox>
-            </StackPanel>
-            
+            </Grid>
+
         </Border>
-        
+
         <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
-            
+
             <TextBlock Style="{StaticResource FadingTextBlockStyle}" 
                        Foreground="{Binding TextColor}" 
                        Text="{Binding TimeString}"

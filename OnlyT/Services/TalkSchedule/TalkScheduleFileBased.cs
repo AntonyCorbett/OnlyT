@@ -63,7 +63,7 @@ namespace OnlyT.Services.TalkSchedule
                {
                   result = new List<TalkScheduleItem>();
 
-                  int talkId = 100;
+                  int talkId = 1000;
                   foreach (XElement elem in items.Elements("item"))
                   {
                      result.Add(new TalkScheduleItem

@@ -77,5 +77,149 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("CREATE_FOLDER_ERROR", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bible Study / Talk.
+        /// </summary>
+        internal static string TALK_BIBLE_STUDY {
+            get {
+                return ResourceManager.GetString("TALK_BIBLE_STUDY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Concluding Talk.
+        /// </summary>
+        internal static string TALK_CONCLUDING {
+            get {
+                return ResourceManager.GetString("TALK_CONCLUDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Concluding Comments.
+        /// </summary>
+        internal static string TALK_CONCLUDING_COMMENTS {
+            get {
+                return ResourceManager.GetString("TALK_CONCLUDING_COMMENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congregation Bible Study.
+        /// </summary>
+        internal static string TALK_CONG_STUDY {
+            get {
+                return ResourceManager.GetString("TALK_CONG_STUDY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digging for Spiritual Gems.
+        /// </summary>
+        internal static string TALK_DIGGING {
+            get {
+                return ResourceManager.GetString("TALK_DIGGING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initial Call.
+        /// </summary>
+        internal static string TALK_INITIAL_CALL {
+            get {
+                return ResourceManager.GetString("TALK_INITIAL_CALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Living - Part 1.
+        /// </summary>
+        internal static string TALK_LIVING1 {
+            get {
+                return ResourceManager.GetString("TALK_LIVING1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Living - Part 2.
+        /// </summary>
+        internal static string TALK_LIVING2 {
+            get {
+                return ResourceManager.GetString("TALK_LIVING2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opening Comments.
+        /// </summary>
+        internal static string TALK_OPENING_COMMENTS {
+            get {
+                return ResourceManager.GetString("TALK_OPENING_COMMENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Month&apos;s Presentations.
+        /// </summary>
+        internal static string TALK_PRESENTATIONS {
+            get {
+                return ResourceManager.GetString("TALK_PRESENTATIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public Talk.
+        /// </summary>
+        internal static string TALK_PUBLIC {
+            get {
+                return ResourceManager.GetString("TALK_PUBLIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bible Reading.
+        /// </summary>
+        internal static string TALK_READING {
+            get {
+                return ResourceManager.GetString("TALK_READING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return Visit.
+        /// </summary>
+        internal static string TALK_RV {
+            get {
+                return ResourceManager.GetString("TALK_RV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service Talk.
+        /// </summary>
+        internal static string TALK_SERVICE {
+            get {
+                return ResourceManager.GetString("TALK_SERVICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Treasures Talk.
+        /// </summary>
+        internal static string TALK_TREASURES {
+            get {
+                return ResourceManager.GetString("TALK_TREASURES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watchtower Study.
+        /// </summary>
+        internal static string TALK_WT {
+            get {
+                return ResourceManager.GetString("TALK_WT", resourceCulture);
+            }
+        }
     }
 }
