@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using OnlyT.Models;
+using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.ViewModel.Messages;
@@ -23,18 +24,29 @@ namespace OnlyT.ViewModel
       private readonly AutoMeetingTime[] _autoMeetingTimes;
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
+      private readonly IBellService _bellService;
 
-      public SettingsPageViewModel(IMonitorsService monitorsService, IOptionsService optionsService)
+      public SettingsPageViewModel(
+         IMonitorsService monitorsService, 
+         IBellService bellService,
+         IOptionsService optionsService)
       {
          Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
          _optionsService = optionsService;
          _monitorsService = monitorsService;
+         _bellService = bellService;
 
          _monitors = GetSystemMonitors().ToArray();
          _operatingModes = GetOperatingModes().ToArray();
          _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
 
          NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
+         TestBellCommand = new RelayCommand(TestBell);
+      }
+
+      private void TestBell()
+      {
+         _bellService.Play(_optionsService.Options.BellVolumePercent);
       }
 
       private IEnumerable<AutoMeetingTime> GetAutoMeetingTimes()
@@ -196,5 +208,6 @@ namespace OnlyT.ViewModel
 
 
       public RelayCommand NavigateOperatorCommand { get; set; }
+      public RelayCommand TestBellCommand { get; set; }
    }
 }

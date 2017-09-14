@@ -71,7 +71,8 @@
                         <Label Style="{StaticResource LabelStyle}">Volume:</Label>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding BellVolumePercent}"
-                                TickFrequency="10" TickPlacement="TopLeft"/>
+                                TickFrequency="10" TickPlacement="BottomRight"/>
+                        <Button Width="100" HorizontalAlignment="Left" Command="{Binding TestBellCommand}">Test</Button>
                     </StackPanel>
                 </GroupBox>
 

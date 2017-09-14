@@ -7,58 +7,26 @@ using Serilog;
 
 namespace OnlyT.Services.Bell
 {
-   internal sealed class TimerBell
+   internal sealed class TimerBell : IDisposable
    {
       private static readonly string _bellFileName = "bell.mp3";
-      private static readonly Lazy<Mp3FileReader> _mp3Reader = new Lazy<Mp3FileReader>(Mp3ReaderFactory);
-      private static readonly Lazy<WaveOut> _waveOut = new Lazy<WaveOut>(WaveOutFactory);
+      private readonly WaveOutEvent _player;
+      private Mp3FileReader _reader;
 
-      private static Mp3FileReader Mp3ReaderFactory()
+      public TimerBell()
       {
-         Mp3FileReader result = null;
-
-         var path = GetBellFilePath();
-         if (!File.Exists(path))
-         {
-            Log.Logger.Error($"Could not find file: {path}");
-         }
-         else
-         {
-            result = new Mp3FileReader(path);
-         }
-
-         return result;
-      }
-
-      private static WaveOut WaveOutFactory()
-      {
-         WaveOut result = null;
-
-         if (_mp3Reader.Value != null)
-         {
-            try
-            {
-               result = new WaveOut();
-               result.Init(_mp3Reader.Value);
-            }
-            catch (Exception ex)
-            {
-               Log.Logger.Error(ex, "Could not init wave out");
-            }
-         }
-
-         return result;
+         _player = new WaveOutEvent();
       }
 
       public void Play(int volumePercent)
       {
          try
          {
-            if(_waveOut.Value != null)
-            { 
-               _waveOut.Value.Volume = (float) volumePercent / 100;
-               _waveOut.Value.Play();
-            }
+            _reader = new Mp3FileReader(GetBellFilePath());
+            _player.Init(_reader);
+            _player.PlaybackStopped += HandlePlaybackStopped;
+            _player.Volume = (float) volumePercent / 100;
+            _player.Play();
          }
          catch (Exception ex)
          {
@@ -66,10 +34,21 @@ namespace OnlyT.Services.Bell
          }
       }
 
+      private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
+      {
+         _reader?.Dispose();
+      }
+
       private static string GetBellFilePath()
       {
          string folder = AppDomain.CurrentDomain.BaseDirectory;
          return Path.Combine(folder, _bellFileName);
+      }
+
+      public void Dispose()
+      {
+         _player?.Dispose();
+         _reader?.Dispose();
       }
    }
 }
