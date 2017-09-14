@@ -131,6 +131,20 @@ namespace OnlyT.ViewModel
          }
       }
 
+      public bool AlwaysOnTop
+      {
+         get => _optionsService.Options.AlwaysOnTop;
+         set
+         {
+            if (_optionsService.Options.AlwaysOnTop != value)
+            {
+               _optionsService.Options.AlwaysOnTop = value;
+               RaisePropertyChanged(nameof(AlwaysOnTop));
+               Messenger.Default.Send(new AlwaysOnTopChangedMessage());
+            }
+         }
+      }
+
       public void Activated(object state)
       {
          

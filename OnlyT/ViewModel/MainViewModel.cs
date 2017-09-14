@@ -43,7 +43,8 @@ namespace OnlyT.ViewModel
          // subscriptions...
          Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
          Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
-         
+         Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
+
          _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
          _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
 
@@ -55,6 +56,15 @@ namespace OnlyT.ViewModel
          // (fire and forget)
          LaunchTimerWindowAsync();
 #pragma warning restore 4014
+      }
+
+      /// <summary>
+      /// Responds to change in the application's "Always on top" option
+      /// </summary>
+      /// <param name="obj"></param>
+      private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage obj)
+      {
+         RaisePropertyChanged(nameof(AlwaysOnTop));
       }
 
       /// <summary>
@@ -107,6 +117,8 @@ namespace OnlyT.ViewModel
             }
          }
       }
+
+      public bool AlwaysOnTop => _optionsService.Options.AlwaysOnTop;
 
       public void Closing(object sender, CancelEventArgs e)
       {

@@ -15,6 +15,7 @@ namespace OnlyT.Services.Options
       public Options()
       {
          OperatingMode = OperatingMode.Automatic;
+         AlwaysOnTop = true;
       }
 
       public string TimerMonitorId { get; set; }
@@ -22,6 +23,7 @@ namespace OnlyT.Services.Options
       public OperatingMode OperatingMode { get; set; }
       public MidWeekOrWeekend MidWeekOrWeekend { get; set; }
       public bool IsCircuitVisit { get; set; }
+      public bool AlwaysOnTop { get; set; }
 
       /// <summary>
       /// Validates the data, correcting automatically as required
