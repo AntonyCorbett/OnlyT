@@ -145,6 +145,32 @@ namespace OnlyT.ViewModel
          }
       }
 
+      public bool IsBellEnabled
+      {
+         get => _optionsService.Options.IsBellEnabled;
+         set
+         {
+            if (_optionsService.Options.IsBellEnabled != value)
+            {
+               _optionsService.Options.IsBellEnabled = value;
+               RaisePropertyChanged(nameof(IsBellEnabled));
+            }
+         }
+      }
+
+      public int BellVolumePercent
+      {
+         get => _optionsService.Options.BellVolumePercent;
+         set
+         {
+            if (_optionsService.Options.BellVolumePercent != value)
+            {
+               _optionsService.Options.BellVolumePercent = value;
+               RaisePropertyChanged(nameof(BellVolumePercent));
+            }
+         }
+      }
+
       public void Activated(object state)
       {
          

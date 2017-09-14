@@ -34,7 +34,7 @@
             <Path Fill="Black" Data="M12.98431,0.00039917452C13.39189,0.014400231,13.670029,0.39642023,13.670029,1.0964207L13.670029,6.1874495C13.670029,6.4934812,13.874008,6.6964851,14.180038,6.6964851L31.491013,6.6964851C31.796005,6.6964851,31.999985,6.900466,31.999985,7.2064977L31.999985,14.334524C31.999985,14.639518,31.796005,14.843499,31.491013,14.843499L14.180038,14.843499C13.874008,14.843499,13.670029,15.04754,13.670029,15.352535L13.670029,20.138568C13.670029,21.360561,12.957992,21.767545,11.939011,20.953577L0.5339815,11.788491C-0.17799383,11.279516,-0.17799383,10.159515,0.5339815,9.6504799L12.14299,0.38346564C12.448616,0.11608436,12.739762,-0.0080016943,12.98431,0.00039917452z"></Path>
         </Button>
 
-        <ScrollViewer Grid.Row="1" Padding="5,0,5,10">
+        <ScrollViewer Grid.Row="1" Padding="10,0,10,10">
             <StackPanel Orientation="Vertical">
                 <TextBlock Margin="0,10,0,0" Text="{Binding AppVersionStr}" Foreground="CadetBlue"/>
 
@@ -50,7 +50,7 @@
                           DisplayMemberPath="Name"
                           SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
 
-                <GroupBox Margin="5" Header="Automatic mode" Padding="5" >
+                <GroupBox Margin="0,5,0,0" Header="Automatic mode" Padding="5" >
                     <StackPanel>
                         <Label Style="{StaticResource LabelStyle}">Meeting:</Label>
                         <ComboBox ItemsSource="{Binding AutoMeetingTimes}" 
@@ -63,9 +63,20 @@
                     </StackPanel>
                 </GroupBox>
 
+                <GroupBox Margin="0,5,0,0" Header="Bell" Padding="5" >
+                    <StackPanel>
+                        <CheckBox IsChecked="{Binding IsBellEnabled, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Enabled" />
+
+                        <Label Style="{StaticResource LabelStyle}">Volume:</Label>
+                        <Slider Maximum="100" LargeChange="10" SmallChange="1" 
+                                Value="{Binding BellVolumePercent}"
+                                TickFrequency="10" TickPlacement="TopLeft"/>
+                    </StackPanel>
+                </GroupBox>
+
                 <CheckBox IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}" 
                           Margin="0,10,0,0" Content="Always on top" />
-
 
             </StackPanel>
         </ScrollViewer>

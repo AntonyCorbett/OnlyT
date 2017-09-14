@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
@@ -18,6 +19,7 @@ namespace OnlyT.ViewModel
          SimpleIoc.Default.Register<IMonitorsService, MonitorsService>();
          SimpleIoc.Default.Register<IOptionsService, OptionsService>();
          SimpleIoc.Default.Register<ITalkScheduleService, TalkScheduleService>();
+         SimpleIoc.Default.Register<IBellService, BellService>();
 
          SimpleIoc.Default.Register<MainViewModel>();
          SimpleIoc.Default.Register<OperatorPageViewModel>();
@@ -30,7 +32,7 @@ namespace OnlyT.ViewModel
 
       public static void Cleanup()
       {
-         // TODO Clear the ViewModels
+         // Clear the ViewModels
       }
    }
 }

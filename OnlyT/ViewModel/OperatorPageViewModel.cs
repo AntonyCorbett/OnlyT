@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -218,6 +219,7 @@ namespace OnlyT.ViewModel
                _talkId = value;
                TargetSeconds = GetTargetSecondsFromTalkSchedule(_talkId);
                RaisePropertyChanged(nameof(TalkId));
+               RaisePropertyChanged(nameof(IsBellVisible));
 
                IncrementTimerCommand?.RaiseCanExecuteChanged();
                DecrementTimerCommand?.RaiseCanExecuteChanged();
@@ -267,6 +269,16 @@ namespace OnlyT.ViewModel
          TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
          SecondsRemaining = e.RemainingSecs;
          Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs));
+
+         if (e.RemainingSecs == 0)
+         {
+            // broadcast talk overtime...
+            var talk = GetCurrentTalk();
+            if (talk != null)
+            {
+               Messenger.Default.Send(new OvertimeMessage(talk.Name, talk.Bell, e.TargetSecs));
+            }
+         }
       }
 
       private int _targetSeconds;
@@ -328,9 +340,18 @@ namespace OnlyT.ViewModel
          }
       }
 
+      public bool IsBellVisible
+      {
+         get
+         {
+            var talk = GetCurrentTalk();
+            return talk != null && talk.Bell && _optionsService.Options.IsBellEnabled;
+         }
+      }
+
       public void Activated(object state)
       {
-
+         RaisePropertyChanged(nameof(IsBellVisible));
       }
 
       public RelayCommand StartCommand { get; set; }

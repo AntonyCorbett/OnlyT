@@ -9,6 +9,7 @@ using OnlyT.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
@@ -25,25 +26,25 @@ namespace OnlyT.ViewModel
       private TimerOutputWindow _timerWindow;
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
-      private readonly ITalkScheduleService _scheduleService;
+      private readonly IBellService _bellService;
       private string _currentPageName;
       private readonly TimerOutputWindowViewModel _timerWindowViewModel;
-      
+
 
       public MainViewModel(
-         ITalkTimerService timerService, 
-         IOptionsService optionsService, 
-         ITalkScheduleService scheduleService,
-         IMonitorsService monitorsService)
+         IOptionsService optionsService,
+         IMonitorsService monitorsService,
+         IBellService bellService)
       {
          _optionsService = optionsService;
          _monitorsService = monitorsService;
-         _scheduleService = scheduleService;
-
+         _bellService = bellService;
+         
          // subscriptions...
          Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
          Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
          Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
+         Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
 
          _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
          _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
@@ -56,6 +57,14 @@ namespace OnlyT.ViewModel
          // (fire and forget)
          LaunchTimerWindowAsync();
 #pragma warning restore 4014
+      }
+
+      private void OnTalkOvertime(OvertimeMessage message)
+      {
+         if (message.UseBellForTalk && _optionsService.Options.IsBellEnabled)
+         {
+            _bellService.Play(_optionsService.Options.BellVolumePercent);
+         }
       }
 
       /// <summary>
@@ -124,7 +133,7 @@ namespace OnlyT.ViewModel
       {
          Messenger.Default.Send(new ShutDownMessage(_currentPageName));
 
-         if(!e.Cancel)
+         if (!e.Cancel)
          {
             CloseTimerWindow();
          }
@@ -158,7 +167,7 @@ namespace OnlyT.ViewModel
             OpenTimerWindow();
          }
       }
-      
+
       private void OpenTimerWindow()
       {
          var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);

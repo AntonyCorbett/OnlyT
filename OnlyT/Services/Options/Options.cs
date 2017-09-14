@@ -16,6 +16,8 @@ namespace OnlyT.Services.Options
       {
          OperatingMode = OperatingMode.Automatic;
          AlwaysOnTop = true;
+         IsBellEnabled = true;
+         BellVolumePercent = 70;
       }
 
       public string TimerMonitorId { get; set; }
@@ -24,13 +26,24 @@ namespace OnlyT.Services.Options
       public MidWeekOrWeekend MidWeekOrWeekend { get; set; }
       public bool IsCircuitVisit { get; set; }
       public bool AlwaysOnTop { get; set; }
+      public bool IsBellEnabled { get; set; }
+      public int BellVolumePercent { get; set;}
+
 
       /// <summary>
       /// Validates the data, correcting automatically as required
       /// </summary>
       public void Sanitize()
       {
-         
+         if (BellVolumePercent < 0)
+         {
+            BellVolumePercent = 0;
+         }
+
+         if (BellVolumePercent > 100)
+         {
+            BellVolumePercent = 100;
+         }
       }
    }
 }

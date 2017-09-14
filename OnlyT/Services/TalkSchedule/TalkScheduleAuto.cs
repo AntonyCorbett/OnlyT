@@ -64,7 +64,8 @@ namespace OnlyT.Services.TalkSchedule
             new TalkScheduleItem(TalkTypesAutoMode.Reading)
             {
                Name = Properties.Resources.TALK_READING,
-               Duration = TimeSpan.FromMinutes(4)
+               Duration = TimeSpan.FromMinutes(4),
+               Bell = true
             }
          };
       }
@@ -86,19 +87,22 @@ namespace OnlyT.Services.TalkSchedule
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.InitialCall)
             {
                Name = Properties.Resources.TALK_INITIAL_CALL,
-               Duration = TimeSpan.FromMinutes(2)
+               Duration = TimeSpan.FromMinutes(2),
+               Bell = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.ReturnVisit)
             {
                Name = Properties.Resources.TALK_RV,
-               Duration = TimeSpan.FromMinutes(4)
+               Duration = TimeSpan.FromMinutes(4),
+               Bell = true
             });
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.BibleStudy)
             {
                Name = Properties.Resources.TALK_BIBLE_STUDY,
-               Duration = TimeSpan.FromMinutes(6)
+               Duration = TimeSpan.FromMinutes(6),
+               Bell = true
             });
          }
 
