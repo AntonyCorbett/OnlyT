@@ -50,6 +50,7 @@ Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Serilog.Sinks.RollingFile.d
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\bell.mp3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\talk_schedule.xml"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
