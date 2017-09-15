@@ -29,8 +29,7 @@ namespace OnlyT.ViewModel
       private readonly IBellService _bellService;
       private string _currentPageName;
       private readonly TimerOutputWindowViewModel _timerWindowViewModel;
-
-
+      
       public MainViewModel(
          IOptionsService optionsService,
          IMonitorsService monitorsService,
@@ -46,6 +45,7 @@ namespace OnlyT.ViewModel
          Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
          Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
 
+         // should really create a "page service" rather than create views in the main view model!
          _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
          _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
 

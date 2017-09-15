@@ -9,7 +9,7 @@ namespace OnlyT.Utils
    /// <summary>
    /// Formats time values
    /// </summary>
-   internal static class TimeFormatter
+   public static class TimeFormatter
    {
       private static readonly int _secsPerMinute = 60;
 

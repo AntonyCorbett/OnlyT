@@ -4,6 +4,10 @@ using Moq;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
+using OnlyT.Services.TalkSchedule;
+using OnlyT.Services.Timer;
+using OnlyT.Tests.Mocks;
+using OnlyT.Utils;
 using OnlyT.ViewModel;
 
 namespace OnlyT.Tests
@@ -12,13 +16,40 @@ namespace OnlyT.Tests
    public class TestViewModels
    {
       [TestMethod]
-      public void TestMainViewModel()
+      public void TestOperatorViewStartStop()
       {
-         Mock<IOptionsService> optionsService = new Mock<IOptionsService>();
-         Mock<IMonitorsService> monitorsService = new Mock<IMonitorsService>();
-         Mock<IBellService> bellService = new Mock<IBellService>();
+         const int TALK_ID_START = 500;
+         const int NUM_TALKS = 3;
 
-         //MainViewModel viewModel = new MainViewModel(optionsService.Object, monitorsService.Object, bellService.Object);
+         Mock<IOptionsService> optionsService = new Mock<IOptionsService>();
+         optionsService.Setup(o => o.Options).Returns(MockOptions.Create());
+
+         Mock<ITalkTimerService> timerService = new Mock<ITalkTimerService>();
+         ITalkScheduleService scheduleService = new MockTalksScheduleService(TALK_ID_START, NUM_TALKS);
+
+         OperatorPageViewModel vm = new OperatorPageViewModel(timerService.Object, scheduleService, optionsService.Object);
+         Assert.IsFalse(vm.IsRunning);
+         Assert.IsFalse(vm.IsManualMode);
+
+         for (int n = 0; n < NUM_TALKS; ++n)
+         {
+            int talkId = TALK_ID_START + n;
+            Assert.IsTrue(vm.TalkId == talkId);
+
+            var talk = scheduleService.GetTalkScheduleItem(talkId);
+            Assert.IsNotNull(talk);
+            Assert.AreEqual(vm.CurrentTimerValueString, TimeFormatter.FormatTimeRemaining(talk.GetDurationSeconds()));
+
+            vm.StartCommand.Execute(null);
+            Assert.IsTrue(vm.IsRunning);
+
+            Assert.IsTrue(vm.TalkId == TALK_ID_START + n);
+
+            vm.StopCommand.Execute(null);
+            Assert.IsFalse(vm.IsRunning);
+
+            Assert.IsTrue(vm.TalkId == (n == NUM_TALKS - 1 ? 0 : TALK_ID_START + n + 1));
+         }
       }
    }
 }
