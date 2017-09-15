@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Messaging;
 using OnlyT.Services.Options;
 
 namespace OnlyT.Services.Bell
@@ -16,6 +17,8 @@ namespace OnlyT.Services.Bell
          _bell = new TimerBell();
       }
 
+      public bool IsPlaying => _bell.IsPlaying;
+
       public void Play(int volumePercent)
       {
          Task.Run(() =>
@@ -23,5 +26,6 @@ namespace OnlyT.Services.Bell
             _bell.Play(volumePercent);
          });
       }
+
    }
 }

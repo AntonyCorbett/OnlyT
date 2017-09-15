@@ -1,42 +1,96 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Windows.Threading;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using NAudio.Wave;
 using OnlyT.Services.Options;
+using OnlyT.ViewModel;
+using OnlyT.ViewModel.Messages;
 using Serilog;
 
 namespace OnlyT.Services.Bell
 {
-   internal sealed class TimerBell : IDisposable
+   /// <summary>
+   /// Manages the playing of the timer bell. See also IBellService
+   /// </summary>
+   internal sealed class TimerBell : ObservableObject, IDisposable
    {
       private static readonly string _bellFileName = "bell.mp3";
-      private readonly WaveOutEvent _player;
+      private WaveOutEvent _player;
       private Mp3FileReader _reader;
-
+      private readonly string _bellFilePath;
+      
       public TimerBell()
       {
-         _player = new WaveOutEvent();
+         _bellFilePath = GetBellFilePath();
+      }
+
+      private bool _playing;
+
+      public bool IsPlaying
+      {
+         get => _playing;
+         private set
+         {
+            if (_playing != value)
+            {
+               _playing = value;
+               RaisePropertyChanged(nameof(IsPlaying));
+
+               DispatcherHelper.CheckBeginInvokeOnUI(() =>
+               {
+                  Messenger.Default.Send(new BellStatusChangedMessage(value));
+               });
+            }
+         }
       }
 
       public void Play(int volumePercent)
       {
-         try
+         if (!IsPlaying)
          {
-            _reader = new Mp3FileReader(GetBellFilePath());
-            _player.Init(_reader);
-            _player.PlaybackStopped += HandlePlaybackStopped;
-            _player.Volume = (float) volumePercent / 100;
-            _player.Play();
-         }
-         catch (Exception ex)
-         {
-            Log.Logger.Error(ex, "Could not play bell");
+            try
+            {
+               if (File.Exists(_bellFilePath))
+               {
+                  IsPlaying = true;
+
+                  _player = new WaveOutEvent();
+                  _reader = new Mp3FileReader(_bellFilePath);
+                  _player.Init(_reader);
+                  _player.PlaybackStopped += HandlePlaybackStopped;
+                  _player.Volume = (float) volumePercent / 100;
+                  _player.Play();
+               }
+               else
+               {
+                  Log.Logger.Error($"Could not find bell file {_bellFilePath}");
+               }
+            }
+            catch (Exception ex)
+            {
+               IsPlaying = false;
+               Log.Logger.Error(ex, "Could not play bell");
+            }
          }
       }
 
       private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
       {
+         Clearup();
+         IsPlaying = false;
+      }
+
+      private void Clearup()
+      {
+         _player?.Dispose();
          _reader?.Dispose();
+
+         _player = null;
+         _reader = null;
       }
 
       private static string GetBellFilePath()
@@ -47,8 +101,8 @@ namespace OnlyT.Services.Bell
 
       public void Dispose()
       {
-         _player?.Dispose();
-         _reader?.Dispose();
+         Clearup();
       }
+
    }
 }

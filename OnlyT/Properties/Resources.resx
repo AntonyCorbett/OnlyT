@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Bell is active</value>
+  </data>
   <data name="APP_VER" xml:space="preserve">
     <value>Version {0}</value>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
     <value>Could not create folder {0}</value>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Bell is inactive</value>
   </data>
   <data name="TALK_BIBLE_STUDY" xml:space="preserve">
     <value>Bible Study / Talk</value>

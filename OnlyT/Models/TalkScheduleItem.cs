@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,35 @@ namespace OnlyT.Models
       }
 
       public bool Editable { get; set; }  // can the timer be modified manually?
-      public bool Bell { get; set; } // should a bell be sounded at time-up?
+
+      private bool? _originalBell;
+
+      public bool OriginalBell
+      {
+         get => _originalBell ?? false;
+         private set
+         {
+            if (_originalBell == null)
+            {
+               _originalBell = value;
+            }
+         }
+      }
+      
+      private bool _bell;
+      // should a bell be sounded at time-up?
+      public bool Bell
+      {
+         get => _bell;
+         set
+         {
+            if (_bell != value)
+            {
+               _bell = value;
+               OriginalBell = value;
+            }
+         }
+      }
 
       public TalkScheduleItem()
       {

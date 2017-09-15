@@ -95,6 +95,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Services\Bell\BellService.cs" />
+    <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
     <Compile Include="Services\Bell\IBellService.cs" />
     <Compile Include="Services\Bell\TimerBell.cs" />
     <Compile Include="EventArgs\TimerChangedEventArgs.cs" />

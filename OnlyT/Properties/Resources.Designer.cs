@@ -61,6 +61,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bell is active.
+        /// </summary>
+        internal static string ACTIVE_BELL {
+            get {
+                return ResourceManager.GetString("ACTIVE_BELL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version {0}.
         /// </summary>
         internal static string APP_VER {
@@ -75,6 +84,15 @@ namespace OnlyT.Properties {
         internal static string CREATE_FOLDER_ERROR {
             get {
                 return ResourceManager.GetString("CREATE_FOLDER_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bell is inactive.
+        /// </summary>
+        internal static string INACTIVE_BELL {
+            get {
+                return ResourceManager.GetString("INACTIVE_BELL", resourceCulture);
             }
         }
         

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using GalaSoft.MvvmLight.Threading;
 using OnlyT.Utils;
 using Serilog;
 
@@ -21,6 +22,11 @@ namespace OnlyT
    {
       private Mutex _appMutex;
       private readonly string _appString = "OnlyTMeetingTimer";
+
+      public App()
+      {
+         DispatcherHelper.Initialize();
+      }
 
       protected override void OnStartup(StartupEventArgs e)
       {

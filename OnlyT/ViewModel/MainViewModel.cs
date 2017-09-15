@@ -70,8 +70,8 @@ namespace OnlyT.ViewModel
       /// <summary>
       /// Responds to change in the application's "Always on top" option
       /// </summary>
-      /// <param name="obj"></param>
-      private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage obj)
+      /// <param name="message"></param>
+      private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage message)
       {
          RaisePropertyChanged(nameof(AlwaysOnTop));
       }

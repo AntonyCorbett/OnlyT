@@ -1,8 +1,10 @@
 ﻿using System.Windows;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
 using OnlyT.Services.Options;
 using OnlyT.Utils;
 using OnlyT.ViewModel;
+using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.Windows
 {
@@ -14,6 +16,12 @@ namespace OnlyT.Windows
       public MainWindow()
       {
          InitializeComponent();
+         Messenger.Default.Register<TimerMonitorChangedMessage>(this, BringToFront);
+      }
+
+      private void BringToFront(TimerMonitorChangedMessage obj)
+      {
+         Activate();
       }
 
       protected override void OnSourceInitialized(System.EventArgs e)

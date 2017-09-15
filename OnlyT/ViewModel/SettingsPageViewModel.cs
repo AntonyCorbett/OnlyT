@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using OnlyT.Models;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
@@ -31,7 +32,10 @@ namespace OnlyT.ViewModel
          IBellService bellService,
          IOptionsService optionsService)
       {
+         // subscriptions...
          Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
+         Messenger.Default.Register<BellStatusChangedMessage>(this, OnBellChanged);
+
          _optionsService = optionsService;
          _monitorsService = monitorsService;
          _bellService = bellService;
@@ -41,7 +45,17 @@ namespace OnlyT.ViewModel
          _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
 
          NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
-         TestBellCommand = new RelayCommand(TestBell);
+         TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
+      }
+
+      private void OnBellChanged(BellStatusChangedMessage message)
+      {
+         TestBellCommand.RaiseCanExecuteChanged();
+      }
+
+      private bool IsNotPlayingBell()
+      {
+         return !_bellService.IsPlaying;
       }
 
       private void TestBell()

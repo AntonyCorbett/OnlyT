@@ -36,6 +36,8 @@ namespace OnlyT.ViewModel
       private static readonly int _maxTimerMins = 99;
       private static readonly int _maxTimerSecs = _maxTimerMins * 60;
 
+      private SolidColorBrush _bellColorActive = new SolidColorBrush(Colors.Gold);
+      private SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
 
       public OperatorPageViewModel(
          ITalkTimerService timerService, 
@@ -56,12 +58,55 @@ namespace OnlyT.ViewModel
          SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
          IncrementTimerCommand = new RelayCommand(IncrementTimer, CanIncreaseTimerValue);
          DecrementTimerCommand = new RelayCommand(DecrementTimer, CanDecreaseTimerValue);
+         BellToggleCommand = new RelayCommand(BellToggle);
 
          // subscriptions...
          Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
          Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
       }
 
+      private void BellToggle()
+      {
+         var talk = GetCurrentTalk();
+         if (talk != null)
+         {
+            talk.Bell = !talk.Bell;
+            RaisePropertyChanged(nameof(BellColour));
+            RaisePropertyChanged(nameof(BellTooltip));
+         }
+      }
+      
+      public SolidColorBrush BellColour
+      {
+         get
+         {
+            var talk = GetCurrentTalk();
+            if (talk != null)
+            {
+               return talk.Bell
+                  ? _bellColorActive
+                  : _bellColorInactive;
+            }
+            return _bellColorInactive;
+         }
+      }
+
+      public string BellTooltip
+      {
+         get
+         {
+            var talk = GetCurrentTalk();
+            if (talk != null)
+            {
+               return talk.Bell
+                  ? Properties.Resources.ACTIVE_BELL
+                  : Properties.Resources.INACTIVE_BELL;
+            }
+
+            return string.Empty;
+         }
+      }
+      
       private bool CanIncreaseTimerValue()
       {
          if (IsRunning || TargetSeconds >= _maxTimerSecs)
@@ -220,6 +265,8 @@ namespace OnlyT.ViewModel
                TargetSeconds = GetTargetSecondsFromTalkSchedule(_talkId);
                RaisePropertyChanged(nameof(TalkId));
                RaisePropertyChanged(nameof(IsBellVisible));
+               RaisePropertyChanged(nameof(BellColour));
+               RaisePropertyChanged(nameof(BellTooltip));
 
                IncrementTimerCommand?.RaiseCanExecuteChanged();
                DecrementTimerCommand?.RaiseCanExecuteChanged();
@@ -345,7 +392,7 @@ namespace OnlyT.ViewModel
          get
          {
             var talk = GetCurrentTalk();
-            return talk != null && talk.Bell && _optionsService.Options.IsBellEnabled;
+            return talk != null && talk.OriginalBell && _optionsService.Options.IsBellEnabled;
          }
       }
 
@@ -359,5 +406,6 @@ namespace OnlyT.ViewModel
       public RelayCommand SettingsCommand { get; set; }
       public RelayCommand IncrementTimerCommand { get; set; }
       public RelayCommand DecrementTimerCommand { get; set; }
+      public RelayCommand BellToggleCommand { get; set; }
    }
 }
