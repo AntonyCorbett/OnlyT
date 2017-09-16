@@ -21,6 +21,7 @@ namespace OnlyT.ViewModel
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
       private readonly IBellService _bellService;
+      private readonly ClockHourFormatItem[] _clockHourFormats;
 
       public SettingsPageViewModel(
          IMonitorsService monitorsService, 
@@ -38,9 +39,21 @@ namespace OnlyT.ViewModel
          _monitors = GetSystemMonitors().ToArray();
          _operatingModes = GetOperatingModes().ToArray();
          _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
+         _clockHourFormats = GetClockHourFormats().ToArray();
 
          NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
          TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
+      }
+
+      private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
+      {
+         return new List<ClockHourFormatItem>
+         {
+            new ClockHourFormatItem {Name = "12-hour", Format = ClockHourFormat.Format12},
+            new ClockHourFormatItem {Name = "12-hour (leading zero)", Format = ClockHourFormat.Format12LeadingZero},
+            new ClockHourFormatItem {Name = "24-hour", Format = ClockHourFormat.Format24},
+            new ClockHourFormatItem {Name = "24-hour (leading zero)", Format = ClockHourFormat.Format24LeadingZero}
+         };
       }
 
       private void OnBellChanged(BellStatusChangedMessage message)
@@ -102,6 +115,22 @@ namespace OnlyT.ViewModel
                _optionsService.Options.TimerMonitorId = value;
                RaisePropertyChanged(nameof(MonitorId));
                Messenger.Default.Send(new TimerMonitorChangedMessage());
+            }
+         }
+      }
+
+      public IEnumerable<ClockHourFormatItem> ClockHourFormats => _clockHourFormats;
+
+      public ClockHourFormat ClockHourFormat
+      {
+         get => _optionsService.Options.ClockHourFormat;
+         set
+         {
+            if (_optionsService.Options.ClockHourFormat != value)
+            {
+               _optionsService.Options.ClockHourFormat = value;
+               RaisePropertyChanged(nameof(ClockHourFormat));
+               Messenger.Default.Send(new ClockHourFormatChangedMessage());
             }
          }
       }

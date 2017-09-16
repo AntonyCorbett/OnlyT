@@ -44,7 +44,7 @@ namespace OnlyT.ViewModel
          _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
          _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
 
-         _timerWindowViewModel = new TimerOutputWindowViewModel();
+         _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
 
          Messenger.Default.Send(new NavigateMessage(OperatorPageViewModel.PageName, null));
 

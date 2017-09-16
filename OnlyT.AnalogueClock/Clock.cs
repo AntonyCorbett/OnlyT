@@ -31,6 +31,9 @@ namespace OnlyT.AnalogueClock
       private readonly DispatcherTimer _timer;
       private readonly DispatcherTimer _animationTimer;
       private readonly bool _isInDesignMode;
+      private bool _digitalFormatLeadingZero;
+      private bool _digitalFormat24Hours;
+
 
 
       static Clock()
@@ -92,16 +95,59 @@ namespace OnlyT.AnalogueClock
          CurrentTimeSec = FormatTimeOfDaySeconds(now);
       }
 
-      private static string FormatTimeOfDayHoursAndMins(DateTime dt)
+      private string FormatTimeOfDayHoursAndMins(DateTime dt)
       {
-         // todo: cater for 24 hr and 12 hr clocks...
-         return $"{dt.Hour:D2}:{dt.Minute:D2}";
+         int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
+
+         if (_digitalFormatLeadingZero)
+         {
+            return $"{hours:D2}:{dt.Minute:D2}";
+         }
+
+         return $"{hours}:{dt.Minute:D2}";
       }
+
       private static string FormatTimeOfDaySeconds(DateTime dt)
       {
          return dt.Second.ToString("D2");
       }
 
+      public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
+         DependencyProperty.Register("DigitalTimeFormatShowLeadingZero", typeof(bool), typeof(Clock),
+            new FrameworkPropertyMetadata(DigitalTimeFormatShowLeadingZeroPropertyChanged));
+
+      public bool DigitalTimeFormatShowLeadingZero
+      {
+         // ReSharper disable once PossibleNullReferenceException
+         get => (bool)GetValue(DigitalTimeFormatShowLeadingZeroProperty);
+         set => SetValue(DigitalTimeFormatShowLeadingZeroProperty, value);
+      }
+
+      private static void DigitalTimeFormatShowLeadingZeroPropertyChanged(DependencyObject d, 
+         DependencyPropertyChangedEventArgs e)
+      {
+         Clock c = (Clock)d;
+         c._digitalFormatLeadingZero = (bool)e.NewValue;
+      }
+
+
+      public static readonly DependencyProperty DigitalTimeFormat24HoursProperty =
+         DependencyProperty.Register("DigitalTimeFormat24Hours", typeof(bool), typeof(Clock),
+            new FrameworkPropertyMetadata(DigitalTimeFormat24HoursPropertyChanged));
+
+      public bool DigitalTimeFormat24Hours
+      {
+         // ReSharper disable once PossibleNullReferenceException
+         get => (bool)GetValue(DigitalTimeFormat24HoursProperty);
+         set => SetValue(DigitalTimeFormat24HoursProperty, value);
+      }
+
+      private static void DigitalTimeFormat24HoursPropertyChanged(DependencyObject d,
+         DependencyPropertyChangedEventArgs e)
+      {
+         Clock c = (Clock)d;
+         c._digitalFormat24Hours = (bool)e.NewValue;
+      }
 
 
       public static readonly DependencyProperty IsRunningProperty =

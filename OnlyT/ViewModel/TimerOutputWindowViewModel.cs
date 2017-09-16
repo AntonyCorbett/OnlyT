@@ -3,6 +3,7 @@ using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using OnlyT.AnalogueClock;
+using OnlyT.Services.Options;
 using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
 
@@ -11,12 +12,23 @@ namespace OnlyT.ViewModel
    internal class TimerOutputWindowViewModel : ViewModelBase
    {
       private static int _secsPerHour = 60 * 60 * 60;
+      private readonly IOptionsService _optionsService;
 
-      public TimerOutputWindowViewModel()
+      public TimerOutputWindowViewModel(IOptionsService optionsService)
       {
+         _optionsService = optionsService;
+
+         // subscriptions...
          Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
          Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
          Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
+         Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
+      }
+
+      private void OnDigitalClockFormatChanged(ClockHourFormatChangedMessage obj)
+      {
+         RaisePropertyChanged(nameof(DigitalTimeFormat24Hours));
+         RaisePropertyChanged(nameof(DigitalTimeFormatShowLeadingZero));
       }
 
       private void OnTimerStopped(TimerStopMessage obj)
@@ -72,6 +84,14 @@ namespace OnlyT.ViewModel
             }
          }
       }
+
+      public bool DigitalTimeFormatShowLeadingZero => 
+         _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||
+         _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
+
+      public bool DigitalTimeFormat24Hours =>
+         _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24 ||
+         _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
 
       private string _timeString;
       public string TimeString

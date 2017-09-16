@@ -50,6 +50,12 @@
                           DisplayMemberPath="Name"
                           SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
 
+                <Label Style="{StaticResource LabelStyle}">Digital clock format:</Label>
+                <ComboBox ItemsSource="{Binding ClockHourFormats}" 
+                          SelectedValuePath="Format" 
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
+
                 <GroupBox Margin="0,5,0,0" Header="Automatic mode" Padding="5" >
                     <StackPanel>
                         <Label Style="{StaticResource LabelStyle}">Meeting:</Label>

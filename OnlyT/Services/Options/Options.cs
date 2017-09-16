@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace OnlyT.Services.Options
 {
@@ -14,6 +15,9 @@ namespace OnlyT.Services.Options
          AlwaysOnTop = true;
          IsBellEnabled = true;
          BellVolumePercent = 70;
+
+         var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
+         ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
       }
 
       public string TimerMonitorId { get; set; }
@@ -25,6 +29,7 @@ namespace OnlyT.Services.Options
       public bool IsBellEnabled { get; set; }
       public int BellVolumePercent { get; set;}
       public DateTime MeetingStart { get; set; }
+      public ClockHourFormat ClockHourFormat { get; set; }
 
 
       /// <summary>

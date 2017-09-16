@@ -58,6 +58,8 @@
 
                 <clock:Clock x:Name="TheClock" Grid.Row="0 " 
                              Margin="15" 
+                             DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
+                             DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
                              DurationSector="{Binding DurationSector, Mode=OneWay}" />
                 
                 <Viewbox Grid.Row="1">
