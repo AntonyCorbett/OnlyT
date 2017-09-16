@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlyT.Models
+﻿namespace OnlyT.Models
 {
    /// <summary>
    /// Used when reading monitor device info from system

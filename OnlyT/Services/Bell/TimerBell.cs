@@ -1,14 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
-using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using NAudio.Wave;
-using OnlyT.Services.Options;
-using OnlyT.ViewModel;
-using OnlyT.ViewModel.Messages;
 using Serilog;
 
 namespace OnlyT.Services.Bell

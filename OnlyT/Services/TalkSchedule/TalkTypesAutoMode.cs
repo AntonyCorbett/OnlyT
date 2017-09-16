@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlyT.Services.TalkSchedule
+﻿namespace OnlyT.Services.TalkSchedule
 {
    /// <summary>
    /// Talk types for automatic mode

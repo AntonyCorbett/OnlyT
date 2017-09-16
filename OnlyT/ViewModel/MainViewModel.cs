@@ -1,19 +1,14 @@
-using System.Windows.Documents;
 using GalaSoft.MvvmLight;
 using System.Windows;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Messaging;
 using OnlyT.ViewModel.Messages;
-using System;
 using OnlyT.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
-using OnlyT.Services.TalkSchedule;
-using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {

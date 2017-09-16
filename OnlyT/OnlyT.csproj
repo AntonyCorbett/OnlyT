@@ -94,6 +94,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
     <Compile Include="Services\Bell\BellService.cs" />
     <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
     <Compile Include="Services\Bell\IBellService.cs" />
@@ -120,6 +121,8 @@
     <Compile Include="Services\TalkSchedule\TalkScheduleFileBased.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkTypesAutoMode.cs" />
+    <Compile Include="Services\Timer\AdaptiveTimerService.cs" />
+    <Compile Include="Services\Timer\IAdaptiveTimerService.cs" />
     <Compile Include="Services\Timer\ITalkTimerService.cs" />
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\CommandLineParser.cs" />

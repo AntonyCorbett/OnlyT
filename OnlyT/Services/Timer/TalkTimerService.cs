@@ -8,7 +8,7 @@ namespace OnlyT.Services.Timer
    /// <summary>
    /// Timer service
    /// </summary>
-   class TalkTimerService : ITalkTimerService
+   internal class TalkTimerService : ITalkTimerService
    {
       private readonly Stopwatch _stopWatch = new Stopwatch();
       private readonly DispatcherTimer _timer = new DispatcherTimer(DispatcherPriority.Render);

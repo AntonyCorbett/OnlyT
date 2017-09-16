@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -32,12 +25,12 @@ namespace OnlyT.ViewModel
       private readonly ITalkTimerService _timerService;
       private readonly ITalkScheduleService _scheduleService;
       private readonly IOptionsService _optionsService;
-      private static readonly System.Windows.Media.Brush _whiteBrush = System.Windows.Media.Brushes.White;
+      private static readonly Brush _whiteBrush = Brushes.White;
       private static readonly int _maxTimerMins = 99;
       private static readonly int _maxTimerSecs = _maxTimerMins * 60;
 
-      private SolidColorBrush _bellColorActive = new SolidColorBrush(Colors.Gold);
-      private SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
+      private readonly SolidColorBrush _bellColorActive = new SolidColorBrush(Colors.Gold);
+      private readonly SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
 
       public OperatorPageViewModel(
          ITalkTimerService timerService, 
@@ -57,7 +50,11 @@ namespace OnlyT.ViewModel
          StopCommand = new RelayCommand(StopTimer, () => IsRunning);
          SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
          IncrementTimerCommand = new RelayCommand(IncrementTimer, CanIncreaseTimerValue);
+         IncrementTimer15Command = new RelayCommand(IncrementTimer15Secs, CanIncreaseTimerValue);
+         IncrementTimer5Command = new RelayCommand(IncrementTimer5Mins, CanIncreaseTimerValue);
          DecrementTimerCommand = new RelayCommand(DecrementTimer, CanDecreaseTimerValue);
+         DecrementTimer15Command = new RelayCommand(DecrementTimer15Secs, CanDecreaseTimerValue);
+         DecrementTimer5Command = new RelayCommand(DecrementTimer5Mins, CanDecreaseTimerValue);
          BellToggleCommand = new RelayCommand(BellToggle);
 
          // subscriptions...
@@ -140,22 +137,42 @@ namespace OnlyT.ViewModel
          SelectFirstTalk();
       }
 
-      private void DecrementTimer()
+      private void IncrDecrTimerInternal(int mins)
       {
-         var newSecs = TargetSeconds - 60;
-         if (newSecs >= 0)
+         var newSecs = TargetSeconds + mins;
+         if (newSecs >= 0 && newSecs <= _maxTimerSecs)
          {
             TargetSeconds = newSecs;
          }
       }
 
+      private void DecrementTimer()
+      {
+         IncrDecrTimerInternal(-60);
+      }
+
+      private void DecrementTimer15Secs()
+      {
+         IncrDecrTimerInternal(-15);
+      }
+
+      private void DecrementTimer5Mins()
+      {
+         IncrDecrTimerInternal(-5 * 60);
+      }
+
       private void IncrementTimer()
       {
-         var newSecs = TargetSeconds + 60;
-         if (newSecs <= _maxTimerSecs)
-         {
-            TargetSeconds = newSecs;
-         }
+         IncrDecrTimerInternal(60);
+      }
+
+      private void IncrementTimer15Secs()
+      {
+         IncrDecrTimerInternal(15);
+      }
+      private void IncrementTimer5Mins()
+      {
+         IncrDecrTimerInternal(5 * 60);
       }
 
       private void OnOperatingModeChanged(OperatingModeChangedMessage message)
@@ -300,8 +317,8 @@ namespace OnlyT.ViewModel
          }
       }
 
-      private System.Windows.Media.Brush _textColor = System.Windows.Media.Brushes.White;
-      public System.Windows.Media.Brush TextColor
+      private Brush _textColor = Brushes.White;
+      public Brush TextColor
       {
          get => _textColor;
          set
@@ -372,7 +389,7 @@ namespace OnlyT.ViewModel
       }
 
       public string CurrentTimerValueString => TimeFormatter.FormatTimeRemaining(_secondsRemaining);
-
+      
       private string _talkTitle;
       public string TalkTitle
       {
@@ -405,7 +422,11 @@ namespace OnlyT.ViewModel
       public RelayCommand StopCommand { get; set; }
       public RelayCommand SettingsCommand { get; set; }
       public RelayCommand IncrementTimerCommand { get; set; }
+      public RelayCommand IncrementTimer15Command { get; set; }
+      public RelayCommand IncrementTimer5Command { get; set; }
       public RelayCommand DecrementTimerCommand { get; set; }
+      public RelayCommand DecrementTimer15Command { get; set; }
+      public RelayCommand DecrementTimer5Command { get; set; }
       public RelayCommand BellToggleCommand { get; set; }
    }
 }

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using OnlyT.Models;
 using OnlyT.Utils;
 using Serilog;
@@ -26,7 +22,7 @@ namespace OnlyT.Services.TalkSchedule
          return Path.Combine(path, _fileName);
       }
 
-      public static bool Exists()
+      private static bool Exists()
       {
          return File.Exists(GetFullPath());
       }

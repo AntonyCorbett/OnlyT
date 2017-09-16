@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using OnlyT.MeetingSongsFile;
 using OnlyT.Models;
 using OnlyT.Services.Options;
 using OnlyT.Utils;
-using Serilog;
 
 namespace OnlyT.Services.TalkSchedule
 {

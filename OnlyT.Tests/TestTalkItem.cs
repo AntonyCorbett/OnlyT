@@ -10,8 +10,7 @@ namespace OnlyT.Tests
       [TestMethod]
       public void TestOriginalBell()
       {
-         TalkScheduleItem item = new TalkScheduleItem();
-         item.Bell = true;
+         TalkScheduleItem item = new TalkScheduleItem {Bell = true};
          Assert.IsTrue(item.Bell);
          Assert.IsTrue(item.OriginalBell);
 
@@ -26,8 +25,7 @@ namespace OnlyT.Tests
          TimeSpan testDur = TimeSpan.FromMinutes(10);
          TimeSpan changedDur = TimeSpan.FromMinutes(20);
 
-         TalkScheduleItem item = new TalkScheduleItem();
-         item.Duration = testDur;
+         TalkScheduleItem item = new TalkScheduleItem {Duration = testDur};
          Assert.AreEqual(item.Duration, testDur);
          Assert.AreEqual(item.OriginalDuration, testDur);
          Assert.IsTrue(item.GetDurationSeconds() == (int)testDur.TotalSeconds);

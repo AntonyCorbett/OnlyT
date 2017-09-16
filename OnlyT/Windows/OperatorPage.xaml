@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       DataContext="{Binding Operator, Mode=OneWay, Source={StaticResource Locator}}"             
       xmlns:local="clr-namespace:OnlyT.Windows"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="395">
 
@@ -22,6 +24,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </UserControl.Resources>
 
     <UserControl.Triggers>
@@ -75,7 +78,7 @@
                             VerticalAlignment="Top"
                             Stretch="Uniform"
                             ToolTip="{Binding BellTooltip, Mode=OneWay}"
-                            Fill="{Binding BellColour}">
+                            Fill="{Binding BellColour}" Cursor="Hand">
                         </Path>
                     </Button>
 
@@ -125,11 +128,25 @@
 
             <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="10,5,0,5">
                 <Button Height="35" VerticalAlignment="Top" Margin="0,0,0,2" Command="{Binding IncrementTimerCommand}">
+                    <Button.InputBindings>
+                        <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding IncrementTimer15Command}"/>
+                        <MouseBinding Gesture="Shift+LeftClick" Command="{Binding IncrementTimer5Command}"/>
+                    </Button.InputBindings>
+                    <i:Interaction.Behaviors>
+                        <behaviours:DisableDoubleClickBehavior />
+                    </i:Interaction.Behaviors>
                     <Viewbox Margin="5">
                         <Path Stretch="Uniform" Fill="Black" Data="M0,25 L20,25 20,45 25,45 25,25 45,25 45,20 25,20 25,0 20,0 20,20 0,20 z" />
                     </Viewbox>
                 </Button>
                 <Button Height="35" VerticalAlignment="Bottom" Margin="0,2,0,0" Command="{Binding DecrementTimerCommand}">
+                    <Button.InputBindings>
+                        <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding DecrementTimer15Command}"/>
+                        <MouseBinding Gesture="Shift+LeftClick" Command="{Binding DecrementTimer5Command}"/>
+                    </Button.InputBindings>
+                    <i:Interaction.Behaviors>
+                        <behaviours:DisableDoubleClickBehavior />
+                    </i:Interaction.Behaviors>
                     <Viewbox Margin="8">
                         <Path Stretch="Uniform" Fill="Black" Data="M0,26 L45,26 45,20 0,20 z" />
                     </Viewbox>
@@ -139,6 +156,9 @@
 
         <Button Grid.Row="2" Command="{Binding StartCommand}" 
                 Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
+            <i:Interaction.Behaviors>
+                <behaviours:DisableDoubleClickBehavior />
+            </i:Interaction.Behaviors>
             <Viewbox Margin="10">
                 <Path Data="M0,0L25,16 0,32z" Stretch="Uniform" Fill="ForestGreen" 
                       Width="48" Height="48" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
@@ -148,6 +168,9 @@
 
         <Button Grid.Row="2" Command="{Binding StopCommand}"
                 Visibility="{Binding Path=IsRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
+            <i:Interaction.Behaviors>
+                <behaviours:DisableDoubleClickBehavior />
+            </i:Interaction.Behaviors>
             <Viewbox Margin="10">
                 <Path Data="M0,0L32,0 32,32 0,32z" Stretch="Uniform" Fill="Brown" 
                       Width="48" Height="48" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">

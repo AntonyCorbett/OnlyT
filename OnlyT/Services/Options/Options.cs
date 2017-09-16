@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlyT.Services.Options
 {
@@ -28,6 +24,7 @@ namespace OnlyT.Services.Options
       public bool AlwaysOnTop { get; set; }
       public bool IsBellEnabled { get; set; }
       public int BellVolumePercent { get; set;}
+      public DateTime MeetingStart { get; set; }
 
 
       /// <summary>
