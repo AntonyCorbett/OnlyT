@@ -11,7 +11,7 @@ namespace OnlyT.ViewModel
 {
    internal class TimerOutputWindowViewModel : ViewModelBase
    {
-      private static int _secsPerHour = 60 * 60 * 60;
+      private static int _secsPerHour = 60 * 60;
       private readonly IOptionsService _optionsService;
 
       public TimerOutputWindowViewModel(IOptionsService optionsService)
@@ -46,22 +46,29 @@ namespace OnlyT.ViewModel
       {
          TimeString = TimeFormatter.FormatTimeRemaining(message.TargetSeconds);
          IsRunning = true;
-         
-         DateTime now = DateTime.Now;
-         double startAngle = CalcAngleFromTime(now);
+         InitOverallDurationSector(message.TargetSeconds);
+      }
 
-         DateTime endTime = now.AddSeconds(message.TargetSeconds);
-         double endAngle = CalcAngleFromTime(endTime);
-
-         if (message.TargetSeconds <= _secsPerHour) // can't display duration sector effectively when > 1 hr
+      private void InitOverallDurationSector(int targetSecs)
+      {
+         if (DurationSector == null)
          {
-            DurationSector = new DurationSector
+            if (targetSecs < _secsPerHour) // can't display duration sector effectively when >= 1 hr
             {
-               StartAngle = startAngle,
-               EndAngle = endAngle,
-               CurrentAngle = startAngle,
-               IsOvertime = false
-            };
+               DateTime now = DateTime.Now;
+               double startAngle = CalcAngleFromTime(now);
+
+               DateTime endTime = now.AddSeconds(targetSecs);
+               double endAngle = CalcAngleFromTime(endTime);
+
+               DurationSector = new DurationSector
+               {
+                  StartAngle = startAngle,
+                  EndAngle = endAngle,
+                  CurrentAngle = startAngle,
+                  IsOvertime = false
+               };
+            }
          }
       }
 
@@ -70,10 +77,13 @@ namespace OnlyT.ViewModel
          TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
          TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
 
-         DateTime now = DateTime.Now;
+         // if duration of talk is greater than 1hr we only start showing the sector
+         // when remaining time is less than 1 hr (for sake of clarity)...
+         InitOverallDurationSector(message.RemainingSecs);
 
          if (DurationSector != null)
          {
+            DateTime now = DateTime.Now;
             var currentAngle = CalcAngleFromTime(now);
             if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15) // prevent gratuitous updates
             {

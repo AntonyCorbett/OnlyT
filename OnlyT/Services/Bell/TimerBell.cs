@@ -81,6 +81,11 @@ namespace OnlyT.Services.Bell
 
       private void Clearup()
       {
+         if (_player != null)
+         {
+            _player.PlaybackStopped -= HandlePlaybackStopped;
+         }
+
          _player?.Dispose();
          _reader?.Dispose();
 

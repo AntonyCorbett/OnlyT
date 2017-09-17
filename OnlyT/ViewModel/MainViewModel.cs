@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
+using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {
@@ -22,18 +23,21 @@ namespace OnlyT.ViewModel
       private readonly IOptionsService _optionsService;
       private readonly IMonitorsService _monitorsService;
       private readonly IBellService _bellService;
+      private readonly ITalkTimerService _timerService;
       private string _currentPageName;
       private readonly TimerOutputWindowViewModel _timerWindowViewModel;
       
       public MainViewModel(
          IOptionsService optionsService,
          IMonitorsService monitorsService,
+         ITalkTimerService timerService,
          IBellService bellService)
       {
          _optionsService = optionsService;
          _monitorsService = monitorsService;
          _bellService = bellService;
-         
+         _timerService = timerService;
+
          // subscriptions...
          Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
          Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
@@ -126,10 +130,10 @@ namespace OnlyT.ViewModel
 
       public void Closing(object sender, CancelEventArgs e)
       {
-         Messenger.Default.Send(new ShutDownMessage(_currentPageName));
-
-         if (!e.Cancel)
-         {
+         e.Cancel = _timerService.IsRunning;
+         if(!e.Cancel)
+         { 
+            Messenger.Default.Send(new ShutDownMessage(_currentPageName));
             CloseTimerWindow();
          }
       }

@@ -33,9 +33,7 @@ namespace OnlyT.AnalogueClock
       private readonly bool _isInDesignMode;
       private bool _digitalFormatLeadingZero;
       private bool _digitalFormat24Hours;
-
-
-
+      
       static Clock()
       {
          DefaultStyleKeyProperty.OverrideMetadata(typeof(Clock), 
