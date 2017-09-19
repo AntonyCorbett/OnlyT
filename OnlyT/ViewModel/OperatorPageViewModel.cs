@@ -264,8 +264,19 @@ namespace OnlyT.ViewModel
          StartCommand.RaiseCanExecuteChanged();
          StopCommand.RaiseCanExecuteChanged();
          SettingsCommand.RaiseCanExecuteChanged();
+
+         RaiseCanExecuteIncrDecrChanged();
+      }
+
+      private void RaiseCanExecuteIncrDecrChanged()
+      {
          IncrementTimerCommand.RaiseCanExecuteChanged();
+         IncrementTimer5Command.RaiseCanExecuteChanged();
+         IncrementTimer15Command.RaiseCanExecuteChanged();
+
          DecrementTimerCommand.RaiseCanExecuteChanged();
+         DecrementTimer5Command.RaiseCanExecuteChanged();
+         DecrementTimer15Command.RaiseCanExecuteChanged();
       }
 
       public IEnumerable<TalkScheduleItem> Talks => _scheduleService.GetTalkScheduleItems();
@@ -284,9 +295,8 @@ namespace OnlyT.ViewModel
                RaisePropertyChanged(nameof(IsBellVisible));
                RaisePropertyChanged(nameof(BellColour));
                RaisePropertyChanged(nameof(BellTooltip));
-
-               IncrementTimerCommand?.RaiseCanExecuteChanged();
-               DecrementTimerCommand?.RaiseCanExecuteChanged();
+               
+               RaiseCanExecuteIncrDecrChanged();
             }
          }
       }
@@ -358,6 +368,7 @@ namespace OnlyT.ViewModel
 
                RaisePropertyChanged(nameof(TargetSeconds));
                RaisePropertyChanged(nameof(CurrentTimerValueString));
+               RaiseCanExecuteIncrDecrChanged();
 
                AdjustTalkTimeForThisSession();
             }
