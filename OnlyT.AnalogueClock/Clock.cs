@@ -214,7 +214,10 @@ namespace OnlyT.AnalogueClock
             // we may have 1, 2 or 3 sectors to draw...
 
             // green sector...
-            DrawSector(c._sectorPath1, sector.StartAngle, sector.EndAngle, IsLargeArc(sector.StartAngle, sector.EndAngle));
+            if (!sector.IsOvertime)
+            {
+               DrawSector(c._sectorPath1, sector.StartAngle, sector.EndAngle, IsLargeArc(sector.StartAngle, sector.EndAngle));
+            }
 
             // light green sector...
             DrawSector(c._sectorPath2, sector.StartAngle, sector.CurrentAngle, IsLargeArc(sector.StartAngle, sector.CurrentAngle));
