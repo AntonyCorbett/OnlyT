@@ -19,6 +19,7 @@ namespace OnlyT.ViewModel
          SimpleIoc.Default.Register<IOptionsService, OptionsService>();
          SimpleIoc.Default.Register<ITalkScheduleService, TalkScheduleService>();
          SimpleIoc.Default.Register<IBellService, BellService>();
+         SimpleIoc.Default.Register<IAdaptiveTimerService, AdaptiveTimerService>();
 
          SimpleIoc.Default.Register<MainViewModel>();
          SimpleIoc.Default.Register<OperatorPageViewModel>();

@@ -1,6 +1,9 @@
 ﻿namespace OnlyT.Services.Timer
 {
-   internal interface IAdaptiveTimerService
+   using System;
+
+   public interface IAdaptiveTimerService
    {
+      TimeSpan? CalculateAdaptiveDuration(int itemId);
    }
 }

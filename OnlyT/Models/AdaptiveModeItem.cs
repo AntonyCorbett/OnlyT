@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OnlyT.Models
+{
+   using OnlyT.Services.Options;
+
+   /// <summary>
+   /// Used for items in the Adaptive mode combos
+   /// </summary>
+   public class AdaptiveModeItem
+   {
+      public AdaptiveMode Mode { get; set; }
+      public string Name { get; set; }
+   }
+}

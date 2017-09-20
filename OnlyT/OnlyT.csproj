@@ -95,6 +95,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
+    <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Services\Bell\BellService.cs" />
     <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Services\Monitors\IMonitorsService.cs" />
     <Compile Include="Services\Monitors\MonitorsService.cs" />
     <Compile Include="Services\Monitors\NativeMethods.cs" />
+    <Compile Include="Services\Options\AdaptiveMode.cs" />
     <Compile Include="Services\Options\ClockHourFormat.cs" />
     <Compile Include="Services\Options\IOptionsService.cs" />
     <Compile Include="Services\Options\MidWeekOrWeekend.cs" />

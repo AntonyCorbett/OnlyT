@@ -33,6 +33,9 @@ namespace OnlyT.Models
          }
       }
 
+      public TimeSpan StartOffsetIntoMeeting { get; set; }
+      public bool AllowAdaptive { get; set; }
+
       public bool Editable { get; set; }  // can the timer be modified manually?
 
       private bool? _originalBell;

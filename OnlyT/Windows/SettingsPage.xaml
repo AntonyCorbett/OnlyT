@@ -63,7 +63,19 @@
                             SelectedValuePath="Id" 
                             DisplayMemberPath="Name"
                             SelectedValue="{Binding MidWeekOrWeekend, Mode=TwoWay}"/>
-                        
+
+                        <Label Style="{StaticResource LabelStyle}">Midweek adaptive mode:</Label>
+                        <ComboBox ItemsSource="{Binding AdaptiveModes}" 
+                                  SelectedValuePath="Mode" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding MidWeekAdaptiveMode, Mode=TwoWay}"/>
+
+                        <Label Style="{StaticResource LabelStyle}">Weekend adaptive mode:</Label>
+                        <ComboBox ItemsSource="{Binding AdaptiveModes}" 
+                                  SelectedValuePath="Mode" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding WeekendAdaptiveMode, Mode=TwoWay}"/>
+
                         <CheckBox IsChecked="{Binding IsCircuitVisit, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Circuit visit" />
                     </StackPanel>

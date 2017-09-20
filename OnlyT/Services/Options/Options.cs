@@ -15,6 +15,8 @@ namespace OnlyT.Services.Options
          AlwaysOnTop = true;
          IsBellEnabled = true;
          BellVolumePercent = 70;
+         MidWeekAdaptiveMode = AdaptiveMode.None;
+         WeekendAdaptiveMode = AdaptiveMode.None;
 
          var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
          ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
@@ -28,8 +30,9 @@ namespace OnlyT.Services.Options
       public bool AlwaysOnTop { get; set; }
       public bool IsBellEnabled { get; set; }
       public int BellVolumePercent { get; set;}
-      public DateTime MeetingStart { get; set; }
       public ClockHourFormat ClockHourFormat { get; set; }
+      public AdaptiveMode MidWeekAdaptiveMode { get; set; }
+      public AdaptiveMode WeekendAdaptiveMode { get; set; }
 
 
       /// <summary>

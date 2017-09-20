@@ -22,6 +22,7 @@ namespace OnlyT.ViewModel
       private readonly IMonitorsService _monitorsService;
       private readonly IBellService _bellService;
       private readonly ClockHourFormatItem[] _clockHourFormats;
+      private readonly AdaptiveModeItem[] _adaptiveModes;
 
       public SettingsPageViewModel(
          IMonitorsService monitorsService, 
@@ -40,9 +41,20 @@ namespace OnlyT.ViewModel
          _operatingModes = GetOperatingModes().ToArray();
          _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
          _clockHourFormats = GetClockHourFormats().ToArray();
+         _adaptiveModes = GetAdaptiveModes().ToArray();
 
          NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
          TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
+      }
+
+      private IEnumerable<AdaptiveModeItem> GetAdaptiveModes()
+      {
+         return new List<AdaptiveModeItem>
+         {
+            new AdaptiveModeItem {Mode = AdaptiveMode.None, Name = "None"},
+            new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = "One-way"},
+            new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = "Two-way"}
+         };
       }
 
       private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
@@ -150,6 +162,35 @@ namespace OnlyT.ViewModel
             }
          }
       }
+
+      public IEnumerable<AdaptiveModeItem> AdaptiveModes => _adaptiveModes;
+
+      public AdaptiveMode MidWeekAdaptiveMode
+      {
+         get => _optionsService.Options.MidWeekAdaptiveMode;
+         set
+         {
+            if (_optionsService.Options.MidWeekAdaptiveMode != value)
+            {
+               _optionsService.Options.MidWeekAdaptiveMode = value;
+               RaisePropertyChanged(nameof(MidWeekAdaptiveMode));
+            }
+         }
+      }
+
+      public AdaptiveMode WeekendAdaptiveMode
+      {
+         get => _optionsService.Options.WeekendAdaptiveMode;
+         set
+         {
+            if (_optionsService.Options.WeekendAdaptiveMode != value)
+            {
+               _optionsService.Options.WeekendAdaptiveMode = value;
+               RaisePropertyChanged(nameof(WeekendAdaptiveMode));
+            }
+         }
+      }
+
 
       public IEnumerable<AutoMeetingTime> AutoMeetingTimes => _autoMeetingTimes;
 

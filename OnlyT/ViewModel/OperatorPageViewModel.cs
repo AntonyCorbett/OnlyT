@@ -25,6 +25,7 @@ namespace OnlyT.ViewModel
       private readonly ITalkTimerService _timerService;
       private readonly ITalkScheduleService _scheduleService;
       private readonly IOptionsService _optionsService;
+      private readonly IAdaptiveTimerService _adaptiveTimerService;
       private static readonly Brush _whiteBrush = Brushes.White;
       private static readonly int _maxTimerMins = 99;
       private static readonly int _maxTimerSecs = _maxTimerMins * 60;
@@ -35,10 +36,12 @@ namespace OnlyT.ViewModel
       public OperatorPageViewModel(
          ITalkTimerService timerService, 
          ITalkScheduleService scheduleService, 
+         IAdaptiveTimerService adaptiveTimerService,
          IOptionsService optionsService)
       {
          _scheduleService = scheduleService;
          _optionsService = optionsService;
+         _adaptiveTimerService = adaptiveTimerService;
          _timerService = timerService;
          _timerService.TimerChangedEvent += TimerChangedHandler;
 
@@ -238,6 +241,7 @@ namespace OnlyT.ViewModel
          RaisePropertyChanged(nameof(IsNotRunning));
 
          RaiseCanExecuteChanged();
+         AdjustForAdaptiveTime();
 
          Messenger.Default.Send(new TimerStartMessage(_targetSeconds));
 
@@ -259,6 +263,18 @@ namespace OnlyT.ViewModel
          });
       }
 
+      private void AdjustForAdaptiveTime()
+      {
+         if (TalkId > 0)
+         {
+            var newDuration = _adaptiveTimerService.CalculateAdaptiveDuration(TalkId);
+            if (newDuration != null)
+            {
+               TargetSeconds = (int)newDuration.Value.TotalSeconds;
+            }
+         }
+      }
+
       private void RaiseCanExecuteChanged()
       {
          StartCommand.RaiseCanExecuteChanged();
@@ -270,13 +286,13 @@ namespace OnlyT.ViewModel
 
       private void RaiseCanExecuteIncrDecrChanged()
       {
-         IncrementTimerCommand.RaiseCanExecuteChanged();
-         IncrementTimer5Command.RaiseCanExecuteChanged();
-         IncrementTimer15Command.RaiseCanExecuteChanged();
+         IncrementTimerCommand?.RaiseCanExecuteChanged();
+         IncrementTimer5Command?.RaiseCanExecuteChanged();
+         IncrementTimer15Command?.RaiseCanExecuteChanged();
 
-         DecrementTimerCommand.RaiseCanExecuteChanged();
-         DecrementTimer5Command.RaiseCanExecuteChanged();
-         DecrementTimer15Command.RaiseCanExecuteChanged();
+         DecrementTimerCommand?.RaiseCanExecuteChanged();
+         DecrementTimer5Command?.RaiseCanExecuteChanged();
+         DecrementTimer15Command?.RaiseCanExecuteChanged();
       }
 
       public IEnumerable<TalkScheduleItem> Talks => _scheduleService.GetTalkScheduleItems();
