@@ -4,6 +4,6 @@
 
    public interface IAdaptiveTimerService
    {
-      TimeSpan? CalculateAdaptiveDuration(int itemId);
+      TimeSpan? CalculateAdaptedDuration(int itemId);
    }
 }

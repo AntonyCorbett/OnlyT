@@ -6,7 +6,8 @@ using OnlyT.Services.Options;
 using OnlyT.Utils;
 
 
-// sample midweek meeting times:
+// sample midweek meeting times (used to determine values 
+// for StartOffsetIntoMeeting)
 //
 //    7:00:00 (00:00) Start, song / prayer
 //    7:05:00 (05:00) Opening comments

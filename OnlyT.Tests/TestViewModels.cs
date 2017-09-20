@@ -22,9 +22,12 @@ namespace OnlyT.Tests
          optionsService.Setup(o => o.Options).Returns(MockOptions.Create());
 
          Mock<ITalkTimerService> timerService = new Mock<ITalkTimerService>();
+         Mock<IAdaptiveTimerService> adaptiveTimerService = new Mock<IAdaptiveTimerService>();
          ITalkScheduleService scheduleService = new MockTalksScheduleService(TALK_ID_START, NUM_TALKS);
 
-         OperatorPageViewModel vm = new OperatorPageViewModel(timerService.Object, scheduleService, optionsService.Object);
+         OperatorPageViewModel vm = new OperatorPageViewModel(timerService.Object, scheduleService, 
+            adaptiveTimerService.Object, optionsService.Object);
+
          Assert.IsFalse(vm.IsRunning);
          Assert.IsFalse(vm.IsManualMode);
 

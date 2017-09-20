@@ -11,7 +11,8 @@ namespace OnlyT.Services.Timer
 
    /// <summary>
    /// Used in Automatic mode to automatically adapt talk timings according to
-   /// the start time of the meeting and the start time of the talk
+   /// the start time of the meeting and the start time of the talk. See also
+   /// TalkScheduleAuto
    /// </summary>
    internal class AdaptiveTimerService : IAdaptiveTimerService
    {
@@ -48,15 +49,17 @@ namespace OnlyT.Services.Timer
          }
       }
 
-      public TimeSpan? CalculateAdaptiveDuration(int itemId)
+      /// <summary>
+      /// Calculates the adapted talk duration for specified talk id
+      /// </summary>
+      /// <param name="itemId">Talk Id</param>
+      /// <returns>Adapted time (or null if time is not adapted)</returns>
+      public TimeSpan? CalculateAdaptedDuration(int itemId)
       {
          TalkScheduleItem talk = _scheduleService.GetTalkScheduleItem(itemId);
          if (talk != null)
          {
-            if (_meetingStartTimeUtc == null)
-            {
-               SetMeetingStartUtc(talk);
-            }
+            EnsureMeetingStartTimeIsSet(talk);
 
             if (_meetingStartTimeUtc != null)
             {
@@ -88,6 +91,14 @@ namespace OnlyT.Services.Timer
          }
 
          return null;
+      }
+
+      private void EnsureMeetingStartTimeIsSet(TalkScheduleItem talk)
+      {
+         if (_meetingStartTimeUtc == null)
+         {
+            SetMeetingStartUtc(talk);
+         }
       }
 
       private bool DeviationWithinRange(TimeSpan deviation)

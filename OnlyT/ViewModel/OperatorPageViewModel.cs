@@ -267,7 +267,7 @@ namespace OnlyT.ViewModel
       {
          if (TalkId > 0)
          {
-            var newDuration = _adaptiveTimerService.CalculateAdaptiveDuration(TalkId);
+            var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
             if (newDuration != null)
             {
                TargetSeconds = (int)newDuration.Value.TotalSeconds;
