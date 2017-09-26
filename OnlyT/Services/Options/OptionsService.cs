@@ -109,9 +109,8 @@ namespace OnlyT.Services.Options
          {
             using (StreamWriter file = File.CreateText(_optionsFilePath))
             {
-               JsonSerializer serializer = new JsonSerializer();
-               serializer.Serialize(file, _options);
-
+                JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented };
+                serializer.Serialize(file, _options);
                _originalOptionsSignature = GetOptionsSignature(_options);
             }
          }

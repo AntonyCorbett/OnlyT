@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
         Topmost="{Binding AlwaysOnTop, Mode=OneWay}"
-        Title="O N L Y - T" Height="350" Width="395" ResizeMode="CanMinimize" Closing="Window_Closing" >
+        Title="O N L Y - T" Height="350" Width="395" ResizeMode="CanMinimize" Closing="WindowClosing" >
     
     <ContentControl Content="{Binding CurrentPage}" />
     

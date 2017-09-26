@@ -66,11 +66,11 @@ namespace OnlyT.Utils
       private const int SW_SHOWNORMAL = 1;
       private const int SW_SHOWMINIMIZED = 2;
 
-      private static void SetPlacement(IntPtr windowHandle, string placementXml)
+      private static void SetPlacement(IntPtr windowHandle, string placementJson, double width, double height)
       {
-         if (!string.IsNullOrEmpty(placementXml))
+         if (!string.IsNullOrEmpty(placementJson))
          {
-            byte[] xmlBytes = encoding.GetBytes(placementXml);
+            byte[] xmlBytes = encoding.GetBytes(placementJson);
             try
             {
                WINDOWPLACEMENT placement;
@@ -82,6 +82,8 @@ namespace OnlyT.Utils
                placement.length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
                placement.flags = 0;
                placement.showCmd = (placement.showCmd == SW_SHOWMINIMIZED ? SW_SHOWNORMAL : placement.showCmd);
+               placement.normalPosition.Right = placement.normalPosition.Left + (int)width;
+               placement.normalPosition.Bottom = placement.normalPosition.Top + (int)height;
                NativeMethods.SetWindowPlacement(windowHandle, ref placement);
             }
             catch (InvalidOperationException)
@@ -104,9 +106,9 @@ namespace OnlyT.Utils
          }
       }
 
-      public static void SetPlacement(this Window window, string placementXml)
+      public static void SetPlacement(this Window window, string placementJson)
       {
-         SetPlacement(new WindowInteropHelper(window).Handle, placementXml);
+         SetPlacement(new WindowInteropHelper(window).Handle, placementJson, window.Width, window.Height);
       }
 
       public static string GetPlacement(this Window window)

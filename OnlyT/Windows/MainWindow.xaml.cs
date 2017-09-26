@@ -33,7 +33,7 @@ namespace OnlyT.Windows
          }
       }
 
-      private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+      private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
       {
          SaveWindowPos();
          MainViewModel m = (MainViewModel)DataContext;
