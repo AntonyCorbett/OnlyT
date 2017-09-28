@@ -38,8 +38,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="96*"/>
-            <ColumnDefinition Width="125*"/>
+            <ColumnDefinition Width="{Binding AnalogueClockColumnWidth}"/>
+            <ColumnDefinition Width="{Binding TimerColumnWidth}"/>
         </Grid.ColumnDefinitions>
 
         <Border CornerRadius="20" Grid.Column="0" BorderBrush="Beige" Margin="10" BorderThickness="3" Padding="10">

@@ -18,11 +18,19 @@ namespace OnlyT.ViewModel
       {
          _optionsService = optionsService;
 
+         AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
+
          // subscriptions...
          Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
          Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
          Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
          Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
+         Messenger.Default.Register<AnalogueClockWidthChanged>(this, OnAnalogueClockWidthChanged);
+      }
+
+      private void OnAnalogueClockWidthChanged(AnalogueClockWidthChanged obj)
+      {
+         AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
       }
 
       private void OnDigitalClockFormatChanged(ClockHourFormatChangedMessage obj)
@@ -48,7 +56,7 @@ namespace OnlyT.ViewModel
          IsRunning = true;
          InitOverallDurationSector(message.TargetSeconds);
       }
-
+      
       private void InitOverallDurationSector(int targetSecs)
       {
          if (DurationSector == null)
@@ -94,6 +102,64 @@ namespace OnlyT.ViewModel
             }
          }
       }
+
+      private int _timerColumnWidthPercentage;
+      public int TimerColumnWidthPercentage
+      {
+         get => _timerColumnWidthPercentage;
+         set
+         {
+            if (_timerColumnWidthPercentage != value)
+            {
+               _timerColumnWidthPercentage = value;
+               TimerColumnWidth = $"{_timerColumnWidthPercentage}*";
+            }
+         }
+      }
+
+      private string _timerColumnWidth;
+      public string TimerColumnWidth
+      {
+         get => _timerColumnWidth;
+         set
+         {
+            if (_timerColumnWidth != value)
+            {
+               _timerColumnWidth = value;
+               RaisePropertyChanged();
+            }
+         }
+      }
+
+      private int _analogueClockColumnWidthPercentage;
+      private int AnalogueClockColumnWidthPercentage
+      {
+         get => _analogueClockColumnWidthPercentage;
+         set
+         {
+            if (_analogueClockColumnWidthPercentage != value)
+            {
+               _analogueClockColumnWidthPercentage = value;
+               AnalogueClockColumnWidth = $"{_analogueClockColumnWidthPercentage}*";
+               TimerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
+            }
+         }
+      }
+
+      private string _analogueClockColumnWidth;
+      public string AnalogueClockColumnWidth
+      {
+         get => _analogueClockColumnWidth;
+         set
+         {
+            if (_analogueClockColumnWidth != value)
+            {
+               _analogueClockColumnWidth = value;
+               RaisePropertyChanged();
+            }
+         }
+      }
+
 
       public bool DigitalTimeFormatShowLeadingZero => 
          _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||

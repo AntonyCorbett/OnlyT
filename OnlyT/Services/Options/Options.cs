@@ -16,6 +16,7 @@ namespace OnlyT.Services.Options
          BellVolumePercent = 70;
          MidWeekAdaptiveMode = AdaptiveMode.None;
          WeekendAdaptiveMode = AdaptiveMode.None;
+         AnalogueClockWidthPercent = 50;
 
          var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
          ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
@@ -32,6 +33,7 @@ namespace OnlyT.Services.Options
       public ClockHourFormat ClockHourFormat { get; set; }
       public AdaptiveMode MidWeekAdaptiveMode { get; set; }
       public AdaptiveMode WeekendAdaptiveMode { get; set; }
+      public int AnalogueClockWidthPercent { get; set; }
 
 
       /// <summary>
@@ -47,6 +49,11 @@ namespace OnlyT.Services.Options
          if (BellVolumePercent > 100)
          {
             BellVolumePercent = 100;
+         }
+
+         if (AnalogueClockWidthPercent < 0 || AnalogueClockWidthPercent > 100)
+         {
+            AnalogueClockWidthPercent = 50;
          }
       }
    }

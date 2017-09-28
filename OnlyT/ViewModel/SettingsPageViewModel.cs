@@ -236,6 +236,20 @@ namespace OnlyT.ViewModel
          }
       }
 
+      public int AnalogueClockWidthPercent
+      {
+         get => _optionsService.Options.AnalogueClockWidthPercent;
+         set
+         {
+            if (_optionsService.Options.AnalogueClockWidthPercent != value)
+            {
+               _optionsService.Options.AnalogueClockWidthPercent = value;
+               RaisePropertyChanged(nameof(AnalogueClockWidthPercent));
+               Messenger.Default.Send(new AnalogueClockWidthChanged());
+            }
+         }
+      }
+
       public bool IsBellEnabled
       {
          get => _optionsService.Options.IsBellEnabled;
