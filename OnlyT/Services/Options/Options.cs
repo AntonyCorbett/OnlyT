@@ -17,6 +17,7 @@ namespace OnlyT.Services.Options
          MidWeekAdaptiveMode = AdaptiveMode.None;
          WeekendAdaptiveMode = AdaptiveMode.None;
          AnalogueClockWidthPercent = 50;
+         AutoEnlargeAnalogueClock = true;
 
          var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
          ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
@@ -34,7 +35,8 @@ namespace OnlyT.Services.Options
       public AdaptiveMode MidWeekAdaptiveMode { get; set; }
       public AdaptiveMode WeekendAdaptiveMode { get; set; }
       public int AnalogueClockWidthPercent { get; set; }
-
+      public bool AutoEnlargeAnalogueClock { get; set; }
+      
 
       /// <summary>
       /// Validates the data, correcting automatically as required

@@ -12,6 +12,8 @@ using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
 {
+   using System.Configuration;
+
    public class SettingsPageViewModel : ViewModelBase, IPage
    {
       public static string PageName => "SettingsPage";
@@ -236,6 +238,20 @@ namespace OnlyT.ViewModel
          }
       }
 
+      public bool AutoEnlargeAnalogueClock
+      {
+         get => _optionsService.Options.AutoEnlargeAnalogueClock;
+         set
+         {
+            if (_optionsService.Options.AutoEnlargeAnalogueClock != value)
+            {
+               _optionsService.Options.AutoEnlargeAnalogueClock = value;
+               RaisePropertyChanged(nameof(AutoEnlargeAnalogueClock));
+               Messenger.Default.Send(new AutoEnlargeAnalogueClockChangedMessage());
+            }
+         }
+      }
+
       public int AnalogueClockWidthPercent
       {
          get => _optionsService.Options.AnalogueClockWidthPercent;
@@ -245,7 +261,7 @@ namespace OnlyT.ViewModel
             {
                _optionsService.Options.AnalogueClockWidthPercent = value;
                RaisePropertyChanged(nameof(AnalogueClockWidthPercent));
-               Messenger.Default.Send(new AnalogueClockWidthChanged());
+               Messenger.Default.Send(new AnalogueClockWidthChangedMessage());
             }
          }
       }

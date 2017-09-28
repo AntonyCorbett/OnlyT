@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:OnlyT.Windows"
              DataContext="{Binding Settings, Mode=OneWay, Source={StaticResource Locator}}"             
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="300">
 
     <UserControl.Resources>
         <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
@@ -96,9 +96,12 @@
 
                 <GroupBox Margin="0,5,0,0" Header="Timer window" Padding="5" >
                     <StackPanel>
+                        <CheckBox IsChecked="{Binding AutoEnlargeAnalogueClock, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Auto enlarge clock" />
+
                         <Label Style="{StaticResource LabelStyle}">Analogue clock width:</Label>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
-                                Value="{Binding AnalogueClockWidthPercent, Mode=TwoWay}"
+                                Value="{Binding AnalogueClockWidthPercent}"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
                         
                     </StackPanel>
