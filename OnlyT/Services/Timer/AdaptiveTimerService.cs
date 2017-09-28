@@ -70,7 +70,7 @@ namespace OnlyT.Services.Timer
                   {
                      DateTime talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
                      DateTime talkActualStartTime = DateTime.UtcNow;
-                     TimeSpan deviation = talkPlannedStartTime - talkActualStartTime;
+                     TimeSpan deviation = talkActualStartTime - talkPlannedStartTime;
 
                      if (DeviationWithinRange(deviation))
                      {
@@ -82,7 +82,7 @@ namespace OnlyT.Services.Timer
                               talk.GetDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
 
                            double secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
-                           return talk.OriginalDuration.Add(TimeSpan.FromSeconds(secondsToApply));
+                           return talk.OriginalDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
                         }
                      }
                   }
