@@ -96,7 +96,7 @@ namespace OnlyT.ViewModel
          if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
          {
             // on launch we display the timer window after a short delay (for aesthetics only)
-            await Task.Delay(1000);
+            await Task.Delay(1000).ConfigureAwait(true);
             OpenTimerWindow();
          }
       }

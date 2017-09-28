@@ -30,7 +30,6 @@ namespace OnlyT.AnalogueClock
       private Path _sectorPath3;
       private readonly DispatcherTimer _timer;
       private readonly DispatcherTimer _animationTimer;
-      private readonly bool _isInDesignMode;
       private bool _digitalFormatLeadingZero;
       private bool _digitalFormat24Hours;
       
@@ -42,7 +41,7 @@ namespace OnlyT.AnalogueClock
 
       public Clock()
       {
-         _isInDesignMode = DesignerProperties.GetIsInDesignMode(this);
+         var isInDesignMode = DesignerProperties.GetIsInDesignMode(this);
 
          _timer = new DispatcherTimer(DispatcherPriority.Render) {Interval = _timerInterval};
          _timer.Tick += TimerCallback;
@@ -50,7 +49,7 @@ namespace OnlyT.AnalogueClock
          _animationTimer = new DispatcherTimer(DispatcherPriority.Render) { Interval = _animationTimerInterval };
          _animationTimer.Tick += AnimationCallback;
 
-         if (_isInDesignMode)
+         if (isInDesignMode)
          {
             CurrentTimeHrMin = "13:50";
             CurrentTimeSec = "20";

@@ -188,7 +188,7 @@ namespace OnlyT.ViewModel
 
       private void SelectFirstTalk()
       {
-         var talks = _scheduleService.GetTalkScheduleItems();
+         var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
          if (talks != null && talks.Any())
          {
             TalkId = talks.First().Id;

@@ -6,7 +6,7 @@
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:local="clr-namespace:OnlyT"
         mc:Ignorable="d"
-        Title="TimerOutputWindow" Height="300" Width="457.562" Loaded="Window_Loaded" 
+        Title="TimerOutputWindow" Height="300" Width="457.562" Loaded="WindowLoaded" 
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
 
     <Window.Resources>
