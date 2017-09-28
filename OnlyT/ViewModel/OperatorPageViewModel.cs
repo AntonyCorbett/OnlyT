@@ -136,6 +136,7 @@ namespace OnlyT.ViewModel
       private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
       {
          _scheduleService.Reset();
+         TalkId = 0;
          RaisePropertyChanged(nameof(Talks));
          SelectFirstTalk();
       }

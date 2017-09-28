@@ -18,7 +18,7 @@ namespace OnlyT.Services.Timer
    {
       private static readonly int _largestDeviationMinutes = 15;
 
-      private static readonly int _smallestDeviationSecs = 10;
+      private static readonly int _smallestDeviationSecs = 15;
 
       private DateTime? _meetingStartTimeUtc;
 
@@ -70,7 +70,7 @@ namespace OnlyT.Services.Timer
                   {
                      DateTime talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
                      DateTime talkActualStartTime = DateTime.UtcNow;
-                     TimeSpan deviation = talkActualStartTime - talkPlannedStartTime;
+                     TimeSpan deviation = talkPlannedStartTime - talkActualStartTime;
 
                      if (DeviationWithinRange(deviation))
                      {
