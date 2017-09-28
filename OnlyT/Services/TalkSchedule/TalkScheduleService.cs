@@ -55,9 +55,16 @@ namespace OnlyT.Services.TalkSchedule
          var talks = GetTalkScheduleItems()?.ToArray();
          if (talks != null)
          {
+            bool foundCurrent = false;
             for (int n = 0; n < talks.Length; ++n)
             {
-               if (talks[n].Id.Equals(currentTalkId) && n != talks.Length - 1)
+               var thisTalk = talks[n];
+               if (thisTalk.Id.Equals(currentTalkId))
+               {
+                  foundCurrent = true;
+               }
+               
+               if (n != talks.Length - 1 && foundCurrent && talks[n + 1].Duration != TimeSpan.Zero)
                {
                   return talks[n + 1].Id;
                }

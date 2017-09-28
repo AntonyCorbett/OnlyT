@@ -168,6 +168,7 @@ namespace OnlyT.Services.TalkSchedule
             Name = Properties.Resources.TALK_LIVING1,
             StartOffsetIntoMeeting = new TimeSpan(0, 51, 40),
             Duration = TimeSpan.FromMinutes(timerPart1),
+            AllowAdaptive = true,
             Editable = true
          });
 
@@ -176,6 +177,7 @@ namespace OnlyT.Services.TalkSchedule
             Name = Properties.Resources.TALK_LIVING2,
             StartOffsetIntoMeeting = new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1)),
             Duration = TimeSpan.FromMinutes(timerPart2),
+            AllowAdaptive = true,
             Editable = true
          });
 
@@ -186,6 +188,7 @@ namespace OnlyT.Services.TalkSchedule
                Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
                StartOffsetIntoMeeting = new TimeSpan(1, 7, 0),
                Duration = TimeSpan.FromMinutes(3),
+               AllowAdaptive = true,
                Editable = true
             });
 
@@ -193,6 +196,7 @@ namespace OnlyT.Services.TalkSchedule
             {
                Name = Properties.Resources.TALK_SERVICE,
                StartOffsetIntoMeeting = new TimeSpan(1, 10, 0),
+               AllowAdaptive = true,
                Duration = TimeSpan.FromMinutes(30)
             });
          }
@@ -203,6 +207,7 @@ namespace OnlyT.Services.TalkSchedule
                Name = Properties.Resources.TALK_CONG_STUDY,
                StartOffsetIntoMeeting = new TimeSpan(1, 7, 0),
                Duration = TimeSpan.FromMinutes(30),
+               AllowAdaptive = true,
                Editable = true
             });
 
@@ -211,6 +216,7 @@ namespace OnlyT.Services.TalkSchedule
                Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
                StartOffsetIntoMeeting = new TimeSpan(1, 37, 0),
                Duration = TimeSpan.FromMinutes(3),
+               AllowAdaptive = true,
                Editable = true
             });
          }
@@ -258,6 +264,7 @@ namespace OnlyT.Services.TalkSchedule
                Name = Properties.Resources.TALK_WT,
                StartOffsetIntoMeeting = new TimeSpan(0, 40, 0),
                Duration = TimeSpan.FromMinutes(30),
+               AllowAdaptive = true,
                Editable = true
             });
 
@@ -266,6 +273,7 @@ namespace OnlyT.Services.TalkSchedule
                Name = Properties.Resources.TALK_CONCLUDING,
                StartOffsetIntoMeeting = new TimeSpan(0, 70, 0),
                Duration = TimeSpan.FromMinutes(30),
+               AllowAdaptive = true,
                Editable = true
             });
          }
@@ -286,6 +294,7 @@ namespace OnlyT.Services.TalkSchedule
                Name = Properties.Resources.TALK_WT,
                StartOffsetIntoMeeting = new TimeSpan(0, 40, 0),
                Duration = TimeSpan.FromMinutes(60),
+               AllowAdaptive = true,
                Editable = true
             });
          }
