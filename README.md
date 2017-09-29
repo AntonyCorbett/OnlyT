@@ -18,4 +18,4 @@ OnlyT is Copyright &copy; 2017 Antony Corbett and other contributors under the [
 
 ### Donate
 
-[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8HCZ8WYBFWUNE)
+[![Donate](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8HCZ8WYBFWUNE)
