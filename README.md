@@ -16,3 +16,6 @@ See the [wiki](https://github.com/AntonyCorbett/OnlyT/wiki) for basic instructio
 
 OnlyT is Copyright &copy; 2017 Antony Corbett and other contributors under the [MIT license](LICENSE).
 
+### Donate
+
+[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8HCZ8WYBFWUNE)
