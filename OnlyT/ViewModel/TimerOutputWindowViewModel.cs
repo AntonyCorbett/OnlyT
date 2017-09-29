@@ -9,6 +9,8 @@ using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
 {
+    using System.Threading.Tasks;
+
     internal class TimerOutputWindowViewModel : ViewModelBase
     {
         private static int _secsPerHour = 60 * 60;
@@ -19,37 +21,27 @@ namespace OnlyT.ViewModel
             _optionsService = optionsService;
 
             AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
-            IsTimerVisible = false;
-
+            
             // subscriptions...
             Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
             Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
-            Messenger.Default.Register<AutoEnlargeAnalogueClockChangedMessage>(this, OnAutoEnlargeAnalogueClockChanged);
+            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
         }
 
-        private void OnAutoEnlargeAnalogueClockChanged(AutoEnlargeAnalogueClockChangedMessage obj)
+        private void OnNavigate(NavigateMessage message)
         {
-            IsTimerVisible = false;
-            IsTimerVisible = true;
-
-            //IsTimerVisible = _optionsService.Options.AutoEnlargeAnalogueClock;
-        }
-
-        private bool _isTimerVisible;
-
-        public bool IsTimerVisible
-        {
-            get => _isTimerVisible;
-            set
+            if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
             {
-                if (_isTimerVisible != value)
-                {
-                    _isTimerVisible = value;
-                    RaisePropertyChanged();
-                }
+                // when the settings page is displayed we ensure that the analogue 
+                // clock is shown in it's restored state rather than enlarged...
+                RunStartTimerAnimation();
+            }
+            else if (message.OriginalPageName.Equals(SettingsPageViewModel.PageName))
+            {
+                RunStopTimerAnimation();
             }
         }
 
@@ -68,6 +60,8 @@ namespace OnlyT.ViewModel
         {
             IsRunning = false;
             DurationSector = null;
+
+            RunStopTimerAnimation();
         }
 
         private double CalcAngleFromTime(DateTime dt)
@@ -79,8 +73,24 @@ namespace OnlyT.ViewModel
         {
             TimeString = TimeFormatter.FormatTimeRemaining(message.TargetSeconds);
             IsRunning = true;
+
             InitOverallDurationSector(message.TargetSeconds);
+
+            RunStartTimerAnimation();
         }
+
+        private void RunStartTimerAnimation()
+        {
+            RunTimerStartAnimationAutoEnlarge = false;
+            RunTimerStartAnimationAutoEnlarge = true;
+        }
+
+        private void RunStopTimerAnimation()
+        {
+            RunTimerStopAnimationAutoEnlarge = false;
+            RunTimerStopAnimationAutoEnlarge = true;
+        }
+
 
         private void InitOverallDurationSector(int targetSecs)
         {
@@ -203,7 +213,35 @@ namespace OnlyT.ViewModel
                 if (_timeString != value)
                 {
                     _timeString = value;
-                    RaisePropertyChanged(nameof(TimeString));
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        private bool _runTimerStartAnimationAutoEnlarge;
+        public bool RunTimerStartAnimationAutoEnlarge
+        {
+            get => _runTimerStartAnimationAutoEnlarge;
+            set
+            {
+                if (_runTimerStartAnimationAutoEnlarge != value)
+                {
+                    _runTimerStartAnimationAutoEnlarge = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        private bool _runTimerStopAnimationAutoEnlarge;
+        public bool RunTimerStopAnimationAutoEnlarge
+        {
+            get => _runTimerStopAnimationAutoEnlarge;
+            set
+            {
+                if (_runTimerStopAnimationAutoEnlarge != value)
+                {
+                    _runTimerStopAnimationAutoEnlarge = value;
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -218,7 +256,7 @@ namespace OnlyT.ViewModel
                 if (_isRunning != value)
                 {
                     _isRunning = value;
-                    RaisePropertyChanged(nameof(IsRunning));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -232,7 +270,7 @@ namespace OnlyT.ViewModel
                 if (!ReferenceEquals(_textColor, value))
                 {
                     _textColor = value;
-                    RaisePropertyChanged(nameof(TextColor));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -246,7 +284,7 @@ namespace OnlyT.ViewModel
                 if (!ReferenceEquals(_durationSector, value))
                 {
                     _durationSector = value;
-                    RaisePropertyChanged(nameof(DurationSector));
+                    RaisePropertyChanged();
                 }
             }
         }

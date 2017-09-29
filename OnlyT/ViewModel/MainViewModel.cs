@@ -13,190 +13,190 @@ using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {
-   /// <summary>
-   /// View model for the main page (which is a placeholder for the Operator or Settings page)
-   /// </summary>
-   public class MainViewModel : ViewModelBase
-   {
-      private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
-      private TimerOutputWindow _timerWindow;
-      private readonly IOptionsService _optionsService;
-      private readonly IMonitorsService _monitorsService;
-      private readonly IBellService _bellService;
-      private readonly ITalkTimerService _timerService;
-      private string _currentPageName;
-      private readonly TimerOutputWindowViewModel _timerWindowViewModel;
-      
-      public MainViewModel(
-         IOptionsService optionsService,
-         IMonitorsService monitorsService,
-         ITalkTimerService timerService,
-         IBellService bellService)
-      {
-         _optionsService = optionsService;
-         _monitorsService = monitorsService;
-         _bellService = bellService;
-         _timerService = timerService;
+    /// <summary>
+    /// View model for the main page (which is a placeholder for the Operator or Settings page)
+    /// </summary>
+    public class MainViewModel : ViewModelBase
+    {
+        private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
+        private TimerOutputWindow _timerWindow;
+        private readonly IOptionsService _optionsService;
+        private readonly IMonitorsService _monitorsService;
+        private readonly IBellService _bellService;
+        private readonly ITalkTimerService _timerService;
+        private string _currentPageName;
+        private readonly TimerOutputWindowViewModel _timerWindowViewModel;
 
-         // subscriptions...
-         Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
-         Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
-         Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
-         Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
+        public MainViewModel(
+           IOptionsService optionsService,
+           IMonitorsService monitorsService,
+           ITalkTimerService timerService,
+           IBellService bellService)
+        {
+            _optionsService = optionsService;
+            _monitorsService = monitorsService;
+            _bellService = bellService;
+            _timerService = timerService;
 
-         // should really create a "page service" rather than create views in the main view model!
-         _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
-         _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
+            // subscriptions...
+            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
+            Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
+            Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
+            Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
 
-         _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
+            // should really create a "page service" rather than create views in the main view model!
+            _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
+            _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
 
-         Messenger.Default.Send(new NavigateMessage(OperatorPageViewModel.PageName, null));
+            _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
+
+            Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
 #pragma warning disable 4014
-         // (fire and forget)
-         LaunchTimerWindowAsync();
+            // (fire and forget)
+            LaunchTimerWindowAsync();
 #pragma warning restore 4014
-      }
+        }
 
-      private void OnTalkOvertime(OvertimeMessage message)
-      {
-         if (message.UseBellForTalk && _optionsService.Options.IsBellEnabled)
-         {
-            _bellService.Play(_optionsService.Options.BellVolumePercent);
-         }
-      }
-
-      /// <summary>
-      /// Responds to change in the application's "Always on top" option
-      /// </summary>
-      /// <param name="message"></param>
-      private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage message)
-      {
-         RaisePropertyChanged(nameof(AlwaysOnTop));
-      }
-
-      /// <summary>
-      /// Responds to a change in timer monitor
-      /// </summary>
-      /// <param name="message"></param>
-      private void OnTimerMonitorChanged(TimerMonitorChangedMessage message)
-      {
-         if (_optionsService.IsTimerMonitorSpecified)
-         {
-            RelocateTimerWindow();
-         }
-         else
-         {
-            HideTimerWindow();
-         }
-      }
-
-      private async Task LaunchTimerWindowAsync()
-      {
-         if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
-         {
-            // on launch we display the timer window after a short delay (for aesthetics only)
-            await Task.Delay(1000).ConfigureAwait(true);
-            OpenTimerWindow();
-         }
-      }
-
-      /// <summary>
-      /// Responds to the NavigateMessage and swaps out one page for another
-      /// </summary>
-      /// <param name="message"></param>
-      private void OnNavigate(NavigateMessage message)
-      {
-         CurrentPage = _pages[message.TargetPage];
-         _currentPageName = message.TargetPage;
-         ((IPage)CurrentPage.DataContext).Activated(message.State);
-      }
-
-      private FrameworkElement _currentPage;
-      public FrameworkElement CurrentPage
-      {
-         get => _currentPage;
-         set
-         {
-            if (!ReferenceEquals(_currentPage, value))
+        private void OnTalkOvertime(OvertimeMessage message)
+        {
+            if (message.UseBellForTalk && _optionsService.Options.IsBellEnabled)
             {
-               _currentPage = value;
-               RaisePropertyChanged(nameof(CurrentPage));
+                _bellService.Play(_optionsService.Options.BellVolumePercent);
             }
-         }
-      }
+        }
 
-      public bool AlwaysOnTop => _optionsService.Options.AlwaysOnTop;
+        /// <summary>
+        /// Responds to change in the application's "Always on top" option
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage message)
+        {
+            RaisePropertyChanged(nameof(AlwaysOnTop));
+        }
 
-      public void Closing(object sender, CancelEventArgs e)
-      {
-         e.Cancel = _timerService.IsRunning;
-         if(!e.Cancel)
-         { 
-            Messenger.Default.Send(new ShutDownMessage(_currentPageName));
-            CloseTimerWindow();
-         }
-      }
+        /// <summary>
+        /// Responds to a change in timer monitor
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnTimerMonitorChanged(TimerMonitorChangedMessage message)
+        {
+            if (_optionsService.IsTimerMonitorSpecified)
+            {
+                RelocateTimerWindow();
+            }
+            else
+            {
+                HideTimerWindow();
+            }
+        }
 
-      /// <summary>
-      /// If the timer window is open when we change the timer display then relocate it;
-      /// otherwise open it
-      /// </summary>
-      private void RelocateTimerWindow()
-      {
-         if (_timerWindow != null)
-         {
+        private async Task LaunchTimerWindowAsync()
+        {
+            if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
+            {
+                // on launch we display the timer window after a short delay (for aesthetics only)
+                await Task.Delay(1000).ConfigureAwait(true);
+                OpenTimerWindow();
+            }
+        }
+
+        /// <summary>
+        /// Responds to the NavigateMessage and swaps out one page for another
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnNavigate(NavigateMessage message)
+        {
+            CurrentPage = _pages[message.TargetPageName];
+            _currentPageName = message.TargetPageName;
+            ((IPage)CurrentPage.DataContext).Activated(message.State);
+        }
+
+        private FrameworkElement _currentPage;
+        public FrameworkElement CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                if (!ReferenceEquals(_currentPage, value))
+                {
+                    _currentPage = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public bool AlwaysOnTop => _optionsService.Options.AlwaysOnTop;
+
+        public void Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = _timerService.IsRunning;
+            if (!e.Cancel)
+            {
+                Messenger.Default.Send(new ShutDownMessage(_currentPageName));
+                CloseTimerWindow();
+            }
+        }
+
+        /// <summary>
+        /// If the timer window is open when we change the timer display then relocate it;
+        /// otherwise open it
+        /// </summary>
+        private void RelocateTimerWindow()
+        {
+            if (_timerWindow != null)
+            {
+                var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                if (timerMonitor != null)
+                {
+                    _timerWindow.Hide();
+                    _timerWindow.WindowState = WindowState.Normal;
+
+                    var area = timerMonitor.Monitor.WorkingArea;
+                    _timerWindow.Left = area.Left;
+                    _timerWindow.Top = area.Top;
+
+                    _timerWindow.Topmost = true;
+                    _timerWindow.WindowState = WindowState.Maximized;
+                    _timerWindow.Show();
+                }
+            }
+            else
+            {
+                OpenTimerWindow();
+            }
+        }
+
+        private void OpenTimerWindow()
+        {
             var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
             if (timerMonitor != null)
             {
-               _timerWindow.Hide();
-               _timerWindow.WindowState = WindowState.Normal;
+                _timerWindow = new TimerOutputWindow { DataContext = _timerWindowViewModel };
 
-               var area = timerMonitor.Monitor.WorkingArea;
-               _timerWindow.Left = area.Left;
-               _timerWindow.Top = area.Top;
+                var area = timerMonitor.Monitor.WorkingArea;
+                _timerWindow.Left = area.Left;
+                _timerWindow.Top = area.Top;
+                _timerWindow.Width = 0;
+                _timerWindow.Height = 0;
 
-               _timerWindow.Topmost = true;
-               _timerWindow.WindowState = WindowState.Maximized;
-               _timerWindow.Show();
+                _timerWindow.Topmost = true;
+                _timerWindow.Show();
             }
-         }
-         else
-         {
-            OpenTimerWindow();
-         }
-      }
+        }
 
-      private void OpenTimerWindow()
-      {
-         var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-         if (timerMonitor != null)
-         {
-            _timerWindow = new TimerOutputWindow { DataContext = _timerWindowViewModel };
+        private void HideTimerWindow()
+        {
+            _timerWindow?.Hide();
+        }
 
-            var area = timerMonitor.Monitor.WorkingArea;
-            _timerWindow.Left = area.Left;
-            _timerWindow.Top = area.Top;
-            _timerWindow.Width = 0;
-            _timerWindow.Height = 0;
-
-            _timerWindow.Topmost = true;
-            _timerWindow.Show();
-         }
-      }
-
-      private void HideTimerWindow()
-      {
-         _timerWindow?.Hide();
-      }
-
-      private void CloseTimerWindow()
-      {
-         if (_timerWindow != null)
-         {
-            _timerWindow.Close();
-            _timerWindow = null;
-         }
-      }
-   }
+        private void CloseTimerWindow()
+        {
+            if (_timerWindow != null)
+            {
+                _timerWindow.Close();
+                _timerWindow = null;
+            }
+        }
+    }
 }

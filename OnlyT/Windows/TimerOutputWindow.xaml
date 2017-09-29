@@ -10,28 +10,94 @@
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
 
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <Style x:Key="FadingTextBlockStyle" TargetType="TextBlock">
+        <Style x:Key="TimerTextAnimationStyle" TargetType="TextBlock">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
+                <DataTrigger Binding="{Binding RunTimerStartAnimationAutoEnlarge}" Value="True">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard>
+                        <RemoveStoryboard BeginStoryboardName="StoryboardStartTimer" />
+                        <RemoveStoryboard BeginStoryboardName="StoryboardStopTimer" />
+                        <BeginStoryboard Name="StoryboardStartTimer">
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)"
-                                                 From="0.0" To="1.0" Duration="0:0:0.5"/>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(TextBlock.Opacity)"
+                                    BeginTime="0:0:1.0"
+                                    From="0.0" To="1.0"
+                                    Duration="0:0:0.4">
+                                </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RunTimerStopAnimationAutoEnlarge}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <RemoveStoryboard BeginStoryboardName="StoryboardStartTimer" />
+                        <RemoveStoryboard BeginStoryboardName="StoryboardStopTimer" />
+                        <BeginStoryboard Name="StoryboardStopTimer">
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)"
-                                                 From="1.0" To="0.0" Duration="0:0:0.5"/>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(TextBlock.Opacity)"
+                                    From="1.0" To="0.0"
+                                    Duration="0:0:0.4">
+                                </DoubleAnimation>
                             </Storyboard>
                         </BeginStoryboard>
-                    </DataTrigger.ExitActions>
+                    </DataTrigger.EnterActions>
                 </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
+        <Style x:Key="AnalogueClockAnimationStyle" TargetType="Border">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RunTimerStartAnimationAutoEnlarge}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <RemoveStoryboard BeginStoryboardName="SbStartTimer" />
+                        <RemoveStoryboard BeginStoryboardName="SbStopTimer" />
+
+                        <BeginStoryboard Name="SbStartTimer">
+                            <Storyboard>
+                                <DoubleAnimation 
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="1.0" To="0.0"
+                                        Duration="0:0:0.4">
+                                </DoubleAnimation>
+                                <Int32Animation BeginTime="0:0:0.5" To="1"
+                                                    Storyboard.TargetProperty="(Grid.ColumnSpan)">
+                                </Int32Animation>
+                                <DoubleAnimation 
+                                        Storyboard.TargetProperty="Opacity"
+                                        BeginTime="0:0:1.0"
+                                        From="0.0" To="1.0"
+                                        Duration="0:0:0.4">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RunTimerStopAnimationAutoEnlarge}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <RemoveStoryboard BeginStoryboardName="SbStartTimer" />
+                        <RemoveStoryboard BeginStoryboardName="SbStopTimer" />
+
+                        <BeginStoryboard Name="SbStopTimer">
+                            <Storyboard>
+                                <DoubleAnimation 
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="1.0" To="0.0"
+                                        Duration="0:0:0.4">
+                                </DoubleAnimation>
+                                <Int32Animation BeginTime="0:0:0.5" To="2"
+                                                    Storyboard.TargetProperty="(Grid.ColumnSpan)">
+                                </Int32Animation>
+                                <DoubleAnimation 
+                                        Storyboard.TargetProperty="Opacity"
+                                        BeginTime="0:0:1.0"
+                                        From="0.0" To="1.0"
+                                        Duration="0:0:0.4">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -42,37 +108,9 @@
             <ColumnDefinition Width="{Binding TimerColumnWidth}" />
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="1" 
+        <Border Style="{StaticResource AnalogueClockAnimationStyle}" 
+                CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" 
                 BorderBrush="Beige" Margin="10" BorderThickness="3" Padding="10">
-            <Border.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsTimerVisible}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation 
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1.0" To="0.0"
-                                            Duration="0:0:0.7">
-                                        </DoubleAnimation>
-                                        <Int32Animation BeginTime="0:0:1" To="2"
-                                            Storyboard.TargetProperty="(Grid.ColumnSpan)">
-                                        </Int32Animation>
-                                        <DoubleAnimation 
-                                            Storyboard.TargetProperty="Opacity"
-                                            BeginTime="0:0:2"
-                                            From="0.0" To="1.0"
-                                            Duration="0:0:0.7">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="1"/>
@@ -104,11 +142,13 @@
 
         <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
 
-            <TextBlock Style="{StaticResource FadingTextBlockStyle}" 
+            <TextBlock Style="{StaticResource TimerTextAnimationStyle}" 
+                       Opacity="0.0"
                        Foreground="{Binding TextColor}" 
                        Text="{Binding TimeString}"
                        FontSize="40"
                        FontWeight="Bold"/>
+
         </Viewbox>
     </Grid>
 

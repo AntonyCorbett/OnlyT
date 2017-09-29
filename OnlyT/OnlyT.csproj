@@ -140,7 +140,6 @@
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\AlwaysOnTopChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AnalogueClockWidthChangedMessage.cs" />
-    <Compile Include="ViewModel\Messages\AutoEnlargeAnalogueClockChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
