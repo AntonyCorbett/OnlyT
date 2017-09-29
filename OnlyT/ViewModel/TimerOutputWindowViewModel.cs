@@ -9,6 +9,7 @@ using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
 {
+    using System.Diagnostics;
     using System.Threading.Tasks;
 
     internal class TimerOutputWindowViewModel : ViewModelBase
@@ -36,8 +37,11 @@ namespace OnlyT.ViewModel
             if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
             {
                 // when the settings page is displayed we ensure that the analogue 
-                // clock is shown in it's restored state rather than enlarged...
+                // clock is shown in its restored state rather than enlarged...
                 RunStartTimerAnimation();
+
+                // and that the timer text is shown...
+                TimeString = TimeFormatter.FormatTimeRemaining(0);
             }
             else if (message.OriginalPageName.Equals(SettingsPageViewModel.PageName))
             {
@@ -117,23 +121,26 @@ namespace OnlyT.ViewModel
 
         private void OnTimerChanged(TimerChangedMessage message)
         {
-            TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
-            TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
-
-            // if duration of talk is greater than 1hr we only start showing the sector
-            // when remaining time is less than 1 hr (for sake of clarity)...
-            InitOverallDurationSector(message.RemainingSecs);
-
-            if (DurationSector != null)
+            if (message.TimerIsRunning)
             {
-                DateTime now = DateTime.Now;
-                var currentAngle = CalcAngleFromTime(now);
-                if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15) // prevent gratuitous updates
+                TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
+                TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
+
+                // if duration of talk is greater than 1hr we only start showing the sector
+                // when remaining time is less than 1 hr (for sake of clarity)...
+                InitOverallDurationSector(message.RemainingSecs);
+
+                if (DurationSector != null)
                 {
-                    var d = DurationSector.Clone();
-                    d.CurrentAngle = currentAngle;
-                    d.IsOvertime = message.RemainingSecs < 0;
-                    DurationSector = d;
+                    DateTime now = DateTime.Now;
+                    var currentAngle = CalcAngleFromTime(now);
+                    if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15) // prevent gratuitous updates
+                    {
+                        var d = DurationSector.Clone();
+                        d.CurrentAngle = currentAngle;
+                        d.IsOvertime = message.RemainingSecs < 0;
+                        DurationSector = d;
+                    }
                 }
             }
         }

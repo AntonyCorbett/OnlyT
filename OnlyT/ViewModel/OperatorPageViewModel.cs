@@ -359,7 +359,7 @@ namespace OnlyT.ViewModel
         {
             TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
             SecondsRemaining = e.RemainingSecs;
-            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs));
+            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.IsRunning));
 
             if (e.RemainingSecs == 0)
             {

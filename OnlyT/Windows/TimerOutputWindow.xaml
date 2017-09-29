@@ -16,6 +16,7 @@
                     <DataTrigger.EnterActions>
                         <RemoveStoryboard BeginStoryboardName="StoryboardStartTimer" />
                         <RemoveStoryboard BeginStoryboardName="StoryboardStopTimer" />
+
                         <BeginStoryboard Name="StoryboardStartTimer">
                             <Storyboard>
                                 <DoubleAnimation 
@@ -32,6 +33,7 @@
                     <DataTrigger.EnterActions>
                         <RemoveStoryboard BeginStoryboardName="StoryboardStartTimer" />
                         <RemoveStoryboard BeginStoryboardName="StoryboardStopTimer" />
+
                         <BeginStoryboard Name="StoryboardStopTimer">
                             <Storyboard>
                                 <DoubleAnimation 
