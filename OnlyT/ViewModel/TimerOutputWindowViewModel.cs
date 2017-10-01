@@ -9,9 +9,6 @@ using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.ViewModel
 {
-    using System.Diagnostics;
-    using System.Threading.Tasks;
-
     internal class TimerOutputWindowViewModel : ViewModelBase
     {
         private static int _secsPerHour = 60 * 60;
@@ -191,7 +188,7 @@ namespace OnlyT.ViewModel
                 }
             }
         }
-        
+
         public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
     }
 }

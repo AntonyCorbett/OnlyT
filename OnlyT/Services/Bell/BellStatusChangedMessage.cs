@@ -1,12 +1,12 @@
 ﻿namespace OnlyT.Services.Bell
 {
-   internal class BellStatusChangedMessage
-   {
-      public bool Playing { get; }
+    internal class BellStatusChangedMessage
+    {
+        public bool Playing { get; }
 
-      public BellStatusChangedMessage(bool playing)
-      {
-         Playing = playing;
-      }
-   }
+        public BellStatusChangedMessage(bool playing)
+        {
+            Playing = playing;
+        }
+    }
 }

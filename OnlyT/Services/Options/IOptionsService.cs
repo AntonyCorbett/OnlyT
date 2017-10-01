@@ -1,10 +1,10 @@
 ﻿namespace OnlyT.Services.Options
 {
-   public interface IOptionsService
-   {
-      Options Options { get; }
-      void Save();
+    public interface IOptionsService
+    {
+        Options Options { get; }
+        void Save();
 
-      bool IsTimerMonitorSpecified { get; }
-   }
+        bool IsTimerMonitorSpecified { get; }
+    }
 }

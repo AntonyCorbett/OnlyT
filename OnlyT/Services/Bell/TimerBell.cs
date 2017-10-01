@@ -8,101 +8,101 @@ using Serilog;
 
 namespace OnlyT.Services.Bell
 {
-   /// <summary>
-   /// Manages the playing of the timer bell. See also IBellService
-   /// </summary>
-   internal sealed class TimerBell : ObservableObject, IDisposable
-   {
-      private static readonly string _bellFileName = "bell.mp3";
-      private WaveOutEvent _player;
-      private Mp3FileReader _reader;
-      private readonly string _bellFilePath;
-      
-      public TimerBell()
-      {
-         _bellFilePath = GetBellFilePath();
-      }
+    /// <summary>
+    /// Manages the playing of the timer bell. See also IBellService
+    /// </summary>
+    internal sealed class TimerBell : ObservableObject, IDisposable
+    {
+        private static readonly string _bellFileName = "bell.mp3";
+        private WaveOutEvent _player;
+        private Mp3FileReader _reader;
+        private readonly string _bellFilePath;
 
-      private bool _playing;
+        public TimerBell()
+        {
+            _bellFilePath = GetBellFilePath();
+        }
 
-      public bool IsPlaying
-      {
-         get => _playing;
-         private set
-         {
-            if (_playing != value)
+        private bool _playing;
+
+        public bool IsPlaying
+        {
+            get => _playing;
+            private set
             {
-               _playing = value;
-               RaisePropertyChanged(nameof(IsPlaying));
+                if (_playing != value)
+                {
+                    _playing = value;
+                    RaisePropertyChanged(nameof(IsPlaying));
 
-               DispatcherHelper.CheckBeginInvokeOnUI(() =>
-               {
-                  Messenger.Default.Send(new BellStatusChangedMessage(value));
-               });
+                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    {
+                        Messenger.Default.Send(new BellStatusChangedMessage(value));
+                    });
+                }
             }
-         }
-      }
+        }
 
-      public void Play(int volumePercent)
-      {
-         if (!IsPlaying)
-         {
-            try
+        public void Play(int volumePercent)
+        {
+            if (!IsPlaying)
             {
-               if (File.Exists(_bellFilePath))
-               {
-                  IsPlaying = true;
+                try
+                {
+                    if (File.Exists(_bellFilePath))
+                    {
+                        IsPlaying = true;
 
-                  _player = new WaveOutEvent();
-                  _reader = new Mp3FileReader(_bellFilePath);
-                  _player.Init(_reader);
-                  _player.PlaybackStopped += HandlePlaybackStopped;
-                  _player.Volume = (float) volumePercent / 100;
-                  _player.Play();
-               }
-               else
-               {
-                  Log.Logger.Error($"Could not find bell file {_bellFilePath}");
-               }
+                        _player = new WaveOutEvent();
+                        _reader = new Mp3FileReader(_bellFilePath);
+                        _player.Init(_reader);
+                        _player.PlaybackStopped += HandlePlaybackStopped;
+                        _player.Volume = (float)volumePercent / 100;
+                        _player.Play();
+                    }
+                    else
+                    {
+                        Log.Logger.Error($"Could not find bell file {_bellFilePath}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    IsPlaying = false;
+                    Log.Logger.Error(ex, "Could not play bell");
+                }
             }
-            catch (Exception ex)
+        }
+
+        private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            Clearup();
+            IsPlaying = false;
+        }
+
+        private void Clearup()
+        {
+            if (_player != null)
             {
-               IsPlaying = false;
-               Log.Logger.Error(ex, "Could not play bell");
+                _player.PlaybackStopped -= HandlePlaybackStopped;
             }
-         }
-      }
 
-      private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
-      {
-         Clearup();
-         IsPlaying = false;
-      }
+            _player?.Dispose();
+            _reader?.Dispose();
 
-      private void Clearup()
-      {
-         if (_player != null)
-         {
-            _player.PlaybackStopped -= HandlePlaybackStopped;
-         }
+            _player = null;
+            _reader = null;
+        }
 
-         _player?.Dispose();
-         _reader?.Dispose();
+        private static string GetBellFilePath()
+        {
+            string folder = AppDomain.CurrentDomain.BaseDirectory;
+            return Path.Combine(folder, _bellFileName);
+        }
 
-         _player = null;
-         _reader = null;
-      }
+        public void Dispose()
+        {
+            Clearup();
+        }
 
-      private static string GetBellFilePath()
-      {
-         string folder = AppDomain.CurrentDomain.BaseDirectory;
-         return Path.Combine(folder, _bellFileName);
-      }
-
-      public void Dispose()
-      {
-         Clearup();
-      }
-
-   }
+    }
 }

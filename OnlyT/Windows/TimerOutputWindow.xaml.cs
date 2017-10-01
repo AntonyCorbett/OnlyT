@@ -69,7 +69,7 @@ namespace OnlyT.Windows
 
             GridLengthAnimation rowHeightAdjust1 = null;
             GridLengthAnimation rowHeightAdjust2 = null;
-            
+
             var model = (TimerOutputWindowViewModel)DataContext;
             switch (model.FullScreenClockMode)
             {
@@ -80,7 +80,7 @@ namespace OnlyT.Windows
                     rowHeightAdjust1.BeginTime = TimeSpan.FromMilliseconds(500);
                     Storyboard.SetTarget(rowHeightAdjust1, ClockGrid.RowDefinitions[0]);
                     Storyboard.SetTargetProperty(rowHeightAdjust1, new PropertyPath(RowDefinition.HeightProperty));
-                    
+
                     rowHeightAdjust2 = new GridLengthAnimation();
                     rowHeightAdjust2.From = new GridLength(0, GridUnitType.Star);
                     rowHeightAdjust2.To = new GridLength(0, GridUnitType.Star);
@@ -164,13 +164,13 @@ namespace OnlyT.Windows
             rowHeightAdjust2.BeginTime = TimeSpan.FromMilliseconds(500);
             Storyboard.SetTarget(rowHeightAdjust2, ClockGrid.RowDefinitions[1]);
             Storyboard.SetTargetProperty(rowHeightAdjust2, new PropertyPath(RowDefinition.HeightProperty));
-            
+
             // restrict clock panel to column 0...
             var changeColSpan = new Int32Animation(2, 1, TimeSpan.Zero);
             Storyboard.SetTarget(changeColSpan, ClockPanel);
             Storyboard.SetTargetProperty(changeColSpan, new PropertyPath(Grid.ColumnSpanProperty));
             changeColSpan.BeginTime = TimeSpan.FromMilliseconds(500);
-            
+
             // fade in the clock panel again...
             var fadeInClock = new DoubleAnimation(0.0, 1.0, TimeSpan.FromMilliseconds(400));
             Storyboard.SetTarget(fadeInClock, ClockPanel);
@@ -189,7 +189,7 @@ namespace OnlyT.Windows
             sb.Children.Add(changeColSpan);
             sb.Children.Add(fadeInClock);
             sb.Children.Add(fadeInTimer);
-            
+
             sb.Begin();
         }
 

@@ -1,9 +1,9 @@
 ﻿namespace OnlyT.Services.Options
 {
-   public enum AdaptiveMode
-   {
-      None,
-      OneWay,
-      TwoWay
-   }
+    public enum AdaptiveMode
+    {
+        None,
+        OneWay,
+        TwoWay
+    }
 }

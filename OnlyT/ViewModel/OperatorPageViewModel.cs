@@ -251,10 +251,10 @@ namespace OnlyT.ViewModel
                 int ms = DateTime.Now.Millisecond;
                 if (ms > 100)
                 {
-                 // sync to the second (so that the timer window clock and countdown
-                 // seconds are in sync)...
+                    // sync to the second (so that the timer window clock and countdown
+                    // seconds are in sync)...
 
-                 Task.Delay(1000 - ms).Wait();
+                    Task.Delay(1000 - ms).Wait();
                 }
 
                 if (_isStarting)

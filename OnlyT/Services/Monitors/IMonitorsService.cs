@@ -3,9 +3,9 @@ using OnlyT.Models;
 
 namespace OnlyT.Services.Monitors
 {
-   public interface IMonitorsService
-   {
-      IEnumerable<MonitorItem> GetSystemMonitors();
-      MonitorItem GetMonitorItem(string monitorId);
-   }
+    public interface IMonitorsService
+    {
+        IEnumerable<MonitorItem> GetSystemMonitors();
+        MonitorItem GetMonitorItem(string monitorId);
+    }
 }

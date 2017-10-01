@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.EventArgs
 {
+    /// <inheritdoc />
     /// <summary>
     /// Event args for change in timer values
     /// </summary>

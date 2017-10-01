@@ -8,31 +8,31 @@ using OnlyT.Services.Timer;
 
 namespace OnlyT.ViewModel
 {
-   public class ViewModelLocator
-   {
-      public ViewModelLocator()
-      {
-         ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-         
-         SimpleIoc.Default.Register<ITalkTimerService, TalkTimerService>();
-         SimpleIoc.Default.Register<IMonitorsService, MonitorsService>();
-         SimpleIoc.Default.Register<IOptionsService, OptionsService>();
-         SimpleIoc.Default.Register<ITalkScheduleService, TalkScheduleService>();
-         SimpleIoc.Default.Register<IBellService, BellService>();
-         SimpleIoc.Default.Register<IAdaptiveTimerService, AdaptiveTimerService>();
+    public class ViewModelLocator
+    {
+        public ViewModelLocator()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-         SimpleIoc.Default.Register<MainViewModel>();
-         SimpleIoc.Default.Register<OperatorPageViewModel>();
-         SimpleIoc.Default.Register<SettingsPageViewModel>();
-      }
+            SimpleIoc.Default.Register<ITalkTimerService, TalkTimerService>();
+            SimpleIoc.Default.Register<IMonitorsService, MonitorsService>();
+            SimpleIoc.Default.Register<IOptionsService, OptionsService>();
+            SimpleIoc.Default.Register<ITalkScheduleService, TalkScheduleService>();
+            SimpleIoc.Default.Register<IBellService, BellService>();
+            SimpleIoc.Default.Register<IAdaptiveTimerService, AdaptiveTimerService>();
 
-      public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-      public OperatorPageViewModel Operator => ServiceLocator.Current.GetInstance<OperatorPageViewModel>();
-      public SettingsPageViewModel Settings => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<OperatorPageViewModel>();
+            SimpleIoc.Default.Register<SettingsPageViewModel>();
+        }
 
-      public static void Cleanup()
-      {
-         // Clear the ViewModels
-      }
-   }
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public OperatorPageViewModel Operator => ServiceLocator.Current.GetInstance<OperatorPageViewModel>();
+        public SettingsPageViewModel Settings => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
+
+        public static void Cleanup()
+        {
+            // Clear the ViewModels
+        }
+    }
 }
