@@ -96,7 +96,13 @@
 
                 <GroupBox Margin="0,5,0,0" Header="Timer window" Padding="5" >
                     <StackPanel>
-                        <Label Style="{StaticResource LabelStyle}">Analogue clock width:</Label>
+                        <Label Style="{StaticResource LabelStyle}">Full-screen clock mode:</Label>
+                        <ComboBox ItemsSource="{Binding TimeOfDayModes}" 
+                                  SelectedValuePath="Mode" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding TimeOfDayMode, Mode=TwoWay}"/>
+
+                        <Label Style="{StaticResource LabelStyle}">Split-screen width:</Label>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding AnalogueClockWidthPercent}"
                                 TickFrequency="10" TickPlacement="BottomRight"/>

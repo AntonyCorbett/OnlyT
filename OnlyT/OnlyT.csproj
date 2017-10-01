@@ -94,9 +94,11 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Animations\GridLengthAnimation.cs" />
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
+    <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Services\Bell\BellService.cs" />
     <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
     <Compile Include="Services\Bell\IBellService.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Services\Options\OperatingMode.cs" />
     <Compile Include="Services\Options\Options.cs" />
     <Compile Include="Services\Options\OptionsService.cs" />
+    <Compile Include="Services\Options\FullScreenClockMode.cs" />
     <Compile Include="Services\TalkSchedule\ITalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleAuto.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleFileBased.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WebUtils.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
+    <Compile Include="ValueConverters\ColWidthPercentageToString.cs" />
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\AlwaysOnTopChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AnalogueClockWidthChangedMessage.cs" />

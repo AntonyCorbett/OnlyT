@@ -5,112 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:local="clr-namespace:OnlyT"
+        xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
         mc:Ignorable="d"
-        Title="TimerOutputWindow" Height="300" Width="457.562" Loaded="WindowLoaded" 
+        Title="TimerOutputWindow" Height="300" Width="458" Loaded="WindowLoaded" 
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
 
     <Window.Resources>
-        <Style x:Key="TimerTextAnimationStyle" TargetType="TextBlock">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding RunTimerStartAnimationAutoEnlarge}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <RemoveStoryboard BeginStoryboardName="StoryboardStartTimer" />
-                        <RemoveStoryboard BeginStoryboardName="StoryboardStopTimer" />
-
-                        <BeginStoryboard Name="StoryboardStartTimer">
-                            <Storyboard>
-                                <DoubleAnimation 
-                                    Storyboard.TargetProperty="(TextBlock.Opacity)"
-                                    BeginTime="0:0:1.0"
-                                    From="0.0" To="1.0"
-                                    Duration="0:0:0.4">
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding RunTimerStopAnimationAutoEnlarge}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <RemoveStoryboard BeginStoryboardName="StoryboardStartTimer" />
-                        <RemoveStoryboard BeginStoryboardName="StoryboardStopTimer" />
-
-                        <BeginStoryboard Name="StoryboardStopTimer">
-                            <Storyboard>
-                                <DoubleAnimation 
-                                    Storyboard.TargetProperty="(TextBlock.Opacity)"
-                                    From="1.0" To="0.0"
-                                    Duration="0:0:0.4">
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="AnalogueClockAnimationStyle" TargetType="Border">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding RunTimerStartAnimationAutoEnlarge}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <RemoveStoryboard BeginStoryboardName="SbStartTimer" />
-                        <RemoveStoryboard BeginStoryboardName="SbStopTimer" />
-
-                        <BeginStoryboard Name="SbStartTimer">
-                            <Storyboard>
-                                <DoubleAnimation 
-                                        Storyboard.TargetProperty="Opacity"
-                                        From="1.0" To="0.0"
-                                        Duration="0:0:0.4">
-                                </DoubleAnimation>
-                                <Int32Animation BeginTime="0:0:0.5" To="1"
-                                                    Storyboard.TargetProperty="(Grid.ColumnSpan)">
-                                </Int32Animation>
-                                <DoubleAnimation 
-                                        Storyboard.TargetProperty="Opacity"
-                                        BeginTime="0:0:1.0"
-                                        From="0.0" To="1.0"
-                                        Duration="0:0:0.4">
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding RunTimerStopAnimationAutoEnlarge}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <RemoveStoryboard BeginStoryboardName="SbStartTimer" />
-                        <RemoveStoryboard BeginStoryboardName="SbStopTimer" />
-
-                        <BeginStoryboard Name="SbStopTimer">
-                            <Storyboard>
-                                <DoubleAnimation 
-                                        Storyboard.TargetProperty="Opacity"
-                                        From="1.0" To="0.0"
-                                        Duration="0:0:0.4">
-                                </DoubleAnimation>
-                                <Int32Animation BeginTime="0:0:0.5" To="2"
-                                                    Storyboard.TargetProperty="(Grid.ColumnSpan)">
-                                </Int32Animation>
-                                <DoubleAnimation 
-                                        Storyboard.TargetProperty="Opacity"
-                                        BeginTime="0:0:1.0"
-                                        From="0.0" To="1.0"
-                                        Duration="0:0:0.4">
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />
     </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding AnalogueClockColumnWidth}" />
-            <ColumnDefinition Width="{Binding TimerColumnWidth}" />
+            <ColumnDefinition Width="{Binding AnalogueClockColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
+            <ColumnDefinition Width="{Binding TimerColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
         </Grid.ColumnDefinitions>
 
-        <Border Style="{StaticResource AnalogueClockAnimationStyle}" 
+        <Border Name="ClockPanel" 
                 CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" 
                 BorderBrush="Beige" Margin="10" BorderThickness="3" Padding="10">
             <Border.Background>
@@ -120,20 +30,20 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <Grid>
+            <Grid Name="ClockGrid">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <clock:Clock x:Name="TheClock" Grid.Row="0 " 
+                <clock:Clock x:Name="TheClock" Grid.Row="0" 
                              Margin="15" 
                              DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
                              DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
                              DurationSector="{Binding DurationSector, Mode=OneWay}" />
-                
+
                 <Viewbox Grid.Row="1">
-                    <TextBlock VerticalAlignment="Bottom" Margin="10,0,10,0">
+                    <TextBlock VerticalAlignment="Bottom" Margin="10,0,10,0" Width="84">
                         <Run Foreground="White" FontSize="24" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
                         <Run Foreground="#FFCBABAB" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
                     </TextBlock>
@@ -144,7 +54,7 @@
 
         <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
 
-            <TextBlock Style="{StaticResource TimerTextAnimationStyle}" 
+            <TextBlock Name="TimerTextBlock" 
                        Opacity="0.0"
                        Foreground="{Binding TextColor}" 
                        Text="{Binding TimeString}"

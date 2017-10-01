@@ -22,31 +22,13 @@ namespace OnlyT.ViewModel
             _optionsService = optionsService;
 
             AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
-            
+
             // subscriptions...
             Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
             Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
-            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
-        }
-
-        private void OnNavigate(NavigateMessage message)
-        {
-            if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
-            {
-                // when the settings page is displayed we ensure that the analogue 
-                // clock is shown in its restored state rather than enlarged...
-                RunStartTimerAnimation();
-
-                // and that the timer text is shown...
-                TimeString = TimeFormatter.FormatTimeRemaining(0);
-            }
-            else if (message.OriginalPageName.Equals(SettingsPageViewModel.PageName))
-            {
-                RunStopTimerAnimation();
-            }
         }
 
         private void OnAnalogueClockWidthChanged(AnalogueClockWidthChangedMessage obj)
@@ -64,8 +46,6 @@ namespace OnlyT.ViewModel
         {
             IsRunning = false;
             DurationSector = null;
-
-            RunStopTimerAnimation();
         }
 
         private double CalcAngleFromTime(DateTime dt)
@@ -77,24 +57,8 @@ namespace OnlyT.ViewModel
         {
             TimeString = TimeFormatter.FormatTimeRemaining(message.TargetSeconds);
             IsRunning = true;
-
             InitOverallDurationSector(message.TargetSeconds);
-
-            RunStartTimerAnimation();
         }
-
-        private void RunStartTimerAnimation()
-        {
-            RunTimerStartAnimationAutoEnlarge = false;
-            RunTimerStartAnimationAutoEnlarge = true;
-        }
-
-        private void RunStopTimerAnimation()
-        {
-            RunTimerStopAnimationAutoEnlarge = false;
-            RunTimerStopAnimationAutoEnlarge = true;
-        }
-
 
         private void InitOverallDurationSector(int targetSecs)
         {
@@ -145,36 +109,11 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private int _timerColumnWidthPercentage;
-        public int TimerColumnWidthPercentage
-        {
-            get => _timerColumnWidthPercentage;
-            set
-            {
-                if (_timerColumnWidthPercentage != value)
-                {
-                    _timerColumnWidthPercentage = value;
-                    TimerColumnWidth = $"{_timerColumnWidthPercentage}*";
-                }
-            }
-        }
+        private int _timerColumnWidthPercentage = -1;
+        public int TimerColumnWidthPercentage => _timerColumnWidthPercentage;
 
-        private string _timerColumnWidth;
-        public string TimerColumnWidth
-        {
-            get => _timerColumnWidth;
-            set
-            {
-                if (_timerColumnWidth != value)
-                {
-                    _timerColumnWidth = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private int _analogueClockColumnWidthPercentage;
-        private int AnalogueClockColumnWidthPercentage
+        private int _analogueClockColumnWidthPercentage = -1;
+        public int AnalogueClockColumnWidthPercentage
         {
             get => _analogueClockColumnWidthPercentage;
             set
@@ -182,26 +121,12 @@ namespace OnlyT.ViewModel
                 if (_analogueClockColumnWidthPercentage != value)
                 {
                     _analogueClockColumnWidthPercentage = value;
-                    AnalogueClockColumnWidth = $"{_analogueClockColumnWidthPercentage}*";
-                    TimerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
-                }
-            }
-        }
-
-        private string _analogueClockColumnWidth;
-        public string AnalogueClockColumnWidth
-        {
-            get => _analogueClockColumnWidth;
-            set
-            {
-                if (_analogueClockColumnWidth != value)
-                {
-                    _analogueClockColumnWidth = value;
+                    _timerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(TimerColumnWidthPercentage));
                 }
             }
         }
-
 
         public bool DigitalTimeFormatShowLeadingZero =>
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||
@@ -225,36 +150,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private bool _runTimerStartAnimationAutoEnlarge;
-        public bool RunTimerStartAnimationAutoEnlarge
-        {
-            get => _runTimerStartAnimationAutoEnlarge;
-            set
-            {
-                if (_runTimerStartAnimationAutoEnlarge != value)
-                {
-                    _runTimerStartAnimationAutoEnlarge = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private bool _runTimerStopAnimationAutoEnlarge;
-        public bool RunTimerStopAnimationAutoEnlarge
-        {
-            get => _runTimerStopAnimationAutoEnlarge;
-            set
-            {
-                if (_runTimerStopAnimationAutoEnlarge != value)
-                {
-                    _runTimerStopAnimationAutoEnlarge = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
         private bool _isRunning;
-
         public bool IsRunning
         {
             get => _isRunning;
@@ -295,5 +191,7 @@ namespace OnlyT.ViewModel
                 }
             }
         }
+        
+        public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
     }
 }

@@ -25,6 +25,7 @@ namespace OnlyT.ViewModel
         private readonly IBellService _bellService;
         private readonly ClockHourFormatItem[] _clockHourFormats;
         private readonly AdaptiveModeItem[] _adaptiveModes;
+        private readonly FullScreenClockModeItem[] _timeOfDayModes;
 
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
@@ -44,30 +45,41 @@ namespace OnlyT.ViewModel
             _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
             _clockHourFormats = GetClockHourFormats().ToArray();
             _adaptiveModes = GetAdaptiveModes().ToArray();
+            _timeOfDayModes = GetTimeOfDayModes().ToArray();
 
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
         }
 
+        private IEnumerable<FullScreenClockModeItem> GetTimeOfDayModes()
+        {
+            return new List<FullScreenClockModeItem>
+            {
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = "Analogue" },
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = "Digital" },
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.AnalogueAndDigital, Name = "Both" }
+            };
+        }
+
         private IEnumerable<AdaptiveModeItem> GetAdaptiveModes()
         {
             return new List<AdaptiveModeItem>
-         {
-            new AdaptiveModeItem {Mode = AdaptiveMode.None, Name = "None"},
-            new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = "One-way"},
-            new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = "Two-way"}
-         };
+            {
+                new AdaptiveModeItem {Mode = AdaptiveMode.None, Name = "None"},
+                new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = "One-way"},
+                new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = "Two-way"}
+            };
         }
 
         private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
         {
             return new List<ClockHourFormatItem>
-         {
-            new ClockHourFormatItem {Name = "12-hour", Format = ClockHourFormat.Format12},
-            new ClockHourFormatItem {Name = "12-hour (leading zero)", Format = ClockHourFormat.Format12LeadingZero},
-            new ClockHourFormatItem {Name = "24-hour", Format = ClockHourFormat.Format24},
-            new ClockHourFormatItem {Name = "24-hour (leading zero)", Format = ClockHourFormat.Format24LeadingZero}
-         };
+            {
+                new ClockHourFormatItem {Name = "12-hour", Format = ClockHourFormat.Format12},
+                new ClockHourFormatItem {Name = "12-hour (leading zero)", Format = ClockHourFormat.Format12LeadingZero},
+                new ClockHourFormatItem {Name = "24-hour", Format = ClockHourFormat.Format24},
+                new ClockHourFormatItem {Name = "24-hour (leading zero)", Format = ClockHourFormat.Format24LeadingZero}
+            };
         }
 
         private void OnBellChanged(BellStatusChangedMessage message)
@@ -88,20 +100,20 @@ namespace OnlyT.ViewModel
         private IEnumerable<AutoMeetingTime> GetAutoMeetingTimes()
         {
             return new List<AutoMeetingTime>
-         {
-            new AutoMeetingTime {Name = "Midweek", Id = MidWeekOrWeekend.MidWeek },
-            new AutoMeetingTime {Name = "Weekend", Id = MidWeekOrWeekend.Weekend }
-         };
+            {
+                new AutoMeetingTime {Name = "Midweek", Id = MidWeekOrWeekend.MidWeek },
+                new AutoMeetingTime {Name = "Weekend", Id = MidWeekOrWeekend.Weekend }
+            };
         }
 
         private IEnumerable<OperatingModeItem> GetOperatingModes()
         {
             return new List<OperatingModeItem>
-         {
-            new OperatingModeItem {Name = "Manual", Mode = OperatingMode.Manual},
-            new OperatingModeItem {Name = "File-based", Mode = OperatingMode.ScheduleFile},
-            new OperatingModeItem {Name = "Automatic", Mode = OperatingMode.Automatic}
-         };
+            {
+                new OperatingModeItem {Name = "Manual", Mode = OperatingMode.Manual},
+                new OperatingModeItem {Name = "File-based", Mode = OperatingMode.ScheduleFile},
+                new OperatingModeItem {Name = "Automatic", Mode = OperatingMode.Automatic}
+            };
         }
 
         private IEnumerable<MonitorItem> GetSystemMonitors()
@@ -161,6 +173,21 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.OperatingMode = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new OperatingModeChangedMessage());
+                }
+            }
+        }
+
+        public IEnumerable<FullScreenClockModeItem> TimeOfDayModes => _timeOfDayModes;
+
+        public FullScreenClockMode TimeOfDayMode
+        {
+            get => _optionsService.Options.FullScreenClockMode;
+            set
+            {
+                if (_optionsService.Options.FullScreenClockMode != value)
+                {
+                    _optionsService.Options.FullScreenClockMode = value;
+                    RaisePropertyChanged();
                 }
             }
         }
