@@ -190,5 +190,7 @@ namespace OnlyT.ViewModel
         }
 
         public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
+
+        public bool ShowTimeOfDayUnderTimer => _optionsService.Options.ShowTimeOfDayUnderTimer;
     }
 }

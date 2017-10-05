@@ -70,11 +70,74 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string ADAPTIVE_MODE_NONE {
+            get {
+                return ResourceManager.GetString("ADAPTIVE_MODE_NONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One-way.
+        /// </summary>
+        internal static string ADAPTIVE_MODE_ONE_WAY {
+            get {
+                return ResourceManager.GetString("ADAPTIVE_MODE_ONE_WAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two-way.
+        /// </summary>
+        internal static string ADAPTIVE_MODE_TWO_WAY {
+            get {
+                return ResourceManager.GetString("ADAPTIVE_MODE_TWO_WAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Version {0}.
         /// </summary>
         internal static string APP_VER {
             get {
                 return ResourceManager.GetString("APP_VER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 12-hour.
+        /// </summary>
+        internal static string CLOCK_FORMAT_12 {
+            get {
+                return ResourceManager.GetString("CLOCK_FORMAT_12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 12-hour (leading zero).
+        /// </summary>
+        internal static string CLOCK_FORMAT_12Z {
+            get {
+                return ResourceManager.GetString("CLOCK_FORMAT_12Z", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 24-hour.
+        /// </summary>
+        internal static string CLOCK_FORMAT_24 {
+            get {
+                return ResourceManager.GetString("CLOCK_FORMAT_24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 24-hour (leading zero).
+        /// </summary>
+        internal static string CLOCK_FORMAT_24Z {
+            get {
+                return ResourceManager.GetString("CLOCK_FORMAT_24Z", resourceCulture);
             }
         }
         
@@ -88,11 +151,74 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analogue.
+        /// </summary>
+        internal static string FULL_SCREEN_ANALOGUE {
+            get {
+                return ResourceManager.GetString("FULL_SCREEN_ANALOGUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analogue and Digital.
+        /// </summary>
+        internal static string FULL_SCREEN_BOTH {
+            get {
+                return ResourceManager.GetString("FULL_SCREEN_BOTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digital.
+        /// </summary>
+        internal static string FULL_SCREEN_DIGITAL {
+            get {
+                return ResourceManager.GetString("FULL_SCREEN_DIGITAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bell is inactive.
         /// </summary>
         internal static string INACTIVE_BELL {
             get {
                 return ResourceManager.GetString("INACTIVE_BELL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Midweek.
+        /// </summary>
+        internal static string MIDWEEK {
+            get {
+                return ResourceManager.GetString("MIDWEEK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatic.
+        /// </summary>
+        internal static string OP_MODE_AUTO {
+            get {
+                return ResourceManager.GetString("OP_MODE_AUTO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File-based.
+        /// </summary>
+        internal static string OP_MODE_FILE {
+            get {
+                return ResourceManager.GetString("OP_MODE_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual.
+        /// </summary>
+        internal static string OP_MODE_MANUAL {
+            get {
+                return ResourceManager.GetString("OP_MODE_MANUAL", resourceCulture);
             }
         }
         
@@ -237,6 +363,15 @@ namespace OnlyT.Properties {
         internal static string TALK_WT {
             get {
                 return ResourceManager.GetString("TALK_WT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekend.
+        /// </summary>
+        internal static string WEEKEND {
+            get {
+                return ResourceManager.GetString("WEEKEND", resourceCulture);
             }
         }
     }

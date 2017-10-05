@@ -106,7 +106,10 @@
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding AnalogueClockWidthPercent}"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
-                        
+
+                        <CheckBox IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Time of day under timer" />
+
                     </StackPanel>
                 </GroupBox>
 

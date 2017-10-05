@@ -36,6 +36,7 @@ namespace OnlyT.Services.Options
         public AdaptiveMode WeekendAdaptiveMode { get; set; }
         public int AnalogueClockWidthPercent { get; set; }
         public FullScreenClockMode FullScreenClockMode { get; set; }
+        public bool ShowTimeOfDayUnderTimer { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required

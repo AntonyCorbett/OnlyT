@@ -53,14 +53,23 @@
         </Border>
 
         <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
 
-            <TextBlock Name="TimerTextBlock" 
-                       Opacity="0.0"
-                       Foreground="{Binding TextColor}" 
-                       Text="{Binding TimeString}"
-                       FontSize="40"
-                       FontWeight="Bold"/>
+                <TextBlock Name="TimerTextBlock" Grid.Row="0"
+                           Opacity="0.0"
+                           Foreground="{Binding TextColor}" 
+                           Text="{Binding TimeString}"
+                           FontSize="40"
+                           FontWeight="Bold"/>
 
+                <TextBlock Name="TimerTextBlock2" Grid.Row="1" Opacity="0.0" HorizontalAlignment="Center">
+                    <Run Foreground="White" FontSize="28" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
+                </TextBlock>
+            </Grid>
         </Viewbox>
     </Grid>
 

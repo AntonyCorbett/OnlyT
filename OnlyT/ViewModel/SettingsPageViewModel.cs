@@ -55,9 +55,9 @@ namespace OnlyT.ViewModel
         {
             return new List<FullScreenClockModeItem>
             {
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = "Analogue" },
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = "Digital" },
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.AnalogueAndDigital, Name = "Both" }
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = Properties.Resources.FULL_SCREEN_ANALOGUE },
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = Properties.Resources.FULL_SCREEN_DIGITAL },
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.AnalogueAndDigital, Name = Properties.Resources.FULL_SCREEN_BOTH }
             };
         }
 
@@ -65,9 +65,9 @@ namespace OnlyT.ViewModel
         {
             return new List<AdaptiveModeItem>
             {
-                new AdaptiveModeItem {Mode = AdaptiveMode.None, Name = "None"},
-                new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = "One-way"},
-                new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = "Two-way"}
+                new AdaptiveModeItem {Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE},
+                new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY},
+                new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY}
             };
         }
 
@@ -75,10 +75,10 @@ namespace OnlyT.ViewModel
         {
             return new List<ClockHourFormatItem>
             {
-                new ClockHourFormatItem {Name = "12-hour", Format = ClockHourFormat.Format12},
-                new ClockHourFormatItem {Name = "12-hour (leading zero)", Format = ClockHourFormat.Format12LeadingZero},
-                new ClockHourFormatItem {Name = "24-hour", Format = ClockHourFormat.Format24},
-                new ClockHourFormatItem {Name = "24-hour (leading zero)", Format = ClockHourFormat.Format24LeadingZero}
+                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12},
+                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero},
+                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24},
+                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero}
             };
         }
 
@@ -101,8 +101,8 @@ namespace OnlyT.ViewModel
         {
             return new List<AutoMeetingTime>
             {
-                new AutoMeetingTime {Name = "Midweek", Id = MidWeekOrWeekend.MidWeek },
-                new AutoMeetingTime {Name = "Weekend", Id = MidWeekOrWeekend.Weekend }
+                new AutoMeetingTime {Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
+                new AutoMeetingTime {Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
             };
         }
 
@@ -110,9 +110,9 @@ namespace OnlyT.ViewModel
         {
             return new List<OperatingModeItem>
             {
-                new OperatingModeItem {Name = "Manual", Mode = OperatingMode.Manual},
-                new OperatingModeItem {Name = "File-based", Mode = OperatingMode.ScheduleFile},
-                new OperatingModeItem {Name = "Automatic", Mode = OperatingMode.Automatic}
+                new OperatingModeItem {Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual},
+                new OperatingModeItem {Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile},
+                new OperatingModeItem {Name = Properties.Resources.OP_MODE_AUTO, Mode = OperatingMode.Automatic}
             };
         }
 
@@ -261,6 +261,20 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.AlwaysOnTop = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new AlwaysOnTopChangedMessage());
+                }
+            }
+        }
+
+        public bool ShowTimeOfDayUnderTimer
+        {
+            get => _optionsService.Options.ShowTimeOfDayUnderTimer;
+            set
+            {
+                if (_optionsService.Options.ShowTimeOfDayUnderTimer != value)
+                {
+                    _optionsService.Options.ShowTimeOfDayUnderTimer = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new ShowTimeOfDayUnderTimerChangedMessage());
                 }
             }
         }

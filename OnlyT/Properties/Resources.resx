@@ -120,14 +120,56 @@
   <data name="ACTIVE_BELL" xml:space="preserve">
     <value>Bell is active</value>
   </data>
+  <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
+    <value>One-way</value>
+  </data>
+  <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
+    <value>Two-way</value>
+  </data>
   <data name="APP_VER" xml:space="preserve">
     <value>Version {0}</value>
+  </data>
+  <data name="CLOCK_FORMAT_12" xml:space="preserve">
+    <value>12-hour</value>
+  </data>
+  <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
+    <value>12-hour (leading zero)</value>
+  </data>
+  <data name="CLOCK_FORMAT_24" xml:space="preserve">
+    <value>24-hour</value>
+  </data>
+  <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
+    <value>24-hour (leading zero)</value>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
     <value>Could not create folder {0}</value>
   </data>
+  <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
+    <value>Analogue</value>
+  </data>
+  <data name="FULL_SCREEN_BOTH" xml:space="preserve">
+    <value>Analogue and Digital</value>
+  </data>
+  <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
+    <value>Digital</value>
+  </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
     <value>Bell is inactive</value>
+  </data>
+  <data name="MIDWEEK" xml:space="preserve">
+    <value>Midweek</value>
+  </data>
+  <data name="OP_MODE_AUTO" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="OP_MODE_FILE" xml:space="preserve">
+    <value>File-based</value>
+  </data>
+  <data name="OP_MODE_MANUAL" xml:space="preserve">
+    <value>Manual</value>
   </data>
   <data name="TALK_BIBLE_STUDY" xml:space="preserve">
     <value>Bible Study / Talk</value>
@@ -176,5 +218,8 @@
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Watchtower Study</value>
+  </data>
+  <data name="WEEKEND" xml:space="preserve">
+    <value>Weekend</value>
   </data>
 </root>

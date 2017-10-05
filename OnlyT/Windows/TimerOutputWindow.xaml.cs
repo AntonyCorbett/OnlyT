@@ -61,11 +61,17 @@ namespace OnlyT.Windows
             Storyboard.SetTargetProperty(fadeOutTimer, new PropertyPath(OpacityProperty));
             fadeOutTimer.BeginTime = TimeSpan.Zero;
 
+            // fade out timer line2...
+            var fadeOutTimer2 = new DoubleAnimation(1.0, 0.0, TimeSpan.FromMilliseconds(400));
+            Storyboard.SetTarget(fadeOutTimer2, TimerTextBlock2);
+            Storyboard.SetTargetProperty(fadeOutTimer2, new PropertyPath(OpacityProperty));
+            fadeOutTimer2.BeginTime = TimeSpan.Zero;
+
             // fade out clock...
             var fadeOutClock = new DoubleAnimation(1.0, 0.0, TimeSpan.FromMilliseconds(400));
             Storyboard.SetTarget(fadeOutClock, ClockPanel);
             Storyboard.SetTargetProperty(fadeOutClock, new PropertyPath(OpacityProperty));
-            fadeOutTimer.BeginTime = TimeSpan.Zero;
+            fadeOutClock.BeginTime = TimeSpan.Zero;
 
             GridLengthAnimation rowHeightAdjust1 = null;
             GridLengthAnimation rowHeightAdjust2 = null;
@@ -120,6 +126,7 @@ namespace OnlyT.Windows
             fadeInClock.BeginTime = TimeSpan.FromMilliseconds(1000);
 
             sb.Children.Add(fadeOutTimer);
+            sb.Children.Add(fadeOutTimer2);
             sb.Children.Add(fadeOutClock);
             if (rowHeightAdjust1 != null)
             {
@@ -183,12 +190,18 @@ namespace OnlyT.Windows
             Storyboard.SetTargetProperty(fadeInTimer, new PropertyPath(OpacityProperty));
             fadeInTimer.BeginTime = TimeSpan.FromMilliseconds(1000);
 
+            var fadeInTimer2 = new DoubleAnimation(0.0, 1.0, TimeSpan.FromMilliseconds(400));
+            Storyboard.SetTarget(fadeInTimer2, TimerTextBlock2);
+            Storyboard.SetTargetProperty(fadeInTimer2, new PropertyPath(OpacityProperty));
+            fadeInTimer2.BeginTime = TimeSpan.FromMilliseconds(1000);
+
             sb.Children.Add(fadeOutClock);
             sb.Children.Add(rowHeightAdjust1);
             sb.Children.Add(rowHeightAdjust2);
             sb.Children.Add(changeColSpan);
             sb.Children.Add(fadeInClock);
             sb.Children.Add(fadeInTimer);
+            sb.Children.Add(fadeInTimer2);
 
             sb.Begin();
         }
