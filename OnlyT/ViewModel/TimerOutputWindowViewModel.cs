@@ -19,6 +19,7 @@ namespace OnlyT.ViewModel
             _optionsService = optionsService;
 
             AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
+            ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
 
             // subscriptions...
             Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
@@ -26,6 +27,12 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
+            Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChangedMessage);
+        }
+
+        private void OnShowTimeOfDayUnderTimerChangedMessage(ShowTimeOfDayUnderTimerChangedMessage message)
+        {
+            ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
         }
 
         private void OnAnalogueClockWidthChanged(AnalogueClockWidthChangedMessage obj)
@@ -189,8 +196,21 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
+        private bool _showTimeOfDayUnderTimer;
 
-        public bool ShowTimeOfDayUnderTimer => _optionsService.Options.ShowTimeOfDayUnderTimer;
+        public bool ShowTimeOfDayUnderTimer
+        {
+            get => _showTimeOfDayUnderTimer;
+            set
+            {
+                if (_showTimeOfDayUnderTimer != value)
+                {
+                    _showTimeOfDayUnderTimer = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
     }
 }

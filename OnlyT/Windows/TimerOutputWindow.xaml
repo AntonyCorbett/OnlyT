@@ -12,6 +12,7 @@
 
     <Window.Resources>
         <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
 
     <Grid>
@@ -66,7 +67,8 @@
                            FontSize="40"
                            FontWeight="Bold"/>
 
-                <TextBlock Name="TimerTextBlock2" Grid.Row="1" Opacity="0.0" HorizontalAlignment="Center">
+                <TextBlock Name="TimerTextBlock2" Grid.Row="1" Opacity="0.0" HorizontalAlignment="Center"
+                           Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BoolToVis}}">
                     <Run Foreground="White" FontSize="28" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
                 </TextBlock>
             </Grid>
