@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 namespace OnlyT.Utils
 {
+    using System.Reflection;
+
     // adapted from david Rickard's Tech Blog
 
     // RECT structure required by WINDOWPLACEMENT structure
@@ -79,11 +81,13 @@ namespace OnlyT.Utils
                         placement = (WINDOWPLACEMENT)serializer.Deserialize(memoryStream);
                     }
 
+                    var adjustedDimensions = GetAdjustedWidthAndHeight(width, height);
+
                     placement.length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
                     placement.flags = 0;
                     placement.showCmd = (placement.showCmd == SW_SHOWMINIMIZED ? SW_SHOWNORMAL : placement.showCmd);
-                    placement.normalPosition.Right = placement.normalPosition.Left + (int)width;
-                    placement.normalPosition.Bottom = placement.normalPosition.Top + (int)height;
+                    placement.normalPosition.Right = placement.normalPosition.Left + (int)adjustedDimensions.Item1;
+                    placement.normalPosition.Bottom = placement.normalPosition.Top + (int)adjustedDimensions.Item2;
                     NativeMethods.SetWindowPlacement(windowHandle, ref placement);
                 }
                 catch (InvalidOperationException)
@@ -91,6 +95,16 @@ namespace OnlyT.Utils
                     // Parsing placement XML failed. Fail silently.
                 }
             }
+        }
+
+        private static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
+        {
+            var dpi = GetDpiSettings();
+
+            var adjustedWidth = (width * dpi.Item1) / 96.0;
+            var adjustedHeight = (height * dpi.Item2) / 96.0;
+
+            return new Tuple<double, double>(adjustedWidth, adjustedHeight);
         }
 
         private static string GetPlacement(IntPtr windowHandle)
@@ -115,6 +129,15 @@ namespace OnlyT.Utils
         {
             return GetPlacement(new WindowInteropHelper(window).Handle);
         }
+
+        private static Tuple<int, int> GetDpiSettings()
+        {
+            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+            var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
+
+            return new Tuple<int, int>((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
+        }
+
     }
 
 }
