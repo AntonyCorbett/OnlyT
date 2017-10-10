@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Animations\GridLengthAnimation.cs" />
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
+    <Compile Include="MeetingSongsFile\TimerValueAndBellFlag.cs" />
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />

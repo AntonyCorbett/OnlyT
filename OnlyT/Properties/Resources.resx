@@ -162,6 +162,15 @@
   <data name="MIDWEEK" xml:space="preserve">
     <value>Midweek</value>
   </data>
+  <data name="MINISTRY1" xml:space="preserve">
+    <value>Ministry - Item 1</value>
+  </data>
+  <data name="MINISTRY2" xml:space="preserve">
+    <value>Ministry - Item 2</value>
+  </data>
+  <data name="MINISTRY3" xml:space="preserve">
+    <value>Ministry - Item 3</value>
+  </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automatic</value>
   </data>

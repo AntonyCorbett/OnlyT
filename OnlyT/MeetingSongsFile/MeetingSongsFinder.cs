@@ -83,7 +83,14 @@ namespace OnlyT.MeetingSongsFile
 
         private void AddTimers(MeetingSongsAndTimers result, XElement elem)
         {
-            string[] timerKeys = { MeetingSongsAndTimers.LivingTimer1Key, MeetingSongsAndTimers.LivingTimer2Key };
+            string[] timerKeys =
+            {
+                MeetingSongsAndTimers.LivingTimer1Key, 
+                MeetingSongsAndTimers.LivingTimer2Key,
+                MeetingSongsAndTimers.MinistryTimer1Key,
+                MeetingSongsAndTimers.MinistryTimer2Key,
+                MeetingSongsAndTimers.MinistryTimer3Key
+            };
 
             foreach (var key in timerKeys)
             {
@@ -93,9 +100,18 @@ namespace OnlyT.MeetingSongsFile
                     break;
                 }
 
-                if (Int32.TryParse(value.Value, out var timerMins))
+                string timeStr = value.Value;
+
+                bool useBell = false;
+                if (timeStr.Contains("B"))
                 {
-                    result.AddTimer(key, timerMins);
+                    useBell = true;
+                    timeStr = timeStr.Replace("B", "");
+                }
+
+                if (Int32.TryParse(timeStr, out var timerMins))
+                {
+                    result.AddTimer(key, timerMins, useBell);
                 }
             }
         }

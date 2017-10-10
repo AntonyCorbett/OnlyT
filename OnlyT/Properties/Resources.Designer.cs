@@ -196,6 +196,33 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ministry - Item 1.
+        /// </summary>
+        internal static string MINISTRY1 {
+            get {
+                return ResourceManager.GetString("MINISTRY1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ministry - Item 2.
+        /// </summary>
+        internal static string MINISTRY2 {
+            get {
+                return ResourceManager.GetString("MINISTRY2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ministry - Item 3.
+        /// </summary>
+        internal static string MINISTRY3 {
+            get {
+                return ResourceManager.GetString("MINISTRY3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic.
         /// </summary>
         internal static string OP_MODE_AUTO {
