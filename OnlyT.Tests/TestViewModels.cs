@@ -38,7 +38,7 @@ namespace OnlyT.Tests
 
                 var talk = scheduleService.GetTalkScheduleItem(talkId);
                 Assert.IsNotNull(talk);
-                Assert.AreEqual(vm.CurrentTimerValueString, TimeFormatter.FormatTimeRemaining(talk.GetDurationSeconds()));
+                Assert.AreEqual(vm.CurrentTimerValueString, TimeFormatter.FormatTimerDisplayString(talk.GetDurationSeconds()));
 
                 vm.StartCommand.Execute(null);
                 Assert.IsTrue(vm.IsRunning);

@@ -110,6 +110,9 @@
                         <CheckBox IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Time of day under timer" />
 
+                        <CheckBox IsChecked="{Binding CountUp, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Timer counts up" />
+
                         <CheckBox IsChecked="{Binding ShowDurationSector, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Show duration sector on analogue clock" />
                     </StackPanel>

@@ -36,7 +36,7 @@ namespace OnlyT.Windows
                 // display is split so that we can easily adjust the split 
                 // position...
                 var model = (TimerOutputWindowViewModel)DataContext;
-                model.TimeString = TimeFormatter.FormatTimeRemaining(0);
+                model.TimeString = TimeFormatter.FormatTimerDisplayString(0);
                 DisplaySplitScreen();
             }
             else if (message.OriginalPageName.Equals(SettingsPageViewModel.PageName))
@@ -51,6 +51,8 @@ namespace OnlyT.Windows
             var model = (TimerOutputWindowViewModel)DataContext;
             if (!model.SplitAndFullScrenModeIdentical())
             {
+                // only animate if the user has configured different display
+                // layout for timer mode and full-screen mode
                 DisplayFullScreenTimeOfDay();
             }
         }
@@ -151,6 +153,10 @@ namespace OnlyT.Windows
             var model = (TimerOutputWindowViewModel)DataContext;
             if (!model.SplitAndFullScrenModeIdentical())
             {
+                model.TextColor = GreenYellowRedSelector.GetGreenBrush();
+                
+                // only animate if the user has configured different display
+                // layout for timer mode and full-screen mode
                 DisplaySplitScreen();
             }
         }

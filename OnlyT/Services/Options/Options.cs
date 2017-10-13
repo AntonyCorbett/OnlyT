@@ -39,6 +39,7 @@ namespace OnlyT.Services.Options
         public FullScreenClockMode FullScreenClockMode { get; set; }
         public bool ShowTimeOfDayUnderTimer { get; set; }
         public bool ShowDurationSector { get; set; }
+        public bool CountUp { get; set; }
 
         
         /// <summary>

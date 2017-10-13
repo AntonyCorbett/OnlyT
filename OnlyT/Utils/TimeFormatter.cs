@@ -10,14 +10,14 @@ namespace OnlyT.Utils
         private static readonly int _secsPerMinute = 60;
 
         /// <summary>
-        /// Gets a time remaining string
+        /// Gets a timer string
         /// </summary>
-        /// <param name="secsRemaining">Seconds remaining in talk (can be negative)</param>
+        /// <param name="totalSeconds">Seconds remaining or used (can be negative)</param>
         /// <returns>Formatted time (mins and secs)</returns>
-        public static string FormatTimeRemaining(int secsRemaining)
+        public static string FormatTimerDisplayString(int totalSeconds)
         {
-            int mins = Math.Abs(secsRemaining) / _secsPerMinute;
-            int secs = Math.Abs(secsRemaining) % _secsPerMinute;
+            int mins = Math.Abs(totalSeconds) / _secsPerMinute;
+            int secs = Math.Abs(totalSeconds) % _secsPerMinute;
 
             return $"{mins:D2}:{secs:D2}";
         }

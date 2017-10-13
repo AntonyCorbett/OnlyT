@@ -26,6 +26,7 @@ namespace OnlyT.ViewModel
         private readonly ITalkScheduleService _scheduleService;
         private readonly IOptionsService _optionsService;
         private readonly IAdaptiveTimerService _adaptiveTimerService;
+        private int _secondsElapsed;
         private static readonly Brush _whiteBrush = Brushes.White;
         private static readonly int _maxTimerMins = 99;
         private static readonly int _maxTimerSecs = _maxTimerMins * 60;
@@ -204,7 +205,7 @@ namespace OnlyT.ViewModel
         {
             _timerService.Stop();
             _isStarting = false;
-
+            
             TextColor = _whiteBrush;
 
             RaisePropertyChanged(nameof(IsRunning));
@@ -234,6 +235,7 @@ namespace OnlyT.ViewModel
         private void StartTimer()
         {
             _isStarting = true;
+            _secondsElapsed = 0;
 
             RunFlashAnimation = false;
             RunFlashAnimation = true;
@@ -358,8 +360,10 @@ namespace OnlyT.ViewModel
         private void TimerChangedHandler(object sender, EventArgs.TimerChangedEventArgs e)
         {
             TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
+            _secondsElapsed = e.ElapsedSecs;
             SecondsRemaining = e.RemainingSecs;
-            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.IsRunning));
+            
+            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning));
 
             if (e.RemainingSecs == 0)
             {
@@ -373,7 +377,8 @@ namespace OnlyT.ViewModel
         }
 
         private int _targetSeconds;
-        public int TargetSeconds
+        
+        private int TargetSeconds
         {
             get => _targetSeconds;
             set
@@ -402,7 +407,8 @@ namespace OnlyT.ViewModel
         }
 
         private int _secondsRemaining;
-        public int SecondsRemaining
+
+        private int SecondsRemaining
         {
             get => _secondsRemaining;
             set
@@ -415,8 +421,10 @@ namespace OnlyT.ViewModel
                 }
             }
         }
-
-        public string CurrentTimerValueString => TimeFormatter.FormatTimeRemaining(_secondsRemaining);
+        
+        public string CurrentTimerValueString => TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp
+            ? _secondsElapsed
+            : _secondsRemaining);
 
         private string _talkTitle;
         public string TalkTitle
@@ -443,6 +451,7 @@ namespace OnlyT.ViewModel
 
         public void Activated(object state)
         {
+            RaisePropertyChanged(nameof(CurrentTimerValueString));  // "CountUp" setting may have changed
             RaisePropertyChanged(nameof(IsBellVisible));
         }
 

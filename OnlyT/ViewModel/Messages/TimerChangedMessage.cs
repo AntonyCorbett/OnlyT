@@ -6,12 +6,14 @@
     internal class TimerChangedMessage
     {
         public int RemainingSecs { get; }
+        public int ElapsedSecs { get; }
         public bool TimerIsRunning { get; }
 
 
-        public TimerChangedMessage(int remainingSecs, bool timerIsRunning)
+        public TimerChangedMessage(int remainingSecs, int elapsedSecs, bool timerIsRunning)
         {
             RemainingSecs = remainingSecs;
+            ElapsedSecs = elapsedSecs;
             TimerIsRunning = timerIsRunning;
         }
     }

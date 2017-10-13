@@ -292,6 +292,19 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool CountUp
+        {
+            get => _optionsService.Options.CountUp;
+            set
+            {
+                if (_optionsService.Options.CountUp != value)
+                {
+                    _optionsService.Options.CountUp = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public int AnalogueClockWidthPercent
         {
             get => _optionsService.Options.AnalogueClockWidthPercent;

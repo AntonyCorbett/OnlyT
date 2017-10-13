@@ -59,7 +59,10 @@ namespace OnlyT.ViewModel
 
         private void OnTimerStarted(TimerStartMessage message)
         {
-            TimeString = TimeFormatter.FormatTimeRemaining(message.TargetSeconds);
+            TimeString = TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp 
+                ? 0
+                : message.TargetSeconds);
+
             IsRunning = true;
             InitOverallDurationSector(message.TargetSeconds);
         }
@@ -92,7 +95,10 @@ namespace OnlyT.ViewModel
             if (message.TimerIsRunning)
             {
                 TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
-                TimeString = TimeFormatter.FormatTimeRemaining(message.RemainingSecs);
+                
+                TimeString = TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp
+                    ? message.ElapsedSecs
+                    : message.RemainingSecs);
 
                 // if duration of talk is greater than 1hr we only start showing the sector
                 // when remaining time is less than 1 hr (for sake of clarity)...
