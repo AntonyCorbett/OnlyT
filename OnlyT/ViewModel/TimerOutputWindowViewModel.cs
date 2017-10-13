@@ -66,7 +66,7 @@ namespace OnlyT.ViewModel
 
         private void InitOverallDurationSector(int targetSecs)
         {
-            if (DurationSector == null)
+            if (DurationSector == null && _optionsService.Options.ShowDurationSector)
             {
                 if (targetSecs < _secsPerHour) // can't display duration sector effectively when >= 1 hr
                 {
@@ -212,5 +212,10 @@ namespace OnlyT.ViewModel
         }
 
         public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
+
+        public bool SplitAndFullScrenModeIdentical()
+        {
+            return _optionsService.Options.AnalogueClockWidthPercent == 100;
+        }
     }
 }

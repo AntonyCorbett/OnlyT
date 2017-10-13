@@ -279,6 +279,19 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool ShowDurationSector
+        {
+            get => _optionsService.Options.ShowDurationSector;
+            set
+            {
+                if (_optionsService.Options.ShowDurationSector != value)
+                {
+                    _optionsService.Options.ShowDurationSector = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public int AnalogueClockWidthPercent
         {
             get => _optionsService.Options.AnalogueClockWidthPercent;

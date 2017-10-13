@@ -18,6 +18,7 @@ namespace OnlyT.Services.Options
             WeekendAdaptiveMode = AdaptiveMode.None;
             AnalogueClockWidthPercent = 50;
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
+            ShowDurationSector = true;
 
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
             ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
@@ -37,7 +38,9 @@ namespace OnlyT.Services.Options
         public int AnalogueClockWidthPercent { get; set; }
         public FullScreenClockMode FullScreenClockMode { get; set; }
         public bool ShowTimeOfDayUnderTimer { get; set; }
+        public bool ShowDurationSector { get; set; }
 
+        
         /// <summary>
         /// Validates the data, correcting automatically as required
         /// </summary>

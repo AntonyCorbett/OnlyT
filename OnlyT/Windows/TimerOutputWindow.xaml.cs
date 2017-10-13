@@ -46,9 +46,13 @@ namespace OnlyT.Windows
             }
         }
 
-        private void OnTimerStopped(TimerStopMessage obj)
+        private void OnTimerStopped(TimerStopMessage msg)
         {
-            DisplayFullScreenTimeOfDay();
+            var model = (TimerOutputWindowViewModel)DataContext;
+            if (!model.SplitAndFullScrenModeIdentical())
+            {
+                DisplayFullScreenTimeOfDay();
+            }
         }
 
         private void DisplayFullScreenTimeOfDay()
@@ -142,9 +146,13 @@ namespace OnlyT.Windows
             sb.Begin();
         }
 
-        private void OnTimerStarted(TimerStartMessage obj)
+        private void OnTimerStarted(TimerStartMessage msg)
         {
-            DisplaySplitScreen();
+            var model = (TimerOutputWindowViewModel)DataContext;
+            if (!model.SplitAndFullScrenModeIdentical())
+            {
+                DisplaySplitScreen();
+            }
         }
 
         private void DisplaySplitScreen()
