@@ -72,7 +72,7 @@ namespace OnlyT.Services.Timer
                             DateTime talkActualStartTime = DateTime.UtcNow;
                             TimeSpan deviation = talkActualStartTime - talkPlannedStartTime;
 
-                            if (DeviationWithinRange(deviation))
+                            //if (DeviationWithinRange(deviation))
                             {
                                 if (adaptiveMode == AdaptiveMode.TwoWay || talkPlannedStartTime < talkActualStartTime)
                                 {
@@ -163,7 +163,7 @@ namespace OnlyT.Services.Timer
             DateTime? result = null;
             if (talk.Id == (int)TalkTypesAutoMode.PublicTalk)
             {
-                result = GetNearest15MinsBefore(DateTime.UtcNow.AddMinutes(-5));
+                result = GetNearest15MinsBefore(DateTime.UtcNow);
             }
             return result;
         }

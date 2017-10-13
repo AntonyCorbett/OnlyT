@@ -75,10 +75,20 @@ namespace OnlyT.Services.Options
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     _options = (Options)serializer.Deserialize(file, typeof(Options));
+                    
                     SetMidWeekOrWeekend();
+                    ResetCircuitVisit();
+                    
                     _options.Sanitize();
                 }
             }
+        }
+
+        private void ResetCircuitVisit()
+        {
+            // when the settings are read we ignore this saved setting 
+            // and reset to false...
+            _options.IsCircuitVisit = false;
         }
 
         private bool IsWeekend()

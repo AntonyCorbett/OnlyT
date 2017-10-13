@@ -156,6 +156,7 @@ namespace OnlyT.ViewModel
             if (newSecs >= 0 && newSecs <= _maxTimerSecs)
             {
                 TargetSeconds = newSecs;
+                AdjustTalkTimeForThisSession();
             }
         }
 
@@ -283,13 +284,12 @@ namespace OnlyT.ViewModel
                     var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
                     if (newDuration != null)
                     {
-                        TargetSeconds = (int) newDuration.Value.TotalSeconds;
-
                         var talk = GetCurrentTalk();
                         if(talk != null)
                         { 
                             talk.AdaptedDuration = newDuration.Value;
                             SetDurationStringAttributes(talk);
+                            TargetSeconds = (int)talk.ActualDuration.TotalSeconds;
                         }
                     }
                 }
@@ -336,8 +336,11 @@ namespace OnlyT.ViewModel
                     RaisePropertyChanged(nameof(IsBellVisible));
                     RaisePropertyChanged(nameof(BellColour));
                     RaisePropertyChanged(nameof(BellTooltip));
-
+                    
                     RaiseCanExecuteIncrDecrChanged();
+
+                    var talk = _scheduleService.GetTalkScheduleItem(_talkId);
+                    SetDurationStringAttributes(talk);
                 }
             }
         }
@@ -413,11 +416,6 @@ namespace OnlyT.ViewModel
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(CurrentTimerValueString));
                     RaiseCanExecuteIncrDecrChanged();
-
-                    AdjustTalkTimeForThisSession();
-                    
-                    var talk = GetCurrentTalk();
-                    SetDurationStringAttributes(talk);
                 }
             }
         }
@@ -532,6 +530,7 @@ namespace OnlyT.ViewModel
             if (talk != null && talk.Editable)
             {
                 talk.ModifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
+                SetDurationStringAttributes(talk);
             }
         }
 
