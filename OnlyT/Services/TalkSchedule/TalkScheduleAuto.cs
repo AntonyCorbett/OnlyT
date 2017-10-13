@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OnlyT.MeetingSongsFile;
 using OnlyT.Models;
 using OnlyT.Services.Options;
@@ -315,7 +316,23 @@ namespace OnlyT.Services.TalkSchedule
             // Living...
             result.AddRange(GetLivingSchedule(isCircuitVisit, songsAndTimers));
 
+            PrefixDurationsToTalkNames(result);
+
             return result;
+        }
+
+        private static bool ShouldShowHours(IReadOnlyCollection<TalkScheduleItem> talks)
+        {
+            return talks.Any(x => x.Duration >= TimeSpan.FromHours(1) || x.OriginalDuration >= TimeSpan.FromHours(1));
+        }
+
+        private static void PrefixDurationsToTalkNames(IReadOnlyCollection<TalkScheduleItem> talks)
+        {
+            bool showHours = ShouldShowHours(talks);
+            foreach (var talk in talks)
+            {
+                talk.PrefixDurationToName(showHours);
+            }
         }
 
 

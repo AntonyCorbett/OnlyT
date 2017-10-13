@@ -80,5 +80,22 @@ namespace OnlyT.Models
         {
             return (int)Duration.TotalSeconds;
         }
+
+        private static string GenerateDurationString(TimeSpan duration, bool showHours)
+        {
+            return showHours
+                ? $"[{duration.Hours:D2}:{duration.Minutes:D2}:{duration.Seconds:D2}]"
+                : $"[{duration.Minutes:D2}:{duration.Seconds:D2}]";
+        }
+
+        private string GenerateTalkNameWithDurationPrefix(bool showHours)
+        {
+            return $"{GenerateDurationString(OriginalDuration, showHours)} {Name}";
+        }
+
+        public void PrefixDurationToName(bool showHours)
+        {
+            Name = GenerateTalkNameWithDurationPrefix(showHours);
+        }
     }
 }
