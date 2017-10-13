@@ -387,13 +387,39 @@ namespace OnlyT.ViewModel
                 {
                     _targetSeconds = value;
                     SecondsRemaining = _targetSeconds;
-
+                    
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(CurrentTimerValueString));
                     RaiseCanExecuteIncrDecrChanged();
 
                     AdjustTalkTimeForThisSession();
+                    DurationString = GenerateDurationString();
                 }
+            }
+        }
+
+        private string GenerateDurationString()
+        {
+            var talk = GetCurrentTalk();
+            int origSecs = (int) talk.OriginalDuration.TotalSeconds;
+            int modifiedSecs = (int) talk.Duration.TotalSeconds;
+            
+            if (origSecs == modifiedSecs)
+            {
+                return TimeFormatter.FormatTimerDisplayString(origSecs);
+            }
+            
+            return $"{TimeFormatter.FormatTimerDisplayString(origSecs)} → {TimeFormatter.FormatTimerDisplayString(modifiedSecs)}";
+        }
+
+        private string _durationString;
+        public string DurationString
+        {
+            get => _durationString;
+            set
+            {
+                _durationString = value;
+                RaisePropertyChanged();
             }
         }
 
