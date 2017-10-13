@@ -85,28 +85,28 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_OPENING_COMMENTS,
                     StartOffsetIntoMeeting = new TimeSpan(0, 5, 0),
-                    Duration = TimeSpan.FromMinutes(3)
+                    OriginalDuration = TimeSpan.FromMinutes(3)
                 },
 
                 new TalkScheduleItem(TalkTypesAutoMode.TreasuresTalk)
                 {   
                     Name = Properties.Resources.TALK_TREASURES,
                     StartOffsetIntoMeeting = new TimeSpan(0, 8, 20),
-                    Duration = TimeSpan.FromMinutes(10)
+                    OriginalDuration = TimeSpan.FromMinutes(10)
                 },
 
                 new TalkScheduleItem(TalkTypesAutoMode.DiggingTalk)
                 {
                     Name = Properties.Resources.TALK_DIGGING,
                     StartOffsetIntoMeeting = new TimeSpan(0, 18, 40),
-                    Duration = TimeSpan.FromMinutes(8)
+                    OriginalDuration = TimeSpan.FromMinutes(8)
                 },
 
                 new TalkScheduleItem(TalkTypesAutoMode.Reading)
                 {
                     Name = Properties.Resources.TALK_READING,
                     StartOffsetIntoMeeting = new TimeSpan(0, 27, 0),
-                    Duration = TimeSpan.FromMinutes(4),
+                    OriginalDuration = TimeSpan.FromMinutes(4),
                     Bell = true
                 }
             };
@@ -139,7 +139,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_PRESENTATIONS,
                     StartOffsetIntoMeeting = new TimeSpan(0, 32, 40),
-                    Duration = TimeSpan.FromMinutes(15)
+                    OriginalDuration = TimeSpan.FromMinutes(15)
                 });
             }
             else
@@ -150,7 +150,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = GetMinistryItemTitle(1),
                     StartOffsetIntoMeeting = startOffset,
-                    Duration = TimeSpan.FromMinutes(timerItem1.TimerMinutes),
+                    OriginalDuration = TimeSpan.FromMinutes(timerItem1.TimerMinutes),
                     Editable = IsMinistryItemEditable(),
                     Bell = timerItem1.UseBell
                 });
@@ -167,7 +167,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = GetMinistryItemTitle(2),
                     StartOffsetIntoMeeting = startOffset,
-                    Duration = TimeSpan.FromMinutes(timerItem2.TimerMinutes),
+                    OriginalDuration = TimeSpan.FromMinutes(timerItem2.TimerMinutes),
                     Editable = IsMinistryItemEditable(),
                     Bell = timerItem2.UseBell
                 });
@@ -184,7 +184,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = GetMinistryItemTitle(3),
                     StartOffsetIntoMeeting = startOffset,
-                    Duration = TimeSpan.FromMinutes(timerItem3.TimerMinutes),
+                    OriginalDuration = TimeSpan.FromMinutes(timerItem3.TimerMinutes),
                     Editable = IsMinistryItemEditable(),
                     Bell = timerItem3.UseBell
                 });
@@ -200,7 +200,7 @@ namespace OnlyT.Services.TalkSchedule
 
         private static bool IsMinistryItemEditable()
         {
-            return IsPre2018Format();
+            return !IsPre2018Format();
         }
 
         private static string GetMinistryItemTitle(int item)
@@ -244,7 +244,7 @@ namespace OnlyT.Services.TalkSchedule
             {
                 Name = Properties.Resources.TALK_LIVING1,
                 StartOffsetIntoMeeting = new TimeSpan(0, 51, 40),
-                Duration = TimeSpan.FromMinutes(timerPart1.TimerMinutes),
+                OriginalDuration = TimeSpan.FromMinutes(timerPart1.TimerMinutes),
                 AllowAdaptive = true,
                 Editable = true
             });
@@ -253,7 +253,7 @@ namespace OnlyT.Services.TalkSchedule
             {
                 Name = Properties.Resources.TALK_LIVING2,
                 StartOffsetIntoMeeting = new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1.TimerMinutes)),
-                Duration = TimeSpan.FromMinutes(timerPart2.TimerMinutes),
+                OriginalDuration = TimeSpan.FromMinutes(timerPart2.TimerMinutes),
                 AllowAdaptive = true,
                 Editable = true
             });
@@ -264,7 +264,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
                     StartOffsetIntoMeeting = new TimeSpan(1, 7, 0),
-                    Duration = TimeSpan.FromMinutes(3),
+                    OriginalDuration = TimeSpan.FromMinutes(3),
                     AllowAdaptive = true,
                     Editable = true
                 });
@@ -274,7 +274,7 @@ namespace OnlyT.Services.TalkSchedule
                     Name = Properties.Resources.TALK_SERVICE,
                     StartOffsetIntoMeeting = new TimeSpan(1, 10, 0),
                     AllowAdaptive = true,
-                    Duration = TimeSpan.FromMinutes(30)
+                    OriginalDuration = TimeSpan.FromMinutes(30)
                 });
             }
             else
@@ -283,7 +283,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_CONG_STUDY,
                     StartOffsetIntoMeeting = new TimeSpan(1, 7, 0),
-                    Duration = TimeSpan.FromMinutes(30),
+                    OriginalDuration = TimeSpan.FromMinutes(30),
                     AllowAdaptive = true,
                     Editable = true
                 });
@@ -292,7 +292,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
                     StartOffsetIntoMeeting = new TimeSpan(1, 37, 0),
-                    Duration = TimeSpan.FromMinutes(3),
+                    OriginalDuration = TimeSpan.FromMinutes(3),
                     AllowAdaptive = true,
                     Editable = true
                 });
@@ -321,20 +321,13 @@ namespace OnlyT.Services.TalkSchedule
             return result;
         }
 
-        private static bool ShouldShowHours(IReadOnlyCollection<TalkScheduleItem> talks)
-        {
-            return talks.Any(x => x.Duration >= TimeSpan.FromHours(1) || x.OriginalDuration >= TimeSpan.FromHours(1));
-        }
-
         private static void PrefixDurationsToTalkNames(IReadOnlyCollection<TalkScheduleItem> talks)
         {
-            bool showHours = ShouldShowHours(talks);
             foreach (var talk in talks)
             {
-                talk.PrefixDurationToName(showHours);
+                talk.PrefixDurationToName();
             }
         }
-
 
         private static List<TalkScheduleItem> GetWeekendMeetingSchedule(bool isCircuitVisit)
         {
@@ -346,7 +339,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_PUBLIC,
                     StartOffsetIntoMeeting = new TimeSpan(0, 5, 0),
-                    Duration = TimeSpan.FromMinutes(30),
+                    OriginalDuration = TimeSpan.FromMinutes(30),
                     Editable = true
                 });
 
@@ -356,7 +349,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_WT,
                     StartOffsetIntoMeeting = new TimeSpan(0, 40, 0),
-                    Duration = TimeSpan.FromMinutes(30),
+                    OriginalDuration = TimeSpan.FromMinutes(30),
                     AllowAdaptive = true,
                     Editable = true
                 });
@@ -365,7 +358,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_CONCLUDING,
                     StartOffsetIntoMeeting = new TimeSpan(0, 70, 0),
-                    Duration = TimeSpan.FromMinutes(30),
+                    OriginalDuration = TimeSpan.FromMinutes(30),
                     AllowAdaptive = true,
                     Editable = true
                 });
@@ -376,7 +369,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_PUBLIC,
                     StartOffsetIntoMeeting = new TimeSpan(0, 5, 0),
-                    Duration = TimeSpan.FromMinutes(30),
+                    OriginalDuration = TimeSpan.FromMinutes(30),
                     Editable = true
                 });
 
@@ -386,11 +379,13 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     Name = Properties.Resources.TALK_WT,
                     StartOffsetIntoMeeting = new TimeSpan(0, 40, 0),
-                    Duration = TimeSpan.FromMinutes(60),
+                    OriginalDuration = TimeSpan.FromMinutes(60),
                     AllowAdaptive = true,
                     Editable = true
                 });
             }
+
+            PrefixDurationsToTalkNames(result);
 
             return result;
         }

@@ -84,9 +84,12 @@
                     
                     <TextBlock Grid.Column="0" Grid.ColumnSpan="2" 
                                Margin="0,0,0,-5"
-                               Foreground="AntiqueWhite" 
-                               VerticalAlignment="Bottom"
-                               Text="{Binding DurationString}">
+                               VerticalAlignment="Bottom">
+                        <Run ToolTip="Original duration" Foreground="{Binding Duration1Colour}" Text="{Binding Duration1String}"/>
+                        <Run Foreground="#bba991" Text="{Binding Duration1ArrowString}" />
+                        <Run ToolTip="Modified duration" Foreground="{Binding Duration2Colour}" Text="{Binding Duration2String}"/>
+                        <Run Foreground="#bba991" Text="{Binding Duration2ArrowString}" />
+                        <Run ToolTip="Adapted duration" Foreground="{Binding Duration3Colour}" Text="{Binding Duration3String}"/>
                     </TextBlock>
 
                     <TextBlock TextWrapping="NoWrap" 

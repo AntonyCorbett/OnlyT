@@ -28,7 +28,12 @@ namespace OnlyT.Tests.Mocks
 
                 for (int n = 0; n < _numTalks; ++n)
                 {
-                    _talks.Add(new TalkScheduleItem { Id = talkId + n, Name = $"Talk {n + 1}", Duration = TimeSpan.FromMinutes(n + 1) });
+                    _talks.Add(new TalkScheduleItem
+                    {
+                        Id = talkId + n, 
+                        Name = $"Talk {n + 1}", 
+                        OriginalDuration = TimeSpan.FromMinutes(n + 1) 
+                    });
                 }
             }
 

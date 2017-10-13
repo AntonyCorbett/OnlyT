@@ -70,7 +70,7 @@ namespace OnlyT.Services.TalkSchedule
                             {
                                 Id = talkId++,
                                 Name = (string)elem.Attribute("name"),
-                                Duration = AttributeToDuration(elem.Attribute("duration")),
+                                OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
                                 Bell = AttributeToBool(elem.Attribute("bell"), false)
                             });
@@ -88,17 +88,11 @@ namespace OnlyT.Services.TalkSchedule
             return result;
         }
 
-        private static bool ShouldShowHours(IReadOnlyCollection<TalkScheduleItem> talks)
-        {
-            return talks.Any(x => x.Duration >= TimeSpan.FromHours(1) || x.OriginalDuration >= TimeSpan.FromHours(1));
-        }
-
         private static void PrefixDurationsToTalkNames(IReadOnlyCollection<TalkScheduleItem> talks)
         {
-            bool shouldShowHors = ShouldShowHours(talks);
             foreach (var talk in talks)
             {
-                talk.PrefixDurationToName(shouldShowHors);
+                talk.PrefixDurationToName();
             }
         }
     }

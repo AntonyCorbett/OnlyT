@@ -25,13 +25,19 @@ namespace OnlyT.Tests
             TimeSpan testDur = TimeSpan.FromMinutes(10);
             TimeSpan changedDur = TimeSpan.FromMinutes(20);
 
-            TalkScheduleItem item = new TalkScheduleItem { Duration = testDur };
-            Assert.AreEqual(item.Duration, testDur);
+            TalkScheduleItem item = new TalkScheduleItem { OriginalDuration = testDur };
             Assert.AreEqual(item.OriginalDuration, testDur);
+            Assert.AreEqual(item.ActualDuration, testDur);
+            
+            Assert.IsNull(item.ModifiedDuration);
+            Assert.IsNull(item.AdaptedDuration);
+            
             Assert.IsTrue(item.GetDurationSeconds() == (int)testDur.TotalSeconds);
 
-            item.Duration = changedDur;
+            item.ModifiedDuration = changedDur;
             Assert.AreEqual(item.OriginalDuration, testDur);
+            Assert.AreEqual(item.ModifiedDuration, changedDur);
+            
             Assert.IsTrue(item.GetDurationSeconds() == (int)changedDur.TotalSeconds);
         }
     }

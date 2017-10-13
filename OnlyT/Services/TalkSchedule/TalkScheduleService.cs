@@ -64,7 +64,7 @@ namespace OnlyT.Services.TalkSchedule
                         foundCurrent = true;
                     }
 
-                    if (n != talks.Length - 1 && foundCurrent && talks[n + 1].Duration != TimeSpan.Zero)
+                    if (n != talks.Length - 1 && foundCurrent && talks[n + 1].ActualDuration != TimeSpan.Zero)
                     {
                         return talks[n + 1].Id;
                     }

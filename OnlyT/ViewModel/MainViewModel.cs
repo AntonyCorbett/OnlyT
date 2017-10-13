@@ -1,3 +1,4 @@
+using System;
 using GalaSoft.MvvmLight;
 using System.Windows;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.Timer;
+using Serilog;
 
 namespace OnlyT.ViewModel
 {
@@ -81,13 +83,20 @@ namespace OnlyT.ViewModel
         /// <param name="message"></param>
         private void OnTimerMonitorChanged(TimerMonitorChangedMessage message)
         {
-            if (_optionsService.IsTimerMonitorSpecified)
+            try
             {
-                RelocateTimerWindow();
+                if (_optionsService.IsTimerMonitorSpecified)
+                {
+                    RelocateTimerWindow();
+                }
+                else
+                {
+                    HideTimerWindow();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                HideTimerWindow();
+                Log.Logger.Error(ex, "Could not change monitor");
             }
         }
 
@@ -169,19 +178,26 @@ namespace OnlyT.ViewModel
 
         private void OpenTimerWindow()
         {
-            var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-            if (timerMonitor != null)
+            try
             {
-                _timerWindow = new TimerOutputWindow { DataContext = _timerWindowViewModel };
+                var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                if (timerMonitor != null)
+                {
+                    _timerWindow = new TimerOutputWindow {DataContext = _timerWindowViewModel};
 
-                var area = timerMonitor.Monitor.WorkingArea;
-                _timerWindow.Left = area.Left;
-                _timerWindow.Top = area.Top;
-                _timerWindow.Width = 0;
-                _timerWindow.Height = 0;
+                    var area = timerMonitor.Monitor.WorkingArea;
+                    _timerWindow.Left = area.Left;
+                    _timerWindow.Top = area.Top;
+                    _timerWindow.Width = 0;
+                    _timerWindow.Height = 0;
 
-                _timerWindow.Topmost = true;
-                _timerWindow.Show();
+                    _timerWindow.Topmost = true;
+                    _timerWindow.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not open timer window");
             }
         }
 
@@ -192,10 +208,17 @@ namespace OnlyT.ViewModel
 
         private void CloseTimerWindow()
         {
-            if (_timerWindow != null)
+            try
             {
-                _timerWindow.Close();
-                _timerWindow = null;
+                if (_timerWindow != null)
+                {
+                    _timerWindow.Close();
+                    _timerWindow = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not close timer window");
             }
         }
     }

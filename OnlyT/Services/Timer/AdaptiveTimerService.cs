@@ -135,7 +135,7 @@ namespace OnlyT.Services.Timer
             {
                 if (item.AllowAdaptive)
                 {
-                    result = result.Add(item.Duration);
+                    result = result.Add(item.ActualDuration);
                 }
 
                 if (item == talk)

@@ -1,5 +1,6 @@
 ﻿using System;
 using OnlyT.Services.TalkSchedule;
+using OnlyT.Utils;
 
 namespace OnlyT.Models
 {
@@ -14,22 +15,58 @@ namespace OnlyT.Models
         /// <summary>
         /// Original duration (before any user modification)
         /// </summary>
-        public TimeSpan OriginalDuration { get; private set; }
+        private TimeSpan? _originalDuration;
 
-        private TimeSpan _duration;
-        public TimeSpan Duration
+        public TimeSpan OriginalDuration 
         {
-            get => _duration;
+            get => _originalDuration ?? TimeSpan.Zero;
+            set => _originalDuration = value;
+        }
+
+        /// <summary>
+        /// Manually modified duration (after user modification)
+        /// </summary>
+        private TimeSpan? _modifiedDuration;
+
+        public TimeSpan? ModifiedDuration
+        {
+            get => _modifiedDuration;
             set
             {
-                if (_duration != value)
+                if (_modifiedDuration != value)
                 {
-                    _duration = value;
-                    if (OriginalDuration == default(TimeSpan))
+                    if (value != null && value == OriginalDuration)
                     {
-                        OriginalDuration = Duration;
+                        _modifiedDuration = null;
                     }
+                    else _modifiedDuration = value;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Adapted duration (following adaptive timer service calculation)
+        /// </summary>
+        public TimeSpan? AdaptedDuration { get; set; }
+
+        /// <summary>
+        /// Actual duration used (may be original, manually adjusted or adapted)
+        /// </summary>
+        public TimeSpan ActualDuration 
+        {
+            get
+            {
+                if (AdaptedDuration != null)
+                {
+                    return AdaptedDuration.Value;
+                }
+                
+                if (ModifiedDuration != null)
+                {
+                    return ModifiedDuration.Value;
+                }
+                
+                return OriginalDuration;
             }
         }
 
@@ -66,7 +103,8 @@ namespace OnlyT.Models
                 }
             }
         }
-
+        
+        
         public TalkScheduleItem()
         {
         }
@@ -78,24 +116,12 @@ namespace OnlyT.Models
 
         public int GetDurationSeconds()
         {
-            return (int)Duration.TotalSeconds;
+            return (int)ActualDuration.TotalSeconds;
         }
-
-        private static string GenerateDurationString(TimeSpan duration, bool showHours)
+        
+        public void PrefixDurationToName()
         {
-            return showHours
-                ? $"[{duration.Hours:D2}:{duration.Minutes:D2}:{duration.Seconds:D2}]"
-                : $"[{duration.Minutes:D2}:{duration.Seconds:D2}]";
-        }
-
-        private string GenerateTalkNameWithDurationPrefix(bool showHours)
-        {
-            return $"{GenerateDurationString(OriginalDuration, showHours)} {Name}";
-        }
-
-        public void PrefixDurationToName(bool showHours)
-        {
-            Name = GenerateTalkNameWithDurationPrefix(showHours);
+            Name = $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
         }
     }
 }

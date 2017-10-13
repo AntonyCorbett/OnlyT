@@ -12,6 +12,7 @@ using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
 using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
+using Serilog;
 
 namespace OnlyT.ViewModel
 {
@@ -21,7 +22,9 @@ namespace OnlyT.ViewModel
     public class OperatorPageViewModel : ViewModelBase, IPage
     {
         public static string PageName => "OperatorPage";
-        private static readonly string _unknownTalkTitle = "Unknown";
+        private static readonly string _arrow = "→";
+        private static readonly Brush _durationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
+        private static readonly Brush _durationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
         private readonly IOptionsService _optionsService;
@@ -47,8 +50,6 @@ namespace OnlyT.ViewModel
             _timerService.TimerChangedEvent += TimerChangedHandler;
 
             SelectFirstTalk();
-
-            _talkTitle = _unknownTalkTitle;
 
             StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
@@ -136,10 +137,17 @@ namespace OnlyT.ViewModel
 
         private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
         {
-            _scheduleService.Reset();
-            TalkId = 0;
-            RaisePropertyChanged(nameof(Talks));
-            SelectFirstTalk();
+            try
+            {
+                _scheduleService.Reset();
+                TalkId = 0;
+                RaisePropertyChanged(nameof(Talks));
+                SelectFirstTalk();
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not handle change of meeting schedule");
+            }
         }
 
         private void IncrDecrTimerInternal(int mins)
@@ -268,13 +276,27 @@ namespace OnlyT.ViewModel
 
         private void AdjustForAdaptiveTime()
         {
-            if (TalkId > 0)
+            try
             {
-                var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
-                if (newDuration != null)
+                if (TalkId > 0)
                 {
-                    TargetSeconds = (int)newDuration.Value.TotalSeconds;
+                    var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
+                    if (newDuration != null)
+                    {
+                        TargetSeconds = (int) newDuration.Value.TotalSeconds;
+
+                        var talk = GetCurrentTalk();
+                        if(talk != null)
+                        { 
+                            talk.AdaptedDuration = newDuration.Value;
+                            SetDurationStringAttributes(talk);
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not adjust for adaptive time");
             }
         }
 
@@ -393,33 +415,114 @@ namespace OnlyT.ViewModel
                     RaiseCanExecuteIncrDecrChanged();
 
                     AdjustTalkTimeForThisSession();
-                    DurationString = GenerateDurationString();
+                    
+                    var talk = GetCurrentTalk();
+                    SetDurationStringAttributes(talk);
                 }
             }
         }
 
-        private string GenerateDurationString()
+        private void SetDurationStringAttributes(TalkScheduleItem talk)
         {
-            var talk = GetCurrentTalk();
-            int origSecs = (int) talk.OriginalDuration.TotalSeconds;
-            int modifiedSecs = (int) talk.Duration.TotalSeconds;
-            
-            if (origSecs == modifiedSecs)
+            if (talk != null)
             {
-                return TimeFormatter.FormatTimerDisplayString(origSecs);
+                Duration1String = TimeFormatter.FormatTimerDisplayString((int)talk.OriginalDuration.TotalSeconds);
+
+                if (talk.ModifiedDuration != null)
+                {
+                    Duration2String = TimeFormatter.FormatTimerDisplayString((int) talk.ModifiedDuration.Value.TotalSeconds);
+
+                    if (talk.AdaptedDuration != null)
+                    {
+                        Duration3String = TimeFormatter.FormatTimerDisplayString((int) talk.AdaptedDuration.Value.TotalSeconds);
+                    }
+                    else
+                    {
+                        Duration3String = string.Empty;
+                    }
+                }
+                else if (talk.AdaptedDuration != null)
+                {
+                    Duration2String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration.Value.TotalSeconds);
+                    Duration3String = string.Empty;
+                }
+                else
+                {
+                    Duration2String = string.Empty;
+                    Duration3String = string.Empty;
+                }
+            }
+            else
+            {
+                Duration1String = string.Empty;
+                Duration2String = string.Empty;
+                Duration3String = string.Empty;
+            }
+
+            Duration1Colour = _durationDimBrush;
+            Duration2Colour = _durationDimBrush;
+            Duration3Colour = _durationDimBrush;
+            
+            if (!string.IsNullOrEmpty(Duration3String))
+            {
+                Duration3Colour = _durationBrush;
+            }
+            else if (!string.IsNullOrEmpty(Duration2String))
+            {
+                Duration2Colour = _durationBrush;
+            }
+            else
+            {
+                Duration1Colour = _durationBrush;
             }
             
-            return $"{TimeFormatter.FormatTimerDisplayString(origSecs)} → {TimeFormatter.FormatTimerDisplayString(modifiedSecs)}";
+            RaisePropertyChanged(nameof(Duration1Colour));
+            RaisePropertyChanged(nameof(Duration2Colour));
+            RaisePropertyChanged(nameof(Duration3Colour));
         }
 
-        private string _durationString;
-        public string DurationString
+        public string Duration1ArrowString { get; set; }
+        public string Duration2ArrowString { get; set; }
+        public Brush Duration1Colour { get; set; }
+        public Brush Duration2Colour { get; set; }
+        public Brush Duration3Colour { get; set; }
+        
+
+        private string _duration1String;
+        public string Duration1String
         {
-            get => _durationString;
+            get => _duration1String;
             set
             {
-                _durationString = value;
+                _duration1String = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        private string _duration2String;
+        public string Duration2String
+        {
+            get => _duration2String;
+            set
+            {
+                _duration2String = value;
+                
+                RaisePropertyChanged();
+                Duration1ArrowString = string.IsNullOrEmpty(_duration2String) ? string.Empty : _arrow;
+                RaisePropertyChanged(nameof(Duration1ArrowString));
+            }
+        }
+
+        private string _duration3String;
+        public string Duration3String
+        {
+            get => _duration3String;
+            set
+            {
+                _duration3String = value;
+                RaisePropertyChanged();
+                Duration2ArrowString = string.IsNullOrEmpty(_duration3String) ? string.Empty : _arrow;
+                RaisePropertyChanged(nameof(Duration2ArrowString));
             }
         }
 
@@ -428,7 +531,7 @@ namespace OnlyT.ViewModel
             var talk = GetCurrentTalk();
             if (talk != null && talk.Editable)
             {
-                talk.Duration = TimeSpan.FromSeconds(TargetSeconds);
+                talk.ModifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
             }
         }
 
@@ -451,20 +554,6 @@ namespace OnlyT.ViewModel
         public string CurrentTimerValueString => TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp
             ? _secondsElapsed
             : _secondsRemaining);
-
-        private string _talkTitle;
-        public string TalkTitle
-        {
-            get => _talkTitle;
-            set
-            {
-                if (_talkTitle != value)
-                {
-                    _talkTitle = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
 
         public bool IsBellVisible
         {

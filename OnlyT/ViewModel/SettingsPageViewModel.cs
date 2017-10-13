@@ -220,7 +220,6 @@ namespace OnlyT.ViewModel
             }
         }
 
-
         public IEnumerable<AutoMeetingTime> AutoMeetingTimes => _autoMeetingTimes;
 
         public MidWeekOrWeekend MidWeekOrWeekend
