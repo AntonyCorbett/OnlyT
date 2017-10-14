@@ -54,6 +54,7 @@ namespace OnlyT.ViewModel
             StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
             SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
+            HelpCommand = new RelayCommand(LaunchHelp);
             IncrementTimerCommand = new RelayCommand(IncrementTimer, CanIncreaseTimerValue);
             IncrementTimer15Command = new RelayCommand(IncrementTimer15Secs, CanIncreaseTimerValue);
             IncrementTimer5Command = new RelayCommand(IncrementTimer5Mins, CanIncreaseTimerValue);
@@ -65,6 +66,11 @@ namespace OnlyT.ViewModel
             // subscriptions...
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
+        }
+
+        private void LaunchHelp()
+        {
+            System.Diagnostics.Process.Start(@"https://github.com/AntonyCorbett/OnlyT/wiki");
         }
 
         private void BellToggle()
@@ -587,6 +593,7 @@ namespace OnlyT.ViewModel
         public RelayCommand StartCommand { get; set; }
         public RelayCommand StopCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
+        public RelayCommand HelpCommand { get; set; }
         public RelayCommand IncrementTimerCommand { get; set; }
         public RelayCommand IncrementTimer15Command { get; set; }
         public RelayCommand IncrementTimer5Command { get; set; }
