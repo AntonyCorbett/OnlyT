@@ -72,7 +72,7 @@ namespace OnlyT.Services.Timer
                             DateTime talkActualStartTime = DateTime.UtcNow;
                             TimeSpan deviation = talkActualStartTime - talkPlannedStartTime;
 
-                            //if (DeviationWithinRange(deviation))
+                            if (DeviationWithinRange(deviation))
                             {
                                 if (adaptiveMode == AdaptiveMode.TwoWay || talkPlannedStartTime < talkActualStartTime)
                                 {

@@ -151,6 +151,33 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adapted duration.
+        /// </summary>
+        internal static string DURATION_ADAPTED {
+            get {
+                return ResourceManager.GetString("DURATION_ADAPTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modified duration.
+        /// </summary>
+        internal static string DURATION_MODIFIED {
+            get {
+                return ResourceManager.GetString("DURATION_MODIFIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original duration.
+        /// </summary>
+        internal static string DURATION_ORIGINAL {
+            get {
+                return ResourceManager.GetString("DURATION_ORIGINAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analogue.
         /// </summary>
         internal static string FULL_SCREEN_ANALOGUE {

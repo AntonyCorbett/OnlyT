@@ -147,6 +147,15 @@
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
     <value>Could not create folder {0}</value>
   </data>
+  <data name="DURATION_ADAPTED" xml:space="preserve">
+    <value>Adapted duration</value>
+  </data>
+  <data name="DURATION_MODIFIED" xml:space="preserve">
+    <value>Modified duration</value>
+  </data>
+  <data name="DURATION_ORIGINAL" xml:space="preserve">
+    <value>Original duration</value>
+  </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
     <value>Analogue</value>
   </data>

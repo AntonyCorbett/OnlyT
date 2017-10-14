@@ -85,11 +85,18 @@
                     <TextBlock Grid.Column="0" Grid.ColumnSpan="2" 
                                Margin="0,0,0,-5"
                                VerticalAlignment="Bottom">
-                        <Run ToolTip="Original duration" Foreground="{Binding Duration1Colour}" Text="{Binding Duration1String}"/>
+                        <Run ToolTip="{Binding Duration1Tooltip}" Foreground="{Binding Duration1Colour}" Text="{Binding Duration1String}"/>
                         <Run Foreground="#bba991" Text="{Binding Duration1ArrowString}" />
-                        <Run ToolTip="Modified duration" Foreground="{Binding Duration2Colour}" Text="{Binding Duration2String}"/>
+                        <Run ToolTip="{Binding Duration2Tooltip}" Foreground="{Binding Duration2Colour}" Text="{Binding Duration2String}"/>
                         <Run Foreground="#bba991" Text="{Binding Duration2ArrowString}" />
-                        <Run ToolTip="Adapted duration" Foreground="{Binding Duration3Colour}" Text="{Binding Duration3String}"/>
+                        <Run ToolTip="{Binding Duration3Tooltip}" Foreground="{Binding Duration3Colour}" Text="{Binding Duration3String}"/>
+                    </TextBlock>
+
+                    <TextBlock Grid.Column="1" 
+                               Margin="0,-5,0,0"
+                               Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BoolToVis}, Mode=OneWay}"
+                               VerticalAlignment="Top" Foreground="#f3dcbc" HorizontalAlignment="Right">
+                        [circuit visit]
                     </TextBlock>
 
                     <TextBlock TextWrapping="NoWrap" 

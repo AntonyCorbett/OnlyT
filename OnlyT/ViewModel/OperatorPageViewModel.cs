@@ -425,14 +425,17 @@ namespace OnlyT.ViewModel
             if (talk != null)
             {
                 Duration1String = TimeFormatter.FormatTimerDisplayString((int)talk.OriginalDuration.TotalSeconds);
+                Duration1Tooltip = Properties.Resources.DURATION_ORIGINAL;
 
                 if (talk.ModifiedDuration != null)
                 {
                     Duration2String = TimeFormatter.FormatTimerDisplayString((int) talk.ModifiedDuration.Value.TotalSeconds);
+                    Duration2Tooltip = Properties.Resources.DURATION_MODIFIED;
 
                     if (talk.AdaptedDuration != null)
                     {
                         Duration3String = TimeFormatter.FormatTimerDisplayString((int) talk.AdaptedDuration.Value.TotalSeconds);
+                        Duration3Tooltip = Properties.Resources.DURATION_ADAPTED;
                     }
                     else
                     {
@@ -442,6 +445,7 @@ namespace OnlyT.ViewModel
                 else if (talk.AdaptedDuration != null)
                 {
                     Duration2String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration.Value.TotalSeconds);
+                    Duration2Tooltip = Properties.Resources.DURATION_ADAPTED;
                     Duration3String = string.Empty;
                 }
                 else
@@ -477,6 +481,10 @@ namespace OnlyT.ViewModel
             RaisePropertyChanged(nameof(Duration1Colour));
             RaisePropertyChanged(nameof(Duration2Colour));
             RaisePropertyChanged(nameof(Duration3Colour));
+
+            RaisePropertyChanged(nameof(Duration1Tooltip));
+            RaisePropertyChanged(nameof(Duration2Tooltip));
+            RaisePropertyChanged(nameof(Duration3Tooltip));
         }
 
         public string Duration1ArrowString { get; set; }
@@ -484,7 +492,10 @@ namespace OnlyT.ViewModel
         public Brush Duration1Colour { get; set; }
         public Brush Duration2Colour { get; set; }
         public Brush Duration3Colour { get; set; }
-        
+        public string Duration1Tooltip { get; set; }
+        public string Duration2Tooltip { get; set; }
+        public string Duration3Tooltip { get; set; }
+
 
         private string _duration1String;
         public string Duration1String
@@ -563,10 +574,14 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool IsCircuitVisit => _optionsService.Options.IsCircuitVisit &&
+                                      _optionsService.Options.OperatingMode == OperatingMode.Automatic;
+
         public void Activated(object state)
         {
             RaisePropertyChanged(nameof(CurrentTimerValueString));  // "CountUp" setting may have changed
             RaisePropertyChanged(nameof(IsBellVisible));
+            RaisePropertyChanged(nameof(IsCircuitVisit));
         }
 
         public RelayCommand StartCommand { get; set; }
