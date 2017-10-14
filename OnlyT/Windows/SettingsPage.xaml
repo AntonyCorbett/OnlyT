@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:OnlyT.Windows"
              DataContext="{Binding Settings, Mode=OneWay, Source={StaticResource Locator}}"             
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="300">
+             d:DesignHeight="1200" d:DesignWidth="300">
 
     <UserControl.Resources>
         <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
@@ -90,7 +90,8 @@
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding BellVolumePercent}"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
-                        <Button Width="100" Margin="0,10,0,0" HorizontalAlignment="Left" Command="{Binding TestBellCommand}">Test</Button>
+                        <Button Width="120" Height="32" Margin="0,10,0,0" HorizontalAlignment="Left" 
+                                Command="{Binding TestBellCommand}">Test</Button>
                     </StackPanel>
                 </GroupBox>
 
@@ -115,6 +116,29 @@
 
                         <CheckBox IsChecked="{Binding ShowDurationSector, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Show duration sector on analogue clock" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Margin="0,5,0,0" Header="Web clock" Padding="5" >
+                    <StackPanel>
+                        <ComboBox ItemsSource="{Binding Ports}" 
+                                  SelectedValuePath="Port" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Port, Mode=TwoWay}"/>
+                        
+                        <Button Width="120" HorizontalAlignment="Left" 
+                                Height="32"
+                                Command="{Binding OpenPortCommand}"
+                                Margin="0,10,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding ElevatedShield}" Height="16"/>
+                                <Label Content="Reserve Port"></Label>
+                            </StackPanel>
+                        </Button>
+                    
+                        <CheckBox IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Enabled" />
+
                     </StackPanel>
                 </GroupBox>
 

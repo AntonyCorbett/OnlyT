@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html style="display:block; height:100%; margin:0; padding:0">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>SoundBox Clock</title>
+		<style type="text/css">			
+			html 
+			{
+				background: #000000;
+			}
+			.clockstyle 
+			{
+				font-family: sans-serif;
+				font-weight: bold;
+				color: #FFFFFF;
+			}
+			.clockstyle_yellow
+			{
+				font-family: sans-serif;
+				font-weight: bold;
+				color: #FFFF66;
+			}
+			.clockstyle_green
+			{
+				font-family: sans-serif;
+				font-weight: bold;
+				color: #00FF00;
+			}
+			.clockstyle_dkgreen
+			{
+				font-family: sans-serif;
+				font-weight: bold;
+				color: #008000;
+			}
+			.clockstyle_red
+			{				
+				font-family: sans-serif;
+				font-weight: bold;
+				color: #FF0000;
+			}
+			.clockstyle_dkred
+			{				
+				font-family: sans-serif;
+				font-weight: bold;
+				color: #800000;
+			}
+			.clockstyle_dim
+			{
+				font-family: sans-serif;				
+				color: #668080;
+			}			
+
+		</style>
+    });
+	</head>
+	
+	<body style="display:table; width:100%; height:100%; margin:0; padding:0">
+		<div style="display:table-cell; width:100%; height:100%; text-align:center; vertical-align:middle">
+			<span id="clocktext" onclick="location.reload(); return false" class="clockstyle" style="font-size:24pt; font-kerning:none"></span>
+		</div>
+		
+		<script type="text/javascript">
+			"use strict";
+			
+			var textElem = document.getElementById("clocktext");
+			var textNode = document.createTextNode("");
+			textElem.appendChild(textNode);
+			
+			var currentMode = "Nameplate";
+			var currentDisplayMode = "Nameplate";
+			var currentTargetSecs = 0;
+			var currentTimerMins = 0;
+			var currentTimerSecs = 0;
+			var timerStartDateTime = new Date();
+			var modeTransition = false;
+			var serverTimeOfDayAdjustment = 0;
+			var FIVE_SEC_TIMER = false;
+			var POLLING_INTERVAL_SECS = 4;
+									
+			function getSoundBoxXml() 
+			{	
+				var clientDate = new Date();		
+
+				var myGetRequest = new XMLHttpRequest();
+				if(myGetRequest.overrideMimeType)
+				{
+					myGetRequest.overrideMimeType("text/xml")
+				}
+								
+				myGetRequest.onreadystatechange=function() 
+				{
+					if (myGetRequest.readyState==4) 
+					{
+						if (myGetRequest.status==200 || window.location.href.indexOf("http")==-1) 
+						{	
+							var xmldata=myGetRequest.responseXML;				
+							var entry=xmldata.getElementsByTagName("clock")[0];
+							
+							if(entry != null)													
+							{
+								currentMode=entry.getAttribute("mode");							
+								
+								switch(currentMode)
+								{
+									case "Timer":
+									case "TimerPause":
+										currentTimerMins=parseInt(entry.getAttribute("mins"));
+										currentTimerSecs=parseInt(entry.getAttribute("secs"));
+										currentTargetSecs=parseInt(entry.getAttribute("targetSecs"));
+
+										var timerElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
+										var serverTimerElapsedSecs = (currentTimerMins * 60) + currentTimerSecs;
+										var diffSecs = serverTimerElapsedSecs - timerElapsedSecs;
+														
+										if(Math.abs(diffSecs) > 1)
+										{	
+											// client timer out by more than 2 secs so adjust the timerStart								
+											timerStartDateTime.setTime(timerStartDateTime.getTime() - diffSecs*1000.0);
+										}
+										break;
+
+									case "TimeOfDay":									
+										var minsIntoDay=parseInt(entry.getAttribute("mins"));
+										var secs=parseInt(entry.getAttribute("secs"));
+										var serverStamp = new Date(clientDate.getTime());
+										serverStamp.setHours(minsIntoDay / 60, minsIntoDay % 60, secs);
+										serverTimeOfDayAdjustment = serverStamp - clientDate;									
+										break;							
+								}
+							}
+						}
+						else
+						{							
+							currentMode = "Offline";							
+						}
+					}				 
+				}
+								
+				var url = "../data/" + clientDate.getTime();	// unique uri to prevent reuse of cached xml
+				myGetRequest.open("GET", url, true);
+				myGetRequest.send(null);
+
+				setTimeout(getSoundBoxXml, POLLING_INTERVAL_SECS * 1000);
+			}
+
+			function getClientTimerElapsedMilliSecs()
+			{
+				var milliSecsNow = new Date().getTime();
+				var clientStartMilliSecs = timerStartDateTime.getTime();
+				return (milliSecsNow - clientStartMilliSecs);
+			}
+
+			function formatMajorMinor(major, minor)
+			{
+				var s = "";
+				s += (major < 10 ? "0" : "") + major + ":";
+				s += (minor < 10 ? "0" : "") + minor;
+				return s;			
+			}
+
+			function formatTimeOfDay(hrs, mins, use24HrFormat)
+			{
+				if(use24HrFormat)
+				{
+					return formatMajorMinor(hrs, mins);
+				}
+				else
+				{
+					return formatMajorMinor(hrs > 12 ? hrs-12 : hrs, mins);
+				}
+			}
+
+			function setClockColour(remainingSecs, paused)
+			{
+				if(remainingSecs < 1)
+				{
+					textElem.className = paused? "clockstyle_dkred" : "clockstyle_red";					
+				}
+
+				else if(remainingSecs < 31)
+				{
+					textElem.className = paused? "clockstyle_dkgreen" : "clockstyle_yellow";					
+				}
+
+				else
+				{
+					textElem.className = paused? "clockstyle_dkgreen" : "clockstyle_green";					
+				}
+			}
+
+			function conditionalUpdateTxtSize()
+			{
+				if (modeTransition)
+				{
+					updateTextSize();
+				}				
+			}
+
+			function getDisplayString()
+			{
+				var s = "";
+				
+				modeTransition = (currentDisplayMode != currentMode);
+											
+				switch(currentMode)
+				{
+					case "TimeOfDay":
+						var d = new Date();
+						d.setTime(d.getTime() + + serverTimeOfDayAdjustment);
+						var h = d.getHours();
+						var m = d.getMinutes();
+						s = formatTimeOfDay(h, m, true);
+
+						textElem.className = "clockstyle";						
+						currentDisplayMode = currentMode;
+						break;
+											
+					case "Timer":
+						var clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;					
+						var targetSecs = currentTargetSecs;
+						var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
+						setClockColour(remainingSecs, false);
+
+						remainingSecs = Math.abs(remainingSecs);
+						var secs = Math.floor(remainingSecs % 60);
+				
+						if(FIVE_SEC_TIMER)
+						{																						
+							if(secs % 5 == 0)
+							{
+								// every 5 secs
+								s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
+								currentDisplayMode = currentMode;
+							}
+							else if (currentDisplayMode == currentMode)
+							{							
+								s = "stet";
+								modeTransition = false;
+							}										
+							else
+							{													
+								s = "";
+							}
+						}
+						else
+						{
+							s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
+							currentDisplayMode = currentMode;
+						}
+						break;
+
+					case "TimerPause":
+						if(currentDisplayMode == currentMode)
+						{
+							// already paused...
+							s = "stet";
+						}
+						else
+						{
+							var clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;					
+							var targetSecs = currentTargetSecs;
+							var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
+							setClockColour(remainingSecs, true);
+
+							remainingSecs = Math.abs(remainingSecs);
+							var secs = Math.floor(remainingSecs % 60);
+				
+							s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
+							currentDisplayMode = currentMode;						
+						}
+						break;
+
+					case "Nameplate":
+						s = "SoundBox";
+						currentDisplayMode = currentMode;
+						textElem.className = "clockstyle_dim";						
+						break;
+
+					case "Offline":
+						s = "offline...";
+						currentDisplayMode = currentMode;
+						textElem.className = "clockstyle_dim";						
+						break;
+				}
+				
+				return s;
+			}
+
+			function updateClock() 
+			{	
+				var s = getDisplayString();
+				if(s != "stet")
+				{
+					textNode.data = s;
+				}
+				
+				conditionalUpdateTxtSize();
+				setTimeout(updateClock, 1000);	// every sec
+			}
+			
+			function updateTextSize() 
+			{
+				var curFontSize = 24;
+				var targetWidth = 0.9;  // Proportion of full screen width
+				for (var i = 0; 3 > i; i++) 
+				{  
+					// Iterate for better better convergence
+					var newFontSize = textElem.parentNode.offsetWidth * targetWidth / textElem.offsetWidth * curFontSize;
+					textElem.style.fontSize = newFontSize.toFixed(3) + "pt";
+					curFontSize = newFontSize;
+				}
+			}
+			
+			getSoundBoxXml();
+			updateClock();
+			updateTextSize();
+
+			window.addEventListener("resize", updateTextSize);
+		</script>
+	</body>
+</html>

@@ -7,10 +7,13 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using OnlyT.EventArgs;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.Timer;
+using OnlyT.Utils;
+using OnlyT.WebServer;
 using Serilog;
 
 namespace OnlyT.ViewModel
@@ -26,6 +29,7 @@ namespace OnlyT.ViewModel
         private readonly IMonitorsService _monitorsService;
         private readonly IBellService _bellService;
         private readonly ITalkTimerService _timerService;
+        private readonly IHttpServer _httpServer;
         private string _currentPageName;
         private readonly TimerOutputWindowViewModel _timerWindowViewModel;
 
@@ -33,11 +37,13 @@ namespace OnlyT.ViewModel
            IOptionsService optionsService,
            IMonitorsService monitorsService,
            ITalkTimerService timerService,
+           IHttpServer httpServer,
            IBellService bellService)
         {
             _optionsService = optionsService;
             _monitorsService = monitorsService;
             _bellService = bellService;
+            _httpServer = httpServer;
             _timerService = timerService;
 
             // subscriptions...
@@ -45,6 +51,8 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
             Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
+
+            InitHttpServer();
 
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
@@ -58,6 +66,33 @@ namespace OnlyT.ViewModel
             // (fire and forget)
             LaunchTimerWindowAsync();
 #pragma warning restore 4014
+        }
+
+        private void InitHttpServer()
+        {
+            _httpServer.ClockServerRequestHandler += ClockRequestHandler;
+            if (_optionsService.Options.IsWebClockEnabled)
+            {
+                _httpServer.Start(_optionsService.Options.HttpServerPort);
+            }
+        }
+
+        private void ClockRequestHandler(object sender, ClockServerEventArgs e)
+        {
+            // we received a web request for the timer clock info...
+
+            TimerChangedEventArgs info = _timerService.GetClockRequestInfo();
+            if (info == null || !info.IsRunning)
+            {
+                e.Mode = ClockServerMode.TimeOfDay;
+            }
+            else
+            {
+                e.Mode = ClockServerMode.Timer;
+                e.Mins = info.ElapsedSecs / 60;
+                e.Secs = info.ElapsedSecs % 60;
+                e.TargetSecs = info.TargetSecs;
+            }
         }
 
         private void OnTalkOvertime(OvertimeMessage message)

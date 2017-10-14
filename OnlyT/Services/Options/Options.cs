@@ -8,6 +8,9 @@ namespace OnlyT.Services.Options
     /// </summary>
     public class Options
     {
+        public static int DefaultPort = 8096;
+        public static int MaxPossiblePorts = 0x80;
+
         public Options()
         {
             OperatingMode = OperatingMode.Automatic;
@@ -19,6 +22,7 @@ namespace OnlyT.Services.Options
             AnalogueClockWidthPercent = 50;
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
+            HttpServerPort = DefaultPort;
 
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
             ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
@@ -40,8 +44,10 @@ namespace OnlyT.Services.Options
         public bool ShowTimeOfDayUnderTimer { get; set; }
         public bool ShowDurationSector { get; set; }
         public bool CountUp { get; set; }
+        public int HttpServerPort { get; set; }
+        public bool IsWebClockEnabled { get; set; }
 
-        
+
         /// <summary>
         /// Validates the data, correcting automatically as required
         /// </summary>
@@ -60,6 +66,11 @@ namespace OnlyT.Services.Options
             if (AnalogueClockWidthPercent < 0 || AnalogueClockWidthPercent > 100)
             {
                 AnalogueClockWidthPercent = 50;
+            }
+
+            if (HttpServerPort < DefaultPort || HttpServerPort > DefaultPort + MaxPossiblePorts)
+            {
+                HttpServerPort = DefaultPort;
             }
         }
     }

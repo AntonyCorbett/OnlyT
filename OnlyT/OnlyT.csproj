@@ -100,6 +100,7 @@
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
+    <Compile Include="Models\WebClockPortItem.cs" />
     <Compile Include="Services\Bell\BellService.cs" />
     <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
     <Compile Include="Services\Bell\IBellService.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Utils\CommandLineParser.cs" />
     <Compile Include="Utils\DateTimeExtensions.cs" />
     <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\FirewallPortsClient.cs" />
     <Compile Include="Utils\GreenYellowRedSelector.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Utils\TimeFormatter.cs" />
@@ -159,6 +161,10 @@
     <Compile Include="ViewModel\OperatorPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TimerOutputWindowViewModel.cs" />
+    <Compile Include="WebServer\ClockServerEventArgs.cs" />
+    <Compile Include="WebServer\ClockServerMode.cs" />
+    <Compile Include="WebServer\HttpServer.cs" />
+    <Compile Include="WebServer\IHttpServer.cs" />
     <Compile Include="Windows\OperatorPage.xaml.cs">
       <DependentUpon>OperatorPage.xaml</DependentUpon>
     </Compile>
@@ -238,6 +244,7 @@
     <Content Include="bell.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\ClockHtmlTemplate.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

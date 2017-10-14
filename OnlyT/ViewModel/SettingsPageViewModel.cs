@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -8,7 +10,9 @@ using OnlyT.Models;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
+using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
+using Serilog;
 
 namespace OnlyT.ViewModel
 {
@@ -17,6 +21,7 @@ namespace OnlyT.ViewModel
     public class SettingsPageViewModel : ViewModelBase, IPage
     {
         public static string PageName => "SettingsPage";
+        
         private readonly MonitorItem[] _monitors;
         private readonly OperatingModeItem[] _operatingModes;
         private readonly AutoMeetingTime[] _autoMeetingTimes;
@@ -26,6 +31,7 @@ namespace OnlyT.ViewModel
         private readonly ClockHourFormatItem[] _clockHourFormats;
         private readonly AdaptiveModeItem[] _adaptiveModes;
         private readonly FullScreenClockModeItem[] _timeOfDayModes;
+        private readonly WebClockPortItem[] _ports;
 
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
@@ -46,10 +52,35 @@ namespace OnlyT.ViewModel
             _clockHourFormats = GetClockHourFormats().ToArray();
             _adaptiveModes = GetAdaptiveModes().ToArray();
             _timeOfDayModes = GetTimeOfDayModes().ToArray();
+            _ports = GetPorts().ToArray();
 
+            // commands...
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
+            OpenPortCommand = new RelayCommand(ReservePort);
         }
+
+        private void ReservePort()
+        {
+            try
+            {
+                int rv = FirewallPortsClient.ReservePort(Port);
+                if (rv != 0)
+                {
+                    Log.Logger.Warning($"Return value from reserve port = {rv}");
+                }
+                else
+                {
+                    Log.Logger.Information($"Port reserved: {Port}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not reserve port");
+            }
+        }
+
+        public BitmapSource ElevatedShield => Utils.NativeMethods.GetElevatedShieldBitmap();
 
         private IEnumerable<FullScreenClockModeItem> GetTimeOfDayModes()
         {
@@ -69,6 +100,18 @@ namespace OnlyT.ViewModel
                 new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY},
                 new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY}
             };
+        }
+
+        private IEnumerable<WebClockPortItem> GetPorts()
+        {
+            var result = new List<WebClockPortItem>();
+            
+            for(int n=Options.DefaultPort; n<= Options.DefaultPort + Options.MaxPossiblePorts; ++n)
+            {
+                result.Add(new WebClockPortItem {Port = n});
+            }
+
+            return result;
         }
 
         private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
@@ -202,6 +245,21 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.MidWeekAdaptiveMode != value)
                 {
                     _optionsService.Options.MidWeekAdaptiveMode = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public IEnumerable<WebClockPortItem> Ports => _ports;
+
+        public int Port
+        {
+            get => _optionsService.Options.HttpServerPort;
+            set
+            {
+                if (_optionsService.Options.HttpServerPort != value)
+                {
+                    _optionsService.Options.HttpServerPort = value;
                     RaisePropertyChanged();
                 }
             }
@@ -344,6 +402,19 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool IsWebClockEnabled
+        {
+            get => _optionsService.Options.IsWebClockEnabled;
+            set
+            {
+                if (_optionsService.Options.IsWebClockEnabled != value)
+                {
+                    _optionsService.Options.IsWebClockEnabled = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public void Activated(object state)
         {
 
@@ -370,5 +441,6 @@ namespace OnlyT.ViewModel
 
         public RelayCommand NavigateOperatorCommand { get; set; }
         public RelayCommand TestBellCommand { get; set; }
+        public RelayCommand OpenPortCommand { get; set; }
     }
 }

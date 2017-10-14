@@ -5,6 +5,7 @@ using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
+using OnlyT.WebServer;
 
 namespace OnlyT.ViewModel
 {
@@ -20,6 +21,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ITalkScheduleService, TalkScheduleService>();
             SimpleIoc.Default.Register<IBellService, BellService>();
             SimpleIoc.Default.Register<IAdaptiveTimerService, AdaptiveTimerService>();
+            SimpleIoc.Default.Register<IHttpServer, HttpServer>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<OperatorPageViewModel>();

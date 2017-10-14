@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Threading;
 using OnlyT.EventArgs;
+using OnlyT.WebServer;
 
 namespace OnlyT.Services.Timer
 {
@@ -78,6 +79,16 @@ namespace OnlyT.Services.Timer
                     });
                 }
             }
+        }
+
+        public TimerChangedEventArgs GetClockRequestInfo()
+        {
+            return new TimerChangedEventArgs
+            {
+                TargetSecs = _targetSecs,
+                ElapsedSecs = _currentSecondsElapsed,
+                IsRunning = IsRunning
+            };
         }
 
         /// <summary>

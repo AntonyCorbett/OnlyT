@@ -1,5 +1,6 @@
 ﻿using System;
 using OnlyT.EventArgs;
+using OnlyT.WebServer;
 
 namespace OnlyT.Services.Timer
 {
@@ -10,5 +11,6 @@ namespace OnlyT.Services.Timer
         void Stop();
         int CurrentSecondsElapsed { get; set; }
         bool IsRunning { get; }
+        TimerChangedEventArgs GetClockRequestInfo();
     }
 }
