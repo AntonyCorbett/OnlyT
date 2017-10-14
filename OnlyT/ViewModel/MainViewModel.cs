@@ -51,6 +51,7 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
             Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
+            Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
 
             InitHttpServer();
 
@@ -66,6 +67,16 @@ namespace OnlyT.ViewModel
             // (fire and forget)
             LaunchTimerWindowAsync();
 #pragma warning restore 4014
+        }
+
+        private void OnHttpServerChanged(HttpServerChangedMessage msg)
+        {
+            _httpServer.Stop();
+
+            if (_optionsService.Options.IsWebClockEnabled)
+            {
+                _httpServer.Start(_optionsService.Options.HttpServerPort);
+            }
         }
 
         private void InitHttpServer()

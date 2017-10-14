@@ -72,6 +72,7 @@ namespace OnlyT.ViewModel
                 else
                 {
                     Log.Logger.Information($"Port reserved: {Port}");
+                    Messenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
             catch (Exception ex)
@@ -411,6 +412,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.IsWebClockEnabled = value;
                     RaisePropertyChanged();
+                    Messenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
         }

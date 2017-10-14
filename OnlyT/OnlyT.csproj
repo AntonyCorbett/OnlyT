@@ -152,6 +152,7 @@
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\OvertimeMessage.cs" />
+    <Compile Include="ViewModel\Messages\HttpServerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShowTimeOfDayUnderTimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerChangedMessage.cs" />
