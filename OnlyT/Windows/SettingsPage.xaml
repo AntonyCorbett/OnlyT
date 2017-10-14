@@ -121,6 +121,7 @@
 
                 <GroupBox Margin="0,5,0,0" Header="Web clock" Padding="5" >
                     <StackPanel>
+                        <Label Style="{StaticResource LabelStyle}">Port:</Label>
                         <ComboBox ItemsSource="{Binding Ports}" 
                                   SelectedValuePath="Port" 
                                   DisplayMemberPath="Name"
