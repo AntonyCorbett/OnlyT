@@ -46,6 +46,7 @@ namespace OnlyT.Services.Options
         public bool CountUp { get; set; }
         public int HttpServerPort { get; set; }
         public bool IsWebClockEnabled { get; set; }
+        public bool AllowCountUpToggle { get; set; }
 
 
         /// <summary>

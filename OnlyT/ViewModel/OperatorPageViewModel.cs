@@ -35,7 +35,7 @@ namespace OnlyT.ViewModel
         private static readonly int _maxTimerMins = 99;
         private static readonly int _maxTimerSecs = _maxTimerMins * 60;
 
-        private readonly SolidColorBrush _bellColorActive = new SolidColorBrush(Colors.Gold);
+        private readonly SolidColorBrush _bellColorActive = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
         private readonly SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
 
         public OperatorPageViewModel(
@@ -53,6 +53,7 @@ namespace OnlyT.ViewModel
 
             SelectFirstTalk();
 
+            // commands...
             StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
             SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
@@ -64,12 +65,26 @@ namespace OnlyT.ViewModel
             DecrementTimer15Command = new RelayCommand(DecrementTimer15Secs, CanDecreaseTimerValue);
             DecrementTimer5Command = new RelayCommand(DecrementTimer5Mins, CanDecreaseTimerValue);
             BellToggleCommand = new RelayCommand(BellToggle);
-            
+            CountUpToggleCommand = new RelayCommand(CountUpToggle);
+
             // subscriptions...
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
         }
 
+        private void CountUpToggle()
+        {
+            if (_optionsService.Options.AllowCountUpToggle)
+            {
+                var talk = GetCurrentTalk();
+                if (talk != null)
+                {
+                    talk.CountUp = !_countUp;
+                    RefreshCountUpFlag(talk);
+                }
+            }
+        }
+        
         private void LaunchHelp()
         {
             System.Diagnostics.Process.Start(@"https://github.com/AntonyCorbett/OnlyT/wiki");
@@ -145,16 +160,19 @@ namespace OnlyT.ViewModel
 
         private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
         {
-            try
+            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
-                _scheduleService.Reset();
-                TalkId = 0;
-                RaisePropertyChanged(nameof(Talks));
-                SelectFirstTalk();
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not handle change of meeting schedule");
+                try
+                {
+                    _scheduleService.Reset();
+                    TalkId = 0;
+                    RaisePropertyChanged(nameof(Talks));
+                    SelectFirstTalk();
+                }
+                catch (Exception ex)
+                {
+                    Log.Logger.Error(ex, "Could not handle change of meeting schedule");
+                }
             }
         }
 
@@ -340,7 +358,7 @@ namespace OnlyT.ViewModel
                 {
                     _talkId = value;
 
-                    var talk = _scheduleService.GetTalkScheduleItem(_talkId);
+                    var talk = GetCurrentTalk();
                     RefreshCountUpFlag(talk);
                     
                     TargetSeconds = GetTargetSecondsFromTalkSchedule(talk);
@@ -358,6 +376,9 @@ namespace OnlyT.ViewModel
         private void RefreshCountUpFlag(TalkScheduleItem talk)
         {
             _countUp = talk?.CountUp ?? _optionsService.Options.CountUp;
+            RaisePropertyChanged(nameof(CountUpOrDownImageData));
+            RaisePropertyChanged(nameof(CountUpOrDownTooltip));
+            RaisePropertyChanged(nameof(CurrentTimerValueString));
         }
 
         private TalkScheduleItem GetCurrentTalk()
@@ -588,16 +609,26 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
+
+        public string CountUpOrDownTooltip => _countUp
+            ? "Currently counting up"
+            : "Currently counting down";
+
+        public string CountUpOrDownImageData => _countUp
+            ? "M 16,0 L 32,7.5 22,7.5 16,30 10,7.5 0,7.5z"
+            : "M 16,0 L 22,22.5 32,22.5 16,30 0,22.5 10,22.5z";
+
         public bool IsCircuitVisit => _optionsService.Options.IsCircuitVisit &&
                                       _optionsService.Options.OperatingMode == OperatingMode.Automatic;
 
         public void Activated(object state)
         {
             // "CountUp" setting may have changed
-            var talk = _scheduleService.GetTalkScheduleItem(_talkId);
+            var talk = GetCurrentTalk();
             RefreshCountUpFlag(talk);
-            RaisePropertyChanged(nameof(CurrentTimerValueString));  
             
+            RaisePropertyChanged(nameof(AllowCountUpDownToggle));
             RaisePropertyChanged(nameof(IsBellVisible));
             RaisePropertyChanged(nameof(IsCircuitVisit));
         }
@@ -613,5 +644,7 @@ namespace OnlyT.ViewModel
         public RelayCommand DecrementTimer15Command { get; set; }
         public RelayCommand DecrementTimer5Command { get; set; }
         public RelayCommand BellToggleCommand { get; set; }
+        public RelayCommand CountUpToggleCommand { get; set; }
+
     }
 }

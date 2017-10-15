@@ -139,7 +139,6 @@
                                 <Label Content="Reserve Port"></Label>
                             </StackPanel>
                         </Button>
-
                         
                         <TextBlock Margin="0,10,0,0">
                             <Hyperlink Command="{Binding WebClockUrlLinkCommand}">
@@ -147,13 +146,24 @@
                             </Hyperlink>
                         </TextBlock>
                         
+                        <Image Width="200" Source="{Binding WebClockQRCode}">
+                            
+                        </Image>
                             
                     </StackPanel>
                 </GroupBox>
 
+                <GroupBox Margin="0,5,0,0" Header="Miscellaneous" Padding="5" >
+                    <StackPanel>
 
-                <CheckBox IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}" 
+                        <CheckBox IsChecked="{Binding AllowCountUpToggle, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Allow count-up toggle" />
+
+                        <CheckBox IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}" 
                           Margin="0,10,0,0" Content="Always on top" />
+                        
+                    </StackPanel>
+                </GroupBox>
 
             </StackPanel>
         </ScrollViewer>

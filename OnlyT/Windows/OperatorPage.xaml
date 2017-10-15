@@ -7,11 +7,13 @@
       xmlns:local="clr-namespace:OnlyT.Windows"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
+      xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="395">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <valueConverters:BoolToCursorConverter x:Key="ToCursorConverter" />
 
         <Style x:Key="MiscButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent" />
@@ -103,6 +105,24 @@
                         <Run ToolTip="{Binding Duration3Tooltip}" Foreground="{Binding Duration3Colour}" Text="{Binding Duration3String}"/>
                     </TextBlock>
 
+                    <Button Grid.Column="1" 
+                            Margin="0,0,0,-5"
+                            Command="{Binding CountUpToggleCommand}" 
+                            IsEnabled="{Binding IsNotRunning}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Width="22"
+                            ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
+                            Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
+                            Style="{StaticResource ChromelessBtn}">
+                        <Path  
+                            Data="{Binding CountUpOrDownImageData}"
+                            Stretch="Uniform"
+                            Fill="#f3dcbc">
+                        </Path>
+                    </Button>
+
+
                     <TextBlock Grid.Column="1" 
                                Margin="0,-5,0,0"
                                Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BoolToVis}, Mode=OneWay}"
@@ -156,6 +176,7 @@
 
             <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="10,5,0,5">
                 <Button Height="35" VerticalAlignment="Top" 
+                        Background="Transparent"
                         ToolTip="Increase"
                         Margin="0,0,0,2" Command="{Binding IncrementTimerCommand}">
                     <Button.InputBindings>
@@ -171,6 +192,7 @@
                 </Button>
                 <Button Height="35" VerticalAlignment="Bottom" 
                         ToolTip="Decrease"
+                        Background="Transparent"
                         Margin="0,2,0,0" Command="{Binding DecrementTimerCommand}">
                     <Button.InputBindings>
                         <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding DecrementTimer15Command}"/>
@@ -187,6 +209,7 @@
         </Grid>
 
         <Button Grid.Row="2" Command="{Binding StartCommand}" 
+                Background="Transparent"
                 Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <behaviours:DisableDoubleClickBehavior />

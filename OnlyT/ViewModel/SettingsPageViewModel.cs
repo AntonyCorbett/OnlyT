@@ -316,6 +316,19 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool AllowCountUpToggle
+        {
+            get => _optionsService.Options.AllowCountUpToggle;
+            set
+            {
+                if (_optionsService.Options.AllowCountUpToggle != value)
+                {
+                    _optionsService.Options.AllowCountUpToggle = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public bool AlwaysOnTop
         {
             get => _optionsService.Options.AlwaysOnTop;
@@ -421,6 +434,19 @@ namespace OnlyT.ViewModel
                     RaisePropertyChanged();
                     Messenger.Default.Send(new HttpServerChangedMessage());
                 }
+            }
+        }
+
+        public BitmapImage WebClockQRCode
+        {
+            get
+            {
+                var url = WebClockUrl;
+                if (!string.IsNullOrEmpty(url) && url.StartsWith("http"))
+                {
+                    return QRCodeGeneration.CreateQRCode(WebClockUrl);
+                }
+                return null;
             }
         }
 
