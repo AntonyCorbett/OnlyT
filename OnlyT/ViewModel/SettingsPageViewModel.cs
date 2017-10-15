@@ -269,6 +269,7 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.HttpServerPort = value;
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(WebClockUrl));
+                    RaisePropertyChanged(nameof(WebClockQRCode));
                 }
             }
         }

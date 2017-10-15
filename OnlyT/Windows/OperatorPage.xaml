@@ -222,6 +222,7 @@
         </Button>
 
         <Button Grid.Row="2" Command="{Binding StopCommand}"
+                Background="Transparent"
                 Visibility="{Binding Path=IsRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <behaviours:DisableDoubleClickBehavior />
