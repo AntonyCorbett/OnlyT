@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Windows;
 
 namespace OnlyT.Services.Options
 {
@@ -30,6 +31,7 @@ namespace OnlyT.Services.Options
 
         public string TimerMonitorId { get; set; }
         public string AppWindowPlacement { get; set; }
+        public Size SettingsPageSize { get; set; }
         public OperatingMode OperatingMode { get; set; }
         public MidWeekOrWeekend MidWeekOrWeekend { get; set; }
         public bool IsCircuitVisit { get; set; }

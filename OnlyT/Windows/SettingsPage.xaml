@@ -6,11 +6,16 @@
              xmlns:local="clr-namespace:OnlyT.Windows"
              DataContext="{Binding Settings, Mode=OneWay, Source={StaticResource Locator}}"             
              mc:Ignorable="d" 
-             d:DesignHeight="1200" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="800">
 
     <UserControl.Resources>
         <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
             <Setter Property="Margin" Value="-5,0,0,0" />
+        </Style>
+        <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Width" Value="230" />
+            <Setter Property="Padding" Value="5" />
         </Style>
     </UserControl.Resources>
 
@@ -30,33 +35,38 @@
             <RowDefinition Height="259*"/>
         </Grid.RowDefinitions>
         
-        <Button Grid.Row="0" Command="{Binding NavigateOperatorCommand}">
+        <Button Grid.Row="0" 
+                Background="Transparent"
+                Command="{Binding NavigateOperatorCommand}">
             <Path Fill="Black" Data="M12.98431,0.00039917452C13.39189,0.014400231,13.670029,0.39642023,13.670029,1.0964207L13.670029,6.1874495C13.670029,6.4934812,13.874008,6.6964851,14.180038,6.6964851L31.491013,6.6964851C31.796005,6.6964851,31.999985,6.900466,31.999985,7.2064977L31.999985,14.334524C31.999985,14.639518,31.796005,14.843499,31.491013,14.843499L14.180038,14.843499C13.874008,14.843499,13.670029,15.04754,13.670029,15.352535L13.670029,20.138568C13.670029,21.360561,12.957992,21.767545,11.939011,20.953577L0.5339815,11.788491C-0.17799383,11.279516,-0.17799383,10.159515,0.5339815,9.6504799L12.14299,0.38346564C12.448616,0.11608436,12.739762,-0.0080016943,12.98431,0.00039917452z"></Path>
         </Button>
 
-        <ScrollViewer Grid.Row="1" Padding="10,0,10,10">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Margin="0,10,0,0" Text="{Binding AppVersionStr}" Foreground="CadetBlue"/>
+        <ScrollViewer Grid.Row="1" Padding="10,0,10,10" VerticalScrollBarVisibility="Auto">
+            <WrapPanel Orientation ="Horizontal">
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Main">
+                    <StackPanel>
+                        <TextBlock Text="{Binding AppVersionStr}" Foreground="CadetBlue"/>
                 
-                <Label Style="{StaticResource LabelStyle}">Monitor:</Label>
-                <ComboBox ItemsSource="{Binding Monitors}" 
-                          SelectedValuePath="MonitorId" 
-                          DisplayMemberPath="MonitorName"
-                          SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
+                        <Label Style="{StaticResource LabelStyle}">Monitor:</Label>
+                        <ComboBox ItemsSource="{Binding Monitors}" 
+                                  SelectedValuePath="MonitorId" 
+                                  DisplayMemberPath="MonitorName"
+                                  SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
 
-                <Label Style="{StaticResource LabelStyle}">Mode:</Label>
-                <ComboBox ItemsSource="{Binding OperatingModes}" 
-                          SelectedValuePath="Mode" 
-                          DisplayMemberPath="Name"
-                          SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
+                        <Label Style="{StaticResource LabelStyle}">Mode:</Label>
+                        <ComboBox ItemsSource="{Binding OperatingModes}" 
+                                  SelectedValuePath="Mode" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
 
-                <Label Style="{StaticResource LabelStyle}">Digital clock format:</Label>
-                <ComboBox ItemsSource="{Binding ClockHourFormats}" 
-                          SelectedValuePath="Format" 
-                          DisplayMemberPath="Name"
-                          SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
-
-                <GroupBox Margin="0,5,0,0" Header="Automatic mode" Padding="5" >
+                        <Label Style="{StaticResource LabelStyle}">Digital clock format:</Label>
+                        <ComboBox ItemsSource="{Binding ClockHourFormats}" 
+                                  SelectedValuePath="Format" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Automatic mode">
                     <StackPanel>
                         <Label Style="{StaticResource LabelStyle}">Meeting:</Label>
                         <ComboBox ItemsSource="{Binding AutoMeetingTimes}" 
@@ -81,7 +91,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Margin="0,5,0,0" Header="Bell" Padding="5" >
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Bell">
                     <StackPanel>
                         <CheckBox IsChecked="{Binding IsBellEnabled, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Enabled" />
@@ -95,7 +105,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Margin="0,5,0,0" Header="Timer window" Padding="5" >
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Timer window">
                     <StackPanel>
                         <Label Style="{StaticResource LabelStyle}">Full-screen clock mode:</Label>
                         <ComboBox ItemsSource="{Binding TimeOfDayModes}" 
@@ -119,7 +129,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Margin="0,5,0,0" Header="Web clock" Padding="5" >
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Web clock">
                     <StackPanel>
                         <CheckBox IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Enabled" />
@@ -153,7 +163,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Margin="0,5,0,0" Header="Miscellaneous" Padding="5" >
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Miscellaneous">
                     <StackPanel>
 
                         <CheckBox IsChecked="{Binding AllowCountUpToggle, Mode=TwoWay}" 
@@ -165,7 +175,7 @@
                     </StackPanel>
                 </GroupBox>
 
-            </StackPanel>
+            </WrapPanel>
         </ScrollViewer>
 
     </Grid>

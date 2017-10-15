@@ -97,7 +97,7 @@ namespace OnlyT.Utils
             }
         }
 
-        private static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
+        public static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
         {
             var dpi = GetDpiSettings();
 
@@ -120,9 +120,18 @@ namespace OnlyT.Utils
             }
         }
 
-        public static void SetPlacement(this Window window, string placementJson)
+        public static void SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
         {
-            SetPlacement(new WindowInteropHelper(window).Handle, placementJson, window.Width, window.Height);
+            double width = window.Width;
+            double height = window.Height;
+
+            if (overrideSize != default(Size))
+            {
+                width = overrideSize.Width;
+                height = overrideSize.Height;
+            }
+            
+            SetPlacement(new WindowInteropHelper(window).Handle, placementJson, width, height);
         }
 
         public static string GetPlacement(this Window window)

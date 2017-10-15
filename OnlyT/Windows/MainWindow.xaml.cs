@@ -13,23 +13,63 @@ namespace OnlyT.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const double MainWindowWidth = 395;
+        private const double MainWindowHeight = 350;
+
         public MainWindow()
         {
             InitializeComponent();
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, BringToFront);
+            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
         }
 
-        private void BringToFront(TimerMonitorChangedMessage obj)
+        private void OnNavigate(NavigateMessage message)
+        {
+            if (message.OriginalPageName.Equals(SettingsPageViewModel.PageName))
+            {
+                // store the size of the settings page...
+                SaveSettingsWindowSize();
+            }
+
+            if (message.TargetPageName.Equals(OperatorPageViewModel.PageName))
+            {
+                // We don't allow the main window to be resized...
+                ResizeMode = ResizeMode.CanMinimize;
+                var adjustedSize = WindowPlacement.GetAdjustedWidthAndHeight(MainWindowWidth, MainWindowHeight);
+                Width = adjustedSize.Item1;
+                Height = adjustedSize.Item2;
+            }
+            else if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
+            {
+                // Settings window can be resized...
+                ResizeMode = ResizeMode.CanResize;
+                var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+                var sz = optionsService.Options.SettingsPageSize;
+                if (sz != default(Size))
+                {
+                    var adjustedSize = WindowPlacement.GetAdjustedWidthAndHeight(sz.Width, sz.Height);
+                    Width = adjustedSize.Item1;
+                    Height = adjustedSize.Item2;
+                }
+            }
+        }
+
+        private void BringToFront(TimerMonitorChangedMessage message)
         {
             Activate();
         }
 
         protected override void OnSourceInitialized(System.EventArgs e)
         {
+            AdjustMainWindowPositionAndSize();
+        }
+
+        private void AdjustMainWindowPositionAndSize()
+        {
             var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
             if (!string.IsNullOrEmpty(optionsService.Options.AppWindowPlacement))
             {
-                this.SetPlacement(optionsService.Options.AppWindowPlacement);
+                this.SetPlacement(optionsService.Options.AppWindowPlacement, new Size(MainWindowWidth, MainWindowHeight));
             }
         }
 
@@ -46,5 +86,10 @@ namespace OnlyT.Windows
             optionsService.Options.AppWindowPlacement = this.GetPlacement();
         }
 
+        private void SaveSettingsWindowSize()
+        {
+            var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+            optionsService.Options.SettingsPageSize = new Size(Width, Height);
+        }
     }
 }
