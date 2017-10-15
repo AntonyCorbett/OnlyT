@@ -139,6 +139,7 @@
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FirewallPortsClient.cs" />
     <Compile Include="Utils\GreenYellowRedSelector.cs" />
+    <Compile Include="Utils\LocalIpAddress.cs" />
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WebUtils.cs" />

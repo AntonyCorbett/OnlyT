@@ -58,6 +58,12 @@ namespace OnlyT.ViewModel
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
             OpenPortCommand = new RelayCommand(ReservePort);
+            WebClockUrlLinkCommand = new RelayCommand(OpenWebClockLink);
+        }
+
+        private void OpenWebClockLink()
+        {
+            System.Diagnostics.Process.Start(WebClockUrl);
         }
 
         private void ReservePort()
@@ -262,6 +268,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.HttpServerPort = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(WebClockUrl));
                 }
             }
         }
@@ -417,6 +424,20 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public string WebClockUrl
+        {
+            get
+            {
+                string ipAddress = LocalIpAddress.GetLocalIp4Address();
+                if (!string.IsNullOrEmpty(ipAddress))
+                {
+                    return $"http://{ipAddress}:{Port}/index";
+                }
+                
+                return "Web clock not available";
+            }
+        }
+
         public void Activated(object state)
         {
 
@@ -444,5 +465,6 @@ namespace OnlyT.ViewModel
         public RelayCommand NavigateOperatorCommand { get; set; }
         public RelayCommand TestBellCommand { get; set; }
         public RelayCommand OpenPortCommand { get; set; }
+        public RelayCommand WebClockUrlLinkCommand { get; set; }
     }
 }
