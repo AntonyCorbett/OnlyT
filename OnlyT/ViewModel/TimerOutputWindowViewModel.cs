@@ -59,7 +59,7 @@ namespace OnlyT.ViewModel
 
         private void OnTimerStarted(TimerStartMessage message)
         {
-            TimeString = TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp 
+            TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp 
                 ? 0
                 : message.TargetSeconds);
 
@@ -96,7 +96,7 @@ namespace OnlyT.ViewModel
             {
                 TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
                 
-                TimeString = TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp
+                TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp
                     ? message.ElapsedSecs
                     : message.RemainingSecs);
 

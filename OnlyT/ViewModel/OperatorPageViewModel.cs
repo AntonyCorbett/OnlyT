@@ -30,6 +30,7 @@ namespace OnlyT.ViewModel
         private readonly IOptionsService _optionsService;
         private readonly IAdaptiveTimerService _adaptiveTimerService;
         private int _secondsElapsed;
+        private bool _countUp;
         private static readonly Brush _whiteBrush = Brushes.White;
         private static readonly int _maxTimerMins = 99;
         private static readonly int _maxTimerSecs = _maxTimerMins * 60;
@@ -48,6 +49,7 @@ namespace OnlyT.ViewModel
             _adaptiveTimerService = adaptiveTimerService;
             _timerService = timerService;
             _timerService.TimerChangedEvent += TimerChangedHandler;
+            _countUp = _optionsService.Options.CountUp;
 
             SelectFirstTalk();
 
@@ -62,7 +64,7 @@ namespace OnlyT.ViewModel
             DecrementTimer15Command = new RelayCommand(DecrementTimer15Secs, CanDecreaseTimerValue);
             DecrementTimer5Command = new RelayCommand(DecrementTimer5Mins, CanDecreaseTimerValue);
             BellToggleCommand = new RelayCommand(BellToggle);
-
+            
             // subscriptions...
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
@@ -261,7 +263,7 @@ namespace OnlyT.ViewModel
             RaiseCanExecuteChanged();
             AdjustForAdaptiveTime();
 
-            Messenger.Default.Send(new TimerStartMessage(_targetSeconds));
+            Messenger.Default.Send(new TimerStartMessage(_targetSeconds, _countUp));
 
             Task.Run(() =>
             {
@@ -337,18 +339,25 @@ namespace OnlyT.ViewModel
                 if (_talkId != value)
                 {
                     _talkId = value;
-                    TargetSeconds = GetTargetSecondsFromTalkSchedule(_talkId);
+
+                    var talk = _scheduleService.GetTalkScheduleItem(_talkId);
+                    RefreshCountUpFlag(talk);
+                    
+                    TargetSeconds = GetTargetSecondsFromTalkSchedule(talk);
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(IsBellVisible));
                     RaisePropertyChanged(nameof(BellColour));
                     RaisePropertyChanged(nameof(BellTooltip));
                     
                     RaiseCanExecuteIncrDecrChanged();
-
-                    var talk = _scheduleService.GetTalkScheduleItem(_talkId);
                     SetDurationStringAttributes(talk);
                 }
             }
+        }
+
+        private void RefreshCountUpFlag(TalkScheduleItem talk)
+        {
+            _countUp = talk?.CountUp ?? _optionsService.Options.CountUp;
         }
 
         private TalkScheduleItem GetCurrentTalk()
@@ -356,9 +365,8 @@ namespace OnlyT.ViewModel
             return _scheduleService.GetTalkScheduleItem(TalkId);
         }
 
-        private int GetTargetSecondsFromTalkSchedule(int talkId)
+        private int GetTargetSecondsFromTalkSchedule(TalkScheduleItem talk)
         {
-            var talk = _scheduleService.GetTalkScheduleItem(talkId);
             return talk?.GetDurationSeconds() ?? 0;
         }
 
@@ -394,7 +402,7 @@ namespace OnlyT.ViewModel
             _secondsElapsed = e.ElapsedSecs;
             SecondsRemaining = e.RemainingSecs;
             
-            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning));
+            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, _countUp));
 
             if (e.RemainingSecs == 0)
             {
@@ -567,7 +575,7 @@ namespace OnlyT.ViewModel
             }
         }
         
-        public string CurrentTimerValueString => TimeFormatter.FormatTimerDisplayString(_optionsService.Options.CountUp
+        public string CurrentTimerValueString => TimeFormatter.FormatTimerDisplayString(_countUp
             ? _secondsElapsed
             : _secondsRemaining);
 
@@ -585,7 +593,11 @@ namespace OnlyT.ViewModel
 
         public void Activated(object state)
         {
-            RaisePropertyChanged(nameof(CurrentTimerValueString));  // "CountUp" setting may have changed
+            // "CountUp" setting may have changed
+            var talk = _scheduleService.GetTalkScheduleItem(_talkId);
+            RefreshCountUpFlag(talk);
+            RaisePropertyChanged(nameof(CurrentTimerValueString));  
+            
             RaisePropertyChanged(nameof(IsBellVisible));
             RaisePropertyChanged(nameof(IsCircuitVisit));
         }

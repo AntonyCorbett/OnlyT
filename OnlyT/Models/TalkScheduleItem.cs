@@ -11,6 +11,7 @@ namespace OnlyT.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool? CountUp { get; set; }
 
         /// <summary>
         /// Original duration (before any user modification)

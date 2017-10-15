@@ -28,6 +28,13 @@ namespace OnlyT.Services.TalkSchedule
             return File.Exists(GetFullPath());
         }
 
+        private static bool? AttributeToNullableBool(XAttribute attribute, bool? defaultValue)
+        {
+            return string.IsNullOrEmpty(attribute?.Value)
+                ? defaultValue
+                : Convert.ToBoolean(attribute.Value);
+        }
+
         private static bool AttributeToBool(XAttribute attribute, bool defaultValue)
         {
             return attribute == null
@@ -70,6 +77,7 @@ namespace OnlyT.Services.TalkSchedule
                             {
                                 Id = talkId++,
                                 Name = (string)elem.Attribute("name"),
+                                CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
                                 Bell = AttributeToBool(elem.Attribute("bell"), false)

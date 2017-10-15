@@ -1,11 +1,20 @@
 <meeting>
 
+  <!--"name" is a descriptive name for the talk (it appears in a combobox at the top of the main window)-->
+
   <!--"duration" format is hr:mm:ss-->
-  <!--Use the "editable" attribute to allow the user to manually modify an item's duration-->
-  <!--Use the "bell" attribute to automatically sound a bell at the expiration of an item's' duration-->
+
+  <!--The "editable" attribute determines whether the user can manually modify the item's duration-->
+
+  <!--Use the "bell" attribute to automatically sound a bell at the expiration of an item's duration-->
+
+  <!--Use the "countup" attribute to specify whether the timer should count up (true) or down (false). 
+  If you leave it empty or remove the attribute then the timer will use the value specified in the OnlyT
+  settings page-->
+
   <items>
-    <item name="Welcome" duration="00:03:00" editable="true" />
-    <item name="Keynote" duration="01:00:00" editable="true" bell="true"/>
+    <item name="Welcome" duration="00:03:00" editable="true" countup="true" />
+    <item name="Keynote" duration="01:00:00" editable="true" bell="true" countup="false" />
     <item name="Concluding Comments" duration="00:03:00" editable="true" />
   </items>  
   
