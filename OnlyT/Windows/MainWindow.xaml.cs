@@ -35,9 +35,8 @@ namespace OnlyT.Windows
             {
                 // We don't allow the main window to be resized...
                 ResizeMode = ResizeMode.CanMinimize;
-                var adjustedSize = WindowPlacement.GetAdjustedWidthAndHeight(MainWindowWidth, MainWindowHeight);
-                Width = adjustedSize.Item1;
-                Height = adjustedSize.Item2;
+                Width = MainWindowWidth;
+                Height = MainWindowHeight;
             }
             else if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
             {
@@ -47,9 +46,8 @@ namespace OnlyT.Windows
                 var sz = optionsService.Options.SettingsPageSize;
                 if (sz != default(Size))
                 {
-                    var adjustedSize = WindowPlacement.GetAdjustedWidthAndHeight(sz.Width, sz.Height);
-                    Width = adjustedSize.Item1;
-                    Height = adjustedSize.Item2;
+                    Width = sz.Width;
+                    Height = sz.Height;
                 }
             }
         }

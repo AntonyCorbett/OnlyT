@@ -97,7 +97,7 @@ namespace OnlyT.Utils
             }
         }
 
-        public static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
+        private static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
         {
             var dpi = GetDpiSettings();
 

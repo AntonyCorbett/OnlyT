@@ -57,7 +57,6 @@ namespace OnlyT.ViewModel
 
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
-            _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
 
             _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
 
@@ -67,6 +66,16 @@ namespace OnlyT.ViewModel
             // (fire and forget)
             LaunchTimerWindowAsync();
 #pragma warning restore 4014
+        }
+
+        private void InitSettingsPage()
+        {
+            // we only init the settings page when first used...
+            
+            if (!_pages.ContainsKey(SettingsPageViewModel.PageName))
+            {
+                _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
+            }
         }
 
         private void OnHttpServerChanged(HttpServerChangedMessage msg)
@@ -162,6 +171,12 @@ namespace OnlyT.ViewModel
         /// <param name="message"></param>
         private void OnNavigate(NavigateMessage message)
         {
+            if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
+            {
+                // we only init the settings page when first used...
+                InitSettingsPage();
+            }
+            
             CurrentPage = _pages[message.TargetPageName];
             _currentPageName = message.TargetPageName;
             ((IPage)CurrentPage.DataContext).Activated(message.State);
