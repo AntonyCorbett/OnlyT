@@ -146,7 +146,7 @@
                                 Margin="0,10,0,0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding ElevatedShield}" Height="16"/>
-                                <Label Content="Reserve Port"></Label>
+                                <Label Content="Open Port"></Label>
                             </StackPanel>
                         </Button>
                         

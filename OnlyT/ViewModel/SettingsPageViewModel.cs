@@ -57,7 +57,7 @@ namespace OnlyT.ViewModel
             // commands...
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
-            OpenPortCommand = new RelayCommand(ReservePort);
+            OpenPortCommand = new RelayCommand(ReserveAndOpenPort);
             WebClockUrlLinkCommand = new RelayCommand(OpenWebClockLink);
         }
 
@@ -66,20 +66,23 @@ namespace OnlyT.ViewModel
             System.Diagnostics.Process.Start(WebClockUrl);
         }
 
-        private void ReservePort()
+        private void ReserveAndOpenPort()
         {
             try
             {
-                int rv = FirewallPortsClient.ReservePort(Port);
+                Log.Logger.Information($"Attempting to reserve and open port: {Port}");
+                
+                int rv = FirewallPortsClient.ReserveAndOpenPort(Port);
                 if (rv != 0)
                 {
-                    Log.Logger.Warning($"Return value from reserve port = {rv}");
+                    Log.Logger.Warning($"Return value from reserve and open port = {rv}");
                 }
                 else
                 {
-                    Log.Logger.Information($"Port reserved: {Port}");
-                    Messenger.Default.Send(new HttpServerChangedMessage());
+                    Log.Logger.Information($"Success reserving and opening port: {Port}");
                 }
+                
+                Messenger.Default.Send(new HttpServerChangedMessage());
             }
             catch (Exception ex)
             {
@@ -270,6 +273,8 @@ namespace OnlyT.ViewModel
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(WebClockUrl));
                     RaisePropertyChanged(nameof(WebClockQRCode));
+
+                    Messenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
         }

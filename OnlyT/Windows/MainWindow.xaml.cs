@@ -16,6 +16,9 @@ namespace OnlyT.Windows
         private const double MainWindowWidth = 395;
         private const double MainWindowHeight = 350;
 
+        private const double SettingsWindowDefWidth = 535;
+        private const double SettingsWindowDefHeight = 525;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,12 +45,20 @@ namespace OnlyT.Windows
             {
                 // Settings window can be resized...
                 ResizeMode = ResizeMode.CanResize;
+                MinHeight = MainWindowHeight;
+                MinWidth = MainWindowWidth;
+                
                 var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
                 var sz = optionsService.Options.SettingsPageSize;
                 if (sz != default(Size))
                 {
                     Width = sz.Width;
                     Height = sz.Height;
+                }
+                else
+                {
+                    Width = SettingsWindowDefWidth;
+                    Height = SettingsWindowDefHeight;
                 }
             }
         }
@@ -74,7 +85,13 @@ namespace OnlyT.Windows
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveWindowPos();
+            
             MainViewModel m = (MainViewModel)DataContext;
+            if (m.CurrentPageName.Equals(SettingsPageViewModel.PageName))
+            {
+                SaveSettingsWindowSize();
+            }
+            
             m.Closing(sender, e);
         }
 

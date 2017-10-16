@@ -9,6 +9,11 @@ namespace OnlyT.Utils
 {
     internal static class FirewallPortsClient
     {
+        public static int ReserveAndOpenPort(int port)
+        {
+            return LaunchFirewallPortsTool($"reserveAndOpen {port}");
+        }
+
         public static int ReservePort(int port)
         {
             return LaunchFirewallPortsTool($"reserve {port}");
@@ -46,6 +51,5 @@ namespace OnlyT.Utils
             process.WaitForExit(5000);
             return process.ExitCode;
         }
-
     }
 }

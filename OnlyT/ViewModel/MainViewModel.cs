@@ -30,7 +30,6 @@ namespace OnlyT.ViewModel
         private readonly IBellService _bellService;
         private readonly ITalkTimerService _timerService;
         private readonly IHttpServer _httpServer;
-        private string _currentPageName;
         private readonly TimerOutputWindowViewModel _timerWindowViewModel;
 
         public MainViewModel(
@@ -68,6 +67,8 @@ namespace OnlyT.ViewModel
 #pragma warning restore 4014
         }
 
+        public string CurrentPageName { get; set; }
+        
         private void InitSettingsPage()
         {
             // we only init the settings page when first used...
@@ -178,7 +179,7 @@ namespace OnlyT.ViewModel
             }
             
             CurrentPage = _pages[message.TargetPageName];
-            _currentPageName = message.TargetPageName;
+            CurrentPageName = message.TargetPageName;
             ((IPage)CurrentPage.DataContext).Activated(message.State);
         }
 
@@ -203,7 +204,7 @@ namespace OnlyT.ViewModel
             e.Cancel = _timerService.IsRunning;
             if (!e.Cancel)
             {
-                Messenger.Default.Send(new ShutDownMessage(_currentPageName));
+                Messenger.Default.Send(new ShutDownMessage(CurrentPageName));
                 CloseTimerWindow();
             }
         }

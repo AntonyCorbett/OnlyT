@@ -32,6 +32,12 @@ namespace OnlyTFirewallPorts
                     result = -1;
                 }
 
+                else if (args[0].Equals("reserveAndOpen"))
+                {
+                    Console.WriteLine($"Reserving and opening port {port}");
+                    result = PortManager.ReserveAndOpenPort(port);
+                }
+
                 else if (args[0].Equals("reserve"))
                 {
                     Console.WriteLine($"Reserving port {port}");

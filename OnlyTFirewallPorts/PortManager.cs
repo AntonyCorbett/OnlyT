@@ -11,6 +11,14 @@ namespace OnlyTFirewallPorts
     {
         private static string RuleNamePrefix = "OnlyTClockServer";
 
+        public static int ReserveAndOpenPort(int port)
+        {
+            int rv1 = ReservePort(port);
+            int rv2 = OpenPort(port);
+
+            return rv1 == 0 || rv1 == 1 ? rv2 : rv1;
+        }
+
         public static int ReservePort(int port)
         {
             string everyone = new System.Security.Principal.SecurityIdentifier(
