@@ -54,7 +54,7 @@ namespace OnlyT.ViewModel
             SelectFirstTalk();
 
             // commands...
-            StartCommand = new RelayCommand(StartTimer, () => IsNotRunning);
+            StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
             SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
             HelpCommand = new RelayCommand(LaunchHelp);
@@ -155,24 +155,21 @@ namespace OnlyT.ViewModel
         private bool CurrentTalkTimerIsEditable()
         {
             var talk = GetCurrentTalk();
-            return talk == null || talk.Editable;
+            return talk != null && talk.Editable;
         }
 
         private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
         {
-            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
+            try
             {
-                try
-                {
-                    _scheduleService.Reset();
-                    TalkId = 0;
-                    RaisePropertyChanged(nameof(Talks));
-                    SelectFirstTalk();
-                }
-                catch (Exception ex)
-                {
-                    Log.Logger.Error(ex, "Could not handle change of meeting schedule");
-                }
+                _scheduleService.Reset();
+                TalkId = 0;
+                RaisePropertyChanged(nameof(Talks));
+                SelectFirstTalk();
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not handle change of meeting schedule");
             }
         }
 
@@ -346,6 +343,8 @@ namespace OnlyT.ViewModel
             DecrementTimer15Command?.RaiseCanExecuteChanged();
         }
 
+        public bool IsValidTalk => GetCurrentTalk() != null;
+
         public IEnumerable<TalkScheduleItem> Talks => _scheduleService.GetTalkScheduleItems();
 
         private int _talkId;
@@ -366,8 +365,10 @@ namespace OnlyT.ViewModel
                     RaisePropertyChanged(nameof(IsBellVisible));
                     RaisePropertyChanged(nameof(BellColour));
                     RaisePropertyChanged(nameof(BellTooltip));
+                    RaisePropertyChanged(nameof(IsValidTalk));
                     
                     RaiseCanExecuteIncrDecrChanged();
+                    StartCommand?.RaiseCanExecuteChanged();
                     SetDurationStringAttributes(talk);
                 }
             }
@@ -608,7 +609,7 @@ namespace OnlyT.ViewModel
                 return talk != null && talk.OriginalBell && _optionsService.Options.IsBellEnabled;
             }
         }
-
+        
         public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
 
         public string CountUpOrDownTooltip => _countUp

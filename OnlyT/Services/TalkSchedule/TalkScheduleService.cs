@@ -16,6 +16,7 @@ namespace OnlyT.Services.TalkSchedule
         // the "talk_schedule.xml" file may exist in MyDocs\OnlyT..
         private Lazy<IEnumerable<TalkScheduleItem>> _fileBasedSchedule;
         private Lazy<IEnumerable<TalkScheduleItem>> _autoSchedule;
+        private Lazy<IEnumerable<TalkScheduleItem>> _manualSchedule;
 
         public TalkScheduleService(IOptionsService optionsService)
         {
@@ -27,6 +28,7 @@ namespace OnlyT.Services.TalkSchedule
         {
             _fileBasedSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(TalkScheduleFileBased.Read);
             _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService));
+            _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
 
         public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
@@ -41,7 +43,7 @@ namespace OnlyT.Services.TalkSchedule
                 default:
                 // ReSharper disable once RedundantCaseLabel
                 case OperatingMode.Manual:
-                    return null;
+                    return _manualSchedule.Value;
             }
         }
 
@@ -55,6 +57,11 @@ namespace OnlyT.Services.TalkSchedule
             var talks = GetTalkScheduleItems()?.ToArray();
             if (talks != null)
             {
+                if (_optionsService.Options.OperatingMode == OperatingMode.Manual)
+                {
+                    return talks.First().Id;
+                }
+                
                 bool foundCurrent = false;
                 for (int n = 0; n < talks.Length; ++n)
                 {

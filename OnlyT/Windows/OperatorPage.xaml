@@ -109,6 +109,7 @@
                             Margin="0,0,0,-5"
                             Command="{Binding CountUpToggleCommand}" 
                             IsEnabled="{Binding IsNotRunning}"
+                            Visibility="{Binding Path=IsValidTalk, Converter={StaticResource BoolToVis}}"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Width="22"

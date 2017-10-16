@@ -137,6 +137,7 @@
     <Compile Include="Services\TalkSchedule\ITalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleAuto.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleFileBased.cs" />
+    <Compile Include="Services\TalkSchedule\TalkScheduleManual.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkTypesAutoMode.cs" />
     <Compile Include="Services\Timer\AdaptiveTimerService.cs" />
