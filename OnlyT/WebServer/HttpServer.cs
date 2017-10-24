@@ -13,7 +13,6 @@ namespace OnlyT.WebServer
     {
         private HttpListener _listener;
         private int _port;
-        private Task _task;
         private readonly bool _24HourClock;
 
         public event EventHandler<ClockServerEventArgs> ClockServerRequestHandler;
@@ -29,7 +28,7 @@ namespace OnlyT.WebServer
             {
                 _listener = new HttpListener();
                 _port = port;
-                _task = Task.Factory.StartNew(StartListening, TaskCreationOptions.LongRunning);
+                Task.Factory.StartNew(StartListening);
             }
         }
 

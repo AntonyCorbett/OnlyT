@@ -83,6 +83,8 @@ namespace OnlyT.Services.TalkSchedule
                                 Bell = AttributeToBool(elem.Attribute("bell"), false)
                             });
                         }
+
+                        PrefixDurationsToTalkNames(result);
                     }
                 }
                 catch (Exception ex)
@@ -91,8 +93,7 @@ namespace OnlyT.Services.TalkSchedule
                     Log.Logger.Error(ex, $"Unable to read {path}");
                 }
             }
-
-            PrefixDurationsToTalkNames(result);
+            
             return result;
         }
 
