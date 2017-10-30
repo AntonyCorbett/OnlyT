@@ -43,8 +43,8 @@
                              DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
                              DurationSector="{Binding DurationSector, Mode=OneWay}" />
 
-                <Viewbox Grid.Row="1">
-                    <TextBlock VerticalAlignment="Bottom" Margin="10,0,10,0" Width="84">
+                <Viewbox Grid.Row="1" >
+                    <TextBlock VerticalAlignment="Bottom" Margin="5,0,5,0">
                         <Run Foreground="White" FontSize="24" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
                         <Run Foreground="#FFCBABAB" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
                     </TextBlock>

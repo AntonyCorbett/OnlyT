@@ -53,7 +53,7 @@ namespace OnlyT.AnalogueClock
 
             if (isInDesignMode)
             {
-                CurrentTimeHrMin = "13:50";
+                CurrentTimeHrMin = "3:50";
                 CurrentTimeSec = "20";
             }
         }
