@@ -44,6 +44,7 @@ namespace OnlyT.ViewModel
         {
             RaisePropertyChanged(nameof(DigitalTimeFormat24Hours));
             RaisePropertyChanged(nameof(DigitalTimeFormatShowLeadingZero));
+            RaisePropertyChanged(nameof(DigitalTimeFormatAMPM));
         }
 
         private void OnTimerStopped(TimerStopMessage obj)
@@ -140,11 +141,16 @@ namespace OnlyT.ViewModel
 
         public bool DigitalTimeFormatShowLeadingZero =>
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||
+           _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM ||
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
 
         public bool DigitalTimeFormat24Hours =>
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24 ||
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
+
+        public bool DigitalTimeFormatAMPM =>
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12AMPM ||
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM;
 
         private string _timeString;
         public string TimeString

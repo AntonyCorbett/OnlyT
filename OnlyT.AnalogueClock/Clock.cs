@@ -34,6 +34,7 @@ namespace OnlyT.AnalogueClock
         private readonly DispatcherTimer _animationTimer;
         private bool _digitalFormatLeadingZero;
         private bool _digitalFormat24Hours;
+        private bool _digitalFormatAMPM;
 
         static Clock()
         {
@@ -97,18 +98,19 @@ namespace OnlyT.AnalogueClock
         private string FormatTimeOfDayHoursAndMins(DateTime dt)
         {
             int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
+            string ampm = _digitalFormatAMPM ? dt.ToString(" tt") : string.Empty;
 
             if (_digitalFormatLeadingZero)
             {
-                return $"{hours:D2}:{dt.Minute:D2}";
+                return $"{hours:D2}:{dt.Minute:D2}{ampm}";
             }
 
-            return $"{hours}:{dt.Minute:D2}";
+            return $"{hours}:{dt.Minute:D2}{ampm}";
         }
 
-        private static string FormatTimeOfDaySeconds(DateTime dt)
+        private string FormatTimeOfDaySeconds(DateTime dt)
         {
-            return dt.Second.ToString("D2");
+            return _digitalFormatAMPM ? string.Empty : dt.Second.ToString("D2");
         }
 
         public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
@@ -147,8 +149,25 @@ namespace OnlyT.AnalogueClock
             Clock c = (Clock)d;
             c._digitalFormat24Hours = (bool)e.NewValue;
         }
+        
+        public static readonly DependencyProperty DigitalTimeFormatAMPMProperty =
+            DependencyProperty.Register("DigitalTimeFormatAMPM", typeof(bool), typeof(Clock),
+                new FrameworkPropertyMetadata(DigitalTimeFormatAMPMPropertyChanged));
 
+        public bool DigitalTimeFormatAMPM
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(DigitalTimeFormatAMPMProperty);
+            set => SetValue(DigitalTimeFormatAMPMProperty, value);
+        }
 
+        private static void DigitalTimeFormatAMPMPropertyChanged(DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            Clock c = (Clock)d;
+            c._digitalFormatAMPM = (bool)e.NewValue;
+        }
+        
         public static readonly DependencyProperty IsRunningProperty =
            DependencyProperty.Register("IsRunning", typeof(bool), typeof(Clock),
               new FrameworkPropertyMetadata(IsRunningPropertyChanged));

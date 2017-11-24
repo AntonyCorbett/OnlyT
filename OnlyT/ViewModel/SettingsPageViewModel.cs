@@ -130,6 +130,8 @@ namespace OnlyT.ViewModel
             {
                 new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12},
                 new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero},
+                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM},
+                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM},
                 new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24},
                 new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero}
             };

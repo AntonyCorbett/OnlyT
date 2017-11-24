@@ -26,7 +26,28 @@ namespace OnlyT.Services.Options
             HttpServerPort = DefaultPort;
 
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
-            ClockHourFormat = dateFormat.Contains("H") ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format12;
+
+            bool clock24 = dateFormat.Contains("H");
+            bool leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
+            bool ampm = dateFormat.Contains("tt");
+
+            if (clock24)
+            {
+                ClockHourFormat = leadingZero ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format24;
+            }
+            else
+            {
+                if (leadingZero)
+                {
+                    ClockHourFormat = ampm 
+                        ? ClockHourFormat.Format12LeadingZeroAMPM : ClockHourFormat.Format12LeadingZero;
+                }
+                else
+                {
+                    ClockHourFormat = ampm
+                        ? ClockHourFormat.Format12AMPM : ClockHourFormat.Format12;
+                }
+            }
         }
 
         public string TimerMonitorId { get; set; }

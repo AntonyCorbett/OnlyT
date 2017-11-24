@@ -41,6 +41,7 @@
                              Margin="15" 
                              DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
                              DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
+                             DigitalTimeFormatAMPM="{Binding DigitalTimeFormatAMPM}"
                              DurationSector="{Binding DurationSector, Mode=OneWay}" />
 
                 <Viewbox Grid.Row="1" >
@@ -62,6 +63,7 @@
 
                 <TextBlock Name="TimerTextBlock" Grid.Row="0"
                            Opacity="0.0"
+                           HorizontalAlignment="Center"
                            Foreground="{Binding TextColor}" 
                            Text="{Binding TimeString}"
                            FontSize="40"

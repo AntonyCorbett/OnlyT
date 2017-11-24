@@ -244,4 +244,10 @@
   <data name="WEEKEND" xml:space="preserve">
     <value>Weekend</value>
   </data>
+  <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
+    <value>12-hour (am/pm)</value>
+  </data>
+  <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
+    <value>12-hour (leading zero &amp; am/pm)</value>
+  </data>
 </root>

@@ -115,11 +115,29 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 12-hour (am/pm).
+        /// </summary>
+        internal static string CLOCK_FORMAT_12AMPM {
+            get {
+                return ResourceManager.GetString("CLOCK_FORMAT_12AMPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 12-hour (leading zero).
         /// </summary>
         internal static string CLOCK_FORMAT_12Z {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_12Z", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 12-hour (leading zero &amp; am/pm).
+        /// </summary>
+        internal static string CLOCK_FORMAT_12ZAMPM {
+            get {
+                return ResourceManager.GetString("CLOCK_FORMAT_12ZAMPM", resourceCulture);
             }
         }
         
