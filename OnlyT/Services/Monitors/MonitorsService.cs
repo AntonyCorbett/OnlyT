@@ -39,7 +39,8 @@ namespace OnlyT.Services.Monitors
 
         private DisplayDeviceData GetDeviceMatchingScreen(DisplayDeviceData[] devices, Screen screen)
         {
-            return devices.SingleOrDefault(x => x.Name.StartsWith(screen.DeviceName));
+            var deviceName = screen.DeviceName + "\\";
+            return devices.SingleOrDefault(x => x.Name.StartsWith(deviceName));
         }
 
         public MonitorItem GetMonitorItem(string monitorId)
