@@ -13,6 +13,7 @@ namespace OnlyT.ViewModel
     {
         private static int _secsPerHour = 60 * 60;
         private readonly IOptionsService _optionsService;
+        private bool _applicationClosing;
 
         public TimerOutputWindowViewModel(IOptionsService optionsService)
         {
@@ -22,12 +23,19 @@ namespace OnlyT.ViewModel
             ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
 
             // subscriptions...
+            Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
             Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
             Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
             Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChangedMessage);
+        }
+        
+        public bool ApplicationClosing => _applicationClosing;
+        private void OnShutDown(ShutDownMessage obj)
+        {
+            _applicationClosing = true;
         }
 
         private void OnShowTimeOfDayUnderTimerChangedMessage(ShowTimeOfDayUnderTimerChangedMessage message)

@@ -8,7 +8,7 @@
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
         mc:Ignorable="d"
         Title="TimerOutputWindow" Height="300" Width="458" Loaded="WindowLoaded" 
-        WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize">
+        WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize" Closing="WindowClosing">
 
     <Window.Resources>
         <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />

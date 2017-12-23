@@ -1,8 +1,7 @@
-﻿using System.Windows;
-
-namespace OnlyT.Windows
+﻿namespace OnlyT.Windows
 {
     using System;
+    using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media.Animation;
 
@@ -247,6 +246,16 @@ namespace OnlyT.Windows
             InitFullScreenMode();
             WindowState = WindowState.Maximized;
             TheClock.IsRunning = true;
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var model = (TimerOutputWindowViewModel)DataContext;
+            if (!model.ApplicationClosing)
+            {
+                // prevent window from being closed independently of application.
+                e.Cancel = true;
+            }
         }
     }
 }
