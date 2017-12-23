@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using OnlyT.AutoUpdates;
 using OnlyT.Models;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
@@ -58,6 +60,7 @@ namespace OnlyT.ViewModel
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
             SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
             HelpCommand = new RelayCommand(LaunchHelp);
+            NewVersionCommand = new RelayCommand(DisplayNewVersionPage);
             IncrementTimerCommand = new RelayCommand(IncrementTimer, CanIncreaseTimerValue);
             IncrementTimer15Command = new RelayCommand(IncrementTimer15Secs, CanIncreaseTimerValue);
             IncrementTimer5Command = new RelayCommand(IncrementTimer5Mins, CanIncreaseTimerValue);
@@ -70,6 +73,31 @@ namespace OnlyT.ViewModel
             // subscriptions...
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
+
+            GetVersionData();
+        }
+
+        public bool IsNewVersionAvailable { get; private set; }
+        private void GetVersionData()
+        {
+            Task.Delay(2000).ContinueWith(_ =>
+            {
+                var latestVersion = VersionDetection.GetLatestReleaseVersion();
+                if (latestVersion != null)
+                {
+                    if (latestVersion != VersionDetection.GetCurrentVersion())
+                    {
+                        // there is a new version....
+                        IsNewVersionAvailable = true;
+                        RaisePropertyChanged(nameof(IsNewVersionAvailable));
+                    }
+                }
+            });
+        }
+
+        private void DisplayNewVersionPage()
+        {
+            Process.Start(VersionDetection.LatestReleaseUrl);
         }
 
         private void CountUpToggle()
@@ -638,6 +666,7 @@ namespace OnlyT.ViewModel
         public RelayCommand StopCommand { get; set; }
         public RelayCommand SettingsCommand { get; set; }
         public RelayCommand HelpCommand { get; set; }
+        public RelayCommand NewVersionCommand { get; set; }
         public RelayCommand IncrementTimerCommand { get; set; }
         public RelayCommand IncrementTimer15Command { get; set; }
         public RelayCommand IncrementTimer5Command { get; set; }
@@ -646,6 +675,5 @@ namespace OnlyT.ViewModel
         public RelayCommand DecrementTimer5Command { get; set; }
         public RelayCommand BellToggleCommand { get; set; }
         public RelayCommand CountUpToggleCommand { get; set; }
-
     }
 }

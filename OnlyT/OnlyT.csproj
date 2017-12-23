@@ -104,6 +104,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Animations\GridLengthAnimation.cs" />
+    <Compile Include="AutoUpdates\VersionDetection.cs" />
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
     <Compile Include="MeetingSongsFile\TimerValueAndBellFlag.cs" />
     <Compile Include="Models\AdaptiveModeItem.cs" />

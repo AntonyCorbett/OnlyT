@@ -7,6 +7,7 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using OnlyT.AutoUpdates;
 using OnlyT.EventArgs;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
@@ -53,19 +54,20 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
 
             InitHttpServer();
-
+            
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
 
             _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
 
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
-
+            
 #pragma warning disable 4014
             // (fire and forget)
             LaunchTimerWindowAsync();
 #pragma warning restore 4014
         }
+
 
         public string CurrentPageName { get; set; }
         

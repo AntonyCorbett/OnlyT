@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using OnlyT.AutoUpdates;
 using OnlyT.Models;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
@@ -487,15 +488,8 @@ namespace OnlyT.ViewModel
             _optionsService.Save();
         }
 
-        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, GetVersionString());
-
-        private string GetVersionString()
-        {
-            var ver = Assembly.GetExecutingAssembly().GetName().Version;
-            return $"{ver.Major}.{ver.Minor}.{ver.Build}.{ver.Revision}";
-        }
-
-
+        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersion());
+        
         public RelayCommand NavigateOperatorCommand { get; set; }
         public RelayCommand TestBellCommand { get; set; }
         public RelayCommand OpenPortCommand { get; set; }
