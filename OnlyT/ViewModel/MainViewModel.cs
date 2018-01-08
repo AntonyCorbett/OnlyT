@@ -7,8 +7,10 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Threading;
 using OnlyT.AutoUpdates;
 using OnlyT.EventArgs;
+using OnlyT.Models;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
@@ -26,12 +28,14 @@ namespace OnlyT.ViewModel
     {
         private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
         private TimerOutputWindow _timerWindow;
+        private CountdownWindow _countdownWindow;
         private readonly IOptionsService _optionsService;
         private readonly IMonitorsService _monitorsService;
         private readonly IBellService _bellService;
         private readonly ITalkTimerService _timerService;
         private readonly IHttpServer _httpServer;
         private readonly TimerOutputWindowViewModel _timerWindowViewModel;
+        private readonly CountdownTimerViewModel _countdownWindowViewModel;
 
         public MainViewModel(
            IOptionsService optionsService,
@@ -52,6 +56,7 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
             Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
+            Messenger.Default.Register<StartCountDownMessage>(this, OnStartCountdown);
 
             InitHttpServer();
             
@@ -59,6 +64,7 @@ namespace OnlyT.ViewModel
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
 
             _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
+            _countdownWindowViewModel = new CountdownTimerViewModel(_optionsService);
 
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
             
@@ -68,6 +74,24 @@ namespace OnlyT.ViewModel
 #pragma warning restore 4014
         }
 
+        /// <summary>
+        /// Starts the countdown (pre-meeting) timer
+        /// </summary>
+        /// <param name="message">The message.</param>
+        private void OnStartCountdown(StartCountDownMessage message)
+        {
+            if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
+            {
+                OpenCountdownWindow();
+                
+                Task.Delay(1000).ContinueWith(t =>
+                {
+                    // hide the timer window after a short delay (so that it doesn't appear 
+                    // as another top-level window during alt-TAB)...
+                    DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
+                });
+            }
+        }
 
         public string CurrentPageName { get; set; }
         
@@ -208,6 +232,7 @@ namespace OnlyT.ViewModel
             {
                 Messenger.Default.Send(new ShutDownMessage(CurrentPageName));
                 CloseTimerWindow();
+                CloseCountdownWindow();
             }
         }
 
@@ -219,13 +244,13 @@ namespace OnlyT.ViewModel
         {
             if (_timerWindow != null)
             {
-                var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-                if (timerMonitor != null)
+                var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                if (targetMonitor != null)
                 {
                     _timerWindow.Hide();
                     _timerWindow.WindowState = WindowState.Normal;
 
-                    var area = timerMonitor.Monitor.WorkingArea;
+                    var area = targetMonitor.Monitor.WorkingArea;
                     _timerWindow.Left = area.Left;
                     _timerWindow.Top = area.Top;
 
@@ -240,29 +265,52 @@ namespace OnlyT.ViewModel
             }
         }
 
+        private void OpenCountdownWindow()
+        {
+            try
+            {
+                var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                if (targetMonitor != null)
+                {
+                    _countdownWindow = new CountdownWindow { DataContext = _countdownWindowViewModel };
+                    ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
+                    _countdownWindow.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not open countdown window");
+            }
+        }
+
         private void OpenTimerWindow()
         {
             try
             {
-                var timerMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-                if (timerMonitor != null)
+                var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                if (targetMonitor != null)
                 {
                     _timerWindow = new TimerOutputWindow {DataContext = _timerWindowViewModel};
-
-                    var area = timerMonitor.Monitor.WorkingArea;
-                    _timerWindow.Left = area.Left;
-                    _timerWindow.Top = area.Top;
-                    _timerWindow.Width = 0;
-                    _timerWindow.Height = 0;
-
-                    _timerWindow.Topmost = true;
-                    _timerWindow.Show();
+                    ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
                 }
             }
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not open timer window");
             }
+        }
+
+        private void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
+        {
+            var area = monitor.Monitor.WorkingArea;
+            
+            window.Left = area.Left;
+            window.Top = area.Top;
+            window.Width = 0;
+            window.Height = 0;
+
+            window.Topmost = true;
+            window.Show();
         }
 
         private void HideTimerWindow()
@@ -283,6 +331,22 @@ namespace OnlyT.ViewModel
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not close timer window");
+            }
+        }
+
+        private void CloseCountdownWindow()
+        {
+            try
+            {
+                if (_countdownWindow != null)
+                {
+                    _countdownWindow.Close();
+                    _countdownWindow = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not close countdown window");
             }
         }
     }

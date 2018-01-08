@@ -159,6 +159,7 @@
     <Compile Include="Utils\WindowPlacement.cs" />
     <Compile Include="ValueConverters\BoolToCursorConverter.cs" />
     <Compile Include="ValueConverters\ColWidthPercentageToString.cs" />
+    <Compile Include="ViewModel\CountdownTimerViewModel.cs" />
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\AlwaysOnTopChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AnalogueClockWidthChangedMessage.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="ViewModel\Messages\HttpServerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShowTimeOfDayUnderTimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />
+    <Compile Include="ViewModel\Messages\StartCountDownMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerMonitorChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerStartMessage.cs" />
@@ -181,6 +183,9 @@
     <Compile Include="WebServer\ClockServerMode.cs" />
     <Compile Include="WebServer\HttpServer.cs" />
     <Compile Include="WebServer\IHttpServer.cs" />
+    <Compile Include="Windows\CountdownWindow.xaml.cs">
+      <DependentUpon>CountdownWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\OperatorPage.xaml.cs">
       <DependentUpon>OperatorPage.xaml</DependentUpon>
     </Compile>
@@ -192,6 +197,10 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Windows\CountdownWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -251,6 +260,10 @@
     <ProjectReference Include="..\OnlyT.AnalogueClock\OnlyT.AnalogueClock.csproj">
       <Project>{5a65feaf-791d-417c-a355-3155a1b1df19}</Project>
       <Name>OnlyT.AnalogueClock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj">
+      <Project>{279d0da6-28fe-4df9-8eed-d75f55664ff9}</Project>
+      <Name>OnlyT.CountdownTimer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -69,6 +70,7 @@ namespace OnlyT.ViewModel
             DecrementTimer5Command = new RelayCommand(DecrementTimer5Mins, CanDecreaseTimerValue);
             BellToggleCommand = new RelayCommand(BellToggle);
             CountUpToggleCommand = new RelayCommand(CountUpToggle);
+            CloseCountdownCommand = new RelayCommand(CloseCountdownWindow);
 
             // subscriptions...
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
@@ -551,6 +553,12 @@ namespace OnlyT.ViewModel
             RaisePropertyChanged(nameof(Duration3Tooltip));
         }
 
+        private void CloseCountdownWindow()
+        {
+            Messenger.Default.Send(new StartCountDownMessage(5, 0));
+        }
+
+
         public string Duration1ArrowString { get; set; }
         public string Duration2ArrowString { get; set; }
         public Brush Duration1Colour { get; set; }
@@ -675,5 +683,6 @@ namespace OnlyT.ViewModel
         public RelayCommand DecrementTimer5Command { get; set; }
         public RelayCommand BellToggleCommand { get; set; }
         public RelayCommand CountUpToggleCommand { get; set; }
+        public RelayCommand CloseCountdownCommand { get; set; }
     }
 }

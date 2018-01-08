@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT", "OnlyT\OnlyT.csproj", "{4A02D18A-0956-40FA-A4EC-9CB27A72B455}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT.Tests", "OnlyT.Tests\OnlyT.Tests.csproj", "{F0ADD340-02C3-4C86-80A9-38F2B67EAB69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyTFirewallPorts", "OnlyTFirewallPorts\OnlyTFirewallPorts.csproj", "{96292806-8129-4F40-9C5C-8DB2CD3F3664}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT.CountdownTimer", "OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj", "{279D0DA6-28FE-4DF9-8EED-D75F55664FF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{96292806-8129-4F40-9C5C-8DB2CD3F3664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96292806-8129-4F40-9C5C-8DB2CD3F3664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96292806-8129-4F40-9C5C-8DB2CD3F3664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279D0DA6-28FE-4DF9-8EED-D75F55664FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279D0DA6-28FE-4DF9-8EED-D75F55664FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279D0DA6-28FE-4DF9-8EED-D75F55664FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279D0DA6-28FE-4DF9-8EED-D75F55664FF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
