@@ -215,7 +215,7 @@ namespace OnlyT.CountdownTimer
             Color revealedColor = ToColor("#c0c5c1");
             Color externalRingColor = ToColor("#74546a");
             Color ballColor = ToColor("#eaf0ce");
-            Color ringStrokeColor = ToColor("#7d8491");
+            Color ringStrokeColor = ToColor("#473341");
             Color innerHighlightColor = Colors.White;
 
             var gs1 = new GradientStopCollection(2)

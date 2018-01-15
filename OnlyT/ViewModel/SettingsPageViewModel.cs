@@ -33,7 +33,7 @@ namespace OnlyT.ViewModel
         private readonly AdaptiveModeItem[] _adaptiveModes;
         private readonly FullScreenClockModeItem[] _timeOfDayModes;
         private readonly WebClockPortItem[] _ports;
-
+        
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
            IBellService bellService,
@@ -54,7 +54,7 @@ namespace OnlyT.ViewModel
             _adaptiveModes = GetAdaptiveModes().ToArray();
             _timeOfDayModes = GetTimeOfDayModes().ToArray();
             _ports = GetPorts().ToArray();
-
+            
             // commands...
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
@@ -282,6 +282,7 @@ namespace OnlyT.ViewModel
             }
         }
 
+
         public AdaptiveMode WeekendAdaptiveMode
         {
             get => _optionsService.Options.WeekendAdaptiveMode;
@@ -321,6 +322,34 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.IsCircuitVisit = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
+                }
+            }
+        }
+
+        public bool IsCountdownEnabled
+        {
+            get => _optionsService.Options.IsCountdownEnabled;
+            set
+            {
+                if (_optionsService.Options.IsCountdownEnabled != value)
+                {
+                    _optionsService.Options.IsCountdownEnabled = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public string MeetingStartTimesAsText
+        {
+            get => _optionsService.Options.MeetingStartTimes.AsText();
+            set
+            {
+                var times = _optionsService.Options.MeetingStartTimes.AsText();
+                if (!times.Equals(value))
+                {
+                    _optionsService.Options.MeetingStartTimes.FromText(value);
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new MeetingStartTimesChangeMessage { Times = _optionsService.Options.MeetingStartTimes.Times });
                 }
             }
         }

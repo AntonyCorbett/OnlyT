@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Threading;
 using OnlyT.ViewModel;
 
 namespace OnlyT.Windows
@@ -21,6 +12,8 @@ namespace OnlyT.Windows
     /// </summary>
     public partial class CountdownWindow : Window
     {
+        public event EventHandler TimeUpEvent;
+        
         public CountdownWindow()
         {
             InitializeComponent();
@@ -31,19 +24,24 @@ namespace OnlyT.Windows
             WindowState = WindowState.Maximized;
         }
 
-        private void WindowClosing(object sender, CancelEventArgs e)
+        public void Start(int offsetSeconds)
         {
-            var model = (CountdownTimerViewModel)DataContext;
-            if (!model.ApplicationClosing)
-            {
-                // prevent window from being closed independently of application.
-                e.Cancel = true;
-            }
+            CountDown.Start(offsetSeconds);
         }
 
-        public void Start()
+        private void OnCountDownTimeUp(object sender, System.EventArgs e)
         {
-            CountDown.Start(10);
+            CountDown.Stop();
+
+            Task.Delay(1000).ContinueWith(t =>
+            {
+                DispatcherHelper.CheckBeginInvokeOnUI(OnTimeUpEvent);
+            });
+        }
+
+        private void OnTimeUpEvent()
+        {
+            TimeUpEvent?.Invoke(this, System.EventArgs.Empty);
         }
     }
 }

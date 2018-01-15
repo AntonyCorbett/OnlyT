@@ -7,15 +7,15 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight.Threading;
-using OnlyT.AutoUpdates;
 using OnlyT.EventArgs;
 using OnlyT.Models;
 using OnlyT.Services.Bell;
+using OnlyT.Services.CountdownTimer;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.Timer;
-using OnlyT.Utils;
 using OnlyT.WebServer;
 using Serilog;
 
@@ -32,23 +32,28 @@ namespace OnlyT.ViewModel
         private readonly IOptionsService _optionsService;
         private readonly IMonitorsService _monitorsService;
         private readonly IBellService _bellService;
+        private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
         private readonly IHttpServer _httpServer;
         private readonly TimerOutputWindowViewModel _timerWindowViewModel;
         private readonly CountdownTimerViewModel _countdownWindowViewModel;
+        private DispatcherTimer _heartbeatTimer;
+        private bool _countdownDone;
 
         public MainViewModel(
            IOptionsService optionsService,
            IMonitorsService monitorsService,
            ITalkTimerService timerService,
            IHttpServer httpServer,
-           IBellService bellService)
+           IBellService bellService,
+           ICountdownTimerTriggerService countdownTimerTriggerService)
         {
             _optionsService = optionsService;
             _monitorsService = monitorsService;
             _bellService = bellService;
             _httpServer = httpServer;
             _timerService = timerService;
+            _countdownTimerTriggerService = countdownTimerTriggerService;
 
             // subscriptions...
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
@@ -56,7 +61,7 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
             Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
-            Messenger.Default.Register<StartCountDownMessage>(this, OnStartCountdown);
+            Messenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
 
             InitHttpServer();
             
@@ -64,7 +69,7 @@ namespace OnlyT.ViewModel
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
 
             _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
-            _countdownWindowViewModel = new CountdownTimerViewModel(_optionsService);
+            _countdownWindowViewModel = new CountdownTimerViewModel();
 
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
             
@@ -77,12 +82,13 @@ namespace OnlyT.ViewModel
         /// <summary>
         /// Starts the countdown (pre-meeting) timer
         /// </summary>
-        /// <param name="message">The message.</param>
-        private void OnStartCountdown(StartCountDownMessage message)
+        private void StartCountdown(int offsetSeconds)
         {
             if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
             {
-                OpenCountdownWindow();
+                Log.Logger.Information("Launching countdown timer");
+                
+                OpenCountdownWindow(offsetSeconds);
                 
                 Task.Delay(1000).ContinueWith(t =>
                 {
@@ -189,7 +195,68 @@ namespace OnlyT.ViewModel
                 // on launch we display the timer window after a short delay (for aesthetics only)
                 await Task.Delay(1000).ConfigureAwait(true);
                 OpenTimerWindow();
+                InitHeartbeatTimer();
             }
+        }
+
+        private void InitHeartbeatTimer()
+        {
+            _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
+            _heartbeatTimer.Interval = TimeSpan.FromSeconds(1);
+            _heartbeatTimer.Tick += HeartbeatTimerTick;
+            _heartbeatTimer.Start();
+        }
+
+        private void HeartbeatTimerTick(object sender, System.EventArgs e)
+        {
+            _heartbeatTimer.Stop();
+            try
+            {
+                if (_optionsService.Options.IsCountdownEnabled)
+                {
+                    if (!CountDownActive && 
+                        !_countdownDone &&
+                        _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
+                    {
+                        StartCountdown(secondsOffset);
+                    }
+                }
+                else
+                {
+                    // countdown not enabled...
+                    if (CountDownActive)
+                    {
+                        StopCountdown();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Error during heartbeat");
+            }
+            finally
+            {
+                _heartbeatTimer.Start();
+            }
+        }
+
+        private void OnStopCountdown(StopCountDownMessage message)
+        {
+            StopCountdown();
+        }
+
+        private void StopCountdown()
+        {
+            _countdownDone = true;
+
+            Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = false });
+
+            _timerWindow?.Show();
+            
+            Task.Delay(1000).ContinueWith(t =>
+            {
+                DispatcherHelper.CheckBeginInvokeOnUI(CloseCountdownWindow);
+            });
         }
 
         /// <summary>
@@ -265,22 +332,35 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OpenCountdownWindow()
+        private bool CountDownActive => _countdownWindow != null;
+
+        private void OpenCountdownWindow(int offsetSeconds)
         {
-            try
+            if (!CountDownActive)
             {
-                var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-                if (targetMonitor != null)
+                try
                 {
-                    _countdownWindow = new CountdownWindow { DataContext = _countdownWindowViewModel };
-                    ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
-                    _countdownWindow.Start();
+                    var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                    if (targetMonitor != null)
+                    {
+                        _countdownWindow = new CountdownWindow {DataContext = _countdownWindowViewModel};
+                        _countdownWindow.TimeUpEvent += OnCountdownTimeUp;
+                        ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
+                        _countdownWindow.Start(offsetSeconds);
+
+                        Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Logger.Error(ex, "Could not open countdown window");
                 }
             }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not open countdown window");
-            }
+        }
+
+        private void OnCountdownTimeUp(object sender, System.EventArgs e)
+        {
+            StopCountdown();
         }
 
         private void OpenTimerWindow()
@@ -322,11 +402,8 @@ namespace OnlyT.ViewModel
         {
             try
             {
-                if (_timerWindow != null)
-                {
-                    _timerWindow.Close();
-                    _timerWindow = null;
-                }
+                _timerWindow?.Close();
+                _timerWindow = null;
             }
             catch (Exception ex)
             {
@@ -340,9 +417,11 @@ namespace OnlyT.ViewModel
             {
                 if (_countdownWindow != null)
                 {
-                    _countdownWindow.Close();
-                    _countdownWindow = null;
+                    _countdownWindow.TimeUpEvent -= OnCountdownTimeUp;
                 }
+                
+                _countdownWindow?.Close();
+                _countdownWindow = null;
             }
             catch (Exception ex)
             {

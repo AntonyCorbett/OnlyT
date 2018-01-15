@@ -17,6 +17,7 @@ namespace OnlyT.Services.Options
             OperatingMode = OperatingMode.Automatic;
             AlwaysOnTop = true;
             IsBellEnabled = true;
+            IsCountdownEnabled = false;
             BellVolumePercent = 70;
             MidWeekAdaptiveMode = AdaptiveMode.None;
             WeekendAdaptiveMode = AdaptiveMode.None;
@@ -24,6 +25,7 @@ namespace OnlyT.Services.Options
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
             HttpServerPort = DefaultPort;
+            MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
 
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
 
@@ -70,7 +72,8 @@ namespace OnlyT.Services.Options
         public int HttpServerPort { get; set; }
         public bool IsWebClockEnabled { get; set; }
         public bool AllowCountUpToggle { get; set; }
-
+        public MeetingStartTimes.MeetingStartTimes MeetingStartTimes { get; set; }
+        public bool IsCountdownEnabled { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required
@@ -96,6 +99,8 @@ namespace OnlyT.Services.Options
             {
                 HttpServerPort = DefaultPort;
             }
+
+            MeetingStartTimes.Sanitize();
         }
     }
 }

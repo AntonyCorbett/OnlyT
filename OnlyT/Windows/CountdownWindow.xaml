@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize"
         Loaded="OnLoaded"
-        Closing="WindowClosing"
         Title="CountdownWindow" Height="305.825" Width="469.418">
     <Grid>
         <Border Name="ClockPanel" 
@@ -22,7 +21,7 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <countdownTimer:CountdownControl x:Name="CountDown" Margin="10"/>
+            <countdownTimer:CountdownControl x:Name="CountDown" Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
 
         </Border>
     </Grid>

@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using OnlyT.Services.Bell;
+using OnlyT.Services.CountdownTimer;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.TalkSchedule;
@@ -22,6 +23,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<IBellService, BellService>();
             SimpleIoc.Default.Register<IAdaptiveTimerService, AdaptiveTimerService>();
             SimpleIoc.Default.Register<IHttpServer, HttpServer>();
+            SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<OperatorPageViewModel>();

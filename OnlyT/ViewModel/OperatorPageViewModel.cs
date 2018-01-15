@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -26,17 +25,17 @@ namespace OnlyT.ViewModel
     {
         public static string PageName => "OperatorPage";
         private static readonly string _arrow = "→";
-        private static readonly Brush _durationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
-        private static readonly Brush _durationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
+        private static readonly Brush DurationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
+        private static readonly Brush DurationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
         private readonly IOptionsService _optionsService;
         private readonly IAdaptiveTimerService _adaptiveTimerService;
         private int _secondsElapsed;
         private bool _countUp;
-        private static readonly Brush _whiteBrush = Brushes.White;
-        private static readonly int _maxTimerMins = 99;
-        private static readonly int _maxTimerSecs = _maxTimerMins * 60;
+        private static readonly Brush WhiteBrush = Brushes.White;
+        private static readonly int MaxTimerMins = 99;
+        private static readonly int MaxTimerSecs = MaxTimerMins * 60;
 
         private readonly SolidColorBrush _bellColorActive = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
         private readonly SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
@@ -75,8 +74,16 @@ namespace OnlyT.ViewModel
             // subscriptions...
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
+            Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
 
             GetVersionData();
+        }
+
+        public bool IsCountdownActive { get; private set; }
+        private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
+        {
+            IsCountdownActive = message.Showing;
+            RaisePropertyChanged(nameof(IsCountdownActive));
         }
 
         public bool IsNewVersionAvailable { get; private set; }
@@ -96,7 +103,7 @@ namespace OnlyT.ViewModel
                 }
             });
         }
-
+        
         private void DisplayNewVersionPage()
         {
             Process.Start(VersionDetection.LatestReleaseUrl);
@@ -117,7 +124,7 @@ namespace OnlyT.ViewModel
         
         private void LaunchHelp()
         {
-            System.Diagnostics.Process.Start(@"https://github.com/AntonyCorbett/OnlyT/wiki");
+            Process.Start(@"https://github.com/AntonyCorbett/OnlyT/wiki");
         }
 
         private void BellToggle()
@@ -164,7 +171,7 @@ namespace OnlyT.ViewModel
 
         private bool CanIncreaseTimerValue()
         {
-            if (IsRunning || TargetSeconds >= _maxTimerSecs)
+            if (IsRunning || TargetSeconds >= MaxTimerSecs)
             {
                 return false;
             }
@@ -206,7 +213,7 @@ namespace OnlyT.ViewModel
         private void IncrDecrTimerInternal(int mins)
         {
             var newSecs = TargetSeconds + mins;
-            if (newSecs >= 0 && newSecs <= _maxTimerSecs)
+            if (newSecs >= 0 && newSecs <= MaxTimerSecs)
             {
                 TargetSeconds = newSecs;
                 AdjustTalkTimeForThisSession();
@@ -268,7 +275,7 @@ namespace OnlyT.ViewModel
             _timerService.Stop();
             _isStarting = false;
             
-            TextColor = _whiteBrush;
+            TextColor = WhiteBrush;
 
             RaisePropertyChanged(nameof(IsRunning));
             RaisePropertyChanged(nameof(IsNotRunning));
@@ -527,21 +534,21 @@ namespace OnlyT.ViewModel
                 Duration3String = string.Empty;
             }
 
-            Duration1Colour = _durationDimBrush;
-            Duration2Colour = _durationDimBrush;
-            Duration3Colour = _durationDimBrush;
+            Duration1Colour = DurationDimBrush;
+            Duration2Colour = DurationDimBrush;
+            Duration3Colour = DurationDimBrush;
             
             if (!string.IsNullOrEmpty(Duration3String))
             {
-                Duration3Colour = _durationBrush;
+                Duration3Colour = DurationBrush;
             }
             else if (!string.IsNullOrEmpty(Duration2String))
             {
-                Duration2Colour = _durationBrush;
+                Duration2Colour = DurationBrush;
             }
             else
             {
-                Duration1Colour = _durationBrush;
+                Duration1Colour = DurationBrush;
             }
             
             RaisePropertyChanged(nameof(Duration1Colour));
@@ -555,7 +562,7 @@ namespace OnlyT.ViewModel
 
         private void CloseCountdownWindow()
         {
-            Messenger.Default.Send(new StartCountDownMessage(5, 0));
+            Messenger.Default.Send(new StopCountDownMessage());
         }
 
 
