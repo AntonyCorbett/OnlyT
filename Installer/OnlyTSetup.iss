@@ -44,6 +44,7 @@ Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Microsoft.Practices.Service
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.CountdownTimer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\QRCoder.dll"; DestDir: "{app}"; Flags: ignoreversion
