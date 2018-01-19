@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -17,8 +16,6 @@ using Serilog;
 
 namespace OnlyT.ViewModel
 {
-    using System.Configuration;
-
     public class SettingsPageViewModel : ViewModelBase, IPage
     {
         public static string PageName => "SettingsPage";

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Markup;
 using OnlyT.Models;
 
 namespace OnlyT.Services.Options.MeetingStartTimes
@@ -106,11 +109,14 @@ namespace OnlyT.Services.Options.MeetingStartTimes
         {
             var trimmedText = text.Trim();
 
+            var currentCulturePmString = CultureInfo.CurrentCulture.DateTimeFormat.PMDesignator;
+            var defaultCulturePmString = CultureInfo.InvariantCulture.DateTimeFormat.PMDesignator;
+
             return
-                trimmedText.EndsWith(CultureInfo.CurrentCulture.DateTimeFormat.PMDesignator,
-                    StringComparison.CurrentCultureIgnoreCase) ||
-                trimmedText.EndsWith(CultureInfo.InvariantCulture.DateTimeFormat.PMDesignator,
-                    StringComparison.InvariantCultureIgnoreCase);
+                !string.IsNullOrEmpty(currentCulturePmString) && trimmedText.EndsWith(
+                    currentCulturePmString, StringComparison.CurrentCultureIgnoreCase) ||
+                !string.IsNullOrEmpty(defaultCulturePmString) && trimmedText.EndsWith(
+                    defaultCulturePmString, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private delegate string GetDayNameFunction(DayOfWeek dayOfWeek);
@@ -118,10 +124,12 @@ namespace OnlyT.Services.Options.MeetingStartTimes
         private static DayOfWeekAndUserSuppliedDayName FindDayOfWeek(string text)
         {
             return FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dow)) ??
-                   FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(dow)) ??
-                   FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(dow)) ??
                    FindDayOfWeek(text, (dow) => CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dow)) ??
+                   
+                   FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(dow)) ??
                    FindDayOfWeek(text, (dow) => CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedDayName(dow)) ??
+                   
+                   FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(dow)) ??
                    FindDayOfWeek(text, (dow) => CultureInfo.InvariantCulture.DateTimeFormat.GetShortestDayName(dow));
         }
         
