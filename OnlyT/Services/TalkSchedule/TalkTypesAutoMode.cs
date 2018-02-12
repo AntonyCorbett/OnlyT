@@ -10,7 +10,6 @@
         TreasuresTalk,
         DiggingTalk,
         Reading,
-        PresentationVideos,
         MinistryItem1,
         MinistryItem2,
         MinistryItem3,

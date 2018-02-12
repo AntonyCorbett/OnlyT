@@ -36,11 +36,7 @@ namespace OnlyT.Models
             {
                 if (_modifiedDuration != value)
                 {
-                    if (value != null && value == OriginalDuration)
-                    {
-                        _modifiedDuration = null;
-                    }
-                    else _modifiedDuration = value;
+                    _modifiedDuration = value != null && value == OriginalDuration ? null : value;
                 }
             }
         }

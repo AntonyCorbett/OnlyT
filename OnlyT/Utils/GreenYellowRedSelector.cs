@@ -8,9 +8,9 @@ namespace OnlyT.Utils
     /// </summary>
     internal static class GreenYellowRedSelector
     {
-        private static readonly Brush _greenBrush = new SolidColorBrush(Colors.Chartreuse);
-        private static readonly Brush _yellowBrush = new SolidColorBrush(Colors.Yellow);
-        private static readonly Brush _redbrush = new SolidColorBrush(Colors.Red);
+        private static readonly Brush GreenBrush = new SolidColorBrush(Colors.Chartreuse);
+        private static readonly Brush YellowBrush = new SolidColorBrush(Colors.Yellow);
+        private static readonly Brush Redbrush = new SolidColorBrush(Colors.Red);
 
         /// <summary>
         /// Gets a brush (red, yellow or green)
@@ -21,20 +21,20 @@ namespace OnlyT.Utils
         {
             if (secsRemaining <= 0)
             {
-                return _redbrush;
+                return Redbrush;
             }
 
             if (secsRemaining <= 30)
             {
-                return _yellowBrush;
+                return YellowBrush;
             }
 
-            return _greenBrush;
+            return GreenBrush;
         }
 
         public static Brush GetGreenBrush()
         {
-            return _greenBrush;
+            return GreenBrush;
         }
     }
 }

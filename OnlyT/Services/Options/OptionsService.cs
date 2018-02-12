@@ -49,6 +49,7 @@ namespace OnlyT.Services.Options
                     // when we come to save them
                     _originalOptionsSignature = GetOptionsSignature(_options);
                 }
+                // ReSharper disable once CatchAllClause
                 catch (Exception ex)
                 {
                     Log.Logger.Error(ex, "Could not read options file");
@@ -142,6 +143,7 @@ namespace OnlyT.Services.Options
                     Log.Logger.Information("Settings changed and saved");
                 }
             }
+            // ReSharper disable once CatchAllClause
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not save settings");
@@ -159,6 +161,5 @@ namespace OnlyT.Services.Options
                 return !string.IsNullOrEmpty(Options.TimerMonitorId);
             }
         }
-
     }
 }

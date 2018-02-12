@@ -6,15 +6,15 @@ namespace OnlyT.CountdownTimer
 {
     public static class Animations
     {
-        private const int FADE_MS = 1000;
-        private const int QUICK_FADE_MS = 600;
+        private const int FadeMs = 1000;
+        private const int QuickFadeMs = 600;
 
         public static void FadeInAndOut(FrameworkElement parentContainer, FrameworkElement ctrl, int msToDisplay, EventHandler onCompleted = null)
         {
             var storyboard = new Storyboard();
-            storyboard.Children.Add(CreateFadeAnimation(ctrl, FADE_MS, true));
+            storyboard.Children.Add(CreateFadeAnimation(ctrl, FadeMs, true));
 
-            var fadeOutAnim = CreateFadeAnimation(ctrl, FADE_MS, false, onCompleted);
+            var fadeOutAnim = CreateFadeAnimation(ctrl, FadeMs, false, onCompleted);
             fadeOutAnim.BeginTime = new TimeSpan(0, 0, 0, 0, msToDisplay);
             storyboard.Children.Add(fadeOutAnim);
             storyboard.Begin(parentContainer);
@@ -22,42 +22,42 @@ namespace OnlyT.CountdownTimer
 
         public static void FadeIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrl, FADE_MS, true, onCompleted);
+            Fade(parentContainer, ctrl, FadeMs, true, onCompleted);
         }
 
         public static void FadeIn(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrls, FADE_MS, true, onCompleted);
+            Fade(parentContainer, ctrls, FadeMs, true, onCompleted);
         }
 
         public static void FadeOut(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrl, FADE_MS, false, onCompleted);
+            Fade(parentContainer, ctrl, FadeMs, false, onCompleted);
         }
 
         public static void FadeOut(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrls, FADE_MS, false, onCompleted);
+            Fade(parentContainer, ctrls, FadeMs, false, onCompleted);
         }
 
         public static void QuickFadeIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrl, QUICK_FADE_MS, true, onCompleted);
+            Fade(parentContainer, ctrl, QuickFadeMs, true, onCompleted);
         }
 
         public static void QuickFadeIn(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrls, QUICK_FADE_MS, true, onCompleted);
+            Fade(parentContainer, ctrls, QuickFadeMs, true, onCompleted);
         }
 
         public static void QuickFadeOut(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrl, QUICK_FADE_MS, false, onCompleted);
+            Fade(parentContainer, ctrl, QuickFadeMs, false, onCompleted);
         }
 
         public static void QuickFadeOut(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
         {
-            Fade(parentContainer, ctrls, QUICK_FADE_MS, false, onCompleted);
+            Fade(parentContainer, ctrls, QuickFadeMs, false, onCompleted);
         }
 
         private static DoubleAnimation CreateFadeAnimation(FrameworkElement ctrl, int ms, bool fadeIn, EventHandler onCompleted = null)
@@ -182,7 +182,7 @@ namespace OnlyT.CountdownTimer
 
         public static Storyboard Flash(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
         {
-            DoubleAnimation anim = CreateFadeAnimation(ctrl, FADE_MS, true, onCompleted);
+            DoubleAnimation anim = CreateFadeAnimation(ctrl, FadeMs, true, onCompleted);
             anim.AutoReverse = true;
             anim.RepeatBehavior = RepeatBehavior.Forever;
 

@@ -27,6 +27,7 @@ namespace OnlyT.Utils
                     }
                 }
             }
+            // ReSharper disable once CatchAllClause
             catch (Exception ex)
             {
                 Log.Logger.Warning(ex, "Could not get local IP Address");

@@ -16,7 +16,7 @@ namespace OnlyT.Utils
         private readonly Dictionary<string, string> _parameters;
         private bool _parsed;
 
-        private const string ID_KEY = "/id";
+        private const string IdKey = "/id";
 
         /// <summary>
         /// singleton instance of CommandLineParser
@@ -31,7 +31,7 @@ namespace OnlyT.Utils
 
         private readonly string[] _paramKeys =
         {
-            ID_KEY
+            IdKey
         };
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace OnlyT.Utils
         /// <returns></returns>
         public string GetId()
         {
-            return GetParamValue(ID_KEY);
+            return GetParamValue(IdKey);
         }
 
         /// <summary>

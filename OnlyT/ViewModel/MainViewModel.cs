@@ -19,6 +19,8 @@ using OnlyT.Services.Timer;
 using OnlyT.WebServer;
 using Serilog;
 
+// ReSharper disable CatchAllClause
+
 namespace OnlyT.ViewModel
 {
     /// <summary>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Xml.Linq;
 using OnlyT.Models;
 using OnlyT.Utils;
@@ -87,6 +86,7 @@ namespace OnlyT.Services.TalkSchedule
                         PrefixDurationsToTalkNames(result);
                     }
                 }
+                // ReSharper disable once CatchAllClause
                 catch (Exception ex)
                 {
                     result = null;

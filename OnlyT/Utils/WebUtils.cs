@@ -28,5 +28,14 @@ namespace OnlyT.Utils
             }
         }
 
+        public static string LoadWithUserAgent(string url)
+        {
+            using (WebClient wc = new WebClient())
+            {
+                wc.Encoding = Encoding.UTF8;
+                wc.Headers.Add("user-agent", GetUserAgentString());
+                return wc.DownloadString(url);
+            }
+        }
     }
 }

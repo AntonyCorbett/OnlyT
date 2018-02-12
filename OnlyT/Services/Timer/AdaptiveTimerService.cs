@@ -6,8 +6,8 @@ namespace OnlyT.Services.Timer
     using System.Diagnostics;
     using System.Linq;
 
-    using OnlyT.Models;
-    using OnlyT.Services.TalkSchedule;
+    using Models;
+    using TalkSchedule;
 
     /// <summary>
     /// Used in Automatic mode to automatically adapt talk timings according to

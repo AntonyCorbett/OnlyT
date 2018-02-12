@@ -47,7 +47,5 @@ namespace OnlyT.Services.Monitors
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
             public string DeviceKey;
         }
-
-
     }
 }

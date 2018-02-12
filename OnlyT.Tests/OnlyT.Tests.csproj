@@ -76,6 +76,7 @@
     <Compile Include="Mocks\MockOptions.cs" />
     <Compile Include="Mocks\MockTalksScheduleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDateCalcs.cs" />
     <Compile Include="TestTalkItem.cs" />
     <Compile Include="TestViewModels.cs" />
   </ItemGroup>

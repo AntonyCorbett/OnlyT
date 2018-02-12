@@ -32,7 +32,7 @@ namespace OnlyT.Animations
         public GridLength From
         {
             // ReSharper disable once PossibleNullReferenceException
-            get => (GridLength) GetValue(FromProperty);
+            get => (GridLength)GetValue(FromProperty);
             set => SetValue(FromProperty, value);
         }
 
@@ -41,7 +41,7 @@ namespace OnlyT.Animations
         public GridLength To
         {
             // ReSharper disable once PossibleNullReferenceException
-            get => (GridLength) GetValue(ToProperty);
+            get => (GridLength)GetValue(ToProperty);
             set => SetValue(ToProperty, value);
         }
 

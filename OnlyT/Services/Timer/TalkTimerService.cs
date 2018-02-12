@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Windows.Threading;
 using OnlyT.EventArgs;
-using OnlyT.WebServer;
 
 namespace OnlyT.Services.Timer
 {

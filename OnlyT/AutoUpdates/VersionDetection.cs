@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Serilog;
 
 namespace OnlyT.AutoUpdates
@@ -13,7 +9,7 @@ namespace OnlyT.AutoUpdates
     internal static class VersionDetection
     {
         public static string LatestReleaseUrl => "https://github.com/AntonyCorbett/OnlyT/releases/latest";
-        
+
         public static string GetLatestReleaseVersion()
         {
             string version = null;
@@ -37,6 +33,7 @@ namespace OnlyT.AutoUpdates
                     }
                 }
             }
+            // ReSharper disable once CatchAllClause
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Getting latest release version");

@@ -16,9 +16,9 @@ namespace OnlyT.AnalogueClock
     {
         private static readonly double _clockRadius = 250;
         private static readonly double _sectorRadius = 230;
-        private static readonly Point _clockOrigin = new Point(_clockRadius, _clockRadius);
-        private static readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
-        private static readonly TimeSpan _animationTimerInterval = TimeSpan.FromMilliseconds(20);
+        private static readonly Point ClockOrigin = new Point(_clockRadius, _clockRadius);
+        private static readonly TimeSpan TimerInterval = TimeSpan.FromMilliseconds(100);
+        private static readonly TimeSpan AnimationTimerInterval = TimeSpan.FromMilliseconds(20);
         private static readonly double _angleTolerance = 0.75;
 
         private AnglesOfHands _animationTargetAngles;
@@ -46,10 +46,10 @@ namespace OnlyT.AnalogueClock
         {
             var isInDesignMode = DesignerProperties.GetIsInDesignMode(this);
 
-            _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = _timerInterval };
+            _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimerInterval };
             _timer.Tick += TimerCallback;
 
-            _animationTimer = new DispatcherTimer(DispatcherPriority.Render) { Interval = _animationTimerInterval };
+            _animationTimer = new DispatcherTimer(DispatcherPriority.Render) { Interval = AnimationTimerInterval };
             _animationTimer.Tick += AnimationCallback;
 
             if (isInDesignMode)
@@ -277,8 +277,8 @@ namespace OnlyT.AnalogueClock
 
         private static void DrawSector(Path sectorPath, double startAngle, double endAngle, bool isLargeArc)
         {
-            Point ptStart = PointOnCircle(_sectorRadius, startAngle, _clockOrigin);
-            Point ptEnd = PointOnCircle(_sectorRadius, endAngle, _clockOrigin);
+            Point ptStart = PointOnCircle(_sectorRadius, startAngle, ClockOrigin);
+            Point ptEnd = PointOnCircle(_sectorRadius, endAngle, ClockOrigin);
             string largeArc = isLargeArc ? "1" : "0";
 
             // use InvariantCulture to ensure that decimal separator is '.'
@@ -399,7 +399,7 @@ namespace OnlyT.AnalogueClock
             for (int n = 0; n < 12; ++n)
             {
                 var angle = n * 30;
-                Point pt = PointOnCircle(centrePointRadius, angle, _clockOrigin);
+                Point pt = PointOnCircle(centrePointRadius, angle, ClockOrigin);
 
                 var hour = n == 0 ? 12 : n;
 
@@ -544,6 +544,5 @@ namespace OnlyT.AnalogueClock
                 _sectorPath3 = sectorPath3;
             }
         }
-
     }
 }

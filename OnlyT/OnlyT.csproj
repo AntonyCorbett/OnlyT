@@ -106,7 +106,10 @@
     <Compile Include="Animations\GridLengthAnimation.cs" />
     <Compile Include="AutoUpdates\VersionDetection.cs" />
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
-    <Compile Include="MeetingSongsFile\TimerValueAndBellFlag.cs" />
+    <Compile Include="MeetingTalkTimesFeed\Meeting.cs" />
+    <Compile Include="MeetingTalkTimesFeed\TalkTimer.cs" />
+    <Compile Include="MeetingTalkTimesFeed\TalkTypes.cs" />
+    <Compile Include="MeetingTalkTimesFeed\TimesFeed.cs" />
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
@@ -117,8 +120,6 @@
     <Compile Include="Services\Bell\IBellService.cs" />
     <Compile Include="Services\Bell\TimerBell.cs" />
     <Compile Include="EventArgs\TimerChangedEventArgs.cs" />
-    <Compile Include="MeetingSongsFile\MeetingSongsFinder.cs" />
-    <Compile Include="MeetingSongsFile\MeetingSongsAndTimers.cs" />
     <Compile Include="Models\AutoMeetingTime.cs" />
     <Compile Include="Models\DisplayDeviceData.cs" />
     <Compile Include="Models\MonitorItem.cs" />
@@ -153,7 +154,7 @@
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\BitmapConverter.cs" />
     <Compile Include="Utils\CommandLineParser.cs" />
-    <Compile Include="Utils\DateTimeExtensions.cs" />
+    <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FirewallPortsClient.cs" />
     <Compile Include="Utils\GreenYellowRedSelector.cs" />

@@ -16,6 +16,8 @@ using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
 using Serilog;
 
+// ReSharper disable CatchAllClause
+
 namespace OnlyT.ViewModel
 {
     /// <summary>
