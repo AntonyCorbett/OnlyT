@@ -24,6 +24,7 @@ namespace OnlyT.ViewModel
     /// <summary>
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
     /// </summary>
+    /// <remarks>Needs refactoring to move _timerWindow and _countdownWindow into a "window service"</remarks>
     public class MainViewModel : ViewModelBase
     {
         private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
@@ -181,6 +182,8 @@ namespace OnlyT.ViewModel
                 {
                     HideTimerWindow();
                 }
+
+                RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {
@@ -290,7 +293,17 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public bool AlwaysOnTop => _optionsService.Options.AlwaysOnTop;
+        public bool AlwaysOnTop
+        {
+            get
+            {
+                var result = _optionsService.Options.AlwaysOnTop || 
+                             (_timerWindow != null && _timerWindow.IsVisible) || 
+                             (_countdownWindow != null && _countdownWindow.IsVisible);
+                
+                return result;
+            }
+        }
 
         public void Closing(object sender, CancelEventArgs e)
         {
@@ -391,6 +404,8 @@ namespace OnlyT.ViewModel
 
             window.Topmost = true;
             window.Show();
+            
+            RaisePropertyChanged(nameof(AlwaysOnTop));
         }
 
         private void HideTimerWindow()
@@ -404,6 +419,8 @@ namespace OnlyT.ViewModel
             {
                 _timerWindow?.Close();
                 _timerWindow = null;
+
+                RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {
@@ -422,6 +439,8 @@ namespace OnlyT.ViewModel
                 
                 _countdownWindow?.Close();
                 _countdownWindow = null;
+
+                RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {

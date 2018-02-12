@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using OnlyT.Models;
+using Serilog;
 
 namespace OnlyT.Services.Monitors
 {
@@ -16,15 +17,21 @@ namespace OnlyT.Services.Monitors
         /// <returns>Collection of MonitorItem</returns>
         public IEnumerable<MonitorItem> GetSystemMonitors()
         {
+            Log.Logger.Information("Getting system monitors");
+            
             List<MonitorItem> result = new List<MonitorItem>();
 
             var devices = DisplayDevices.ReadDisplayDevices().ToArray();
 
             foreach (var screen in Screen.AllScreens)
             {
+                Log.Logger.Information($"Screen: {screen.DeviceName}");
+                
                 DisplayDeviceData deviceData = GetDeviceMatchingScreen(devices, screen);
                 if (deviceData != null)
                 {
+                    Log.Logger.Information($"Matching device: {deviceData.DeviceString}, {deviceData.DeviceId}");
+                    
                     result.Add(new MonitorItem
                     {
                         Monitor = screen,
