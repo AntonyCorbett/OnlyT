@@ -8,8 +8,12 @@ namespace OnlyT.Services.Monitors
     /// </summary>
     public static class NativeMethods
     {
-        [DllImport("user32.dll")]
-        public static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, uint dwFlags);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool EnumDisplayDevices(
+            string lpDevice, 
+            uint iDevNum, 
+            ref DISPLAY_DEVICE lpDisplayDevice, 
+            uint dwFlags);
 
         [Flags()]
         public enum DisplayDeviceStateFlags : int
@@ -31,7 +35,7 @@ namespace OnlyT.Services.Monitors
             Disconnect = 0x2000000
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public struct DISPLAY_DEVICE
         {
             [MarshalAs(UnmanagedType.U4)]

@@ -60,8 +60,6 @@ namespace OnlyT.Services.Monitors
                         });
                     }
                 }
-
-                device1.cb = Marshal.SizeOf(device1);
             }
 
             return result;
