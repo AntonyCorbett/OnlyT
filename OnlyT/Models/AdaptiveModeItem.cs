@@ -1,6 +1,6 @@
 ﻿namespace OnlyT.Models
 {
-    using OnlyT.Services.Options;
+    using Services.Options;
 
     /// <summary>
     /// Used for items in the Adaptive mode combos

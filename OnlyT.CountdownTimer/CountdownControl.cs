@@ -207,6 +207,7 @@ namespace OnlyT.CountdownTimer
 
         Color ToColor(string htmlColor)
         {
+            // ReSharper disable once PossibleNullReferenceException
             return (Color)ColorConverter.ConvertFromString(htmlColor);
         }
 

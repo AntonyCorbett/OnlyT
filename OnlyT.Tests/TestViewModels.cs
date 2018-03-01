@@ -15,15 +15,15 @@ namespace OnlyT.Tests
         [TestMethod]
         public void TestOperatorViewStartStop()
         {
-            const int TALK_ID_START = 500;
-            const int NUM_TALKS = 3;
+            const int TalkIdStart = 500;
+            const int NumTalks = 3;
 
             Mock<IOptionsService> optionsService = new Mock<IOptionsService>();
             optionsService.Setup(o => o.Options).Returns(MockOptions.Create());
 
             Mock<ITalkTimerService> timerService = new Mock<ITalkTimerService>();
             Mock<IAdaptiveTimerService> adaptiveTimerService = new Mock<IAdaptiveTimerService>();
-            ITalkScheduleService scheduleService = new MockTalksScheduleService(TALK_ID_START, NUM_TALKS);
+            ITalkScheduleService scheduleService = new MockTalksScheduleService(TalkIdStart, NumTalks);
 
             OperatorPageViewModel vm = new OperatorPageViewModel(timerService.Object, scheduleService,
                adaptiveTimerService.Object, optionsService.Object);
@@ -31,9 +31,9 @@ namespace OnlyT.Tests
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);
 
-            for (int n = 0; n < NUM_TALKS; ++n)
+            for (int n = 0; n < NumTalks; ++n)
             {
-                int talkId = TALK_ID_START + n;
+                int talkId = TalkIdStart + n;
                 Assert.IsTrue(vm.TalkId == talkId);
 
                 var talk = scheduleService.GetTalkScheduleItem(talkId);
@@ -43,12 +43,12 @@ namespace OnlyT.Tests
                 vm.StartCommand.Execute(null);
                 Assert.IsTrue(vm.IsRunning);
 
-                Assert.IsTrue(vm.TalkId == TALK_ID_START + n);
+                Assert.IsTrue(vm.TalkId == TalkIdStart + n);
 
                 vm.StopCommand.Execute(null);
                 Assert.IsFalse(vm.IsRunning);
 
-                Assert.IsTrue(vm.TalkId == (n == NUM_TALKS - 1 ? 0 : TALK_ID_START + n + 1));
+                Assert.IsTrue(vm.TalkId == (n == NumTalks - 1 ? 0 : TalkIdStart + n + 1));
             }
         }
     }

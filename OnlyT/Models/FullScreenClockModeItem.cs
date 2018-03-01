@@ -1,6 +1,6 @@
 ﻿namespace OnlyT.Models
 {
-    using OnlyT.Services.Options;
+    using Services.Options;
 
     public class FullScreenClockModeItem
     {

@@ -144,6 +144,11 @@ namespace OnlyT.Utils
             var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
             var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
 
+            if (dpiXProperty == null || dpiYProperty == null)
+            {
+                return new Tuple<int, int>(96, 96);
+            }
+
             return new Tuple<int, int>((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
         }
 

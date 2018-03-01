@@ -11,7 +11,7 @@
         Title="CountdownWindow" Height="305.825" Width="469.418">
     <Grid>
         <Border Name="ClockPanel" 
-                CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" 
+                CornerRadius="20" Grid.Column="0" 
                 BorderBrush="Beige" Margin="10" BorderThickness="3" Padding="10">
 
             <Border.Background>

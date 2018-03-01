@@ -27,7 +27,9 @@ namespace OnlyT.ViewModel
     {
         public static string PageName => "OperatorPage";
         private static readonly string _arrow = "→";
+        // ReSharper disable once PossibleNullReferenceException
         private static readonly Brush DurationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
+        // ReSharper disable once PossibleNullReferenceException
         private static readonly Brush DurationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
@@ -39,6 +41,7 @@ namespace OnlyT.ViewModel
         private static readonly int MaxTimerMins = 99;
         private static readonly int MaxTimerSecs = MaxTimerMins * 60;
 
+        // ReSharper disable once PossibleNullReferenceException
         private readonly SolidColorBrush _bellColorActive = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
         private readonly SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
 

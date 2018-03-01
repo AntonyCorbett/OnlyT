@@ -217,7 +217,7 @@ namespace OnlyT.Services.TalkSchedule
             {
                 Name = Properties.Resources.TALK_LIVING2,
                 StartOffsetIntoMeeting = new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1.Minutes)),
-                OriginalDuration = TimeSpan.FromMinutes(timerPart2.Minutes),
+                OriginalDuration = TimeSpan.FromMinutes(timerPart2?.Minutes ?? 0),
                 AllowAdaptive = true,
                 Editable = true
             });

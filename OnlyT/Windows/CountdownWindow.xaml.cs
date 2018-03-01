@@ -1,9 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Threading;
-using OnlyT.ViewModel;
 
 namespace OnlyT.Windows
 {

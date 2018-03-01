@@ -10,7 +10,7 @@ namespace OnlyT.CountdownTimer
         {
             PathSegmentCollection segs = new PathSegmentCollection();
 
-            segs.Add(CreateLine1(angle, centrePt, innerRadius, outerRadius));
+            segs.Add(CreateLine1(angle, centrePt, outerRadius));
             segs.Add(CreateArc1(angle, centrePt, outerRadius));
             segs.Add(CreateLine2(angle, centrePt, innerRadius));
             segs.Add(CreateArc2(angle, centrePt, innerRadius));
@@ -57,7 +57,7 @@ namespace OnlyT.CountdownTimer
             return new ArcSegment(endPt, sz, 360 - angle, largeArc, SweepDirection.Counterclockwise, true);
         }
 
-        private static LineSegment CreateLine1(double angle, Point centrePt, int innerRadius, int outerRadius)
+        private static LineSegment CreateLine1(double angle, Point centrePt, int outerRadius)
         {
             var endX = centrePt.X + Math.Sin(angle * Math.PI / 180) * outerRadius;
             var endY = centrePt.Y - Math.Cos(angle * Math.PI / 180) * outerRadius;

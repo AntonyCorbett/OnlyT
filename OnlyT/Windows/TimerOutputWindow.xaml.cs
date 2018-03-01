@@ -7,11 +7,11 @@
 
     using GalaSoft.MvvmLight.Messaging;
 
-    using OnlyT.Animations;
-    using OnlyT.Services.Options;
-    using OnlyT.Utils;
-    using OnlyT.ViewModel;
-    using OnlyT.ViewModel.Messages;
+    using Animations;
+    using Services.Options;
+    using Utils;
+    using ViewModel;
+    using ViewModel.Messages;
 
     /// <summary>
     /// Interaction logic for TimerOutputWindow.xaml
