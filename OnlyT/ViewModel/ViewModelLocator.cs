@@ -1,5 +1,5 @@
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 using OnlyT.Services.Bell;
 using OnlyT.Services.CountdownTimer;
 using OnlyT.Services.Monitors;

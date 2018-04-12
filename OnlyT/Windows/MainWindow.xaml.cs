@@ -1,6 +1,6 @@
 ﻿using System.Windows;
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Practices.ServiceLocation;
 using OnlyT.Services.Options;
 using OnlyT.Utils;
 using OnlyT.ViewModel;
