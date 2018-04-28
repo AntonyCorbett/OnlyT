@@ -2,7 +2,7 @@
 <html style="display:block; height:100%; margin:0; padding:0">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<title>SoundBox Clock</title>
+		<title>OnlyT Clock</title>
 		<style type="text/css">			
 			html 
 			{
@@ -71,13 +71,14 @@
 			var currentTargetSecs = 0;
 			var currentTimerMins = 0;
 			var currentTimerSecs = 0;
+			var currentTimerMillisecs = 0;
 			var timerStartDateTime = new Date();
 			var modeTransition = false;
 			var serverTimeOfDayAdjustment = 0;
 			var FIVE_SEC_TIMER = false;
 			var POLLING_INTERVAL_SECS = 4;
 									
-			function getSoundBoxXml() 
+			function getOnlyTXml() 
 			{	
 				var clientDate = new Date();		
 
@@ -89,6 +90,8 @@
 								
 				myGetRequest.onreadystatechange=function() 
 				{
+					var responseDate = new Date();
+
 					if (myGetRequest.readyState==4) 
 					{
 						if (myGetRequest.status==200 || window.location.href.indexOf("http")==-1) 
@@ -103,19 +106,22 @@
 								switch(currentMode)
 								{
 									case "Timer":
-									case "TimerPause":
+									case "TimerPause":										
+										var requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
+
 										currentTimerMins=parseInt(entry.getAttribute("mins"));
 										currentTimerSecs=parseInt(entry.getAttribute("secs"));
+										currentTimerMillisecs=parseInt(entry.getAttribute("ms"));
 										currentTargetSecs=parseInt(entry.getAttribute("targetSecs"));
 
-										var timerElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
-										var serverTimerElapsedSecs = (currentTimerMins * 60) + currentTimerSecs;
-										var diffSecs = serverTimerElapsedSecs - timerElapsedSecs;
+										var timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
+										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + ((currentTimerSecs - 1) * 1000) + currentTimerMillisecs;
+										var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + requestLatencyMillisecs;
 														
-										if(Math.abs(diffSecs) > 1)
-										{	
-											// client timer out by more than 2 secs so adjust the timerStart								
-											timerStartDateTime.setTime(timerStartDateTime.getTime() - diffSecs*1000.0);
+										if(Math.abs(diffMillisecs) > 100)
+										{												
+											// client timer out by more than 1/10 sec so adjust the timerStart								
+											timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
 										}
 										break;
 
@@ -135,12 +141,17 @@
 						}
 					}				 
 				}
+
+				myGetRequest.ontimeout = function (e) {
+					console.log("timeout");
+				};
 								
 				var url = "../data/" + clientDate.getTime();	// unique uri to prevent reuse of cached xml
 				myGetRequest.open("GET", url, true);
+				myGetRequest.timeout = 2000;
 				myGetRequest.send(null);
 
-				setTimeout(getSoundBoxXml, POLLING_INTERVAL_SECS * 1000);
+				setTimeout(getOnlyTXml, POLLING_INTERVAL_SECS * 1000);
 			}
 
 			function getClientTimerElapsedMilliSecs()
@@ -271,7 +282,7 @@
 						break;
 
 					case "Nameplate":
-						s = "SoundBox";
+						s = "OnlyT";
 						currentDisplayMode = currentMode;
 						textElem.className = "clockstyle_dim";						
 						break;
@@ -295,7 +306,7 @@
 				}
 				
 				conditionalUpdateTxtSize();
-				setTimeout(updateClock, 1000);	// every sec
+				setTimeout(updateClock, 100);	// every 1/10 sec
 			}
 			
 			function updateTextSize() 
@@ -311,7 +322,7 @@
 				}
 			}
 			
-			getSoundBoxXml();
+			getOnlyTXml();
 			updateClock();
 			updateTextSize();
 

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Threading;
 using OnlyT.EventArgs;
+using OnlyT.Models;
 
 namespace OnlyT.Services.Timer
 {
@@ -32,7 +33,7 @@ namespace OnlyT.Services.Timer
 
         private void UpdateTimerValue()
         {
-            CurrentSecondsElapsed = (int)_stopWatch.Elapsed.TotalSeconds;
+            CurrentTimeElapsed = _stopWatch.Elapsed;
         }
 
         /// <summary>
@@ -55,6 +56,24 @@ namespace OnlyT.Services.Timer
             _timer.Stop();
             _stopWatch.Reset();
             UpdateTimerValue();
+        }
+
+        private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
+
+        /// <summary>
+        /// The current elapsed time
+        /// </summary>
+        public TimeSpan CurrentTimeElapsed
+        {
+            get => _currentTimeElapsed;
+            set
+            {
+                if (_currentTimeElapsed != value)
+                {
+                    _currentTimeElapsed = value;
+                    CurrentSecondsElapsed = (int)_currentTimeElapsed.TotalSeconds;
+                }
+            }
         }
 
         private int _currentSecondsElapsed;
@@ -80,12 +99,12 @@ namespace OnlyT.Services.Timer
             }
         }
 
-        public TimerChangedEventArgs GetClockRequestInfo()
+        public ClockRequestInfo GetClockRequestInfo()
         {
-            return new TimerChangedEventArgs
+            return new ClockRequestInfo
             {
-                TargetSecs = _targetSecs,
-                ElapsedSecs = _currentSecondsElapsed,
+                TargetSeconds = _targetSecs,
+                ElapsedTime = _currentTimeElapsed,
                 IsRunning = IsRunning
             };
         }

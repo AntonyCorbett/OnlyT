@@ -474,6 +474,20 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public bool IsApiEnabled
+        {
+            get => _optionsService.Options.IsApiEnabled;
+            set
+            {
+                if (_optionsService.Options.IsApiEnabled != value)
+                {
+                    _optionsService.Options.IsApiEnabled = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new HttpServerChangedMessage());
+                }
+            }
+        }
+
         public BitmapImage WebClockQRCode
         {
             get

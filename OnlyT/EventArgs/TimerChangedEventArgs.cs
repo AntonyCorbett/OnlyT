@@ -1,4 +1,6 @@
-﻿namespace OnlyT.EventArgs
+﻿using System;
+
+namespace OnlyT.EventArgs
 {
     /// <inheritdoc />
     /// <summary>

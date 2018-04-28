@@ -112,6 +112,7 @@
     <Compile Include="MeetingTalkTimesFeed\TimesFeed.cs" />
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
+    <Compile Include="Models\ClockRequestInfo.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\WebClockPortItem.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\GetCurrentTimerInfoMessage.cs" />
     <Compile Include="ViewModel\Messages\MeetingStartTimesChangeMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />
@@ -190,8 +192,9 @@
     <Compile Include="ViewModel\OperatorPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TimerOutputWindowViewModel.cs" />
-    <Compile Include="WebServer\ClockServerEventArgs.cs" />
     <Compile Include="WebServer\ClockServerMode.cs" />
+    <Compile Include="WebServer\Controllers\ApiController.cs" />
+    <Compile Include="WebServer\Controllers\ClockWebPageController.cs" />
     <Compile Include="WebServer\HttpServer.cs" />
     <Compile Include="WebServer\IHttpServer.cs" />
     <Compile Include="Windows\CountdownWindow.xaml.cs">

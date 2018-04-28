@@ -2,6 +2,8 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using OnlyT.Services.Options;
+using OnlyT.WebServer.Controllers;
 using Serilog;
 
 // ReSharper disable CatchAllClause
@@ -13,12 +15,12 @@ namespace OnlyT.WebServer
         private HttpListener _listener;
         private int _port;
         private readonly bool _24HourClock;
+        private readonly IOptionsService _optionsService;
 
-        public event EventHandler<ClockServerEventArgs> ClockServerRequestHandler;
-
-        public HttpServer()
+        public HttpServer(IOptionsService optionsService)
         {
-            _24HourClock = (new DateTime(1, 1, 1, 23, 1, 1)).ToShortTimeString().Contains("23");
+            _optionsService = optionsService;
+            _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
         }
 
         public void Start(int port)
@@ -33,7 +35,10 @@ namespace OnlyT.WebServer
 
         public void Stop()
         {
-            _listener?.Stop();
+            if (_listener?.IsListening ?? false)
+            {
+                _listener?.Stop();
+            }
         }
 
         private void StartListener()
@@ -41,6 +46,7 @@ namespace OnlyT.WebServer
             _listener.Prefixes.Clear();
             _listener.Prefixes.Add($"http://*:{_port}/index/");
             _listener.Prefixes.Add($"http://*:{_port}/data/");
+            _listener.Prefixes.Add($"http://*:{_port}/api/");
 
             _listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
             _listener.IgnoreWriteExceptions = true;
@@ -103,11 +109,15 @@ namespace OnlyT.WebServer
                                 switch (segment)
                                 {
                                     case "data":
-                                        HandleRequestForTimerData(response);
+                                        HandleRequestForClockWebPageTimerData(response);
                                         break;
 
                                     case "index":
-                                        HandleRequestForTimerPage(response);
+                                        HandleRequestForClockWebPage(response);
+                                        break;
+
+                                    case "api":
+                                        HandleApiRequest(context.Request, response);
                                         break;
                                 }
                             }
@@ -121,105 +131,37 @@ namespace OnlyT.WebServer
             }
         }
 
-        private void HandleRequestForTimerPage(HttpListenerResponse response)
+        private void HandleApiRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
-            response.ContentType = "text/html";
-            response.ContentEncoding = Encoding.UTF8;
-
-            string responseString = Properties.Resources.ClockHtmlTemplate;
-            if (!_24HourClock)
+            if (_optionsService.Options.IsApiEnabled)
             {
-                responseString = ReplaceTimeFormat(responseString);
-            }
-
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-
-            response.ContentLength64 = buffer.Length;
-            using (System.IO.Stream output = response.OutputStream)
-            {
-                output.Write(buffer, 0, buffer.Length);
+                ApiController controller = new ApiController();
+                controller.HandleRequest(request, response);
             }
         }
 
-        private void HandleRequestForTimerData(HttpListenerResponse response)
+        private void HandleRequestForClockWebPage(HttpListenerResponse response)
         {
-            response.ContentType = "text/xml";
-            response.ContentEncoding = Encoding.UTF8;
-
-            string responseString = CreateXml();
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-
-            response.ContentLength64 = buffer.Length;
-            using (System.IO.Stream output = response.OutputStream)
+            if (_optionsService.Options.IsWebClockEnabled)
             {
-                output.Write(buffer, 0, buffer.Length);
+                ClockWebPageController controller = new ClockWebPageController();
+                controller.HandleRequestForWebPage(response, _24HourClock);
             }
         }
 
-        private string ReplaceTimeFormat(string responseString)
+        private void HandleRequestForClockWebPageTimerData(HttpListenerResponse response)
         {
-            string origLineOfCode = "s = formatTimeOfDay(h, m, true);";
-            string newLineOfCode = "s = formatTimeOfDay(h, m, false);";
-
-            return responseString.Replace(origLineOfCode, newLineOfCode);
-        }
-
-
-        private string CreateXml()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            var args = new ClockServerEventArgs();
-            OnClockServerRequest(args);
-
-            sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            sb.AppendLine("<root>");
-
-            switch (args.Mode)
+            if (_optionsService.Options.IsWebClockEnabled)
             {
-                case ClockServerMode.Nameplate:
-                    sb.AppendLine(" <clock mode=\"Nameplate\" mins=\"0\" secs=\"0\" targetSecs=\"0\" />");
-                    break;
-
-                case ClockServerMode.TimeOfDay:
-                    // in this mode mins and secs hold the total offset time into the day
-                    DateTime now = DateTime.Now;
-                    sb.AppendLine(
-                        $" <clock mode=\"TimeOfDay\" mins=\"{(now.Hour * 60) + now.Minute}\" secs=\"{now.Second}\" targetSecs=\"0\" />");
-                    break;
-
-                case ClockServerMode.Timer:
-                    sb.AppendLine(
-                        $" <clock mode=\"Timer\" mins=\"{args.Mins}\" secs=\"{args.Secs}\" targetSecs=\"{args.TargetSecs}\" />");
-                    break;
-
-                case ClockServerMode.TimerPause:
-                    sb.AppendLine(
-                        $" <clock mode=\"TimerPause\" mins=\"{args.Mins}\" secs=\"{args.Secs}\" targetSecs=\"{args.TargetSecs}\" />");
-                    break;
-            }
-
-            sb.AppendLine("</root>");
-            return sb.ToString();
-        }
-
-        private void OnClockServerRequest(ClockServerEventArgs e)
-        {
-            var handler = ClockServerRequestHandler;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-            else
-            {
-                e.Mode = ClockServerMode.Nameplate;
+                ClockWebPageController controller = new ClockWebPageController();
+                controller.HandleRequestForTimerData(response);
             }
         }
 
         public void Dispose()
         {
             _listener.Close();
+            _listener = null;
         }
-
     }
 }

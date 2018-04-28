@@ -74,6 +74,7 @@ namespace OnlyT.Services.Options
         public bool AllowCountUpToggle { get; set; }
         public MeetingStartTimes.MeetingStartTimes MeetingStartTimes { get; set; }
         public bool IsCountdownEnabled { get; set; }
+        public bool IsApiEnabled { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required

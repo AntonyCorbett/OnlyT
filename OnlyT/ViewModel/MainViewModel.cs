@@ -65,9 +65,10 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
             Messenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
+            Messenger.Default.Register<GetCurrentTimerInfoMessage>(this, OnGetCurrentTimerInfo);
 
             InitHttpServer();
-            
+
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
 
@@ -75,7 +76,7 @@ namespace OnlyT.ViewModel
             _countdownWindowViewModel = new CountdownTimerViewModel();
 
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
-            
+
 #pragma warning disable 4014
             // (fire and forget)
             LaunchTimerWindowAsync();
@@ -90,9 +91,9 @@ namespace OnlyT.ViewModel
             if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
             {
                 Log.Logger.Information("Launching countdown timer");
-                
+
                 OpenCountdownWindow(offsetSeconds);
-                
+
                 Task.Delay(1000).ContinueWith(t =>
                 {
                     // hide the timer window after a short delay (so that it doesn't appear 
@@ -103,11 +104,11 @@ namespace OnlyT.ViewModel
         }
 
         public string CurrentPageName { get; set; }
-        
+
         private void InitSettingsPage()
         {
             // we only init the settings page when first used...
-            
+
             if (!_pages.ContainsKey(SettingsPageViewModel.PageName))
             {
                 _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
@@ -117,37 +118,33 @@ namespace OnlyT.ViewModel
         private void OnHttpServerChanged(HttpServerChangedMessage msg)
         {
             _httpServer.Stop();
-
-            if (_optionsService.Options.IsWebClockEnabled)
-            {
-                _httpServer.Start(_optionsService.Options.HttpServerPort);
-            }
+            InitHttpServer();
         }
 
         private void InitHttpServer()
         {
-            _httpServer.ClockServerRequestHandler += ClockRequestHandler;
-            if (_optionsService.Options.IsWebClockEnabled)
+            if (_optionsService.Options.IsWebClockEnabled || _optionsService.Options.IsApiEnabled)
             {
                 _httpServer.Start(_optionsService.Options.HttpServerPort);
             }
         }
 
-        private void ClockRequestHandler(object sender, ClockServerEventArgs e)
+        private void OnGetCurrentTimerInfo(GetCurrentTimerInfoMessage message)
         {
             // we received a web request for the timer clock info...
 
-            TimerChangedEventArgs info = _timerService.GetClockRequestInfo();
+            var info = _timerService.GetClockRequestInfo();
             if (info == null || !info.IsRunning)
             {
-                e.Mode = ClockServerMode.TimeOfDay;
+                message.Mode = ClockServerMode.TimeOfDay;
             }
             else
             {
-                e.Mode = ClockServerMode.Timer;
-                e.Mins = info.ElapsedSecs / 60;
-                e.Secs = info.ElapsedSecs % 60;
-                e.TargetSecs = info.TargetSecs;
+                message.Mode = ClockServerMode.Timer;
+                message.TargetSecs = info.TargetSeconds;
+                message.Mins = info.ElapsedTime.Minutes;
+                message.Secs = info.ElapsedTime.Seconds;
+                message.Millisecs = info.ElapsedTime.Milliseconds;
             }
         }
 
@@ -219,7 +216,7 @@ namespace OnlyT.ViewModel
             {
                 if (_optionsService.Options.IsCountdownEnabled)
                 {
-                    if (!CountDownActive && 
+                    if (!CountDownActive &&
                         !_countdownDone &&
                         _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
                     {
@@ -257,7 +254,7 @@ namespace OnlyT.ViewModel
             Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = false });
 
             _timerWindow?.Show();
-            
+
             Task.Delay(1000).ContinueWith(t =>
             {
                 DispatcherHelper.CheckBeginInvokeOnUI(CloseCountdownWindow);
@@ -275,7 +272,7 @@ namespace OnlyT.ViewModel
                 // we only init the settings page when first used...
                 InitSettingsPage();
             }
-            
+
             CurrentPage = _pages[message.TargetPageName];
             CurrentPageName = message.TargetPageName;
             ((IPage)CurrentPage.DataContext).Activated(message.State);
@@ -299,10 +296,10 @@ namespace OnlyT.ViewModel
         {
             get
             {
-                var result = _optionsService.Options.AlwaysOnTop || 
-                             (_timerWindow != null && _timerWindow.IsVisible) || 
+                var result = _optionsService.Options.AlwaysOnTop ||
+                             (_timerWindow != null && _timerWindow.IsVisible) ||
                              (_countdownWindow != null && _countdownWindow.IsVisible);
-                
+
                 return result;
             }
         }
@@ -358,7 +355,7 @@ namespace OnlyT.ViewModel
                     var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                     if (targetMonitor != null)
                     {
-                        _countdownWindow = new CountdownWindow {DataContext = _countdownWindowViewModel};
+                        _countdownWindow = new CountdownWindow { DataContext = _countdownWindowViewModel };
                         _countdownWindow.TimeUpEvent += OnCountdownTimeUp;
                         ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
                         _countdownWindow.Start(offsetSeconds);
@@ -385,7 +382,7 @@ namespace OnlyT.ViewModel
                 var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                 if (targetMonitor != null)
                 {
-                    _timerWindow = new TimerOutputWindow {DataContext = _timerWindowViewModel};
+                    _timerWindow = new TimerOutputWindow { DataContext = _timerWindowViewModel };
                     ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
                 }
             }
@@ -398,7 +395,7 @@ namespace OnlyT.ViewModel
         private void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
         {
             var area = monitor.Monitor.WorkingArea;
-            
+
             window.Left = area.Left;
             window.Top = area.Top;
             window.Width = 0;
@@ -406,7 +403,7 @@ namespace OnlyT.ViewModel
 
             window.Topmost = true;
             window.Show();
-            
+
             RaisePropertyChanged(nameof(AlwaysOnTop));
         }
 
@@ -438,7 +435,7 @@ namespace OnlyT.ViewModel
                 {
                     _countdownWindow.TimeUpEvent -= OnCountdownTimeUp;
                 }
-                
+
                 _countdownWindow?.Close();
                 _countdownWindow = null;
 
