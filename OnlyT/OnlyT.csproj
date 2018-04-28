@@ -192,11 +192,19 @@
     <Compile Include="ViewModel\OperatorPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TimerOutputWindowViewModel.cs" />
+    <Compile Include="WebServer\Controllers\BaseApiController.cs" />
+    <Compile Include="WebServer\Controllers\SystemApiController.cs" />
+    <Compile Include="WebServer\ErrorHandling\WebServerErrorCodes.cs" />
+    <Compile Include="WebServer\ErrorHandling\WebServerException.cs" />
     <Compile Include="WebServer\ClockServerMode.cs" />
-    <Compile Include="WebServer\Controllers\ApiController.cs" />
+    <Compile Include="WebServer\Controllers\ApiRouter.cs" />
     <Compile Include="WebServer\Controllers\ClockWebPageController.cs" />
+    <Compile Include="WebServer\ErrorHandling\WebServerErrorCode.cs" />
     <Compile Include="WebServer\HttpServer.cs" />
     <Compile Include="WebServer\IHttpServer.cs" />
+    <Compile Include="WebServer\Models\ApiCultureData.cs" />
+    <Compile Include="WebServer\Models\ApiSystemData.cs" />
+    <Compile Include="WebServer\Models\ApiVersion.cs" />
     <Compile Include="Windows\CountdownWindow.xaml.cs">
       <DependentUpon>CountdownWindow.xaml</DependentUpon>
     </Compile>

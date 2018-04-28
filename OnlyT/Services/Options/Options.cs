@@ -75,6 +75,7 @@ namespace OnlyT.Services.Options
         public MeetingStartTimes.MeetingStartTimes MeetingStartTimes { get; set; }
         public bool IsCountdownEnabled { get; set; }
         public bool IsApiEnabled { get; set; }
+        public string ApiCode { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required

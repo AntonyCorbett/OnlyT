@@ -135,8 +135,8 @@ namespace OnlyT.WebServer
         {
             if (_optionsService.Options.IsApiEnabled)
             {
-                ApiController controller = new ApiController();
-                controller.HandleRequest(request, response);
+                ApiRouter controller = new ApiRouter();
+                controller.HandleRequest(request, response, _optionsService);
             }
         }
 

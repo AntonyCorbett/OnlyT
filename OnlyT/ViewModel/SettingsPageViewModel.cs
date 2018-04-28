@@ -488,6 +488,20 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public string ApiCode
+        {
+            get => _optionsService.Options.ApiCode;
+            set
+            {
+                var val = value.Trim();
+                if (!_optionsService.Options.ApiCode.Equals(val))
+                {
+                    _optionsService.Options.ApiCode = val;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public BitmapImage WebClockQRCode
         {
             get

@@ -135,31 +135,30 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Web clock and API">
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Remote access">
                     <StackPanel>
-                        <CheckBox IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Web clock enabled" />
-
-                        <CheckBox IsChecked="{Binding IsApiEnabled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="API enabled" />
-
                         <Label Style="{StaticResource LabelStyle}">Port:</Label>
                         <ComboBox ItemsSource="{Binding Ports}" 
-                                  SelectedValuePath="Port" 
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Port, Mode=TwoWay}"/>
-                        
+                            SelectedValuePath="Port" 
+                            DisplayMemberPath="Name"
+                            SelectedValue="{Binding Port, Mode=TwoWay}"/>
+
                         <Button Width="120" HorizontalAlignment="Left" 
-                                Height="32"
-                                Command="{Binding OpenPortCommand}"
-                                Margin="0,10,0,0">
+                            Height="32"
+                            Command="{Binding OpenPortCommand}"
+                            Margin="0,10,0,0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding ElevatedShield}" Height="16"/>
                                 <Label Content="Open Port"></Label>
                             </StackPanel>
                         </Button>
+                    </StackPanel>
+                </GroupBox>
 
-                        <Label Style="{StaticResource LabelStyle}">Web clock address:</Label>
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Web clock">
+                    <StackPanel>
+                        <CheckBox IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Enabled" />
 
                         <TextBlock Margin="0,2,0,0">
                             <Hyperlink Command="{Binding WebClockUrlLinkCommand}">
@@ -173,7 +172,18 @@
                             
                     </StackPanel>
                 </GroupBox>
-                
+
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Programming API">
+                    <StackPanel>
+                        <CheckBox IsChecked="{Binding IsApiEnabled, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Enabled" />
+                        
+                        <Label Style="{StaticResource LabelStyle}">Code:</Label>
+                        <TextBox Text="{Binding ApiCode, Mode=TwoWay}"></TextBox>
+
+                    </StackPanel>
+                </GroupBox>
+
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Meeting countdown">
                     <StackPanel>
                         <CheckBox IsChecked="{Binding IsCountdownEnabled, Mode=TwoWay}" 
