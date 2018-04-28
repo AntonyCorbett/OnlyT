@@ -1,13 +1,58 @@
-﻿using System;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json;
-using OnlyT.WebServer.ErrorHandling;
+﻿using System.Linq;
 
 namespace OnlyT.WebServer.Controllers
 {
+    // ReSharper disable ParameterOnlyUsedForPreconditionCheck.Global
+    using System;
+    using System.Net;
+    using System.Text;
+    using ErrorHandling;
+    using Newtonsoft.Json;
+
     internal class BaseApiController
     {
+        protected bool IsMethodGet(HttpListenerRequest request)
+        {
+            return IsMethod(request, "GET");
+        }
+
+        protected bool IsMethodPost(HttpListenerRequest request)
+        {
+            return IsMethod(request, "POST");
+        }
+
+        protected void CheckMethodGetOrPost(HttpListenerRequest request)
+        {
+            if (!IsMethodGet(request) && !IsMethodPost(request))
+            {
+                throw new WebServerException(WebServerErrorCode.BadHttpVerb);
+            }
+        }
+
+        protected void CheckMethodGet(HttpListenerRequest request)
+        {
+            if (!IsMethodGet(request))
+            {
+                throw new WebServerException(WebServerErrorCode.BadHttpVerb);
+            }
+        }
+
+        protected void CheckMethodPost(HttpListenerRequest request)
+        {
+            if (!IsMethodPost(request))
+            {
+                throw new WebServerException(WebServerErrorCode.BadHttpVerb);
+            }
+        }
+        
+        protected void CheckSegmentLength(HttpListenerRequest request, params int[] lengths)
+        {
+            if (!lengths.Contains(request.Url.Segments.Length))
+            {
+                throw new WebServerException(WebServerErrorCode.UriTooManySegments);
+            }
+        }
+
         protected void WriteResponse(HttpListenerResponse response, object info)
         {
             if (info == null)
@@ -34,8 +79,13 @@ namespace OnlyT.WebServer.Controllers
             }
             catch (Exception)
             {
-                ; // ignore
+                // ignore
             }
+        }
+
+        private bool IsMethod(HttpListenerRequest request, string methodName)
+        {
+            return request.HttpMethod.Equals(methodName, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

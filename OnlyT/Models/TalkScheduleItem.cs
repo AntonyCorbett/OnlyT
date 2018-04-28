@@ -1,16 +1,18 @@
-﻿using System;
-using OnlyT.Services.TalkSchedule;
-using OnlyT.Utils;
-
-namespace OnlyT.Models
+﻿namespace OnlyT.Models
 {
+    using System;
+    using Services.TalkSchedule;
+    using Utils;
+
     /// <summary>
     /// Represents a talk in the meeting schedule
     /// </summary>
     public class TalkScheduleItem
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public bool? CountUp { get; set; }
 
         /// <summary>
@@ -68,6 +70,7 @@ namespace OnlyT.Models
         }
 
         public TimeSpan StartOffsetIntoMeeting { get; set; }
+
         public bool AllowAdaptive { get; set; }
 
         public bool Editable { get; set; }  // can the timer be modified manually?
@@ -87,6 +90,7 @@ namespace OnlyT.Models
         }
 
         private bool _bell;
+        
         // should a bell be sounded at time-up?
         public bool Bell
         {
@@ -100,7 +104,6 @@ namespace OnlyT.Models
                 }
             }
         }
-        
         
         public TalkScheduleItem()
         {

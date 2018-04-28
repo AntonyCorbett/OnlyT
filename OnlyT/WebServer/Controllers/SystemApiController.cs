@@ -24,25 +24,11 @@ namespace OnlyT.WebServer.Controllers
             int oldestSupportedApiVersion, 
             int currentApiVersion)
         {
-            if (request.HttpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase))
-            {
-                // segments: "/" "api/" "v3/" "system/"
+            CheckMethodGet(request);
+            CheckSegmentLength(request, 4);
 
-                if (request.Url.Segments.Length == 4)
-                {
-                    var systemData = GetSystemData(oldestSupportedApiVersion, currentApiVersion);
-                    WriteResponse(response, systemData);
-                }
-                else
-                {
-                    throw new WebServerException(WebServerErrorCode.UriTooManySegments);
-                }
-            }
-            else
-            {
-                // can only use GET on this url
-                throw new WebServerException(WebServerErrorCode.BadHttpVerb);
-            }
+            // segments: "/" "api/" "v1/" "system/"
+            WriteResponse(response, GetSystemData(oldestSupportedApiVersion, currentApiVersion));
         }
 
         private ApiSystemData GetSystemData(int oldestSupportedApiVersion, int currentApiVersion)

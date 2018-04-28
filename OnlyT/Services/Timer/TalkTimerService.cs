@@ -1,11 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Threading;
-using OnlyT.EventArgs;
-using OnlyT.Models;
-
-namespace OnlyT.Services.Timer
+﻿namespace OnlyT.Services.Timer
 {
+    using System;
+    using System.Diagnostics;
+    using System.Windows.Threading;
+    using EventArgs;
+    using Models;
+
     /// <summary>
     /// Timer service
     /// </summary>
@@ -13,8 +13,8 @@ namespace OnlyT.Services.Timer
     {
         private readonly Stopwatch _stopWatch = new Stopwatch();
         private readonly DispatcherTimer _timer = new DispatcherTimer(DispatcherPriority.Render);
-        private int _targetSecs = 600;
         private readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
+        private int _targetSecs = 600;
 
         public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
 
@@ -22,18 +22,6 @@ namespace OnlyT.Services.Timer
         {
             _timer.Interval = _timerInterval;
             _timer.Tick += TimerElapsedHandler;
-        }
-
-        private void TimerElapsedHandler(object sender, System.EventArgs e)
-        {
-            _timer.Stop();
-            UpdateTimerValue();
-            _timer.Start();
-        }
-
-        private void UpdateTimerValue()
-        {
-            CurrentTimeElapsed = _stopWatch.Elapsed;
         }
 
         /// <summary>
@@ -63,9 +51,8 @@ namespace OnlyT.Services.Timer
         /// <summary>
         /// The current elapsed time
         /// </summary>
-        public TimeSpan CurrentTimeElapsed
+        private TimeSpan CurrentTimeElapsed
         {
-            get => _currentTimeElapsed;
             set
             {
                 if (_currentTimeElapsed != value)
@@ -117,6 +104,18 @@ namespace OnlyT.Services.Timer
         protected virtual void OnTimerChangedEvent(TimerChangedEventArgs e)
         {
             TimerChangedEvent?.Invoke(this, e);
+        }
+
+        private void TimerElapsedHandler(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            UpdateTimerValue();
+            _timer.Start();
+        }
+
+        private void UpdateTimerValue()
+        {
+            CurrentTimeElapsed = _stopWatch.Elapsed;
         }
     }
 }

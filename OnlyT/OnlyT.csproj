@@ -193,7 +193,10 @@
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TimerOutputWindowViewModel.cs" />
     <Compile Include="WebServer\Controllers\BaseApiController.cs" />
+    <Compile Include="WebServer\Controllers\BellApiController.cs" />
+    <Compile Include="WebServer\Controllers\DateTimeApiController.cs" />
     <Compile Include="WebServer\Controllers\SystemApiController.cs" />
+    <Compile Include="WebServer\Controllers\TimersApiController.cs" />
     <Compile Include="WebServer\ErrorHandling\WebServerErrorCodes.cs" />
     <Compile Include="WebServer\ErrorHandling\WebServerException.cs" />
     <Compile Include="WebServer\ClockServerMode.cs" />
@@ -205,6 +208,11 @@
     <Compile Include="WebServer\Models\ApiCultureData.cs" />
     <Compile Include="WebServer\Models\ApiSystemData.cs" />
     <Compile Include="WebServer\Models\ApiVersion.cs" />
+    <Compile Include="WebServer\Models\BellResponseData.cs" />
+    <Compile Include="WebServer\Models\LocalTime.cs" />
+    <Compile Include="WebServer\Models\TimerInfo.cs" />
+    <Compile Include="WebServer\Models\TimersResponseData.cs" />
+    <Compile Include="WebServer\Models\TimerStatus.cs" />
     <Compile Include="Windows\CountdownWindow.xaml.cs">
       <DependentUpon>CountdownWindow.xaml</DependentUpon>
     </Compile>
@@ -265,6 +273,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

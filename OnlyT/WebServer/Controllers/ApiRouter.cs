@@ -1,11 +1,12 @@
-﻿using System;
-using System.Net;
-using OnlyT.Services.Options;
-using OnlyT.WebServer.ErrorHandling;
-using OnlyT.WebServer.Models;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
+    using System;
+    using System.Net;
+    using ErrorHandling;
+    using Models;
+    using Services.Bell;
+    using Services.Options;
+
     internal class ApiRouter : BaseApiController
     {
         private const int OldestSupportedApiVer = 1;
@@ -14,7 +15,8 @@ namespace OnlyT.WebServer.Controllers
         public void HandleRequest(
             HttpListenerRequest request, 
             HttpListenerResponse response, 
-            IOptionsService optionsService)
+            IOptionsService optionsService,
+            IBellService bellService)
         {
             if (request.HttpMethod.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
             {
@@ -36,43 +38,44 @@ namespace OnlyT.WebServer.Controllers
                 }
                 else if (request.Url.Segments.Length > 3)
                 {
-                    // segments: "/" "api/" "v1" ...
-
+                    // segments: "/" "api/" "v1"
                     string apiVerStr = request.Url.Segments[2].TrimEnd('/').ToLower();
                     string segment = request.Url.Segments[3].TrimEnd('/').ToLower();
 
                     int apiVer = GetApiVerFromStr(apiVerStr);
+
+                    if (!segment.Equals("system"))
+                    {
+                        // we don't check the api code for calls to the "system" API
+                        CheckApiCode(request, apiCode);
+                    }
                     
                     switch (segment)
                     {
-                        //case "timers":
-                        //    CheckApiCode(request, apiCode);
-                        //    HandleTimersApi(apiVer, request, response);
-                        //    break;
+                        case "timers":
+                            HandleTimersApi(request, response);
+                            break;
 
                         //case "events":
                         //    if (_tcpNotifier != null)
                         //    {
-                        //        CheckApiCode(request, apiCode);
                         //        HandleEventsApi(apiVer, request, response);
                         //    }
                         //    break;
 
-                        //case "bell":
-                        //    CheckApiCode(request, apiCode);
-                        //    HandleBellApi(apiVer, request, response);
-                        //    break;
+                        case "bell":
+                            HandleBellApi(request, response, optionsService, bellService);
+                            break;
 
-                        //case "datetime":
-                        //    CheckApiCode(request, apiCode);
-                        //    DisableCache(response);
-                        //    HandleTimeApi(apiVer, request, response);
-                        //    break;
+                        case "datetime":
+                            DisableCache(response);
+                            HandleDateTimeApi(request, response);
+                            break;
 
                         case "system":
                             // no API code check needed
                             DisableCache(response);
-                            HandleSystemApi(apiVer, request, response, optionsService);
+                            HandleSystemApi(request, response, optionsService);
                             break;
 
                         default:
@@ -82,8 +85,29 @@ namespace OnlyT.WebServer.Controllers
             }
         }
 
+        private void HandleTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var controller = new TimersApiController();
+            controller.Handler(request, response);
+        }
+
+        private void HandleBellApi(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            IOptionsService optionsService,
+            IBellService bellService)
+        {
+            var controller = new BellApiController(optionsService, bellService);
+            controller.Handler(request, response);
+        }
+
+        private void HandleDateTimeApi(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            var controller = new DateTimeApiController();
+            controller.Handler(request, response);
+        }
+
         private void HandleSystemApi(
-            int apiVer, 
             HttpListenerRequest request, 
             HttpListenerResponse response, 
             IOptionsService optionsService)
@@ -107,7 +131,7 @@ namespace OnlyT.WebServer.Controllers
         {
             response.StatusCode = (int)HttpStatusCode.OK;
 
-            string corsHeaders = request.Headers["Access-Control-Request-Headers"];
+            var corsHeaders = request.Headers["Access-Control-Request-Headers"];
 
             if (corsHeaders != null)
             {
@@ -119,25 +143,29 @@ namespace OnlyT.WebServer.Controllers
 
         private int GetApiVerFromStr(string apiVerStr)
         {
-            if (!Int32.TryParse(apiVerStr.Substring(1), out var ver) || ver < 1 || ver > CurrentApiVer)
+            if (!int.TryParse(apiVerStr.Substring(1), out var ver) || ver < 1 || ver > CurrentApiVer)
             {
                 throw new WebServerException(WebServerErrorCode.ApiVersionNotSupported);
             }
+
             return ver;
         }
 
         private void CheckApiCode(HttpListenerRequest request, string apiCode)
         {
             // use of api code is enabled...
-            var code = request.Headers["ApiCode"];
-            if (!code.Equals(apiCode))
+            var code = request.Headers["ApiCode"] ?? request.QueryString["ApiCode"];
+            if (string.IsNullOrEmpty(code) && string.IsNullOrEmpty(apiCode))
             {
-                var qs = request.QueryString["ApiCode"];
-                if (qs == null || !qs.Equals(apiCode))
-                {
-                    throw new WebServerException(WebServerErrorCode.BadApiCode);
-                }
+                return;
             }
+
+            if (code != null && code.Equals(apiCode))
+            {
+                return;
+            }
+
+            throw new WebServerException(WebServerErrorCode.BadApiCode);
         }
     }
 }

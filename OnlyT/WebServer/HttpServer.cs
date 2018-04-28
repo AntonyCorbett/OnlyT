@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using OnlyT.Services.Bell;
 using OnlyT.Services.Options;
 using OnlyT.WebServer.Controllers;
 using Serilog;
@@ -16,10 +17,13 @@ namespace OnlyT.WebServer
         private int _port;
         private readonly bool _24HourClock;
         private readonly IOptionsService _optionsService;
+        private readonly IBellService _bellService;
 
-        public HttpServer(IOptionsService optionsService)
+        public HttpServer(IOptionsService optionsService, IBellService bellService)
         {
             _optionsService = optionsService;
+            _bellService = bellService;
+
             _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
         }
 
@@ -136,7 +140,7 @@ namespace OnlyT.WebServer
             if (_optionsService.Options.IsApiEnabled)
             {
                 ApiRouter controller = new ApiRouter();
-                controller.HandleRequest(request, response, _optionsService);
+                controller.HandleRequest(request, response, _optionsService, _bellService);
             }
         }
 
