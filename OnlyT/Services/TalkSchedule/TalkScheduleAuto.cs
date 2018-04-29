@@ -130,6 +130,7 @@ namespace OnlyT.Services.TalkSchedule
                 // counsel...
                 startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
             }
+
             startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.MinistryItem2)
@@ -147,6 +148,7 @@ namespace OnlyT.Services.TalkSchedule
                 // counsel...
                 startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
             }
+
             startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
 
             result.Add(new TalkScheduleItem(TalkTypesAutoMode.MinistryItem3)
@@ -264,7 +266,6 @@ namespace OnlyT.Services.TalkSchedule
             return result;
         }
 
-
         private static List<TalkScheduleItem> GetMidweekMeetingSchedule(bool isCircuitVisit, Meeting meetingData)
         {
             var result = new List<TalkScheduleItem>();
@@ -306,7 +307,6 @@ namespace OnlyT.Services.TalkSchedule
                 });
 
                 // song here
-
                 result.Add(new TalkScheduleItem(TalkTypesAutoMode.Watchtower)
                 {
                     Name = Properties.Resources.TALK_WT,
@@ -336,7 +336,6 @@ namespace OnlyT.Services.TalkSchedule
                 });
 
                 // song
-
                 result.Add(new TalkScheduleItem(TalkTypesAutoMode.Watchtower)
                 {
                     Name = Properties.Resources.TALK_WT,

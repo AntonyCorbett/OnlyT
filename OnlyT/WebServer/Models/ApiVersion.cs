@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace OnlyT.WebServer.Models
+﻿namespace OnlyT.WebServer.Models
 {
+    using Newtonsoft.Json;
+
     public class ApiVersion
     {
         [JsonProperty(PropertyName = "lowVersion")]

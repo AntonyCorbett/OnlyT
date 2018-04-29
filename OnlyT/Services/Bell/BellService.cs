@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace OnlyT.Services.Bell
+﻿namespace OnlyT.Services.Bell
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Manages the bell
     /// </summary>
@@ -23,6 +23,5 @@ namespace OnlyT.Services.Bell
                 _bell.Play(volumePercent);
             });
         }
-
     }
 }

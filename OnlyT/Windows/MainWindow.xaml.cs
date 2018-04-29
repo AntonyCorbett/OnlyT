@@ -1,13 +1,13 @@
-﻿using System.Windows;
-using CommonServiceLocator;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.Services.Options;
-using OnlyT.Utils;
-using OnlyT.ViewModel;
-using OnlyT.ViewModel.Messages;
-
-namespace OnlyT.Windows
+﻿namespace OnlyT.Windows
 {
+    using System.Windows;
+    using CommonServiceLocator;
+    using GalaSoft.MvvmLight.Messaging;
+    using Services.Options;
+    using Utils;
+    using ViewModel;
+    using ViewModel.Messages;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -24,6 +24,11 @@ namespace OnlyT.Windows
             InitializeComponent();
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, BringToFront);
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
+        }
+
+        protected override void OnSourceInitialized(System.EventArgs e)
+        {
+            AdjustMainWindowPositionAndSize();
         }
 
         private void OnNavigate(NavigateMessage message)
@@ -68,11 +73,6 @@ namespace OnlyT.Windows
             Activate();
         }
 
-        protected override void OnSourceInitialized(System.EventArgs e)
-        {
-            AdjustMainWindowPositionAndSize();
-        }
-
         private void AdjustMainWindowPositionAndSize()
         {
             var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
@@ -92,7 +92,7 @@ namespace OnlyT.Windows
                 SaveSettingsWindowSize();
             }
             
-            m.Closing(sender, e);
+            m.Closing(e);
         }
 
         private void SaveWindowPos()

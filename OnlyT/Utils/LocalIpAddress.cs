@@ -1,13 +1,18 @@
-﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using Serilog;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System;
+    using System.Net;
+    using System.Net.Sockets;
+    using Serilog;
+
     internal class LocalIpAddress
     {
         private static readonly Lazy<string> IpAddress = new Lazy<string>(IpAddressFactory);
+
+        public static string GetLocalIp4Address()
+        {
+            return IpAddress.Value;
+        }
 
         private static string IpAddressFactory()
         {
@@ -30,11 +35,6 @@ namespace OnlyT.Utils
             }
             
             return result;
-        }
-
-        public static string GetLocalIp4Address()
-        {
-            return IpAddress.Value;
         }
     }
 }

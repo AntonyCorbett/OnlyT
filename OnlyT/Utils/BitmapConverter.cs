@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.IO;
-using System.Windows.Media.Imaging;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System.Drawing;
+    using System.IO;
+    using System.Windows.Media.Imaging;
+
     internal static class BitmapConverter
     {
         public static BitmapImage Convert(Bitmap src)

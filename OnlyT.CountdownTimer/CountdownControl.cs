@@ -1,17 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-
-namespace OnlyT.CountdownTimer
+﻿namespace OnlyT.CountdownTimer
 {
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Shapes;
+    using System.Windows.Threading;
+
     public class CountdownControl : Control
     {
         private const int MinsToCountdown = 5;
-        
+
+        private readonly DispatcherTimer _timer;
         private Path _donut;
         private Path _pie;
         private Ellipse _secondsBall;
@@ -23,8 +24,7 @@ namespace OnlyT.CountdownTimer
         private int _outerCircleRadius;
         private int _innerCircleRadius;
         private Point _centrePoint;
-        private DateTime _start;        
-        private readonly DispatcherTimer _timer;
+        private DateTime _start;
 
         public event EventHandler TimeUpEvent;
 
@@ -45,6 +45,16 @@ namespace OnlyT.CountdownTimer
             _timer.Tick += TimerFire;
         }
 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (GetTemplateChild("CountdownCanvas") is Canvas canvas)
+            {
+                InitCanvas(canvas);
+            }
+        }
+
         public void Start(int secsElapsed)
         {
             _start = DateTime.UtcNow.AddSeconds(-secsElapsed);
@@ -57,12 +67,19 @@ namespace OnlyT.CountdownTimer
             {
                 _timer.Stop();
 
-                Animations.FadeOut(this, new FrameworkElement[] { _donut, _secondsBall, _pie, _time },
+                Animations.FadeOut(
+                    this, 
+                    new FrameworkElement[] { _donut, _secondsBall, _pie, _time },
                     (sender, args) =>
                     {
                         Visibility = Visibility.Hidden;
                     });
             });
+        }
+
+        protected virtual void OnTimeUpEvent()
+        {
+            TimeUpEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void RenderPieSliceAndBall(double angle, double secondsElapsed)
@@ -71,7 +88,7 @@ namespace OnlyT.CountdownTimer
             {
                 _pie.Data = PieSlice.Get(angle, _centrePoint, _innerCircleRadius, _outerCircleRadius);
 
-                Point ballPt = SecondsBall.GetPos(
+                var ballPt = SecondsBall.GetPos(
                     _centrePoint,
                     (int)secondsElapsed % 60,
                     _secondsBall.Width / 2,
@@ -96,7 +113,7 @@ namespace OnlyT.CountdownTimer
 
                 if (secondsLeft >= 0)
                 {
-                    double angle = 360 - ((double)360 / secsInCountdown) * secondsLeft;
+                    var angle = 360 - (((double)360 / secsInCountdown) * secondsLeft);
                     RenderPieSliceAndBall(angle, secondsElapsed);
 
                     if (!Dispatcher.HasShutdownStarted)
@@ -117,16 +134,6 @@ namespace OnlyT.CountdownTimer
             else
             {
                 _timer.Start();
-            }
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            if (GetTemplateChild("CountdownCanvas") is Canvas canvas)
-            {
-                InitCanvas(canvas);
             }
         }
 
@@ -159,7 +166,7 @@ namespace OnlyT.CountdownTimer
 
         private void OnCanvasLoaded(object sender, RoutedEventArgs e)
         {
-            Canvas canvas = (Canvas) sender;
+            Canvas canvas = (Canvas)sender;
             
             RegisterNames(canvas);
 
@@ -205,7 +212,7 @@ namespace OnlyT.CountdownTimer
             Animations.FadeIn(this, new FrameworkElement[] { _donut, _secondsBall, _pie, _time });
         }
 
-        Color ToColor(string htmlColor)
+        private Color ToColor(string htmlColor)
         {
             // ReSharper disable once PossibleNullReferenceException
             return (Color)ColorConverter.ConvertFromString(htmlColor);
@@ -286,17 +293,15 @@ namespace OnlyT.CountdownTimer
 
         private Size GetTextSize(bool useExtent)
         {
-            var formattedText = new FormattedText(GetTimeText(), CultureInfo.CurrentUICulture,
-                FlowDirection.LeftToRight, new Typeface(_time.FontFamily, _time.FontStyle, _time.FontWeight, FontStretches.Normal),
+            var formattedText = new FormattedText(
+                GetTimeText(), 
+                CultureInfo.CurrentUICulture,
+                FlowDirection.LeftToRight, 
+                new Typeface(_time.FontFamily, _time.FontStyle, _time.FontWeight, FontStretches.Normal),
                 _time.FontSize,
                 Brushes.Black);
 
             return new Size(formattedText.Width, useExtent ? formattedText.Extent : formattedText.Height);
-        }
-
-        protected virtual void OnTimeUpEvent()
-        {
-            TimeUpEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

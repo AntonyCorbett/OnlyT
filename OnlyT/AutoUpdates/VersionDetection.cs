@@ -1,11 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Reflection;
-using Serilog;
-
-namespace OnlyT.AutoUpdates
+﻿namespace OnlyT.AutoUpdates
 {
+    using System;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Reflection;
+    using Serilog;
+
+    /// <summary>
+    /// Used to get the installed OnlyT version and the 
+    /// latest OnlyT release version from the github webpage.
+    /// </summary>
     internal static class VersionDetection
     {
         public static string LatestReleaseUrl => "https://github.com/AntonyCorbett/OnlyT/releases/latest";
@@ -16,7 +20,7 @@ namespace OnlyT.AutoUpdates
 
             try
             {
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient())
                 {
                     var response = client.GetAsync(LatestReleaseUrl).Result;
                     if (response.IsSuccessStatusCode)

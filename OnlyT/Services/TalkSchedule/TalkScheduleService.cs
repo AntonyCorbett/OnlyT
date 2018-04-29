@@ -1,13 +1,12 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using OnlyT.ViewModel.Messages;
-
-namespace OnlyT.Services.TalkSchedule
+﻿namespace OnlyT.Services.TalkSchedule
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using GalaSoft.MvvmLight.Messaging;
     using Models;
     using Options;
+    using ViewModel.Messages;
 
     /// <summary>
     /// Service to handle the delivery of a talk schedule based on current "Operating mode"
@@ -24,8 +23,10 @@ namespace OnlyT.Services.TalkSchedule
         public TalkScheduleService(IOptionsService optionsService)
         {
             _optionsService = optionsService;
-            Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Reset();
+
+            // subscriptions...
+            Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
         }
 
         public void Reset()

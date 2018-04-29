@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System.Collections.Generic;
+    using System.IO;
+
     public static class StringUtils
     {
         public static IEnumerable<string> SplitIntoLines(this string text, bool ignoreEmptyLines = true)

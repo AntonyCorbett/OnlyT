@@ -1,7 +1,7 @@
-﻿using System.Net;
-
-namespace OnlyT.WebServer.ErrorHandling
+﻿namespace OnlyT.WebServer.ErrorHandling
 {
+    using System.Net;
+
     public static class WebServerErrorCodes
     {
         public static string GetDescription(WebServerErrorCode code)

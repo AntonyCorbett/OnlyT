@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
-
-namespace OnlyT.CountdownTimer
+﻿namespace OnlyT.CountdownTimer
 {
-    static class PieSlice
+    using System;
+    using System.Windows;
+    using System.Windows.Media;
+
+    internal static class PieSlice
     {
         public static Geometry Get(double angle, Point centrePt, int innerRadius, int outerRadius)
         {
@@ -23,8 +23,8 @@ namespace OnlyT.CountdownTimer
 
         private static Point GetStartPoint(double angle, Point centrePt, int innerRadius)
         {
-            var startX = centrePt.X + Math.Sin(angle * Math.PI / 180) * innerRadius;
-            var startY = centrePt.Y - Math.Cos(angle * Math.PI / 180) * innerRadius;
+            var startX = centrePt.X + (Math.Sin(angle * Math.PI / 180) * innerRadius);
+            var startY = centrePt.Y - (Math.Cos(angle * Math.PI / 180) * innerRadius);
 
             return new Point(startX, startY);
         }
@@ -59,11 +59,12 @@ namespace OnlyT.CountdownTimer
 
         private static LineSegment CreateLine1(double angle, Point centrePt, int outerRadius)
         {
-            var endX = centrePt.X + Math.Sin(angle * Math.PI / 180) * outerRadius;
-            var endY = centrePt.Y - Math.Cos(angle * Math.PI / 180) * outerRadius;
+            var endX = centrePt.X + (Math.Sin(angle * Math.PI / 180) * outerRadius);
+            var endY = centrePt.Y - (Math.Cos(angle * Math.PI / 180) * outerRadius);
             var ls = new LineSegment(new Point(endX, endY), true) { IsStroked = angle > 0 };
             return ls;
         }
+
         private static LineSegment CreateLine2(double angle, Point centrePt, int innerRadius)
         {
             var endX = centrePt.X;

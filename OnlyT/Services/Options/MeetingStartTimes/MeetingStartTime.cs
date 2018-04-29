@@ -1,14 +1,36 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using OnlyT.Models;
-
-namespace OnlyT.Services.Options.MeetingStartTimes
+﻿namespace OnlyT.Services.Options.MeetingStartTimes
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using Models;
+
     public class MeetingStartTime
     {
         public DayOfWeek? DayOfWeek { get; set; }
+
         public TimeSpan StartTime { get; set; }
+
+        public static MeetingStartTime FromText(string text)
+        {
+            var dayOfWeek = FindDayOfWeek(text);
+            if (dayOfWeek != null)
+            {
+                text = text.Replace(dayOfWeek.UserSuppliedDayName, string.Empty);
+            }
+
+            var time = GetTimeOfDay(text);
+            if (time != null)
+            {
+                return new MeetingStartTime
+                {
+                    DayOfWeek = dayOfWeek?.DayOfWeek,
+                    StartTime = time.Value
+                };
+            }
+
+            return null;
+        }
 
         public void Sanitize()
         {
@@ -31,27 +53,6 @@ namespace OnlyT.Services.Options.MeetingStartTimes
             return timeString;
         }
 
-        public static MeetingStartTime FromText(string text)
-        {
-            var dayOfWeek = FindDayOfWeek(text);
-            if (dayOfWeek != null)
-            {
-                text = text.Replace(dayOfWeek.UserSuppliedDayName, string.Empty);
-            }
-
-            var time = GetTimeOfDay(text);
-            if (time != null)
-            {
-                return new MeetingStartTime
-                {
-                    DayOfWeek = dayOfWeek?.DayOfWeek,
-                    StartTime = time.Value
-                };    
-            }
-           
-            return null;
-        }
-
         private static TimeSpan? GetTimeOfDay(string text)
         {
             bool hasPm = HasPm(text);
@@ -59,29 +60,29 @@ namespace OnlyT.Services.Options.MeetingStartTimes
             int hour = -1;
             int mins = -1;
 
-            var digits = text.Where(Char.IsDigit).ToArray();
+            var digits = text.Where(char.IsDigit).ToArray();
             if (digits.Length > 0 && digits.Length < 5)
             {
                 switch (digits.Length)
                 {
                     case 1:
-                        hour = Int32.Parse(digits[0].ToString());
+                        hour = int.Parse(digits[0].ToString());
                         mins = 0;
                         break;
 
                     case 2:
-                        hour = Int32.Parse($"{digits[0]}{digits[1]}");
+                        hour = int.Parse($"{digits[0]}{digits[1]}");
                         mins = 0;
                         break;
 
                     case 3:
-                        hour = Int32.Parse(digits[0].ToString());
-                        mins = Int32.Parse($"{digits[1]}{digits[2]}");
+                        hour = int.Parse(digits[0].ToString());
+                        mins = int.Parse($"{digits[1]}{digits[2]}");
                         break;
                         
                     case 4:
-                        hour = Int32.Parse($"{digits[0]}{digits[1]}");
-                        mins = Int32.Parse($"{digits[2]}{digits[3]}");
+                        hour = int.Parse($"{digits[0]}{digits[1]}");
+                        mins = int.Parse($"{digits[2]}{digits[3]}");
                         break;
                 }
             }
@@ -106,11 +107,11 @@ namespace OnlyT.Services.Options.MeetingStartTimes
             var currentCulturePmString = CultureInfo.CurrentCulture.DateTimeFormat.PMDesignator;
             var defaultCulturePmString = CultureInfo.InvariantCulture.DateTimeFormat.PMDesignator;
 
-            return
-                !string.IsNullOrEmpty(currentCulturePmString) && trimmedText.EndsWith(
-                    currentCulturePmString, StringComparison.CurrentCultureIgnoreCase) ||
-                !string.IsNullOrEmpty(defaultCulturePmString) && trimmedText.EndsWith(
-                    defaultCulturePmString, StringComparison.InvariantCultureIgnoreCase);
+            return 
+                (!string.IsNullOrEmpty(currentCulturePmString) && trimmedText.EndsWith(
+                    currentCulturePmString, StringComparison.CurrentCultureIgnoreCase)) ||
+                (!string.IsNullOrEmpty(defaultCulturePmString) && trimmedText.EndsWith(
+                    defaultCulturePmString, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private delegate string GetDayNameFunction(DayOfWeek dayOfWeek);

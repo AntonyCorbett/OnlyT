@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using OnlyT.Utils;
-
-namespace OnlyT.Services.Options.MeetingStartTimes
+﻿namespace OnlyT.Services.Options.MeetingStartTimes
 {
+    using System;
+    using System.Collections.Generic;
+    using Utils;
+
     public class MeetingStartTimes
     {
         public List<MeetingStartTime> Times { get;  }
@@ -18,6 +18,24 @@ namespace OnlyT.Services.Options.MeetingStartTimes
             foreach (var startTime in Times)
             {
                 startTime.Sanitize();
+            }
+        }
+
+        public void FromText(string value)
+        {
+            Times.Clear();
+
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                var lines = value.SplitIntoLines();
+                foreach (var line in lines)
+                {
+                    var startTime = MeetingStartTime.FromText(line);
+                    if (startTime != null)
+                    {
+                        Times.Add(startTime);
+                    }
+                }
             }
         }
 
@@ -39,24 +57,6 @@ namespace OnlyT.Services.Options.MeetingStartTimes
             if (!string.IsNullOrWhiteSpace(startTime))
             {
                 result.Add(startTime);
-            }
-        }
-
-        public void FromText(string value)
-        {
-            Times.Clear();
-
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                var lines = value.SplitIntoLines();
-                foreach (var line in lines)
-                {
-                    var startTime = MeetingStartTime.FromText(line);
-                    if (startTime != null)
-                    {
-                        Times.Add(startTime);
-                    }
-                }
             }
         }
     }

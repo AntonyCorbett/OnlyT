@@ -1,15 +1,15 @@
-using CommonServiceLocator;
-using GalaSoft.MvvmLight.Ioc;
-using OnlyT.Services.Bell;
-using OnlyT.Services.CountdownTimer;
-using OnlyT.Services.Monitors;
-using OnlyT.Services.Options;
-using OnlyT.Services.TalkSchedule;
-using OnlyT.Services.Timer;
-using OnlyT.WebServer;
-
 namespace OnlyT.ViewModel
 {
+    using CommonServiceLocator;
+    using GalaSoft.MvvmLight.Ioc;
+    using Services.Bell;
+    using Services.CountdownTimer;
+    using Services.Monitors;
+    using Services.Options;
+    using Services.TalkSchedule;
+    using Services.Timer;
+    using WebServer;
+
     public class ViewModelLocator
     {
         public ViewModelLocator()
@@ -31,7 +31,9 @@ namespace OnlyT.ViewModel
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
         public OperatorPageViewModel Operator => ServiceLocator.Current.GetInstance<OperatorPageViewModel>();
+
         public SettingsPageViewModel Settings => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
 
         public static void Cleanup()

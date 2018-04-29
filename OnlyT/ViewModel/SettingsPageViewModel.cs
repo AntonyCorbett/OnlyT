@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Media.Imaging;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.AutoUpdates;
-using OnlyT.Models;
-using OnlyT.Services.Bell;
-using OnlyT.Services.Monitors;
-using OnlyT.Services.Options;
-using OnlyT.Utils;
-using OnlyT.ViewModel.Messages;
-using Serilog;
-
-// ReSharper disable CatchAllClause
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
+    // ReSharper disable CatchAllClause
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Media.Imaging;
+    using AutoUpdates;
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.Messaging;
+    using Messages;
+    using Models;
+    using Serilog;
+    using Services.Bell;
+    using Services.CountdownTimer;
+    using Services.Monitors;
+    using Services.Options;
+    using Utils;
+
     public class SettingsPageViewModel : ViewModelBase, IPage
     {
         public static string PageName => "SettingsPage";
@@ -28,6 +28,7 @@ namespace OnlyT.ViewModel
         private readonly IOptionsService _optionsService;
         private readonly IMonitorsService _monitorsService;
         private readonly IBellService _bellService;
+        private readonly ICountdownTimerTriggerService _countdownTimerService;
         private readonly ClockHourFormatItem[] _clockHourFormats;
         private readonly AdaptiveModeItem[] _adaptiveModes;
         private readonly FullScreenClockModeItem[] _timeOfDayModes;
@@ -36,7 +37,8 @@ namespace OnlyT.ViewModel
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
            IBellService bellService,
-           IOptionsService optionsService)
+           IOptionsService optionsService,
+           ICountdownTimerTriggerService countdownTimerService)
         {
             // subscriptions...
             Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
@@ -45,6 +47,7 @@ namespace OnlyT.ViewModel
             _optionsService = optionsService;
             _monitorsService = monitorsService;
             _bellService = bellService;
+            _countdownTimerService = countdownTimerService;
 
             _monitors = GetSystemMonitors().ToArray();
             _operatingModes = GetOperatingModes().ToArray();
@@ -59,6 +62,10 @@ namespace OnlyT.ViewModel
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
             OpenPortCommand = new RelayCommand(ReserveAndOpenPort);
             WebClockUrlLinkCommand = new RelayCommand(OpenWebClockLink);
+        }
+
+        public void Activated(object state)
+        {
         }
 
         private void OpenWebClockLink()
@@ -106,19 +113,19 @@ namespace OnlyT.ViewModel
         {
             return new List<AdaptiveModeItem>
             {
-                new AdaptiveModeItem {Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE},
-                new AdaptiveModeItem {Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY},
-                new AdaptiveModeItem {Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY}
+                new AdaptiveModeItem { Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE },
+                new AdaptiveModeItem { Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY },
+                new AdaptiveModeItem { Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY }
             };
         }
 
         private IEnumerable<WebClockPortItem> GetPorts()
         {
             var result = new List<WebClockPortItem>();
-            
-            for(int n=Options.DefaultPort; n<= Options.DefaultPort + Options.MaxPossiblePorts; ++n)
+
+            for (int n = Options.DefaultPort; n <= Options.DefaultPort + Options.MaxPossiblePorts; ++n)
             {
-                result.Add(new WebClockPortItem {Port = n});
+                result.Add(new WebClockPortItem { Port = n });
             }
 
             return result;
@@ -128,12 +135,12 @@ namespace OnlyT.ViewModel
         {
             return new List<ClockHourFormatItem>
             {
-                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12},
-                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero},
-                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM},
-                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM},
-                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24},
-                new ClockHourFormatItem {Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero}
+                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12 },
+                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero },
+                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM },
+                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM },
+                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 },
+                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero }
             };
         }
 
@@ -156,8 +163,8 @@ namespace OnlyT.ViewModel
         {
             return new List<AutoMeetingTime>
             {
-                new AutoMeetingTime {Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
-                new AutoMeetingTime {Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
+                new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
+                new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
             };
         }
 
@@ -165,9 +172,9 @@ namespace OnlyT.ViewModel
         {
             return new List<OperatingModeItem>
             {
-                new OperatingModeItem {Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual},
-                new OperatingModeItem {Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile},
-                new OperatingModeItem {Name = Properties.Resources.OP_MODE_AUTO, Mode = OperatingMode.Automatic}
+                new OperatingModeItem { Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual },
+                new OperatingModeItem { Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile },
+                new OperatingModeItem { Name = Properties.Resources.OP_MODE_AUTO, Mode = OperatingMode.Automatic }
             };
         }
 
@@ -281,7 +288,6 @@ namespace OnlyT.ViewModel
             }
         }
 
-
         public AdaptiveMode WeekendAdaptiveMode
         {
             get => _optionsService.Options.WeekendAdaptiveMode;
@@ -348,7 +354,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.MeetingStartTimes.FromText(value);
                     RaisePropertyChanged();
-                    Messenger.Default.Send(new MeetingStartTimesChangeMessage { Times = _optionsService.Options.MeetingStartTimes.Times });
+                    _countdownTimerService.UpdateTriggerPeriods();
                 }
             }
         }
@@ -511,6 +517,7 @@ namespace OnlyT.ViewModel
                 {
                     return QRCodeGeneration.CreateQRCode(WebClockUrl);
                 }
+
                 return null;
             }
         }
@@ -529,11 +536,6 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public void Activated(object state)
-        {
-
-        }
-
         private void OnShutDown(ShutDownMessage obj)
         {
             Save();
@@ -547,8 +549,11 @@ namespace OnlyT.ViewModel
         public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersion());
         
         public RelayCommand NavigateOperatorCommand { get; set; }
+
         public RelayCommand TestBellCommand { get; set; }
+
         public RelayCommand OpenPortCommand { get; set; }
+
         public RelayCommand WebClockUrlLinkCommand { get; set; }
     }
 }

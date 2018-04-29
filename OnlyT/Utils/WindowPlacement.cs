@@ -1,15 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows;
-using System.Windows.Interop;
-using System.Xml;
-using System.Xml.Serialization;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Interop;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     // adapted from david Rickard's Tech Blog
 
@@ -151,7 +150,5 @@ namespace OnlyT.Utils
 
             return new Tuple<int, int>((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
         }
-
     }
-
 }

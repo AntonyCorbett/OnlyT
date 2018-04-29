@@ -1,9 +1,9 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Interactivity;
-
-namespace OnlyT.Behaviours
+﻿namespace OnlyT.Behaviours
 {
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Interactivity;
+
     /// <summary>
     /// Helper class to disable effect of gratuitous double-clicking
     /// </summary>
@@ -15,15 +15,15 @@ namespace OnlyT.Behaviours
             AssociatedObject.PreviewMouseDoubleClick += AssociatedObjectOnPreviewMouseDoubleClick;
         }
 
-        private void AssociatedObjectOnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs mouseButtonEventArgs)
-        {
-            mouseButtonEventArgs.Handled = true;
-        }
-
         protected override void OnDetaching()
         {
             AssociatedObject.PreviewMouseDoubleClick -= AssociatedObjectOnPreviewMouseDoubleClick;
             base.OnDetaching();
+        }
+
+        private void AssociatedObjectOnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            mouseButtonEventArgs.Handled = true;
         }
     }
 }

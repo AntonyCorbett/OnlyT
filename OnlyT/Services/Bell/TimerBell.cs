@@ -1,23 +1,23 @@
-﻿using System;
-using System.IO;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
-using NAudio.Wave;
-using Serilog;
-
-namespace OnlyT.Services.Bell
+﻿namespace OnlyT.Services.Bell
 {
+    using System;
+    using System.IO;
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Threading;
+    using NAudio.Wave;
+    using Serilog;
+
     /// <summary>
     /// Manages the playing of the timer bell. See also IBellService
     /// </summary>
     internal sealed class TimerBell : ObservableObject, IDisposable
     {
-        private static readonly string _bellFileName = "bell.mp3";
+        private static readonly string BellFileName = "bell.mp3";
+        private readonly string _bellFilePath;
         private WaveOutEvent _player;
         private Mp3FileReader _reader;
-        private readonly string _bellFilePath;
-
+        
         public TimerBell()
         {
             _bellFilePath = GetBellFilePath();
@@ -73,6 +73,17 @@ namespace OnlyT.Services.Bell
             }
         }
 
+        public void Dispose()
+        {
+            Clearup();
+        }
+
+        private static string GetBellFilePath()
+        {
+            string folder = AppDomain.CurrentDomain.BaseDirectory;
+            return Path.Combine(folder, BellFileName);
+        }
+
         private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
         {
             Clearup();
@@ -91,17 +102,6 @@ namespace OnlyT.Services.Bell
 
             _player = null;
             _reader = null;
-        }
-
-        private static string GetBellFilePath()
-        {
-            string folder = AppDomain.CurrentDomain.BaseDirectory;
-            return Path.Combine(folder, _bellFileName);
-        }
-
-        public void Dispose()
-        {
-            Clearup();
         }
     }
 }

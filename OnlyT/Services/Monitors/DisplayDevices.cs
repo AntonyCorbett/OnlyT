@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using OnlyT.Models;
-using Serilog;
-
-namespace OnlyT.Services.Monitors
+﻿namespace OnlyT.Services.Monitors
 {
+    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+    using Models;
+    using Serilog;
+
     /// <summary>
     /// Queries the system for information regarding display devices
     /// </summary>
@@ -20,7 +20,7 @@ namespace OnlyT.Services.Monitors
                 
             var result = new List<DisplayDeviceData>();
 
-            for (uint id = 0; ; id++)
+            for (uint id = 0;; id++)
             {
                 Log.Logger.Information($"Seeking device {id}");
                 

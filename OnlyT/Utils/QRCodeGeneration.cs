@@ -1,9 +1,9 @@
-﻿using System.Collections.Concurrent;
-using System.Windows.Media.Imaging;
-using QRCoder;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System.Collections.Concurrent;
+    using System.Windows.Media.Imaging;
+    using QRCoder;
+
     internal static class QRCodeGeneration
     {
         private static readonly ConcurrentDictionary<string, BitmapImage> Cache = 

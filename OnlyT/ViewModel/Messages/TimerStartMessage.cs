@@ -9,7 +9,7 @@
 
         public bool CountUp { get; }
 
-        public int TalkId { get; set; }
+        public int TalkId { get; }
 
         public TimerStartMessage(int targetSeconds, bool countUp, int talkId)
         {

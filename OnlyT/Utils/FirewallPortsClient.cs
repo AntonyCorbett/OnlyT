@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System.Diagnostics;
+
     internal static class FirewallPortsClient
     {
         public static int ReserveAndOpenPort(int port)

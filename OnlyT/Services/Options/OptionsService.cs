@@ -1,18 +1,18 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
-using OnlyT.Utils;
-using Serilog;
-
-namespace OnlyT.Services.Options
+﻿namespace OnlyT.Services.Options
 {
+    using System;
+    using System.IO;
+    using Newtonsoft.Json;
+    using Serilog;
+    using Utils;
+
     /// <summary>
     /// Service to deal with program settings
     /// </summary>
     public class OptionsService : IOptionsService
     {
-        private Options _options;
         private readonly int _optionsVersion = 1;
+        private Options _options;
         private string _optionsFilePath;
         private string _originalOptionsSignature;
 
@@ -22,6 +22,40 @@ namespace OnlyT.Services.Options
             {
                 Init();
                 return _options;
+            }
+        }
+
+        /// <summary>
+        /// Saves the settings (if they have changed since they were last read)
+        /// </summary>
+        public void Save()
+        {
+            try
+            {
+                var newSignature = GetOptionsSignature(_options);
+                if (_originalOptionsSignature != newSignature)
+                {
+                    // changed...
+                    WriteOptions();
+                    Log.Logger.Information("Settings changed and saved");
+                }
+            }
+            // ReSharper disable once CatchAllClause
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not save settings");
+            }
+        }
+
+        /// <summary>
+        /// Determines if the timer monitor is specified
+        /// </summary>
+        public bool IsTimerMonitorSpecified
+        {
+            get
+            {
+                Init();
+                return !string.IsNullOrEmpty(Options.TimerMonitorId);
             }
         }
 
@@ -101,8 +135,7 @@ namespace OnlyT.Services.Options
         private void SetMidWeekOrWeekend()
         {
             // when the settings are read we ignore this saved setting 
-            // and reset according to current day of week...
-
+            // and reset according to current day of week.
             _options.MidWeekOrWeekend = IsWeekend()
                ? MidWeekOrWeekend.Weekend
                : MidWeekOrWeekend.MidWeek;
@@ -124,41 +157,6 @@ namespace OnlyT.Services.Options
                     serializer.Serialize(file, _options);
                     _originalOptionsSignature = GetOptionsSignature(_options);
                 }
-            }
-        }
-
-
-        /// <summary>
-        /// Saves the settings (if they have changed since they were last read)
-        /// </summary>
-        public void Save()
-        {
-            try
-            {
-                var newSignature = GetOptionsSignature(_options);
-                if (_originalOptionsSignature != newSignature)
-                {
-                    // changed...
-                    WriteOptions();
-                    Log.Logger.Information("Settings changed and saved");
-                }
-            }
-            // ReSharper disable once CatchAllClause
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not save settings");
-            }
-        }
-
-        /// <summary>
-        /// Determines if the timer monitor is specified
-        /// </summary>
-        public bool IsTimerMonitorSpecified
-        {
-            get
-            {
-                Init();
-                return !string.IsNullOrEmpty(Options.TimerMonitorId);
             }
         }
     }

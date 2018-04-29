@@ -1,16 +1,15 @@
-﻿using System;
-
-namespace OnlyT.WebServer.ErrorHandling
+﻿namespace OnlyT.WebServer.ErrorHandling
 {
+    using System;
+
     public class WebServerException : Exception
     {
-        private readonly WebServerErrorCode _code;
-        public WebServerErrorCode Code => _code;
+        public WebServerErrorCode Code { get; }
 
         public WebServerException(WebServerErrorCode code)
             : base(WebServerErrorCodes.GetDescription(code))
         {
-            _code = code;
+            Code = code;
         }
     }
 }

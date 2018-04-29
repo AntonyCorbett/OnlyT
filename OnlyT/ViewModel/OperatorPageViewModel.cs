@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using OnlyT.Services.Bell;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -36,6 +38,7 @@
         private readonly ITalkScheduleService _scheduleService;
         private readonly IOptionsService _optionsService;
         private readonly IAdaptiveTimerService _adaptiveTimerService;
+        private readonly IBellService _bellService;
         private int _secondsElapsed;
         private bool _countUp;
         private static readonly Brush WhiteBrush = Brushes.White;
@@ -50,11 +53,13 @@
            ITalkTimerService timerService,
            ITalkScheduleService scheduleService,
            IAdaptiveTimerService adaptiveTimerService,
-           IOptionsService optionsService)
+           IOptionsService optionsService,
+           IBellService bellService)
         {
             _scheduleService = scheduleService;
             _optionsService = optionsService;
             _adaptiveTimerService = adaptiveTimerService;
+            _bellService = bellService;
             _timerService = timerService;
             _timerService.TimerChangedEvent += TimerChangedHandler;
             _countUp = _optionsService.Options.CountUp;
@@ -312,11 +317,13 @@
 
             if (e.RemainingSecs == 0)
             {
-                // broadcast talk overtime...
                 var talk = GetCurrentTalk();
                 if (talk != null)
                 {
-                    Messenger.Default.Send(new OvertimeMessage(talk.Name, talk.Bell, e.TargetSecs));
+                    if (talk.Bell && _optionsService.Options.IsBellEnabled)
+                    {
+                        _bellService.Play(_optionsService.Options.BellVolumePercent);
+                    }
                 }
             }
         }

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using OnlyT.Models;
-using Serilog;
-
-namespace OnlyT.Services.Monitors
+﻿namespace OnlyT.Services.Monitors
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+    using Models;
+    using Serilog;
+
     /// <summary>
     /// Service to get display device information
     /// </summary>
@@ -44,15 +44,15 @@ namespace OnlyT.Services.Monitors
             return result;
         }
 
+        public MonitorItem GetMonitorItem(string monitorId)
+        {
+            return GetSystemMonitors().SingleOrDefault(x => x.MonitorId.Equals(monitorId));
+        }
+
         private DisplayDeviceData GetDeviceMatchingScreen(DisplayDeviceData[] devices, Screen screen)
         {
             var deviceName = screen.DeviceName + "\\";
             return devices.SingleOrDefault(x => x.Name.StartsWith(deviceName));
-        }
-
-        public MonitorItem GetMonitorItem(string monitorId)
-        {
-            return GetSystemMonitors().SingleOrDefault(x => x.MonitorId.Equals(monitorId));
         }
     }
 }

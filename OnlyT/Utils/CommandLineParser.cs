@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// Parses the command-line. Supports switches of the form "-[switch]"
     /// and parameters of the form "/[param]="
     /// </summary>
     public class CommandLineParser
     {
-        private readonly List<string> _rawItems;
-        private readonly List<string> _switches;
-        private readonly Dictionary<string, string> _parameters;
-        private bool _parsed;
-
         private const string IdKey = "/id";
 
         /// <summary>
         /// singleton instance of CommandLineParser
         /// </summary>
         private static CommandLineParser _instance;
+
+        private readonly List<string> _rawItems;
+        private readonly List<string> _switches;
+        private readonly Dictionary<string, string> _parameters;
+        private bool _parsed;
+        
         public static CommandLineParser Instance => _instance ?? (_instance = new CommandLineParser());
 
         private readonly string[] _switchValues =
@@ -143,6 +144,7 @@ namespace OnlyT.Utils
                                     {
                                         currentParamValue.Append(" ");
                                     }
+
                                     currentParamValue.Append(item.Substring(key.Length).Replace("=", "").Trim());
                                 }
                             }
@@ -153,6 +155,7 @@ namespace OnlyT.Utils
                                 {
                                     currentParamValue.Append(" ");
                                 }
+
                                 currentParamValue.Append(item);
                             }
                         }

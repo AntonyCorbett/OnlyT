@@ -4,10 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media.Animation;
-
-    using GalaSoft.MvvmLight.Messaging;
-
     using Animations;
+    using GalaSoft.MvvmLight.Messaging;
     using Services.Options;
     using Utils;
     using ViewModel;
@@ -85,38 +83,45 @@
             switch (model.FullScreenClockMode)
             {
                 case FullScreenClockMode.Analogue:
-                    rowHeightAdjust1 = new GridLengthAnimation();
-                    rowHeightAdjust1.From = new GridLength(100, GridUnitType.Star);
-                    rowHeightAdjust1.To = new GridLength(100, GridUnitType.Star);
-                    rowHeightAdjust1.BeginTime = TimeSpan.FromMilliseconds(500);
+                    rowHeightAdjust1 = new GridLengthAnimation
+                    {
+                        From = new GridLength(100, GridUnitType.Star),
+                        To = new GridLength(100, GridUnitType.Star),
+                        BeginTime = TimeSpan.FromMilliseconds(500)
+                    };
                     Storyboard.SetTarget(rowHeightAdjust1, ClockGrid.RowDefinitions[0]);
                     Storyboard.SetTargetProperty(rowHeightAdjust1, new PropertyPath(RowDefinition.HeightProperty));
 
-                    rowHeightAdjust2 = new GridLengthAnimation();
-                    rowHeightAdjust2.From = new GridLength(0, GridUnitType.Star);
-                    rowHeightAdjust2.To = new GridLength(0, GridUnitType.Star);
-                    rowHeightAdjust2.BeginTime = TimeSpan.FromMilliseconds(500);
+                    rowHeightAdjust2 = new GridLengthAnimation
+                    {
+                        From = new GridLength(0, GridUnitType.Star),
+                        To = new GridLength(0, GridUnitType.Star),
+                        BeginTime = TimeSpan.FromMilliseconds(500)
+                    };
                     Storyboard.SetTarget(rowHeightAdjust2, ClockGrid.RowDefinitions[1]);
                     Storyboard.SetTargetProperty(rowHeightAdjust2, new PropertyPath(RowDefinition.HeightProperty));
                     break;
 
                 case FullScreenClockMode.Digital:
-                    rowHeightAdjust1 = new GridLengthAnimation();
-                    rowHeightAdjust1.From = new GridLength(0, GridUnitType.Star);
-                    rowHeightAdjust1.To = new GridLength(0, GridUnitType.Star);
-                    rowHeightAdjust1.BeginTime = TimeSpan.FromMilliseconds(500);
+                    rowHeightAdjust1 = new GridLengthAnimation
+                    {
+                        From = new GridLength(0, GridUnitType.Star),
+                        To = new GridLength(0, GridUnitType.Star),
+                        BeginTime = TimeSpan.FromMilliseconds(500)
+                    };
                     Storyboard.SetTarget(rowHeightAdjust1, ClockGrid.RowDefinitions[0]);
                     Storyboard.SetTargetProperty(rowHeightAdjust1, new PropertyPath(RowDefinition.HeightProperty));
 
-                    rowHeightAdjust2 = new GridLengthAnimation();
-                    rowHeightAdjust2.From = new GridLength(100, GridUnitType.Star);
-                    rowHeightAdjust2.To = new GridLength(100, GridUnitType.Star);
-                    rowHeightAdjust2.BeginTime = TimeSpan.FromMilliseconds(500);
+                    rowHeightAdjust2 = new GridLengthAnimation
+                    {
+                        From = new GridLength(100, GridUnitType.Star),
+                        To = new GridLength(100, GridUnitType.Star),
+                        BeginTime = TimeSpan.FromMilliseconds(500)
+                    };
                     Storyboard.SetTarget(rowHeightAdjust2, ClockGrid.RowDefinitions[1]);
                     Storyboard.SetTargetProperty(rowHeightAdjust2, new PropertyPath(RowDefinition.HeightProperty));
                     break;
             }
-
 
             // change clock panel to use colspan 2...
             var changeColSpan = new Int32Animation(1, 2, TimeSpan.Zero);
@@ -133,14 +138,17 @@
             sb.Children.Add(fadeOutTimer);
             sb.Children.Add(fadeOutTimer2);
             sb.Children.Add(fadeOutClock);
+
             if (rowHeightAdjust1 != null)
             {
                 sb.Children.Add(rowHeightAdjust1);
             }
+
             if (rowHeightAdjust2 != null)
             {
                 sb.Children.Add(rowHeightAdjust2);
             }
+
             sb.Children.Add(changeColSpan);
             sb.Children.Add(fadeInClock);
 
@@ -171,17 +179,23 @@
             fadeOutClock.BeginTime = TimeSpan.Zero;
 
             // row heights...
-            GridLengthAnimation rowHeightAdjust1 = new GridLengthAnimation();
-            rowHeightAdjust1.From = new GridLength(75, GridUnitType.Star);
-            rowHeightAdjust1.To = new GridLength(75, GridUnitType.Star);
-            rowHeightAdjust1.BeginTime = TimeSpan.FromMilliseconds(500);
+            GridLengthAnimation rowHeightAdjust1 = new GridLengthAnimation
+            {
+                From = new GridLength(75, GridUnitType.Star),
+                To = new GridLength(75, GridUnitType.Star),
+                BeginTime = TimeSpan.FromMilliseconds(500)
+            };
+
             Storyboard.SetTarget(rowHeightAdjust1, ClockGrid.RowDefinitions[0]);
             Storyboard.SetTargetProperty(rowHeightAdjust1, new PropertyPath(RowDefinition.HeightProperty));
 
-            GridLengthAnimation rowHeightAdjust2 = new GridLengthAnimation();
-            rowHeightAdjust2.From = new GridLength(25, GridUnitType.Star);
-            rowHeightAdjust2.To = new GridLength(25, GridUnitType.Star);
-            rowHeightAdjust2.BeginTime = TimeSpan.FromMilliseconds(500);
+            GridLengthAnimation rowHeightAdjust2 = new GridLengthAnimation
+            {
+                From = new GridLength(25, GridUnitType.Star),
+                To = new GridLength(25, GridUnitType.Star),
+                BeginTime = TimeSpan.FromMilliseconds(500)
+            };
+
             Storyboard.SetTarget(rowHeightAdjust2, ClockGrid.RowDefinitions[1]);
             Storyboard.SetTargetProperty(rowHeightAdjust2, new PropertyPath(RowDefinition.HeightProperty));
 

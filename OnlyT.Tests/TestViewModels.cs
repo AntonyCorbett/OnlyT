@@ -1,14 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using OnlyT.Services.Options;
-using OnlyT.Services.TalkSchedule;
-using OnlyT.Services.Timer;
-using OnlyT.Tests.Mocks;
-using OnlyT.Utils;
-using OnlyT.ViewModel;
-
-namespace OnlyT.Tests
+﻿namespace OnlyT.Tests
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Mocks;
+    using Moq;
+    using Services.Bell;
+    using Services.Options;
+    using Services.TalkSchedule;
+    using Services.Timer;
+    using Utils;
+    using ViewModel;
+
     [TestClass]
     public class TestViewModels
     {
@@ -24,9 +25,14 @@ namespace OnlyT.Tests
             Mock<ITalkTimerService> timerService = new Mock<ITalkTimerService>();
             Mock<IAdaptiveTimerService> adaptiveTimerService = new Mock<IAdaptiveTimerService>();
             ITalkScheduleService scheduleService = new MockTalksScheduleService(TalkIdStart, NumTalks);
+            Mock<IBellService> bellService = new Mock<IBellService>();
 
-            OperatorPageViewModel vm = new OperatorPageViewModel(timerService.Object, scheduleService,
-               adaptiveTimerService.Object, optionsService.Object);
+            var vm = new OperatorPageViewModel(
+                timerService.Object, 
+                scheduleService,
+                adaptiveTimerService.Object, 
+                optionsService.Object,
+                bellService.Object);
 
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);

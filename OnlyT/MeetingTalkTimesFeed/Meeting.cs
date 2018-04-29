@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlyT.MeetingTalkTimesFeed
+﻿namespace OnlyT.MeetingTalkTimesFeed
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     internal class Meeting
     {
         public DateTime Date { get; set; }

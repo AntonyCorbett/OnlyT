@@ -3,5 +3,7 @@
     public interface ICountdownTimerTriggerService
     {
         bool IsInCountdownPeriod(out int secondsOffset);
+
+        void UpdateTriggerPeriods();
     }
 }

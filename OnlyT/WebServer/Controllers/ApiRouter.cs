@@ -60,6 +60,7 @@
                             HandleTimersApi(request, response, timerService, talksService, optionsService);
                             break;
 
+                        // todo:
                         //case "events":
                         //    if (_tcpNotifier != null)
                         //    {

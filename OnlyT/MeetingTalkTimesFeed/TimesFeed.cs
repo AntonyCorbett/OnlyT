@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using OnlyT.Utils;
-using Serilog;
-
-namespace OnlyT.MeetingTalkTimesFeed
+﻿namespace OnlyT.MeetingTalkTimesFeed
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Newtonsoft.Json;
+    using Serilog;
+    using Utils;
+
     internal class TimesFeed
     {
         private static readonly string FeedUrl = @"https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
@@ -19,6 +19,12 @@ namespace OnlyT.MeetingTalkTimesFeed
         public TimesFeed()
         {
             _localFeedFile = Path.Combine(FileUtils.GetAppDataFolder(), "feed.json");
+        }
+
+        public Meeting GetTodaysMeetingData()
+        {
+            LoadFile();
+            return _meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
         }
 
         private bool LocalFileToOld()
@@ -38,12 +44,6 @@ namespace OnlyT.MeetingTalkTimesFeed
             return tooOld;
         }
 
-        public Meeting GetTodaysMeetingData()
-        {
-            LoadFile();
-            return _meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
-        }
-
         private void LoadFile()
         {
             if (_meetingData == null)
@@ -56,7 +56,7 @@ namespace OnlyT.MeetingTalkTimesFeed
         {
             List<Meeting> result = null;
 
-            bool needRefresh = LocalFileToOld();
+            var needRefresh = LocalFileToOld();
 
             if (!needRefresh)
             {

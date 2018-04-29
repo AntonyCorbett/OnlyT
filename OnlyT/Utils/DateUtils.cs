@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System;
+
     public static class DateUtils
     {
         public static DateTime GetMondayOfThisWeek()

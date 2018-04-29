@@ -1,20 +1,20 @@
-﻿using OnlyT.WebServer.ErrorHandling;
-using OnlyT.WebServer.Models;
-
-namespace OnlyT.WebServer
+﻿namespace OnlyT.WebServer
 {
     // ReSharper disable CatchAllClause
     using System;
     using System.Net;
     using System.Threading.Tasks;
     using Controllers;
+    using ErrorHandling;
+    using EventArgs;
+    using Models;
     using Serilog;
     using Services.Bell;
     using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;
-
-    internal class HttpServer : IHttpServer, IDisposable
+    
+    internal sealed class HttpServer : IHttpServer, IDisposable
     {
         private readonly bool _24HourClock;
         private readonly IOptionsService _optionsService;
@@ -43,6 +43,8 @@ namespace OnlyT.WebServer
             _listener.Close();
             _listener = null;
         }
+
+        public event EventHandler<TimerInfoEventArgs> RequestForTimerDataEvent;
 
         public void Start(int port)
         {
@@ -186,9 +188,17 @@ namespace OnlyT.WebServer
         {
             if (_optionsService.Options.IsWebClockEnabled)
             {
+                var timerInfo = new TimerInfoEventArgs();
+                OnRequestForTimerDataEvent(timerInfo);
+
                 ClockWebPageController controller = new ClockWebPageController();
-                controller.HandleRequestForTimerData(response);
+                controller.HandleRequestForTimerData(response, timerInfo);
             }
+        }
+
+        private void OnRequestForTimerDataEvent(TimerInfoEventArgs timerInfo)
+        {
+            RequestForTimerDataEvent?.Invoke(this, timerInfo);
         }
     }
 }

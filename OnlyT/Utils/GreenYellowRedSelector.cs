@@ -1,7 +1,7 @@
-﻿using System.Windows.Media;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System.Windows.Media;
+
     /// <summary>
     /// Returns an appropriate brush based on time remaining:
     /// Red if overtime; Yellow if 30 secs or less to go; otherwise Green

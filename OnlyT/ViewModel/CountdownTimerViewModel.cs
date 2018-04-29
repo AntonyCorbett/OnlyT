@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.ViewModel.Messages;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Messaging;
+    using Messages;
+
     internal class CountdownTimerViewModel : ViewModelBase
     {
         private bool _applicationClosing;
@@ -15,6 +15,7 @@ namespace OnlyT.ViewModel
         }
 
         public bool ApplicationClosing => _applicationClosing;
+
         private void OnShutDown(ShutDownMessage obj)
         {
             _applicationClosing = true;

@@ -3,21 +3,20 @@
     using System;
     using System.Net;
     using System.Text;
-    using GalaSoft.MvvmLight.Messaging;
+    using EventArgs;
     using NUglify;
-    using ViewModel.Messages;
 
     internal class ClockWebPageController
     {
         private static byte[] WebPageHtml;
         private static bool TwentyFourHourClockUsed;
 
-        public void HandleRequestForTimerData(HttpListenerResponse response)
+        public void HandleRequestForTimerData(HttpListenerResponse response, TimerInfoEventArgs timerInfo)
         {
             response.ContentType = "text/xml";
             response.ContentEncoding = Encoding.UTF8;
 
-            string responseString = CreateXml();
+            string responseString = CreateXml(timerInfo);
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
 
             response.ContentLength64 = buffer.Length;
@@ -64,22 +63,14 @@
             return responseString.Replace(origLineOfCode, newLineOfCode);
         }
 
-        private void GetClockServerInfo(GetCurrentTimerInfoMessage message)
-        {
-            Messenger.Default.Send(message);
-        }
-
-        private string CreateXml()
+        private string CreateXml(TimerInfoEventArgs timerInfo)
         {
             var sb = new StringBuilder();
-
-            var message = new GetCurrentTimerInfoMessage();
-            GetClockServerInfo(message);
-
+           
             sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             sb.AppendLine("<root>");
 
-            switch (message.Mode)
+            switch (timerInfo.Mode)
             {
                 case ClockServerMode.Nameplate:
                     sb.AppendLine(" <clock mode=\"Nameplate\" mins=\"0\" secs=\"0\" ms=\"0\" targetSecs=\"0\" />");
@@ -94,12 +85,12 @@
 
                 case ClockServerMode.Timer:
                     sb.AppendLine(
-                        $" <clock mode=\"Timer\" mins=\"{message.Mins}\" secs=\"{message.Secs}\" ms=\"{message.Millisecs}\" targetSecs=\"{message.TargetSecs}\" />");
+                        $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" />");
                     break;
 
                 case ClockServerMode.TimerPause:
                     sb.AppendLine(
-                        $" <clock mode=\"TimerPause\" mins=\"{message.Mins}\" secs=\"{message.Secs}\" ms=\"{message.Millisecs}\" targetSecs=\"{message.TargetSecs}\" />");
+                        $" <clock mode=\"TimerPause\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" />");
                     break;
             }
 

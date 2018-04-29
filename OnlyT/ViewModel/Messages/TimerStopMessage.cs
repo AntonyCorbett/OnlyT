@@ -5,9 +5,9 @@
     /// </summary>
     internal class TimerStopMessage
     {
-        public int TalkId { get; set; }
+        public int TalkId { get; }
 
-        public int ElapsedSecs { get; set; }
+        public int ElapsedSecs { get; }
 
 
         public TimerStopMessage(int talkId, int elapsedSecs)

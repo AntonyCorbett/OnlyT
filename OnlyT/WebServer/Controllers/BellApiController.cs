@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using OnlyT.Services.Bell;
-using OnlyT.Services.Options;
-using OnlyT.WebServer.Models;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
+    using System.Net;
+    using Models;
+    using Services.Bell;
+    using Services.Options;
+
     internal class BellApiController : BaseApiController
     {
         private readonly IOptionsService _optionsService;
@@ -29,7 +24,6 @@ namespace OnlyT.WebServer.Controllers
             var responseData = new BellResponseData();
 
             // segments: "/" "api/" "v1/" "bell/"
-
             if (_optionsService.Options.IsBellEnabled && !_bellService.IsPlaying)
             {
                 responseData.Success = true;

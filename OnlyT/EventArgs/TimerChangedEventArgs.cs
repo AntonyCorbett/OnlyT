@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OnlyT.EventArgs
+﻿namespace OnlyT.EventArgs
 {
     /// <inheritdoc />
     /// <summary>
@@ -9,8 +7,11 @@ namespace OnlyT.EventArgs
     public class TimerChangedEventArgs : System.EventArgs
     {
         public int TargetSecs { get; set; }
+
         public int ElapsedSecs { get; set; }
+
         public bool IsRunning { get; set; }
+
         public int RemainingSecs => TargetSecs - ElapsedSecs;
     }
 }

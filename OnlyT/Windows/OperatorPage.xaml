@@ -137,6 +137,7 @@
                             VerticalAlignment="Bottom"
                             Width="22"
                             ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
+                            ToolTipService.ShowOnDisabled="True"
                             Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
                             Style="{StaticResource ChromelessBtn}">
                         <Path  

@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.Services.Options;
-using OnlyT.Services.Options.MeetingStartTimes;
-using OnlyT.ViewModel.Messages;
-
-namespace OnlyT.Services.CountdownTimer
+﻿namespace OnlyT.Services.CountdownTimer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Options;
+    using Options.MeetingStartTimes;
+    
     public sealed class CountdownTimerTriggerService : ICountdownTimerTriggerService
     {
         private const int CountdownDurationMins = 5;
-        private List<CountdownTriggerPeriod> _triggerPeriods;
         private readonly object _locker = new object();
+        private readonly IOptionsService _optionsService;
+        private List<CountdownTriggerPeriod> _triggerPeriods;
 
-        public CountdownTimerTriggerService(IOptionsService options)
+        public CountdownTimerTriggerService(IOptionsService optionsService)
         {
-            UpdateTriggerPeriods(options.Options.MeetingStartTimes.Times);
-            
-            // subscriptions...
-            Messenger.Default.Register<MeetingStartTimesChangeMessage>(this, OnMeetingStartTimesChanged);
+            _optionsService = optionsService;
+            UpdateTriggerPeriods();
         }
 
-        private void OnMeetingStartTimesChanged(MeetingStartTimesChangeMessage message)
+        public void UpdateTriggerPeriods()
         {
-            UpdateTriggerPeriods(message?.Times);
-        }
+            var times = _optionsService.Options.MeetingStartTimes.Times;
 
-        private void UpdateTriggerPeriods(List<MeetingStartTime> times)
-        {
             lock (_locker)
             {
                 _triggerPeriods = null;
@@ -37,6 +31,27 @@ namespace OnlyT.Services.CountdownTimer
                     CalculateTriggerPeriods(times);
                 }
             }
+        }
+
+        public bool IsInCountdownPeriod(out int secondsOffset)
+        {
+            lock (_locker)
+            {
+                if (_triggerPeriods != null)
+                {
+                    var now = DateTime.Now;
+
+                    var trigger = _triggerPeriods.FirstOrDefault(x => x.Start <= now && x.End > now);
+                    if (trigger != null)
+                    {
+                        secondsOffset = (int)(now - trigger.Start).TotalSeconds;
+                        return true;
+                    }
+                }
+            }
+
+            secondsOffset = 0;
+            return false;
         }
 
         private void CalculateTriggerPeriods(IEnumerable<MeetingStartTime> meetingStartTimes)
@@ -53,34 +68,13 @@ namespace OnlyT.Services.CountdownTimer
                     {
                         Start = today.Add(
                             TimeSpan.FromMinutes(
-                                time.StartTime.Hours * 60 + time.StartTime.Minutes - CountdownDurationMins)),
+                                (time.StartTime.Hours * 60) + time.StartTime.Minutes - CountdownDurationMins)),
                         End = today.Add(new TimeSpan(time.StartTime.Hours, time.StartTime.Minutes, 0))
                     });
                 }
             }
 
             _triggerPeriods = triggerPeriods;
-        }
-
-        public bool IsInCountdownPeriod(out int secondsOffset)
-        {
-            lock (_locker)
-            {
-                if (_triggerPeriods != null)
-                {
-                    DateTime now = DateTime.Now;
-
-                    var trigger = _triggerPeriods.FirstOrDefault(x => x.Start <= now && x.End > now);
-                    if (trigger != null)
-                    {
-                        secondsOffset = (int)(now - trigger.Start).TotalSeconds;
-                        return true;
-                    }
-                }
-            }
-
-            secondsOffset = 0;
-            return false;
         }
     }
 }

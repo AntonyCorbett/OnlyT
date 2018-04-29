@@ -1,13 +1,17 @@
-﻿using OnlyT.WebServer;
-
-namespace OnlyT.ViewModel.Messages
+﻿namespace OnlyT.EventArgs
 {
-    internal class GetCurrentTimerInfoMessage
+    using WebServer;
+
+    public class TimerInfoEventArgs : System.EventArgs
     {
         public ClockServerMode Mode { get; set; }
+
         public int Mins { get; set; }
+
         public int Secs { get; set; }
+
         public int Millisecs { get; set; }
+
         public int TargetSecs { get; set; }
     }
 }

@@ -1,28 +1,26 @@
-using System;
-using GalaSoft.MvvmLight;
-using System.Windows;
-using System.Collections.Generic;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.ViewModel.Messages;
-using OnlyT.Windows;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using GalaSoft.MvvmLight.Threading;
-using OnlyT.EventArgs;
-using OnlyT.Models;
-using OnlyT.Services.Bell;
-using OnlyT.Services.CountdownTimer;
-using OnlyT.Services.Monitors;
-using OnlyT.Services.Options;
-using OnlyT.Services.Timer;
-using OnlyT.WebServer;
-using Serilog;
-
-// ReSharper disable CatchAllClause
-
 namespace OnlyT.ViewModel
 {
+    // ReSharper disable CatchAllClause
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Threading;
+    using EventArgs;
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Threading;
+    using Messages;
+    using Models;
+    using Serilog;
+    using Services.CountdownTimer;
+    using Services.Monitors;
+    using Services.Options;
+    using Services.Timer;
+    using WebServer;
+    using Windows;
+
     /// <summary>
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
     /// </summary>
@@ -30,11 +28,8 @@ namespace OnlyT.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
-        private TimerOutputWindow _timerWindow;
-        private CountdownWindow _countdownWindow;
         private readonly IOptionsService _optionsService;
         private readonly IMonitorsService _monitorsService;
-        private readonly IBellService _bellService;
         private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
         private readonly IHttpServer _httpServer;
@@ -42,31 +37,31 @@ namespace OnlyT.ViewModel
         private readonly CountdownTimerViewModel _countdownWindowViewModel;
         private DispatcherTimer _heartbeatTimer;
         private bool _countdownDone;
+        private TimerOutputWindow _timerWindow;
+        private CountdownWindow _countdownWindow;
 
         public MainViewModel(
            IOptionsService optionsService,
            IMonitorsService monitorsService,
            ITalkTimerService timerService,
            IHttpServer httpServer,
-           IBellService bellService,
            ICountdownTimerTriggerService countdownTimerTriggerService)
         {
             _optionsService = optionsService;
             _monitorsService = monitorsService;
-            _bellService = bellService;
             _httpServer = httpServer;
             _timerService = timerService;
             _countdownTimerTriggerService = countdownTimerTriggerService;
+
+            _httpServer.RequestForTimerDataEvent += OnRequestForTimerData;
 
             // subscriptions...
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
-            Messenger.Default.Register<OvertimeMessage>(this, OnTalkOvertime);
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
             Messenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
-            Messenger.Default.Register<GetCurrentTimerInfoMessage>(this, OnGetCurrentTimerInfo);
-
+            
             InitHttpServer();
 
             // should really create a "page service" rather than create views in the main view model!
@@ -83,9 +78,23 @@ namespace OnlyT.ViewModel
 #pragma warning restore 4014
         }
 
+        public void Closing(CancelEventArgs e)
+        {
+            e.Cancel = _timerService.IsRunning;
+            if (!e.Cancel)
+            {
+                Messenger.Default.Send(new ShutDownMessage(CurrentPageName));
+                CloseTimerWindow();
+                CloseCountdownWindow();
+            }
+        }
+
         /// <summary>
         /// Starts the countdown (pre-meeting) timer
         /// </summary>
+        /// <param name="offsetSeconds">
+        /// The offset in seconds (the timer already started offsetSeconds ago).
+        /// </param>
         private void StartCountdown(int offsetSeconds)
         {
             if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
@@ -103,12 +112,11 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public string CurrentPageName { get; set; }
+        public string CurrentPageName { get; private set; }
 
         private void InitSettingsPage()
         {
-            // we only init the settings page when first used...
-
+            // we only init the settings page when first used.
             if (!_pages.ContainsKey(SettingsPageViewModel.PageName))
             {
                 _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
@@ -129,46 +137,39 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnGetCurrentTimerInfo(GetCurrentTimerInfoMessage message)
+        private void OnRequestForTimerData(object sender, TimerInfoEventArgs timerData)
         {
             // we received a web request for the timer clock info...
-
             var info = _timerService.GetClockRequestInfo();
+
             if (info == null || !info.IsRunning)
             {
-                message.Mode = ClockServerMode.TimeOfDay;
+                timerData.Mode = ClockServerMode.TimeOfDay;
             }
             else
             {
-                message.Mode = ClockServerMode.Timer;
-                message.TargetSecs = info.TargetSeconds;
-                message.Mins = info.ElapsedTime.Minutes;
-                message.Secs = info.ElapsedTime.Seconds;
-                message.Millisecs = info.ElapsedTime.Milliseconds;
-            }
-        }
+                timerData.Mode = ClockServerMode.Timer;
 
-        private void OnTalkOvertime(OvertimeMessage message)
-        {
-            if (message.UseBellForTalk && _optionsService.Options.IsBellEnabled)
-            {
-                _bellService.Play(_optionsService.Options.BellVolumePercent);
+                timerData.TargetSecs = info.TargetSeconds;
+                timerData.Mins = info.ElapsedTime.Minutes;
+                timerData.Secs = info.ElapsedTime.Seconds;
+                timerData.Millisecs = info.ElapsedTime.Milliseconds;
             }
         }
 
         /// <summary>
-        /// Responds to change in the application's "Always on top" option
+        /// Responds to change in the application's "Always on top" option.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">AlwaysOnTopChangedMessage message.</param>
         private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage message)
         {
             RaisePropertyChanged(nameof(AlwaysOnTop));
         }
 
         /// <summary>
-        /// Responds to a change in timer monitor
+        /// Responds to a change in timer monitor.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">TimerMonitorChangedMessage message.</param>
         private void OnTimerMonitorChanged(TimerMonitorChangedMessage message)
         {
             try
@@ -203,13 +204,16 @@ namespace OnlyT.ViewModel
 
         private void InitHeartbeatTimer()
         {
-            _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
-            _heartbeatTimer.Interval = TimeSpan.FromSeconds(1);
+            _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+
             _heartbeatTimer.Tick += HeartbeatTimerTick;
             _heartbeatTimer.Start();
         }
 
-        private void HeartbeatTimerTick(object sender, System.EventArgs e)
+        private void HeartbeatTimerTick(object sender, EventArgs e)
         {
             _heartbeatTimer.Stop();
             try
@@ -262,9 +266,9 @@ namespace OnlyT.ViewModel
         }
 
         /// <summary>
-        /// Responds to the NavigateMessage and swaps out one page for another
+        /// Responds to the NavigateMessage and swaps out one page for another.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">NavigateMessage message.</param>
         private void OnNavigate(NavigateMessage message)
         {
             if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
@@ -279,6 +283,7 @@ namespace OnlyT.ViewModel
         }
 
         private FrameworkElement _currentPage;
+
         public FrameworkElement CurrentPage
         {
             get => _currentPage;
@@ -301,17 +306,6 @@ namespace OnlyT.ViewModel
                              (_countdownWindow != null && _countdownWindow.IsVisible);
 
                 return result;
-            }
-        }
-
-        public void Closing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = _timerService.IsRunning;
-            if (!e.Cancel)
-            {
-                Messenger.Default.Send(new ShutDownMessage(CurrentPageName));
-                CloseTimerWindow();
-                CloseCountdownWindow();
             }
         }
 
@@ -370,7 +364,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnCountdownTimeUp(object sender, System.EventArgs e)
+        private void OnCountdownTimeUp(object sender, EventArgs e)
         {
             StopCountdown();
         }

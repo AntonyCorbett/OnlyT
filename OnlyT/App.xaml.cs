@@ -1,21 +1,21 @@
-﻿using System.IO;
-using System.Threading;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
-using GalaSoft.MvvmLight.Threading;
-using OnlyT.Utils;
-using Serilog;
-
-namespace OnlyT
+﻿namespace OnlyT
 {
+    using System.IO;
+    using System.Threading;
+    using System.Windows;
+    using System.Windows.Interop;
+    using System.Windows.Media;
+    using GalaSoft.MvvmLight.Threading;
+    using Serilog;
+    using Utils;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        private Mutex _appMutex;
         private readonly string _appString = "OnlyTMeetingTimer";
+        private Mutex _appMutex;
 
         public App()
         {
@@ -52,8 +52,7 @@ namespace OnlyT
             // 2 => A rendering tier value of 2 means that most of the graphics features of WPF 
             //      should use hardware acceleration provided the necessary system resources have 
             //      not been exhausted. This corresponds to a DirectX version that is greater 
-            //      than or equal to 9.0.            
-
+            //      than or equal to 9.0.
             int renderingTier = RenderCapability.Tier >> 16;
             return renderingTier == 0;
         }

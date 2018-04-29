@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace OnlyT.Services.Monitors
+﻿namespace OnlyT.Services.Monitors
 {
+    using System;
+    using System.Runtime.InteropServices;
+
     /// <summary>
     /// Native methods associated with retrieval of display device data
     /// </summary>

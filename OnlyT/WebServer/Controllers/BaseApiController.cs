@@ -1,9 +1,8 @@
-﻿using System.Linq;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
     // ReSharper disable ParameterOnlyUsedForPreconditionCheck.Global
     using System;
+    using System.Linq;
     using System.Net;
     using System.Text;
     using ErrorHandling;

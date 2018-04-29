@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-using GalaSoft.MvvmLight.Threading;
-
-namespace OnlyT.Windows
+﻿namespace OnlyT.Windows
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using GalaSoft.MvvmLight.Threading;
+
     /// <summary>
     /// Interaction logic for CountdownWindow.xaml
     /// </summary>
@@ -17,17 +17,17 @@ namespace OnlyT.Windows
             InitializeComponent();
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Maximized;
-        }
-
         public void Start(int offsetSeconds)
         {
             CountDown.Start(offsetSeconds);
         }
 
-        private void OnCountDownTimeUp(object sender, System.EventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
+        }
+
+        private void OnCountDownTimeUp(object sender, EventArgs e)
         {
             CountDown.Stop();
 
@@ -39,7 +39,7 @@ namespace OnlyT.Windows
 
         private void OnTimeUpEvent()
         {
-            TimeUpEvent?.Invoke(this, System.EventArgs.Empty);
+            TimeUpEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

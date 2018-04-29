@@ -1,25 +1,74 @@
-﻿using System;
-using System.ComponentModel;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-
-namespace OnlyT.AnalogueClock
+﻿namespace OnlyT.AnalogueClock
 {
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Media.Effects;
+    using System.Windows.Shapes;
+    using System.Windows.Threading;
 
     public class Clock : Control
     {
-        private static readonly double _clockRadius = 250;
-        private static readonly double _sectorRadius = 230;
-        private static readonly Point ClockOrigin = new Point(_clockRadius, _clockRadius);
+        public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
+            DependencyProperty.Register(
+                "DigitalTimeFormatShowLeadingZero", 
+                typeof(bool), 
+                typeof(Clock),
+                new FrameworkPropertyMetadata(DigitalTimeFormatShowLeadingZeroPropertyChanged));
+
+        public static readonly DependencyProperty DigitalTimeFormat24HoursProperty =
+            DependencyProperty.Register(
+                "DigitalTimeFormat24Hours", 
+                typeof(bool), 
+                typeof(Clock),
+                new FrameworkPropertyMetadata(DigitalTimeFormat24HoursPropertyChanged));
+
+        public static readonly DependencyProperty DigitalTimeFormatAMPMProperty =
+            DependencyProperty.Register(
+                "DigitalTimeFormatAMPM", 
+                typeof(bool), 
+                typeof(Clock),
+                new FrameworkPropertyMetadata(DigitalTimeFormatAMPMPropertyChanged));
+
+        public static readonly DependencyProperty IsRunningProperty =
+            DependencyProperty.Register(
+                "IsRunning", 
+                typeof(bool), 
+                typeof(Clock),
+                new FrameworkPropertyMetadata(IsRunningPropertyChanged));
+
+        public static readonly DependencyProperty CurrentTimeHrMinProperty =
+            DependencyProperty.Register(
+                "CurrentTimeHrMin", 
+                typeof(string), 
+                typeof(Clock));
+
+        public static readonly DependencyProperty CurrentTimeSecProperty =
+            DependencyProperty.Register(
+                "CurrentTimeSec", 
+                typeof(string), 
+                typeof(Clock));
+
+        public static readonly DependencyProperty DurationSectorProperty =
+            DependencyProperty.Register(
+                "DurationSector", 
+                typeof(DurationSector), 
+                typeof(Clock),
+                new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
+
+        private static readonly double ClockRadius = 250;
+        private static readonly double SectorRadius = 230;
+        private static readonly Point ClockOrigin = new Point(ClockRadius, ClockRadius);
         private static readonly TimeSpan TimerInterval = TimeSpan.FromMilliseconds(100);
         private static readonly TimeSpan AnimationTimerInterval = TimeSpan.FromMilliseconds(20);
-        private static readonly double _angleTolerance = 0.75;
+        private static readonly double AngleTolerance = 0.75;
+
+        private readonly DispatcherTimer _timer;
+        private readonly DispatcherTimer _animationTimer;
 
         private AnglesOfHands _animationTargetAngles;
         private AnglesOfHands _animationCurrentAngles;
@@ -30,16 +79,15 @@ namespace OnlyT.AnalogueClock
         private Path _sectorPath1;
         private Path _sectorPath2;
         private Path _sectorPath3;
-        private readonly DispatcherTimer _timer;
-        private readonly DispatcherTimer _animationTimer;
         private bool _digitalFormatLeadingZero;
         private bool _digitalFormat24Hours;
         private bool _digitalFormatAMPM;
 
         static Clock()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Clock),
-               new FrameworkPropertyMetadata(typeof(Clock)));
+            DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(Clock),
+                new FrameworkPropertyMetadata(typeof(Clock)));
         }
 
         public Clock()
@@ -58,65 +106,7 @@ namespace OnlyT.AnalogueClock
                 CurrentTimeSec = "20";
             }
         }
-
-        private double CalculateAngleSeconds(DateTime dt)
-        {
-            return dt.Second * 6;
-        }
-
-        private double CalculateAngleMinutes(DateTime dt)
-        {
-            return (dt.Minute * 6) + (dt.Second + (double)dt.Millisecond / 1000) / 60 * 6;
-        }
-
-        private double CalculateAngleHours(DateTime dt)
-        {
-            int hr = dt.Hour >= 12 ? dt.Hour - 12 : dt.Hour;
-            return (hr * 30) + ((double)dt.Minute / 60) * 30;
-        }
-
-        private void TimerCallback(object sender, EventArgs eventArgs)
-        {
-            var now = DateTime.Now;
-
-            double secondAngle = CalculateAngleSeconds(now);
-            ((DropShadowEffect)_secondHand.Effect).Direction = secondAngle;
-            _secondHand.RenderTransform = new RotateTransform(secondAngle, _clockRadius, _clockRadius);
-
-            double minuteAngle = CalculateAngleMinutes(now);
-            ((DropShadowEffect)_minuteHand.Effect).Direction = minuteAngle;
-            _minuteHand.RenderTransform = new RotateTransform(minuteAngle, _clockRadius, _clockRadius);
-
-            double hourAngle = CalculateAngleHours(now);
-            ((DropShadowEffect)_hourHand.Effect).Direction = hourAngle;
-            _hourHand.RenderTransform = new RotateTransform(hourAngle, _clockRadius, _clockRadius);
-
-            CurrentTimeHrMin = FormatTimeOfDayHoursAndMins(now);
-            CurrentTimeSec = FormatTimeOfDaySeconds(now);
-        }
-
-        private string FormatTimeOfDayHoursAndMins(DateTime dt)
-        {
-            int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
-            string ampm = _digitalFormatAMPM ? dt.ToString(" tt") : string.Empty;
-
-            if (_digitalFormatLeadingZero)
-            {
-                return $"{hours:D2}:{dt.Minute:D2}{ampm}";
-            }
-
-            return $"{hours}:{dt.Minute:D2}{ampm}";
-        }
-
-        private string FormatTimeOfDaySeconds(DateTime dt)
-        {
-            return _digitalFormatAMPM ? string.Empty : dt.Second.ToString("D2");
-        }
-
-        public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
-           DependencyProperty.Register("DigitalTimeFormatShowLeadingZero", typeof(bool), typeof(Clock),
-              new FrameworkPropertyMetadata(DigitalTimeFormatShowLeadingZeroPropertyChanged));
-
+        
         public bool DigitalTimeFormatShowLeadingZero
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -124,59 +114,41 @@ namespace OnlyT.AnalogueClock
             set => SetValue(DigitalTimeFormatShowLeadingZeroProperty, value);
         }
 
-        private static void DigitalTimeFormatShowLeadingZeroPropertyChanged(DependencyObject d,
-           DependencyPropertyChangedEventArgs e)
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            GetElementRefs();
+
+            if (GetTemplateChild("ClockCanvas") is Canvas cc)
+            {
+                GenerateHourMarkers(cc);
+                GenerateHourNumbers(cc);
+            }
+        }
+
+        private static void DigitalTimeFormatShowLeadingZeroPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
         {
             Clock c = (Clock)d;
             c._digitalFormatLeadingZero = (bool)e.NewValue;
         }
 
-
-        public static readonly DependencyProperty DigitalTimeFormat24HoursProperty =
-           DependencyProperty.Register("DigitalTimeFormat24Hours", typeof(bool), typeof(Clock),
-              new FrameworkPropertyMetadata(DigitalTimeFormat24HoursPropertyChanged));
-
-        public bool DigitalTimeFormat24Hours
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (bool)GetValue(DigitalTimeFormat24HoursProperty);
-            set => SetValue(DigitalTimeFormat24HoursProperty, value);
-        }
-
-        private static void DigitalTimeFormat24HoursPropertyChanged(DependencyObject d,
-           DependencyPropertyChangedEventArgs e)
+        private static void DigitalTimeFormat24HoursPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
         {
             Clock c = (Clock)d;
             c._digitalFormat24Hours = (bool)e.NewValue;
         }
-        
-        public static readonly DependencyProperty DigitalTimeFormatAMPMProperty =
-            DependencyProperty.Register("DigitalTimeFormatAMPM", typeof(bool), typeof(Clock),
-                new FrameworkPropertyMetadata(DigitalTimeFormatAMPMPropertyChanged));
 
-        public bool DigitalTimeFormatAMPM
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (bool)GetValue(DigitalTimeFormatAMPMProperty);
-            set => SetValue(DigitalTimeFormatAMPMProperty, value);
-        }
-
-        private static void DigitalTimeFormatAMPMPropertyChanged(DependencyObject d,
+        private static void DigitalTimeFormatAMPMPropertyChanged(
+            DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
             Clock c = (Clock)d;
             c._digitalFormatAMPM = (bool)e.NewValue;
-        }
-        
-        public static readonly DependencyProperty IsRunningProperty =
-           DependencyProperty.Register("IsRunning", typeof(bool), typeof(Clock),
-              new FrameworkPropertyMetadata(IsRunningPropertyChanged));
-
-        public bool IsRunning
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (bool)GetValue(IsRunningProperty);
-            set => SetValue(IsRunningProperty, value);
         }
 
         private static void IsRunningPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -193,34 +165,9 @@ namespace OnlyT.AnalogueClock
             }
         }
 
-        public static readonly DependencyProperty CurrentTimeHrMinProperty =
-           DependencyProperty.Register("CurrentTimeHrMin", typeof(string), typeof(Clock));
-
-        public static readonly DependencyProperty CurrentTimeSecProperty =
-           DependencyProperty.Register("CurrentTimeSec", typeof(string), typeof(Clock));
-
-
-        private string CurrentTimeHrMin
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (string)GetValue(CurrentTimeHrMinProperty);
-            set => SetValue(CurrentTimeHrMinProperty, value);
-        }
-
-        private string CurrentTimeSec
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (string)GetValue(CurrentTimeSecProperty);
-            set => SetValue(CurrentTimeSecProperty, value);
-        }
-
-        public static readonly DependencyProperty DurationSectorProperty =
-           DependencyProperty.Register("DurationSector", typeof(DurationSector), typeof(Clock),
-              new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
-
         private static void DurationSectorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DurationSector sector = (DurationSector)e.NewValue;
+            var sector = (DurationSector)e.NewValue;
             Clock c = (Clock)d;
 
             if (sector == null)
@@ -277,21 +224,110 @@ namespace OnlyT.AnalogueClock
 
         private static void DrawSector(Path sectorPath, double startAngle, double endAngle, bool isLargeArc)
         {
-            Point ptStart = PointOnCircle(_sectorRadius, startAngle, ClockOrigin);
-            Point ptEnd = PointOnCircle(_sectorRadius, endAngle, ClockOrigin);
+            var startPoint = PointOnCircle(SectorRadius, startAngle, ClockOrigin);
+            var endPoint = PointOnCircle(SectorRadius, endAngle, ClockOrigin);
             string largeArc = isLargeArc ? "1" : "0";
 
             // use InvariantCulture to ensure that decimal separator is '.'
-            sectorPath.Data = Geometry.Parse($"M{_clockRadius.ToString(CultureInfo.InvariantCulture)},{_clockRadius.ToString(CultureInfo.InvariantCulture)} L{ptStart.X.ToString(CultureInfo.InvariantCulture)},{ptStart.Y.ToString(CultureInfo.InvariantCulture)} A{_sectorRadius.ToString(CultureInfo.InvariantCulture)},{_sectorRadius.ToString(CultureInfo.InvariantCulture)} 0 {largeArc} 1 {ptEnd.X.ToString(CultureInfo.InvariantCulture)},{ptEnd.Y.ToString(CultureInfo.InvariantCulture)} z");
+            sectorPath.Data = Geometry.Parse($"M{ClockRadius.ToString(CultureInfo.InvariantCulture)},{ClockRadius.ToString(CultureInfo.InvariantCulture)} L{startPoint.X.ToString(CultureInfo.InvariantCulture)},{startPoint.Y.ToString(CultureInfo.InvariantCulture)} A{SectorRadius.ToString(CultureInfo.InvariantCulture)},{SectorRadius.ToString(CultureInfo.InvariantCulture)} 0 {largeArc} 1 {endPoint.X.ToString(CultureInfo.InvariantCulture)},{endPoint.Y.ToString(CultureInfo.InvariantCulture)} z");
         }
 
         private static Point PointOnCircle(double radius, double angleInDegrees, Point origin)
         {
             // NB - angleInDegrees is from 12 o'clock rather than from 3 o'clock
-            double x = radius * Math.Cos((angleInDegrees - 90) * Math.PI / 180F) + origin.X;
-            double y = radius * Math.Sin((angleInDegrees - 90) * Math.PI / 180F) + origin.Y;
+            var x = (radius * Math.Cos((angleInDegrees - 90) * Math.PI / 180F)) + origin.X;
+            var y = (radius * Math.Sin((angleInDegrees - 90) * Math.PI / 180F)) + origin.Y;
 
             return new Point(x, y);
+        }
+
+        private double CalculateAngleSeconds(DateTime dt)
+        {
+            return dt.Second * 6;
+        }
+
+        private double CalculateAngleMinutes(DateTime dt)
+        {
+            return (dt.Minute * 6) + ((dt.Second + ((double)dt.Millisecond / 1000)) / (60 * 6));
+        }
+
+        private double CalculateAngleHours(DateTime dt)
+        {
+            var hr = dt.Hour >= 12 ? dt.Hour - 12 : dt.Hour;
+            return (hr * 30) + (((double)dt.Minute / 60) * 30);
+        }
+
+        private void TimerCallback(object sender, EventArgs eventArgs)
+        {
+            var now = DateTime.Now;
+
+            var secondAngle = CalculateAngleSeconds(now);
+            ((DropShadowEffect)_secondHand.Effect).Direction = secondAngle;
+            _secondHand.RenderTransform = new RotateTransform(secondAngle, ClockRadius, ClockRadius);
+
+            var minuteAngle = CalculateAngleMinutes(now);
+            ((DropShadowEffect)_minuteHand.Effect).Direction = minuteAngle;
+            _minuteHand.RenderTransform = new RotateTransform(minuteAngle, ClockRadius, ClockRadius);
+
+            var hourAngle = CalculateAngleHours(now);
+            ((DropShadowEffect)_hourHand.Effect).Direction = hourAngle;
+            _hourHand.RenderTransform = new RotateTransform(hourAngle, ClockRadius, ClockRadius);
+
+            CurrentTimeHrMin = FormatTimeOfDayHoursAndMins(now);
+            CurrentTimeSec = FormatTimeOfDaySeconds(now);
+        }
+
+        private string FormatTimeOfDayHoursAndMins(DateTime dt)
+        {
+            int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
+            string ampm = _digitalFormatAMPM ? dt.ToString(" tt") : string.Empty;
+
+            if (_digitalFormatLeadingZero)
+            {
+                return $"{hours:D2}:{dt.Minute:D2}{ampm}";
+            }
+
+            return $"{hours}:{dt.Minute:D2}{ampm}";
+        }
+
+        private string FormatTimeOfDaySeconds(DateTime dt)
+        {
+            return _digitalFormatAMPM ? string.Empty : dt.Second.ToString("D2");
+        }
+
+        public bool DigitalTimeFormat24Hours
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(DigitalTimeFormat24HoursProperty);
+            set => SetValue(DigitalTimeFormat24HoursProperty, value);
+        }
+
+        public bool DigitalTimeFormatAMPM
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(DigitalTimeFormatAMPMProperty);
+            set => SetValue(DigitalTimeFormatAMPMProperty, value);
+        }
+
+        public bool IsRunning
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(IsRunningProperty);
+            set => SetValue(IsRunningProperty, value);
+        }
+
+        private string CurrentTimeHrMin
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (string)GetValue(CurrentTimeHrMinProperty);
+            set => SetValue(CurrentTimeHrMinProperty, value);
+        }
+
+        private string CurrentTimeSec
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (string)GetValue(CurrentTimeSecProperty);
+            set => SetValue(CurrentTimeSecProperty, value);
         }
 
         public DurationSector DurationSector
@@ -344,13 +380,13 @@ namespace OnlyT.AnalogueClock
 
         private double AnimateHand(Line hand, double currentAngle, double targetAngle)
         {
-            if (Math.Abs(currentAngle - targetAngle) > _angleTolerance)
+            if (Math.Abs(currentAngle - targetAngle) > AngleTolerance)
             {
                 double delta = (targetAngle - currentAngle) / 5;
                 currentAngle += delta;
 
                 ((DropShadowEffect)hand.Effect).Direction = currentAngle;
-                hand.RenderTransform = new RotateTransform(currentAngle, _clockRadius, _clockRadius);
+                hand.RenderTransform = new RotateTransform(currentAngle, ClockRadius, ClockRadius);
             }
 
             return currentAngle;
@@ -359,22 +395,9 @@ namespace OnlyT.AnalogueClock
         private bool AnimationShouldContinue()
         {
             return
-               Math.Abs(_animationCurrentAngles.SecondsAngle - _animationTargetAngles.SecondsAngle) > _angleTolerance ||
-               Math.Abs(_animationCurrentAngles.MinutesAngle - _animationTargetAngles.MinutesAngle) > _angleTolerance ||
-               Math.Abs(_animationCurrentAngles.HoursAngle - _animationTargetAngles.HoursAngle) > _angleTolerance;
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            GetElementRefs();
-
-            if (GetTemplateChild("ClockCanvas") is Canvas cc)
-            {
-                GenerateHourMarkers(cc);
-                GenerateHourNumbers(cc);
-            }
+               Math.Abs(_animationCurrentAngles.SecondsAngle - _animationTargetAngles.SecondsAngle) > AngleTolerance ||
+               Math.Abs(_animationCurrentAngles.MinutesAngle - _animationTargetAngles.MinutesAngle) > AngleTolerance ||
+               Math.Abs(_animationCurrentAngles.HoursAngle - _animationTargetAngles.HoursAngle) > AngleTolerance;
         }
 
         private TextBlock CreateHourNumberTextBlock(int hour)
@@ -412,8 +435,8 @@ namespace OnlyT.AnalogueClock
                 };
 
                 canvas.Children.Add(b);
-                Canvas.SetLeft(b, pt.X - borderSize / 2);
-                Canvas.SetTop(b, pt.Y - borderSize / 2);
+                Canvas.SetLeft(b, pt.X - (borderSize / 2));
+                Canvas.SetTop(b, pt.Y - (borderSize / 2));
             }
         }
 
@@ -423,7 +446,7 @@ namespace OnlyT.AnalogueClock
             for (var n = 0; n < 4; ++n)
             {
                 var line = CreateMajorHourMarker();
-                line.RenderTransform = new RotateTransform(angle += 90, _clockRadius, _clockRadius);
+                line.RenderTransform = new RotateTransform(angle += 90, ClockRadius, ClockRadius);
                 canvas.Children.Add(line);
             }
 
@@ -432,7 +455,7 @@ namespace OnlyT.AnalogueClock
                 if (n % 3 > 0)
                 {
                     var line = CreateMinorHourMarker();
-                    line.RenderTransform = new RotateTransform(angle, _clockRadius, _clockRadius);
+                    line.RenderTransform = new RotateTransform(angle, ClockRadius, ClockRadius);
                     canvas.Children.Add(line);
                 }
 
@@ -444,7 +467,7 @@ namespace OnlyT.AnalogueClock
                 if (n % 5 > 0)
                 {
                     var line = CreateMinuteMarker();
-                    line.RenderTransform = new RotateTransform(angle, _clockRadius, _clockRadius);
+                    line.RenderTransform = new RotateTransform(angle, ClockRadius, ClockRadius);
                     canvas.Children.Add(line);
                 }
 
@@ -458,9 +481,9 @@ namespace OnlyT.AnalogueClock
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = 7,
-                X1 = _clockRadius,
+                X1 = ClockRadius,
                 Y1 = 19,
-                X2 = _clockRadius,
+                X2 = ClockRadius,
                 Y2 = 27
             };
         }
@@ -471,9 +494,9 @@ namespace OnlyT.AnalogueClock
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = 3,
-                X1 = _clockRadius,
+                X1 = ClockRadius,
                 Y1 = 19,
-                X2 = _clockRadius,
+                X2 = ClockRadius,
                 Y2 = 25
             };
         }
@@ -484,9 +507,9 @@ namespace OnlyT.AnalogueClock
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = 1,
-                X1 = _clockRadius,
+                X1 = ClockRadius,
                 Y1 = 19,
-                X2 = _clockRadius,
+                X2 = ClockRadius,
                 Y2 = 25
             };
         }

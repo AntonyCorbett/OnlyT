@@ -6,8 +6,11 @@
     internal class TimerChangedMessage
     {
         public int RemainingSecs { get; }
+
         public int ElapsedSecs { get; }
+
         public bool TimerIsRunning { get; }
+
         public bool CountUp { get; }
 
 

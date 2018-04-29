@@ -1,7 +1,7 @@
 ﻿namespace OnlyT.WebServer.Models
 {
     using Newtonsoft.Json;
-    using OnlyT.Services.TalkSchedule;
+    using Services.TalkSchedule;
 
     internal class TimerInfo
     {

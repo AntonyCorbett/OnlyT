@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace OnlyT.ValueConverters
+﻿namespace OnlyT.ValueConverters
 {
+    using System;
     using System.Globalization;
     using System.Windows.Data;
 

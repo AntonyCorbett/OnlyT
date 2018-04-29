@@ -1,14 +1,15 @@
-﻿using System;
-using System.Windows.Media;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.AnalogueClock;
-using OnlyT.Services.Options;
-using OnlyT.Utils;
-using OnlyT.ViewModel.Messages;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
+    // ReSharper disable UnusedMember.Global
+    using System;
+    using System.Windows.Media;
+    using AnalogueClock;
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Messaging;
+    using Messages;
+    using Services.Options;
+    using Utils;
+
     internal class TimerOutputWindowViewModel : ViewModelBase
     {
         private static int _secsPerHour = 60 * 60;
@@ -18,7 +19,7 @@ namespace OnlyT.ViewModel
         public TimerOutputWindowViewModel(IOptionsService optionsService)
         {
             _optionsService = optionsService;
-
+        
             AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
             ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
 
@@ -31,8 +32,14 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
             Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChangedMessage);
         }
-        
+
+        public bool SplitAndFullScrenModeIdentical()
+        {
+            return _optionsService.Options.AnalogueClockWidthPercent == 100;
+        }
+
         public bool ApplicationClosing => _applicationClosing;
+
         private void OnShutDown(ShutDownMessage obj)
         {
             _applicationClosing = true;
@@ -61,10 +68,7 @@ namespace OnlyT.ViewModel
             DurationSector = null;
         }
 
-        private double CalcAngleFromTime(DateTime dt)
-        {
-            return (dt.Minute + (double)dt.Second / 60) / 60 * 360;
-        }
+        private double CalcAngleFromTime(DateTime dt) => (dt.Minute + ((double)dt.Second / 60)) / 60 * 360;
 
         private void OnTimerStarted(TimerStartMessage message)
         {
@@ -80,13 +84,14 @@ namespace OnlyT.ViewModel
         {
             if (DurationSector == null && _optionsService.Options.ShowDurationSector)
             {
-                if (targetSecs < _secsPerHour) // can't display duration sector effectively when >= 1 hr
+                // can't display duration sector effectively when >= 1 hr
+                if (targetSecs < _secsPerHour) 
                 {
-                    DateTime now = DateTime.Now;
-                    double startAngle = CalcAngleFromTime(now);
+                    var now = DateTime.Now;
+                    var startAngle = CalcAngleFromTime(now);
 
-                    DateTime endTime = now.AddSeconds(targetSecs);
-                    double endAngle = CalcAngleFromTime(endTime);
+                    var endTime = now.AddSeconds(targetSecs);
+                    var endAngle = CalcAngleFromTime(endTime);
 
                     DurationSector = new DurationSector
                     {
@@ -115,9 +120,11 @@ namespace OnlyT.ViewModel
 
                 if (DurationSector != null)
                 {
-                    DateTime now = DateTime.Now;
+                    var now = DateTime.Now;
                     var currentAngle = CalcAngleFromTime(now);
-                    if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15) // prevent gratuitous updates
+
+                    // prevent gratuitous updates
+                    if (Math.Abs(currentAngle - DurationSector.CurrentAngle) > 0.15)
                     {
                         var d = DurationSector.Clone();
                         d.CurrentAngle = currentAngle;
@@ -129,9 +136,11 @@ namespace OnlyT.ViewModel
         }
 
         private int _timerColumnWidthPercentage = -1;
+
         public int TimerColumnWidthPercentage => _timerColumnWidthPercentage;
 
         private int _analogueClockColumnWidthPercentage = -1;
+
         public int AnalogueClockColumnWidthPercentage
         {
             get => _analogueClockColumnWidthPercentage;
@@ -161,6 +170,7 @@ namespace OnlyT.ViewModel
             _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM;
 
         private string _timeString;
+
         public string TimeString
         {
             get => _timeString;
@@ -175,6 +185,7 @@ namespace OnlyT.ViewModel
         }
 
         private bool _isRunning;
+
         public bool IsRunning
         {
             get => _isRunning;
@@ -189,6 +200,7 @@ namespace OnlyT.ViewModel
         }
 
         private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
+
         public Brush TextColor
         {
             get => _textColor;
@@ -203,6 +215,7 @@ namespace OnlyT.ViewModel
         }
 
         private DurationSector _durationSector;
+
         public DurationSector DurationSector
         {
             get => _durationSector;
@@ -232,10 +245,5 @@ namespace OnlyT.ViewModel
         }
 
         public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
-
-        public bool SplitAndFullScrenModeIdentical()
-        {
-            return _optionsService.Options.AnalogueClockWidthPercent == 100;
-        }
     }
 }

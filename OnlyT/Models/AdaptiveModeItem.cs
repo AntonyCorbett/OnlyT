@@ -8,6 +8,7 @@
     public class AdaptiveModeItem
     {
         public AdaptiveMode Mode { get; set; }
+
         public string Name { get; set; }
     }
 }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Net;
-using System.Reflection;
-using System.Threading;
-using OnlyT.Services.Options;
-using OnlyT.WebServer.ErrorHandling;
-using OnlyT.WebServer.Models;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
+    using System;
+    using System.Net;
+    using System.Reflection;
+    using System.Threading;
+    using Models;
+    using Services.Options;
+
     internal class SystemApiController : BaseApiController
     {
         private static Guid SessionId = Guid.NewGuid();

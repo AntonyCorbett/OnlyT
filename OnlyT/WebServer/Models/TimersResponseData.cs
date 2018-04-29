@@ -1,18 +1,17 @@
-﻿using System.Linq;
-using OnlyT.Services.Options;
-using OnlyT.WebServer.ErrorHandling;
-
-namespace OnlyT.WebServer.Models
+﻿namespace OnlyT.WebServer.Models
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using ErrorHandling;
     using Newtonsoft.Json;
     using OnlyT.Models;
+    using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;
 
     internal class TimersResponseData
     {
-        [JsonProperty(PropertyName = "timerStatus")]
+        [JsonProperty(PropertyName = "status")]
         public TimerStatus Status { get; }
 
         [JsonProperty(PropertyName = "timerInfo")]

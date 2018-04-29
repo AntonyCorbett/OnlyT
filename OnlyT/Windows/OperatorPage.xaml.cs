@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
-
-namespace OnlyT.Windows
+﻿namespace OnlyT.Windows
 {
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for OperatorPage.xaml
     /// </summary>

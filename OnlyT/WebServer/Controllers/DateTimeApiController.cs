@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net;
-using OnlyT.WebServer.Models;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
+    using System;
+    using System.Net;
+    using Models;
+
     internal class DateTimeApiController : BaseApiController
     {
         public void Handler(HttpListenerRequest request, HttpListenerResponse response)
@@ -14,9 +14,9 @@ namespace OnlyT.WebServer.Controllers
             // segments: "/" "api/" "v1/" "datetime/"
 
             // system clock
-            DateTime dt = DateTime.Now;
+            var dt = DateTime.Now;
 
-            LocalTime lt = new LocalTime
+            var lt = new LocalTime
             {
                 Year = dt.Year,
                 Month = dt.Month,

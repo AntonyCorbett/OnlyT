@@ -1,12 +1,10 @@
-﻿using System;
-using OnlyT.Services.Options;
-
-namespace OnlyT.Services.Timer
+﻿namespace OnlyT.Services.Timer
 {
+    using System;
     using System.Diagnostics;
     using System.Linq;
-
     using Models;
+    using Options;
     using TalkSchedule;
 
     /// <summary>
@@ -16,37 +14,20 @@ namespace OnlyT.Services.Timer
     /// </summary>
     internal class AdaptiveTimerService : IAdaptiveTimerService
     {
-        private static readonly int _largestDeviationMinutes = 15;
+        private static readonly int LargestDeviationMinutes = 15;
 
-        private static readonly int _smallestDeviationSecs = 15;
-
-        private DateTime? _meetingStartTimeUtc;
+        private static readonly int SmallestDeviationSecs = 15;
 
         private readonly IOptionsService _optionsService;
 
         private readonly ITalkScheduleService _scheduleService;
 
+        private DateTime? _meetingStartTimeUtc;
+
         public AdaptiveTimerService(IOptionsService optionsService, ITalkScheduleService scheduleService)
         {
             _optionsService = optionsService;
             _scheduleService = scheduleService;
-        }
-
-        private void SetMeetingStartUtc(TalkScheduleItem talk)
-        {
-            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
-            {
-                switch (_optionsService.Options.MidWeekOrWeekend)
-                {
-                    case MidWeekOrWeekend.Weekend:
-                        _meetingStartTimeUtc = CalculateWeekendStartTime(talk);
-                        break;
-
-                    case MidWeekOrWeekend.MidWeek:
-                        _meetingStartTimeUtc = CalculateMidWeekStartTime(talk);
-                        break;
-                }
-            }
         }
 
         /// <summary>
@@ -93,6 +74,23 @@ namespace OnlyT.Services.Timer
             return null;
         }
 
+        private void SetMeetingStartUtc(TalkScheduleItem talk)
+        {
+            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
+            {
+                switch (_optionsService.Options.MidWeekOrWeekend)
+                {
+                    case MidWeekOrWeekend.Weekend:
+                        _meetingStartTimeUtc = CalculateWeekendStartTime(talk);
+                        break;
+
+                    case MidWeekOrWeekend.MidWeek:
+                        _meetingStartTimeUtc = CalculateMidWeekStartTime(talk);
+                        break;
+                }
+            }
+        }
+
         private void EnsureMeetingStartTimeIsSet(TalkScheduleItem talk)
         {
             if (_meetingStartTimeUtc == null)
@@ -103,8 +101,8 @@ namespace OnlyT.Services.Timer
 
         private bool DeviationWithinRange(TimeSpan deviation)
         {
-            return Math.Abs(deviation.TotalSeconds) > _smallestDeviationSecs
-                   && Math.Abs(deviation.TotalMinutes) <= _largestDeviationMinutes;
+            return Math.Abs(deviation.TotalSeconds) > SmallestDeviationSecs
+                   && Math.Abs(deviation.TotalMinutes) <= LargestDeviationMinutes;
         }
 
         private AdaptiveMode GetAdaptiveMode()
@@ -149,14 +147,15 @@ namespace OnlyT.Services.Timer
 
         private DateTime CalculatePlannedStartTimeOfItem(TalkScheduleItem talk)
         {
-            Debug.Assert(_meetingStartTimeUtc != null);
+            Debug.Assert(_meetingStartTimeUtc != null, "Meeting start time is null");
+
             if (_meetingStartTimeUtc != null)
             {
                 return _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting);
             }
+
             return DateTime.MinValue;
         }
-
 
         private DateTime? CalculateWeekendStartTime(TalkScheduleItem talk)
         {
@@ -165,6 +164,7 @@ namespace OnlyT.Services.Timer
             {
                 result = GetNearest15MinsBefore(DateTime.UtcNow);
             }
+
             return result;
         }
 
@@ -178,31 +178,31 @@ namespace OnlyT.Services.Timer
                     result = GetNearest15MinsBefore(DateTime.UtcNow);
                     break;
             }
+
             return result;
         }
 
-        private DateTime GetNearest15MinsBefore(DateTime dtBase)
+        private DateTime GetNearest15MinsBefore(DateTime dateTimeBase)
         {
-            DateTime result = dtBase.Date;
-            if (dtBase.Minute > 45)
+            DateTime result = dateTimeBase.Date;
+            if (dateTimeBase.Minute > 45)
             {
-                result = result.AddHours(dtBase.Hour).AddMinutes(45);
+                result = result.AddHours(dateTimeBase.Hour).AddMinutes(45);
             }
-            else if (dtBase.Minute > 30)
+            else if (dateTimeBase.Minute > 30)
             {
-                result = result.AddHours(dtBase.Hour).AddMinutes(30);
+                result = result.AddHours(dateTimeBase.Hour).AddMinutes(30);
             }
-            else if (dtBase.Minute > 15)
+            else if (dateTimeBase.Minute > 15)
             {
-                result = result.AddHours(dtBase.Hour).AddMinutes(15);
+                result = result.AddHours(dateTimeBase.Hour).AddMinutes(15);
             }
             else
             {
-                result = result.AddHours(dtBase.Hour);
+                result = result.AddHours(dateTimeBase.Hour);
             }
+
             return result;
         }
-
     }
-
 }

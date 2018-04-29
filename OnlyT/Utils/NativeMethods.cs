@@ -1,10 +1,10 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Media.Imaging;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System;
+    using System.Runtime.InteropServices;
+    using System.Windows;
+    using System.Windows.Media.Imaging;
+
     /// <summary>
     /// Misc Native methods 
     /// </summary>

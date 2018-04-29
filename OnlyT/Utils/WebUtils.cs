@@ -1,17 +1,12 @@
-﻿using System.IO;
-using System.Net;
-using System.Text;
-using System.Xml.Linq;
-
-namespace OnlyT.Utils
+﻿namespace OnlyT.Utils
 {
+    using System.IO;
+    using System.Net;
+    using System.Text;
+    using System.Xml.Linq;
+
     internal static class WebUtils
     {
-        private static string GetUserAgentString()
-        {
-            return "OnlyT (+http://cv8.org.uk/soundbox)";
-        }
-
         /// <summary>
         /// Downloads an xml file, specifying a user agent string
         /// </summary>
@@ -36,6 +31,11 @@ namespace OnlyT.Utils
                 wc.Headers.Add("user-agent", GetUserAgentString());
                 return wc.DownloadString(url);
             }
+        }
+
+        private static string GetUserAgentString()
+        {
+            return "OnlyT (+http://cv8.org.uk/soundbox)";
         }
     }
 }
