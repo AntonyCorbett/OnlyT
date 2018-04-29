@@ -57,7 +57,7 @@
                     switch (segment)
                     {
                         case "timers":
-                            HandleTimersApi(request, response, timerService, talksService);
+                            HandleTimersApi(request, response, timerService, talksService, optionsService);
                             break;
 
                         //case "events":
@@ -93,9 +93,10 @@
             HttpListenerRequest request, 
             HttpListenerResponse response,
             ITalkTimerService timerService,
-            ITalkScheduleService talksService)
+            ITalkScheduleService talksService,
+            IOptionsService optionsService)
         {
-            var controller = new TimersApiController(timerService, talksService);
+            var controller = new TimersApiController(timerService, talksService, optionsService);
             controller.Handler(request, response);
         }
 

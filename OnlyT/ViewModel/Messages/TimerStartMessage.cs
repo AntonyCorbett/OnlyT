@@ -6,12 +6,16 @@
     internal class TimerStartMessage
     {
         public int TargetSeconds { get; }
+
         public bool CountUp { get; }
 
-        public TimerStartMessage(int targetSeconds, bool countUp)
+        public int TalkId { get; set; }
+
+        public TimerStartMessage(int targetSeconds, bool countUp, int talkId)
         {
             TargetSeconds = targetSeconds;
             CountUp = countUp;
+            TalkId = talkId;
         }
     }
 }

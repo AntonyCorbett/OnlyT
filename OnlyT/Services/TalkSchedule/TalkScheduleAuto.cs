@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using OnlyT.MeetingTalkTimesFeed;
-using OnlyT.Models;
-using OnlyT.Services.Options;
-
-
-// sample midweek meeting times (used to determine values 
+﻿// sample midweek meeting times (used to determine values 
 // for StartOffsetIntoMeeting)
 //
 //    7:00:00 (00:00) Start, song / prayer
@@ -42,16 +34,23 @@ using OnlyT.Services.Options;
 
 namespace OnlyT.Services.TalkSchedule
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using MeetingTalkTimesFeed;
+    using Models;
+    using Options;
+
     /// <summary>
     /// The talk schedule when in "Automatic" operating mode
     /// </summary>
     internal static class TalkScheduleAuto
     {
         /// <summary>
-        /// Gets the talk schedule
+        /// Gets the talk schedule.
         /// </summary>
-        /// <param name="optionsService"></param>
-        /// <returns>A collection of TalkScheduleItem</returns>
+        /// <param name="optionsService">Options service.</param>
+        /// <returns>A collection of TalkScheduleItem.</returns>
         public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)
         {
             bool isCircuitVisit = optionsService.Options.IsCircuitVisit;
@@ -200,7 +199,7 @@ namespace OnlyT.Services.TalkSchedule
             var result = new List<TalkScheduleItem>();
 
             TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living1)) ??
-                                   new TalkTimer {Minutes = 15, TalkType = TalkTypes.Living1};
+                                   new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
 
             TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
                                   

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="display:block; height:100%; margin:0; padding:0">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>		
 		<title>OnlyT Clock</title>
 		<style type="text/css">			
 			html 

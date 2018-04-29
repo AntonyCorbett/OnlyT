@@ -6,7 +6,8 @@
     public enum TalkTypesAutoMode
     {
         Unknown,
-        OpeningComments,
+
+        OpeningComments = 1000,
         TreasuresTalk,
         DiggingTalk,
         Reading,
@@ -18,7 +19,8 @@
         CongBibleStudy,
         CircuitServiceTalk,
         ConcludingComments,
-        PublicTalk,
+
+        PublicTalk = 2000,
         Watchtower
     }
 }

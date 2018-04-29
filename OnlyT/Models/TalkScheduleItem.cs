@@ -16,15 +16,14 @@
         public bool? CountUp { get; set; }
 
         /// <summary>
+        /// The duration for which the timer ran (or null if not run yet)
+        /// </summary>
+        public int? CompletedTimeSecs { get; set; }
+
+        /// <summary>
         /// Original duration (before any user modification)
         /// </summary>
-        private TimeSpan? _originalDuration;
-
-        public TimeSpan OriginalDuration 
-        {
-            get => _originalDuration ?? TimeSpan.Zero;
-            set => _originalDuration = value;
-        }
+        public TimeSpan OriginalDuration { get; set; }
 
         /// <summary>
         /// Manually modified duration (after user modification)

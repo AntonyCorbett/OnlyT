@@ -15,6 +15,7 @@
         private readonly DispatcherTimer _timer = new DispatcherTimer(DispatcherPriority.Render);
         private readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
         private int _targetSecs = 600;
+        private int? _talkId;
 
         public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
 
@@ -24,13 +25,21 @@
             _timer.Tick += TimerElapsedHandler;
         }
 
+        public void SetupTalk(int talkId, int targetSeconds)
+        {
+            _talkId = talkId;
+            _targetSecs = targetSeconds;
+        }
+
         /// <summary>
         /// Starts the timer
         /// </summary>
-        /// <param name="targetSecs">The target duration of the talk</param>
-        public void Start(int targetSecs)
+        /// <param name="targetSecs">The target duration of the talk.</param>
+        /// <param name="talkId">The Id of the talk that is being timed.</param>
+        public void Start(int targetSecs, int talkId)
         {
             _targetSecs = targetSecs;
+            _talkId = talkId;
             _stopWatch.Start();
             UpdateTimerValue();
             _timer.Start();
@@ -42,8 +51,21 @@
         public void Stop()
         {
             _timer.Stop();
+            _talkId = null;
+
             _stopWatch.Reset();
             UpdateTimerValue();
+        }
+
+        public TimerStatus GetStatus()
+        {
+            return new TimerStatus
+            {
+                TalkId = _talkId,
+                TargetSeconds = _targetSecs,
+                IsRunning = IsRunning,
+                TimeElapsed = CurrentTimeElapsed
+            };
         }
 
         private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
@@ -53,6 +75,7 @@
         /// </summary>
         private TimeSpan CurrentTimeElapsed
         {
+            get => _currentTimeElapsed;
             set
             {
                 if (_currentTimeElapsed != value)

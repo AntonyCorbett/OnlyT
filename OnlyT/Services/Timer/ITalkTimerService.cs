@@ -8,7 +8,7 @@
     {
         event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
 
-        void Start(int targetSecs);
+        void Start(int targetSecs, int talkId);
 
         void Stop();
 
@@ -17,5 +17,9 @@
         bool IsRunning { get; }
 
         ClockRequestInfo GetClockRequestInfo();
+
+        TimerStatus GetStatus();
+
+        void SetupTalk(int talkId, int targetSeconds);
     }
 }

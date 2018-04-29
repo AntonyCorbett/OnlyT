@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using OnlyT.Models;
-using OnlyT.Services.Options;
-
-namespace OnlyT.Services.TalkSchedule
+﻿namespace OnlyT.Services.TalkSchedule
 {
+    using System;
+    using System.Collections.Generic;
+    using Models;
+    using Options;
+
     internal class TalkScheduleManual
     {
         public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)

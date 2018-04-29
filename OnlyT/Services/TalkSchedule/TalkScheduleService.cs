@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using OnlyT.Models;
-using OnlyT.Services.Options;
+﻿using GalaSoft.MvvmLight.Messaging;
+using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.Services.TalkSchedule
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Models;
+    using Options;
+
     /// <summary>
     /// Service to handle the delivery of a talk schedule based on current "Operating mode"
     /// </summary>
@@ -21,6 +24,7 @@ namespace OnlyT.Services.TalkSchedule
         public TalkScheduleService(IOptionsService optionsService)
         {
             _optionsService = optionsService;
+            Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Reset();
         }
 
@@ -37,6 +41,7 @@ namespace OnlyT.Services.TalkSchedule
             {
                 case OperatingMode.ScheduleFile:
                     return _fileBasedSchedule.Value;
+
                 case OperatingMode.Automatic:
                     return _autoSchedule.Value;
 
@@ -61,7 +66,7 @@ namespace OnlyT.Services.TalkSchedule
                 {
                     return talks.First().Id;
                 }
-                
+
                 bool foundCurrent = false;
                 for (int n = 0; n < talks.Length; ++n)
                 {
@@ -79,6 +84,15 @@ namespace OnlyT.Services.TalkSchedule
             }
 
             return 0;
+        }
+
+        private void OnTimerStopped(TimerStopMessage message)
+        {
+            var talk = GetTalkScheduleItem(message.TalkId);
+            if (talk != null)
+            {
+                talk.CompletedTimeSecs = message.ElapsedSecs;
+            }
         }
     }
 }

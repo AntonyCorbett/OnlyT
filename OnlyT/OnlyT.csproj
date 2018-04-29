@@ -118,6 +118,7 @@
     <Compile Include="Models\ClockRequestInfo.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
+    <Compile Include="Models\TimerStatus.cs" />
     <Compile Include="Models\WebClockPortItem.cs" />
     <Compile Include="Services\Bell\BellService.cs" />
     <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
@@ -209,13 +210,13 @@
     <Compile Include="WebServer\HttpServer.cs" />
     <Compile Include="WebServer\IHttpServer.cs" />
     <Compile Include="WebServer\Models\ApiCultureData.cs" />
+    <Compile Include="WebServer\Models\ApiError.cs" />
     <Compile Include="WebServer\Models\ApiSystemData.cs" />
     <Compile Include="WebServer\Models\ApiVersion.cs" />
     <Compile Include="WebServer\Models\BellResponseData.cs" />
     <Compile Include="WebServer\Models\LocalTime.cs" />
     <Compile Include="WebServer\Models\TimerInfo.cs" />
     <Compile Include="WebServer\Models\TimersResponseData.cs" />
-    <Compile Include="WebServer\Models\TimerStatus.cs" />
     <Compile Include="Windows\CountdownWindow.xaml.cs">
       <DependentUpon>CountdownWindow.xaml</DependentUpon>
     </Compile>

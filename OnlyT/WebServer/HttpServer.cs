@@ -1,4 +1,7 @@
-﻿namespace OnlyT.WebServer
+﻿using OnlyT.WebServer.ErrorHandling;
+using OnlyT.WebServer.Models;
+
+namespace OnlyT.WebServer
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -108,10 +111,10 @@
             if (_listener.IsListening)
             {
                 // Call EndGetContext to complete the asynchronous operation...
-                HttpListenerContext context = _listener.EndGetContext(result);
+                var context = _listener.EndGetContext(result);
 
                 // Obtain a response object.
-                using (HttpListenerResponse response = context.Response)
+                using (var response = context.Response)
                 {
                     try
                     {
@@ -139,9 +142,17 @@
                             }
                         }
                     }
+                    catch (WebServerException ex)
+                    {
+                        Log.Logger.Error(ex, "Web server error");
+                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(ex.Code);
+                        BaseApiController.WriteResponse(response, new ApiError(ex.Code));
+                    }
                     catch (Exception ex)
                     {
-                        Log.Logger.Error(ex, "Clock server error");
+                        Log.Logger.Error(ex, "Web server error");
+                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(WebServerErrorCode.UnknownError);
+                        BaseApiController.WriteResponse(response, new ApiError(WebServerErrorCode.UnknownError));
                     }
                 }
             }
