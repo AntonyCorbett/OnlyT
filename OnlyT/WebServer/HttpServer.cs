@@ -1,30 +1,44 @@
-﻿using System;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using OnlyT.Services.Bell;
-using OnlyT.Services.Options;
-using OnlyT.WebServer.Controllers;
-using Serilog;
-
-// ReSharper disable CatchAllClause
-
-namespace OnlyT.WebServer
+﻿namespace OnlyT.WebServer
 {
+    // ReSharper disable CatchAllClause
+    using System;
+    using System.Net;
+    using System.Threading.Tasks;
+    using Controllers;
+    using Serilog;
+    using Services.Bell;
+    using Services.Options;
+    using Services.TalkSchedule;
+    using Services.Timer;
+
     internal class HttpServer : IHttpServer, IDisposable
     {
-        private HttpListener _listener;
-        private int _port;
         private readonly bool _24HourClock;
         private readonly IOptionsService _optionsService;
         private readonly IBellService _bellService;
+        private readonly ITalkTimerService _timerService;
+        private readonly ITalkScheduleService _talksService;
+        private HttpListener _listener;
+        private int _port;
 
-        public HttpServer(IOptionsService optionsService, IBellService bellService)
+        public HttpServer(
+            IOptionsService optionsService, 
+            IBellService bellService,
+            ITalkTimerService timerService,
+            ITalkScheduleService talksService)
         {
             _optionsService = optionsService;
             _bellService = bellService;
+            _timerService = timerService;
+            _talksService = talksService;
 
             _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
+        }
+
+        public void Dispose()
+        {
+            _listener.Close();
+            _listener = null;
         }
 
         public void Start(int port)
@@ -89,7 +103,6 @@ namespace OnlyT.WebServer
             }
         }
 
-
         private void ListenerCallback(IAsyncResult result)
         {
             if (_listener.IsListening)
@@ -106,7 +119,6 @@ namespace OnlyT.WebServer
                         if (context.Request.Url.Segments.Length > 1)
                         {
                             // segments: "/" ...
-
                             string segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
                             if (_listener.IsListening)
                             {
@@ -140,7 +152,13 @@ namespace OnlyT.WebServer
             if (_optionsService.Options.IsApiEnabled)
             {
                 ApiRouter controller = new ApiRouter();
-                controller.HandleRequest(request, response, _optionsService, _bellService);
+                controller.HandleRequest(
+                    request, 
+                    response, 
+                    _optionsService, 
+                    _bellService, 
+                    _timerService,
+                    _talksService);
             }
         }
 
@@ -160,12 +178,6 @@ namespace OnlyT.WebServer
                 ClockWebPageController controller = new ClockWebPageController();
                 controller.HandleRequestForTimerData(response);
             }
-        }
-
-        public void Dispose()
-        {
-            _listener.Close();
-            _listener = null;
         }
     }
 }

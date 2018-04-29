@@ -1,13 +1,17 @@
-﻿using System;
-using System.Net;
-using System.Text;
-using GalaSoft.MvvmLight.Messaging;
-using OnlyT.ViewModel.Messages;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
+    using System;
+    using System.Net;
+    using System.Text;
+    using GalaSoft.MvvmLight.Messaging;
+    using NUglify;
+    using ViewModel.Messages;
+
     internal class ClockWebPageController
     {
+        private static byte[] WebPageHtml;
+        private static bool TwentyFourHourClockUsed;
+
         public void HandleRequestForTimerData(HttpListenerResponse response)
         {
             response.ContentType = "text/xml";
@@ -25,21 +29,30 @@ namespace OnlyT.WebServer.Controllers
 
         public void HandleRequestForWebPage(HttpListenerResponse response, bool twentyFourHourClock)
         {
+            EnsureWebPageHtmlPrepared(twentyFourHourClock);
+
             response.ContentType = "text/html";
             response.ContentEncoding = Encoding.UTF8;
-
-            string responseString = Properties.Resources.ClockHtmlTemplate;
-            if (!twentyFourHourClock)
-            {
-                responseString = ReplaceTimeFormat(responseString);
-            }
-
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-
-            response.ContentLength64 = buffer.Length;
+            
+            response.ContentLength64 = WebPageHtml.Length;
             using (System.IO.Stream output = response.OutputStream)
             {
-                output.Write(buffer, 0, buffer.Length);
+                output.Write(WebPageHtml, 0, WebPageHtml.Length);
+            }
+        }
+
+        private void EnsureWebPageHtmlPrepared(bool twentyFourHourClock)
+        {
+            if (WebPageHtml == null || TwentyFourHourClockUsed != twentyFourHourClock)
+            {
+                var content = Properties.Resources.ClockHtmlTemplate;
+                if (!twentyFourHourClock)
+                {
+                    content = ReplaceTimeFormat(content);
+                }
+                
+                WebPageHtml = Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
+                TwentyFourHourClockUsed = twentyFourHourClock;
             }
         }
 

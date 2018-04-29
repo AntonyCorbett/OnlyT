@@ -4,17 +4,31 @@
 
     internal class TimerInfo
     {
-        [JsonProperty(PropertyName = "internalName")]
-        public string InternalName { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
 
         [JsonProperty(PropertyName = "localisedTitle")]
         public string LocalisedTitle { get; set; }
 
+        [JsonProperty(PropertyName = "originalDurationSecs")]
+        public int OriginalDurationSecs { get; set; }
+
+        [JsonProperty(PropertyName = "modifiedDurationSecs")]
+        public int? ModifiedDurationSecs { get; set; }
+
+        [JsonProperty(PropertyName = "adaptedDurationSecs")]
+        public int? AdaptedDurationSecs { get; set; }
+
+        [JsonProperty(PropertyName = "actualDurationSecs")]
+        public int ActualDurationSecs { get; set; }
+
+        [JsonProperty(PropertyName = "usesBell")]
+        public bool UsesBell { get; set; }
+
+
+
         [JsonProperty(PropertyName = "status")]
         public TimerStatus Status { get; set; }
-
-        [JsonProperty(PropertyName = "index")]
-        public int Index { get; set; }
 
         [JsonProperty(PropertyName = "isEnabled")]
         public bool IsEnabled { get; set; }

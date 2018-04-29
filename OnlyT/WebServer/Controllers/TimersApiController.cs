@@ -1,13 +1,12 @@
-﻿using System.Linq;
-using OnlyT.Models;
-using OnlyT.Services.TalkSchedule;
-using OnlyT.WebServer.ErrorHandling;
-using OnlyT.WebServer.Models;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
     using System;
+    using System.Linq;
     using System.Net;
+    using ErrorHandling;
+    using Models;
+    using OnlyT.Models;
+    using Services.TalkSchedule;
     using Services.Timer;
 
     internal class TimersApiController : BaseApiController
@@ -66,9 +65,9 @@ namespace OnlyT.WebServer.Controllers
             }
         }
 
-        private TimerInfo GetTimerInfo(TimersResponseData allTimerData, int index)
+        private TimerInfo GetTimerInfo(TimersResponseData allTimerData, int timerId)
         {
-            var result = allTimerData.TimerInfo.ElementAtOrDefault(index);
+            var result = allTimerData.TimerInfo.SingleOrDefault(x => x.Id == timerId);
             if (result == null)
             {
                 throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
@@ -82,7 +81,7 @@ namespace OnlyT.WebServer.Controllers
             var result = new TimersResponseData();
 
             var talks = _talkScheduleService.GetTalkScheduleItems();
-
+            
             foreach (var talk in talks)
             {
                 result.Add(CreateTimerInfo(talk));
@@ -93,12 +92,20 @@ namespace OnlyT.WebServer.Controllers
 
         private TimerInfo CreateTimerInfo(TalkScheduleItem talk)
         {
-            var result = new TimerInfo();
-            result.InternalName = talk.Id.ToString();
-
-            // todo:
-
-            return result;
+            return new TimerInfo
+            {
+                Id = talk.Id,
+                LocalisedTitle = talk.Name,
+                OriginalDurationSecs = (int)talk.OriginalDuration.TotalSeconds,
+                ModifiedDurationSecs = talk.ModifiedDuration == null 
+                    ? null 
+                    : (int?)talk.ModifiedDuration.Value.TotalSeconds,
+                AdaptedDurationSecs = talk.AdaptedDuration == null
+                    ? null
+                    : (int?)talk.AdaptedDuration.Value.TotalSeconds,
+                ActualDurationSecs = (int)talk.ActualDuration.TotalSeconds,
+                UsesBell = talk.Bell
+            };
         }
     }
 }

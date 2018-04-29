@@ -6,6 +6,8 @@
     using Models;
     using Services.Bell;
     using Services.Options;
+    using Services.TalkSchedule;
+    using Services.Timer;
 
     internal class ApiRouter : BaseApiController
     {
@@ -16,7 +18,9 @@
             HttpListenerRequest request, 
             HttpListenerResponse response, 
             IOptionsService optionsService,
-            IBellService bellService)
+            IBellService bellService,
+            ITalkTimerService timerService,
+            ITalkScheduleService talksService)
         {
             if (request.HttpMethod.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
             {
@@ -53,7 +57,7 @@
                     switch (segment)
                     {
                         case "timers":
-                            HandleTimersApi(request, response);
+                            HandleTimersApi(request, response, timerService, talksService);
                             break;
 
                         //case "events":
@@ -85,9 +89,13 @@
             }
         }
 
-        private void HandleTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+        private void HandleTimersApi(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            ITalkTimerService timerService,
+            ITalkScheduleService talksService)
         {
-            var controller = new TimersApiController();
+            var controller = new TimersApiController(timerService, talksService);
             controller.Handler(request, response);
         }
 
