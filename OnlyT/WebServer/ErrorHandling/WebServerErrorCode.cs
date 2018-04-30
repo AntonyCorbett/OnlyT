@@ -23,6 +23,7 @@
 
         SubscriptionAddressNotFound = 1155,
         SubscriptionPortNotSpecified,
+        Throttled,
 
         UnknownError = 5128
     }

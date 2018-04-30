@@ -13,7 +13,8 @@
     using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;
-    
+    using Throttling;
+
     internal sealed class HttpServer : IHttpServer, IDisposable
     {
         private readonly bool _24HourClock;
@@ -21,8 +22,10 @@
         private readonly IBellService _bellService;
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _talksService;
+        private readonly ApiThrottler _apiThrottler;
         private HttpListener _listener;
         private int _port;
+
 
         public HttpServer(
             IOptionsService optionsService, 
@@ -36,6 +39,7 @@
             _talksService = talksService;
 
             _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
+            _apiThrottler = new ApiThrottler(optionsService);
         }
 
         public void Dispose()
@@ -114,7 +118,7 @@
             {
                 // Call EndGetContext to complete the asynchronous operation...
                 var context = _listener.EndGetContext(result);
-
+                
                 // Obtain a response object.
                 using (var response = context.Response)
                 {
@@ -130,11 +134,11 @@
                                 switch (segment)
                                 {
                                     case "data":
-                                        HandleRequestForClockWebPageTimerData(response);
+                                        HandleRequestForClockWebPageTimerData(context.Request, response);
                                         break;
 
                                     case "index":
-                                        HandleRequestForClockWebPage(response);
+                                        HandleRequestForClockWebPage(context.Request, response);
                                         break;
 
                                     case "api":
@@ -168,6 +172,7 @@
                 controller.HandleRequest(
                     request, 
                     response, 
+                    _apiThrottler,
                     _optionsService, 
                     _bellService, 
                     _timerService,
@@ -175,19 +180,25 @@
             }
         }
 
-        private void HandleRequestForClockWebPage(HttpListenerResponse response)
+        private void HandleRequestForClockWebPage(HttpListenerRequest request, HttpListenerResponse response)
         {
             if (_optionsService.Options.IsWebClockEnabled)
             {
+                _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
+
                 ClockWebPageController controller = new ClockWebPageController();
                 controller.HandleRequestForWebPage(response, _24HourClock);
             }
         }
 
-        private void HandleRequestForClockWebPageTimerData(HttpListenerResponse response)
+        private void HandleRequestForClockWebPageTimerData(
+            HttpListenerRequest request,
+            HttpListenerResponse response)
         {
             if (_optionsService.Options.IsWebClockEnabled)
             {
+                _apiThrottler.CheckRateLimit(ApiRequestType.ClockData, request);
+
                 var timerInfo = new TimerInfoEventArgs();
                 OnRequestForTimerDataEvent(timerInfo);
 

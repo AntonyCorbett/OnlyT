@@ -25,6 +25,7 @@
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
             HttpServerPort = DefaultPort;
+            IsApiThrottled = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
 
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
@@ -99,6 +100,8 @@
         public bool IsApiEnabled { get; set; }
 
         public string ApiCode { get; set; }
+
+        public bool IsApiThrottled { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required

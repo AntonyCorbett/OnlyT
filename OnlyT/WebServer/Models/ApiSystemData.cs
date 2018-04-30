@@ -28,6 +28,9 @@
         [JsonProperty(PropertyName = "apiEnabled")]
         public bool ApiEnabled { get; set; }
 
+        [JsonProperty(PropertyName = "apiThrottled")]
+        public bool ApiThrottled { get; set; }
+
         [JsonProperty(PropertyName = "apiCodeRequired")]
         public bool ApiCodeRequired { get; set; }
     }

@@ -3,16 +3,21 @@
     using System;
     using System.Net;
     using Models;
+    using Throttling;
 
     internal class DateTimeApiController : BaseApiController
     {
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+        public void Handler(
+            HttpListenerRequest request, 
+            HttpListenerResponse response, 
+            ApiThrottler apiThrottler)
         {
             CheckMethodGet(request);
             CheckSegmentLength(request, 4);
 
-            // segments: "/" "api/" "v1/" "datetime/"
+            apiThrottler.CheckRateLimit(ApiRequestType.DateTime, request);
 
+            // segments: "/" "api/" "v1/" "datetime/"
             // system clock
             var dt = DateTime.Now;
 

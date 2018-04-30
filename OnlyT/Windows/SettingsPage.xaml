@@ -177,7 +177,10 @@
                     <StackPanel>
                         <CheckBox IsChecked="{Binding IsApiEnabled, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Enabled" />
-                        
+
+                        <CheckBox IsChecked="{Binding IsApiThrottled, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Throttled" />
+
                         <Label Style="{StaticResource LabelStyle}">Code:</Label>
                         <TextBox Text="{Binding ApiCode, Mode=TwoWay}"></TextBox>
 

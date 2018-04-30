@@ -214,6 +214,10 @@
     <Compile Include="WebServer\Models\LocalTime.cs" />
     <Compile Include="WebServer\Models\TimerInfo.cs" />
     <Compile Include="WebServer\Models\TimersResponseData.cs" />
+    <Compile Include="WebServer\Throttling\ApiClientIdAndRequestType.cs" />
+    <Compile Include="WebServer\Throttling\ApiRequestType.cs" />
+    <Compile Include="WebServer\Throttling\ApiThrottler.cs" />
+    <Compile Include="WebServer\Throttling\ApiRequestHistory.cs" />
     <Compile Include="Windows\CountdownWindow.xaml.cs">
       <DependentUpon>CountdownWindow.xaml</DependentUpon>
     </Compile>

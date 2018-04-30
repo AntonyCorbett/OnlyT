@@ -1,4 +1,6 @@
-﻿namespace OnlyT.WebServer.Controllers
+﻿using OnlyT.WebServer.Throttling;
+
+namespace OnlyT.WebServer.Controllers
 {
     using System;
     using System.Net;
@@ -17,6 +19,7 @@
         public void HandleRequest(
             HttpListenerRequest request, 
             HttpListenerResponse response, 
+            ApiThrottler apiThrottler,
             IOptionsService optionsService,
             IBellService bellService,
             ITalkTimerService timerService,
@@ -38,7 +41,7 @@
                 if (request.Url.Segments.Length == 2)
                 {
                     // segments: "/" "api/"
-                    HandleApiVersionRequest(response);
+                    HandleApiVersionRequest(request, response, apiThrottler);
                 }
                 else if (request.Url.Segments.Length > 3)
                 {
@@ -57,7 +60,7 @@
                     switch (segment)
                     {
                         case "timers":
-                            HandleTimersApi(request, response, timerService, talksService, optionsService);
+                            HandleTimersApi(request, response, apiThrottler, timerService, talksService, optionsService);
                             break;
 
                         // todo:
@@ -69,18 +72,18 @@
                         //    break;
 
                         case "bell":
-                            HandleBellApi(request, response, optionsService, bellService);
+                            HandleBellApi(request, response, apiThrottler, optionsService, bellService);
                             break;
 
                         case "datetime":
                             DisableCache(response);
-                            HandleDateTimeApi(request, response);
+                            HandleDateTimeApi(request, response, apiThrottler);
                             break;
 
                         case "system":
                             // no API code check needed
                             DisableCache(response);
-                            HandleSystemApi(request, response, optionsService);
+                            HandleSystemApi(request, response, apiThrottler, optionsService);
                             break;
 
                         default:
@@ -93,37 +96,43 @@
         private void HandleTimersApi(
             HttpListenerRequest request, 
             HttpListenerResponse response,
+            ApiThrottler throttler,
             ITalkTimerService timerService,
             ITalkScheduleService talksService,
             IOptionsService optionsService)
         {
             var controller = new TimersApiController(timerService, talksService, optionsService);
-            controller.Handler(request, response);
+            controller.Handler(request, response, throttler);
         }
 
         private void HandleBellApi(
             HttpListenerRequest request, 
             HttpListenerResponse response,
+            ApiThrottler throttler,
             IOptionsService optionsService,
             IBellService bellService)
         {
             var controller = new BellApiController(optionsService, bellService);
-            controller.Handler(request, response);
+            controller.Handler(request, response, throttler);
         }
 
-        private void HandleDateTimeApi(HttpListenerRequest request, HttpListenerResponse response)
+        private void HandleDateTimeApi(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            ApiThrottler apiThrottler)
         {
             var controller = new DateTimeApiController();
-            controller.Handler(request, response);
+            controller.Handler(request, response, apiThrottler);
         }
 
         private void HandleSystemApi(
             HttpListenerRequest request, 
             HttpListenerResponse response, 
+            ApiThrottler throttler,
             IOptionsService optionsService)
         {
             var controller = new SystemApiController(optionsService);
-            controller.Handler(request, response, OldestSupportedApiVer, CurrentApiVer);
+            controller.Handler(request, response, throttler, OldestSupportedApiVer, CurrentApiVer);
         }
 
         private void DisableCache(HttpListenerResponse response)
@@ -131,8 +140,13 @@
             response.AddHeader("Cache-Control", "no-cache");
         }
 
-        private void HandleApiVersionRequest(HttpListenerResponse response)
+        private void HandleApiVersionRequest(
+            HttpListenerRequest request, 
+            HttpListenerResponse response, 
+            ApiThrottler throttler)
         {
+            throttler.CheckRateLimit(ApiRequestType.Version, request);
+
             var v = new ApiVersion { LowVersion = OldestSupportedApiVer, HighVersion = CurrentApiVer };
             WriteResponse(response, v);
         }

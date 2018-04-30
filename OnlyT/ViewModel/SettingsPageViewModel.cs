@@ -494,6 +494,19 @@
             }
         }
 
+        public bool IsApiThrottled
+        {
+            get => _optionsService.Options.IsApiThrottled;
+            set
+            {
+                if (_optionsService.Options.IsApiThrottled != value)
+                {
+                    _optionsService.Options.IsApiThrottled = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public string ApiCode
         {
             get => _optionsService.Options.ApiCode;

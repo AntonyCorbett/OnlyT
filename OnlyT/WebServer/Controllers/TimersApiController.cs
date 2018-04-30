@@ -1,4 +1,6 @@
-﻿namespace OnlyT.WebServer.Controllers
+﻿using OnlyT.WebServer.Throttling;
+
+namespace OnlyT.WebServer.Controllers
 {
     using System;
     using System.Net;
@@ -23,29 +25,39 @@
             _optionsService = optionsService;
         }
 
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+        public void Handler(HttpListenerRequest request, HttpListenerResponse response, ApiThrottler throttler)
         {
             CheckMethodGetOrPost(request);
 
             if (IsMethodGet(request))
             {
-                HandleGetTimersApi(request, response);
+                HandleGetTimersApi(request, response, throttler);
             }
             else if (IsMethodPost(request))
             {
-                HandlePostTimersApi(request, response);
+                HandlePostTimersApi(request, response, throttler);
             }
         }
 
-        private void HandlePostTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+        private void HandlePostTimersApi(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            ApiThrottler throttler)
         {
+            throttler.CheckRateLimit(ApiRequestType.TimerControl, request);
+
             throw new NotImplementedException();
         }
 
-        private void HandleGetTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+        private void HandleGetTimersApi(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            ApiThrottler throttler)
         {
             CheckSegmentLength(request, 4, 5);
-            
+
+            throttler.CheckRateLimit(ApiRequestType.Timer, request);
+
             switch (request.Url.Segments.Length)
             {
                 case 4:

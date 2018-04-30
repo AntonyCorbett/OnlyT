@@ -1,7 +1,9 @@
 ﻿namespace OnlyT.WebServer.Controllers
 {
+    using System;
     using System.Net;
     using Models;
+    using OnlyT.WebServer.Throttling;
     using Services.Bell;
     using Services.Options;
 
@@ -35,6 +37,16 @@
             }
 
             WriteResponse(response, responseData);
+        }
+
+        internal void Handler(
+            HttpListenerRequest request, 
+            HttpListenerResponse response, 
+            ApiThrottler throttler)
+        {
+            throttler.CheckRateLimit(ApiRequestType.Bell, request);
+
+            throw new NotImplementedException();
         }
     }
 }

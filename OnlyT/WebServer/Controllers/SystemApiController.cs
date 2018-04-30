@@ -1,4 +1,6 @@
-﻿namespace OnlyT.WebServer.Controllers
+﻿using OnlyT.WebServer.Throttling;
+
+namespace OnlyT.WebServer.Controllers
 {
     using System;
     using System.Net;
@@ -20,11 +22,14 @@
         public void Handler(
             HttpListenerRequest request, 
             HttpListenerResponse response, 
+            ApiThrottler throttler,
             int oldestSupportedApiVersion, 
             int currentApiVersion)
         {
             CheckMethodGet(request);
             CheckSegmentLength(request, 4);
+
+            throttler.CheckRateLimit(ApiRequestType.System, request);
 
             // segments: "/" "api/" "v1/" "system/"
             WriteResponse(response, GetSystemData(oldestSupportedApiVersion, currentApiVersion));
@@ -42,6 +47,7 @@
                 OnlyTVersion = Assembly.GetEntryAssembly().GetName().Version.ToString(),
                 SessionId = SessionId.ToString(),
                 ApiEnabled = _optionsService.Options.IsApiEnabled,
+                ApiThrottled = _optionsService.Options.IsApiThrottled,
                 ApiCodeRequired = !string.IsNullOrEmpty(_optionsService.Options.ApiCode),
                 Culture = new ApiCultureData
                 {

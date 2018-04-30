@@ -46,6 +46,9 @@
                 case WebServerErrorCode.SubscriptionPortNotSpecified:
                     return "Subscription port not found";
 
+                case WebServerErrorCode.Throttled:
+                    return "Client throttled";
+
                 case WebServerErrorCode.UnknownError:
                 default:
                     return "Unknown error";
@@ -68,6 +71,9 @@
                 case WebServerErrorCode.SubscriptionAddressNotFound:
                 case WebServerErrorCode.SubscriptionPortNotSpecified:
                     return HttpStatusCode.BadRequest;
+
+                case WebServerErrorCode.Throttled:  // should be 429 but not yet available in HttpStatusCode
+                    return HttpStatusCode.ServiceUnavailable;
 
                 case WebServerErrorCode.UnknownError:
                     return HttpStatusCode.InternalServerError;
