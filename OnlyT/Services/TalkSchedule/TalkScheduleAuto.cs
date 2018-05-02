@@ -279,17 +279,7 @@ namespace OnlyT.Services.TalkSchedule
             // Living...
             result.AddRange(GetLivingSchedule(isCircuitVisit, meetingData));
 
-            PrefixDurationsToTalkNames(result);
-
             return result;
-        }
-
-        private static void PrefixDurationsToTalkNames(IReadOnlyCollection<TalkScheduleItem> talks)
-        {
-            foreach (var talk in talks)
-            {
-                talk.PrefixDurationToName();
-            }
         }
 
         private static List<TalkScheduleItem> GetWeekendMeetingSchedule(bool isCircuitVisit)
@@ -345,9 +335,7 @@ namespace OnlyT.Services.TalkSchedule
                     Editable = true
                 });
             }
-
-            PrefixDurationsToTalkNames(result);
-
+            
             return result;
         }
     }

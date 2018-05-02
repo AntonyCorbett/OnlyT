@@ -1,6 +1,4 @@
-﻿using OnlyT.Services.Bell;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -8,6 +6,7 @@ namespace OnlyT.ViewModel
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Windows;
     using System.Windows.Media;
     using AutoUpdates;
     using GalaSoft.MvvmLight;
@@ -16,6 +15,7 @@ namespace OnlyT.ViewModel
     using Messages;
     using Models;
     using Serilog;
+    using Services.Bell;
     using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;
@@ -65,6 +65,8 @@ namespace OnlyT.ViewModel
             _countUp = _optionsService.Options.CountUp;
 
             SelectFirstTalk();
+
+            _timerService.TimerStartStopFromApiEvent += HandleTimerStartStopFromApi;
 
             // commands...
             StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
@@ -736,6 +738,48 @@ namespace OnlyT.ViewModel
                 RaisePropertyChanged(nameof(BellColour));
                 RaisePropertyChanged(nameof(BellTooltip));
             }
+        }
+
+        private void HandleTimerStartStopFromApi(object sender, OnlyT.EventArgs.TimerStartStopEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                // always on UI thread to prevent synchronisation issues.
+                TalkId = e.TalkId;
+                bool success = TalkId == e.TalkId;
+
+                if (success)
+                {
+                    switch (e.Command)
+                    {
+                        case StartStopTimerCommands.Start:
+                            success = IsNotRunning;
+                            if (success)
+                            {
+                                StartTimer();
+                            }
+
+                            break;
+
+                        case StartStopTimerCommands.Stop:
+                            success = IsRunning;
+                            if (success)
+                            {
+                                StopTimer();
+                            }
+
+                            break;
+                    }
+                }
+
+                e.CurrentStatus = _timerService.GetStatus();
+                if (success)
+                {
+                    e.CurrentStatus.IsRunning = e.Command == StartStopTimerCommands.Start;
+                }
+
+                e.Success = success;
+            });
         }
     }
 }

@@ -18,10 +18,15 @@
             _bellService = bellService;
         }
 
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+        public void Handler(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            ApiThrottler throttler)
         {
             CheckMethodPost(request);
             CheckSegmentLength(request, 4);
+
+            throttler.CheckRateLimit(ApiRequestType.Bell, request);
 
             var responseData = new BellResponseData();
 
@@ -37,16 +42,6 @@
             }
 
             WriteResponse(response, responseData);
-        }
-
-        internal void Handler(
-            HttpListenerRequest request, 
-            HttpListenerResponse response, 
-            ApiThrottler throttler)
-        {
-            throttler.CheckRateLimit(ApiRequestType.Bell, request);
-
-            throw new NotImplementedException();
         }
     }
 }

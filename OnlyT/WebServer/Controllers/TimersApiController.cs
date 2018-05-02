@@ -1,4 +1,5 @@
-﻿using OnlyT.WebServer.Throttling;
+﻿using OnlyT.EventArgs;
+using OnlyT.WebServer.Throttling;
 
 namespace OnlyT.WebServer.Controllers
 {
@@ -27,15 +28,37 @@ namespace OnlyT.WebServer.Controllers
 
         public void Handler(HttpListenerRequest request, HttpListenerResponse response, ApiThrottler throttler)
         {
-            CheckMethodGetOrPost(request);
+            CheckMethodGetPostOrDelete(request);
 
             if (IsMethodGet(request))
             {
+                // get timer info
                 HandleGetTimersApi(request, response, throttler);
             }
             else if (IsMethodPost(request))
             {
+                // start a timer
                 HandlePostTimersApi(request, response, throttler);
+            }
+            else if (IsMethodDelete(request))
+            {
+                // stop a timer
+                HandleDeleteTimersApi(request, response, throttler);
+            }
+        }
+
+        private void HandleDeleteTimersApi(
+            HttpListenerRequest request,
+            HttpListenerResponse response,
+            ApiThrottler throttler)
+        {
+            CheckSegmentLength(request, 5);
+
+            throttler.CheckRateLimit(ApiRequestType.TimerControlStop, request);
+
+            if (int.TryParse(request.Url.Segments[4], out var talkId))
+            {
+                WriteResponse(response, _timerService.StopTalkTimerFromApi(talkId));
             }
         }
 
@@ -44,9 +67,14 @@ namespace OnlyT.WebServer.Controllers
             HttpListenerResponse response,
             ApiThrottler throttler)
         {
-            throttler.CheckRateLimit(ApiRequestType.TimerControl, request);
+            CheckSegmentLength(request, 5);
 
-            throw new NotImplementedException();
+            throttler.CheckRateLimit(ApiRequestType.TimerControlStart, request);
+
+            if (int.TryParse(request.Url.Segments[4], out var talkId))
+            {
+                WriteResponse(response, _timerService.StartTalkTimerFromApi(talkId));
+            }
         }
 
         private void HandleGetTimersApi(

@@ -9,7 +9,7 @@
     /// <summary>
     /// Timer service
     /// </summary>
-    internal class TalkTimerService : ITalkTimerService
+    internal sealed class TalkTimerService : ITalkTimerService
     {
         private readonly Stopwatch _stopWatch = new Stopwatch();
         private readonly DispatcherTimer _timer = new DispatcherTimer(DispatcherPriority.Render);
@@ -18,6 +18,8 @@
         private int? _talkId;
 
         public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
+
+        public event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
 
         public TalkTimerService()
         {
@@ -29,6 +31,30 @@
         {
             _talkId = talkId;
             _targetSecs = targetSeconds;
+        }
+
+        public TimerStartStopEventArgs StartTalkTimerFromApi(int talkId)
+        {
+            var result = new TimerStartStopEventArgs
+            {
+                TalkId = talkId,
+                Command = StartStopTimerCommands.Start
+            };
+
+            OnTimerStartStopFromApiEvent(result);
+            return result;
+        }
+
+        public TimerStartStopEventArgs StopTalkTimerFromApi(int talkId)
+        {
+            var result = new TimerStartStopEventArgs
+            {
+                TalkId = talkId,
+                Command = StartStopTimerCommands.Stop
+            };
+
+            OnTimerStartStopFromApiEvent(result);
+            return result;
         }
 
         /// <summary>
@@ -124,7 +150,7 @@
         /// </summary>
         public bool IsRunning => _stopWatch.IsRunning;
 
-        protected virtual void OnTimerChangedEvent(TimerChangedEventArgs e)
+        private void OnTimerChangedEvent(TimerChangedEventArgs e)
         {
             TimerChangedEvent?.Invoke(this, e);
         }
@@ -139,6 +165,11 @@
         private void UpdateTimerValue()
         {
             CurrentTimeElapsed = _stopWatch.Elapsed;
+        }
+
+        private void OnTimerStartStopFromApiEvent(TimerStartStopEventArgs e)
+        {
+            TimerStartStopFromApiEvent?.Invoke(this, e);
         }
     }
 }

@@ -8,6 +8,8 @@
     {
         event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
 
+        event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
+
         void Start(int targetSecs, int talkId);
 
         void Stop();
@@ -21,5 +23,9 @@
         TimerStatus GetStatus();
 
         void SetupTalk(int talkId, int targetSeconds);
+
+        TimerStartStopEventArgs StartTalkTimerFromApi(int talkId);
+
+        TimerStartStopEventArgs StopTalkTimerFromApi(int talkId);
     }
 }

@@ -19,13 +19,13 @@
                 return;
             }
 
-            ApiClientIdAndRequestType key = new ApiClientIdAndRequestType(clientId, requestType);
+            var key = new ApiClientIdAndRequestType(clientId, requestType);
             var found = _clientHistory.TryGetValue(key, out var stamp);
             _clientHistory.AddOrUpdate(key, currentStamp, (keyType, stampType) => currentStamp);
 
             if (found)
             {
-                long minIntervalMillisecs = GetMinCallingInterval(requestType);
+                var minIntervalMillisecs = GetMinCallingInterval(requestType);
 
                 if (currentStamp - stamp < minIntervalMillisecs)
                 {
@@ -41,7 +41,8 @@
                 case ApiRequestType.Timer:
                     return 2000;
 
-                case ApiRequestType.TimerControl:
+                case ApiRequestType.TimerControlStart:
+                case ApiRequestType.TimerControlStop:
                     return 500;
                     
                 default:

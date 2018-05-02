@@ -50,9 +50,22 @@
             return IsMethod(request, "POST");
         }
 
+        protected bool IsMethodDelete(HttpListenerRequest request)
+        {
+            return IsMethod(request, "DELETE");
+        }
+
         protected void CheckMethodGetOrPost(HttpListenerRequest request)
         {
             if (!IsMethodGet(request) && !IsMethodPost(request))
+            {
+                throw new WebServerException(WebServerErrorCode.BadHttpVerb);
+            }
+        }
+
+        protected void CheckMethodGetPostOrDelete(HttpListenerRequest request)
+        {
+            if (!IsMethodGet(request) && !IsMethodPost(request) && !IsMethodDelete(request))
             {
                 throw new WebServerException(WebServerErrorCode.BadHttpVerb);
             }

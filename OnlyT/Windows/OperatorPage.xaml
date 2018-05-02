@@ -86,7 +86,7 @@
                       IsEnabled="{Binding IsNotRunning}"
                       FontSize="14"
                       SelectedValuePath="Id" 
-                      DisplayMemberPath="Name"
+                      DisplayMemberPath="NameIncludingDuration"
                       Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BoolToVis}, Mode=OneWay}"
                       SelectedValue="{Binding TalkId, Mode=TwoWay}"/>
 

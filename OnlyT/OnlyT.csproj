@@ -110,6 +110,7 @@
     <Compile Include="AutoUpdates\VersionDetection.cs" />
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
     <Compile Include="EventArgs\TimerInfoEventArgs.cs" />
+    <Compile Include="EventArgs\TimerStartStopEventArgs.cs" />
     <Compile Include="MeetingTalkTimesFeed\Meeting.cs" />
     <Compile Include="MeetingTalkTimesFeed\TalkTimer.cs" />
     <Compile Include="MeetingTalkTimesFeed\TalkTypes.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Models\ClockRequestInfo.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
+    <Compile Include="Models\StartStopTimerCommands.cs" />
     <Compile Include="Models\TimerStatus.cs" />
     <Compile Include="Models\WebClockPortItem.cs" />
     <Compile Include="Services\Bell\BellService.cs" />

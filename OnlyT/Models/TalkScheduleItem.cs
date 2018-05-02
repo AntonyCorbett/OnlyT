@@ -13,6 +13,8 @@
 
         public string Name { get; set; }
 
+        public string NameIncludingDuration => $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
+
         public bool? CountUp { get; set; }
 
         /// <summary>
@@ -116,11 +118,6 @@
         public int GetDurationSeconds()
         {
             return (int)ActualDuration.TotalSeconds;
-        }
-        
-        public void PrefixDurationToName()
-        {
-            Name = $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
         }
     }
 }

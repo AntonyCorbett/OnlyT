@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-
-namespace OnlyTFirewallPorts
+﻿namespace OnlyTFirewallPorts
 {
+    using System.Diagnostics;
+
     internal static class PortManager
     {
         private static string RuleNamePrefix = "OnlyTClockServer";
@@ -46,7 +46,7 @@ namespace OnlyTFirewallPorts
                 UseShellExecute = false
             };
 
-            var process = new Process {StartInfo = psi};
+            var process = new Process { StartInfo = psi };
             process.Start();
             process.WaitForExit(5000);
             return process.ExitCode;

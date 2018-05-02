@@ -44,8 +44,6 @@
                                 Bell = AttributeToBool(elem.Attribute("bell"), false)
                             });
                         }
-
-                        PrefixDurationsToTalkNames(result);
                     }
                 }
                 // ReSharper disable once CatchAllClause
@@ -96,14 +94,6 @@
         {
             TimeSpan.TryParse(s, out var result);
             return result;
-        }
-
-        private static void PrefixDurationsToTalkNames(IReadOnlyCollection<TalkScheduleItem> talks)
-        {
-            foreach (var talk in talks)
-            {
-                talk.PrefixDurationToName();
-            }
         }
     }
 }

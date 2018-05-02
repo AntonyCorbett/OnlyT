@@ -11,7 +11,7 @@
     /// <summary>
     /// Service to handle the delivery of a talk schedule based on current "Operating mode"
     /// </summary>
-    public class TalkScheduleService : ITalkScheduleService
+    public sealed class TalkScheduleService : ITalkScheduleService
     {
         private readonly IOptionsService _optionsService;
 
