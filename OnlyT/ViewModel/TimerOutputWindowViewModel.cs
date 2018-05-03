@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using System.Windows.Input;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable UnusedMember.Global
     using System;
@@ -30,7 +32,8 @@
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
-            Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChangedMessage);
+            Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChanged);
+            Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
         }
 
         public bool SplitAndFullScrenModeIdentical()
@@ -45,7 +48,7 @@
             _applicationClosing = true;
         }
 
-        private void OnShowTimeOfDayUnderTimerChangedMessage(ShowTimeOfDayUnderTimerChangedMessage message)
+        private void OnShowTimeOfDayUnderTimerChanged(ShowTimeOfDayUnderTimerChangedMessage message)
         {
             ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
         }
@@ -103,6 +106,16 @@
                 }
             }
         }
+
+        private void OnMousePointerChanged(MousePointerInTimerDisplayChangedMessage message)
+        {
+            RaisePropertyChanged(nameof(MousePointer));
+        }
+
+        public Cursor MousePointer =>
+            _optionsService.Options.ShowMousePointerInTimerDisplay
+                ? Cursors.Arrow
+                : Cursors.None;
 
         private void OnTimerChanged(TimerChangedMessage message)
         {

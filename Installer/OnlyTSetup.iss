@@ -40,7 +40,7 @@ Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\bell.mp3"; DestDir: "{app}"
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Microsoft.Practices.ServiceLocation.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ignoreversion

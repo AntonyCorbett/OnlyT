@@ -44,10 +44,12 @@
                 case ApiRequestType.TimerControlStart:
                 case ApiRequestType.TimerControlStop:
                     return 500;
-                    
+
+                case ApiRequestType.ClockData:
+                    return 500;
+
                 default:
                 case ApiRequestType.Version:
-                case ApiRequestType.ClockData:
                 case ApiRequestType.ClockPage:
                 case ApiRequestType.Bell:
                 case ApiRequestType.DateTime:

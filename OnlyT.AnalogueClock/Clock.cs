@@ -248,7 +248,10 @@
 
         private double CalculateAngleMinutes(DateTime dt)
         {
-            return (dt.Minute * 6) + ((dt.Second + ((double)dt.Millisecond / 1000)) / (60 * 6));
+            return 
+                (dt.Minute * 6) + 
+                (dt.Second * 0.1) +
+                (dt.Millisecond * 0.0001);
         }
 
         private double CalculateAngleHours(DateTime dt)

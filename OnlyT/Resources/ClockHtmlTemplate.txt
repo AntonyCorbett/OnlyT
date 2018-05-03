@@ -116,7 +116,7 @@
 
 										var timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
 										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + ((currentTimerSecs - 1) * 1000) + currentTimerMillisecs;
-										var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + requestLatencyMillisecs;
+										var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
 														
 										if(Math.abs(diffMillisecs) > 100)
 										{												

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize"
         Loaded="OnLoaded"
-        Title="CountdownWindow" Height="305.825" Width="469.418">
+        Title="CountdownWindow" Height="305.825" Width="469.418" Cursor="None">
     <Grid>
         <Border Name="ClockPanel" 
                 CornerRadius="20" Grid.Column="0" 

@@ -103,6 +103,8 @@
 
         public bool IsApiThrottled { get; set; }
 
+        public bool ShowMousePointerInTimerDisplay { get; set; }
+
         /// <summary>
         /// Validates the data, correcting automatically as required
         /// </summary>

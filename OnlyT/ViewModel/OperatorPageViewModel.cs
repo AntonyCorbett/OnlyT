@@ -125,6 +125,11 @@ namespace OnlyT.ViewModel
             }
         }
 
+        public string SettingsHint =>
+            IsRunning
+                ? Properties.Resources.NOT_AVAIL_TIMER_RUNNING
+                : Properties.Resources.SETTINGS;
+
         public string BellTooltip
         {
             get
@@ -161,6 +166,7 @@ namespace OnlyT.ViewModel
 
             RaisePropertyChanged(nameof(IsRunning));
             RaisePropertyChanged(nameof(IsNotRunning));
+            RaisePropertyChanged(nameof(SettingsHint));
 
             RaiseCanExecuteChanged();
             AdjustForAdaptiveTime();
@@ -678,6 +684,7 @@ namespace OnlyT.ViewModel
 
             RaisePropertyChanged(nameof(IsRunning));
             RaisePropertyChanged(nameof(IsNotRunning));
+            RaisePropertyChanged(nameof(SettingsHint));
 
             Messenger.Default.Send(msg);
             RaiseCanExecuteChanged();

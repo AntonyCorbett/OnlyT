@@ -300,6 +300,24 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string MONITOR_NONE {
+            get {
+                return ResourceManager.GetString("MONITOR_NONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not available while timer is running!.
+        /// </summary>
+        internal static string NOT_AVAIL_TIMER_RUNNING {
+            get {
+                return ResourceManager.GetString("NOT_AVAIL_TIMER_RUNNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic.
         /// </summary>
         internal static string OP_MODE_AUTO {
@@ -323,6 +341,15 @@ namespace OnlyT.Properties {
         internal static string OP_MODE_MANUAL {
             get {
                 return ResourceManager.GetString("OP_MODE_MANUAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SETTINGS {
+            get {
+                return ResourceManager.GetString("SETTINGS", resourceCulture);
             }
         }
         

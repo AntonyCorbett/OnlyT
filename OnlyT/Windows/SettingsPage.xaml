@@ -132,6 +132,9 @@
 
                         <CheckBox IsChecked="{Binding ShowDurationSector, Mode=TwoWay}" 
                                   Margin="0,10,0,0" Content="Show sector on analogue clock" />
+
+                        <CheckBox IsChecked="{Binding ShowMousePointerInTimerDisplay, Mode=TwoWay}" 
+                                  Margin="0,10,0,0" Content="Show mouse pointer" />
                     </StackPanel>
                 </GroupBox>
 

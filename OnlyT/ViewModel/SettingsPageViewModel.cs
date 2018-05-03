@@ -180,7 +180,12 @@
 
         private IEnumerable<MonitorItem> GetSystemMonitors()
         {
-            var result = new List<MonitorItem> { new MonitorItem() };  // empty (i.e. no timer monitor)
+            var result = new List<MonitorItem>
+            {
+                // empty (i.e. no timer monitor)
+                new MonitorItem { MonitorName = Properties.Resources.MONITOR_NONE } 
+            };  
+
             result.AddRange(_monitorsService.GetSystemMonitors());
             return result;
         }
@@ -503,6 +508,20 @@
                 {
                     _optionsService.Options.IsApiThrottled = value;
                     RaisePropertyChanged();
+                }
+            }
+        }
+
+        public bool ShowMousePointerInTimerDisplay
+        {
+            get => _optionsService.Options.ShowMousePointerInTimerDisplay;
+            set
+            {
+                if (_optionsService.Options.ShowMousePointerInTimerDisplay != value)
+                {
+                    _optionsService.Options.ShowMousePointerInTimerDisplay = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new MousePointerInTimerDisplayChangedMessage());
                 }
             }
         }

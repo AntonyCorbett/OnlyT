@@ -329,7 +329,7 @@ namespace OnlyT.ViewModel
                     _timerWindow.WindowState = WindowState.Normal;
 
                     LocateWindowAtOrigin(_timerWindow, targetMonitor.Monitor);
-
+                    
                     _timerWindow.Topmost = true;
                     _timerWindow.WindowState = WindowState.Maximized;
                     _timerWindow.Show();
@@ -396,13 +396,14 @@ namespace OnlyT.ViewModel
             var left = (area.Left * 96) / _systemDpi.dpiX;
             var top = (area.Top * 96) / _systemDpi.dpiY;
 
+            // these seemingly redundant sizing statements are required!
             window.Left = 0;
             window.Top = 0;
-
             window.Width = 0;
             window.Height = 0;
-            window.Left = left + 1;
-            window.Top = top + 1;
+
+            window.Left = left;
+            window.Top = top;
         }
 
         private void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
