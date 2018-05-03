@@ -25,6 +25,7 @@
         private int _innerCircleRadius;
         private Point _centrePoint;
         private DateTime _start;
+        private double _pixelsPerDip;
 
         public event EventHandler TimeUpEvent;
 
@@ -170,6 +171,8 @@
             
             RegisterNames(canvas);
 
+            _pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             _canvasWidth = canvas.ActualWidth;
             _canvasHeight = canvas.ActualHeight;
 
@@ -299,7 +302,8 @@
                 FlowDirection.LeftToRight, 
                 new Typeface(_time.FontFamily, _time.FontStyle, _time.FontWeight, FontStretches.Normal),
                 _time.FontSize,
-                Brushes.Black);
+                Brushes.Black,
+                _pixelsPerDip);
 
             return new Size(formattedText.Width, useExtent ? formattedText.Extent : formattedText.Height);
         }

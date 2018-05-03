@@ -37,25 +37,26 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\bell.mp3"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\NUglify.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.CountdownTimer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\OnlyT.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\QRCoder.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\UnityEngine.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "d:\ProjectsPersonal\OnlyT\OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "d:\ProjectsPersonal\OnlyT\OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\talk_schedule.xml"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

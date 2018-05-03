@@ -106,14 +106,15 @@ namespace OnlyT.ViewModel
             {
                 Log.Logger.Information("Launching countdown timer");
 
-                OpenCountdownWindow(offsetSeconds);
-
-                Task.Delay(1000).ContinueWith(t =>
+                if (OpenCountdownWindow(offsetSeconds))
                 {
-                    // hide the timer window after a short delay (so that it doesn't appear 
-                    // as another top-level window during alt-TAB)...
-                    DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
-                });
+                    Task.Delay(1000).ContinueWith(t =>
+                    {
+                        // hide the timer window after a short delay (so that it doesn't appear 
+                        // as another top-level window during alt-TAB)...
+                        DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
+                    });
+                }
             }
         }
 
@@ -341,9 +342,11 @@ namespace OnlyT.ViewModel
             }
         }
 
+        private bool InSettingsPage => CurrentPageName.Equals(SettingsPageViewModel.PageName);
+
         private bool CountDownActive => _countdownWindow != null;
 
-        private void OpenCountdownWindow(int offsetSeconds)
+        private bool OpenCountdownWindow(int offsetSeconds)
         {
             if (!CountDownActive)
             {
@@ -358,6 +361,8 @@ namespace OnlyT.ViewModel
                         _countdownWindow.Start(offsetSeconds);
 
                         Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
+
+                        return true;
                     }
                 }
                 catch (Exception ex)
@@ -365,6 +370,8 @@ namespace OnlyT.ViewModel
                     Log.Logger.Error(ex, "Could not open countdown window");
                 }
             }
+
+            return false;
         }
 
         private void OnCountdownTimeUp(object sender, EventArgs e)
