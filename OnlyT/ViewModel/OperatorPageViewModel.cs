@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using OnlyT.WebServer.ErrorHandling;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -745,6 +747,8 @@
             Application.Current.Dispatcher.Invoke(() =>
             {
                 // always on UI thread to prevent synchronisation issues.
+                CheckTalkExists(e.TalkId);
+
                 TalkId = e.TalkId;
                 bool success = TalkId == e.TalkId;
 
@@ -780,6 +784,15 @@
 
                 e.Success = success;
             });
+        }
+
+        private void CheckTalkExists(int talkId)
+        {
+            var talk = _scheduleService.GetTalkScheduleItem(talkId);
+            if (talk == null)
+            {
+                throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
+            }
         }
     }
 }

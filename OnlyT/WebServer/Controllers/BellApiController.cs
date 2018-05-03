@@ -11,22 +11,24 @@
     {
         private readonly IOptionsService _optionsService;
         private readonly IBellService _bellService;
+        private readonly ApiThrottler _apiThrottler;
 
-        public BellApiController(IOptionsService optionsService, IBellService bellService)
+        public BellApiController(
+            IOptionsService optionsService, 
+            IBellService bellService,
+            ApiThrottler apiThrottler)
         {
             _optionsService = optionsService;
             _bellService = bellService;
+            _apiThrottler = apiThrottler;
         }
 
-        public void Handler(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            ApiThrottler throttler)
+        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
         {
             CheckMethodPost(request);
             CheckSegmentLength(request, 4);
 
-            throttler.CheckRateLimit(ApiRequestType.Bell, request);
+            _apiThrottler.CheckRateLimit(ApiRequestType.Bell, request);
 
             var responseData = new BellResponseData();
 

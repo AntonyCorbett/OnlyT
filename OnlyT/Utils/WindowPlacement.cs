@@ -1,5 +1,12 @@
 ﻿namespace OnlyT.Utils
 {
+    // ReSharper disable InconsistentNaming
+    // ReSharper disable StyleCop.SA1307
+    // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable FieldCanBeMadeReadOnly.Global
+    // ReSharper disable StyleCop.SA1203
+    // ReSharper disable StyleCop.SA1310
+    // ReSharper disable UnusedMember.Global
     using System;
     using System.IO;
     using System.Reflection;
@@ -61,30 +68,62 @@
 
     public static class WindowPlacement
     {
-        private static readonly Encoding encoding = new UTF8Encoding();
-        private static readonly XmlSerializer serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
+        private static readonly Encoding Encoding = new UTF8Encoding();
+        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
 
         private const int SW_SHOWNORMAL = 1;
         private const int SW_SHOWMINIMIZED = 2;
+
+        public static void SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
+        {
+            double width = window.Width;
+            double height = window.Height;
+
+            if (overrideSize != default(Size))
+            {
+                width = overrideSize.Width;
+                height = overrideSize.Height;
+            }
+
+            SetPlacement(new WindowInteropHelper(window).Handle, placementJson, width, height);
+        }
+
+        public static string GetPlacement(this Window window)
+        {
+            return GetPlacement(new WindowInteropHelper(window).Handle);
+        }
+
+        public static (int x, int y) GetDpiSettings()
+        {
+            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
+            var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
+
+            if (dpiXProperty == null || dpiYProperty == null)
+            {
+                return (96, 96);
+            }
+
+            return ((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
+        }
 
         private static void SetPlacement(IntPtr windowHandle, string placementJson, double width, double height)
         {
             if (!string.IsNullOrEmpty(placementJson))
             {
-                byte[] xmlBytes = encoding.GetBytes(placementJson);
+                byte[] xmlBytes = Encoding.GetBytes(placementJson);
                 try
                 {
                     WINDOWPLACEMENT placement;
                     using (MemoryStream memoryStream = new MemoryStream(xmlBytes))
                     {
-                        placement = (WINDOWPLACEMENT)serializer.Deserialize(memoryStream);
+                        placement = (WINDOWPLACEMENT)Serializer.Deserialize(memoryStream);
                     }
 
                     var adjustedDimensions = GetAdjustedWidthAndHeight(width, height);
 
                     placement.length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
                     placement.flags = 0;
-                    placement.showCmd = (placement.showCmd == SW_SHOWMINIMIZED ? SW_SHOWNORMAL : placement.showCmd);
+                    placement.showCmd = placement.showCmd == SW_SHOWMINIMIZED ? SW_SHOWNORMAL : placement.showCmd;
                     placement.normalPosition.Right = placement.normalPosition.Left + (int)adjustedDimensions.Item1;
                     placement.normalPosition.Bottom = placement.normalPosition.Top + (int)adjustedDimensions.Item2;
                     NativeMethods.SetWindowPlacement(windowHandle, ref placement);
@@ -113,42 +152,10 @@
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
-                serializer.Serialize(xmlTextWriter, placement);
+                Serializer.Serialize(xmlTextWriter, placement);
                 byte[] xmlBytes = memoryStream.ToArray();
-                return encoding.GetString(xmlBytes);
+                return Encoding.GetString(xmlBytes);
             }
-        }
-
-        public static void SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
-        {
-            double width = window.Width;
-            double height = window.Height;
-
-            if (overrideSize != default(Size))
-            {
-                width = overrideSize.Width;
-                height = overrideSize.Height;
-            }
-            
-            SetPlacement(new WindowInteropHelper(window).Handle, placementJson, width, height);
-        }
-
-        public static string GetPlacement(this Window window)
-        {
-            return GetPlacement(new WindowInteropHelper(window).Handle);
-        }
-
-        private static Tuple<int, int> GetDpiSettings()
-        {
-            var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
-            var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
-
-            if (dpiXProperty == null || dpiYProperty == null)
-            {
-                return new Tuple<int, int>(96, 96);
-            }
-
-            return new Tuple<int, int>((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
         }
     }
 }

@@ -8,11 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>OnlyT</RootNamespace>
     <AssemblyName>OnlyT</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -139,7 +144,7 @@
     <Compile Include="Services\Monitors\DisplayDevices.cs" />
     <Compile Include="Services\Monitors\IMonitorsService.cs" />
     <Compile Include="Services\Monitors\MonitorsService.cs" />
-    <Compile Include="Services\Monitors\NativeMethods.cs" />
+    <Compile Include="Services\Monitors\EnumDisplayNativeMethods.cs" />
     <Compile Include="Services\Options\AdaptiveMode.cs" />
     <Compile Include="Services\Options\ClockHourFormat.cs" />
     <Compile Include="Services\Options\IOptionsService.cs" />
@@ -200,6 +205,7 @@
     <Compile Include="WebServer\Controllers\DateTimeApiController.cs" />
     <Compile Include="WebServer\Controllers\SystemApiController.cs" />
     <Compile Include="WebServer\Controllers\TimersApiController.cs" />
+    <Compile Include="WebServer\Controllers\WebHooksApiController.cs" />
     <Compile Include="WebServer\ErrorHandling\WebServerErrorCodes.cs" />
     <Compile Include="WebServer\ErrorHandling\WebServerException.cs" />
     <Compile Include="WebServer\ClockServerMode.cs" />
@@ -282,6 +288,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -289,7 +296,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

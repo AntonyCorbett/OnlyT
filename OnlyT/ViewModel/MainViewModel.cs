@@ -6,6 +6,7 @@ namespace OnlyT.ViewModel
     using System.ComponentModel;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Forms;
     using System.Windows.Threading;
     using EventArgs;
     using GalaSoft.MvvmLight;
@@ -18,6 +19,7 @@ namespace OnlyT.ViewModel
     using Services.Monitors;
     using Services.Options;
     using Services.Timer;
+    using Utils;
     using WebServer;
     using Windows;
 
@@ -39,6 +41,7 @@ namespace OnlyT.ViewModel
         private bool _countdownDone;
         private TimerOutputWindow _timerWindow;
         private CountdownWindow _countdownWindow;
+        private (int dpiX, int dpiY) _systemDpi;
 
         public MainViewModel(
            IOptionsService optionsService,
@@ -54,6 +57,8 @@ namespace OnlyT.ViewModel
             _countdownTimerTriggerService = countdownTimerTriggerService;
 
             _httpServer.RequestForTimerDataEvent += OnRequestForTimerData;
+
+            _systemDpi = WindowPlacement.GetDpiSettings();
 
             // subscriptions...
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
@@ -323,9 +328,7 @@ namespace OnlyT.ViewModel
                     _timerWindow.Hide();
                     _timerWindow.WindowState = WindowState.Normal;
 
-                    var area = targetMonitor.Monitor.WorkingArea;
-                    _timerWindow.Left = area.Left;
-                    _timerWindow.Top = area.Top;
+                    LocateWindowAtOrigin(_timerWindow, targetMonitor.Monitor);
 
                     _timerWindow.Topmost = true;
                     _timerWindow.WindowState = WindowState.Maximized;
@@ -386,14 +389,25 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
+        private void LocateWindowAtOrigin(Window window, Screen monitor)
         {
-            var area = monitor.Monitor.WorkingArea;
+            var area = monitor.WorkingArea;
 
-            window.Left = area.Left;
-            window.Top = area.Top;
+            var left = (area.Left * 96) / _systemDpi.dpiX;
+            var top = (area.Top * 96) / _systemDpi.dpiY;
+
+            window.Left = 0;
+            window.Top = 0;
+
             window.Width = 0;
             window.Height = 0;
+            window.Left = left + 1;
+            window.Top = top + 1;
+        }
+
+        private void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
+        {
+            LocateWindowAtOrigin(window, monitor.Monitor);
 
             window.Topmost = true;
             window.Show();

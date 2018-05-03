@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace OnlyT.WebServer
+﻿namespace OnlyT.WebServer
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -25,9 +23,9 @@ namespace OnlyT.WebServer
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _talksService;
         private readonly ApiThrottler _apiThrottler;
+        private readonly ApiRouter _apiRouter;
         private HttpListener _listener;
         private int _port;
-
 
         public HttpServer(
             IOptionsService optionsService, 
@@ -42,6 +40,8 @@ namespace OnlyT.WebServer
 
             _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
             _apiThrottler = new ApiThrottler(optionsService);
+
+            _apiRouter = new ApiRouter(_apiThrottler, _optionsService, _bellService, _timerService, _talksService);
         }
 
         public void Dispose()
@@ -170,15 +170,7 @@ namespace OnlyT.WebServer
         {
             if (_optionsService.Options.IsApiEnabled)
             {
-                ApiRouter controller = new ApiRouter();
-                controller.HandleRequest(
-                    request, 
-                    response, 
-                    _apiThrottler,
-                    _optionsService, 
-                    _bellService, 
-                    _timerService,
-                    _talksService);
+                _apiRouter.HandleRequest(request, response);
             }
         }
 

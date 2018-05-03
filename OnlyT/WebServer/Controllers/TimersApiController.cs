@@ -1,60 +1,57 @@
-﻿using OnlyT.EventArgs;
-using OnlyT.WebServer.Throttling;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
-    using System;
     using System.Net;
     using Models;
     using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;
+    using Throttling;
 
     internal class TimersApiController : BaseApiController
     {
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _talkScheduleService;
         private readonly IOptionsService _optionsService;
+        private readonly ApiThrottler _apiThrottler;
 
         public TimersApiController(
             ITalkTimerService timerService, 
             ITalkScheduleService talkScheduleService,
-            IOptionsService optionsService)
+            IOptionsService optionsService,
+            ApiThrottler apiThrottler)
         {
             _timerService = timerService;
             _talkScheduleService = talkScheduleService;
             _optionsService = optionsService;
+            _apiThrottler = apiThrottler;
         }
 
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response, ApiThrottler throttler)
+        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
         {
             CheckMethodGetPostOrDelete(request);
 
             if (IsMethodGet(request))
             {
                 // get timer info
-                HandleGetTimersApi(request, response, throttler);
+                HandleGetTimersApi(request, response);
             }
             else if (IsMethodPost(request))
             {
                 // start a timer
-                HandlePostTimersApi(request, response, throttler);
+                HandlePostTimersApi(request, response);
             }
             else if (IsMethodDelete(request))
             {
                 // stop a timer
-                HandleDeleteTimersApi(request, response, throttler);
+                HandleDeleteTimersApi(request, response);
             }
         }
 
-        private void HandleDeleteTimersApi(
-            HttpListenerRequest request,
-            HttpListenerResponse response,
-            ApiThrottler throttler)
+        private void HandleDeleteTimersApi(HttpListenerRequest request, HttpListenerResponse response)
         {
             CheckSegmentLength(request, 5);
 
-            throttler.CheckRateLimit(ApiRequestType.TimerControlStop, request);
+            _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStop, request);
 
             if (int.TryParse(request.Url.Segments[4], out var talkId))
             {
@@ -62,14 +59,11 @@ namespace OnlyT.WebServer.Controllers
             }
         }
 
-        private void HandlePostTimersApi(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            ApiThrottler throttler)
+        private void HandlePostTimersApi(HttpListenerRequest request, HttpListenerResponse response)
         {
             CheckSegmentLength(request, 5);
 
-            throttler.CheckRateLimit(ApiRequestType.TimerControlStart, request);
+            _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStart, request);
 
             if (int.TryParse(request.Url.Segments[4], out var talkId))
             {
@@ -77,14 +71,11 @@ namespace OnlyT.WebServer.Controllers
             }
         }
 
-        private void HandleGetTimersApi(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            ApiThrottler throttler)
+        private void HandleGetTimersApi(HttpListenerRequest request, HttpListenerResponse response)
         {
             CheckSegmentLength(request, 4, 5);
 
-            throttler.CheckRateLimit(ApiRequestType.Timer, request);
+            _apiThrottler.CheckRateLimit(ApiRequestType.Timer, request);
 
             switch (request.Url.Segments.Length)
             {

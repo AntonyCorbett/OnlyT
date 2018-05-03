@@ -1,4 +1,9 @@
-﻿namespace OnlyT.Services.Monitors
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Media;
+
+namespace OnlyT.Services.Monitors
 {
     using System.Collections.Generic;
     using System.Linq;

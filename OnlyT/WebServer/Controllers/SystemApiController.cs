@@ -13,23 +13,24 @@ namespace OnlyT.WebServer.Controllers
     {
         private static Guid SessionId = Guid.NewGuid();
         private readonly IOptionsService _optionsService;
+        private readonly ApiThrottler _apiThrottler;
 
-        public SystemApiController(IOptionsService optionsService)
+        public SystemApiController(IOptionsService optionsService, ApiThrottler apiThrottler)
         {
             _optionsService = optionsService;
+            _apiThrottler = apiThrottler;
         }
 
         public void Handler(
             HttpListenerRequest request, 
             HttpListenerResponse response, 
-            ApiThrottler throttler,
             int oldestSupportedApiVersion, 
             int currentApiVersion)
         {
             CheckMethodGet(request);
             CheckSegmentLength(request, 4);
 
-            throttler.CheckRateLimit(ApiRequestType.System, request);
+            _apiThrottler.CheckRateLimit(ApiRequestType.System, request);
 
             // segments: "/" "api/" "v1/" "system/"
             WriteResponse(response, GetSystemData(oldestSupportedApiVersion, currentApiVersion));

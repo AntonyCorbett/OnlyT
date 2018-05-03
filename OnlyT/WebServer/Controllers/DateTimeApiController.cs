@@ -7,15 +7,19 @@
 
     internal class DateTimeApiController : BaseApiController
     {
-        public void Handler(
-            HttpListenerRequest request, 
-            HttpListenerResponse response, 
-            ApiThrottler apiThrottler)
+        private readonly ApiThrottler _apiThrottler;
+
+        public DateTimeApiController(ApiThrottler apiThrottler)
+        {
+            _apiThrottler = apiThrottler;
+        }
+
+        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
         {
             CheckMethodGet(request);
             CheckSegmentLength(request, 4);
 
-            apiThrottler.CheckRateLimit(ApiRequestType.DateTime, request);
+            _apiThrottler.CheckRateLimit(ApiRequestType.DateTime, request);
 
             // segments: "/" "api/" "v1/" "datetime/"
             // system clock

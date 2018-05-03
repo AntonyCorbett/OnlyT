@@ -1,6 +1,4 @@
-﻿using OnlyT.WebServer.Throttling;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
     using System;
     using System.Net;
@@ -10,20 +8,49 @@ namespace OnlyT.WebServer.Controllers
     using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;
+    using Throttling;
 
     internal class ApiRouter : BaseApiController
     {
         private const int OldestSupportedApiVer = 1;
         private const int CurrentApiVer = 1;
 
-        public void HandleRequest(
-            HttpListenerRequest request, 
-            HttpListenerResponse response, 
+        private readonly ApiThrottler _apiThrottler;
+        private readonly IOptionsService _optionsService;
+        
+        private readonly Lazy<TimersApiController> _timersApiController;
+        private readonly Lazy<DateTimeApiController> _dateTimeApiController;
+        private readonly Lazy<BellApiController> _bellApiController;
+        private readonly Lazy<SystemApiController> _systemApiController;
+        private readonly Lazy<WebHooksApiController> _webHooksApiController;
+
+        public ApiRouter(
             ApiThrottler apiThrottler,
             IOptionsService optionsService,
             IBellService bellService,
             ITalkTimerService timerService,
             ITalkScheduleService talksService)
+        {
+            _apiThrottler = apiThrottler;
+            _optionsService = optionsService;
+        
+            _timersApiController = new Lazy<TimersApiController>(() => 
+                new TimersApiController(timerService, talksService, _optionsService, _apiThrottler));
+
+            _dateTimeApiController = new Lazy<DateTimeApiController>(() =>
+                new DateTimeApiController(_apiThrottler));
+
+            _bellApiController = new Lazy<BellApiController>(() =>
+                new BellApiController(_optionsService, bellService, _apiThrottler));
+
+            _systemApiController = new Lazy<SystemApiController>(() =>
+                new SystemApiController(_optionsService, _apiThrottler));
+
+            _webHooksApiController = new Lazy<WebHooksApiController>(() =>
+                new WebHooksApiController());
+        }
+
+        public void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
             if (request.HttpMethod.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
             {
@@ -31,7 +58,7 @@ namespace OnlyT.WebServer.Controllers
             }
             else
             {
-                var apiCode = optionsService.Options.ApiCode;
+                var apiCode = _optionsService.Options.ApiCode;
 
                 if (request.Url.Segments.Length < 2)
                 {
@@ -41,7 +68,7 @@ namespace OnlyT.WebServer.Controllers
                 if (request.Url.Segments.Length == 2)
                 {
                     // segments: "/" "api/"
-                    HandleApiVersionRequest(request, response, apiThrottler);
+                    HandleApiVersionRequest(request, response);
                 }
                 else if (request.Url.Segments.Length > 3)
                 {
@@ -60,30 +87,26 @@ namespace OnlyT.WebServer.Controllers
                     switch (segment)
                     {
                         case "timers":
-                            HandleTimersApi(request, response, apiThrottler, timerService, talksService, optionsService);
+                            _timersApiController.Value.Handler(request, response);
                             break;
 
-                        // todo:
-                        //case "events":
-                        //    if (_tcpNotifier != null)
-                        //    {
-                        //        HandleEventsApi(apiVer, request, response);
-                        //    }
-                        //    break;
+                        case "webhooks":
+                            _webHooksApiController.Value.Handler(request, response);
+                            break;
 
                         case "bell":
-                            HandleBellApi(request, response, apiThrottler, optionsService, bellService);
+                            _bellApiController.Value.Handler(request, response);
                             break;
 
                         case "datetime":
                             DisableCache(response);
-                            HandleDateTimeApi(request, response, apiThrottler);
+                            _dateTimeApiController.Value.Handler(request, response);
                             break;
 
                         case "system":
                             // no API code check needed
                             DisableCache(response);
-                            HandleSystemApi(request, response, apiThrottler, optionsService);
+                            _systemApiController.Value.Handler(request, response, OldestSupportedApiVer, CurrentApiVer);
                             break;
 
                         default:
@@ -93,59 +116,16 @@ namespace OnlyT.WebServer.Controllers
             }
         }
 
-        private void HandleTimersApi(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            ApiThrottler throttler,
-            ITalkTimerService timerService,
-            ITalkScheduleService talksService,
-            IOptionsService optionsService)
-        {
-            var controller = new TimersApiController(timerService, talksService, optionsService);
-            controller.Handler(request, response, throttler);
-        }
-
-        private void HandleBellApi(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            ApiThrottler throttler,
-            IOptionsService optionsService,
-            IBellService bellService)
-        {
-            var controller = new BellApiController(optionsService, bellService);
-            controller.Handler(request, response, throttler);
-        }
-
-        private void HandleDateTimeApi(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            ApiThrottler apiThrottler)
-        {
-            var controller = new DateTimeApiController();
-            controller.Handler(request, response, apiThrottler);
-        }
-
-        private void HandleSystemApi(
-            HttpListenerRequest request, 
-            HttpListenerResponse response, 
-            ApiThrottler throttler,
-            IOptionsService optionsService)
-        {
-            var controller = new SystemApiController(optionsService);
-            controller.Handler(request, response, throttler, OldestSupportedApiVer, CurrentApiVer);
-        }
-
         private void DisableCache(HttpListenerResponse response)
         {
             response.AddHeader("Cache-Control", "no-cache");
         }
 
-        private void HandleApiVersionRequest(
-            HttpListenerRequest request, 
-            HttpListenerResponse response, 
-            ApiThrottler throttler)
+        private void HandleApiVersionRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
-            throttler.CheckRateLimit(ApiRequestType.Version, request);
+            CheckMethodGet(request);
+
+            _apiThrottler.CheckRateLimit(ApiRequestType.Version, request);
 
             var v = new ApiVersion { LowVersion = OldestSupportedApiVer, HighVersion = CurrentApiVer };
             WriteResponse(response, v);

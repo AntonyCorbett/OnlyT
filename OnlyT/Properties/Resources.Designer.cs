@@ -163,8 +163,8 @@ namespace OnlyT.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html style=&quot;display:block; height:100%; margin:0; padding:0&quot;&gt;
         ///	&lt;head&gt;
-        ///		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;
-        ///		&lt;title&gt;SoundBox Clock&lt;/title&gt;
+        ///		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;		
+        ///		&lt;title&gt;OnlyT Clock&lt;/title&gt;
         ///		&lt;style type=&quot;text/css&quot;&gt;			
         ///			html 
         ///			{
@@ -183,7 +183,7 @@ namespace OnlyT.Properties {
         ///				color: #FFFF66;
         ///			}
         ///			.clockstyle_green
-        ///			 [rest of string was truncated]&quot;;.
+        ///			{ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ClockHtmlTemplate {
             get {

@@ -1,5 +1,11 @@
 ﻿namespace OnlyT.Utils
 {
+    // ReSharper disable StyleCop.SA1602
+    // ReSharper disable InconsistentNaming
+    // ReSharper disable StyleCop.SA1121
+    // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable FieldCanBeMadeReadOnly.Global
+    // ReSharper disable UnusedMember.Global
     using System;
     using System.Runtime.InteropServices;
     using System.Windows;
@@ -144,18 +150,21 @@
         public static extern Int32 SHGetStockIconInfo(SHSTOCKICONID siid, SHGSI uFlags, ref SHSTOCKICONINFO psii);
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern bool DestroyIcon(IntPtr hIcon);
+        private static extern bool DestroyIcon(IntPtr hIcon);
 
         public static BitmapSource GetElevatedShieldBitmap()
         {
-            SHSTOCKICONINFO sii = new SHSTOCKICONINFO();
-            sii.cbSize = (UInt32)Marshal.SizeOf(typeof(SHSTOCKICONINFO));
+            var sii = new SHSTOCKICONINFO
+            {
+                cbSize = (UInt32)Marshal.SizeOf(typeof(SHSTOCKICONINFO))
+            };
 
-            Marshal.ThrowExceptionForHR(SHGetStockIconInfo(SHSTOCKICONID.SIID_SHIELD,
+            Marshal.ThrowExceptionForHR(SHGetStockIconInfo(
+                SHSTOCKICONID.SIID_SHIELD,
                 SHGSI.SHGSI_ICON | SHGSI.SHGSI_SMALLICON,
                 ref sii));
 
-            BitmapSource shieldSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+            var shieldSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
                 sii.hIcon,
                 Int32Rect.Empty,
                 BitmapSizeOptions.FromEmptyOptions());

@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Services.Monitors
 {
+    using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using Models;
@@ -24,10 +25,10 @@
             {
                 Log.Logger.Information($"Seeking device {id}");
                 
-                NativeMethods.DISPLAY_DEVICE device1 = new NativeMethods.DISPLAY_DEVICE();
+                EnumDisplayNativeMethods.DISPLAY_DEVICE device1 = new EnumDisplayNativeMethods.DISPLAY_DEVICE();
                 device1.cb = Marshal.SizeOf(device1);
 
-                bool rv = NativeMethods.EnumDisplayDevices(null, id, ref device1, 0);
+                bool rv = EnumDisplayNativeMethods.EnumDisplayDevices(null, id, ref device1, 0);
                 Log.Logger.Information($"EnumDisplayDevices retval = {rv}");
 
                 if (!rv)
@@ -37,17 +38,17 @@
 
                 Log.Logger.Information($"Device name: {device1.DeviceName}");
                 
-                if (device1.StateFlags.HasFlag(NativeMethods.DisplayDeviceStateFlags.AttachedToDesktop))
+                if (device1.StateFlags.HasFlag(EnumDisplayNativeMethods.DisplayDeviceStateFlags.AttachedToDesktop))
                 {
                     Log.Logger.Information("Device attached to desktop");
                     
-                    NativeMethods.DISPLAY_DEVICE device2 = new NativeMethods.DISPLAY_DEVICE();
+                    EnumDisplayNativeMethods.DISPLAY_DEVICE device2 = new EnumDisplayNativeMethods.DISPLAY_DEVICE();
                     device2.cb = Marshal.SizeOf(device2);
 
-                    rv = NativeMethods.EnumDisplayDevices(device1.DeviceName, 0, ref device2, 0);
+                    rv = EnumDisplayNativeMethods.EnumDisplayDevices(device1.DeviceName, 0, ref device2, 0);
                     Log.Logger.Information($"Secondary EnumDisplayDevices retval = {rv}");
                     
-                    if (rv && device2.StateFlags.HasFlag(NativeMethods.DisplayDeviceStateFlags.AttachedToDesktop))
+                    if (rv && device2.StateFlags.HasFlag(EnumDisplayNativeMethods.DisplayDeviceStateFlags.AttachedToDesktop))
                     {
                         Log.Logger.Information($"Display device data = {device2.DeviceName}, {device2.DeviceID}");
                         
