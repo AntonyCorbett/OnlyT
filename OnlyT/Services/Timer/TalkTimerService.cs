@@ -9,6 +9,7 @@
     /// <summary>
     /// Timer service
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class TalkTimerService : ITalkTimerService
     {
         private readonly Stopwatch _stopWatch = new Stopwatch();

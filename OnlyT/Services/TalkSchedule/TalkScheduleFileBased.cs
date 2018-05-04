@@ -60,7 +60,7 @@
         private static string GetFullPath()
         {
             string path = FileUtils.GetOnlyTMyDocsFolder();
-            Directory.CreateDirectory(path);
+            FileUtils.CreateDirectory(path);
             return Path.Combine(path, FileName);
         }
 

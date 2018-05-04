@@ -3,11 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Newtonsoft.Json;
 
     internal class Meeting
     {
+        [JsonProperty]
         public DateTime Date { get; set; }
 
+        [JsonProperty]
         public List<TalkTimer> Talks { get; }
 
         public Meeting()

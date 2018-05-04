@@ -1,6 +1,4 @@
-﻿using OnlyT.WebServer.ErrorHandling;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -22,6 +20,7 @@ namespace OnlyT.ViewModel
     using Services.TalkSchedule;
     using Services.Timer;
     using Utils;
+    using WebServer.ErrorHandling;
 
     /// <summary>
     /// View model for the Operator page

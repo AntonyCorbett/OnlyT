@@ -18,6 +18,7 @@
     using Services.Options;
     using Utils;
 
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class SettingsPageViewModel : ViewModelBase, IPage
     {
         public static string PageName => "SettingsPage";
@@ -97,7 +98,7 @@
             }
         }
 
-        public BitmapSource ElevatedShield => Utils.NativeMethods.GetElevatedShieldBitmap();
+        public BitmapSource ElevatedShield => NativeMethods.GetElevatedShieldBitmap();
 
         private IEnumerable<FullScreenClockModeItem> GetTimeOfDayModes()
         {

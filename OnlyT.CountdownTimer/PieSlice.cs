@@ -8,12 +8,13 @@
     {
         public static Geometry Get(double angle, Point centrePt, int innerRadius, int outerRadius)
         {
-            PathSegmentCollection segs = new PathSegmentCollection();
-
-            segs.Add(CreateLine1(angle, centrePt, outerRadius));
-            segs.Add(CreateArc1(angle, centrePt, outerRadius));
-            segs.Add(CreateLine2(angle, centrePt, innerRadius));
-            segs.Add(CreateArc2(angle, centrePt, innerRadius));
+            PathSegmentCollection segs = new PathSegmentCollection
+            {
+                CreateLine1(angle, centrePt, outerRadius),
+                CreateArc1(angle, centrePt, outerRadius),
+                CreateLine2(angle, centrePt, innerRadius),
+                CreateArc2(angle, centrePt, innerRadius)
+            };
 
             Point start = GetStartPoint(angle, centrePt, innerRadius);
             PathFigure pf = new PathFigure(start, segs, true);

@@ -27,6 +27,7 @@ namespace OnlyT.ViewModel
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
     /// </summary>
     /// <remarks>Needs refactoring to move _timerWindow and _countdownWindow into a "window service"</remarks>
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class MainViewModel : ViewModelBase
     {
         private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
@@ -341,8 +342,8 @@ namespace OnlyT.ViewModel
                 OpenTimerWindow();
             }
         }
-
-        private bool InSettingsPage => CurrentPageName.Equals(SettingsPageViewModel.PageName);
+        
+        //// private bool InSettingsPage => CurrentPageName.Equals(SettingsPageViewModel.PageName);
 
         private bool CountDownActive => _countdownWindow != null;
 

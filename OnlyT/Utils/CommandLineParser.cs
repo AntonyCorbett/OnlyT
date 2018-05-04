@@ -16,14 +16,13 @@
         /// <summary>
         /// singleton instance of CommandLineParser
         /// </summary>
-        private static CommandLineParser _instance;
+        private static CommandLineParser ParserInstance;
 
         private readonly List<string> _rawItems;
         private readonly List<string> _switches;
         private readonly Dictionary<string, string> _parameters;
-        private bool _parsed;
         
-        public static CommandLineParser Instance => _instance ?? (_instance = new CommandLineParser());
+        public static CommandLineParser Instance => ParserInstance ?? (ParserInstance = new CommandLineParser());
 
         private readonly string[] _switchValues =
         {
@@ -35,19 +34,24 @@
             IdKey
         };
 
+        private bool _parsed;
+
         /// <summary>
         /// Gets the "/id=" argument
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Id value.</returns>
         public string GetId()
         {
             return GetParamValue(IdKey);
         }
 
         /// <summary>
-        /// Initialise with optional args
+        /// Initializes a new instance of the <see cref="CommandLineParser"/> class. 
+        /// Initialise with optional args.
         /// </summary>
-        /// <param name="args">command-line args (useful for units tests, otherwise omit)</param>
+        /// <param name="args">
+        /// command-line args (useful for units tests, otherwise omit).
+        /// </param>
         public CommandLineParser(IEnumerable<string> args = null)
         {
             _rawItems = args?.ToList() ?? Environment.GetCommandLineArgs().ToList();
@@ -145,7 +149,7 @@
                                         currentParamValue.Append(" ");
                                     }
 
-                                    currentParamValue.Append(item.Substring(key.Length).Replace("=", "").Trim());
+                                    currentParamValue.Append(item.Substring(key.Length).Replace("=", string.Empty).Trim());
                                 }
                             }
                             else

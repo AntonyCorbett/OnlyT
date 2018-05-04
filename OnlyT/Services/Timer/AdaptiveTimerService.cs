@@ -12,6 +12,7 @@
     /// the start time of the meeting and the start time of the talk. See also
     /// TalkScheduleAuto
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     internal class AdaptiveTimerService : IAdaptiveTimerService
     {
         private static readonly int LargestDeviationMinutes = 15;

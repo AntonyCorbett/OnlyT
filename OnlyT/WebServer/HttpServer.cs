@@ -15,13 +15,11 @@
     using Services.Timer;
     using Throttling;
 
+    // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class HttpServer : IHttpServer, IDisposable
     {
         private readonly bool _24HourClock;
         private readonly IOptionsService _optionsService;
-        private readonly IBellService _bellService;
-        private readonly ITalkTimerService _timerService;
-        private readonly ITalkScheduleService _talksService;
         private readonly ApiThrottler _apiThrottler;
         private readonly ApiRouter _apiRouter;
         private HttpListener _listener;
@@ -34,14 +32,11 @@
             ITalkScheduleService talksService)
         {
             _optionsService = optionsService;
-            _bellService = bellService;
-            _timerService = timerService;
-            _talksService = talksService;
 
             _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
             _apiThrottler = new ApiThrottler(optionsService);
 
-            _apiRouter = new ApiRouter(_apiThrottler, _optionsService, _bellService, _timerService, _talksService);
+            _apiRouter = new ApiRouter(_apiThrottler, _optionsService, bellService, timerService, talksService);
         }
 
         public void Dispose()

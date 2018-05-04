@@ -1,9 +1,8 @@
-﻿using System.Windows.Input;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable UnusedMember.Global
     using System;
+    using System.Windows.Input;
     using System.Windows.Media;
     using AnalogueClock;
     using GalaSoft.MvvmLight;
@@ -112,6 +111,7 @@ namespace OnlyT.ViewModel
             RaisePropertyChanged(nameof(MousePointer));
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public Cursor MousePointer =>
             _optionsService.Options.ShowMousePointerInTimerDisplay
                 ? Cursors.Arrow
@@ -150,10 +150,12 @@ namespace OnlyT.ViewModel
 
         private int _timerColumnWidthPercentage = -1;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public int TimerColumnWidthPercentage => _timerColumnWidthPercentage;
 
         private int _analogueClockColumnWidthPercentage = -1;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public int AnalogueClockColumnWidthPercentage
         {
             get => _analogueClockColumnWidthPercentage;
@@ -169,15 +171,18 @@ namespace OnlyT.ViewModel
             }
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public bool DigitalTimeFormatShowLeadingZero =>
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM ||
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public bool DigitalTimeFormat24Hours =>
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24 ||
            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public bool DigitalTimeFormatAMPM =>
             _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12AMPM ||
             _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM;
@@ -199,6 +204,7 @@ namespace OnlyT.ViewModel
 
         private bool _isRunning;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public bool IsRunning
         {
             get => _isRunning;
@@ -229,6 +235,7 @@ namespace OnlyT.ViewModel
 
         private DurationSector _durationSector;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public DurationSector DurationSector
         {
             get => _durationSector;
@@ -244,6 +251,7 @@ namespace OnlyT.ViewModel
 
         private bool _showTimeOfDayUnderTimer;
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public bool ShowTimeOfDayUnderTimer
         {
             get => _showTimeOfDayUnderTimer;

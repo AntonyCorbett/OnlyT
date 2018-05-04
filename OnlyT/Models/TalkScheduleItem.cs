@@ -13,6 +13,7 @@
 
         public string Name { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
         public string NameIncludingDuration => $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
 
         public bool? CountUp { get; set; }

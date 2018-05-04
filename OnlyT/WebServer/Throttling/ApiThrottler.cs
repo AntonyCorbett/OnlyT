@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using OnlyT.Services.Options;
-
-namespace OnlyT.WebServer.Throttling
+﻿namespace OnlyT.WebServer.Throttling
 {
+    using System.Diagnostics;
     using System.Net;
+    using Services.Options;
 
     internal class ApiThrottler
     {

@@ -8,8 +8,7 @@
         public int TalkId { get; }
 
         public int ElapsedSecs { get; }
-
-
+        
         public TimerStopMessage(int talkId, int elapsedSecs)
         {
             TalkId = talkId;

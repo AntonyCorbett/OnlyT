@@ -36,6 +36,7 @@ namespace OnlyT.ViewModel
 
         public SettingsPageViewModel Settings => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
 
+        // ReSharper disable once UnusedMember.Global
         public static void Cleanup()
         {
             // Clear the ViewModels

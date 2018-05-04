@@ -10,7 +10,7 @@
         {
             if (value != null)
             {
-                if ((bool) value)
+                if ((bool)value)
                 {
                     return "Hand";
                 }

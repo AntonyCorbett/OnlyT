@@ -1,6 +1,5 @@
 ﻿namespace OnlyT.WebServer.Controllers
 {
-    using System;
     using System.Net;
     using Models;
     using OnlyT.WebServer.Throttling;

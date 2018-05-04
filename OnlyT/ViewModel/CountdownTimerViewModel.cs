@@ -14,6 +14,7 @@
             Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
         }
 
+        // ReSharper disable once UnusedMember.Global
         public bool ApplicationClosing => _applicationClosing;
 
         private void OnShutDown(ShutDownMessage obj)

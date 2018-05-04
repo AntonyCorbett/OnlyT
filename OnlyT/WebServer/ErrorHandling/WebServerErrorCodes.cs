@@ -25,9 +25,6 @@
                 case WebServerErrorCode.BadHttpVerb:
                     return "Wrong http method used";
 
-                case WebServerErrorCode.CouldNotTransitionTimer:
-                    return "Could not transition timer";
-
                 case WebServerErrorCode.ApiVersionNotSupported:
                     return "API version not supported";
 
@@ -80,9 +77,6 @@
 
                 case WebServerErrorCode.BadHttpVerb:
                     return HttpStatusCode.MethodNotAllowed;
-
-                case WebServerErrorCode.CouldNotTransitionTimer:
-                    return HttpStatusCode.Conflict;
 
                 case WebServerErrorCode.BadApiCode:
                 case WebServerErrorCode.ApiNotEnabled:

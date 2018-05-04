@@ -1,6 +1,4 @@
-﻿using OnlyT.WebServer.Throttling;
-
-namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers
 {
     using System;
     using System.Net;
@@ -8,6 +6,7 @@ namespace OnlyT.WebServer.Controllers
     using System.Threading;
     using Models;
     using Services.Options;
+    using Throttling;
 
     internal class SystemApiController : BaseApiController
     {

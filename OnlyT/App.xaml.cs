@@ -22,6 +22,12 @@
             DispatcherHelper.Initialize();
         }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _appMutex?.Dispose();
+            Log.Logger.Information("==== Exit ====");
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             if (AnotherInstanceRunning())
@@ -73,12 +79,6 @@
         {
             _appMutex = new Mutex(true, _appString, out var newInstance);
             return !newInstance;
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            _appMutex?.Dispose();
-            Log.Logger.Information("==== Exit ====");
         }
     }
 }

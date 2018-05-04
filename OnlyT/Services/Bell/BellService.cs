@@ -5,6 +5,7 @@
     /// <summary>
     /// Manages the bell
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class BellService : IBellService
     {
         private readonly TimerBell _bell;

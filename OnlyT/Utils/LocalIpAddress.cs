@@ -5,7 +5,7 @@
     using System.Net.Sockets;
     using Serilog;
 
-    internal class LocalIpAddress
+    internal static class LocalIpAddress
     {
         private static readonly Lazy<string> IpAddress = new Lazy<string>(IpAddressFactory);
 

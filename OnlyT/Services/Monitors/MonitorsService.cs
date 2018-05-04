@@ -1,9 +1,4 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Media;
-
-namespace OnlyT.Services.Monitors
+﻿namespace OnlyT.Services.Monitors
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -14,6 +9,7 @@ namespace OnlyT.Services.Monitors
     /// <summary>
     /// Service to get display device information
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     public sealed class MonitorsService : IMonitorsService
     {
         /// <summary>

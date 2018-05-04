@@ -1,5 +1,7 @@
 ﻿namespace OnlyT.Services.Options
 {
+    // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
     using System.Globalization;
     using System.Windows;
 

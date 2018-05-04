@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Services.Options.MeetingStartTimes
 {
+    // ReSharper disable MemberCanBePrivate.Global
     using System;
     using System.Globalization;
     using System.Linq;

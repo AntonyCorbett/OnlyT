@@ -9,6 +9,8 @@
 
         public bool CountUp { get; }
 
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public int TalkId { get; }
 
         public TimerStartMessage(int targetSeconds, bool countUp, int talkId)

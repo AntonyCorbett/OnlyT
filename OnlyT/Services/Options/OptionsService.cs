@@ -9,6 +9,7 @@
     /// <summary>
     /// Service to deal with program settings
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class OptionsService : IOptionsService
     {
         private readonly int _optionsVersion = 1;
@@ -70,7 +71,7 @@
                     var path = Path.GetDirectoryName(_optionsFilePath);
                     if (path != null)
                     {
-                        Directory.CreateDirectory(path);
+                        FileUtils.CreateDirectory(path);
                         ReadOptions();
                     }
 

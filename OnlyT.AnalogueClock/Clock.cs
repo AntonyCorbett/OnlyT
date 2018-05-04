@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.AnalogueClock
 {
+    // ReSharper disable UnusedMember.Global
     using System;
     using System.ComponentModel;
     using System.Globalization;
@@ -322,6 +323,7 @@
         private string CurrentTimeHrMin
         {
             // ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once UnusedMember.Local
             get => (string)GetValue(CurrentTimeHrMinProperty);
             set => SetValue(CurrentTimeHrMinProperty, value);
         }
@@ -329,6 +331,7 @@
         private string CurrentTimeSec
         {
             // ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once UnusedMember.Local
             get => (string)GetValue(CurrentTimeSecProperty);
             set => SetValue(CurrentTimeSecProperty, value);
         }

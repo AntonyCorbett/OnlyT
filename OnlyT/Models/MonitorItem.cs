@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Models
 {
+    // ReSharper disable UnusedAutoPropertyAccessor.Global
     using System.Windows.Forms;
 
     /// <summary>

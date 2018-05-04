@@ -13,7 +13,6 @@
 
         public bool CountUp { get; }
 
-
         public TimerChangedMessage(int remainingSecs, int elapsedSecs, bool timerIsRunning, bool countUp)
         {
             RemainingSecs = remainingSecs;

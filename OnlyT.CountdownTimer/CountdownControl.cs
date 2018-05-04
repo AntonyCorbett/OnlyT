@@ -8,6 +8,7 @@
     using System.Windows.Shapes;
     using System.Windows.Threading;
 
+    // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class CountdownControl : Control
     {
         private const int MinsToCountdown = 5;

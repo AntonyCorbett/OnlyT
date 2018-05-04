@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Models
 {
+    // ReSharper disable UnusedAutoPropertyAccessor.Global
     using Services.Options;
 
     public class FullScreenClockModeItem

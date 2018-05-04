@@ -1,5 +1,7 @@
 ﻿namespace OnlyT.WebServer.Throttling
 {
+    // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable UnusedAutoPropertyAccessor.Global
     internal struct ApiClientIdAndRequestType
     {
         public string ClientId { get; }
