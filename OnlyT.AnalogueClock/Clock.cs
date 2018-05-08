@@ -61,6 +61,10 @@
                 typeof(Clock),
                 new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
 
+        private const double HourHandDropShadowOpacity = 1.0;
+        private const double MinuteHandDropShadowOpacity = 0.4;
+        private const double SecondHandDropShadowOpacity = 0.3;
+
         private static readonly double ClockRadius = 250;
         private static readonly double SectorRadius = 230;
         private static readonly Point ClockOrigin = new Point(ClockRadius, ClockRadius);
@@ -83,7 +87,7 @@
         private bool _digitalFormatLeadingZero;
         private bool _digitalFormat24Hours;
         private bool _digitalFormatAMPM;
-
+        
         static Clock()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
@@ -132,7 +136,7 @@
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            Clock c = (Clock)d;
+            var c = (Clock)d;
             c._digitalFormatLeadingZero = (bool)e.NewValue;
         }
 
@@ -140,7 +144,7 @@
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            Clock c = (Clock)d;
+            var c = (Clock)d;
             c._digitalFormat24Hours = (bool)e.NewValue;
         }
 
@@ -148,14 +152,14 @@
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            Clock c = (Clock)d;
+            var c = (Clock)d;
             c._digitalFormatAMPM = (bool)e.NewValue;
         }
 
         private static void IsRunningPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            bool b = (bool)e.NewValue;
-            Clock c = (Clock)d;
+            var b = (bool)e.NewValue;
+            var c = (Clock)d;
             if (b)
             {
                 c.StartupAnimation();
@@ -169,7 +173,7 @@
         private static void DurationSectorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var sector = (DurationSector)e.NewValue;
-            Clock c = (Clock)d;
+            var c = (Clock)d;
 
             if (sector == null)
             {
@@ -261,21 +265,20 @@
             return (hr * 30) + (((double)dt.Minute / 60) * 30);
         }
 
+        private void PositionClockHand(Line hand, double angle, double shadowOpacity)
+        {
+            ((DropShadowEffect)hand.Effect).Opacity = shadowOpacity;
+            ((DropShadowEffect)hand.Effect).Direction = angle;
+            hand.RenderTransform = new RotateTransform(angle, ClockRadius, ClockRadius);
+        }
+
         private void TimerCallback(object sender, EventArgs eventArgs)
         {
             var now = DateTime.Now;
-
-            var secondAngle = CalculateAngleSeconds(now);
-            ((DropShadowEffect)_secondHand.Effect).Direction = secondAngle;
-            _secondHand.RenderTransform = new RotateTransform(secondAngle, ClockRadius, ClockRadius);
-
-            var minuteAngle = CalculateAngleMinutes(now);
-            ((DropShadowEffect)_minuteHand.Effect).Direction = minuteAngle;
-            _minuteHand.RenderTransform = new RotateTransform(minuteAngle, ClockRadius, ClockRadius);
-
-            var hourAngle = CalculateAngleHours(now);
-            ((DropShadowEffect)_hourHand.Effect).Direction = hourAngle;
-            _hourHand.RenderTransform = new RotateTransform(hourAngle, ClockRadius, ClockRadius);
+            
+            PositionClockHand(_secondHand, CalculateAngleSeconds(now), SecondHandDropShadowOpacity);
+            PositionClockHand(_minuteHand, CalculateAngleMinutes(now), MinuteHandDropShadowOpacity);
+            PositionClockHand(_hourHand, CalculateAngleHours(now), HourHandDropShadowOpacity);
 
             CurrentTimeHrMin = FormatTimeOfDayHoursAndMins(now);
             CurrentTimeSec = FormatTimeOfDaySeconds(now);
@@ -284,7 +287,7 @@
         private string FormatTimeOfDayHoursAndMins(DateTime dt)
         {
             int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
-            string ampm = _digitalFormatAMPM ? dt.ToString(" tt") : string.Empty;
+            var ampm = _digitalFormatAMPM ? dt.ToString(" tt") : string.Empty;
 
             if (_digitalFormatLeadingZero)
             {
@@ -370,9 +373,23 @@
         {
             ((DispatcherTimer)sender).Stop();
 
-            _animationCurrentAngles.SecondsAngle = AnimateHand(_secondHand, _animationCurrentAngles.SecondsAngle, _animationTargetAngles.SecondsAngle);
-            _animationCurrentAngles.MinutesAngle = AnimateHand(_minuteHand, _animationCurrentAngles.MinutesAngle, _animationTargetAngles.MinutesAngle);
-            _animationCurrentAngles.HoursAngle = AnimateHand(_hourHand, _animationCurrentAngles.HoursAngle, _animationTargetAngles.HoursAngle);
+            _animationCurrentAngles.SecondsAngle = AnimateHand(
+                _secondHand, 
+                _animationCurrentAngles.SecondsAngle, 
+                _animationTargetAngles.SecondsAngle,
+                SecondHandDropShadowOpacity);
+
+            _animationCurrentAngles.MinutesAngle = AnimateHand(
+                _minuteHand, 
+                _animationCurrentAngles.MinutesAngle, 
+                _animationTargetAngles.MinutesAngle,
+                MinuteHandDropShadowOpacity);
+
+            _animationCurrentAngles.HoursAngle = AnimateHand(
+                _hourHand, 
+                _animationCurrentAngles.HoursAngle, 
+                _animationTargetAngles.HoursAngle,
+                HourHandDropShadowOpacity);
 
             if (AnimationShouldContinue())
             {
@@ -384,15 +401,14 @@
             }
         }
 
-        private double AnimateHand(Line hand, double currentAngle, double targetAngle)
+        private double AnimateHand(Line hand, double currentAngle, double targetAngle, double shadowOpacity)
         {
             if (Math.Abs(currentAngle - targetAngle) > AngleTolerance)
             {
                 double delta = (targetAngle - currentAngle) / 5;
                 currentAngle += delta;
-
-                ((DropShadowEffect)hand.Effect).Direction = currentAngle;
-                hand.RenderTransform = new RotateTransform(currentAngle, ClockRadius, ClockRadius);
+                
+                PositionClockHand(hand, currentAngle, shadowOpacity);
             }
 
             return currentAngle;
@@ -428,7 +444,7 @@
             for (int n = 0; n < 12; ++n)
             {
                 var angle = n * 30;
-                Point pt = PointOnCircle(centrePointRadius, angle, ClockOrigin);
+                var pt = PointOnCircle(centrePointRadius, angle, ClockOrigin);
 
                 var hour = n == 0 ? 12 : n;
 
@@ -530,7 +546,7 @@
                     Color = Colors.DarkGray,
                     BlurRadius = 5,
                     ShadowDepth = 3,
-                    Opacity = 0.4
+                    Opacity = MinuteHandDropShadowOpacity
                 };
             }
 
@@ -542,7 +558,7 @@
                     Color = Colors.DarkGray,
                     BlurRadius = 5,
                     ShadowDepth = 3,
-                    Opacity = 1
+                    Opacity = HourHandDropShadowOpacity
                 };
             }
 
@@ -554,7 +570,7 @@
                     Color = Colors.DarkGray,
                     BlurRadius = 1.2,
                     ShadowDepth = 3,
-                    Opacity = 0.3
+                    Opacity = SecondHandDropShadowOpacity
                 };
             }
 

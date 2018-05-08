@@ -8,11 +8,14 @@
         public int TalkId { get; }
 
         public int ElapsedSecs { get; }
+
+        public bool PersistFinalTimerValue { get; }
         
-        public TimerStopMessage(int talkId, int elapsedSecs)
+        public TimerStopMessage(int talkId, int elapsedSecs, bool persist)
         {
             TalkId = talkId;
             ElapsedSecs = elapsedSecs;
+            PersistFinalTimerValue = persist;
         }
     }
 }

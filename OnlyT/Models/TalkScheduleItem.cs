@@ -75,6 +75,8 @@
 
         public bool AllowAdaptive { get; set; }
 
+        public bool PersistFinalTimerValue { get; set; }
+
         public bool Editable { get; set; }  // can the timer be modified manually?
 
         private bool? _originalBell;

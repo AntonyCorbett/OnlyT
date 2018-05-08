@@ -16,6 +16,8 @@
     /// </summary>
     public partial class TimerOutputWindow : Window
     {
+        private bool _persistingTimer;
+
         public TimerOutputWindow()
         {
             InitializeComponent();
@@ -45,12 +47,19 @@
 
         private void OnTimerStopped(TimerStopMessage msg)
         {
-            var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.SplitAndFullScrenModeIdentical())
+            if (msg.PersistFinalTimerValue)
             {
-                // only animate if the user has configured different display
-                // layout for timer mode and full-screen mode
-                DisplayFullScreenTimeOfDay();
+                _persistingTimer = true;
+            }
+            else
+            {
+                var model = (TimerOutputWindowViewModel)DataContext;
+                if (!model.SplitAndFullScrenModeIdentical())
+                {
+                    // only animate if the user has configured different display
+                    // layout for timer mode and full-screen mode
+                    DisplayFullScreenTimeOfDay();
+                }
             }
         }
 
@@ -158,7 +167,7 @@
         private void OnTimerStarted(TimerStartMessage msg)
         {
             var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.SplitAndFullScrenModeIdentical())
+            if (!model.SplitAndFullScrenModeIdentical() && !_persistingTimer)
             {
                 model.TextColor = GreenYellowRedSelector.GetGreenBrush();
                 
@@ -166,6 +175,8 @@
                 // layout for timer mode and full-screen mode
                 DisplaySplitScreen();
             }
+
+            _persistingTimer = false;
         }
 
         private void DisplaySplitScreen()

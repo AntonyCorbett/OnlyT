@@ -674,7 +674,8 @@
 
         private void StopTimer()
         {
-            var msg = new TimerStopMessage(TalkId, _timerService.CurrentSecondsElapsed);
+            var talk = GetCurrentTalk();
+            var msg = new TimerStopMessage(TalkId, _timerService.CurrentSecondsElapsed, talk.PersistFinalTimerValue);
             
             _timerService.Stop();
             _isStarting = false;

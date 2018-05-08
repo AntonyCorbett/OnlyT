@@ -88,7 +88,8 @@
                     Name = Properties.Resources.TALK_READING,
                     StartOffsetIntoMeeting = new TimeSpan(0, 27, 0),
                     OriginalDuration = TimeSpan.FromMinutes(4),
-                    Bell = true
+                    Bell = true,
+                    PersistFinalTimerValue = true
                 }
             };
         }
@@ -119,7 +120,8 @@
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = TimeSpan.FromMinutes(timerItem1.Minutes),
                 Editable = IsMinistryItemEditable(),
-                Bell = timerItem1.IsStudentTalk
+                Bell = timerItem1.IsStudentTalk,
+                PersistFinalTimerValue = timerItem1.IsStudentTalk
             });
 
             startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem1.Minutes));
@@ -137,7 +139,8 @@
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = TimeSpan.FromMinutes(timerItem2.Minutes),
                 Editable = IsMinistryItemEditable(),
-                Bell = timerItem2.IsStudentTalk
+                Bell = timerItem2.IsStudentTalk,
+                PersistFinalTimerValue = timerItem2.IsStudentTalk
             });
 
             startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem2.Minutes));
@@ -155,7 +158,8 @@
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = TimeSpan.FromMinutes(timerItem3.Minutes),
                 Editable = IsMinistryItemEditable(),
-                Bell = timerItem3.IsStudentTalk
+                Bell = timerItem3.IsStudentTalk,
+                PersistFinalTimerValue = timerItem3.IsStudentTalk
             });
 
             return result;

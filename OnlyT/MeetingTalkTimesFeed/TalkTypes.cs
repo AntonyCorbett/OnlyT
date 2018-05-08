@@ -30,6 +30,6 @@
         /// <summary>
         /// Second item in Living section.
         /// </summary>
-        Living2,
+        Living2
     }
 }

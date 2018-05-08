@@ -41,7 +41,8 @@
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
-                                Bell = AttributeToBool(elem.Attribute("bell"), false)
+                                Bell = AttributeToBool(elem.Attribute("bell"), false),
+                                PersistFinalTimerValue = AttributeToBool(elem.Attribute("persist"), false)
                             });
                         }
                     }
