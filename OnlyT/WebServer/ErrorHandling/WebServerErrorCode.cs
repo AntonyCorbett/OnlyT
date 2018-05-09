@@ -24,11 +24,6 @@
         UriTooFewSegments,
 
         /// <summary>
-        /// Could not identify the timer.
-        /// </summary>
-        CouldNotIdentifyTimer,
-
-        /// <summary>
         /// There is a bad prefix.
         /// </summary>
         BadPrefix = 1134,

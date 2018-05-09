@@ -11,18 +11,14 @@
         [JsonProperty(PropertyName = "errorMessage")]
         public string ErrorMessage { get; set; }
 
-        [JsonProperty(PropertyName = "conflictingId", NullValueHandling = NullValueHandling.Ignore)]
-        public string ConflictingId { get; set; }
-
         public ApiError()
         {
         }
 
-        public ApiError(WebServerErrorCode code, string conflictingId = null)
+        public ApiError(WebServerErrorCode code)
         {
             ErrorCode = (int)code;
             ErrorMessage = WebServerErrorCodes.GetDescription(code);
-            ConflictingId = conflictingId;
         }
     }
 }

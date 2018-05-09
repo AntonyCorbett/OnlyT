@@ -19,9 +19,6 @@
                 case WebServerErrorCode.BadPrefix:
                     return "Malformed URI";
 
-                case WebServerErrorCode.CouldNotIdentifyTimer:
-                    return "Could not identify timer";
-
                 case WebServerErrorCode.BadHttpVerb:
                     return "Wrong http method used";
 
@@ -61,7 +58,6 @@
 
                 case WebServerErrorCode.UriTooManySegments:
                 case WebServerErrorCode.UriTooFewSegments:
-                case WebServerErrorCode.CouldNotIdentifyTimer:
                 case WebServerErrorCode.BadPrefix:
                 case WebServerErrorCode.ApiVersionNotSupported:
                 case WebServerErrorCode.NotAvailableInApiVersion:

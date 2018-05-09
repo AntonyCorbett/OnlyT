@@ -70,7 +70,7 @@
             _timerService.TimerStartStopFromApiEvent += HandleTimerStartStopFromApi;
 
             // commands...
-            StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
+            StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk, true);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
             SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
             HelpCommand = new RelayCommand(LaunchHelp);
@@ -757,7 +757,7 @@
                 CheckTalkExists(e.TalkId);
 
                 bool success = TalkId == e.TalkId || IsNotRunning;
-
+                
                 if (success)
                 {
                     TalkId = e.TalkId;
@@ -787,7 +787,7 @@
                         }
                     }
                 }
-
+                
                 e.CurrentStatus = _timerService.GetStatus();
                 if (success)
                 {
