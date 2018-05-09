@@ -756,30 +756,35 @@
                 // always on UI thread to prevent synchronisation issues.
                 CheckTalkExists(e.TalkId);
 
-                TalkId = e.TalkId;
-                bool success = TalkId == e.TalkId;
+                bool success = TalkId == e.TalkId || IsNotRunning;
 
                 if (success)
                 {
-                    switch (e.Command)
+                    TalkId = e.TalkId;
+                    success = TalkId == e.TalkId;
+
+                    if (success)
                     {
-                        case StartStopTimerCommands.Start:
-                            success = IsNotRunning;
-                            if (success)
-                            {
-                                StartTimer();
-                            }
+                        switch (e.Command)
+                        {
+                            case StartStopTimerCommands.Start:
+                                success = IsNotRunning;
+                                if (success)
+                                {
+                                    StartTimer();
+                                }
 
-                            break;
+                                break;
 
-                        case StartStopTimerCommands.Stop:
-                            success = IsRunning;
-                            if (success)
-                            {
-                                StopTimer();
-                            }
+                            case StartStopTimerCommands.Stop:
+                                success = IsRunning;
+                                if (success)
+                                {
+                                    StopTimer();
+                                }
 
-                            break;
+                                break;
+                        }
                     }
                 }
 
