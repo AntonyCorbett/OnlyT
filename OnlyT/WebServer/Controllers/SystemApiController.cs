@@ -44,7 +44,7 @@
                 AccountName = Environment.UserName,
                 WorkingSet = Environment.WorkingSet,
                 MachineName = Environment.MachineName,
-                OnlyTVersion = Assembly.GetEntryAssembly().GetName().Version.ToString(),
+                OnlyTVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(),
                 SessionId = SessionId.ToString(),
                 ApiEnabled = _optionsService.Options.IsApiEnabled,
                 ApiThrottled = _optionsService.Options.IsApiThrottled,
