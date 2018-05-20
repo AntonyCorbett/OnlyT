@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
-
-namespace OnlyT.Models
+﻿namespace OnlyT.Models
 {
     // ReSharper disable UnusedAutoPropertyAccessor.Global
     using System;
+    using Newtonsoft.Json;
 
     public class TimerStatus
     {
