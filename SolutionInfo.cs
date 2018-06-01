@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyCompany("Antony Corbett")]
+[assembly: AssemblyCompany("SoundBox")]
 [assembly: AssemblyProduct("OnlyT")]
-[assembly: AssemblyCopyright("Copyright © 2018")]
+[assembly: AssemblyCopyright("Copyright © 2018 Antony Corbett")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 
-[assembly: AssemblyVersion("1.1.0.6")]
+[assembly: AssemblyVersion("1.1.0.8")]
