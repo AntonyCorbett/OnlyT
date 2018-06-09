@@ -57,6 +57,8 @@
             {
                 TalkId = talk.Id,
                 TalkTitle = talk.Name,
+                MeetingSectionNameInternal = talk.MeetingSectionNameInternal,
+                MeetingSectionNameLocalised = talk.MeetingSectionNameLocalised,
                 OriginalDurationSecs = (int)talk.OriginalDuration.TotalSeconds,
                 ModifiedDurationSecs = talk.ModifiedDuration == null
                     ? null

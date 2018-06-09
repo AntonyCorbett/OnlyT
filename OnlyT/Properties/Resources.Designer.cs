@@ -345,6 +345,42 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Living.
+        /// </summary>
+        internal static string SECTION_LIVING {
+            get {
+                return ResourceManager.GetString("SECTION_LIVING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ministry.
+        /// </summary>
+        internal static string SECTION_MINISTRY {
+            get {
+                return ResourceManager.GetString("SECTION_MINISTRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Treasures.
+        /// </summary>
+        internal static string SECTION_TREASURES {
+            get {
+                return ResourceManager.GetString("SECTION_TREASURES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekend.
+        /// </summary>
+        internal static string SECTION_WEEKEND {
+            get {
+                return ResourceManager.GetString("SECTION_WEEKEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string SETTINGS {

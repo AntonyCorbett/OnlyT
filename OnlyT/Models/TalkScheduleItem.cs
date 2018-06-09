@@ -13,6 +13,10 @@
 
         public string Name { get; set; }
 
+        public string MeetingSectionNameInternal { get; set; }
+
+        public string MeetingSectionNameLocalised { get; set; }
+
         // ReSharper disable once UnusedMember.Global
         public string NameIncludingDuration => $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
 

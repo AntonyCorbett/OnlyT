@@ -38,6 +38,8 @@
                             {
                                 Id = talkId++,
                                 Name = (string)elem.Attribute("name"),
+                                MeetingSectionNameInternal = (string)elem.Attribute("section"),
+                                MeetingSectionNameLocalised = (string)elem.Attribute("section"),
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),

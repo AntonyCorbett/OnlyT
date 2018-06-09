@@ -259,4 +259,16 @@
   <data name="SETTINGS" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SECTION_TREASURES" xml:space="preserve">
+    <value>Treasures</value>
+  </data>
+  <data name="SECTION_MINISTRY" xml:space="preserve">
+    <value>Ministry</value>
+  </data>
+  <data name="SECTION_LIVING" xml:space="preserve">
+    <value>Living</value>
+  </data>
+  <data name="SECTION_WEEKEND" xml:space="preserve">
+    <value>Weekend</value>
+  </data>
 </root>

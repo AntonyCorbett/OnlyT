@@ -44,6 +44,14 @@
     /// </summary>
     internal static class TalkScheduleAuto
     {
+        // midweek meeting sections.
+        private const string SectionTreasures = "Treasures";
+        private const string SectionMinistry = "Ministry";
+        private const string SectionLiving = "Living";
+
+        // weekend sectons.
+        private const string SectionWeekend = "Weekend";
+
         /// <summary>
         /// Gets the talk schedule.
         /// </summary>
@@ -51,46 +59,41 @@
         /// <returns>A collection of TalkScheduleItem.</returns>
         public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)
         {
-            bool isCircuitVisit = optionsService.Options.IsCircuitVisit;
+            var isCircuitVisit = optionsService.Options.IsCircuitVisit;
             
             return optionsService.Options.MidWeekOrWeekend == MidWeekOrWeekend.Weekend
                 ? GetWeekendMeetingSchedule(isCircuitVisit)
                 : GetMidweekMeetingSchedule(isCircuitVisit, new TimesFeed().GetTodaysMeetingData());
         }
 
+        private static TalkScheduleItem CreateTreasuresItem(
+            TalkTypesAutoMode talkType, 
+            string talkName,
+            TimeSpan startOffset,
+            TimeSpan duration,
+            bool useBell = false,
+            bool persistFinalTimerValue = false)
+        {
+            return new TalkScheduleItem(talkType)
+            {
+                Name = talkName,
+                MeetingSectionNameLocalised = Properties.Resources.SECTION_TREASURES,
+                MeetingSectionNameInternal = SectionTreasures,
+                StartOffsetIntoMeeting = startOffset,
+                OriginalDuration = duration,
+                Bell = useBell,
+                PersistFinalTimerValue = persistFinalTimerValue
+            };
+        }
+
         private static List<TalkScheduleItem> GetTreasuresSchedule()
         {
             return new List<TalkScheduleItem>
             {
-                new TalkScheduleItem(TalkTypesAutoMode.OpeningComments)
-                {
-                    Name = Properties.Resources.TALK_OPENING_COMMENTS,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 5, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(3)
-                },
-
-                new TalkScheduleItem(TalkTypesAutoMode.TreasuresTalk)
-                {   
-                    Name = Properties.Resources.TALK_TREASURES,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 8, 20),
-                    OriginalDuration = TimeSpan.FromMinutes(10)
-                },
-
-                new TalkScheduleItem(TalkTypesAutoMode.DiggingTalk)
-                {
-                    Name = Properties.Resources.TALK_DIGGING,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 18, 40),
-                    OriginalDuration = TimeSpan.FromMinutes(8)
-                },
-
-                new TalkScheduleItem(TalkTypesAutoMode.Reading)
-                {
-                    Name = Properties.Resources.TALK_READING,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 27, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(4),
-                    Bell = true,
-                    PersistFinalTimerValue = true
-                }
+                CreateTreasuresItem(TalkTypesAutoMode.OpeningComments, Properties.Resources.TALK_OPENING_COMMENTS, new TimeSpan(0, 5, 0), TimeSpan.FromMinutes(3)),
+                CreateTreasuresItem(TalkTypesAutoMode.TreasuresTalk, Properties.Resources.TALK_TREASURES, new TimeSpan(0, 8, 20), TimeSpan.FromMinutes(10)),
+                CreateTreasuresItem(TalkTypesAutoMode.DiggingTalk, Properties.Resources.TALK_DIGGING, new TimeSpan(0, 18, 40), TimeSpan.FromMinutes(8)),
+                CreateTreasuresItem(TalkTypesAutoMode.Reading, Properties.Resources.TALK_READING, new TimeSpan(0, 27, 0), TimeSpan.FromMinutes(4), true, true)
             };
         }
 
@@ -100,7 +103,29 @@
             {
                 Minutes = 4,
                 IsStudentTalk = false,
-                TalkType = talkType
+                TalkType = talkType,
+            };
+        }
+
+        private static TalkScheduleItem CreateMinistryItem(
+            TalkTypesAutoMode talkType,
+            string talkName,
+            TimeSpan startOffset,
+            TimeSpan duration,
+            bool useBell = false,
+            bool persistFinalTimerValue = false,
+            bool editableTime = false)
+        {
+            return new TalkScheduleItem(talkType)
+            {
+                Name = talkName,
+                MeetingSectionNameLocalised = Properties.Resources.SECTION_MINISTRY,
+                MeetingSectionNameInternal = SectionMinistry,
+                StartOffsetIntoMeeting = startOffset,
+                OriginalDuration = duration,
+                Bell = useBell,
+                PersistFinalTimerValue = persistFinalTimerValue,
+                Editable = editableTime
             };
         }
 
@@ -114,15 +139,14 @@
 
             TimeSpan startOffset = new TimeSpan(0, 32, 20);
 
-            result.Add(new TalkScheduleItem(TalkTypesAutoMode.MinistryItem1)
-            {
-                Name = GetMinistryItemTitle(1),
-                StartOffsetIntoMeeting = startOffset,
-                OriginalDuration = TimeSpan.FromMinutes(timerItem1.Minutes),
-                Editable = IsMinistryItemEditable(),
-                Bell = timerItem1.IsStudentTalk,
-                PersistFinalTimerValue = timerItem1.IsStudentTalk
-            });
+            result.Add(CreateMinistryItem(
+                TalkTypesAutoMode.MinistryItem1,
+                GetMinistryItemTitle(1),
+                startOffset,
+                TimeSpan.FromMinutes(timerItem1.Minutes),
+                timerItem1.IsStudentTalk,
+                timerItem1.IsStudentTalk,
+                IsMinistryItemEditable()));
 
             startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem1.Minutes));
             if (timerItem1.IsStudentTalk)
@@ -133,15 +157,14 @@
 
             startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
 
-            result.Add(new TalkScheduleItem(TalkTypesAutoMode.MinistryItem2)
-            {
-                Name = GetMinistryItemTitle(2),
-                StartOffsetIntoMeeting = startOffset,
-                OriginalDuration = TimeSpan.FromMinutes(timerItem2.Minutes),
-                Editable = IsMinistryItemEditable(),
-                Bell = timerItem2.IsStudentTalk,
-                PersistFinalTimerValue = timerItem2.IsStudentTalk
-            });
+            result.Add(CreateMinistryItem(
+                TalkTypesAutoMode.MinistryItem2,
+                GetMinistryItemTitle(2),
+                startOffset,
+                TimeSpan.FromMinutes(timerItem2.Minutes),
+                timerItem2.IsStudentTalk,
+                timerItem2.IsStudentTalk,
+                IsMinistryItemEditable()));
 
             startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem2.Minutes));
             if (timerItem2.IsStudentTalk)
@@ -152,16 +175,15 @@
 
             startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
 
-            result.Add(new TalkScheduleItem(TalkTypesAutoMode.MinistryItem3)
-            {
-                Name = GetMinistryItemTitle(3),
-                StartOffsetIntoMeeting = startOffset,
-                OriginalDuration = TimeSpan.FromMinutes(timerItem3.Minutes),
-                Editable = IsMinistryItemEditable(),
-                Bell = timerItem3.IsStudentTalk,
-                PersistFinalTimerValue = timerItem3.IsStudentTalk
-            });
-
+            result.Add(CreateMinistryItem(
+                TalkTypesAutoMode.MinistryItem3,
+                GetMinistryItemTitle(3),
+                startOffset,
+                TimeSpan.FromMinutes(timerItem3.Minutes),
+                timerItem3.IsStudentTalk,
+                timerItem3.IsStudentTalk,
+                IsMinistryItemEditable()));
+        
             return result;
         }
 
@@ -198,6 +220,24 @@
             throw new ArgumentException(@"Unknown item", nameof(item));
         }
 
+        private static TalkScheduleItem CreateLivingItem(
+            TalkTypesAutoMode talkType,
+            string talkName,
+            TimeSpan startOffset,
+            TimeSpan duration)
+        {
+            return new TalkScheduleItem(talkType)
+            {
+                Name = talkName,
+                MeetingSectionNameLocalised = Properties.Resources.SECTION_LIVING,
+                MeetingSectionNameInternal = SectionLiving,
+                StartOffsetIntoMeeting = startOffset,
+                OriginalDuration = duration,
+                Editable = true,
+                AllowAdaptive = true
+            };
+        }
+
         private static IEnumerable<TalkScheduleItem> GetLivingSchedule(bool isCircuitVisit, Meeting meetingData)
         {
             var result = new List<TalkScheduleItem>();
@@ -206,63 +246,46 @@
                                    new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
 
             TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
-                                  
-            result.Add(new TalkScheduleItem(TalkTypesAutoMode.LivingPart1)
-            {
-                Name = Properties.Resources.TALK_LIVING1,
-                StartOffsetIntoMeeting = new TimeSpan(0, 51, 40),
-                OriginalDuration = TimeSpan.FromMinutes(timerPart1.Minutes),
-                AllowAdaptive = true,
-                Editable = true
-            });
 
-            result.Add(new TalkScheduleItem(TalkTypesAutoMode.LivingPart2)
-            {
-                Name = Properties.Resources.TALK_LIVING2,
-                StartOffsetIntoMeeting = new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1.Minutes)),
-                OriginalDuration = TimeSpan.FromMinutes(timerPart2?.Minutes ?? 0),
-                AllowAdaptive = true,
-                Editable = true
-            });
+            result.Add(CreateLivingItem(
+                TalkTypesAutoMode.LivingPart1,
+                Properties.Resources.TALK_LIVING1,
+                new TimeSpan(0, 51, 40),
+                TimeSpan.FromMinutes(timerPart1.Minutes)));
+
+            result.Add(CreateLivingItem(
+                TalkTypesAutoMode.LivingPart2,
+                Properties.Resources.TALK_LIVING2,
+                new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1.Minutes)),
+                TimeSpan.FromMinutes(timerPart2?.Minutes ?? 0)));
 
             if (isCircuitVisit)
             {
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.ConcludingComments)
-                {
-                    Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
-                    StartOffsetIntoMeeting = new TimeSpan(1, 7, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(3),
-                    AllowAdaptive = true,
-                    Editable = true
-                });
+                result.Add(CreateLivingItem(
+                    TalkTypesAutoMode.ConcludingComments,
+                    Properties.Resources.TALK_CONCLUDING_COMMENTS,
+                    new TimeSpan(1, 7, 0),
+                    TimeSpan.FromMinutes(3)));
 
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.CircuitServiceTalk)
-                {
-                    Name = Properties.Resources.TALK_SERVICE,
-                    StartOffsetIntoMeeting = new TimeSpan(1, 10, 0),
-                    AllowAdaptive = true,
-                    OriginalDuration = TimeSpan.FromMinutes(30)
-                });
+                result.Add(CreateLivingItem(
+                    TalkTypesAutoMode.CircuitServiceTalk,
+                    Properties.Resources.TALK_SERVICE,
+                    new TimeSpan(1, 10, 0),
+                    TimeSpan.FromMinutes(30)));
             }
             else
             {
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.CongBibleStudy)
-                {
-                    Name = Properties.Resources.TALK_CONG_STUDY,
-                    StartOffsetIntoMeeting = new TimeSpan(1, 7, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(30),
-                    AllowAdaptive = true,
-                    Editable = true
-                });
+                result.Add(CreateLivingItem(
+                    TalkTypesAutoMode.CongBibleStudy,
+                    Properties.Resources.TALK_CONG_STUDY,
+                    new TimeSpan(1, 7, 0),
+                    TimeSpan.FromMinutes(30)));
 
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.ConcludingComments)
-                {
-                    Name = Properties.Resources.TALK_CONCLUDING_COMMENTS,
-                    StartOffsetIntoMeeting = new TimeSpan(1, 37, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(3),
-                    AllowAdaptive = true,
-                    Editable = true
-                });
+                result.Add(CreateLivingItem(
+                    TalkTypesAutoMode.ConcludingComments,
+                    Properties.Resources.TALK_CONCLUDING_COMMENTS,
+                    new TimeSpan(1, 37, 0),
+                    TimeSpan.FromMinutes(3)));
             }
 
             return result;
@@ -284,58 +307,69 @@
             return result;
         }
 
+        private static TalkScheduleItem CreateWeekendItem(
+            TalkTypesAutoMode talkType,
+            string talkName,
+            TimeSpan startOffset,
+            TimeSpan duration,
+            bool allowAdaptive)
+        {
+            return new TalkScheduleItem(talkType)
+            {
+                Name = talkName,
+                MeetingSectionNameLocalised = Properties.Resources.SECTION_WEEKEND,
+                MeetingSectionNameInternal = SectionWeekend,
+                StartOffsetIntoMeeting = startOffset,
+                OriginalDuration = duration,
+                Editable = true,
+                AllowAdaptive = allowAdaptive
+            };
+        }
+
         private static List<TalkScheduleItem> GetWeekendMeetingSchedule(bool isCircuitVisit)
         {
             var result = new List<TalkScheduleItem>();
 
             if (isCircuitVisit)
             {
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.PublicTalk)
-                {
-                    Name = Properties.Resources.TALK_PUBLIC,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 5, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(30),
-                    Editable = true
-                });
+                result.Add(CreateWeekendItem(
+                    TalkTypesAutoMode.PublicTalk,
+                    Properties.Resources.TALK_PUBLIC,
+                    new TimeSpan(0, 5, 0),
+                    TimeSpan.FromMinutes(30),
+                    false));
 
                 // song here
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.Watchtower)
-                {
-                    Name = Properties.Resources.TALK_WT,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 40, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(30),
-                    AllowAdaptive = true,
-                    Editable = true
-                });
+                result.Add(CreateWeekendItem(
+                    TalkTypesAutoMode.Watchtower,
+                    Properties.Resources.TALK_WT,
+                    new TimeSpan(0, 40, 0),
+                    TimeSpan.FromMinutes(30),
+                    true));
 
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.CircuitServiceTalk)
-                {
-                    Name = Properties.Resources.TALK_CONCLUDING,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 70, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(30),
-                    AllowAdaptive = true,
-                    Editable = true
-                });
+                result.Add(CreateWeekendItem(
+                    TalkTypesAutoMode.CircuitServiceTalk,
+                    Properties.Resources.TALK_CONCLUDING,
+                    new TimeSpan(0, 70, 0),
+                    TimeSpan.FromMinutes(30),
+                    true));
             }
             else
             {
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.PublicTalk)
-                {
-                    Name = Properties.Resources.TALK_PUBLIC,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 5, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(30),
-                    Editable = true
-                });
-
+                result.Add(CreateWeekendItem(
+                    TalkTypesAutoMode.PublicTalk,
+                    Properties.Resources.TALK_PUBLIC,
+                    new TimeSpan(0, 5, 0),
+                    TimeSpan.FromMinutes(30),
+                    false));
+                
                 // song
-                result.Add(new TalkScheduleItem(TalkTypesAutoMode.Watchtower)
-                {
-                    Name = Properties.Resources.TALK_WT,
-                    StartOffsetIntoMeeting = new TimeSpan(0, 40, 0),
-                    OriginalDuration = TimeSpan.FromMinutes(60),
-                    AllowAdaptive = true,
-                    Editable = true
-                });
+                result.Add(CreateWeekendItem(
+                    TalkTypesAutoMode.Watchtower,
+                    Properties.Resources.TALK_WT,
+                    new TimeSpan(0, 40, 0),
+                    TimeSpan.FromMinutes(60),
+                    true));
             }
             
             return result;
