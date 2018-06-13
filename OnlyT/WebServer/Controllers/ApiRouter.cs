@@ -13,7 +13,7 @@
     internal class ApiRouter : BaseApiController
     {
         private const int OldestSupportedApiVer = 1;
-        private const int CurrentApiVer = 1;
+        private const int CurrentApiVer = 3;
 
         private readonly ApiThrottler _apiThrottler;
         private readonly IOptionsService _optionsService;
