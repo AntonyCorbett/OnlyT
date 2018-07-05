@@ -5,23 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OnlyT.Windows"
              xmlns:countdownTimer="clr-namespace:OnlyT.CountdownTimer;assembly=OnlyT.CountdownTimer"
-             DataContext="{Binding Settings, Mode=OneWay, Source={StaticResource Locator}}"             
+             DataContext="{Binding Settings, Mode=OneWay, Source={StaticResource Locator}}"         
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="1000">
+             d:DesignHeight="1000" d:DesignWidth="1000">
 
     <UserControl.Resources>
-        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+        <Style x:Key="LabelStyle" BasedOn="{StaticResource MaterialDesignLabel}" TargetType="{x:Type Label}">
             <Setter Property="Margin" Value="-5,0,0,0" />
         </Style>
-        <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
+        <Style x:Key="GroupBoxStyle" BasedOn="{StaticResource MaterialDesignCardGroupBox}" TargetType="{x:Type GroupBox}">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Width" Value="230" />
             <Setter Property="Padding" Value="5" />
         </Style>
         <Style x:Key="SampleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="CadetBlue" />
-            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkBrush}" />
             <Setter Property="FontSize" Value="11" />
+        </Style>
+        <Style x:Key="SettingsComboStyle" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="0,0,0,15" />
+        </Style>
+        <Style x:Key="SettingsCheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style x:Key="SettingsStackPanel" TargetType="{x:Type StackPanel}">
+            <Setter Property="Margin" Value="5" />
         </Style>
     </UserControl.Resources>
 
@@ -29,7 +47,7 @@
         <EventTrigger RoutedEvent="UserControl.Loaded">
             <BeginStoryboard>
                 <Storyboard >
-                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1" />
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.5" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -42,79 +60,103 @@
         </Grid.RowDefinitions>
         
         <Button Grid.Row="0" 
-                Background="Transparent"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 Command="{Binding NavigateOperatorCommand}">
-            <Path Fill="Black" Data="M12.98431,0.00039917452C13.39189,0.014400231,13.670029,0.39642023,13.670029,1.0964207L13.670029,6.1874495C13.670029,6.4934812,13.874008,6.6964851,14.180038,6.6964851L31.491013,6.6964851C31.796005,6.6964851,31.999985,6.900466,31.999985,7.2064977L31.999985,14.334524C31.999985,14.639518,31.796005,14.843499,31.491013,14.843499L14.180038,14.843499C13.874008,14.843499,13.670029,15.04754,13.670029,15.352535L13.670029,20.138568C13.670029,21.360561,12.957992,21.767545,11.939011,20.953577L0.5339815,11.788491C-0.17799383,11.279516,-0.17799383,10.159515,0.5339815,9.6504799L12.14299,0.38346564C12.448616,0.11608436,12.739762,-0.0080016943,12.98431,0.00039917452z"></Path>
+                <materialDesign:PackIcon
+                    Kind="Backburger"
+                    Height="24"
+                    Width="24" />
+
         </Button>
 
         <ScrollViewer Grid.Row="1" Padding="10,0,10,10" VerticalScrollBarVisibility="Auto">
-            <WrapPanel Orientation ="Horizontal">
+            <WrapPanel Orientation="Horizontal">
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Main">
-                    <StackPanel>
-                        <TextBlock Text="{Binding AppVersionStr}" Foreground="CadetBlue"/>
-                
-                        <Label Style="{StaticResource LabelStyle}">Monitor:</Label>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox ItemsSource="{Binding Monitors}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Monitor"
                                   SelectedValuePath="MonitorId" 
                                   DisplayMemberPath="MonitorName"
                                   SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
-
-                        <Label Style="{StaticResource LabelStyle}">Mode:</Label>
+                        
                         <ComboBox ItemsSource="{Binding OperatingModes}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Mode"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
-
-                        <Label Style="{StaticResource LabelStyle}">Digital clock format:</Label>
+                        
                         <ComboBox ItemsSource="{Binding ClockHourFormats}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Digital clock format"
                                   SelectedValuePath="Format" 
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
+
+                        <TextBlock Text="{Binding AppVersionStr}"
+                                   VerticalAlignment="Bottom"
+                                   FontSize="11" 
+                                   Margin="0,15,0,0"
+                                   Foreground="{StaticResource PrimaryHueDarkBrush}"/>
+
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Automatic mode">
-                    <StackPanel>
-                        <Label Style="{StaticResource LabelStyle}">Meeting:</Label>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox ItemsSource="{Binding AutoMeetingTimes}" 
-                            SelectedValuePath="Id" 
-                            DisplayMemberPath="Name"
-                            SelectedValue="{Binding MidWeekOrWeekend, Mode=TwoWay}"/>
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Meeting"
+                                  SelectedValuePath="Id" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding MidWeekOrWeekend, Mode=TwoWay}"/>
 
-                        <Label Style="{StaticResource LabelStyle}">Midweek adaptive mode:</Label>
                         <ComboBox ItemsSource="{Binding AdaptiveModes}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Midweek adaptive mode"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding MidWeekAdaptiveMode, Mode=TwoWay}"/>
-
-                        <Label Style="{StaticResource LabelStyle}">Weekend adaptive mode:</Label>
+                        
                         <ComboBox ItemsSource="{Binding AdaptiveModes}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Weekend adaptive mode"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding WeekendAdaptiveMode, Mode=TwoWay}"/>
 
                         <CheckBox IsChecked="{Binding IsCircuitVisit, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Circuit visit" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Circuit visit" />
+
+                        <CheckBox IsChecked="{Binding PersistStudentTime, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Persist student time" />
                     </StackPanel>
                 </GroupBox>
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Bell">
-                    <StackPanel>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsBellEnabled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Enabled" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Enabled" />
 
                         <Label Style="{StaticResource LabelStyle}">Volume:</Label>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding BellVolumePercent}"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
-                        <Button Width="120" Height="32" Margin="0,10,0,0" HorizontalAlignment="Left" 
-                                Command="{Binding TestBellCommand}">Test</Button>
+                        <Button Width="120" Height="32" Margin="0,20,0,0" 
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                HorizontalAlignment="Left" 
+                                Command="{Binding TestBellCommand}">TEST</Button>
                     </StackPanel>
                 </GroupBox>
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Timer window">
-                    <StackPanel>
-                        <Label Style="{StaticResource LabelStyle}">Full-screen clock mode:</Label>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox ItemsSource="{Binding TimeOfDayModes}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Full-screen clock mode"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding TimeOfDayMode, Mode=TwoWay}"/>
@@ -122,48 +164,65 @@
                         <Label Style="{StaticResource LabelStyle}">Split-screen width:</Label>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding AnalogueClockWidthPercent}"
+                                Margin="0,0,0,20"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
 
                         <CheckBox IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Time of day under timer" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Time of day under timer" />
 
                         <CheckBox IsChecked="{Binding CountUp, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Timer counts up" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Timer counts up" />
 
                         <CheckBox IsChecked="{Binding ShowDurationSector, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Show sector on analogue clock" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Show sector on analogue clock" />
 
                         <CheckBox IsChecked="{Binding ShowMousePointerInTimerDisplay, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Show mouse pointer" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Show mouse pointer" />
+                        
+                        <ComboBox ItemsSource="{Binding PersistDurationItems}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Persist talk duration"
+                                  SelectedValuePath="Seconds" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding PeristDurationSecs, Mode=TwoWay}"/>
+
                     </StackPanel>
                 </GroupBox>
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Remote access">
-                    <StackPanel>
-                        <Label Style="{StaticResource LabelStyle}">Port:</Label>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox ItemsSource="{Binding Ports}" 
-                            SelectedValuePath="Port" 
-                            DisplayMemberPath="Name"
-                            SelectedValue="{Binding Port, Mode=TwoWay}"/>
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="Port"
+                                  SelectedValuePath="Port" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Port, Mode=TwoWay}"/>
 
                         <Button Width="120" HorizontalAlignment="Left" 
-                            Height="32"
-                            Command="{Binding OpenPortCommand}"
-                            Margin="0,10,0,0">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding ElevatedShield}" Height="16"/>
-                                <Label Content="Open Port"></Label>
-                            </StackPanel>
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                Height="32"
+                                Command="{Binding OpenPortCommand}"
+                                Margin="0,10,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding ElevatedShield}" Height="16"/>
+                                    <Label Content="Open Port"></Label>
+                                </StackPanel>
                         </Button>
+
                     </StackPanel>
                 </GroupBox>
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Web clock">
-                    <StackPanel>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Enabled" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Enabled" />
 
-                        <TextBlock Margin="0,2,0,0">
+                        <TextBlock>
                             <Hyperlink Command="{Binding WebClockUrlLinkCommand}">
                                 <TextBlock Text="{Binding WebClockUrl, Mode=OneWay}" />
                             </Hyperlink>
@@ -176,30 +235,35 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Programming API">
-                    <StackPanel>
+                <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Remote Apps">
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsApiEnabled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Enabled" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Enabled" />
 
                         <CheckBox IsChecked="{Binding IsApiThrottled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Throttled" />
-
-                        <Label Style="{StaticResource LabelStyle}">Code:</Label>
-                        <TextBox Text="{Binding ApiCode, Mode=TwoWay}"></TextBox>
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Throttled" />
+                        
+                        <TextBox Text="{Binding ApiCode, Mode=TwoWay}" 
+                                 materialDesign:HintAssist.Hint="Access code"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
                     </StackPanel>
                 </GroupBox>
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Meeting countdown">
-                    <StackPanel>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsCountdownEnabled, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Enable meeting countdown" />
-
-                        <Label Style="{StaticResource LabelStyle}">Meeting start times (1 per line):</Label>
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Enable meeting countdown" />
+                        
                         <TextBox MinLines="6"
+                                 Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                                 materialDesign:HintAssist.Hint="Meeting start times (1 per line)"
                                  TextWrapping="Wrap"
                                  AcceptsTab="False"
-                                 Height="70"
+                                 Height="120"
                                  HorizontalScrollBarVisibility="Disabled"
                                  VerticalScrollBarVisibility="Auto"
                                  AcceptsReturn="True"
@@ -219,13 +283,15 @@
                 </GroupBox>
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Miscellaneous">
-                    <StackPanel>
+                    <StackPanel Style="{StaticResource SettingsStackPanel}">
 
                         <CheckBox IsChecked="{Binding AllowCountUpToggle, Mode=TwoWay}" 
-                                  Margin="0,10,0,0" Content="Allow count-up toggle" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Allow count-up toggle" />
 
                         <CheckBox IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}" 
-                          Margin="0,10,0,0" Content="Always on top" />
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Always on top" />
                         
                     </StackPanel>
                 </GroupBox>

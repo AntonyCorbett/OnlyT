@@ -387,7 +387,7 @@ namespace OnlyT.ViewModel
                 var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                 if (targetMonitor != null)
                 {
-                    _timerWindow = new TimerOutputWindow { DataContext = _timerWindowViewModel };
+                    _timerWindow = new TimerOutputWindow(_optionsService) { DataContext = _timerWindowViewModel };
                     ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
                 }
             }

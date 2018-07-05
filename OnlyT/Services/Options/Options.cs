@@ -2,8 +2,11 @@
 {
     // ReSharper disable MemberCanBePrivate.Global
     // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+    using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using System.Windows;
+    using Models;
 
     /// <summary>
     /// All program options. The full structure is written to disk in JSON format on change
@@ -27,7 +30,9 @@
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
             HttpServerPort = DefaultPort;
+            PersistDurationSecs = 90;
             IsApiThrottled = true;
+            PersistStudentTime = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
 
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
@@ -67,6 +72,8 @@
 
         public bool IsCircuitVisit { get; set; }
 
+        public bool PersistStudentTime { get; set; }
+
         public bool AlwaysOnTop { get; set; }
 
         public bool IsBellEnabled { get; set; }
@@ -90,6 +97,8 @@
         public bool CountUp { get; set; }
 
         public int HttpServerPort { get; set; }
+
+        public int PersistDurationSecs { get; set; }
 
         public bool IsWebClockEnabled { get; set; }
 
@@ -131,8 +140,32 @@
             {
                 HttpServerPort = DefaultPort;
             }
+            
+            var persistDurations = GetPersistDurationItems().ToArray();
+            if (persistDurations.FirstOrDefault(x => x.Seconds == PersistDurationSecs) == null)
+            {
+                PersistDurationSecs = persistDurations[persistDurations.Length / 2].Seconds;
+            }
 
             MeetingStartTimes.Sanitize();
+        }
+
+        public IEnumerable<PersistDurationItem> GetPersistDurationItems()
+        {
+            var result = new List<PersistDurationItem>();
+
+            const int NumItems = 11;
+            const int SecsIncrement = 15;
+
+            int secs = SecsIncrement;
+
+            for (int n = 0; n < NumItems; ++n)
+            {
+                result.Add(new PersistDurationItem(secs));
+                secs += SecsIncrement;
+            }
+
+            return result;
         }
     }
 }

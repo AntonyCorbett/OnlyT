@@ -4,6 +4,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media.Animation;
+    using System.Windows.Threading;
     using Animations;
     using GalaSoft.MvvmLight.Messaging;
     using Services.Options;
@@ -16,15 +17,30 @@
     /// </summary>
     public partial class TimerOutputWindow : Window
     {
-        private bool _persistingTimer;
-
-        public TimerOutputWindow()
+        private readonly DispatcherTimer _persistTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
+        private readonly IOptionsService _optionsService;
+        private bool _persistingTalkDuration;
+        
+        public TimerOutputWindow(IOptionsService optionsService)
         {
             InitializeComponent();
+
+            _optionsService = optionsService;
 
             Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
+            
+            _persistTimer.Tick += HandlePersistTimerTick;
+        }
+
+        private void HandlePersistTimerTick(object sender, EventArgs e)
+        {
+            if (_persistingTalkDuration)
+            {
+                _persistingTalkDuration = false;
+                AdjustDisplayOnTimerStop();
+            }
         }
 
         private void OnNavigate(NavigateMessage message)
@@ -49,17 +65,24 @@
         {
             if (msg.PersistFinalTimerValue)
             {
-                _persistingTimer = true;
+                _persistingTalkDuration = true;
+                _persistTimer.Interval = TimeSpan.FromSeconds(_optionsService.Options.PersistDurationSecs);
+                _persistTimer.Start();
             }
             else
             {
-                var model = (TimerOutputWindowViewModel)DataContext;
-                if (!model.SplitAndFullScrenModeIdentical())
-                {
-                    // only animate if the user has configured different display
-                    // layout for timer mode and full-screen mode
-                    DisplayFullScreenTimeOfDay();
-                }
+                AdjustDisplayOnTimerStop();
+            }
+        }
+
+        private void AdjustDisplayOnTimerStop()
+        {
+            var model = (TimerOutputWindowViewModel)DataContext;
+            if (!model.SplitAndFullScrenModeIdentical())
+            {
+                // only animate if the user has configured different display
+                // layout for timer mode and full-screen mode
+                DisplayFullScreenTimeOfDay();
             }
         }
 
@@ -167,7 +190,7 @@
         private void OnTimerStarted(TimerStartMessage msg)
         {
             var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.SplitAndFullScrenModeIdentical() && !_persistingTimer)
+            if (!model.SplitAndFullScrenModeIdentical() && !_persistingTalkDuration)
             {
                 model.TextColor = GreenYellowRedSelector.GetGreenBrush();
                 
@@ -176,7 +199,7 @@
                 DisplaySplitScreen();
             }
 
-            _persistingTimer = false;
+            _persistingTalkDuration = false;
         }
 
         private void DisplaySplitScreen()

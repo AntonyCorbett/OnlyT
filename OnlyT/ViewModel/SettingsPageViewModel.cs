@@ -34,7 +34,8 @@
         private readonly AdaptiveModeItem[] _adaptiveModes;
         private readonly FullScreenClockModeItem[] _timeOfDayModes;
         private readonly WebClockPortItem[] _ports;
-        
+        private readonly PersistDurationItem[] _persistDurationItems;
+
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
            IBellService bellService,
@@ -57,6 +58,7 @@
             _adaptiveModes = GetAdaptiveModes().ToArray();
             _timeOfDayModes = GetTimeOfDayModes().ToArray();
             _ports = GetPorts().ToArray();
+            _persistDurationItems = optionsService.Options.GetPersistDurationItems().ToArray();
             
             // commands...
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
@@ -275,8 +277,23 @@
             }
         }
 
-        public IEnumerable<WebClockPortItem> Ports => _ports;
+        public IEnumerable<PersistDurationItem> PersistDurationItems => _persistDurationItems;
 
+        public int PeristDurationSecs
+        {
+            get => _optionsService.Options.PersistDurationSecs;
+            set
+            {
+                if (_optionsService.Options.PersistDurationSecs != value)
+                {
+                    _optionsService.Options.PersistDurationSecs = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public IEnumerable<WebClockPortItem> Ports => _ports;
+        
         public int Port
         {
             get => _optionsService.Options.HttpServerPort;
@@ -319,6 +336,19 @@
                     _optionsService.Options.MidWeekOrWeekend = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
+                }
+            }
+        }
+
+        public bool PersistStudentTime
+        {
+            get => _optionsService.Options.PersistStudentTime;
+            set
+            {
+                if (_optionsService.Options.PersistStudentTime != value)
+                {
+                    _optionsService.Options.PersistStudentTime = value;
+                    RaisePropertyChanged();
                 }
             }
         }

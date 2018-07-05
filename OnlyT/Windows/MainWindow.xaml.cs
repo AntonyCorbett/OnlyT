@@ -52,7 +52,7 @@
                 ResizeMode = ResizeMode.CanResize;
                 MinHeight = MainWindowHeight;
                 MinWidth = MainWindowWidth;
-                
+
                 var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
                 var sz = optionsService.Options.SettingsPageSize;
                 if (sz != default(Size))
@@ -78,6 +78,7 @@
             var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
             if (!string.IsNullOrEmpty(optionsService.Options.AppWindowPlacement))
             {
+                this.SetPlacement(optionsService.Options.AppWindowPlacement);
                 this.SetPlacement(optionsService.Options.AppWindowPlacement, new Size(MainWindowWidth, MainWindowHeight));
             }
         }
@@ -86,7 +87,8 @@
         {
             SaveWindowPos();
             
-            MainViewModel m = (MainViewModel)DataContext;
+            var m = (MainViewModel)DataContext;
+
             if (m.CurrentPageName.Equals(SettingsPageViewModel.PageName))
             {
                 SaveSettingsWindowSize();

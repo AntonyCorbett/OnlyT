@@ -90,6 +90,11 @@
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
             Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
 
+            if (IsInDesignMode)
+            {
+                IsNewVersionAvailable = true;
+            }
+
             GetVersionData();
         }
 
@@ -675,7 +680,10 @@
         private void StopTimer()
         {
             var talk = GetCurrentTalk();
-            var msg = new TimerStopMessage(TalkId, _timerService.CurrentSecondsElapsed, talk.PersistFinalTimerValue);
+            var msg = new TimerStopMessage(
+                TalkId, 
+                _timerService.CurrentSecondsElapsed, 
+                _optionsService.Options.PersistStudentTime && talk.PersistFinalTimerValue);
             
             _timerService.Stop();
             _isStarting = false;
@@ -700,19 +708,22 @@
 
         private void GetVersionData()
         {
-            Task.Delay(2000).ContinueWith(_ =>
+            if (!IsNewVersionAvailable)
             {
-                var latestVersion = VersionDetection.GetLatestReleaseVersion();
-                if (latestVersion != null)
+                Task.Delay(2000).ContinueWith(_ =>
                 {
-                    if (latestVersion != VersionDetection.GetCurrentVersion())
+                    var latestVersion = VersionDetection.GetLatestReleaseVersion();
+                    if (latestVersion != null)
                     {
-                        // there is a new version....
-                        IsNewVersionAvailable = true;
-                        RaisePropertyChanged(nameof(IsNewVersionAvailable));
+                        if (latestVersion != VersionDetection.GetCurrentVersion())
+                        {
+                            // there is a new version....
+                            IsNewVersionAvailable = true;
+                            RaisePropertyChanged(nameof(IsNewVersionAvailable));
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         private void DisplayNewVersionPage()

@@ -32,7 +32,6 @@
             var responseData = new BellResponseData();
 
             // segments: "/" "api/" "v1/" "bell/"
-            //if (_optionsService.Options.IsBellEnabled && !_bellService.IsPlaying)
             if (!_bellService.IsPlaying)
             {
                 responseData.Success = true;
