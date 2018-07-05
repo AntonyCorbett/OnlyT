@@ -2,7 +2,7 @@
 
 Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed for use in Kingdom Halls where the meeting format is predefined, but has a "manual" and "file-based" mode that can be used to configure the timers as required (and so can be used in other settings too).
 
-![Main Window](http://cv8.org.uk/soundbox/OnlyT/Images/MainWindow.png)
+![Main Window](http://cv8.org.uk/soundbox/OnlyT/Images/MainWindow2.png)
 
 ![Timer Display](http://cv8.org.uk/soundbox/OnlyT/Images/Monitor02.png)
 
