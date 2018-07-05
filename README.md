@@ -16,5 +16,5 @@ See the [wiki](https://github.com/AntonyCorbett/OnlyT/wiki) for basic instructio
 
 ### License, etc
 
-OnlyT is Copyright &copy; 2017 Antony Corbett and other contributors under the [MIT license](LICENSE).
+OnlyT is Copyright &copy; 2018 Antony Corbett and other contributors under the [MIT license](LICENSE).
 
