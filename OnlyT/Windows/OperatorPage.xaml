@@ -273,7 +273,8 @@
                 <ColumnDefinition Width="52" />
             </Grid.ColumnDefinitions>
 
-            <Button Background="Transparent"
+            <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                    Margin="0,0,10,0"
                     ToolTip="Close Countdown"
                     Grid.Column="0"
                     FontSize="14"
