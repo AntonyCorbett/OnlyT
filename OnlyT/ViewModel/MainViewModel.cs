@@ -1,3 +1,7 @@
+using System.Windows.Interop;
+using System.Windows.Media;
+using OnlyT.Services.CommandLine;
+
 namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
@@ -49,8 +53,15 @@ namespace OnlyT.ViewModel
            IMonitorsService monitorsService,
            ITalkTimerService timerService,
            IHttpServer httpServer,
+           ICommandLineService commandLineService,
            ICountdownTimerTriggerService countdownTimerTriggerService)
         {
+            if (commandLineService.NoGpu)
+            {
+                // disable hardware (GPU) rendering so that it's all done by the CPU...
+                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            }
+
             _optionsService = optionsService;
             _monitorsService = monitorsService;
             _httpServer = httpServer;

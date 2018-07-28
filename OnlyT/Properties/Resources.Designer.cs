@@ -309,7 +309,16 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not available while timer is running!.
+        ///   Looks up a localized string similar to Settings disabled by administrator!.
+        /// </summary>
+        internal static string NOT_AVAIL_ADMIN {
+            get {
+                return ResourceManager.GetString("NOT_AVAIL_ADMIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings not available while timer is running!.
         /// </summary>
         internal static string NOT_AVAIL_TIMER_RUNNING {
             get {

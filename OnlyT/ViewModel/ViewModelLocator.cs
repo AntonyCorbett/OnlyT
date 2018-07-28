@@ -1,3 +1,5 @@
+using OnlyT.Services.CommandLine;
+
 namespace OnlyT.ViewModel
 {
     using CommonServiceLocator;
@@ -23,6 +25,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<IBellService, BellService>();
             SimpleIoc.Default.Register<IAdaptiveTimerService, AdaptiveTimerService>();
             SimpleIoc.Default.Register<IHttpServer, HttpServer>();
+            SimpleIoc.Default.Register<ICommandLineService, CommandLineService>();
             SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
 
             SimpleIoc.Default.Register<MainViewModel>();

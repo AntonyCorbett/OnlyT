@@ -254,7 +254,7 @@
     <value>None</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Not available while timer is running!</value>
+    <value>Settings not available while timer is running!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Settings</value>
@@ -270,5 +270,8 @@
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Weekend</value>
+  </data>
+  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
+    <value>Settings disabled by administrator!</value>
   </data>
 </root>

@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.Options
+﻿using OnlyT.Services.CommandLine;
+
+namespace OnlyT.Services.Options
 {
     using System;
     using System.IO;
@@ -10,12 +12,18 @@
     /// Service to deal with program settings
     /// </summary>
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class OptionsService : IOptionsService
+    internal class OptionsService : IOptionsService
     {
+        private readonly ICommandLineService _commandLineService;
         private readonly int _optionsVersion = 1;
         private Options _options;
         private string _optionsFilePath;
         private string _originalOptionsSignature;
+
+        public OptionsService(ICommandLineService commandLineService)
+        {
+            _commandLineService = commandLineService;
+        }
 
         public Options Options
         {
@@ -66,7 +74,7 @@
             {
                 try
                 {
-                    string commandLineIdentifier = CommandLineParser.Instance.GetId();
+                    string commandLineIdentifier = _commandLineService.OptionsIdentifier;
                     _optionsFilePath = FileUtils.GetUserOptionsFilePath(commandLineIdentifier, _optionsVersion);
                     var path = Path.GetDirectoryName(_optionsFilePath);
                     if (path != null)

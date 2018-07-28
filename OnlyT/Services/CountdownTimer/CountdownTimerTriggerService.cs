@@ -7,7 +7,7 @@
     using Options.MeetingStartTimes;
     
     // ReSharper disable once ClassNeverInstantiated.Global
-    public sealed class CountdownTimerTriggerService : ICountdownTimerTriggerService
+    internal sealed class CountdownTimerTriggerService : ICountdownTimerTriggerService
     {
         private const int CountdownDurationMins = 5;
         private readonly object _locker = new object();

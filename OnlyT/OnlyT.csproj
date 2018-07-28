@@ -45,6 +45,9 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="FluentCommandLineParser, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentCommandLineParser.1.4.3\lib\net35\FluentCommandLineParser.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -148,6 +151,8 @@
     <Compile Include="Models\MonitorItem.cs" />
     <Compile Include="Models\OperatingModeItem.cs" />
     <Compile Include="Models\TalkScheduleItem.cs" />
+    <Compile Include="Services\CommandLine\CommandLineService.cs" />
+    <Compile Include="Services\CommandLine\ICommandLineService.cs" />
     <Compile Include="Services\CountdownTimer\CountdownTimerTriggerService.cs" />
     <Compile Include="Services\CountdownTimer\CountdownTriggerPeriod.cs" />
     <Compile Include="Services\CountdownTimer\ICountdownTimerTriggerService.cs" />
@@ -176,7 +181,6 @@
     <Compile Include="Services\Timer\ITalkTimerService.cs" />
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\BitmapConverter.cs" />
-    <Compile Include="Utils\CommandLineParser.cs" />
     <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FirewallPortsClient.cs" />

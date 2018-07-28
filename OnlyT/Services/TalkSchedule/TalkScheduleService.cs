@@ -12,7 +12,7 @@
     /// Service to handle the delivery of a talk schedule based on current "Operating mode"
     /// </summary>
     // ReSharper disable once ClassNeverInstantiated.Global
-    public sealed class TalkScheduleService : ITalkScheduleService
+    internal sealed class TalkScheduleService : ITalkScheduleService
     {
         private readonly IOptionsService _optionsService;
 

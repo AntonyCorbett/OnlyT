@@ -11,7 +11,7 @@
     using Services.Options;
     using Utils;
 
-    internal class TimerOutputWindowViewModel : ViewModelBase
+    public class TimerOutputWindowViewModel : ViewModelBase
     {
         private static int _secsPerHour = 60 * 60;
         private readonly IOptionsService _optionsService;

@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using OnlyT.Services.CommandLine;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -40,6 +42,7 @@
         private readonly IOptionsService _optionsService;
         private readonly IAdaptiveTimerService _adaptiveTimerService;
         private readonly IBellService _bellService;
+        private readonly ICommandLineService _commandLineService;
         private int _secondsElapsed;
         private bool _countUp;
         private static readonly Brush WhiteBrush = Brushes.White;
@@ -55,11 +58,13 @@
            ITalkScheduleService scheduleService,
            IAdaptiveTimerService adaptiveTimerService,
            IOptionsService optionsService,
+           ICommandLineService commandLineService,
            IBellService bellService)
         {
             _scheduleService = scheduleService;
             _optionsService = optionsService;
             _adaptiveTimerService = adaptiveTimerService;
+            _commandLineService = commandLineService;
             _bellService = bellService;
             _timerService = timerService;
             _timerService.TimerChangedEvent += TimerChangedHandler;
@@ -72,7 +77,7 @@
             // commands...
             StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk, true);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
-            SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning);
+            SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
             HelpCommand = new RelayCommand(LaunchHelp);
             NewVersionCommand = new RelayCommand(DisplayNewVersionPage);
             IncrementTimerCommand = new RelayCommand(IncrementTimer, CanIncreaseTimerValue);
@@ -130,9 +135,11 @@
         }
 
         public string SettingsHint =>
-            IsRunning
-                ? Properties.Resources.NOT_AVAIL_TIMER_RUNNING
-                : Properties.Resources.SETTINGS;
+            _commandLineService.NoSettings
+                ? Properties.Resources.NOT_AVAIL_ADMIN
+                : IsRunning
+                    ? Properties.Resources.NOT_AVAIL_TIMER_RUNNING
+                    : Properties.Resources.SETTINGS;
 
         public string BellTooltip
         {
@@ -149,7 +156,7 @@
                 return string.Empty;
             }
         }
-
+        
         public bool IsManualMode => _optionsService.Options.OperatingMode == OperatingMode.Manual;
 
         public bool IsNotManualMode => _optionsService.Options.OperatingMode != OperatingMode.Manual;

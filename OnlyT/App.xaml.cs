@@ -38,12 +38,6 @@
             {
                 ConfigureLogger();
             }
-
-            if (CommandLineParser.Instance.IsSwitchSet("-nogpu") || ForceSoftwareRendering())
-            {
-                // disable hardware (GPU) rendering so that it's all done by the CPU...
-                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-            }
         }
 
         private bool ForceSoftwareRendering()
