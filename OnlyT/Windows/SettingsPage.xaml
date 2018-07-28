@@ -244,8 +244,21 @@
                         <CheckBox IsChecked="{Binding IsApiThrottled, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="Throttled" />
-                        
+
+                        <TextBox Text="{Binding MobileIpAddress, Mode=OneWay}" 
+                                 Margin="0,5,0,0"
+                                 IsReadOnly="True"
+                                 materialDesign:HintAssist.Hint="IP Address"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <TextBox Text="{Binding Port, Mode=OneWay}" 
+                                 Margin="0,5,0,0"
+                                 IsReadOnly="True"
+                                 materialDesign:HintAssist.Hint="Port"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
                         <TextBox Text="{Binding ApiCode, Mode=TwoWay}" 
+                                 Margin="0,5,0,0"
                                  materialDesign:HintAssist.Hint="Access code"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 

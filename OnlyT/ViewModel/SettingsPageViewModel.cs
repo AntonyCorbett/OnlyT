@@ -599,6 +599,20 @@
             }
         }
 
+        public string MobileIpAddress
+        {
+            get
+            {
+                string ipAddress = LocalIpAddress.GetLocalIp4Address();
+                if (!string.IsNullOrEmpty(ipAddress))
+                {
+                    return ipAddress;
+                }
+
+                return "not available";
+            }
+        }
+
         private void OnShutDown(ShutDownMessage obj)
         {
             Save();
