@@ -69,7 +69,9 @@
 
         </Button>
 
-        <ScrollViewer Grid.Row="1" Padding="10,0,10,10" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" Padding="10,0,10,10" 
+                      PanningMode="VerticalOnly"
+                      VerticalScrollBarVisibility="Auto">
             <WrapPanel Orientation="Horizontal">
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="Main">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">

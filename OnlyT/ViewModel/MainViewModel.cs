@@ -42,11 +42,11 @@ namespace OnlyT.ViewModel
         private readonly IHttpServer _httpServer;
         private readonly TimerOutputWindowViewModel _timerWindowViewModel;
         private readonly CountdownTimerViewModel _countdownWindowViewModel;
+        private readonly (int dpiX, int dpiY) _systemDpi;
         private DispatcherTimer _heartbeatTimer;
         private bool _countdownDone;
         private TimerOutputWindow _timerWindow;
         private CountdownWindow _countdownWindow;
-        private (int dpiX, int dpiY) _systemDpi;
 
         public MainViewModel(
            IOptionsService optionsService,
