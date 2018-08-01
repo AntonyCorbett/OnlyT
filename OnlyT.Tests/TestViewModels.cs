@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Tests
+﻿using OnlyT.Services.CommandLine;
+
+namespace OnlyT.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
@@ -26,12 +28,14 @@
             Mock<IAdaptiveTimerService> adaptiveTimerService = new Mock<IAdaptiveTimerService>();
             ITalkScheduleService scheduleService = new MockTalksScheduleService(TalkIdStart, NumTalks);
             Mock<IBellService> bellService = new Mock<IBellService>();
+            Mock<ICommandLineService> commandLineService = new Mock<ICommandLineService>();
 
             var vm = new OperatorPageViewModel(
                 timerService.Object, 
                 scheduleService,
                 adaptiveTimerService.Object, 
                 optionsService.Object,
+                commandLineService.Object,
                 bellService.Object);
 
             Assert.IsFalse(vm.IsRunning);

@@ -563,7 +563,7 @@
             set
             {
                 var val = value.Trim();
-                if (!_optionsService.Options.ApiCode.Equals(val))
+                if (_optionsService.Options.ApiCode == null || !_optionsService.Options.ApiCode.Equals(val))
                 {
                     _optionsService.Options.ApiCode = val;
                     RaisePropertyChanged();
