@@ -1,6 +1,4 @@
-﻿using OnlyT.Services.CommandLine;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -12,12 +10,13 @@ namespace OnlyT.ViewModel
     using System.Windows.Media;
     using AutoUpdates;
     using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.CommandWpf;
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
     using Serilog;
     using Services.Bell;
+    using Services.CommandLine;
     using Services.Options;
     using Services.TalkSchedule;
     using Services.Timer;

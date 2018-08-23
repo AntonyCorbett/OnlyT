@@ -1,9 +1,8 @@
-﻿using OnlyT.Services.CommandLine;
-
-namespace OnlyT.Services.Options
+﻿namespace OnlyT.Services.Options
 {
     using System;
     using System.IO;
+    using CommandLine;
     using Newtonsoft.Json;
     using Serilog;
     using Utils;

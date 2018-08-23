@@ -7,7 +7,7 @@
     using System.Windows.Media.Imaging;
     using AutoUpdates;
     using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.CommandWpf;
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
