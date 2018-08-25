@@ -115,7 +115,8 @@
 										currentTargetSecs=parseInt(entry.getAttribute("targetSecs"));
 
 										var timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
-										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + ((currentTimerSecs - 1) * 1000) + currentTimerMillisecs;
+										//var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + ((currentTimerSecs - 1) * 1000) + currentTimerMillisecs;
+										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000) + currentTimerMillisecs;
 										var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
 														
 										if(Math.abs(diffMillisecs) > 100)
@@ -183,12 +184,12 @@
 
 			function setClockColour(remainingSecs, paused)
 			{
-				if(remainingSecs < 1)
+				if(remainingSecs <= 0)
 				{
 					textElem.className = paused? "clockstyle_dkred" : "clockstyle_red";					
 				}
 
-				else if(remainingSecs < 31)
+				else if(remainingSecs <= 30)
 				{
 					textElem.className = paused? "clockstyle_dkgreen" : "clockstyle_yellow";					
 				}
@@ -228,12 +229,22 @@
 											
 					case "Timer":
 						var clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;					
+
 						var targetSecs = currentTargetSecs;
 						var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
+												
 						setClockColour(remainingSecs, false);
 
-						remainingSecs = Math.abs(remainingSecs);
-						var secs = Math.floor(remainingSecs % 60);
+						if(remainingSecs > 0)
+						{
+							remainingSecs = Math.abs(remainingSecs);
+							var secs = Math.ceil(remainingSecs % 60);
+						}
+						else
+						{
+							remainingSecs = Math.abs(remainingSecs);
+							var secs = Math.floor(remainingSecs % 60);
+						}
 				
 						if(FIVE_SEC_TIMER)
 						{																						
@@ -273,8 +284,16 @@
 							var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
 							setClockColour(remainingSecs, true);
 
-							remainingSecs = Math.abs(remainingSecs);
-							var secs = Math.floor(remainingSecs % 60);
+							if(remainingSecs > 0)
+							{
+								remainingSecs = Math.abs(remainingSecs);
+								var secs = Math.ceil(remainingSecs % 60);
+							}
+							else
+							{
+								remainingSecs = Math.abs(remainingSecs);
+								var secs = Math.floor(remainingSecs % 60);
+							}
 				
 							s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
 							currentDisplayMode = currentMode;						
