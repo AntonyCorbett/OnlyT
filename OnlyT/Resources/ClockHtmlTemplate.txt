@@ -75,7 +75,6 @@
 			var timerStartDateTime = new Date();
 			var modeTransition = false;
 			var serverTimeOfDayAdjustment = 0;
-			var FIVE_SEC_TIMER = false;
 			var POLLING_INTERVAL_SECS = 4;
 									
 			function getOnlyTXml() 
@@ -105,8 +104,7 @@
 								
 								switch(currentMode)
 								{
-									case "Timer":
-									case "TimerPause":										
+									case "Timer":									
 										var requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
 
 										currentTimerMins=parseInt(entry.getAttribute("mins"));
@@ -114,8 +112,7 @@
 										currentTimerMillisecs=parseInt(entry.getAttribute("ms"));
 										currentTargetSecs=parseInt(entry.getAttribute("targetSecs"));
 
-										var timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
-										//var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + ((currentTimerSecs - 1) * 1000) + currentTimerMillisecs;
+										var timerElapsedMillisecs = getClientTimerElapsedMilliSecs();										
 										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000) + currentTimerMillisecs;
 										var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
 														
@@ -182,21 +179,21 @@
 				}
 			}
 
-			function setClockColour(remainingSecs, paused)
+			function setClockColour(remainingSecs)
 			{
 				if(remainingSecs <= 0)
 				{
-					textElem.className = paused? "clockstyle_dkred" : "clockstyle_red";					
+					textElem.className = "clockstyle_red";					
 				}
 
 				else if(remainingSecs <= 30)
 				{
-					textElem.className = paused? "clockstyle_dkgreen" : "clockstyle_yellow";					
+					textElem.className = "clockstyle_yellow";					
 				}
 
 				else
 				{
-					textElem.className = paused? "clockstyle_dkgreen" : "clockstyle_green";					
+					textElem.className = "clockstyle_green";					
 				}
 			}
 
@@ -233,7 +230,7 @@
 						var targetSecs = currentTargetSecs;
 						var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
 												
-						setClockColour(remainingSecs, false);
+						setClockColour(remainingSecs);
 
 						if(remainingSecs > 0)
 						{
@@ -246,58 +243,8 @@
 							var secs = Math.floor(remainingSecs % 60);
 						}
 				
-						if(FIVE_SEC_TIMER)
-						{																						
-							if(secs % 5 == 0)
-							{
-								// every 5 secs
-								s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
-								currentDisplayMode = currentMode;
-							}
-							else if (currentDisplayMode == currentMode)
-							{							
-								s = "stet";
-								modeTransition = false;
-							}										
-							else
-							{													
-								s = "";
-							}
-						}
-						else
-						{
-							s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
-							currentDisplayMode = currentMode;
-						}
-						break;
-
-					case "TimerPause":
-						if(currentDisplayMode == currentMode)
-						{
-							// already paused...
-							s = "stet";
-						}
-						else
-						{
-							var clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;					
-							var targetSecs = currentTargetSecs;
-							var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
-							setClockColour(remainingSecs, true);
-
-							if(remainingSecs > 0)
-							{
-								remainingSecs = Math.abs(remainingSecs);
-								var secs = Math.ceil(remainingSecs % 60);
-							}
-							else
-							{
-								remainingSecs = Math.abs(remainingSecs);
-								var secs = Math.floor(remainingSecs % 60);
-							}
-				
-							s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
-							currentDisplayMode = currentMode;						
-						}
+						s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
+						currentDisplayMode = currentMode;
 						break;
 
 					case "Nameplate":

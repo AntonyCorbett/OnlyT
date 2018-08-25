@@ -15,11 +15,6 @@
         /// <summary>
         /// The timer.
         /// </summary>
-        Timer,
-
-        /// <summary>
-        /// The timer pause.
-        /// </summary>
-        TimerPause
+        Timer
     }
 }
