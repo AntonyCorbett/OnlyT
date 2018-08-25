@@ -87,11 +87,6 @@
                     sb.AppendLine(
                         $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" />");
                     break;
-
-                case ClockServerMode.TimerPause:
-                    sb.AppendLine(
-                        $" <clock mode=\"TimerPause\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" />");
-                    break;
             }
 
             sb.AppendLine("</root>");
