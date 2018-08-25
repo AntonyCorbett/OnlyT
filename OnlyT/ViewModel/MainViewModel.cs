@@ -169,7 +169,7 @@ namespace OnlyT.ViewModel
                 timerData.Mode = ClockServerMode.Timer;
 
                 timerData.TargetSecs = info.TargetSeconds;
-                timerData.Mins = info.ElapsedTime.Minutes;
+                timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
                 timerData.Secs = info.ElapsedTime.Seconds;
                 timerData.Millisecs = info.ElapsedTime.Milliseconds;
             }
