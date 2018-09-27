@@ -219,21 +219,28 @@
 
 						var targetSecs = currentTargetSecs;
 						var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
-
+						
 						setClockColour(remainingSecs);
 						
 						if(remainingSecs < 0)
 						{
 							remainingSecs = Math.abs(remainingSecs);							
-							var secs = Math.floor(remainingSecs % 60);
+							var remainingMins = Math.floor(remainingSecs / 60.0);
+							var secs = Math.floor(remainingSecs % 60);							
 						}
 						else
 						{
 							remainingSecs = Math.abs(remainingSecs);							
+							var remainingMins = Math.floor(remainingSecs / 60.0);
 							var secs = Math.ceil(remainingSecs % 60);
+							if(secs === 60)
+							{
+								secs = 0;
+								++remainingMins;
+							}							
 						}
 						
-						s = formatMajorMinor(Math.floor(remainingSecs / 60.0), secs);
+						s = formatMajorMinor(remainingMins, secs);
 						currentDisplayMode = currentMode;
 						break;
 
