@@ -101,6 +101,7 @@
         {
             var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
             optionsService.Options.AppWindowPlacement = this.GetPlacement();
+            optionsService.Save();
         }
 
         private void SaveSettingsWindowSize()
