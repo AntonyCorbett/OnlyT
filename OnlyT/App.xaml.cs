@@ -61,6 +61,10 @@ namespace OnlyT
             var commandLineService = ViewModelLocator.CommandLineServiceFactory();
             if (commandLineService.IgnoreMutex)
             {
+                // if the "nomutex" option is specified then
+                // it is possible to run multiple instances
+                // (the user is responsible for ensuring that
+                // settings are not shared).
                 return false;
             }
 
