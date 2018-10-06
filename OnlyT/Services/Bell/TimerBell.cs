@@ -75,7 +75,7 @@
 
         public void Dispose()
         {
-            Clearup();
+            ClearUp();
         }
 
         private static string GetBellFilePath()
@@ -86,11 +86,11 @@
 
         private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
         {
-            Clearup();
+            ClearUp();
             IsPlaying = false;
         }
 
-        private void Clearup()
+        private void ClearUp()
         {
             if (_player != null)
             {

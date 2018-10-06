@@ -50,9 +50,9 @@
                     {
                         if (talk.AllowAdaptive)
                         {
-                            DateTime talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
-                            DateTime talkActualStartTime = DateTime.UtcNow;
-                            TimeSpan deviation = talkActualStartTime - talkPlannedStartTime;
+                            var talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
+                            var talkActualStartTime = DateTime.UtcNow;
+                            var deviation = talkActualStartTime - talkPlannedStartTime;
 
                             if (DeviationWithinRange(deviation))
                             {

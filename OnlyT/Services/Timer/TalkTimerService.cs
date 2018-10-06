@@ -17,15 +17,59 @@
         private readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
         private int _targetSecs = 600;
         private int? _talkId;
-
-        public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
-
-        public event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
+        private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
+        private int _currentSecondsElapsed;
 
         public TalkTimerService()
         {
             _timer.Interval = _timerInterval;
             _timer.Tick += TimerElapsedHandler;
+        }
+
+        public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
+
+        public event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
+
+        /// <summary>
+        /// Gets a value indicating whether the timer is running
+        /// </summary>
+        public bool IsRunning => _stopWatch.IsRunning;
+
+        /// <summary>
+        /// Gets or sets the current number of seconds elapsed
+        /// </summary>
+        public int CurrentSecondsElapsed
+        {
+            get => _currentSecondsElapsed;
+            set
+            {
+                if (_currentSecondsElapsed != value)
+                {
+                    _currentSecondsElapsed = value;
+                    OnTimerChangedEvent(new TimerChangedEventArgs
+                    {
+                        TargetSecs = _targetSecs,
+                        ElapsedSecs = _currentSecondsElapsed,
+                        IsRunning = IsRunning
+                    });
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the current elapsed time
+        /// </summary>
+        private TimeSpan CurrentTimeElapsed
+        {
+            get => _currentTimeElapsed;
+            set
+            {
+                if (_currentTimeElapsed != value)
+                {
+                    _currentTimeElapsed = value;
+                    CurrentSecondsElapsed = (int)_currentTimeElapsed.TotalSeconds;
+                }
+            }
         }
 
         public void SetupTalk(int talkId, int targetSeconds)
@@ -94,48 +138,7 @@
                 TimeElapsed = CurrentTimeElapsed
             };
         }
-
-        private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
-
-        /// <summary>
-        /// The current elapsed time
-        /// </summary>
-        private TimeSpan CurrentTimeElapsed
-        {
-            get => _currentTimeElapsed;
-            set
-            {
-                if (_currentTimeElapsed != value)
-                {
-                    _currentTimeElapsed = value;
-                    CurrentSecondsElapsed = (int)_currentTimeElapsed.TotalSeconds;
-                }
-            }
-        }
-
-        private int _currentSecondsElapsed;
-
-        /// <summary>
-        /// The current number of seconds elapsed
-        /// </summary>
-        public int CurrentSecondsElapsed
-        {
-            get => _currentSecondsElapsed;
-            set
-            {
-                if (_currentSecondsElapsed != value)
-                {
-                    _currentSecondsElapsed = value;
-                    OnTimerChangedEvent(new TimerChangedEventArgs
-                    {
-                        TargetSecs = _targetSecs,
-                        ElapsedSecs = _currentSecondsElapsed,
-                        IsRunning = IsRunning
-                    });
-                }
-            }
-        }
-
+        
         public ClockRequestInfo GetClockRequestInfo()
         {
             return new ClockRequestInfo
@@ -145,11 +148,6 @@
                 IsRunning = IsRunning
             };
         }
-
-        /// <summary>
-        /// Is the timer running?
-        /// </summary>
-        public bool IsRunning => _stopWatch.IsRunning;
 
         private void OnTimerChangedEvent(TimerChangedEventArgs e)
         {

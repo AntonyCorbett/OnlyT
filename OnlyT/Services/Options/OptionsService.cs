@@ -34,6 +34,18 @@
         }
 
         /// <summary>
+        /// Gets a value indicating whether the timer monitor is specified
+        /// </summary>
+        public bool IsTimerMonitorSpecified
+        {
+            get
+            {
+                Init();
+                return !string.IsNullOrEmpty(Options.TimerMonitorId);
+            }
+        }
+
+        /// <summary>
         /// Saves the settings (if they have changed since they were last read)
         /// </summary>
         public void Save()
@@ -48,22 +60,9 @@
                     Log.Logger.Information("Settings changed and saved");
                 }
             }
-            // ReSharper disable once CatchAllClause
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not save settings");
-            }
-        }
-
-        /// <summary>
-        /// Determines if the timer monitor is specified
-        /// </summary>
-        public bool IsTimerMonitorSpecified
-        {
-            get
-            {
-                Init();
-                return !string.IsNullOrEmpty(Options.TimerMonitorId);
             }
         }
 
@@ -91,7 +90,6 @@
                     // when we come to save them
                     _originalOptionsSignature = GetOptionsSignature(_options);
                 }
-                // ReSharper disable once CatchAllClause
                 catch (Exception ex)
                 {
                     Log.Logger.Error(ex, "Could not read options file");

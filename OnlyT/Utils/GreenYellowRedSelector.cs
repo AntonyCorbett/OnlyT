@@ -10,7 +10,7 @@
     {
         private static readonly Brush GreenBrush = new SolidColorBrush(Colors.Chartreuse);
         private static readonly Brush YellowBrush = new SolidColorBrush(Colors.Yellow);
-        private static readonly Brush Redbrush = new SolidColorBrush(Colors.Red);
+        private static readonly Brush RedBrush = new SolidColorBrush(Colors.Red);
 
         /// <summary>
         /// Gets a brush (red, yellow or green)
@@ -21,7 +21,7 @@
         {
             if (secsRemaining <= 0)
             {
-                return Redbrush;
+                return RedBrush;
             }
 
             if (secsRemaining <= 30)

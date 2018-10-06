@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Behaviours
 {
+    using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Interactivity;
@@ -7,7 +8,7 @@
     /// <summary>
     /// Helper class to disable effect of gratuitous double-clicking
     /// </summary>
-    public class DisableDoubleClickBehavior : Behavior<Button>
+    public class DoubleClickBehaviour : Behavior<Button>
     {
         protected override void OnAttached()
         {
@@ -19,6 +20,11 @@
         {
             AssociatedObject.PreviewMouseDoubleClick -= AssociatedObjectOnPreviewMouseDoubleClick;
             base.OnDetaching();
+        }
+
+        protected override Freezable CreateInstanceCore()
+        {
+            throw new System.NotImplementedException();
         }
 
         private void AssociatedObjectOnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs mouseButtonEventArgs)

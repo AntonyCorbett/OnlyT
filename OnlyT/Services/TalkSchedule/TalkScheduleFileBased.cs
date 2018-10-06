@@ -14,7 +14,7 @@
     internal static class TalkScheduleFileBased
     {
         private static readonly string FileName = "talk_schedule.xml";
-        private static int StartId = 5000;
+        private static readonly int StartId = 5000;
 
         public static IEnumerable<TalkScheduleItem> Read()
         {
@@ -49,7 +49,6 @@
                         }
                     }
                 }
-                // ReSharper disable once CatchAllClause
                 catch (Exception ex)
                 {
                     result = null;

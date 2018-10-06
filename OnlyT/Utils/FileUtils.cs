@@ -29,15 +29,6 @@
         }
 
         /// <summary>
-        /// Gets system temp folder
-        /// </summary>
-        /// <returns>Temp folder</returns>
-        public static string GetSystemTempFolder()
-        {
-            return Path.GetTempPath();
-        }
-
-        /// <summary>
         /// Gets the log folder
         /// </summary>
         /// <returns>Log folder</returns>
@@ -85,22 +76,6 @@
             string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppNamePathSegment);
             Directory.CreateDirectory(folder);
             return folder;
-        }
-
-        private static bool DirectoryIsAvailable(string dir)
-        {
-            if (string.IsNullOrEmpty(dir))
-            {
-                return false;
-            }
-
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-                return Directory.Exists(dir);
-            }
-
-            return true;
         }
     }
 }

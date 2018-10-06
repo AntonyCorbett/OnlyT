@@ -15,8 +15,8 @@
 
         public override string ToString()
         {
-            var studentTalkeStr = IsStudentTalk ? " (student)" : string.Empty;
-            return $"{TalkType}, {Minutes} mins{studentTalkeStr}";
+            var studentTalkStr = IsStudentTalk ? " (student)" : string.Empty;
+            return $"{TalkType}, {Minutes} mins{studentTalkStr}";
         }
     }
 }

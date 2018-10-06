@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Utils
 {
+    // ReSharper disable CommentTypo
     // ReSharper disable InconsistentNaming
     // ReSharper disable StyleCop.SA1307
     // ReSharper disable MemberCanBePrivate.Global

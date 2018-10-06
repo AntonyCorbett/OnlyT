@@ -9,6 +9,22 @@
     /// </summary>
     public class TalkScheduleItem
     {
+        /// <summary>
+        /// Manually modified duration (after user modification)
+        /// </summary>
+        private TimeSpan? _modifiedDuration;
+        private bool? _originalBell;
+        private bool _bell;
+
+        public TalkScheduleItem()
+        {
+        }
+
+        public TalkScheduleItem(TalkTypesAutoMode tt)
+        {
+            Id = (int)tt;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -23,19 +39,14 @@
         public bool? CountUp { get; set; }
 
         /// <summary>
-        /// The duration for which the timer ran (or null if not run yet)
+        /// Gets or sets the duration for which the timer ran (or null if not run yet)
         /// </summary>
         public int? CompletedTimeSecs { get; set; }
 
         /// <summary>
-        /// Original duration (before any user modification)
+        /// Gets or sets the original duration (before any user modification)
         /// </summary>
         public TimeSpan OriginalDuration { get; set; }
-
-        /// <summary>
-        /// Manually modified duration (after user modification)
-        /// </summary>
-        private TimeSpan? _modifiedDuration;
 
         public TimeSpan? ModifiedDuration
         {
@@ -50,12 +61,12 @@
         }
 
         /// <summary>
-        /// Adapted duration (following adaptive timer service calculation)
+        /// Gets or sets the adapted duration (following adaptive timer service calculation)
         /// </summary>
         public TimeSpan? AdaptedDuration { get; set; }
 
         /// <summary>
-        /// Actual duration used (may be original, manually adjusted or adapted)
+        /// Gets or sets the actual duration used (may be original, manually adjusted or adapted)
         /// </summary>
         public TimeSpan ActualDuration 
         {
@@ -81,9 +92,8 @@
 
         public bool PersistFinalTimerValue { get; set; }
 
-        public bool Editable { get; set; }  // can the timer be modified manually?
-
-        private bool? _originalBell;
+        // can the timer be modified manually?
+        public bool Editable { get; set; } 
 
         public bool OriginalBell
         {
@@ -96,8 +106,6 @@
                 }
             }
         }
-
-        private bool _bell;
         
         // should a bell be sounded at time-up?
         public bool Bell
@@ -111,15 +119,6 @@
                     OriginalBell = value;
                 }
             }
-        }
-        
-        public TalkScheduleItem()
-        {
-        }
-
-        public TalkScheduleItem(TalkTypesAutoMode tt)
-        {
-            Id = (int)tt;
         }
 
         public int GetDurationSeconds()

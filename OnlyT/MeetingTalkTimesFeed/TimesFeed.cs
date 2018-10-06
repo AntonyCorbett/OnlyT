@@ -21,7 +21,7 @@
             _localFeedFile = Path.Combine(FileUtils.GetAppDataFolder(), "feed.json");
         }
 
-        public Meeting GetTodaysMeetingData()
+        public Meeting GetMeetingDataForToday()
         {
             LoadFile();
             return _meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
@@ -33,8 +33,8 @@
 
             if (File.Exists(_localFeedFile))
             {
-                DateTime created = File.GetLastWriteTime(_localFeedFile);
-                TimeSpan diff = DateTime.Now - created;
+                var created = File.GetLastWriteTime(_localFeedFile);
+                var diff = DateTime.Now - created;
                 if (diff.TotalDays <= _tooOldDays)
                 {
                     tooOld = false;
@@ -68,7 +68,6 @@
                         needRefresh = true;
                     }
                 }
-                // ReSharper disable once CatchAllClause
                 catch (Exception ex)
                 {
                     needRefresh = true;
@@ -84,7 +83,6 @@
                     result = JsonConvert.DeserializeObject<List<Meeting>>(content);
                     File.WriteAllText(_localFeedFile, content, Encoding.UTF8);
                 }
-                // ReSharper disable once CatchAllClause
                 catch (Exception ex)
                 {
                     Log.Logger.Error(ex, "Downloading meeting feed");

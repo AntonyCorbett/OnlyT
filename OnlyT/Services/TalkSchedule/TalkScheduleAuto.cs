@@ -49,7 +49,7 @@
         private const string SectionMinistry = "Ministry";
         private const string SectionLiving = "Living";
 
-        // weekend sectons.
+        // weekend sections.
         private const string SectionWeekend = "Weekend";
 
         /// <summary>
@@ -63,7 +63,7 @@
             
             return optionsService.Options.MidWeekOrWeekend == MidWeekOrWeekend.Weekend
                 ? GetWeekendMeetingSchedule(isCircuitVisit)
-                : GetMidweekMeetingSchedule(isCircuitVisit, new TimesFeed().GetTodaysMeetingData());
+                : GetMidweekMeetingSchedule(isCircuitVisit, new TimesFeed().GetMeetingDataForToday());
         }
 
         private static TalkScheduleItem CreateTreasuresItem(

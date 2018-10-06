@@ -8,6 +8,8 @@
 
     public class MeetingStartTime
     {
+        private delegate string GetDayNameFunction(DayOfWeek dayOfWeek);
+
         public DayOfWeek? DayOfWeek { get; set; }
 
         public TimeSpan StartTime { get; set; }
@@ -114,9 +116,7 @@
                 (!string.IsNullOrEmpty(defaultCulturePmString) && trimmedText.EndsWith(
                     defaultCulturePmString, StringComparison.InvariantCultureIgnoreCase));
         }
-
-        private delegate string GetDayNameFunction(DayOfWeek dayOfWeek);
-
+        
         private static DayOfWeekAndUserSuppliedDayName FindDayOfWeek(string text)
         {
             return FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dow)) ??

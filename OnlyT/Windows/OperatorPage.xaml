@@ -215,7 +215,7 @@
                         <MouseBinding Gesture="Shift+LeftClick" Command="{Binding IncrementTimer5Command}"/>
                     </Button.InputBindings>
                     <i:Interaction.Behaviors>
-                        <behaviours:DisableDoubleClickBehavior />
+                        <behaviours:DoubleClickBehaviour />
                     </i:Interaction.Behaviors>
                     <materialDesign:PackIcon
                         Kind="Plus"
@@ -232,7 +232,7 @@
                         <MouseBinding Gesture="Shift+LeftClick" Command="{Binding DecrementTimer5Command}"/>
                     </Button.InputBindings>
                     <i:Interaction.Behaviors>
-                        <behaviours:DisableDoubleClickBehavior />
+                        <behaviours:DoubleClickBehaviour />
                     </i:Interaction.Behaviors>
                     <materialDesign:PackIcon
                         Kind="Minus"
@@ -248,7 +248,7 @@
                 Height="50"
                 Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
             <i:Interaction.Behaviors>
-                <behaviours:DisableDoubleClickBehavior />
+                <behaviours:DoubleClickBehaviour />
             </i:Interaction.Behaviors>
             <materialDesign:PackIcon
                 Kind="Play"
@@ -262,7 +262,7 @@
                 Height="50"
                 Visibility="{Binding Path=IsRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
             <i:Interaction.Behaviors>
-                <behaviours:DisableDoubleClickBehavior />
+                <behaviours:DoubleClickBehaviour />
             </i:Interaction.Behaviors>
             <materialDesign:PackIcon
                 Kind="Stop"

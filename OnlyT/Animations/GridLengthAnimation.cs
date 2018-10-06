@@ -10,15 +10,16 @@
     /// </summary>
     public class GridLengthAnimation : AnimationTimeline
     {
+        public static readonly DependencyProperty FromProperty;
+        public static readonly DependencyProperty ToProperty;
+
         static GridLengthAnimation()
         {
             FromProperty = DependencyProperty.Register("From", typeof(GridLength), typeof(GridLengthAnimation));
             ToProperty = DependencyProperty.Register("To", typeof(GridLength), typeof(GridLengthAnimation));
         }
-
+        
         public override Type TargetPropertyType => typeof(GridLength);
-
-        public static readonly DependencyProperty FromProperty;
 
         public GridLength From
         {
@@ -26,8 +27,6 @@
             get => (GridLength)GetValue(FromProperty);
             set => SetValue(FromProperty, value);
         }
-
-        public static readonly DependencyProperty ToProperty;
 
         public GridLength To
         {
