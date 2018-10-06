@@ -7,5 +7,7 @@
         string OptionsIdentifier { get; set; }
 
         bool NoSettings { get; set; }
+
+        bool IgnoreMutex { get; set; }
     }
 }

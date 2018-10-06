@@ -1,3 +1,4 @@
+using System;
 using OnlyT.Services.CommandLine;
 
 namespace OnlyT.ViewModel
@@ -14,6 +15,9 @@ namespace OnlyT.ViewModel
 
     public class ViewModelLocator
     {
+        private static readonly Lazy<CommandLineService> CommandLineServiceInstance = 
+            new Lazy<CommandLineService>();
+
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -28,9 +32,16 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ICommandLineService, CommandLineService>();
             SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
 
+            SimpleIoc.Default.Register(CommandLineServiceFactory);
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<OperatorPageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
+        }
+
+        internal static CommandLineService CommandLineServiceFactory()
+        {
+            return CommandLineServiceInstance.Value;
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();

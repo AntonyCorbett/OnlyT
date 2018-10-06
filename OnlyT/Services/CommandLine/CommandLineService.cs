@@ -19,6 +19,9 @@
             p.Setup<bool>("nosettings")
                 .Callback(s => { NoSettings = s; }).SetDefault(false);
 
+            p.Setup<bool>("nomutex")
+                .Callback(s => { IgnoreMutex = s; }).SetDefault(false);
+
             p.Parse(Environment.GetCommandLineArgs());
         }
 
@@ -27,5 +30,7 @@
         public string OptionsIdentifier { get; set; }
 
         public bool NoSettings { get; set; }
+
+        public bool IgnoreMutex { get; set; }
     }
 }
