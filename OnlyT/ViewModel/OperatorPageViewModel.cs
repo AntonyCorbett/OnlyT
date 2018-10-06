@@ -93,6 +93,7 @@
             Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
             Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
+            Messenger.Default.Register<ShowCircuitVisitToggleChangedMessage>(this, OnShowCircuitVisitToggleChanged);
 
             if (IsInDesignMode)
             {
@@ -155,7 +156,11 @@
                 return string.Empty;
             }
         }
-        
+
+        public bool ShouldShowCircuitVisitToggle => IsAutoMode && _optionsService.Options.ShowCircuitVisitToggle;
+
+        public bool IsAutoMode => _optionsService.Options.OperatingMode == OperatingMode.Automatic;
+
         public bool IsManualMode => _optionsService.Options.OperatingMode == OperatingMode.Manual;
 
         public bool IsNotManualMode => _optionsService.Options.OperatingMode != OperatingMode.Manual;
@@ -514,8 +519,20 @@
             ? "M 16,0 L 32,7.5 22,7.5 16,30 10,7.5 0,7.5z"
             : "M 16,0 L 22,22.5 32,22.5 16,30 0,22.5 10,22.5z";
 
-        public bool IsCircuitVisit => _optionsService.Options.IsCircuitVisit &&
-                                      _optionsService.Options.OperatingMode == OperatingMode.Automatic;
+        public bool IsCircuitVisit
+        {
+            get => _optionsService.Options.IsCircuitVisit &&
+                   _optionsService.Options.OperatingMode == OperatingMode.Automatic;
+            set
+            {
+                if (_optionsService.Options.IsCircuitVisit != value)
+                {
+                    _optionsService.Options.IsCircuitVisit = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new AutoMeetingChangedMessage());
+                }
+            }
+        }
 
         public RelayCommand StartCommand { get; set; }
 
@@ -573,6 +590,11 @@
         private void CloseCountdownWindow()
         {
             Messenger.Default.Send(new StopCountDownMessage());
+        }
+
+        private void OnShowCircuitVisitToggleChanged(ShowCircuitVisitToggleChangedMessage message)
+        {
+            RaisePropertyChanged(nameof(ShouldShowCircuitVisitToggle));
         }
 
         private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
@@ -664,6 +686,8 @@
 
         private void OnOperatingModeChanged(OperatingModeChangedMessage message)
         {
+            RaisePropertyChanged(nameof(IsAutoMode));
+            RaisePropertyChanged(nameof(ShouldShowCircuitVisitToggle));
             RaisePropertyChanged(nameof(IsManualMode));
             RaisePropertyChanged(nameof(IsNotManualMode));
             Messenger.Default.Send(new AutoMeetingChangedMessage());

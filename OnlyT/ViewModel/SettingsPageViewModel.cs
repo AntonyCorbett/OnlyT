@@ -367,6 +367,20 @@
             }
         }
 
+        public bool ShowCircuitVisitToggle
+        {
+            get => _optionsService.Options.ShowCircuitVisitToggle;
+            set
+            {
+                if (_optionsService.Options.ShowCircuitVisitToggle != value)
+                {
+                    _optionsService.Options.ShowCircuitVisitToggle = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new ShowCircuitVisitToggleChangedMessage());
+                }
+            }
+        }
+
         public bool IsCountdownEnabled
         {
             get => _optionsService.Options.IsCountdownEnabled;

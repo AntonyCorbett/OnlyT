@@ -72,6 +72,8 @@
 
         public bool IsCircuitVisit { get; set; }
 
+        public bool ShowCircuitVisitToggle { get; set; }
+
         public bool PersistStudentTime { get; set; }
 
         public bool AlwaysOnTop { get; set; }

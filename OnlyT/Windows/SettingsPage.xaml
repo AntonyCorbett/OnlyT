@@ -131,6 +131,10 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="Circuit visit" />
 
+                        <CheckBox IsChecked="{Binding ShowCircuitVisitToggle, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="Circuit visit toggle" />
+
                         <CheckBox IsChecked="{Binding PersistStudentTime, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="Persist student time" />

@@ -25,6 +25,11 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <valueConverters:BoolToCursorConverter x:Key="ToCursorConverter" />
 
+        <Style x:Key="CircuitVisitCheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="30" />
+        </Style>
+
         <Style x:Key="DownloadButtonStyle" BasedOn="{StaticResource MaterialDesignFloatingActionMiniLightButton}" TargetType="{x:Type Button}">
             <Setter Property="Visibility" Value="Hidden"/>
             <Style.Triggers>
@@ -273,15 +278,31 @@
                 <ColumnDefinition Width="52" />
             </Grid.ColumnDefinitions>
 
+            <StackPanel 
+                IsEnabled="{Binding IsNotRunning}"
+                Visibility="{Binding Path=ShouldShowCircuitVisitToggle, Converter={StaticResource BoolToVis}}"
+                Grid.Column="0" 
+                Orientation="Horizontal">
+
+                <ToggleButton
+                    IsChecked="{Binding IsCircuitVisit}"
+                    Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" />
+
+                <Label Content="Circuit visit" 
+                       VerticalAlignment="Center"/>
+
+            </StackPanel>
+
             <Button Style="{StaticResource MaterialDesignRaisedButton}"
                     Margin="0,0,10,0"
-                    ToolTip="Close Countdown"
+                    ToolTip="Close countdown"
                     Grid.Column="0"
                     FontSize="14"
+                    Content="Close countdown"
                     Visibility="{Binding Path=IsCountdownActive, Converter={StaticResource BoolToVis}, Mode=OneWay}"
-                    Command="{Binding CloseCountdownCommand}">
-                Close Countdown
-            </Button>
+                    Command="{Binding CloseCountdownCommand}"/>
 
             <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                     ToolTip="{Binding SettingsHint, Mode=OneWay}"
