@@ -33,7 +33,7 @@
         /// <summary>
         /// Ministry item 1.
         /// </summary>
-        MinistryItem1,
+        MinistryItem1 = 2000,
 
         /// <summary>
         /// Ministry item 2.
@@ -46,9 +46,14 @@
         MinistryItem3,
 
         /// <summary>
+        /// Ministry item 4.
+        /// </summary>
+        MinistryItem4,
+
+        /// <summary>
         /// Living item 1.
         /// </summary>
-        LivingPart1,
+        LivingPart1 = 3000,
 
         /// <summary>
         /// Living item 2.
@@ -58,26 +63,26 @@
         /// <summary>
         /// Congregation Bible study.
         /// </summary>
-        CongBibleStudy,
+        CongBibleStudy = 4000,
 
         /// <summary>
         /// CO Service talk.
         /// </summary>
-        CircuitServiceTalk,
+        CircuitServiceTalk = 5000,
         
         /// <summary>
         /// Concluding comments.
         /// </summary>
-        ConcludingComments,
+        ConcludingComments = 6000,
 
         /// <summary>
         /// Public talk.
         /// </summary>
-        PublicTalk = 2000,
+        PublicTalk = 7000,
 
         /// <summary>
         /// WT study.
         /// </summary>
-        Watchtower
+        Watchtower = 8000
     }
 }

@@ -161,6 +161,7 @@ namespace OnlyT.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;!DOCTYPE html&gt;
         ///&lt;html style=&quot;display:block; height:100%; margin:0; padding:0&quot;&gt;
         ///	&lt;head&gt;
         ///		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;		
@@ -182,8 +183,7 @@ namespace OnlyT.Properties {
         ///				font-weight: bold;
         ///				color: #FFFF66;
         ///			}
-        ///			.clockstyle_green
-        ///			{ [rest of string was truncated]&quot;;.
+        ///			.clock [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ClockHtmlTemplate {
             get {
@@ -300,6 +300,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ministry - Item 4.
+        /// </summary>
+        internal static string MINISTRY4 {
+            get {
+                return ResourceManager.GetString("MINISTRY4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         internal static string MONITOR_NONE {
@@ -399,15 +408,6 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bible Study / Talk.
-        /// </summary>
-        internal static string TALK_BIBLE_STUDY {
-            get {
-                return ResourceManager.GetString("TALK_BIBLE_STUDY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Concluding Talk.
         /// </summary>
         internal static string TALK_CONCLUDING {
@@ -440,15 +440,6 @@ namespace OnlyT.Properties {
         internal static string TALK_DIGGING {
             get {
                 return ResourceManager.GetString("TALK_DIGGING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Initial Call.
-        /// </summary>
-        internal static string TALK_INITIAL_CALL {
-            get {
-                return ResourceManager.GetString("TALK_INITIAL_CALL", resourceCulture);
             }
         }
         
@@ -503,15 +494,6 @@ namespace OnlyT.Properties {
         internal static string TALK_READING {
             get {
                 return ResourceManager.GetString("TALK_READING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Return Visit.
-        /// </summary>
-        internal static string TALK_RV {
-            get {
-                return ResourceManager.GetString("TALK_RV", resourceCulture);
             }
         }
         

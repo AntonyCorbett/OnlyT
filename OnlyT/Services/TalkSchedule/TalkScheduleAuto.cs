@@ -133,88 +133,134 @@
         {
             var result = new List<TalkScheduleItem>();
 
-            TalkTimer timerItem1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry1)) ?? CreateDefaultMinistryTalkTimer(TalkTypes.Ministry1);
-            TalkTimer timerItem2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry2)) ?? CreateDefaultMinistryTalkTimer(TalkTypes.Ministry2);
-            TalkTimer timerItem3 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry3)) ?? CreateDefaultMinistryTalkTimer(TalkTypes.Ministry3);
+            TalkTimer timerItem1 = null;
+            TalkTimer timerItem2 = null;
+            TalkTimer timerItem3 = null;
+            TalkTimer timerItem4 = null;
+
+            if (meetingData != null)
+            {
+                if (meetingData.Date.Year < 2019)
+                {
+                    timerItem1 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Ministry1)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Pre2019Ministry1);
+                    timerItem2 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Ministry2)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Pre2019Ministry2);
+                    timerItem3 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Ministry3)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Pre2019Ministry3);
+                }
+                else
+                {
+                    timerItem1 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry1)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry1);
+                    timerItem2 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry2)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry2);
+                    timerItem3 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry3)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry3);
+                    timerItem4 =
+                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry4)) ??
+                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry4);
+                }
+            }
 
             TimeSpan startOffset = new TimeSpan(0, 32, 20);
 
-            result.Add(CreateMinistryItem(
-                TalkTypesAutoMode.MinistryItem1,
-                GetMinistryItemTitle(1),
-                startOffset,
-                TimeSpan.FromMinutes(timerItem1.Minutes),
-                timerItem1.IsStudentTalk,
-                timerItem1.IsStudentTalk,
-                IsMinistryItemEditable()));
-
-            startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem1.Minutes));
-            if (timerItem1.IsStudentTalk)
+            if (timerItem1 != null)
             {
-                // counsel...
-                startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
+                result.Add(CreateMinistryItem(
+                    TalkTypesAutoMode.MinistryItem1,
+                    GetMinistryItemTitle(1),
+                    startOffset,
+                    TimeSpan.FromMinutes(timerItem1.Minutes),
+                    timerItem1.IsStudentTalk,
+                    timerItem1.IsStudentTalk,
+                    true));
+
+                startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem1.Minutes));
+                if (timerItem1.IsStudentTalk)
+                {
+                    // counsel...
+                    startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
+                }
+
+                startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
             }
 
-            startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
-
-            result.Add(CreateMinistryItem(
-                TalkTypesAutoMode.MinistryItem2,
-                GetMinistryItemTitle(2),
-                startOffset,
-                TimeSpan.FromMinutes(timerItem2.Minutes),
-                timerItem2.IsStudentTalk,
-                timerItem2.IsStudentTalk,
-                IsMinistryItemEditable()));
-
-            startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem2.Minutes));
-            if (timerItem2.IsStudentTalk)
+            if (timerItem2 != null)
             {
-                // counsel...
-                startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
+                result.Add(CreateMinistryItem(
+                    TalkTypesAutoMode.MinistryItem2,
+                    GetMinistryItemTitle(2),
+                    startOffset,
+                    TimeSpan.FromMinutes(timerItem2.Minutes),
+                    timerItem2.IsStudentTalk,
+                    timerItem2.IsStudentTalk,
+                    true));
+
+                startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem2.Minutes));
+                if (timerItem2.IsStudentTalk)
+                {
+                    // counsel...
+                    startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
+                }
+
+                startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
             }
 
-            startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
+            if (timerItem3 != null)
+            {
+                result.Add(CreateMinistryItem(
+                    TalkTypesAutoMode.MinistryItem3,
+                    GetMinistryItemTitle(3),
+                    startOffset,
+                    TimeSpan.FromMinutes(timerItem3.Minutes),
+                    timerItem3.IsStudentTalk,
+                    timerItem3.IsStudentTalk,
+                    true));
 
-            result.Add(CreateMinistryItem(
-                TalkTypesAutoMode.MinistryItem3,
-                GetMinistryItemTitle(3),
-                startOffset,
-                TimeSpan.FromMinutes(timerItem3.Minutes),
-                timerItem3.IsStudentTalk,
-                timerItem3.IsStudentTalk,
-                IsMinistryItemEditable()));
-        
+                startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem3.Minutes));
+                if (timerItem3.IsStudentTalk)
+                {
+                    // counsel...
+                    startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
+                }
+
+                startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
+            }
+
+            if (timerItem4 != null)
+            {
+                result.Add(CreateMinistryItem(
+                    TalkTypesAutoMode.MinistryItem4,
+                    GetMinistryItemTitle(4),
+                    startOffset,
+                    TimeSpan.FromMinutes(timerItem4.Minutes),
+                    timerItem4.IsStudentTalk,
+                    timerItem4.IsStudentTalk,
+                    true));
+            }
+
             return result;
-        }
-
-        private static bool IsPre2018Format()
-        {
-            return DateTime.Now.Year <= 2017;
-        }
-
-        private static bool IsMinistryItemEditable()
-        {
-            return !IsPre2018Format();
         }
 
         private static string GetMinistryItemTitle(int item)
         {
-            bool oldTitles = IsPre2018Format();
-
             switch (item)
             {
                 case 1:
-                    return oldTitles
-                        ? Properties.Resources.TALK_INITIAL_CALL
-                        : Properties.Resources.MINISTRY1;
+                    return Properties.Resources.MINISTRY1;
                 case 2:
-                    return oldTitles
-                        ? Properties.Resources.TALK_RV
-                        : Properties.Resources.MINISTRY2;
+                    return Properties.Resources.MINISTRY2;
                 case 3:
-                    return oldTitles
-                        ? Properties.Resources.TALK_BIBLE_STUDY
-                        : Properties.Resources.MINISTRY3;
+                    return Properties.Resources.MINISTRY3;
+                case 4:
+                    return Properties.Resources.MINISTRY4;
             }
 
             throw new ArgumentException(@"Unknown item", nameof(item));
@@ -242,10 +288,10 @@
         {
             var result = new List<TalkScheduleItem>();
 
-            TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living1)) ??
-                                   new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
+            TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Living1)) ??
+                                   new TalkTimer { Minutes = 15, TalkType = TalkTypes.Pre2019Living1 };
 
-            TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
+            TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Living2));
 
             result.Add(CreateLivingItem(
                 TalkTypesAutoMode.LivingPart1,
