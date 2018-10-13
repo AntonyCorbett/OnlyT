@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>Bell is active</value>
+    <value>Звонок включен</value>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
     <value>None</value>
@@ -170,7 +170,7 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Bell is inactive</value>
+    <value>Звонок выключен</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Midweek</value>
@@ -307,10 +307,10 @@
     <value>REMOTE APPS</value>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>AUTOMATIC MODE</value>
+    <value>Автоматический режим</value>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>BELL</value>
+    <value>Звонок</value>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
     <value>WEB CLOCK</value>
@@ -335,7 +335,7 @@
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Встреча</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
@@ -345,7 +345,7 @@
     <value>Прочее</value>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Экран</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
     <value>Show mouse pointer</value>
@@ -395,7 +395,7 @@
     <value>Split-screen width:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>Тест</value>
+    <value>Проверить</value>
     <comment>Caption for the Bell test button in settings</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
@@ -414,7 +414,7 @@
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
-    <value>Volume:</value>
+    <value>Громкость:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
