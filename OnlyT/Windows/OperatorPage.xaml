@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         DataContext="{Binding Operator, Mode=OneWay, Source={StaticResource Locator}}"             
         xmlns:local="clr-namespace:OnlyT.Windows"
+        xmlns:resx="clr-namespace:OnlyT.Properties"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
@@ -155,10 +156,9 @@
 
                     <TextBlock Grid.Column="1" 
                                Margin="0,-5,0,0"
+                               Text="{x:Static resx:Resources.CIRCUIT_VISIT_BRACKETS}" 
                                Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BoolToVis}, Mode=OneWay}"
-                               VerticalAlignment="Top" Foreground="#f3dcbc" HorizontalAlignment="Right">
-                        [circuit visit]
-                    </TextBlock>
+                               VerticalAlignment="Top" Foreground="#f3dcbc" HorizontalAlignment="Right"/>
 
                     <TextBlock TextWrapping="NoWrap" 
                            FontSize="72" 
@@ -290,17 +290,17 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left" />
 
-                <Label Content="Circuit visit" 
+                <Label Content="{x:Static resx:Resources.CIRCUIT_VISIT}" 
                        VerticalAlignment="Center"/>
 
             </StackPanel>
 
             <Button Style="{StaticResource MaterialDesignRaisedButton}"
                     Margin="0,0,10,0"
-                    ToolTip="Close countdown"
+                    ToolTip="{x:Static resx:Resources.CLOSE_COUNTDOWN}" 
                     Grid.Column="0"
                     FontSize="14"
-                    Content="Close countdown"
+                    Content="{x:Static resx:Resources.CLOSE_COUNTDOWN}" 
                     Visibility="{Binding Path=IsCountdownActive, Converter={StaticResource BoolToVis}, Mode=OneWay}"
                     Command="{Binding CloseCountdownCommand}"/>
 
@@ -316,7 +316,7 @@
             </Button>
 
             <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                    ToolTip="Help"
+                    ToolTip="{x:Static resx:Resources.HELP}" 
                     Grid.Column="2"
                     ToolTipService.ShowOnDisabled="True"
                     Command="{Binding HelpCommand}">
@@ -327,7 +327,7 @@
             </Button>
 
             <Button Style="{StaticResource DownloadButtonStyle}" 
-                    ToolTip="New version available!"
+                    ToolTip="{x:Static resx:Resources.NEW_VERSION}" 
                     Grid.Column="1"
                     Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BoolToVis}, Mode=OneWay}"
                     Command="{Binding NewVersionCommand}">

@@ -5,12 +5,6 @@
 
     public class ApiError
     {
-        [JsonProperty(PropertyName = "errorCode")]
-        public int ErrorCode { get; set; }
-
-        [JsonProperty(PropertyName = "errorMessage")]
-        public string ErrorMessage { get; set; }
-
         public ApiError()
         {
         }
@@ -20,5 +14,11 @@
             ErrorCode = (int)code;
             ErrorMessage = WebServerErrorCodes.GetDescription(code);
         }
+
+        [JsonProperty(PropertyName = "errorCode")]
+        public int ErrorCode { get; set; }
+
+        [JsonProperty(PropertyName = "errorMessage")]
+        public string ErrorMessage { get; set; }
     }
 }

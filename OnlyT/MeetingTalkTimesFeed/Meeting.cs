@@ -7,16 +7,16 @@
 
     internal class Meeting
     {
+        public Meeting()
+        {
+            Talks = new List<TalkTimer>();
+        }
+
         [JsonProperty]
         public DateTime Date { get; set; }
 
         [JsonProperty]
         public List<TalkTimer> Talks { get; }
-
-        public Meeting()
-        {
-            Talks = new List<TalkTimer>();
-        }
 
         public override string ToString()
         {

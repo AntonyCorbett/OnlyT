@@ -22,7 +22,7 @@ namespace OnlyT.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace OnlyT.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OnlyT.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace OnlyT.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,18 +61,36 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access code.
+        /// </summary>
+        public static string ACCESS_CODE {
+            get {
+                return ResourceManager.GetString("ACCESS_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bell is active.
         /// </summary>
-        internal static string ACTIVE_BELL {
+        public static string ACTIVE_BELL {
             get {
                 return ResourceManager.GetString("ACTIVE_BELL", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Midweek adaptive mode.
+        /// </summary>
+        public static string ADAPTIVE_MIDWEEK {
+            get {
+                return ResourceManager.GetString("ADAPTIVE_MIDWEEK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string ADAPTIVE_MODE_NONE {
+        public static string ADAPTIVE_MODE_NONE {
             get {
                 return ResourceManager.GetString("ADAPTIVE_MODE_NONE", resourceCulture);
             }
@@ -81,7 +99,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to One-way.
         /// </summary>
-        internal static string ADAPTIVE_MODE_ONE_WAY {
+        public static string ADAPTIVE_MODE_ONE_WAY {
             get {
                 return ResourceManager.GetString("ADAPTIVE_MODE_ONE_WAY", resourceCulture);
             }
@@ -90,25 +108,97 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Two-way.
         /// </summary>
-        internal static string ADAPTIVE_MODE_TWO_WAY {
+        public static string ADAPTIVE_MODE_TWO_WAY {
             get {
                 return ResourceManager.GetString("ADAPTIVE_MODE_TWO_WAY", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Weekend adaptive mode.
+        /// </summary>
+        public static string ADAPTIVE_WEEKEND {
+            get {
+                return ResourceManager.GetString("ADAPTIVE_WEEKEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow count-up toggle.
+        /// </summary>
+        public static string ALLOW_COUNT_UP_TOGGLE {
+            get {
+                return ResourceManager.GetString("ALLOW_COUNT_UP_TOGGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always on top.
+        /// </summary>
+        public static string ALWAYS_ON_TOP {
+            get {
+                return ResourceManager.GetString("ALWAYS_ON_TOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Software version {0}.
         /// </summary>
-        internal static string APP_VER {
+        public static string APP_VER {
             get {
                 return ResourceManager.GetString("APP_VER", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to REMOTE APPS.
+        /// </summary>
+        public static string APPS_SECTION {
+            get {
+                return ResourceManager.GetString("APPS_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUTOMATIC MODE.
+        /// </summary>
+        public static string AUTO_SECTION {
+            get {
+                return ResourceManager.GetString("AUTO_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BELL.
+        /// </summary>
+        public static string BELL_SECTION {
+            get {
+                return ResourceManager.GetString("BELL_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Circuit visit.
+        /// </summary>
+        public static string CIRCUIT_VISIT {
+            get {
+                return ResourceManager.GetString("CIRCUIT_VISIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [circuit visit].
+        /// </summary>
+        public static string CIRCUIT_VISIT_BRACKETS {
+            get {
+                return ResourceManager.GetString("CIRCUIT_VISIT_BRACKETS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 12-hour.
         /// </summary>
-        internal static string CLOCK_FORMAT_12 {
+        public static string CLOCK_FORMAT_12 {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_12", resourceCulture);
             }
@@ -117,7 +207,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 12-hour (am/pm).
         /// </summary>
-        internal static string CLOCK_FORMAT_12AMPM {
+        public static string CLOCK_FORMAT_12AMPM {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_12AMPM", resourceCulture);
             }
@@ -126,7 +216,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 12-hour (leading zero).
         /// </summary>
-        internal static string CLOCK_FORMAT_12Z {
+        public static string CLOCK_FORMAT_12Z {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_12Z", resourceCulture);
             }
@@ -135,7 +225,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 12-hour (leading zero &amp; am/pm).
         /// </summary>
-        internal static string CLOCK_FORMAT_12ZAMPM {
+        public static string CLOCK_FORMAT_12ZAMPM {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_12ZAMPM", resourceCulture);
             }
@@ -144,7 +234,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 24-hour.
         /// </summary>
-        internal static string CLOCK_FORMAT_24 {
+        public static string CLOCK_FORMAT_24 {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_24", resourceCulture);
             }
@@ -153,9 +243,18 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to 24-hour (leading zero).
         /// </summary>
-        internal static string CLOCK_FORMAT_24Z {
+        public static string CLOCK_FORMAT_24Z {
             get {
                 return ResourceManager.GetString("CLOCK_FORMAT_24Z", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WEB CLOCK.
+        /// </summary>
+        public static string CLOCK_SECTION {
+            get {
+                return ResourceManager.GetString("CLOCK_SECTION", resourceCulture);
             }
         }
         
@@ -185,25 +284,61 @@ namespace OnlyT.Properties {
         ///			}
         ///			.clock [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string ClockHtmlTemplate {
+        public static string ClockHtmlTemplate {
             get {
                 return ResourceManager.GetString("ClockHtmlTemplate", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CLOSE COUNTDOWN.
+        /// </summary>
+        public static string CLOSE_COUNTDOWN {
+            get {
+                return ResourceManager.GetString("CLOSE_COUNTDOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Circuit visit toggle.
+        /// </summary>
+        public static string CO_VISIT_TOGGLE {
+            get {
+                return ResourceManager.GetString("CO_VISIT_TOGGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MEETING COUNTDOWN.
+        /// </summary>
+        public static string COUNTDOWN_SECTION {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not create folder {0}.
         /// </summary>
-        internal static string CREATE_FOLDER_ERROR {
+        public static string CREATE_FOLDER_ERROR {
             get {
                 return ResourceManager.GetString("CREATE_FOLDER_ERROR", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Digital clock format.
+        /// </summary>
+        public static string DIGITAL_CLOCK_FORMAT {
+            get {
+                return ResourceManager.GetString("DIGITAL_CLOCK_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adapted duration.
         /// </summary>
-        internal static string DURATION_ADAPTED {
+        public static string DURATION_ADAPTED {
             get {
                 return ResourceManager.GetString("DURATION_ADAPTED", resourceCulture);
             }
@@ -212,7 +347,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Modified duration.
         /// </summary>
-        internal static string DURATION_MODIFIED {
+        public static string DURATION_MODIFIED {
             get {
                 return ResourceManager.GetString("DURATION_MODIFIED", resourceCulture);
             }
@@ -221,16 +356,25 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Original duration.
         /// </summary>
-        internal static string DURATION_ORIGINAL {
+        public static string DURATION_ORIGINAL {
             get {
                 return ResourceManager.GetString("DURATION_ORIGINAL", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ENABLED {
+            get {
+                return ResourceManager.GetString("ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analogue.
         /// </summary>
-        internal static string FULL_SCREEN_ANALOGUE {
+        public static string FULL_SCREEN_ANALOGUE {
             get {
                 return ResourceManager.GetString("FULL_SCREEN_ANALOGUE", resourceCulture);
             }
@@ -239,34 +383,88 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Analogue and Digital.
         /// </summary>
-        internal static string FULL_SCREEN_BOTH {
+        public static string FULL_SCREEN_BOTH {
             get {
                 return ResourceManager.GetString("FULL_SCREEN_BOTH", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Full-screen clock mode.
+        /// </summary>
+        public static string FULL_SCREEN_CLOCK {
+            get {
+                return ResourceManager.GetString("FULL_SCREEN_CLOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Digital.
         /// </summary>
-        internal static string FULL_SCREEN_DIGITAL {
+        public static string FULL_SCREEN_DIGITAL {
             get {
                 return ResourceManager.GetString("FULL_SCREEN_DIGITAL", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string HELP {
+            get {
+                return ResourceManager.GetString("HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bell is inactive.
         /// </summary>
-        internal static string INACTIVE_BELL {
+        public static string INACTIVE_BELL {
             get {
                 return ResourceManager.GetString("INACTIVE_BELL", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IP address.
+        /// </summary>
+        public static string IP_ADDRESS {
+            get {
+                return ResourceManager.GetString("IP_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MAIN.
+        /// </summary>
+        public static string MAIN_SECTION {
+            get {
+                return ResourceManager.GetString("MAIN_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meeting.
+        /// </summary>
+        public static string MEETING {
+            get {
+                return ResourceManager.GetString("MEETING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meeting start times (1 per line).
+        /// </summary>
+        public static string MEETING_STARTS {
+            get {
+                return ResourceManager.GetString("MEETING_STARTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Midweek.
         /// </summary>
-        internal static string MIDWEEK {
+        public static string MIDWEEK {
             get {
                 return ResourceManager.GetString("MIDWEEK", resourceCulture);
             }
@@ -275,7 +473,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ministry - Item 1.
         /// </summary>
-        internal static string MINISTRY1 {
+        public static string MINISTRY1 {
             get {
                 return ResourceManager.GetString("MINISTRY1", resourceCulture);
             }
@@ -284,7 +482,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ministry - Item 2.
         /// </summary>
-        internal static string MINISTRY2 {
+        public static string MINISTRY2 {
             get {
                 return ResourceManager.GetString("MINISTRY2", resourceCulture);
             }
@@ -293,7 +491,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ministry - Item 3.
         /// </summary>
-        internal static string MINISTRY3 {
+        public static string MINISTRY3 {
             get {
                 return ResourceManager.GetString("MINISTRY3", resourceCulture);
             }
@@ -302,25 +500,88 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ministry - Item 4.
         /// </summary>
-        internal static string MINISTRY4 {
+        public static string MINISTRY4 {
             get {
                 return ResourceManager.GetString("MINISTRY4", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MISCELLANEOUS.
+        /// </summary>
+        public static string MISC_SECTION {
+            get {
+                return ResourceManager.GetString("MISC_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitor.
+        /// </summary>
+        public static string MONITOR {
+            get {
+                return ResourceManager.GetString("MONITOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string MONITOR_NONE {
+        public static string MONITOR_NONE {
             get {
                 return ResourceManager.GetString("MONITOR_NONE", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show mouse pointer.
+        /// </summary>
+        public static string MOUSE_PTR {
+            get {
+                return ResourceManager.GetString("MOUSE_PTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Put each start time on a new line..
+        /// </summary>
+        public static string MTG_START_NOTES1 {
+            get {
+                return ResourceManager.GetString("MTG_START_NOTES1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Use any time format you like!.
+        /// </summary>
+        public static string MTG_START_NOTES2 {
+            get {
+                return ResourceManager.GetString("MTG_START_NOTES2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Optionally include a day, e.g. &quot;Thu 7:15&quot;.
+        /// </summary>
+        public static string MTG_START_NOTES3 {
+            get {
+                return ResourceManager.GetString("MTG_START_NOTES3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New version available!.
+        /// </summary>
+        public static string NEW_VERSION {
+            get {
+                return ResourceManager.GetString("NEW_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings disabled by administrator!.
         /// </summary>
-        internal static string NOT_AVAIL_ADMIN {
+        public static string NOT_AVAIL_ADMIN {
             get {
                 return ResourceManager.GetString("NOT_AVAIL_ADMIN", resourceCulture);
             }
@@ -329,16 +590,34 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Settings not available while timer is running!.
         /// </summary>
-        internal static string NOT_AVAIL_TIMER_RUNNING {
+        public static string NOT_AVAIL_TIMER_RUNNING {
             get {
                 return ResourceManager.GetString("NOT_AVAIL_TIMER_RUNNING", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notes:.
+        /// </summary>
+        public static string NOTES {
+            get {
+                return ResourceManager.GetString("NOTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mode.
+        /// </summary>
+        public static string OP_MODE {
+            get {
+                return ResourceManager.GetString("OP_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatic.
         /// </summary>
-        internal static string OP_MODE_AUTO {
+        public static string OP_MODE_AUTO {
             get {
                 return ResourceManager.GetString("OP_MODE_AUTO", resourceCulture);
             }
@@ -347,7 +626,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to File-based.
         /// </summary>
-        internal static string OP_MODE_FILE {
+        public static string OP_MODE_FILE {
             get {
                 return ResourceManager.GetString("OP_MODE_FILE", resourceCulture);
             }
@@ -356,16 +635,61 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Manual.
         /// </summary>
-        internal static string OP_MODE_MANUAL {
+        public static string OP_MODE_MANUAL {
             get {
                 return ResourceManager.GetString("OP_MODE_MANUAL", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OPEN PORT.
+        /// </summary>
+        public static string OPEN_PORT {
+            get {
+                return ResourceManager.GetString("OPEN_PORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Persist student time.
+        /// </summary>
+        public static string PERSIST_STUDENT_TIME {
+            get {
+                return ResourceManager.GetString("PERSIST_STUDENT_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Persist talk duration.
+        /// </summary>
+        public static string PERSIST_TALK_DURATION {
+            get {
+                return ResourceManager.GetString("PERSIST_TALK_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port.
+        /// </summary>
+        public static string PORT {
+            get {
+                return ResourceManager.GetString("PORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REMOTE ACCESS.
+        /// </summary>
+        public static string REMOTE_SECTION {
+            get {
+                return ResourceManager.GetString("REMOTE_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Living.
         /// </summary>
-        internal static string SECTION_LIVING {
+        public static string SECTION_LIVING {
             get {
                 return ResourceManager.GetString("SECTION_LIVING", resourceCulture);
             }
@@ -374,7 +698,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ministry.
         /// </summary>
-        internal static string SECTION_MINISTRY {
+        public static string SECTION_MINISTRY {
             get {
                 return ResourceManager.GetString("SECTION_MINISTRY", resourceCulture);
             }
@@ -383,7 +707,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Treasures.
         /// </summary>
-        internal static string SECTION_TREASURES {
+        public static string SECTION_TREASURES {
             get {
                 return ResourceManager.GetString("SECTION_TREASURES", resourceCulture);
             }
@@ -392,25 +716,43 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Weekend.
         /// </summary>
-        internal static string SECTION_WEEKEND {
+        public static string SECTION_WEEKEND {
             get {
                 return ResourceManager.GetString("SECTION_WEEKEND", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show sector on analogue clock.
+        /// </summary>
+        public static string SECTOR_ANALOG_CLOCK {
+            get {
+                return ResourceManager.GetString("SECTOR_ANALOG_CLOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        internal static string SETTINGS {
+        public static string SETTINGS {
             get {
                 return ResourceManager.GetString("SETTINGS", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Split-screen width:.
+        /// </summary>
+        public static string SPLIT_WIDTH {
+            get {
+                return ResourceManager.GetString("SPLIT_WIDTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Concluding Talk.
         /// </summary>
-        internal static string TALK_CONCLUDING {
+        public static string TALK_CONCLUDING {
             get {
                 return ResourceManager.GetString("TALK_CONCLUDING", resourceCulture);
             }
@@ -419,7 +761,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Concluding Comments.
         /// </summary>
-        internal static string TALK_CONCLUDING_COMMENTS {
+        public static string TALK_CONCLUDING_COMMENTS {
             get {
                 return ResourceManager.GetString("TALK_CONCLUDING_COMMENTS", resourceCulture);
             }
@@ -428,7 +770,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Congregation Bible Study.
         /// </summary>
-        internal static string TALK_CONG_STUDY {
+        public static string TALK_CONG_STUDY {
             get {
                 return ResourceManager.GetString("TALK_CONG_STUDY", resourceCulture);
             }
@@ -437,7 +779,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Digging for Spiritual Gems.
         /// </summary>
-        internal static string TALK_DIGGING {
+        public static string TALK_DIGGING {
             get {
                 return ResourceManager.GetString("TALK_DIGGING", resourceCulture);
             }
@@ -446,7 +788,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Living - Part 1.
         /// </summary>
-        internal static string TALK_LIVING1 {
+        public static string TALK_LIVING1 {
             get {
                 return ResourceManager.GetString("TALK_LIVING1", resourceCulture);
             }
@@ -455,7 +797,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Living - Part 2.
         /// </summary>
-        internal static string TALK_LIVING2 {
+        public static string TALK_LIVING2 {
             get {
                 return ResourceManager.GetString("TALK_LIVING2", resourceCulture);
             }
@@ -464,7 +806,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Opening Comments.
         /// </summary>
-        internal static string TALK_OPENING_COMMENTS {
+        public static string TALK_OPENING_COMMENTS {
             get {
                 return ResourceManager.GetString("TALK_OPENING_COMMENTS", resourceCulture);
             }
@@ -473,7 +815,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This Month&apos;s Presentations.
         /// </summary>
-        internal static string TALK_PRESENTATIONS {
+        public static string TALK_PRESENTATIONS {
             get {
                 return ResourceManager.GetString("TALK_PRESENTATIONS", resourceCulture);
             }
@@ -482,7 +824,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Public Talk.
         /// </summary>
-        internal static string TALK_PUBLIC {
+        public static string TALK_PUBLIC {
             get {
                 return ResourceManager.GetString("TALK_PUBLIC", resourceCulture);
             }
@@ -491,7 +833,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Bible Reading.
         /// </summary>
-        internal static string TALK_READING {
+        public static string TALK_READING {
             get {
                 return ResourceManager.GetString("TALK_READING", resourceCulture);
             }
@@ -500,7 +842,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Service Talk.
         /// </summary>
-        internal static string TALK_SERVICE {
+        public static string TALK_SERVICE {
             get {
                 return ResourceManager.GetString("TALK_SERVICE", resourceCulture);
             }
@@ -509,7 +851,7 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Treasures Talk.
         /// </summary>
-        internal static string TALK_TREASURES {
+        public static string TALK_TREASURES {
             get {
                 return ResourceManager.GetString("TALK_TREASURES", resourceCulture);
             }
@@ -518,16 +860,70 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Watchtower Study.
         /// </summary>
-        internal static string TALK_WT {
+        public static string TALK_WT {
             get {
                 return ResourceManager.GetString("TALK_WT", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TEST.
+        /// </summary>
+        public static string TEST {
+            get {
+                return ResourceManager.GetString("TEST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Throttled.
+        /// </summary>
+        public static string THROTTLED {
+            get {
+                return ResourceManager.GetString("THROTTLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time of day under timer.
+        /// </summary>
+        public static string TIME_UNDER_TIMER {
+            get {
+                return ResourceManager.GetString("TIME_UNDER_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer counts up.
+        /// </summary>
+        public static string TIMER_COUNT_UP {
+            get {
+                return ResourceManager.GetString("TIMER_COUNT_UP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TIMER WINDOW.
+        /// </summary>
+        public static string TIMER_WIN_SECTION {
+            get {
+                return ResourceManager.GetString("TIMER_WIN_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume:.
+        /// </summary>
+        public static string VOLUME {
+            get {
+                return ResourceManager.GetString("VOLUME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weekend.
         /// </summary>
-        internal static string WEEKEND {
+        public static string WEEKEND {
             get {
                 return ResourceManager.GetString("WEEKEND", resourceCulture);
             }

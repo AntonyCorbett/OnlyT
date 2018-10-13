@@ -11,12 +11,6 @@
 
     internal class TimersResponseData
     {
-        [JsonProperty(PropertyName = "status")]
-        public TimerStatus Status { get; }
-
-        [JsonProperty(PropertyName = "timerInfo")]
-        public List<TimerInfo> TimerInfo { get; }
-
         public TimersResponseData(
             ITalkScheduleService talkService, 
             ITalkTimerService timerService,
@@ -50,6 +44,12 @@
             Status = timerService.GetStatus();
             TimerInfo = new List<TimerInfo> { CreateTimerInfo(talk, optionsService.Options.CountUp) };
         }
+
+        [JsonProperty(PropertyName = "status")]
+        public TimerStatus Status { get; }
+
+        [JsonProperty(PropertyName = "timerInfo")]
+        public List<TimerInfo> TimerInfo { get; }
 
         private TimerInfo CreateTimerInfo(TalkScheduleItem talk, bool countUpByDefault)
         {

@@ -5,6 +5,13 @@
     /// </summary>
     internal class NavigateMessage
     {
+        public NavigateMessage(string originalPageName, string targetPageName, object state)
+        {
+            OriginalPageName = originalPageName ?? string.Empty;
+            TargetPageName = targetPageName;
+            State = state;
+        }
+
         public string OriginalPageName { get; }
 
         /// <summary>
@@ -16,12 +23,5 @@
         /// Optional context-specific state
         /// </summary>
         public object State { get; }
-
-        public NavigateMessage(string originalPageName, string targetPageName, object state)
-        {
-            OriginalPageName = originalPageName ?? string.Empty;
-            TargetPageName = targetPageName;
-            State = state;
-        }
     }
 }

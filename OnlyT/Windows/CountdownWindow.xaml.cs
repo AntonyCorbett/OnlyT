@@ -10,12 +10,12 @@
     /// </summary>
     public partial class CountdownWindow : Window
     {
-        public event EventHandler TimeUpEvent;
-        
         public CountdownWindow()
         {
             InitializeComponent();
         }
+
+        public event EventHandler TimeUpEvent;
 
         public void Start(int offsetSeconds)
         {

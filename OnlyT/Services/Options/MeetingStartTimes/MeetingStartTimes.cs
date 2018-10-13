@@ -6,12 +6,12 @@
 
     public class MeetingStartTimes
     {
-        public List<MeetingStartTime> Times { get;  }
-
         public MeetingStartTimes()
         {
             Times = new List<MeetingStartTime>();
         }
+
+        public List<MeetingStartTime> Times { get; }
 
         public void Sanitize()
         {
