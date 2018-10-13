@@ -328,7 +328,7 @@
     <value>Включено</value>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Полноэкранный режим</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>IP-адрес</value>
@@ -342,7 +342,7 @@
     <value>Meeting start times (1 per line)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>MISCELLANEOUS</value>
+    <value>Прочее</value>
   </data>
   <data name="MONITOR" xml:space="preserve">
     <value>Monitor</value>
@@ -407,7 +407,7 @@
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>TIMER WINDOW</value>
+    <value>Окно таймера</value>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
     <value>Time of day under timer</value>
