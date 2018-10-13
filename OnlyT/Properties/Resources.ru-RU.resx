@@ -137,13 +137,13 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12-hour</value>
+    <value>12-часовой</value>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
     <value>12-hour (leading zero)</value>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24-hour</value>
+    <value>24-часовой</value>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
     <value>24-hour (leading zero)</value>
@@ -173,7 +173,7 @@
     <value>Звонок выключен</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
-    <value>Midweek</value>
+    <value>В будние дни</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
     <value>Первый разговор</value>
@@ -218,7 +218,7 @@
     <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Публичная речь</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
     <value>Чтение Библии</value>
@@ -227,16 +227,16 @@
     <value>Service Talk</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Сокровища – Речь</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Изучение Сторожевой башни</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Выходные</value>
+    <value>В выходные дни</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12-hour (am/pm)</value>
+    <value>12-часовой (am/pm)</value>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
     <value>12-hour (leading zero &amp; am/pm)</value>
@@ -260,7 +260,7 @@
     <value>Жизнь</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>В выходные дни</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
     <value>Settings disabled by administrator!</value>
@@ -322,7 +322,7 @@
     <value>Circuit visit toggle</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Формат времени</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Включено</value>
