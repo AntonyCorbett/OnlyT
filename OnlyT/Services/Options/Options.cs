@@ -34,7 +34,7 @@
             IsApiThrottled = true;
             PersistStudentTime = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
-
+            
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
 
             bool clock24 = dateFormat.Contains("H");
@@ -117,6 +117,8 @@
         public bool IsApiThrottled { get; set; }
 
         public bool ShowMousePointerInTimerDisplay { get; set; }
+
+        public string Culture { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required

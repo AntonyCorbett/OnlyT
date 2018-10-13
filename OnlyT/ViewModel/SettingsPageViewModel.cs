@@ -24,6 +24,7 @@
         public static string PageName => "SettingsPage";
         
         private readonly MonitorItem[] _monitors;
+        private readonly LanguageItem[] _languages;
         private readonly OperatingModeItem[] _operatingModes;
         private readonly AutoMeetingTime[] _autoMeetingTimes;
         private readonly IOptionsService _optionsService;
@@ -52,6 +53,7 @@
             _countdownTimerService = countdownTimerService;
 
             _monitors = GetSystemMonitors().ToArray();
+            _languages = GetSupportedLanguages();
             _operatingModes = GetOperatingModes().ToArray();
             _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
             _clockHourFormats = GetClockHourFormats().ToArray();
@@ -181,6 +183,17 @@
             };
         }
 
+        private LanguageItem[] GetSupportedLanguages()
+        {
+            return new[]
+            {
+                new LanguageItem {LanguageId = @"en-EN", LanguageName = @"English (United Kingdom)" },
+                new LanguageItem {LanguageId = @"en-US", LanguageName = @"English (United States)" },
+                new LanguageItem {LanguageId = @"pl-PL", LanguageName = @"Polish (Poland)" },
+                new LanguageItem {LanguageId = @"ru-RU", LanguageName = @"Russian (Russia)" }
+            };
+        }
+
         private IEnumerable<MonitorItem> GetSystemMonitors()
         {
             var result = new List<MonitorItem>
@@ -211,6 +224,21 @@
                     _optionsService.Options.TimerMonitorId = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new TimerMonitorChangedMessage());
+                }
+            }
+        }
+
+        public IEnumerable<LanguageItem> Languages => _languages;
+
+        public string LanguageId
+        {
+            get => _optionsService.Options.Culture;
+            set
+            {
+                if (_optionsService.Options.Culture != value)
+                {
+                    _optionsService.Options.Culture = value;
+                    RaisePropertyChanged();
                 }
             }
         }

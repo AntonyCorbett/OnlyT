@@ -1,7 +1,11 @@
 ﻿namespace OnlyT.Services.Options
 {
     using System;
+    using System.Globalization;
     using System.IO;
+    using System.Threading;
+    using System.Windows;
+    using System.Windows.Markup;
     using CommandLine;
     using Newtonsoft.Json;
     using Serilog;
@@ -98,6 +102,30 @@
             }
         }
 
+        private void SetCulture()
+        {
+            var culture = _options.Culture;
+
+            if (string.IsNullOrEmpty(culture))
+            {
+                culture = CultureInfo.CurrentCulture.Name;
+            }
+
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+                FrameworkElement.LanguageProperty.OverrideMetadata(
+                    typeof(FrameworkElement),
+                    new FrameworkPropertyMetadata(
+                        XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not set culture");
+            }
+        }
+    
         private string GetOptionsSignature(Options options)
         {
             // config data is small so simple solution is best...
@@ -121,6 +149,8 @@
                     ResetCircuitVisit();
                     
                     _options.Sanitize();
+
+                    SetCulture();
                 }
             }
         }

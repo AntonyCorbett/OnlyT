@@ -417,4 +417,7 @@
     <value>Volume:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>

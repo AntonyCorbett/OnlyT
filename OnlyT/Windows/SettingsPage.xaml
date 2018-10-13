@@ -313,7 +313,13 @@
                         <CheckBox IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.ALWAYS_ON_TOP}" />
-                        
+
+                        <ComboBox ItemsSource="{Binding Languages}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.LANGUAGE}"
+                                  SelectedValuePath="LanguageId" 
+                                  DisplayMemberPath="LanguageName"
+                                  SelectedValue="{Binding LanguageId, Mode=TwoWay}"/>
                     </StackPanel>
                 </GroupBox>
 
