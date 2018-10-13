@@ -268,4 +268,153 @@
   <data name="MINISTRY4" xml:space="preserve">
     <value>Ministry - Item 4</value>
   </data>
+  <data name="CIRCUIT_VISIT" xml:space="preserve">
+    <value>Circuit visit</value>
+  </data>
+  <data name="CLOSE_COUNTDOWN" xml:space="preserve">
+    <value>CLOSE COUNTDOWN</value>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
+    <value>[circuit visit]</value>
+  </data>
+  <data name="NEW_VERSION" xml:space="preserve">
+    <value>New version available!</value>
+  </data>
+  <data name="MAIN_SECTION" xml:space="preserve">
+    <value>MAIN</value>
+  </data>
+  <data name="ACCESS_CODE" xml:space="preserve">
+    <value>Access code</value>
+    <comment>similar to a PIN or a password</comment>
+  </data>
+  <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
+    <value>Midweek adaptive mode</value>
+  </data>
+  <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
+    <value>Weekend adaptive mode</value>
+  </data>
+  <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
+    <value>Allow count-up toggle</value>
+  </data>
+  <data name="ALWAYS_ON_TOP" xml:space="preserve">
+    <value>Always on top</value>
+    <comment>Refers to the main window always being on top of others</comment>
+  </data>
+  <data name="APPS_SECTION" xml:space="preserve">
+    <value>REMOTE APPS</value>
+  </data>
+  <data name="AUTO_SECTION" xml:space="preserve">
+    <value>AUTOMATIC MODE</value>
+  </data>
+  <data name="BELL_SECTION" xml:space="preserve">
+    <value>BELL</value>
+  </data>
+  <data name="CLOCK_SECTION" xml:space="preserve">
+    <value>WEB CLOCK</value>
+  </data>
+  <data name="COUNTDOWN_SECTION" xml:space="preserve">
+    <value>MEETING COUNTDOWN</value>
+  </data>
+  <data name="CO_VISIT_TOGGLE" xml:space="preserve">
+    <value>Circuit visit toggle</value>
+  </data>
+  <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
+    <value>Digital clock format</value>
+  </data>
+  <data name="ENABLED" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
+    <value>Full-screen clock mode</value>
+  </data>
+  <data name="IP_ADDRESS" xml:space="preserve">
+    <value>IP address</value>
+    <comment>Network address</comment>
+  </data>
+  <data name="MEETING" xml:space="preserve">
+    <value>Meeting</value>
+    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
+  </data>
+  <data name="MEETING_STARTS" xml:space="preserve">
+    <value>Meeting start times (1 per line)</value>
+  </data>
+  <data name="MISC_SECTION" xml:space="preserve">
+    <value>MISCELLANEOUS</value>
+  </data>
+  <data name="MONITOR" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
+  <data name="MOUSE_PTR" xml:space="preserve">
+    <value>Show mouse pointer</value>
+  </data>
+  <data name="MTG_START_NOTES1" xml:space="preserve">
+    <value>- Put each start time on a new line.</value>
+    <comment>Limited space available for this item!</comment>
+  </data>
+  <data name="MTG_START_NOTES2" xml:space="preserve">
+    <value>- Use any time format you like!</value>
+    <comment>Limited space available for this item!</comment>
+  </data>
+  <data name="MTG_START_NOTES3" xml:space="preserve">
+    <value>- Optionally include a day, e.g. "Thu 7:15"</value>
+    <comment>Limited space available for this item!</comment>
+  </data>
+  <data name="NOTES" xml:space="preserve">
+    <value>Notes:</value>
+  </data>
+  <data name="OPEN_PORT" xml:space="preserve">
+    <value>OPEN PORT</value>
+    <comment>Caption for the "open port" button in settings</comment>
+  </data>
+  <data name="OP_MODE" xml:space="preserve">
+    <value>Mode</value>
+    <comment>The operating mode (i.e. manual, auto or file-based)</comment>
+  </data>
+  <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
+    <value>Persist student time</value>
+    <comment>All the monitor to display the final student time for a little longer than normal</comment>
+  </data>
+  <data name="PERSIST_TALK_DURATION" xml:space="preserve">
+    <value>Persist talk duration</value>
+    <comment>How long the talk timer is shown after the end of the item</comment>
+  </data>
+  <data name="PORT" xml:space="preserve">
+    <value>Port</value>
+    <comment>i.e. the TCP (networking) "port"</comment>
+  </data>
+  <data name="REMOTE_SECTION" xml:space="preserve">
+    <value>REMOTE ACCESS</value>
+  </data>
+  <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
+    <value>Show sector on analogue clock</value>
+  </data>
+  <data name="SPLIT_WIDTH" xml:space="preserve">
+    <value>Split-screen width:</value>
+  </data>
+  <data name="TEST" xml:space="preserve">
+    <value>TEST</value>
+    <comment>Caption for the Bell test button in settings</comment>
+  </data>
+  <data name="THROTTLED" xml:space="preserve">
+    <value>Throttled</value>
+    <comment>Communication is deliberately limited to prevent overloading</comment>
+  </data>
+  <data name="TIMER_COUNT_UP" xml:space="preserve">
+    <value>Timer counts up</value>
+    <comment>Counts up rather than down</comment>
+  </data>
+  <data name="TIMER_WIN_SECTION" xml:space="preserve">
+    <value>TIMER WINDOW</value>
+  </data>
+  <data name="TIME_UNDER_TIMER" xml:space="preserve">
+    <value>Time of day under timer</value>
+    <comment>Show time of day underneath the timer</comment>
+  </data>
+  <data name="VOLUME" xml:space="preserve">
+    <value>Volume:</value>
+    <comment>Label for the volume control in the Bell settings</comment>
+  </data>
 </root>
