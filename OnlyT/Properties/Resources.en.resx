@@ -161,10 +161,10 @@
     <value>Original duration</value>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Analogue</value>
+    <value>Analog</value>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Analogue and Digital</value>
+    <value>Analog and Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
     <value>Digital</value>
@@ -389,7 +389,7 @@
     <value>REMOTE ACCESS</value>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Show sector on analogue clock</value>
+    <value>Show sector on analog clock</value>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
     <value>Split-screen width:</value>
