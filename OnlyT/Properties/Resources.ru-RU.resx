@@ -331,7 +331,7 @@
     <value>Full-screen clock mode</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP-адрес</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
@@ -363,10 +363,10 @@
     <comment>Limited space available for this item!</comment>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Примечания:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OPEN PORT</value>
+    <value>Открыть порт</value>
     <comment>Caption for the "open port" button in settings</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
@@ -382,11 +382,11 @@
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
-    <value>Port</value>
+    <value>Порт</value>
     <comment>i.e. the TCP (networking) "port"</comment>
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
-    <value>REMOTE ACCESS</value>
+    <value>Удаленный доступ</value>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
     <value>Show sector on analogue clock</value>
@@ -395,7 +395,7 @@
     <value>Split-screen width:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>TEST</value>
+    <value>Тест</value>
     <comment>Caption for the Bell test button in settings</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
