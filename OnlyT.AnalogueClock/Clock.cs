@@ -111,7 +111,13 @@
                 CurrentTimeSec = "20";
             }
         }
-        
+
+        public DurationSector DurationSector
+        {
+            get => (DurationSector)GetValue(DurationSectorProperty);
+            set => SetValue(DurationSectorProperty, value);
+        }
+
         public bool DigitalTimeFormatShowLeadingZero
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -186,7 +192,7 @@
                 bool delay = e.OldValue == null;
                 if (delay)
                 {
-                    // the first tiem we display the sector we delay it for aesthetics
+                    // the first time we display the sector we delay it for aesthetics
                     // (so it doesn't appear just as the clock is fading out)
                     Task.Delay(1000).ContinueWith(t => { c.Dispatcher.Invoke(() => { DrawSector(c, sector); }); });
                 }
@@ -338,13 +344,7 @@
             get => (string)GetValue(CurrentTimeSecProperty);
             set => SetValue(CurrentTimeSecProperty, value);
         }
-
-        public DurationSector DurationSector
-        {
-            get => (DurationSector)GetValue(DurationSectorProperty);
-            set => SetValue(DurationSectorProperty, value);
-        }
-
+        
         private void StartupAnimation()
         {
             _animationTargetAngles = GenerateTargetAngles();
