@@ -185,13 +185,13 @@
     <value>Третий разговор</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatic</value>
+    <value>Автоматически</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>File-based</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
+    <value>Вручную</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Concluding Talk</value>
@@ -304,7 +304,7 @@
     <comment>Refers to the main window always being on top of others</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>REMOTE APPS</value>
+    <value>Приложение для удаленного доступа</value>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
     <value>Автоматический режим</value>
@@ -355,7 +355,7 @@
     <comment>Limited space available for this item!</comment>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>- Use any time format you like!</value>
+    <value>-Используйте любой формат времени, который вам нравится!</value>
     <comment>Limited space available for this item!</comment>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
