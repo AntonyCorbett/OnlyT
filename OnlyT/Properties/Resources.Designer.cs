@@ -696,6 +696,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please restart OnlyT after changing the language..
+        /// </summary>
+        public static string RESTART_LANGUAGE {
+            get {
+                return ResourceManager.GetString("RESTART_LANGUAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Living.
         /// </summary>
         public static string SECTION_LIVING {

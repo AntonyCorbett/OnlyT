@@ -314,12 +314,23 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.ALWAYS_ON_TOP}" />
 
-                        <ComboBox ItemsSource="{Binding Languages}" 
-                                  Style="{StaticResource SettingsComboStyle}"
-                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.LANGUAGE}"
-                                  SelectedValuePath="LanguageId" 
-                                  DisplayMemberPath="LanguageName"
-                                  SelectedValue="{Binding LanguageId, Mode=TwoWay}"/>
+                        <DockPanel>
+                            <materialDesign:PackIcon Kind="Translate" 
+                                                     Width="24" 
+                                                     Height="24"
+                                                     Margin="0,0,6,0"
+                                                     VerticalAlignment="Center"/>
+                            <ComboBox ItemsSource="{Binding Languages}" 
+                                      Style="{StaticResource SettingsComboStyle}"
+                                      materialDesign:HintAssist.Hint="{x:Static resx:Resources.LANGUAGE}"
+                                      SelectedValuePath="LanguageId" 
+                                      DisplayMemberPath="LanguageName"
+                                      SelectedValue="{Binding LanguageId, Mode=TwoWay}"/>
+                        </DockPanel>
+                        <TextBlock Style="{StaticResource SampleStyle}" 
+                                   TextWrapping="Wrap"
+                                   Text="{x:Static resx:Resources.RESTART_LANGUAGE}"/>
+
                     </StackPanel>
                 </GroupBox>
 
