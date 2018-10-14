@@ -142,19 +142,19 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12 horas</value>
+    <value>12 Horas</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
-    <value>12-hour (leading zero)</value>
+    <value>12 Horas (com zero à esquerda)</value>
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24 horas</value>
+    <value>24 Horas</value>
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
-    <value>24-hour (leading zero)</value>
+    <value>24 Horas (com zero à esquerda)</value>
     <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
@@ -162,10 +162,10 @@
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
-    <value>Adapted duration</value>
+    <value>Duração adaptada</value>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Modified duration</value>
+    <value>Duração modificada</value>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
     <value>Duração original</value>
@@ -240,17 +240,17 @@
     <value>Discurso Tesouros</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Estudo d'A Sentinela</value>
+    <value>Estudo de A Sentinela</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
     <value>Fim de Semana</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12 horas (am/pm)</value>
+    <value>12 Horas (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-hour (leading zero &amp; am/pm)</value>
+    <value>12 Horas (com zero à esquerda e am/pm)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
@@ -314,7 +314,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Allow count-up toggle</value>
+    <value>Permitir ativar contagem crescente</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -342,7 +342,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Visita de circuito</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Formato de relógio digital</value>
@@ -351,7 +351,7 @@
     <value>Ativado</value>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Modo de relógio no ecrã inteiro</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>Endereço IP</value>
@@ -362,7 +362,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Hora de início de reunião (1 por linha)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERSOS</value>
@@ -375,13 +375,13 @@
     <value>Mostrar o ponteiro do rato</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Coloque cada hora de início numa nova linha.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Use o formato de tempo que preferir!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Opcionalmente inclua o dia, ex.: "Qui 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
@@ -395,11 +395,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Persist student time</value>
+    <value>Continuar a mostrar o tempo de estudante</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Persist talk duration</value>
+    <value>Tempo para mostrar o tempo de estudante</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
