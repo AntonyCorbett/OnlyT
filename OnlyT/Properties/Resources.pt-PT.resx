@@ -345,7 +345,7 @@
     <value>Circuit visit toggle</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Formato de relógio digital</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Ativado</value>
