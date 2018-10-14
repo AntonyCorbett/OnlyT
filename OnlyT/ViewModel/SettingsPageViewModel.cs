@@ -212,6 +212,16 @@ namespace OnlyT.ViewModel
                 }
             }
 
+            // the native language
+            {
+                var c = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
+                result.Add(new LanguageItem
+                {
+                    LanguageId = c.Name,
+                    LanguageName = c.EnglishName
+                });
+            }
+
             result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
 
             return result.ToArray();

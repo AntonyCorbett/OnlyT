@@ -60,6 +60,15 @@ Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\Serilog.Sinks.RollingFile.d
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\UnityEngine.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\ca-ES\*.dll"; DestDir: "{app}\ca-ES"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\el-GR\*.dll"; DestDir: "{app}\el-GR"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\en-US\*.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\fi-FI\*.dll"; DestDir: "{app}\fi-FI"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\pl-PL\*.dll"; DestDir: "{app}\pl-PL"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\pt-BR\*.dll"; DestDir: "{app}\pt-BR"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\pt-PT\*.dll"; DestDir: "{app}\pt-PT"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\ro-RO\*.dll"; DestDir: "{app}\ro-RO"; Flags: ignoreversion
+Source: "d:\ProjectsPersonal\OnlyT\OnlyT\bin\Release\ru-RU\*.dll"; DestDir: "{app}\ru-RU"; Flags: ignoreversion
 Source: "d:\ProjectsPersonal\OnlyT\talk_schedule.xml"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
