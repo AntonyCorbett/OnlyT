@@ -1,4 +1,7 @@
-﻿namespace OnlyT.ViewModel
+﻿using System.Globalization;
+using System.IO;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -185,13 +188,33 @@
 
         private LanguageItem[] GetSupportedLanguages()
         {
-            return new[]
+            var result = new List<LanguageItem>();
+
+            var subFolders = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            foreach (var folder in subFolders)
             {
-                new LanguageItem {LanguageId = @"en-EN", LanguageName = @"English (United Kingdom)" },
-                new LanguageItem {LanguageId = @"en-US", LanguageName = @"English (United States)" },
-                new LanguageItem {LanguageId = @"pl-PL", LanguageName = @"Polish (Poland)" },
-                new LanguageItem {LanguageId = @"ru-RU", LanguageName = @"Russian (Russia)" }
-            };
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    try
+                    {
+                        var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
+                        result.Add(new LanguageItem
+                        {
+                            LanguageId = c.Name,
+                            LanguageName = c.EnglishName
+                        });
+                    }
+                    catch (CultureNotFoundException)
+                    {
+                        // expected
+                    }
+                }
+            }
+
+            result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
+
+            return result.ToArray();
         }
 
         private IEnumerable<MonitorItem> GetSystemMonitors()
