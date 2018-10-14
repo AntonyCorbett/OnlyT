@@ -306,11 +306,11 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Midweek adaptive mode</value>
+    <value>Viikkokok. mukautuva tila</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Weekend adaptive mode</value>
+    <value>Viikonl. mukautuva tila</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
@@ -318,70 +318,70 @@
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
-    <value>Always on top</value>
+    <value>Aina päällimmäisenä</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>REMOTE APPS</value>
+    <value>ETÄSOVELLUKSET</value>
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>AUTOMATIC MODE</value>
+    <value>AUTOMAATTINEN TILA</value>
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>BELL</value>
+    <value>ÄÄNIMERKKI</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB CLOCK</value>
+    <value>WEB-KELLO</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>KOKOUKSEN LÄHTÖLASKENTA</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>Circuit visit toggle</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Digitaalikellon muoto</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Käytössä</value>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Koko näytön kellon muoto</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP-osoite</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Kokous</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Kokouksien alkamisajat (1/rivi)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>MISCELLANEOUS</value>
+    <value>SEKALAISET</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Monitori</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Show mouse pointer</value>
+    <value>Näytä hiiriosoitin</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Laita jokainen alkamisaika omalle rivilleen.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Käytä haluamaasi aikaformaattia!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Halutessasi voit sisällyttää päivän, esimerkiksi ”to 19:15”</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes:</value>
