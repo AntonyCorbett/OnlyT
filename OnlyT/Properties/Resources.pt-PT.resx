@@ -310,7 +310,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Modo adaptável do fim de semana</value>
+    <value>Modo adaptável na Fim de Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
@@ -338,14 +338,14 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>TEMPORIZADOR REUNIÃO</value>
+    <value>TEMPORIZADOR DA REUNIÃO</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>Seletor Visita de circuito</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Formato de relógio digital</value>
+    <value>Formato do relógio digital</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Ativado</value>
@@ -362,7 +362,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Hora de início de reunião (1 por linha)</value>
+    <value>Horas de início de reunião (1 por linha)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERSOS</value>
@@ -425,7 +425,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Cronómetro conta para cima</value>
+    <value>Cronómetro crescente</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
