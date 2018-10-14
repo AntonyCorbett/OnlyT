@@ -257,7 +257,7 @@
     <value>Nenhum</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>As definições não estão disponíveis quando o cronómetro está a ser executado!</value>
+    <value>As definições não estão disponíveis enquanto o cronómetro está em uso!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Definições</value>
@@ -266,7 +266,7 @@
     <value>Tesouros</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministério</value>
+    <value>Empenhe-se no Ministério</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
     <value>Viver</value>
@@ -306,7 +306,7 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Modo adaptável no meio da semana</value>
+    <value>Modo adaptável na Meio da Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
