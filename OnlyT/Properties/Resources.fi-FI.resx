@@ -246,7 +246,7 @@
     <value>Viikonloppu</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12 tuntinen (am/pm)</value>
+    <value>12-tuntinen (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
