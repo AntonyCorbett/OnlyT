@@ -135,7 +135,7 @@
   </data>
   <data name="APP_VER" xml:space="preserve">
     <value>Software version {0}</value>
-    <comment>See Settings, Main</comment>
+    <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -143,18 +143,23 @@
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
     <value>12-hour</value>
+    <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
     <value>12-hour (leading zero)</value>
+    <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
     <value>24-hour</value>
+    <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
     <value>24-hour (leading zero)</value>
+    <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
     <value>Could not create folder {0}</value>
+    <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
     <value>Adapted duration</value>
@@ -242,9 +247,11 @@
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12-hour (am/pm)</value>
+    <comment>The 12-hour clock format with "am" or "pm" appended</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
     <value>12-hour (leading zero &amp; am/pm)</value>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
     <value>None</value>
@@ -279,6 +286,7 @@
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>CLOSE COUNTDOWN</value>
+    <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
     <value>Help</value>
@@ -295,7 +303,7 @@
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
     <value>Access code</value>
-    <comment>similar to a PIN or a password</comment>
+    <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
     <value>Midweek adaptive mode</value>
@@ -331,7 +339,7 @@
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
     <value>MEETING COUNTDOWN</value>
-    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals</comment>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>Circuit visit toggle</value>
@@ -367,23 +375,20 @@
     <value>Show mouse pointer</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>- Put each start time on a new line.</value>
-    <comment>Limited space available for this item!</comment>
+    <value>Put each start time on a new line.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>- Use any time format you like!</value>
-    <comment>Limited space available for this item!</comment>
+    <value>Use any time format you like!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>- Optionally include a day, e.g. "Thu 7:15"</value>
-    <comment>Limited space available for this item!</comment>
+    <value>Optionally include a day, e.g. "Thu 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
     <value>OPEN PORT</value>
-    <comment>Caption for the "open port" button in settings</comment>
+    <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
     <value>Mode</value>
@@ -413,7 +418,7 @@
   </data>
   <data name="TEST" xml:space="preserve">
     <value>TEST</value>
-    <comment>Caption for the Bell test button in settings</comment>
+    <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
     <value>Throttled</value>
