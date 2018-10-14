@@ -119,18 +119,23 @@
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
     <value>Bell is active</value>
+    <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
     <value>None</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
     <value>One-way</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
     <value>Two-way</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
     <value>Software version {0}</value>
+    <comment>See Settings, Main</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
   <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -264,6 +269,7 @@
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
     <value>Settings disabled by administrator!</value>
+    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
     <value>Ministry - Item 4</value>
@@ -285,6 +291,7 @@
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
     <value>MAIN</value>
+    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
     <value>Access code</value>
@@ -292,31 +299,39 @@
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
     <value>Midweek adaptive mode</value>
+    <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
     <value>Weekend adaptive mode</value>
+    <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
     <value>Allow count-up toggle</value>
+    <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
     <value>Always on top</value>
-    <comment>Refers to the main window always being on top of others</comment>
+    <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
     <value>REMOTE APPS</value>
+    <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
     <value>AUTOMATIC MODE</value>
+    <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
     <value>BELL</value>
+    <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
     <value>WEB CLOCK</value>
+    <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
     <value>MEETING COUNTDOWN</value>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>Circuit visit toggle</value>
@@ -343,6 +358,7 @@
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>MISCELLANEOUS</value>
+    <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
     <value>Monitor</value>
@@ -387,6 +403,7 @@
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
     <value>REMOTE ACCESS</value>
+    <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
     <value>Show sector on analog clock</value>
@@ -408,6 +425,7 @@
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
     <value>TIMER WINDOW</value>
+    <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
     <value>Time of day under timer</value>
@@ -416,5 +434,23 @@
   <data name="VOLUME" xml:space="preserve">
     <value>Volume:</value>
     <comment>Label for the volume control in the Bell settings</comment>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="RESTART_LANGUAGE" xml:space="preserve">
+    <value>Please restart OnlyT after changing the language.</value>
+  </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Decrease</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Increase</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Manual mode</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
 </root>
