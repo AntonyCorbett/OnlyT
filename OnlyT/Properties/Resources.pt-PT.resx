@@ -342,7 +342,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Visita de circuito</value>
+    <value>Seletor Visita de circuito</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Formato de relógio digital</value>
@@ -381,7 +381,7 @@
     <value>Use o formato de tempo que preferir!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Opcionalmente inclua o dia, ex.: "Qui 7:15"</value>
+    <value>Opcionalmente inclua um dia. Ex.: "Qui 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
