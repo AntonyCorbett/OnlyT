@@ -378,7 +378,7 @@
     <value>Put each start time on a new line.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Используйте любой формат времени, который вам нравится!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
