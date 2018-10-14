@@ -453,6 +453,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manual mode.
+        /// </summary>
+        public static string MANUAL_MODE {
+            get {
+                return ResourceManager.GetString("MANUAL_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meeting.
         /// </summary>
         public static string MEETING {
@@ -899,6 +908,24 @@ namespace OnlyT.Properties {
         public static string THROTTLED {
             get {
                 return ResourceManager.GetString("THROTTLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease.
+        /// </summary>
+        public static string TIME_DECREASE {
+            get {
+                return ResourceManager.GetString("TIME_DECREASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase.
+        /// </summary>
+        public static string TIME_INCREASE {
+            get {
+                return ResourceManager.GetString("TIME_INCREASE", resourceCulture);
             }
         }
         

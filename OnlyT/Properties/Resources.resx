@@ -441,4 +441,16 @@
   <data name="RESTART_LANGUAGE" xml:space="preserve">
     <value>Please restart OnlyT after changing the language.</value>
   </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Decrease</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Increase</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Manual mode</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
+  </data>
 </root>
