@@ -16,8 +16,8 @@ namespace OnlyT.ViewModel
     using GalaSoft.MvvmLight.Threading;
     using Messages;
     using Models;
-    using OnlyT.Services.CommandLine;
     using Serilog;
+    using Services.CommandLine;
     using Services.CountdownTimer;
     using Services.Monitors;
     using Services.Options;
@@ -26,6 +26,7 @@ namespace OnlyT.ViewModel
     using WebServer;
     using Windows;
 
+    /// <inheritdoc />
     /// <summary>
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
     /// </summary>
@@ -46,6 +47,7 @@ namespace OnlyT.ViewModel
         private bool _countdownDone;
         private TimerOutputWindow _timerWindow;
         private CountdownWindow _countdownWindow;
+        private FrameworkElement _currentPage;
 
         public MainViewModel(
            IOptionsService optionsService,
@@ -89,10 +91,41 @@ namespace OnlyT.ViewModel
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
 #pragma warning disable 4014
+
             // (fire and forget)
             LaunchTimerWindowAsync();
+
 #pragma warning restore 4014
         }
+
+        public FrameworkElement CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                if (!ReferenceEquals(_currentPage, value))
+                {
+                    _currentPage = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public bool AlwaysOnTop
+        {
+            get
+            {
+                var result = _optionsService.Options.AlwaysOnTop ||
+                             (_timerWindow != null && _timerWindow.IsVisible) ||
+                             (_countdownWindow != null && _countdownWindow.IsVisible);
+
+                return result;
+            }
+        }
+
+        public string CurrentPageName { get; private set; }
+
+        private bool CountDownActive => _countdownWindow != null;
 
         public void Closing(CancelEventArgs e)
         {
@@ -104,49 +137,6 @@ namespace OnlyT.ViewModel
                 CloseCountdownWindow();
             }
         }
-
-        private bool ForceSoftwareRendering()
-        {
-            // https://blogs.msdn.microsoft.com/jgoldb/2010/06/22/software-rendering-usage-in-wpf/
-            // renderingTier values:
-            // 0 => No graphics hardware acceleration available for the application on the device
-            //      and DirectX version level is less than version 7.0
-            // 1 => Partial graphics hardware acceleration available on the video card. This 
-            //      corresponds to a DirectX version that is greater than or equal to 7.0 and 
-            //      less than 9.0.
-            // 2 => A rendering tier value of 2 means that most of the graphics features of WPF 
-            //      should use hardware acceleration provided the necessary system resources have 
-            //      not been exhausted. This corresponds to a DirectX version that is greater 
-            //      than or equal to 9.0.
-            int renderingTier = RenderCapability.Tier >> 16;
-            return renderingTier == 0;
-        }
-
-        /// <summary>
-        /// Starts the countdown (pre-meeting) timer
-        /// </summary>
-        /// <param name="offsetSeconds">
-        /// The offset in seconds (the timer already started offsetSeconds ago).
-        /// </param>
-        private void StartCountdown(int offsetSeconds)
-        {
-            if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
-            {
-                Log.Logger.Information("Launching countdown timer");
-
-                if (OpenCountdownWindow(offsetSeconds))
-                {
-                    Task.Delay(1000).ContinueWith(t =>
-                    {
-                        // hide the timer window after a short delay (so that it doesn't appear 
-                        // as another top-level window during alt-TAB)...
-                        DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
-                    });
-                }
-            }
-        }
-
-        public string CurrentPageName { get; private set; }
 
         private void InitSettingsPage()
         {
@@ -316,33 +306,6 @@ namespace OnlyT.ViewModel
             ((IPage)CurrentPage.DataContext).Activated(message.State);
         }
 
-        private FrameworkElement _currentPage;
-
-        public FrameworkElement CurrentPage
-        {
-            get => _currentPage;
-            set
-            {
-                if (!ReferenceEquals(_currentPage, value))
-                {
-                    _currentPage = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        public bool AlwaysOnTop
-        {
-            get
-            {
-                var result = _optionsService.Options.AlwaysOnTop ||
-                             (_timerWindow != null && _timerWindow.IsVisible) ||
-                             (_countdownWindow != null && _countdownWindow.IsVisible);
-
-                return result;
-            }
-        }
-
         /// <summary>
         /// If the timer window is open when we change the timer display then relocate it;
         /// otherwise open it
@@ -370,10 +333,6 @@ namespace OnlyT.ViewModel
             }
         }
         
-        //// private bool InSettingsPage => CurrentPageName.Equals(SettingsPageViewModel.PageName);
-
-        private bool CountDownActive => _countdownWindow != null;
-
         private bool OpenCountdownWindow(int offsetSeconds)
         {
             if (!CountDownActive)
@@ -489,6 +448,47 @@ namespace OnlyT.ViewModel
             {
                 Log.Logger.Error(ex, "Could not close countdown window");
             }
+        }
+
+        /// <summary>
+        /// Starts the countdown (pre-meeting) timer
+        /// </summary>
+        /// <param name="offsetSeconds">
+        /// The offset in seconds (the timer already started offsetSeconds ago).
+        /// </param>
+        private void StartCountdown(int offsetSeconds)
+        {
+            if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
+            {
+                Log.Logger.Information("Launching countdown timer");
+
+                if (OpenCountdownWindow(offsetSeconds))
+                {
+                    Task.Delay(1000).ContinueWith(t =>
+                    {
+                        // hide the timer window after a short delay (so that it doesn't appear 
+                        // as another top-level window during alt-TAB)...
+                        DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
+                    });
+                }
+            }
+        }
+
+        private bool ForceSoftwareRendering()
+        {
+            // https://blogs.msdn.microsoft.com/jgoldb/2010/06/22/software-rendering-usage-in-wpf/
+            // renderingTier values:
+            // 0 => No graphics hardware acceleration available for the application on the device
+            //      and DirectX version level is less than version 7.0
+            // 1 => Partial graphics hardware acceleration available on the video card. This 
+            //      corresponds to a DirectX version that is greater than or equal to 7.0 and 
+            //      less than 9.0.
+            // 2 => A rendering tier value of 2 means that most of the graphics features of WPF 
+            //      should use hardware acceleration provided the necessary system resources have 
+            //      not been exhausted. This corresponds to a DirectX version that is greater 
+            //      than or equal to 9.0.
+            int renderingTier = RenderCapability.Tier >> 16;
+            return renderingTier == 0;
         }
     }
 }

@@ -32,6 +32,12 @@
         <Style x:Key="SampleStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkBrush}" />
             <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="10,0,0,4" />
+        </Style>
+        <Style x:Key="MiscNotesStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkBrush}" />
+            <Setter Property="FontSize" Value="11" />
         </Style>
         <Style x:Key="SettingsComboStyle" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
             <Setter Property="Margin" Value="0,0,0,15" />
@@ -292,13 +298,29 @@
                             
                         </TextBox>
                         <Label Style="{StaticResource LabelStyle}" Content="{x:Static resx:Resources.NOTES}"/>
-                        <TextBlock Style="{StaticResource SampleStyle}">
-                            <Run Text="{x:Static resx:Resources.MTG_START_NOTES1}" />
-                            <LineBreak />
-                            <Run Text="{x:Static resx:Resources.MTG_START_NOTES2}" />
-                            <LineBreak />
-                            <Run Text="{x:Static resx:Resources.MTG_START_NOTES3}" />
-                        </TextBlock>
+                            <BulletDecorator>
+                                <BulletDecorator.Bullet>
+                                    <Ellipse Height="5" Width="5" Fill="{StaticResource PrimaryHueLightBrush}"/>
+                                </BulletDecorator.Bullet>
+                                <TextBlock Style="{StaticResource SampleStyle}" 
+                                           Text="{x:Static resx:Resources.MTG_START_NOTES1}"/>
+                            </BulletDecorator>
+
+                            <BulletDecorator>
+                                <BulletDecorator.Bullet>
+                                    <Ellipse Height="5" Width="5" Fill="{StaticResource PrimaryHueLightBrush}"/>
+                                </BulletDecorator.Bullet>
+                                <TextBlock Style="{StaticResource SampleStyle}" 
+                                           Text="{x:Static resx:Resources.MTG_START_NOTES2}"/>
+                            </BulletDecorator>
+
+                            <BulletDecorator>
+                                <BulletDecorator.Bullet>
+                                    <Ellipse Height="5" Width="5" Fill="{StaticResource PrimaryHueLightBrush}"/>
+                                </BulletDecorator.Bullet>
+                                <TextBlock Style="{StaticResource SampleStyle}" 
+                                           Text="{x:Static resx:Resources.MTG_START_NOTES3}"/>
+                            </BulletDecorator>
                     </StackPanel>
 
                 </GroupBox>
@@ -327,7 +349,7 @@
                                       DisplayMemberPath="LanguageName"
                                       SelectedValue="{Binding LanguageId, Mode=TwoWay}"/>
                         </DockPanel>
-                        <TextBlock Style="{StaticResource SampleStyle}" 
+                        <TextBlock Style="{StaticResource MiscNotesStyle}" 
                                    TextWrapping="Wrap"
                                    Text="{x:Static resx:Resources.RESTART_LANGUAGE}"/>
 

@@ -561,7 +561,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to - Put each start time on a new line..
+        ///   Looks up a localized string similar to Put each start time on a new line..
         /// </summary>
         public static string MTG_START_NOTES1 {
             get {
@@ -570,7 +570,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to - Use any time format you like!.
+        ///   Looks up a localized string similar to Use any time format you like!.
         /// </summary>
         public static string MTG_START_NOTES2 {
             get {
@@ -579,7 +579,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to - Optionally include a day, e.g. &quot;Thu 7:15&quot;.
+        ///   Looks up a localized string similar to Optionally include a day, e.g. &quot;Thu 7:15&quot;.
         /// </summary>
         public static string MTG_START_NOTES3 {
             get {
