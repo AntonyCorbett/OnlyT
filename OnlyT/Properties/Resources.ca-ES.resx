@@ -163,15 +163,19 @@
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
     <value>Adapted duration</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
     <value>Modified duration</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
     <value>Original duration</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
     <value>Analògic</value>
+    <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
     <value>Analògic i digital</value>
