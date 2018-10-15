@@ -118,23 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>Κουδούνι ανοικτό</value>
+    <value>Bell is active</value>
     <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
-    <value>Προσαρμοσμένος Τρόπος Ανοικτός</value>
+    <value>None</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
-    <value>Μη ανάστροφη προσαρμογή </value>
+    <value>One-way</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
-    <value>Αμφίδρομος τρόπος </value>
+    <value>Two-way</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
-    <value>Έκδοση λογισμικού {0}</value>
+    <value>Software version {0}</value>
     <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -142,320 +142,320 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>Είδος ρολογιού 24/12</value>
+    <value>12-hour</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
-    <value>12 ωρο</value>
+    <value>12-hour (leading zero)</value>
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24-ωρο</value>
+    <value>24-hour</value>
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
-    <value>24-ωρο (με μηδέν αρχικά)</value>
+    <value>24-hour (leading zero)</value>
     <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
-    <value>Αδυναμία δημιουργίας φακέλου {0}</value>
+    <value>Could not create folder {0}</value>
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
-    <value>Προσαρμοσμένη διάρκεια</value>
+    <value>Adapted duration</value>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Προσαρμοσμένη διάρκεια</value>
+    <value>Modified duration</value>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
-    <value>Αρχική διάρκεια</value>
+    <value>Original duration</value>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Αναλογική</value>
+    <value>Analogue</value>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Αναλογικά και ψηφιακά</value>
+    <value>Analogue and Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
-    <value>Ψηφιακό</value>
+    <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Κουδούνι είναι ανενεργό</value>
+    <value>Bell is inactive</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
-    <value>Μεσοβδόμαδο</value>
+    <value>Midweek</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Σχολή 1</value>
+    <value>Ministry - Item 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Σχολή 2</value>
+    <value>Ministry - Item 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Σχολή 3</value>
+    <value>Ministry - Item 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Αυτόματο</value>
+    <value>Automatic</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Αρχείο-βασικό</value>
+    <value>File-based</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Χειροκίνητο</value>
+    <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Καταληκτική ομιλία</value>
+    <value>Concluding Talk</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Σχόλια</value>
+    <value>Concluding Comments</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Εκκλ/ μελέτη Βίβλων</value>
+    <value>Congregation Bible Study</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Σκάβοντας για πνευματικούς πολύτιμοι λίθοι</value>
+    <value>Digging for Spiritual Gems</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Ομιλία 1</value>
+    <value>Living - Part 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Ομιλία 2</value>
+    <value>Living - Part 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Εναρκτήρια σχόλια</value>
+    <value>Opening Comments</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>Παρουσιάσεις μήνα</value>
+    <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Δημόσια ομιλία</value>
+    <value>Public Talk</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Ανάγνωση Γραφής</value>
+    <value>Bible Reading</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Υπηρεσιακη ομιλία</value>
+    <value>Service Talk</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Ομιλία θησαυρών</value>
+    <value>Treasures Talk</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Σκοπιά</value>
+    <value>Watchtower Study</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Σαβ/κου (Παρ-Κυρ)</value>
+    <value>Weekend</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12 ωρών (πμ/μμ)</value>
+    <value>12-hour (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-ωρη (με μηδέν &amp; πμ/μμ)</value>
+    <value>12-hour (leading zero &amp; am/pm)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>Οθόνη καμία</value>
+    <value>None</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Ρυθμίσεις δεν είναι διαθέσιμες ενώ εκτελείται το χρονόμετρο!</value>
+    <value>Settings not available while timer is running!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Ρυθμίσεις</value>
+    <value>Settings</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Θησαυρός</value>
+    <value>Treasures</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Χριστιανική ζωή</value>
+    <value>Ministry</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Ζώντας ως</value>
+    <value>Living</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Σαββατοκύριακο</value>
+    <value>Weekend</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Ρυθμίσεις απενεργοποιήθηκαν από το διαχειριστή!</value>
+    <value>Settings disabled by administrator!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Σχολή 4</value>
+    <value>Ministry - Item 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Επίσκεψη Επισκόπου</value>
+    <value>Circuit visit</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>ΚΛΕΊΣΤΕ ΑΝΤΊΣΤΡΟΦΗ ΜΈΤΡΗΣΗ</value>
+    <value>CLOSE COUNTDOWN</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
-    <value>Βοήθεια</value>
+    <value>Help</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[επίσκεψη Επισκόπου]</value>
+    <value>[circuit visit]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>Νέα έκδοση διαθέσιμη!</value>
+    <value>New version available!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
-    <value>Κύριο μενού</value>
+    <value>MAIN</value>
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
-    <value>Κωδικός πρόσβασης (Automatic Translation)</value>
+    <value>Access code</value>
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Μεσοβδόμαδο λειτουργία προσαρμοσμένη</value>
+    <value>Midweek adaptive mode</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Προσαρμοστική λειτουργία το σαββατοκύριακο</value>
+    <value>Weekend adaptive mode</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Επιτρέπω μέτρηση προς τα πάνω</value>
+    <value>Allow count-up toggle</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
-    <value>Πάντα σε πρώτο πλάνο</value>
+    <value>Always on top</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>ΑΠΟΜΑΚΡΥΣΜΈΝΕΣ ΕΦΑΡΜΟΓΈΣ</value>
+    <value>REMOTE APPS</value>
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>ΑΥΤΌΜΑΤΗ ΛΕΙΤΟΥΡΓΊΑ</value>
+    <value>AUTOMATIC MODE</value>
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>ΚΑΜΠΆΝΑ</value>
+    <value>BELL</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB ΡΟΛΌΙ</value>
+    <value>WEB CLOCK</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>ΑΝΤΊΣΤΡΟΦΗ ΜΈΤΡΗΣΗ</value>
+    <value>MEETING COUNTDOWN</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Εναλλαγής επίσκεψη Επισκόπου</value>
+    <value>Circuit visit toggle</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Μορφή ψηφιακού ρολογιού</value>
+    <value>Digital clock format</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Ενεργοποιημένο</value>
+    <value>Enabled</value>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Λειτουργία πλήρους οθόνης</value>
+    <value>Full-screen clock mode</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>Διεύθυνση IP</value>
+    <value>IP address</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Συνάντηση</value>
+    <value>Meeting</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Έναρξη της σύσκεψης σε (1 ανά γραμμή)</value>
+    <value>Meeting start times (1 per line)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>ΔΙΑΦΟΡΑ</value>
+    <value>MISCELLANEOUS</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Οθόνη</value>
+    <value>Monitor</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Εμφάνιση του δείκτη ποντικιού</value>
+    <value>Show mouse pointer</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Βάλτε κάθε ώρα έναρξης σε μια νέα γραμμή.</value>
+    <value>Put each start time on a new line.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Για να χρησιμοποιήσετε οποιαδήποτε μορφή ώρας που σας αρέσει!</value>
+    <value>Use any time format you like!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Περιλαμβάνουν προαιρετικά μια ημέρα, π.χ. «Πεμ 7:15»</value>
+    <value>Optionally include a day, e.g. "Thu 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Σημειώσεις:</value>
+    <value>Notes:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>ΆΝΟΙΓΜΑ ΘΎΡΑΣ</value>
+    <value>OPEN PORT</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
-    <value>Κατάσταση Λειτουργίας</value>
+    <value>Mode</value>
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Σπουδαστή χρόνος</value>
+    <value>Persist student time</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Χρόνος</value>
+    <value>Persist talk duration</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
-    <value>Θύρα</value>
+    <value>Port</value>
     <comment>i.e. the TCP (networking) "port"</comment>
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
-    <value>ΑΠΟΜΑΚΡΥΣΜΈΝΗ ΠΡΌΣΒΑΣΗ</value>
+    <value>REMOTE ACCESS</value>
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Εμφάνιση τομέα σε αναλογικό ρολόι</value>
+    <value>Show sector on analogue clock</value>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Διαχωριστικό οθόνης:</value>
+    <value>Split-screen width:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>ΔΟΚΙΜΉ</value>
+    <value>TEST</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Τεθεί σε αναμονή</value>
+    <value>Throttled</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Χρονόμετρο μετράει μέχρι</value>
+    <value>Timer counts up</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>ΠΑΡΆΘΥΡΟ ΧΡΟΝΟΜΈΤΡΩΝ</value>
+    <value>TIMER WINDOW</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Ώρα της ημέρας σύμφωνα με χρονοδιακόπτη</value>
+    <value>Time of day under timer</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
-    <value>Ένταση ήχου:</value>
+    <value>Volume:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Γλώσσες</value>
+    <value>Language</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Μετά την αλλαγή της γλώσσας, παρακαλώ κάντε επανεκκίνηση OnlyT.</value>
+    <value>Please restart OnlyT after changing the language.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Μείωση</value>
+    <value>Decrease</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Αύξηση</value>
+    <value>Increase</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Χειροκίνητη λειτουργία</value>
+    <value>Manual mode</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
 </root>
