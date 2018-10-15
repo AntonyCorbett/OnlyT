@@ -28,8 +28,6 @@
         private DateTime _start;
         private double _pixelsPerDip;
 
-        public event EventHandler TimeUpEvent;
-
         static CountdownControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
@@ -46,6 +44,8 @@
             
             _timer.Tick += TimerFire;
         }
+
+        public event EventHandler TimeUpEvent;
 
         public override void OnApplyTemplate()
         {

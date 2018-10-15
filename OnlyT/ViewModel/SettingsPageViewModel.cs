@@ -23,8 +23,6 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     public class SettingsPageViewModel : ViewModelBase, IPage
     {
-        public static string PageName => "SettingsPage";
-        
         private readonly MonitorItem[] _monitors;
         private readonly LanguageItem[] _languages;
         private readonly OperatingModeItem[] _operatingModes;
@@ -70,6 +68,8 @@
             OpenPortCommand = new RelayCommand(ReserveAndOpenPort);
             WebClockUrlLinkCommand = new RelayCommand(OpenWebClockLink);
         }
+
+        public static string PageName => "SettingsPage";
 
         public void Activated(object state)
         {

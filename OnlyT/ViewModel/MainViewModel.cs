@@ -40,8 +40,6 @@ namespace OnlyT.ViewModel
         private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
         private readonly IHttpServer _httpServer;
-        private readonly TimerOutputWindowViewModel _timerWindowViewModel;
-        private readonly CountdownTimerViewModel _countdownWindowViewModel;
         private readonly (int dpiX, int dpiY) _systemDpi;
         private DispatcherTimer _heartbeatTimer;
         private bool _countdownDone;
@@ -84,10 +82,7 @@ namespace OnlyT.ViewModel
 
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
-
-            _timerWindowViewModel = new TimerOutputWindowViewModel(_optionsService);
-            _countdownWindowViewModel = new CountdownTimerViewModel();
-
+            
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
 #pragma warning disable 4014
@@ -342,7 +337,7 @@ namespace OnlyT.ViewModel
                     var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                     if (targetMonitor != null)
                     {
-                        _countdownWindow = new CountdownWindow { DataContext = _countdownWindowViewModel };
+                        _countdownWindow = new CountdownWindow();
                         _countdownWindow.TimeUpEvent += OnCountdownTimeUp;
                         ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
                         _countdownWindow.Start(offsetSeconds);
@@ -373,7 +368,8 @@ namespace OnlyT.ViewModel
                 var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                 if (targetMonitor != null)
                 {
-                    _timerWindow = new TimerOutputWindow(_optionsService) { DataContext = _timerWindowViewModel };
+                    //_timerWindow = new TimerOutputWindow(_optionsService) { DataContext = _timerWindowViewModel };
+                    _timerWindow = new TimerOutputWindow(_optionsService);
                     ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
                 }
             }

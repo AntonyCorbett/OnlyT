@@ -6,6 +6,7 @@
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:local="clr-namespace:OnlyT"
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Output}"
         mc:Ignorable="d"
         Title="TimerOutputWindow" Height="300" Width="458" Loaded="WindowLoaded" 
         WindowStyle="None" 

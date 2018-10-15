@@ -17,13 +17,12 @@
         private readonly string _bellFilePath;
         private WaveOutEvent _player;
         private Mp3FileReader _reader;
-        
+        private bool _playing;
+
         public TimerBell()
         {
             _bellFilePath = GetBellFilePath();
         }
-
-        private bool _playing;
 
         public bool IsPlaying
         {
