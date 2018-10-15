@@ -1,11 +1,10 @@
-﻿using System.Globalization;
-using System.IO;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Windows.Media.Imaging;
     using AutoUpdates;

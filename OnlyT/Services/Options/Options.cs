@@ -34,30 +34,8 @@
             IsApiThrottled = true;
             PersistStudentTime = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
-            
-            var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
 
-            bool clock24 = dateFormat.Contains("H");
-            bool leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
-            bool ampm = dateFormat.Contains("tt");
-
-            if (clock24)
-            {
-                ClockHourFormat = leadingZero ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format24;
-            }
-            else
-            {
-                if (leadingZero)
-                {
-                    ClockHourFormat = ampm 
-                        ? ClockHourFormat.Format12LeadingZeroAMPM : ClockHourFormat.Format12LeadingZero;
-                }
-                else
-                {
-                    ClockHourFormat = ampm
-                        ? ClockHourFormat.Format12AMPM : ClockHourFormat.Format12;
-                }
-            }
+            AdjustClockFormat();
         }
 
         public string TimerMonitorId { get; set; }
@@ -158,18 +136,45 @@
         {
             var result = new List<PersistDurationItem>();
 
-            const int NumItems = 11;
-            const int SecsIncrement = 15;
+            const int numItems = 11;
+            const int secsIncrement = 15;
 
-            int secs = SecsIncrement;
+            int secs = secsIncrement;
 
-            for (int n = 0; n < NumItems; ++n)
+            for (int n = 0; n < numItems; ++n)
             {
                 result.Add(new PersistDurationItem(secs));
-                secs += SecsIncrement;
+                secs += secsIncrement;
             }
 
             return result;
+        }
+
+        private void AdjustClockFormat()
+        {
+            var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
+
+            bool clock24 = dateFormat.Contains("H");
+            bool leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
+            bool ampm = dateFormat.Contains("tt");
+
+            if (clock24)
+            {
+                ClockHourFormat = leadingZero ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format24;
+            }
+            else
+            {
+                if (leadingZero)
+                {
+                    ClockHourFormat = ampm
+                        ? ClockHourFormat.Format12LeadingZeroAMPM : ClockHourFormat.Format12LeadingZero;
+                }
+                else
+                {
+                    ClockHourFormat = ampm
+                        ? ClockHourFormat.Format12AMPM : ClockHourFormat.Format12;
+                }
+            }
         }
     }
 }
