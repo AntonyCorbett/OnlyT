@@ -192,7 +192,7 @@
     <value>Valmennusta kenttäpalvelukseen - osa 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Palvelus - osa 3</value>
+    <value>Valmennusta kenttäpalvelukseen - osa 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automaattinen</value>
@@ -411,7 +411,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Näytä sektori analogisessa kellossa</value>
+    <value>Näytä sektori analogikellossa</value>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
     <value>Jaetun ruudun leveys:</value>
@@ -425,7 +425,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Ajastin laskee ylös</value>
+    <value>Ajastimen laskentasuunta ylös</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
