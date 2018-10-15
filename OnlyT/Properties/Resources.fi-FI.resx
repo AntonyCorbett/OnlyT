@@ -186,10 +186,10 @@
     <value>Viikkokokous</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Palvelus - osa 1</value>
+    <value>Valmennusta kenttäpalvelukseen - osa 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Palvelus - osa 2</value>
+    <value>Valmennusta kenttäpalvelukseen - osa 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
     <value>Palvelus - osa 3</value>
@@ -216,10 +216,10 @@
     <value>Hengellisten helmien etsintää</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Elämä - osa 1</value>
+    <value>Elämä kristittynä - osa 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Elämä - osa 2</value>
+    <value>Elämä kristittynä - osa 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Alkusanat</value>
