@@ -163,15 +163,19 @@
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
     <value>Dostosuj czas trwania</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
     <value>Modyfikuj czas trwania</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
     <value>Rzeczywisty czas trwania</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
     <value>Analogowy</value>
+    <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
     <value>Analogowy i cyfrowy</value>
@@ -207,31 +211,31 @@
     <value>Concluding Talk</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Powtórka i zapowiedź następnego zebrania</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Zborowe studium Biblii</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Digging for Spiritual Gems</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>Chrześcijański tryb życia, cz. 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>Chrześcijański tryb życia, cz. 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Uwagi wstępne</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Wykład publiczny</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Czytanie Bblii</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Service Talk</value>
@@ -240,7 +244,7 @@
     <value>Treasures Talk</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Studium Strażnicy</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
     <value>Weekend</value>
@@ -260,7 +264,7 @@
     <value>Settings not available while timer is running!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ustawienia</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
     <value>Treasures</value>
@@ -407,7 +411,7 @@
     <comment>i.e. the TCP (networking) "port"</comment>
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
-    <value>REMOTE ACCESS</value>
+    <value>DOSTĘP ZDALNY</value>
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
@@ -437,25 +441,25 @@
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
-    <value>Volume:</value>
+    <value>Głośność:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Language</value>
+    <value>Język</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
     <value>Please restart OnlyT after changing the language.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease</value>
+    <value>Zmniejsz</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase</value>
+    <value>Zwiększ</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Manual mode</value>
+    <value>Ręcznie</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
 </root>
