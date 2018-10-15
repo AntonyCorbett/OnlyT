@@ -102,7 +102,9 @@
                       Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BoolToVis}, Mode=OneWay}"
                       SelectedValue="{Binding TalkId, Mode=TwoWay}"/>
 
-            <TextBlock Text="{x:Static resx:Resources.MANUAL_MODE}" FontSize="14" 
+            <TextBlock Text="{x:Static resx:Resources.MANUAL_MODE}" 
+                       VerticalAlignment="Center"
+                       FontSize="14" 
                        Visibility="{Binding Path=IsManualMode, Converter={StaticResource BoolToVis}, Mode=OneWay}" Margin="0,-7,0,7"/>
         </Grid>
 
