@@ -134,7 +134,7 @@
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
-    <value>Ohjelmaversio {0}</value>
+    <value>Ohjelmistoversio {0}</value>
     <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -192,7 +192,7 @@
     <value>Valmennusta kenttäpalvelukseen - osa 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Palvelus - osa 3</value>
+    <value>Valmennusta kenttäpalvelukseen - osa 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automaattinen</value>
@@ -247,11 +247,11 @@
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12-tuntinen (am/pm)</value>
-    <comment>The 12-hour clock format with "am" or "pm" appended</comment>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
     <value>12-tuntinen (etunolla &amp; am/pm)</value>
-    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended</comment>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
     <value>Ei mitään</value>
@@ -411,7 +411,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Näytä sektori analogisessa kellossa</value>
+    <value>Näytä sektori analogikellossa</value>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
     <value>Jaetun ruudun leveys:</value>
@@ -425,7 +425,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Ajastin laskee ylös</value>
+    <value>Ajastimen laskentasuunta ylös</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
