@@ -416,6 +416,7 @@
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
     <value>Näytä sektori analogikellossa</value>
+    <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
     <value>Jaetun ruudun leveys:</value>
