@@ -165,7 +165,7 @@
     <value>Duração adaptada</value>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Duração modificada</value>
+    <value>Duração alterada</value>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
     <value>Duração original</value>
@@ -180,19 +180,19 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Campaínha inativa</value>
+    <value>Campaínha desativada</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Meio da Semana</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Ministério - Designação 1</value>
+    <value>Ministério - Parte 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Ministério - Designação 2</value>
+    <value>Ministério - Parte 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Ministério - Designação 3</value>
+    <value>Ministério - Parte 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automático</value>
@@ -269,7 +269,7 @@
     <value>Empenhe-se no Ministério</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Viver</value>
+    <value>Viver Como Cristãos</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Fim de Semana</value>
@@ -279,7 +279,7 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Ministério - Item 4</value>
+    <value>Ministério - Parte 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Visita de Circuito</value>
@@ -306,15 +306,15 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Modo adaptável na Meio da Semana</value>
+    <value>Modo adaptável na Reunião de Meio da Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Modo adaptável na Fim de Semana</value>
+    <value>Modo adaptável na Reunião de Fim de Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permitir seletor de contagem crescente</value>
+    <value>Permitir ativação de contagem crescente</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -381,7 +381,7 @@
     <value>Use o formato de tempo que preferir!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Opcionalmente inclua um dia. Ex.: "Qui 7:15"</value>
+    <value>Pode ser incluído o dia. Ex.: "Qui 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
@@ -395,11 +395,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Manter o tempo de estudante</value>
+    <value>Manter o tempo da designação</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Duração do “tempo do discurso”</value>
+    <value>Duração do “tempo da designação”</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
