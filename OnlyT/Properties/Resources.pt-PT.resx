@@ -314,7 +314,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permitir seletor de contagem crescente</value>
+    <value>Permitir ativação de contagem crescente</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
