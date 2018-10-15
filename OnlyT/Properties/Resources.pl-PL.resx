@@ -217,7 +217,7 @@
     <value>Zborowe studium Biblii</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Wyszukiwanie duchowych skarbów</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Chrześcijański tryb życia, cz. 1</value>
@@ -250,18 +250,18 @@
     <value>Weekend</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12-hour (am/pm)</value>
+    <value>12-godzinny</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-hour (leading zero &amp; am/pm)</value>
+    <value>12-godzinny (od zera)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>Żaden</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>Ustawienia nie są dostępne gdy stoper jest włączony!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Ustawienia</value>
