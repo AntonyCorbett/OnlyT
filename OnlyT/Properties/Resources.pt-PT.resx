@@ -134,7 +134,7 @@
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
-    <value>Versão do software {0}</value>
+    <value>Versão de software {0}</value>
     <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -186,13 +186,13 @@
     <value>Meio da Semana</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Ministério - Item 1</value>
+    <value>Ministério - Designação 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Ministério - Item 2</value>
+    <value>Ministério - Designação 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Ministério - Item 3</value>
+    <value>Ministério - Designação 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automático</value>
@@ -257,7 +257,7 @@
     <value>Nenhum</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>As definições não estão disponíveis quando o cronómetro está a ser executado!</value>
+    <value>As definições não estão disponíveis enquanto o cronómetro está em uso!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Definições</value>
@@ -266,7 +266,7 @@
     <value>Tesouros</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministério</value>
+    <value>Empenhe-se no Ministério</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
     <value>Viver</value>
@@ -306,15 +306,15 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Modo adaptável no meio da semana</value>
+    <value>Modo adaptável na Meio da Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Modo adaptável do fim de semana</value>
+    <value>Modo adaptável na Fim de Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permitir ativação de contagem crescente</value>
+    <value>Permitir seletor de contagem crescente</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -338,14 +338,14 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>TEMPORIZADOR REUNIÃO</value>
+    <value>TEMPORIZADOR DA REUNIÃO</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>Seletor Visita de circuito</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Formato de relógio digital</value>
+    <value>Formato do relógio digital</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Ativado</value>
@@ -362,7 +362,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Hora de início de reunião (1 por linha)</value>
+    <value>Horas de início de reunião (1 por linha)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERSOS</value>
@@ -395,11 +395,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Continuar a mostrar o tempo de estudante</value>
+    <value>Manter o tempo de estudante</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Tempo para mostrar o tempo de estudante</value>
+    <value>Duração do “tempo do discurso”</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -425,7 +425,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Cronómetro conta para cima</value>
+    <value>Cronómetro crescente</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
