@@ -41,6 +41,14 @@
         </Style>
         <Style x:Key="SettingsComboStyle" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
             <Setter Property="Margin" Value="0,0,0,15" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                            <VirtualizingStackPanel 
+                                Background="{StaticResource MaterialDesignChipBackground}" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="SettingsCheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
             <Setter Property="Margin" Value="0,0,0,10" />
