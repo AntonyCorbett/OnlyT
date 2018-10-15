@@ -134,7 +134,7 @@
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
-    <value>Ohjelmaversio {0}</value>
+    <value>Ohjelmistoversio {0}</value>
     <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -247,11 +247,11 @@
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12-tuntinen (am/pm)</value>
-    <comment>The 12-hour clock format with "am" or "pm" appended</comment>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
     <value>12-tuntinen (etunolla &amp; am/pm)</value>
-    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended</comment>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
     <value>Ei mitään</value>
