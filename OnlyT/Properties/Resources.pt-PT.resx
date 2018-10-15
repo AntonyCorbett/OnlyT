@@ -381,7 +381,7 @@
     <value>Use o formato de tempo que preferir!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Opcionalmente, inclua o dia. Ex.: "Qui 19:15"</value>
+    <value>Pode incluir o dia. Ex.: "Qui 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
@@ -399,7 +399,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Duração do tempo da designação</value>
+    <value>Duração do “tempo da designação”</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
