@@ -165,7 +165,7 @@
     <value>Duração adaptada</value>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Duração modificada</value>
+    <value>Duração alterada</value>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
     <value>Duração original</value>
@@ -180,7 +180,7 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Campaínha inativa</value>
+    <value>Campaínha desativada</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Meio da Semana</value>
