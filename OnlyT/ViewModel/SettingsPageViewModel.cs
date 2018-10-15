@@ -140,15 +140,32 @@
 
         private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
         {
-            return new List<ClockHourFormatItem>
+            var cultureUsesAmPm = !string.IsNullOrEmpty(DateTime.Now.ToString("tt", CultureInfo.CurrentUICulture));
+
+            var result = new List<ClockHourFormatItem>();
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12 });
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero });
+
+            if (cultureUsesAmPm)
             {
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12 },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero }
-            };
+                result.Add(new ClockHourFormatItem
+                    { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM });
+
+                result.Add(new ClockHourFormatItem
+                    { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM });
+            }
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 });
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero });
+
+            return result;
         }
 
         private void OnBellChanged(BellStatusChangedMessage message)
