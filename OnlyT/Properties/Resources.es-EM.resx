@@ -202,7 +202,7 @@
     <value>Automático</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Basado en archivos</value>
+    <value>Basado en archivo</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manual</value>
@@ -261,7 +261,7 @@
     <value>Ninguno</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>La configuración no está disponible mientras el temporizador esté funcionando!</value>
+    <value>¡La configuración no está disponible mientras el temporizador esté funcionando!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Configuración</value>
@@ -403,7 +403,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Persistir la duración del discurso</value>
+    <value>Persistir la duración del discurso por</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
