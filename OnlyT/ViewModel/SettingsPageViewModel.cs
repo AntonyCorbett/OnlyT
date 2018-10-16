@@ -358,7 +358,7 @@
 
         public IEnumerable<PersistDurationItem> PersistDurationItems => _persistDurationItems;
 
-        public int PeristDurationSecs
+        public int PersistDurationSecs
         {
             get => _optionsService.Options.PersistDurationSecs;
             set

@@ -991,5 +991,14 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("WEEKEND", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} seconds.
+        /// </summary>
+        public static string X_SECONDS {
+            get {
+                return ResourceManager.GetString("X_SECONDS", resourceCulture);
+            }
+        }
     }
 }

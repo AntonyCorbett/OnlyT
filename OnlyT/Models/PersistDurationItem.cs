@@ -9,6 +9,6 @@
 
         public int Seconds { get; }
 
-        public string Name => $"{Seconds} seconds";
+        public string Name => string.Format(Properties.Resources.X_SECONDS, Seconds);
     }
 }

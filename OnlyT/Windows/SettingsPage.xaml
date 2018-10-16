@@ -210,7 +210,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.PERSIST_TALK_DURATION}"
                                   SelectedValuePath="Seconds" 
                                   DisplayMemberPath="Name"
-                                  SelectedValue="{Binding PeristDurationSecs, Mode=TwoWay}"/>
+                                  SelectedValue="{Binding PersistDurationSecs, Mode=TwoWay}"/>
 
                     </StackPanel>
                 </GroupBox>

@@ -471,4 +471,7 @@
     <value>Currently counting up</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
+  <data name="X_SECONDS" xml:space="preserve">
+    <value>{0} seconds</value>
+  </data>
 </root>
