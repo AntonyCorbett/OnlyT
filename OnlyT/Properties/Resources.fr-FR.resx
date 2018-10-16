@@ -142,7 +142,7 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12 heures</value>
+    <value>12 heures (0:00)</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
@@ -273,7 +273,7 @@
     <value>Applique-toi au ministère</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Vie Chrétienne</value>
+    <value>Vie chrétienne</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Weekend</value>
@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Afficher la bascule Semaine spéciale</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Format de l’horloge numérique</value>
@@ -355,7 +355,7 @@
     <value>Activé</value>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Affichage de l'horloge en plein écran</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>Adresse IP</value>
@@ -376,7 +376,7 @@
     <value>Moniteur</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Montrer la souris</value>
+    <value>Afficher le pointeur de la souris</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
     <value>Mettez chaque réunion sur une ligne différente.</value>
@@ -419,26 +419,26 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Split-screen width:</value>
+    <value>Taille relative de l'horloge:</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>Tester</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Throttled</value>
+    <value>Débit réduit</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Timer counts up</value>
+    <value>Minuteur en mode chronomètre</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>TIMER WINDOW</value>
+    <value>MINUTEUR PLEIN ECRAN</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Time of day under timer</value>
+    <value>Heure courante sous le minuteur</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
