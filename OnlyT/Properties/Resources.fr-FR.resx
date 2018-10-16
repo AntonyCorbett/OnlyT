@@ -296,7 +296,7 @@
     <value>Help</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[circuit visit]</value>
+    <value>[semaine spéciale]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
     <value>Nouvelle version disponible !</value>
