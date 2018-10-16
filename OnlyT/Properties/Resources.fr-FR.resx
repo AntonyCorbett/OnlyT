@@ -190,13 +190,13 @@
     <value>Semaine</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Ministry - Item 1</value>
+    <value>Applique-toi au ministère - 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Ministry - Item 2</value>
+    <value>Applique-toi au ministère - 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Ministry - Item 3</value>
+    <value>Applique-toi au ministère - 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automatique</value>
@@ -220,10 +220,10 @@
     <value>Recherchons des perles spirituelles</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>Vie chrétienne - 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>Vie chrétienne - 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Introduction</value>
@@ -302,11 +302,11 @@
     <value>Nouvelle version disponible !</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
-    <value>MAIN</value>
+    <value>GÉNÉRAL</value>
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
-    <value>Access code</value>
+    <value>Code d'accès</value>
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
@@ -382,10 +382,10 @@
     <value>Mettez chaque réunion sur une ligne différente.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Utilisez n'importe quel format d'heure!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Vous pouvez inclure le jour, par exemple "Jeu 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes :</value>
@@ -452,15 +452,15 @@
     <value>Redémarrez OnlyT après avoir changé la langue.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease</value>
+    <value>Retirer une minute</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase</value>
+    <value>Ajouter une minute</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Manual mode</value>
+    <value>Mode manuel</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
 </root>
