@@ -66,13 +66,14 @@ Source: "OnlyT\bin\Release\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: i
 Source: "OnlyT\bin\Release\ca-ES\*.dll"; DestDir: "{app}\ca-ES"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\el-GR\*.dll"; DestDir: "{app}\el-GR"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\en-US\*.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\es-EM\*.dll"; DestDir: "{app}\es-EM"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\es-ES\*.dll"; DestDir: "{app}\es-ES"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\es-MX\*.dll"; DestDir: "{app}\es-MX"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\fi-FI\*.dll"; DestDir: "{app}\fi-FI"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\fr-FR\*.dll"; DestDir: "{app}\fr-FR"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\id-ID\*.dll"; DestDir: "{app}\id-ID"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\it-IT\*.dll"; DestDir: "{app}\it-IT"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\jv-ID\*.dll"; DestDir: "{app}\jv-ID"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\no-NO\*.dll"; DestDir: "{app}\no-NO"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\jv-Latn-ID\*.dll"; DestDir: "{app}\jv-Latn-ID"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\no\*.dll"; DestDir: "{app}\no"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pl-PL\*.dll"; DestDir: "{app}\pl-PL"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pt-BR\*.dll"; DestDir: "{app}\pt-BR"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pt-PT\*.dll"; DestDir: "{app}\pt-PT"; Flags: ignoreversion
