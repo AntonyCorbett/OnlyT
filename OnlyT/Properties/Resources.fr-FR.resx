@@ -190,10 +190,10 @@
     <value>Semaine</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Applique-toi au ministère - 1</value>
+    <value>Applique-toi - 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Applique-toi au ministère - 2</value>
+    <value>Applique-toi - 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
     <value>Applique-toi au ministère - 3</value>
@@ -229,7 +229,7 @@
     <value>Introduction</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Présentations du mois</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Discours public</value>
@@ -270,7 +270,7 @@
     <value>Treasures</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministry</value>
+    <value>Applique-toi au ministère</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
     <value>Living</value>
