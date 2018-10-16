@@ -26,7 +26,7 @@
         </Style>
         <Style x:Key="GroupBoxStyle" BasedOn="{StaticResource MaterialDesignCardGroupBox}" TargetType="{x:Type GroupBox}">
             <Setter Property="Margin" Value="5" />
-            <Setter Property="Width" Value="230" />
+            <Setter Property="Width" Value="330" />
             <Setter Property="Padding" Value="5" />
         </Style>
         <Style x:Key="SampleStyle" TargetType="{x:Type TextBlock}">
