@@ -73,6 +73,8 @@
 
         public void Activated(object state)
         {
+            // may be changed on operator page...
+            RaisePropertyChanged(nameof(IsCircuitVisit));
         }
 
         private void OpenWebClockLink()
