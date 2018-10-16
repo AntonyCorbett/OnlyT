@@ -214,7 +214,7 @@
     <value>Palabras de conclusión</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Estudio bíblico de congregación</value>
+    <value>Estudio Bíblico de Congregación</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Busquemos Perlas Escondidas</value>
@@ -229,7 +229,7 @@
     <value>Palabras de introducción</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>Presentaciones de este mes</value>
+    <value>Presentaciones de este Mes</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Discurso Público</value>
