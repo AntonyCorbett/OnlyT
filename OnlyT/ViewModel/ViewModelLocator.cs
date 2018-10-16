@@ -1,11 +1,10 @@
-using System;
-using OnlyT.Services.CommandLine;
-
 namespace OnlyT.ViewModel
 {
+    using System;
     using CommonServiceLocator;
     using GalaSoft.MvvmLight.Ioc;
     using Services.Bell;
+    using Services.CommandLine;
     using Services.CountdownTimer;
     using Services.Monitors;
     using Services.Options;
@@ -37,11 +36,8 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<OperatorPageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
-        }
-
-        internal static CommandLineService CommandLineServiceFactory()
-        {
-            return CommandLineServiceInstance.Value;
+            SimpleIoc.Default.Register<TimerOutputWindowViewModel>();
+            SimpleIoc.Default.Register<CountdownTimerViewModel>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -50,10 +46,18 @@ namespace OnlyT.ViewModel
 
         public SettingsPageViewModel Settings => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
 
-        // ReSharper disable once UnusedMember.Global
+        public TimerOutputWindowViewModel Output => ServiceLocator.Current.GetInstance<TimerOutputWindowViewModel>();
+
+        public CountdownTimerViewModel Countdown => ServiceLocator.Current.GetInstance<CountdownTimerViewModel>();
+
         public static void Cleanup()
         {
             // Clear the ViewModels
+        }
+
+        internal static CommandLineService CommandLineServiceFactory()
+        {
+            return CommandLineServiceInstance.Value;
         }
     }
 }

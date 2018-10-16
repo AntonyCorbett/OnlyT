@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OnlyT.Windows"
         xmlns:countdownTimer="clr-namespace:OnlyT.CountdownTimer;assembly=OnlyT.CountdownTimer"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Countdown}"
         mc:Ignorable="d"
         WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize"
         Loaded="OnLoaded"

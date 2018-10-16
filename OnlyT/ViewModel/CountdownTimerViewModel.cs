@@ -4,22 +4,19 @@
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
 
-    internal class CountdownTimerViewModel : ViewModelBase
+    public class CountdownTimerViewModel : ViewModelBase
     {
-        private bool _applicationClosing;
-
         public CountdownTimerViewModel()
         {
             // subscriptions...
             Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
         }
-
-        // ReSharper disable once UnusedMember.Global
-        public bool ApplicationClosing => _applicationClosing;
+        
+        public bool ApplicationClosing { get; private set; }
 
         private void OnShutDown(ShutDownMessage obj)
         {
-            _applicationClosing = true;
+            ApplicationClosing = true;
         }
     }
 }

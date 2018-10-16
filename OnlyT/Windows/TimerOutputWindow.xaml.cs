@@ -78,7 +78,7 @@
         private void AdjustDisplayOnTimerStop()
         {
             var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.SplitAndFullScrenModeIdentical())
+            if (!model.SplitAndFullScreenModeIdentical())
             {
                 // only animate if the user has configured different display
                 // layout for timer mode and full-screen mode
@@ -190,7 +190,7 @@
         private void OnTimerStarted(TimerStartMessage msg)
         {
             var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.SplitAndFullScrenModeIdentical() && !_persistingTalkDuration)
+            if (!model.SplitAndFullScreenModeIdentical() && !_persistingTalkDuration)
             {
                 model.TextColor = GreenYellowRedSelector.GetGreenBrush();
                 

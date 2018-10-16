@@ -18,7 +18,7 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class HttpServer : IHttpServer, IDisposable
     {
-        private readonly bool _24HourClock;
+        private readonly bool _clock24Hour;
         private readonly IOptionsService _optionsService;
         private readonly ApiThrottler _apiThrottler;
         private readonly ApiRouter _apiRouter;
@@ -33,19 +33,19 @@
         {
             _optionsService = optionsService;
 
-            _24HourClock = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
+            _clock24Hour = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
             _apiThrottler = new ApiThrottler(optionsService);
 
             _apiRouter = new ApiRouter(_apiThrottler, _optionsService, bellService, timerService, talksService);
         }
+
+        public event EventHandler<TimerInfoEventArgs> RequestForTimerDataEvent;
 
         public void Dispose()
         {
             _listener.Close();
             _listener = null;
         }
-
-        public event EventHandler<TimerInfoEventArgs> RequestForTimerDataEvent;
 
         public void Start(int port)
         {
@@ -176,7 +176,7 @@
                 _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
 
                 ClockWebPageController controller = new ClockWebPageController();
-                controller.HandleRequestForWebPage(response, _24HourClock);
+                controller.HandleRequestForWebPage(response, _clock24Hour);
             }
         }
 

@@ -15,7 +15,6 @@
     {
         private static int _secsPerHour = 60 * 60;
         private readonly IOptionsService _optionsService;
-        private bool _applicationClosing;
 
         public TimerOutputWindowViewModel(IOptionsService optionsService)
         {
@@ -35,16 +34,18 @@
             Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
         }
 
-        public bool SplitAndFullScrenModeIdentical()
+        public int TimerColumnWidthPercentage { get; private set; } = -1;
+
+        public bool ApplicationClosing { get; private set; }
+
+        public bool SplitAndFullScreenModeIdentical()
         {
             return _optionsService.Options.AnalogueClockWidthPercent == 100;
         }
-
-        public bool ApplicationClosing => _applicationClosing;
-
+        
         private void OnShutDown(ShutDownMessage obj)
         {
-            _applicationClosing = true;
+            ApplicationClosing = true;
         }
 
         private void OnShowTimeOfDayUnderTimerChanged(ShowTimeOfDayUnderTimerChangedMessage message)
@@ -148,11 +149,6 @@
             }
         }
 
-        private int _timerColumnWidthPercentage = -1;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public int TimerColumnWidthPercentage => _timerColumnWidthPercentage;
-
         private int _analogueClockColumnWidthPercentage = -1;
 
         // ReSharper disable once MemberCanBePrivate.Global
@@ -164,7 +160,7 @@
                 if (_analogueClockColumnWidthPercentage != value)
                 {
                     _analogueClockColumnWidthPercentage = value;
-                    _timerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
+                    TimerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(TimerColumnWidthPercentage));
                 }

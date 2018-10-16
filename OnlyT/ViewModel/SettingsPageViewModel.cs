@@ -3,6 +3,8 @@
     // ReSharper disable CatchAllClause
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Windows.Media.Imaging;
     using AutoUpdates;
@@ -21,8 +23,6 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     public class SettingsPageViewModel : ViewModelBase, IPage
     {
-        public static string PageName => "SettingsPage";
-        
         private readonly MonitorItem[] _monitors;
         private readonly LanguageItem[] _languages;
         private readonly OperatingModeItem[] _operatingModes;
@@ -69,8 +69,12 @@
             WebClockUrlLinkCommand = new RelayCommand(OpenWebClockLink);
         }
 
+        public static string PageName => "SettingsPage";
+
         public void Activated(object state)
         {
+            // may be changed on operator page...
+            RaisePropertyChanged(nameof(IsCircuitVisit));
         }
 
         private void OpenWebClockLink()
@@ -138,15 +142,32 @@
 
         private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
         {
-            return new List<ClockHourFormatItem>
+            var cultureUsesAmPm = !string.IsNullOrEmpty(DateTime.Now.ToString("tt", CultureInfo.CurrentUICulture));
+
+            var result = new List<ClockHourFormatItem>();
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12 });
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero });
+
+            if (cultureUsesAmPm)
             {
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12 },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 },
-                new ClockHourFormatItem { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero }
-            };
+                result.Add(new ClockHourFormatItem
+                    { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM });
+
+                result.Add(new ClockHourFormatItem
+                    { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM });
+            }
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 });
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero });
+
+            return result;
         }
 
         private void OnBellChanged(BellStatusChangedMessage message)
@@ -185,13 +206,43 @@
 
         private LanguageItem[] GetSupportedLanguages()
         {
-            return new[]
+            var result = new List<LanguageItem>();
+
+            var subFolders = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            foreach (var folder in subFolders)
             {
-                new LanguageItem {LanguageId = @"en-EN", LanguageName = @"English (United Kingdom)" },
-                new LanguageItem {LanguageId = @"en-US", LanguageName = @"English (United States)" },
-                new LanguageItem {LanguageId = @"pl-PL", LanguageName = @"Polish (Poland)" },
-                new LanguageItem {LanguageId = @"ru-RU", LanguageName = @"Russian (Russia)" }
-            };
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    try
+                    {
+                        var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
+                        result.Add(new LanguageItem
+                        {
+                            LanguageId = c.Name,
+                            LanguageName = c.EnglishName
+                        });
+                    }
+                    catch (CultureNotFoundException)
+                    {
+                        // expected
+                    }
+                }
+            }
+
+            // the native language
+            {
+                var c = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
+                result.Add(new LanguageItem
+                {
+                    LanguageId = c.Name,
+                    LanguageName = c.EnglishName
+                });
+            }
+
+            result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
+
+            return result.ToArray();
         }
 
         private IEnumerable<MonitorItem> GetSystemMonitors()

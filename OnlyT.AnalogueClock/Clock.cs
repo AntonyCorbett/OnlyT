@@ -293,7 +293,7 @@
         private string FormatTimeOfDayHoursAndMins(DateTime dt)
         {
             int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
-            var ampm = _digitalFormatAMPM ? dt.ToString(" tt") : string.Empty;
+            var ampm = GetAmPmPostfix(dt);
 
             if (_digitalFormatLeadingZero)
             {
@@ -301,6 +301,23 @@
             }
 
             return $"{hours}:{dt.Minute:D2}{ampm}";
+        }
+
+        private string GetAmPmPostfix(DateTime dt)
+        {
+            if (!_digitalFormatAMPM)
+            {
+                return string.Empty;
+            }
+
+            var ampm = dt.ToString("tt");
+
+            if (string.IsNullOrEmpty(ampm))
+            {
+                return string.Empty;
+            }
+
+            return $" {ampm}";
         }
 
         private string FormatTimeOfDaySeconds(DateTime dt)
