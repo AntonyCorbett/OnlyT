@@ -390,6 +390,42 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ENABLED_API {
+            get {
+                return ResourceManager.GetString("ENABLED_API", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ENABLED_BELL {
+            get {
+                return ResourceManager.GetString("ENABLED_BELL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ENABLED_COUNTDOWN {
+            get {
+                return ResourceManager.GetString("ENABLED_COUNTDOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ENABLED_WEB_CLOCK {
+            get {
+                return ResourceManager.GetString("ENABLED_WEB_CLOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analogue.
         /// </summary>
         public static string FULL_SCREEN_ANALOGUE {

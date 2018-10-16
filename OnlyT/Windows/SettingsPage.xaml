@@ -160,7 +160,7 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsBellEnabled, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
-                                  Content="{x:Static resx:Resources.ENABLED}" />
+                                  Content="{x:Static resx:Resources.ENABLED_BELL}" />
 
                         <Label Style="{StaticResource LabelStyle}" Content="{x:Static resx:Resources.VOLUME}"/>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
@@ -242,7 +242,7 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
-                                  Content="{x:Static resx:Resources.ENABLED}" />
+                                  Content="{x:Static resx:Resources.ENABLED_WEB_CLOCK}" />
 
                         <TextBlock>
                             <Hyperlink Command="{Binding WebClockUrlLinkCommand}">
@@ -261,7 +261,7 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsApiEnabled, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
-                                  Content="{x:Static resx:Resources.ENABLED}" />
+                                  Content="{x:Static resx:Resources.ENABLED_API}" />
 
                         <CheckBox IsChecked="{Binding IsApiThrottled, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
@@ -291,7 +291,7 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox IsChecked="{Binding IsCountdownEnabled, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
-                                  Content="{x:Static resx:Resources.ENABLED}" />
+                                  Content="{x:Static resx:Resources.ENABLED_COUNTDOWN}" />
                         
                         <TextBox MinLines="6"
                                  Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
