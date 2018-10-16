@@ -247,39 +247,11 @@
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
     <value>Análogo y Digital</value>
   </data>
-  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Modo de reloj a pantalla completa</value>
-  </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
     <value>Digital</value>
   </data>
-  <data name="HELP" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
     <value>El timbre está desactivado</value>
-  </data>
-  <data name="IP_ADDRESS" xml:space="preserve">
-    <value>Dirección IP</value>
-    <comment>Network address</comment>
-  </data>
-  <data name="LANGUAGE" xml:space="preserve">
-    <value>Idioma</value>
-  </data>
-  <data name="MAIN_SECTION" xml:space="preserve">
-    <value>PRINCIPAL</value>
-    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
-  </data>
-  <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Modo manual</value>
-    <comment>Title displayed at the top of the main page when in manual mode</comment>
-  </data>
-  <data name="MEETING" xml:space="preserve">
-    <value>Reunión</value>
-    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
-  </data>
-  <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Hora de inicio de reuniones (1 por línea)</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Entre semana</value>
@@ -293,18 +265,182 @@
   <data name="MINISTRY3" xml:space="preserve">
     <value>Mejores Maestros - tema 3</value>
   </data>
+  <data name="OP_MODE_AUTO" xml:space="preserve">
+    <value>Automático</value>
+  </data>
+  <data name="OP_MODE_FILE" xml:space="preserve">
+    <value>Basado en archivo</value>
+  </data>
+  <data name="OP_MODE_MANUAL" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="TALK_CONCLUDING" xml:space="preserve">
+    <value>Discurso Final</value>
+  </data>
+  <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
+    <value>Palabras de conclusión</value>
+  </data>
+  <data name="TALK_CONG_STUDY" xml:space="preserve">
+    <value>Estudio Bíblico de Congregación</value>
+  </data>
+  <data name="TALK_DIGGING" xml:space="preserve">
+    <value>Busquemos Perlas Escondidas</value>
+  </data>
+  <data name="TALK_LIVING1" xml:space="preserve">
+    <value>Vida Cristiana - Parte 1</value>
+  </data>
+  <data name="TALK_LIVING2" xml:space="preserve">
+    <value>Vida Cristiana - Parte 2</value>
+  </data>
+  <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
+    <value>Palabras de introducción</value>
+  </data>
+  <data name="TALK_PRESENTATIONS" xml:space="preserve">
+    <value>Presentaciones de este Mes</value>
+  </data>
+  <data name="TALK_PUBLIC" xml:space="preserve">
+    <value>Discurso Público</value>
+  </data>
+  <data name="TALK_READING" xml:space="preserve">
+    <value>Lectura de la Biblia</value>
+  </data>
+  <data name="TALK_SERVICE" xml:space="preserve">
+    <value>Discurso de Servicio</value>
+  </data>
+  <data name="TALK_TREASURES" xml:space="preserve">
+    <value>Discurso de Tesoros</value>
+  </data>
+  <data name="TALK_WT" xml:space="preserve">
+    <value>Estudio de La Atalaya</value>
+  </data>
+  <data name="WEEKEND" xml:space="preserve">
+    <value>Fin de semana</value>
+  </data>
+  <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
+    <value>12-horas (am/pm)</value>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
+    <value>12-horas (cero inicial y am/pm)</value>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="MONITOR_NONE" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
+    <value>¡La configuración no está disponible mientras el temporizador esté funcionando!</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="SECTION_TREASURES" xml:space="preserve">
+    <value>Tesoros</value>
+  </data>
+  <data name="SECTION_MINISTRY" xml:space="preserve">
+    <value>Mejores Maestros</value>
+  </data>
+  <data name="SECTION_LIVING" xml:space="preserve">
+    <value>Vida Cristiana</value>
+  </data>
+  <data name="SECTION_WEEKEND" xml:space="preserve">
+    <value>Fin de semana</value>
+  </data>
+  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
+    <value>¡La configuración está deshabilitada por el administrador!</value>
+    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
+  </data>
   <data name="MINISTRY4" xml:space="preserve">
     <value>Mejores Maestros - tema 4</value>
+  </data>
+  <data name="CIRCUIT_VISIT" xml:space="preserve">
+    <value>Visita de superintendente de circuito</value>
+  </data>
+  <data name="CLOSE_COUNTDOWN" xml:space="preserve">
+    <value>CERRAR CUENTA REGRESIVA</value>
+    <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
+    <value>[visita de superintendente de circuito]</value>
+  </data>
+  <data name="NEW_VERSION" xml:space="preserve">
+    <value>¡Nueva versión disponible!</value>
+  </data>
+  <data name="MAIN_SECTION" xml:space="preserve">
+    <value>PRINCIPAL</value>
+    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
+  </data>
+  <data name="ACCESS_CODE" xml:space="preserve">
+    <value>Código de acceso</value>
+    <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
+  </data>
+  <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
+    <value>Modo de adaptación entre semana</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
+    <value>Modo de adaptación de fin de semana</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
+    <value>Permitir el cambio a cuenta ascendente</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALWAYS_ON_TOP" xml:space="preserve">
+    <value>Siempre en la parte superior</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="APPS_SECTION" xml:space="preserve">
+    <value>APLICACIONES REMOTAS</value>
+    <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
+  </data>
+  <data name="AUTO_SECTION" xml:space="preserve">
+    <value>MODO AUTOMÁTICO</value>
+    <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
+  </data>
+  <data name="BELL_SECTION" xml:space="preserve">
+    <value>TIMBRE</value>
+    <comment>Title for Settings, BELL section. Please keep capitals</comment>
+  </data>
+  <data name="CLOCK_SECTION" xml:space="preserve">
+    <value>RELOJ WEB</value>
+    <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
+  </data>
+  <data name="COUNTDOWN_SECTION" xml:space="preserve">
+    <value>CUENTA REGRESIVA PARA REUNIÓN</value>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="CO_VISIT_TOGGLE" xml:space="preserve">
+    <value>Alternar visita Superintendente Circuito</value>
+  </data>
+  <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
+    <value>Formato de reloj digital</value>
+  </data>
+  <data name="ENABLED" xml:space="preserve">
+    <value>Activado</value>
+  </data>
+  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
+    <value>Modo de reloj a pantalla completa</value>
+  </data>
+  <data name="IP_ADDRESS" xml:space="preserve">
+    <value>Dirección IP</value>
+    <comment>Network address</comment>
+  </data>
+  <data name="MEETING" xml:space="preserve">
+    <value>Reunión</value>
+    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
+  </data>
+  <data name="MEETING_STARTS" xml:space="preserve">
+    <value>Hora de inicio de reuniones (1 por línea)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>VARIOS</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
-  <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
-  </data>
-  <data name="MONITOR_NONE" xml:space="preserve">
-    <value>Ninguno</value>
+  <data name="SPLIT_WIDTH" xml:space="preserve">
+    <value>Ancho de la pantalla dividida:</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
     <value>Mostrar el puntero del ratón</value>
@@ -318,18 +454,8 @@
   <data name="MTG_START_NOTES3" xml:space="preserve">
     <value>Opcionalmente, puedes incluir el día, por ejemplo "jueves 7:15"</value>
   </data>
-  <data name="NEW_VERSION" xml:space="preserve">
-    <value>¡Nueva versión disponible!</value>
-  </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
-  </data>
-  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>¡La configuración está deshabilitada por el administrador!</value>
-    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
-  </data>
-  <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>¡La configuración no está disponible mientras el temporizador esté funcionando!</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
     <value>PUERTO ABIERTO</value>
@@ -338,15 +464,6 @@
   <data name="OP_MODE" xml:space="preserve">
     <value>Modo</value>
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
-  </data>
-  <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automático</value>
-  </data>
-  <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Basado en archivo</value>
-  </data>
-  <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
     <value>Hacer persistente el tiempo del estudiante</value>
@@ -364,69 +481,12 @@
     <value>ACCESO REMOTO</value>
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
-  <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Por favor reinicie OnlyT después de cambiar el idioma.</value>
-  </data>
-  <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Vida Cristiana</value>
-  </data>
-  <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Mejores Maestros</value>
-  </data>
-  <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Tesoros</value>
-  </data>
-  <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Fin de semana</value>
-  </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
     <value>Mostrar sector en el reloj análogo</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
-  <data name="SETTINGS" xml:space="preserve">
-    <value>Configuración</value>
-  </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
     <value>Ancho de la pantalla dividida:</value>
-  </data>
-  <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Discurso Final</value>
-  </data>
-  <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Palabras de conclusión</value>
-  </data>
-  <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Estudio bíblico de congregación</value>
-  </data>
-  <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Busquemos Perlas Escondidas</value>
-  </data>
-  <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Vida Cristiana - Parte 1</value>
-  </data>
-  <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Vida Cristiana - Parte 2</value>
-  </data>
-  <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Palabras de introducción</value>
-  </data>
-  <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>Presentaciones de este mes</value>
-  </data>
-  <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Discurso Público</value>
-  </data>
-  <data name="TALK_READING" xml:space="preserve">
-    <value>Lectura de la Biblia</value>
-  </data>
-  <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Discurso de Servicio</value>
-  </data>
-  <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Discurso de Tesoros</value>
-  </data>
-  <data name="TALK_WT" xml:space="preserve">
-    <value>Estudio de La Atalaya</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>PRUEBA</value>
@@ -444,14 +504,6 @@
     <value>VENTANA DEL TEMPORIZADOR</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
-  <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Disminución</value>
-    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
-  </data>
-  <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Aumento</value>
-    <comment>Tooltip displayed on "Plus" button to increase time</comment>
-  </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
     <value>Hora del día debajo del temporizador</value>
     <comment>Show time of day underneath the timer</comment>
@@ -460,7 +512,22 @@
     <value>Volumen:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
-  <data name="WEEKEND" xml:space="preserve">
-    <value>Fin de semana</value>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="RESTART_LANGUAGE" xml:space="preserve">
+    <value>Por favor reinicie OnlyT después de cambiar el idioma.</value>
+  </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Disminución</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Aumento</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Modo manual</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
 </root>

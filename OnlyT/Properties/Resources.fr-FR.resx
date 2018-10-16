@@ -150,7 +150,7 @@
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24 heures</value>
+    <value>24 heures (0:00)</value>
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
@@ -241,7 +241,7 @@
     <value>Discours de service</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Joyaux - discours</value>
+    <value>Joyaux de la Parole de Dieu - discours</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Étude de la Tour de Garde</value>
@@ -399,7 +399,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Conserver le temps des étudiants</value>
+    <value>Conserver le temps des élèves</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -442,7 +442,7 @@
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
-    <value>Volume:</value>
+    <value>Volume :</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
