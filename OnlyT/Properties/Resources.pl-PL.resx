@@ -276,7 +276,7 @@
     <value>Życie</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>W sobotę/niedzielę</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
     <value>Ustawienia wyłączone przez administratora!</value>
@@ -449,7 +449,7 @@
     <value>Język</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Uruchom ponownie OnlyT po zmianie języka.</value>
+    <value>Po zmianie języka uruchom ponownie OnlyT.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Zmniejsz</value>
