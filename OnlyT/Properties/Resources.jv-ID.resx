@@ -208,10 +208,10 @@
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>Khotbah Panutup</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Komentar Panutup</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Sinau Alkitab Jemaat</value>
@@ -238,10 +238,10 @@
     <value>Maca Alkitab</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Khotbah Dinas</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Khotbah Sinau Saka Alkitab</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Sinau Warta Penting</value>
@@ -250,75 +250,75 @@
     <value>Akhir Pekan</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12-hour (am/pm)</value>
+    <value>12 jam (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-hour (leading zero &amp; am/pm)</value>
+    <value>12 jam (00: 00 am/pm)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>Ora ana</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>Ora isa ngatur nek timer lagi mlaku!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Pengaturan</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Sinau Saka Alkitab</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministry</value>
+    <value>Ditrapke Wektu Nginjil</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Uripe Wong Kristen</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Akhir Pekan</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Settings disabled by administrator!</value>
+    <value>Pengaturan dipateni administrator!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Ministry - Item 4</value>
+    <value>Ditrapke Wektu Nginjil - Bagean 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Circuit visit</value>
+    <value>Kunjungan Pinituwane Wilayah</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>CLOSE COUNTDOWN</value>
+    <value>TUTUP TIMER</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
-    <value>Help</value>
+    <value>Bantuan</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[circuit visit]</value>
+    <value>[kunjungan pintuwane wilayah]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>New version available!</value>
+    <value>Versi anyar wis ana!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
-    <value>MAIN</value>
+    <value>HALAMAN UTAMA</value>
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
-    <value>Access code</value>
+    <value>Kode Akses</value>
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Midweek adaptive mode</value>
+    <value>Mode pengaturan waktu disesuaikke tengah pekan</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Weekend adaptive mode</value>
+    <value>Mode pengaturan waktu disesuaikke akhir pekan</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Allow count-up toggle</value>
+    <value>Tampike tombol tambah kurang</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -330,65 +330,65 @@
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>AUTOMATIC MODE</value>
+    <value>MODE OTOMATIS</value>
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>BELL</value>
+    <value>BEL</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB CLOCK</value>
+    <value>JAM WEB</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>TIMER PAKUMPULAN IBADAH</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Tombol Kunjungan Pinituwane Wilayah</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Format jam digital</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Aktif</value>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Mode tampilan layar penuh</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP adress</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Pakumpulan Ibadah</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Pakumpulan ibadah dimulai (1 per baris)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>MISCELLANEOUS</value>
+    <value>LIYANE</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
     <value>Monitor</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Show mouse pointer</value>
+    <value>Tampilke pointer mouse</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Mulai wektu ing baris anyar.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Gunakna format wektu sing njenengan senengi!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Tambahan dina, Conto. "Kemis 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Cathetan:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
     <value>OPEN PORT</value>
@@ -456,11 +456,11 @@
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase</value>
+    <value>Tambah</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Manual mode</value>
+    <value>Mode manual</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
 </root>
