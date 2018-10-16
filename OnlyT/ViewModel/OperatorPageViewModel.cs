@@ -133,8 +133,8 @@
         public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
 
         public string CountUpOrDownTooltip => _countUp
-            ? "Currently counting up"
-            : "Currently counting down";
+            ? Properties.Resources.COUNTING_UP
+            : Properties.Resources.COUNTING_DOWN;
 
         public string CountUpOrDownImageData => _countUp
             ? "M 16,0 L 32,7.5 22,7.5 16,30 10,7.5 0,7.5z"

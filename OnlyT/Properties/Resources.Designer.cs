@@ -318,6 +318,24 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currently counting down.
+        /// </summary>
+        public static string COUNTING_DOWN {
+            get {
+                return ResourceManager.GetString("COUNTING_DOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently counting up.
+        /// </summary>
+        public static string COUNTING_UP {
+            get {
+                return ResourceManager.GetString("COUNTING_UP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not create folder {0}.
         /// </summary>
         public static string CREATE_FOLDER_ERROR {
