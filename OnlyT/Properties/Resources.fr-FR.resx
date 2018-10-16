@@ -322,7 +322,7 @@
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
-    <value>Always on top</value>
+    <value>Toujours au premier plan</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
@@ -330,7 +330,7 @@
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>AUTOMATIC MODE</value>
+    <value>MODE AUTOMATIQUE</value>
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
@@ -342,14 +342,14 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>COMPTE À REBOURS DE LA RÉUNION</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>Circuit visit toggle</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Format de l’horloge numérique</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Enabled</value>
@@ -358,7 +358,7 @@
     <value>Full-screen clock mode</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>Adresse IP</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
@@ -366,7 +366,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Heure de début des réunions (1 par ligne)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERS</value>
@@ -379,7 +379,7 @@
     <value>Montrer la souris</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Mettez chaque réunion sur une ligne différente.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Use any time format you like!</value>
@@ -388,7 +388,7 @@
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Notes :</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
     <value>OPEN PORT</value>
