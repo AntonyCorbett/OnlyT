@@ -142,7 +142,7 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12 heures</value>
+    <value>12 heures (0:00)</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
@@ -273,7 +273,7 @@
     <value>Applique-toi au ministère</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Vie Chrétienne</value>
+    <value>Vie chrétienne</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Weekend</value>
@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Bascule semaine spéciale</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Format de l’horloge numérique</value>
