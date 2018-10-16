@@ -342,7 +342,7 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>CONTO ALLA ROVESCIA ADUNANZA</value>
+    <value>INIZIO ADUNANZA</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
@@ -376,10 +376,10 @@
     <value>Schermo</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Visualizza il puntatore del mouse</value>
+    <value>Visualizza puntatore mouse</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Mettere ogni ora di inizio su una nuova riga.</value>
+    <value>Mettere ogni ora di inizio su nuova riga.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Utilizzare qualsiasi formato!</value>
@@ -391,7 +391,7 @@
     <value>Note:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>APRIRE LA PORTA</value>
+    <value>APRI PORTA</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
@@ -399,7 +399,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Rimane visualizzato tempo studenti</value>
+    <value>Mostra tempo studenti</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -415,7 +415,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Visualizza settore orologio analogico</value>
+    <value>Vedi settore orologio analogico</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
