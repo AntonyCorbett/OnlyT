@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permettre la commutation compte à rebours/chronomètre</value>
+    <value>Autoriser le changement de direction du minuteur</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -462,5 +462,13 @@
   <data name="MANUAL_MODE" xml:space="preserve">
     <value>Mode manuel</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Currently counting down</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Currently counting up</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
 </root>
