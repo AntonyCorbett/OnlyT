@@ -238,13 +238,13 @@
     <value>Lecture de la Bible</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Discours de service</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Treasures Talk</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Étude de la Tour de Garde</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
     <value>Weekend</value>
@@ -258,10 +258,10 @@
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>Aucun</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>Paramètres non disponibles quand le minuteur est en marche !</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Paramètres</value>
