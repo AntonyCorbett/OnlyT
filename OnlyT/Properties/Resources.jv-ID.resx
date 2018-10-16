@@ -353,6 +353,7 @@
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Aktif</value>
+    <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
     <value>Mode tampilan layar penuh</value>
@@ -470,5 +471,20 @@
   <data name="COUNTING_UP" xml:space="preserve">
     <value>Currently counting up</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="X_SECONDS" xml:space="preserve">
+    <value>{0} seconds</value>
+  </data>
+  <data name="ENABLED_API" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ENABLED_BELL" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ENABLED_COUNTDOWN" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
+    <value>Enabled</value>
   </data>
 </root>
