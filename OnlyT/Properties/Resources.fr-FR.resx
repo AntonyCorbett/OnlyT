@@ -190,10 +190,10 @@
     <value>Semaine</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Applique-toi - 1</value>
+    <value>Applique-toi au ministère - 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Applique-toi - 2</value>
+    <value>Applique-toi au ministère - 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
     <value>Applique-toi au ministère - 3</value>
@@ -241,7 +241,7 @@
     <value>Discours de service</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Joyaux - discours</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Étude de la Tour de Garde</value>
@@ -267,13 +267,13 @@
     <value>Paramètres</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Joyaux de la Parole de Dieu</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
     <value>Applique-toi au ministère</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Vie Chrétienne</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Weekend</value>
@@ -283,13 +283,13 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Ministry - Item 4</value>
+    <value>Applique-toi au ministère - 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Semaine spéciale</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>CLOSE COUNTDOWN</value>
+    <value>FERMER LE COMPTE À REBOURS</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -310,11 +310,11 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Midweek adaptive mode</value>
+    <value>Mode adaptatif : semaine</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Weekend adaptive mode</value>
+    <value>Mode adaptatif : weekend</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
@@ -373,7 +373,7 @@
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Écran</value>
+    <value>Moniteur</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
     <value>Montrer la souris</value>
