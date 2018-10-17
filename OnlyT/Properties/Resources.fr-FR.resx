@@ -423,7 +423,7 @@
     <value>Taille relative de l'horloge:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>Tester</value>
+    <value>TESTER</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Heure courante sous le minuteur</value>
+    <value>Heure actuelle sous le minuteur</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
