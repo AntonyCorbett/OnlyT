@@ -261,7 +261,7 @@
     <value>Aucun</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Paramètres non disponibles quand le minuteur est en marche !</value>
+    <value>Paramètres non disponibles quand le minuteur est en route !</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Paramètres</value>
