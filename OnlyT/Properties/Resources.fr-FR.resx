@@ -162,15 +162,15 @@
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
-    <value>Durée adaptée</value>
+    <value>Temps imparti adapté</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Temps modifié</value>
+    <value>Temps imparti modifié</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
-    <value>Temps initiale</value>
+    <value>Temps imparti initial</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
