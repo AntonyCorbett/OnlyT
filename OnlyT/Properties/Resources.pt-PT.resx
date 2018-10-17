@@ -356,7 +356,7 @@
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Modo de relógio em ecrã inteiro</value>
+    <value>Relógio em ecrã inteiro</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>Endereço IP</value>
