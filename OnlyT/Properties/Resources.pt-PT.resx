@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permitir seletor de contagem crescente</value>
+    <value>Permitir contagem crescente</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -450,7 +450,7 @@
     <value>Língua</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Por favor reinicie o OnlyT depois de mudar a língua.</value>
+    <value>Por favor, reinicie o OnlyT depois de mudar a língua.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Diminuir</value>
@@ -476,7 +476,7 @@
     <value>{0} segundos</value>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Ativado</value>
+    <value>Permitir</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
     <value>Ativada</value>
