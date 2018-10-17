@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Seletor Visita de Circuito</value>
+    <value>Seletor de Visita de Circuito</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Formato do relógio digital</value>
@@ -356,7 +356,7 @@
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Modo de relógio no ecrã inteiro</value>
+    <value>Modo de relógio em ecrã inteiro</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>Endereço IP</value>
@@ -400,7 +400,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Manter o tempo da designação</value>
+    <value>Manter o “tempo da designação”</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
