@@ -162,15 +162,15 @@
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
-    <value>Durée adaptée</value>
+    <value>Temps imparti adapté</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Durée modifiée</value>
+    <value>Temps imparti modifié</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
-    <value>Durée originelle</value>
+    <value>Temps imparti initial</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
@@ -423,7 +423,7 @@
     <value>Taille relative de l'horloge:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>Tester</value>
+    <value>TESTER</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Heure courante sous le minuteur</value>
+    <value>Heure actuelle sous le minuteur</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">

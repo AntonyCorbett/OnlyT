@@ -126,11 +126,11 @@
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
-    <value>Jednostronny</value>
+    <value>Jednokierunkowy</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
-    <value>Dwustronny</value>
+    <value>Dwukierunkowy</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
@@ -199,13 +199,13 @@
     <value>Trzecia rozmowa</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatycznie</value>
+    <value>Automatyczny</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>Z pliku</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Ręcznie</value>
+    <value>Ręczny</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Uwagi końcowe</value>
@@ -400,7 +400,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Utrzymaj czas ucznia</value>
+    <value>Czas po zakończeniu punktu</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -465,26 +465,26 @@
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Currently counting down</value>
+    <value>Odliczanie</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>Currently counting up</value>
+    <value>Stoper</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>{0} sekund</value>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Włączone</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Włączone</value>
   </data>
   <data name="ENABLED_COUNTDOWN" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Włączone</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Aktywny</value>
   </data>
 </root>
