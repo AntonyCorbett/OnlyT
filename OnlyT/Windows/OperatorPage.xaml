@@ -132,36 +132,6 @@
                         </Path>
                     </Button>
 
-                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" 
-                               Margin="0,0,0,-5"
-                               VerticalAlignment="Bottom">
-                        <Run ToolTip="{Binding Duration1Tooltip}" Foreground="{Binding Duration1Colour}" Text="{Binding Duration1String}"/>
-                        <Run Foreground="#bba991" Text="{Binding Duration1ArrowString}" />
-                        <Run ToolTip="{Binding Duration2Tooltip}" Foreground="{Binding Duration2Colour}" Text="{Binding Duration2String}"/>
-                        <Run Foreground="#bba991" Text="{Binding Duration2ArrowString}" />
-                        <Run ToolTip="{Binding Duration3Tooltip}" Foreground="{Binding Duration3Colour}" Text="{Binding Duration3String}"/>
-                    </TextBlock>
-
-                    <Button Grid.Column="1" 
-                            Margin="0,0,0,-5"
-                            Command="{Binding CountUpToggleCommand}" 
-                            IsEnabled="{Binding IsNotRunning}"
-                            Visibility="{Binding Path=IsValidTalk, Converter={StaticResource BoolToVis}}"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Width="22"
-                            ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
-                            ToolTipService.ShowOnDisabled="True"
-                            Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
-                            Style="{StaticResource ChromelessBtn}">
-                        <Path  
-                            Data="{Binding CountUpOrDownImageData}"
-                            Stretch="Uniform"
-                            Fill="#f3dcbc">
-                        </Path>
-                    </Button>
-
-
                     <TextBlock Grid.Column="1" 
                                Margin="0,-5,0,0"
                                Text="{x:Static resx:Resources.CIRCUIT_VISIT_BRACKETS}" 
@@ -209,6 +179,53 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,-5"
+                                VerticalAlignment="Bottom"
+                                Grid.Column="0" Grid.ColumnSpan="2" >
+
+                        <TextBlock ToolTip="{Binding Duration1Tooltip}" 
+                             Foreground="{Binding Duration1Colour}" 
+                             Text="{Binding Duration1String}"/>
+
+                        <TextBlock Foreground="#bba991" 
+                                   Margin="5,0,5,0"
+                                   Text="{Binding Duration1ArrowString}" />
+
+                        <TextBlock ToolTip="{Binding Duration2Tooltip}" 
+                             Foreground="{Binding Duration2Colour}" 
+                             Text="{Binding Duration2String}"/>
+
+                        <TextBlock Foreground="#bba991" 
+                                   Margin="5,0,5,0"
+                                   Text="{Binding Duration2ArrowString}" />
+
+                        <TextBlock ToolTip="{Binding Duration3Tooltip}" 
+                             Foreground="{Binding Duration3Colour}" 
+                             Text="{Binding Duration3String}"/>
+
+                    </StackPanel>
+
+                    <Button Grid.Column="1" 
+                            Margin="0,0,0,-5"
+                            Command="{Binding CountUpToggleCommand}" 
+                            IsEnabled="{Binding IsNotRunning}"
+                            Visibility="{Binding Path=IsValidTalk, Converter={StaticResource BoolToVis}}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Width="22"
+                            ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
+                            ToolTipService.ShowOnDisabled="True"
+                            Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
+                            Style="{StaticResource ChromelessBtn}">
+                        <Path  
+                            Data="{Binding CountUpOrDownImageData}"
+                            Stretch="Uniform"
+                            Fill="#f3dcbc">
+                        </Path>
+                    </Button>
+
                 </Grid>
             </Border>
 
@@ -293,6 +310,7 @@
                 Orientation="Horizontal">
 
                 <ToggleButton
+                    Margin="5,0,0,0"
                     IsChecked="{Binding IsCircuitVisit}"
                     Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                     VerticalAlignment="Center"
