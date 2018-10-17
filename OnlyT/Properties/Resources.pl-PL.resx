@@ -199,13 +199,13 @@
     <value>Trzecia rozmowa</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatycznie</value>
+    <value>Automatyczny</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>Z pliku</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Ręcznie</value>
+    <value>Ręczny</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Uwagi końcowe</value>
@@ -400,7 +400,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Utrzymaj czas ucznia</value>
+    <value>Czas po zakończeniu punktu</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
