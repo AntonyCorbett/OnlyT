@@ -13,8 +13,8 @@
     internal static class VersionDetection
     {
         public static string LatestReleaseUrl => "https://github.com/AntonyCorbett/OnlyT/releases/latest";
-
-        public static string GetLatestReleaseVersion()
+        
+        public static string GetLatestReleaseVersionString()
         {
             string version = null;
 
@@ -45,10 +45,41 @@
             return version;
         }
 
-        public static string GetCurrentVersion()
+        public static Version GetLatestReleaseVersion()
         {
-            var ver = Assembly.GetExecutingAssembly().GetName().Version;
+            string versionString = GetLatestReleaseVersionString();
+
+            if (string.IsNullOrEmpty(versionString))
+            {
+                return null;
+            }
+
+            string[] tokens = versionString.Split('.');
+            if (tokens.Length != 4)
+            {
+                return null;
+            }
+
+            if (!int.TryParse(tokens[0], out var major) ||
+                !int.TryParse(tokens[1], out var minor) ||
+                !int.TryParse(tokens[2], out var build) ||
+                !int.TryParse(tokens[3], out var revision))
+            {
+                return null;
+            }
+
+            return new Version(major, minor, build, revision);
+        }
+
+        public static string GetCurrentVersionString()
+        {
+            var ver = GetCurrentVersion();
             return $"{ver.Major}.{ver.Minor}.{ver.Build}.{ver.Revision}";
+        }
+
+        public static Version GetCurrentVersion()
+        {
+            return Assembly.GetExecutingAssembly().GetName().Version;
         }
     }
 }

@@ -716,7 +716,7 @@
             _optionsService.Save();
         }
 
-        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersion());
+        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersionString());
         
         public RelayCommand NavigateOperatorCommand { get; set; }
 
