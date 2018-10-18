@@ -174,11 +174,11 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Análogo</value>
+    <value>Análogico</value>
     <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Análogo y Digital</value>
+    <value>Análogico y Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
     <value>Digital</value>
@@ -214,7 +214,7 @@
     <value>Palabras de conclusión</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Estudio Bíblico de Congregación</value>
+    <value>Estudio Bíblico de la Congregación</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Busquemos Perlas Escondidas</value>
