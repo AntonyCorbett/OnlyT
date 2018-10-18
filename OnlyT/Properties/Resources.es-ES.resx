@@ -174,11 +174,11 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in teh main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Análogo</value>
+    <value>Análogico</value>
     <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Análogo y Digital</value>
+    <value>Análogico y Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
     <value>Digital</value>
@@ -214,7 +214,7 @@
     <value>Palabras de conclusión</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Estudio Bíblico de Congregación</value>
+    <value>Estudio Bíblico de la Congregación</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Busquemos Perlas Escondidas</value>
@@ -286,10 +286,10 @@
     <value>Mejores Maestros - tema 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Visita de superintendente de circuito</value>
+    <value>Visita de Superintendente</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>CERRAR CUENTA REGRESIVA</value>
+    <value>CERRAR CUENTA ATRÁS</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -342,7 +342,7 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>CUENTA REGRESIVA PARA REUNIÓN</value>
+    <value>CUENTA ATRÁS PARA REUNIÓN</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
@@ -392,7 +392,7 @@
     <value>Notas:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>PUERTO ABIERTO</value>
+    <value>ABRIR PUERTO</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
