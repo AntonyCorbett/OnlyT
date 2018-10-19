@@ -91,6 +91,8 @@ namespace OnlyT.ViewModel
             LaunchTimerWindowAsync();
 
 #pragma warning restore 4014
+
+            InitHeartbeatTimer();
         }
 
         public FrameworkElement CurrentPage
@@ -196,10 +198,12 @@ namespace OnlyT.ViewModel
                 if (_optionsService.IsTimerMonitorSpecified)
                 {
                     RelocateTimerWindow();
+                    RelocateCountdownWindow();
                 }
                 else
                 {
                     HideTimerWindow();
+                    HideCountdownWindow();
                 }
 
                 RaisePropertyChanged(nameof(AlwaysOnTop));
@@ -217,19 +221,21 @@ namespace OnlyT.ViewModel
                 // on launch we display the timer window after a short delay (for aesthetics only)
                 await Task.Delay(1000).ConfigureAwait(true);
                 OpenTimerWindow();
-                InitHeartbeatTimer();
             }
         }
 
         private void InitHeartbeatTimer()
         {
-            _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
+            if (!IsInDesignMode)
             {
-                Interval = TimeSpan.FromSeconds(1)
-            };
+                _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
+                {
+                    Interval = TimeSpan.FromSeconds(1)
+                };
 
-            _heartbeatTimer.Tick += HeartbeatTimerTick;
-            _heartbeatTimer.Start();
+                _heartbeatTimer.Tick += HeartbeatTimerTick;
+                _heartbeatTimer.Start();
+            }
         }
 
         private void HeartbeatTimerTick(object sender, EventArgs e)
@@ -309,25 +315,26 @@ namespace OnlyT.ViewModel
         {
             if (_timerWindow != null)
             {
-                var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-                if (targetMonitor != null)
-                {
-                    _timerWindow.Hide();
-                    _timerWindow.WindowState = WindowState.Normal;
-
-                    LocateWindowAtOrigin(_timerWindow, targetMonitor.Monitor);
-                    
-                    _timerWindow.Topmost = true;
-                    _timerWindow.WindowState = WindowState.Maximized;
-                    _timerWindow.Show();
-                }
+                RelocateWindow(_timerWindow);
             }
             else
             {
                 OpenTimerWindow();
             }
         }
-        
+
+        /// <summary>
+        /// If the countdown window is open when we change the timer display then relocate it;
+        /// otherwise open it
+        /// </summary>
+        private void RelocateCountdownWindow()
+        {
+            if (_countdownWindow != null)
+            {
+                RelocateWindow(_countdownWindow);
+            }
+        }
+
         private bool OpenCountdownWindow(int offsetSeconds)
         {
             if (!CountDownActive)
@@ -368,7 +375,6 @@ namespace OnlyT.ViewModel
                 var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                 if (targetMonitor != null)
                 {
-                    //_timerWindow = new TimerOutputWindow(_optionsService) { DataContext = _timerWindowViewModel };
                     _timerWindow = new TimerOutputWindow(_optionsService);
                     ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
                 }
@@ -409,6 +415,11 @@ namespace OnlyT.ViewModel
         private void HideTimerWindow()
         {
             _timerWindow?.Hide();
+        }
+
+        private void HideCountdownWindow()
+        {
+            _countdownWindow?.Hide();
         }
 
         private void CloseTimerWindow()
@@ -485,6 +496,22 @@ namespace OnlyT.ViewModel
             //      than or equal to 9.0.
             int renderingTier = RenderCapability.Tier >> 16;
             return renderingTier == 0;
+        }
+
+        private void RelocateWindow(Window window)
+        {
+            var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+            if (targetMonitor != null)
+            {
+                window.Hide();
+                window.WindowState = WindowState.Normal;
+
+                LocateWindowAtOrigin(window, targetMonitor.Monitor);
+
+                window.Topmost = true;
+                window.WindowState = WindowState.Maximized;
+                window.Show();
+            }
         }
     }
 }
