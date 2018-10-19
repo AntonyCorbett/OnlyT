@@ -202,13 +202,13 @@
     <value>Automàtic</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>File-based</value>
+    <value>Fitxer XML personalitzat</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>Discurs de servei</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Concluding Comments</value>
@@ -238,7 +238,7 @@
     <value>Bible Reading</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Discurs de servei</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Treasures Talk</value>
