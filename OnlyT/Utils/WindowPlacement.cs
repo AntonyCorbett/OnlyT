@@ -69,11 +69,11 @@
 
     public static class WindowPlacement
     {
-        private static readonly Encoding Encoding = new UTF8Encoding();
-        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
-
         private const int SW_SHOWNORMAL = 1;
         private const int SW_SHOWMINIMIZED = 2;
+
+        private static readonly Encoding Encoding = new UTF8Encoding();
+        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
 
         public static void SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
         {

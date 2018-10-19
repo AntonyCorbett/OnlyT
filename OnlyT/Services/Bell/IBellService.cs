@@ -2,8 +2,8 @@
 {
     public interface IBellService
     {
-        void Play(int volumePercent);
-        
         bool IsPlaying { get; }
+
+        void Play(int volumePercent);
     }
 }

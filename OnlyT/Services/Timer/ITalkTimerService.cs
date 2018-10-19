@@ -10,13 +10,13 @@
 
         event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
 
-        void Start(int targetSecs, int talkId);
-
-        void Stop();
-
         int CurrentSecondsElapsed { get; set; }
 
         bool IsRunning { get; }
+
+        void Start(int targetSecs, int talkId);
+
+        void Stop();
 
         ClockRequestInfo GetClockRequestInfo();
 

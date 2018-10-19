@@ -3,9 +3,9 @@
     public interface IOptionsService
     {
         Options Options { get; }
+        
+        bool IsTimerMonitorSpecified { get; }
 
         void Save();
-
-        bool IsTimerMonitorSpecified { get; }
     }
 }

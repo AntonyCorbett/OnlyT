@@ -71,197 +71,7 @@
 
         public static string PageName => "SettingsPage";
 
-        public void Activated(object state)
-        {
-            // may be changed on operator page...
-            RaisePropertyChanged(nameof(IsCircuitVisit));
-        }
-
-        private void OpenWebClockLink()
-        {
-            System.Diagnostics.Process.Start(WebClockUrl);
-        }
-
-        private void ReserveAndOpenPort()
-        {
-            try
-            {
-                Log.Logger.Information($"Attempting to reserve and open port: {Port}");
-                
-                int rv = FirewallPortsClient.ReserveAndOpenPort(Port);
-                if (rv != 0)
-                {
-                    Log.Logger.Warning($"Return value from reserve and open port = {rv}");
-                }
-                else
-                {
-                    Log.Logger.Information($"Success reserving and opening port: {Port}");
-                }
-                
-                Messenger.Default.Send(new HttpServerChangedMessage());
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not reserve port");
-            }
-        }
-
         public BitmapSource ElevatedShield => NativeMethods.GetElevatedShieldBitmap();
-
-        private IEnumerable<FullScreenClockModeItem> GetTimeOfDayModes()
-        {
-            return new List<FullScreenClockModeItem>
-            {
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = Properties.Resources.FULL_SCREEN_ANALOGUE },
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = Properties.Resources.FULL_SCREEN_DIGITAL },
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.AnalogueAndDigital, Name = Properties.Resources.FULL_SCREEN_BOTH }
-            };
-        }
-
-        private IEnumerable<AdaptiveModeItem> GetAdaptiveModes()
-        {
-            return new List<AdaptiveModeItem>
-            {
-                new AdaptiveModeItem { Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE },
-                new AdaptiveModeItem { Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY },
-                new AdaptiveModeItem { Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY }
-            };
-        }
-
-        private IEnumerable<WebClockPortItem> GetPorts()
-        {
-            var result = new List<WebClockPortItem>();
-
-            for (int n = Options.DefaultPort; n <= Options.DefaultPort + Options.MaxPossiblePorts; ++n)
-            {
-                result.Add(new WebClockPortItem { Port = n });
-            }
-
-            return result;
-        }
-
-        private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
-        {
-            var cultureUsesAmPm = !string.IsNullOrEmpty(DateTime.Now.ToString("tt", CultureInfo.CurrentUICulture));
-
-            var result = new List<ClockHourFormatItem>();
-
-            result.Add(new ClockHourFormatItem
-                { Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12 });
-
-            result.Add(new ClockHourFormatItem
-                { Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero });
-
-            if (cultureUsesAmPm)
-            {
-                result.Add(new ClockHourFormatItem
-                    { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM });
-
-                result.Add(new ClockHourFormatItem
-                    { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM });
-            }
-
-            result.Add(new ClockHourFormatItem
-                { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 });
-
-            result.Add(new ClockHourFormatItem
-                { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero });
-
-            return result;
-        }
-
-        private void OnBellChanged(BellStatusChangedMessage message)
-        {
-            TestBellCommand.RaiseCanExecuteChanged();
-        }
-
-        private bool IsNotPlayingBell()
-        {
-            return !_bellService.IsPlaying;
-        }
-
-        private void TestBell()
-        {
-            _bellService.Play(_optionsService.Options.BellVolumePercent);
-        }
-
-        private IEnumerable<AutoMeetingTime> GetAutoMeetingTimes()
-        {
-            return new List<AutoMeetingTime>
-            {
-                new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
-                new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
-            };
-        }
-
-        private IEnumerable<OperatingModeItem> GetOperatingModes()
-        {
-            return new List<OperatingModeItem>
-            {
-                new OperatingModeItem { Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual },
-                new OperatingModeItem { Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile },
-                new OperatingModeItem { Name = Properties.Resources.OP_MODE_AUTO, Mode = OperatingMode.Automatic }
-            };
-        }
-
-        private LanguageItem[] GetSupportedLanguages()
-        {
-            var result = new List<LanguageItem>();
-
-            var subFolders = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
-
-            foreach (var folder in subFolders)
-            {
-                if (!string.IsNullOrEmpty(folder))
-                {
-                    try
-                    {
-                        var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
-                        result.Add(new LanguageItem
-                        {
-                            LanguageId = c.Name,
-                            LanguageName = c.EnglishName
-                        });
-                    }
-                    catch (CultureNotFoundException)
-                    {
-                        // expected
-                    }
-                }
-            }
-
-            // the native language
-            {
-                var c = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
-                result.Add(new LanguageItem
-                {
-                    LanguageId = c.Name,
-                    LanguageName = c.EnglishName
-                });
-            }
-
-            result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
-
-            return result.ToArray();
-        }
-
-        private IEnumerable<MonitorItem> GetSystemMonitors()
-        {
-            var result = new List<MonitorItem>
-            {
-                // empty (i.e. no timer monitor)
-                new MonitorItem { MonitorName = Properties.Resources.MONITOR_NONE } 
-            };  
-
-            result.AddRange(_monitorsService.GetSystemMonitors());
-            return result;
-        }
-
-        private void NavigateOperatorPage()
-        {
-            Save();
-            Messenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
-        }
 
         public IEnumerable<MonitorItem> Monitors => _monitors;
 
@@ -391,7 +201,7 @@
         }
 
         public IEnumerable<WebClockPortItem> Ports => _ports;
-        
+
         public int Port
         {
             get => _optionsService.Options.HttpServerPort;
@@ -402,7 +212,7 @@
                     _optionsService.Options.HttpServerPort = value;
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(WebClockUrl));
-                    RaisePropertyChanged(nameof(WebClockQRCode));
+                    RaisePropertyChanged(nameof(WebClockQrCode));
 
                     Messenger.Default.Send(new HttpServerChangedMessage());
                 }
@@ -683,7 +493,7 @@
             }
         }
 
-        public BitmapImage WebClockQRCode
+        public BitmapImage WebClockQrCode
         {
             get
             {
@@ -706,7 +516,7 @@
                 {
                     return $"http://{ipAddress}:{Port}/index";
                 }
-                
+
                 return "Web clock not available";
             }
         }
@@ -725,6 +535,22 @@
             }
         }
 
+        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersionString());
+
+        public RelayCommand NavigateOperatorCommand { get; set; }
+
+        public RelayCommand TestBellCommand { get; set; }
+
+        public RelayCommand OpenPortCommand { get; set; }
+
+        public RelayCommand WebClockUrlLinkCommand { get; set; }
+
+        public void Activated(object state)
+        {
+            // may be changed on operator page...
+            RaisePropertyChanged(nameof(IsCircuitVisit));
+        }
+
         private void OnShutDown(ShutDownMessage obj)
         {
             Save();
@@ -735,14 +561,192 @@
             _optionsService.Save();
         }
 
-        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersionString());
-        
-        public RelayCommand NavigateOperatorCommand { get; set; }
+        private void OpenWebClockLink()
+        {
+            System.Diagnostics.Process.Start(WebClockUrl);
+        }
 
-        public RelayCommand TestBellCommand { get; set; }
+        private void ReserveAndOpenPort()
+        {
+            try
+            {
+                Log.Logger.Information($"Attempting to reserve and open port: {Port}");
+                
+                int rv = FirewallPortsClient.ReserveAndOpenPort(Port);
+                if (rv != 0)
+                {
+                    Log.Logger.Warning($"Return value from reserve and open port = {rv}");
+                }
+                else
+                {
+                    Log.Logger.Information($"Success reserving and opening port: {Port}");
+                }
+                
+                Messenger.Default.Send(new HttpServerChangedMessage());
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not reserve port");
+            }
+        }
 
-        public RelayCommand OpenPortCommand { get; set; }
+        private IEnumerable<FullScreenClockModeItem> GetTimeOfDayModes()
+        {
+            return new List<FullScreenClockModeItem>
+            {
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = Properties.Resources.FULL_SCREEN_ANALOGUE },
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = Properties.Resources.FULL_SCREEN_DIGITAL },
+                new FullScreenClockModeItem { Mode = FullScreenClockMode.AnalogueAndDigital, Name = Properties.Resources.FULL_SCREEN_BOTH }
+            };
+        }
 
-        public RelayCommand WebClockUrlLinkCommand { get; set; }
+        private IEnumerable<AdaptiveModeItem> GetAdaptiveModes()
+        {
+            return new List<AdaptiveModeItem>
+            {
+                new AdaptiveModeItem { Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE },
+                new AdaptiveModeItem { Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY },
+                new AdaptiveModeItem { Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY }
+            };
+        }
+
+        private IEnumerable<WebClockPortItem> GetPorts()
+        {
+            var result = new List<WebClockPortItem>();
+
+            for (int n = Options.DefaultPort; n <= Options.DefaultPort + Options.MaxPossiblePorts; ++n)
+            {
+                result.Add(new WebClockPortItem { Port = n });
+            }
+
+            return result;
+        }
+
+        private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
+        {
+            var cultureUsesAmPm = !string.IsNullOrEmpty(DateTime.Now.ToString("tt", CultureInfo.CurrentUICulture));
+
+            var result = new List<ClockHourFormatItem>
+            {
+                new ClockHourFormatItem
+                {
+                    Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12
+                },
+                new ClockHourFormatItem
+                {
+                    Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero
+                }
+            };
+            
+            if (cultureUsesAmPm)
+            {
+                result.Add(new ClockHourFormatItem
+                    { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM });
+
+                result.Add(new ClockHourFormatItem
+                    { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM });
+            }
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 });
+
+            result.Add(new ClockHourFormatItem
+                { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero });
+
+            return result;
+        }
+
+        private void OnBellChanged(BellStatusChangedMessage message)
+        {
+            TestBellCommand.RaiseCanExecuteChanged();
+        }
+
+        private bool IsNotPlayingBell()
+        {
+            return !_bellService.IsPlaying;
+        }
+
+        private void TestBell()
+        {
+            _bellService.Play(_optionsService.Options.BellVolumePercent);
+        }
+
+        private IEnumerable<AutoMeetingTime> GetAutoMeetingTimes()
+        {
+            return new List<AutoMeetingTime>
+            {
+                new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
+                new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
+            };
+        }
+
+        private IEnumerable<OperatingModeItem> GetOperatingModes()
+        {
+            return new List<OperatingModeItem>
+            {
+                new OperatingModeItem { Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual },
+                new OperatingModeItem { Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile },
+                new OperatingModeItem { Name = Properties.Resources.OP_MODE_AUTO, Mode = OperatingMode.Automatic }
+            };
+        }
+
+        private LanguageItem[] GetSupportedLanguages()
+        {
+            var result = new List<LanguageItem>();
+
+            var subFolders = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            foreach (var folder in subFolders)
+            {
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    try
+                    {
+                        var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
+                        result.Add(new LanguageItem
+                        {
+                            LanguageId = c.Name,
+                            LanguageName = c.EnglishName
+                        });
+                    }
+                    catch (CultureNotFoundException)
+                    {
+                        // expected
+                    }
+                }
+            }
+
+            // the native language
+            {
+                var c = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
+                result.Add(new LanguageItem
+                {
+                    LanguageId = c.Name,
+                    LanguageName = c.EnglishName
+                });
+            }
+
+            result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
+
+            return result.ToArray();
+        }
+
+        private IEnumerable<MonitorItem> GetSystemMonitors()
+        {
+            var result = new List<MonitorItem>
+            {
+                // empty (i.e. no timer monitor)
+                new MonitorItem { MonitorName = Properties.Resources.MONITOR_NONE } 
+            };  
+
+            result.AddRange(_monitorsService.GetSystemMonitors());
+            return result;
+        }
+
+        private void NavigateOperatorPage()
+        {
+            Save();
+            Messenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
+        }
     }
 }

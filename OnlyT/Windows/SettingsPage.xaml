@@ -255,7 +255,7 @@
                             </Hyperlink>
                         </TextBlock>
                         
-                        <Image Width="200" Source="{Binding WebClockQRCode}">
+                        <Image Width="200" Source="{Binding WebClockQrCode}">
                             
                         </Image>
                             

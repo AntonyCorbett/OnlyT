@@ -65,7 +65,7 @@
                 case WebServerErrorCode.SubscriptionPortNotSpecified:
                     return HttpStatusCode.BadRequest;
 
-                case WebServerErrorCode.Throttled:  // should be 429 but not yet available in HttpStatusCode
+                case WebServerErrorCode.Throttled: // should be 429 but not yet available in HttpStatusCode
                     return HttpStatusCode.ServiceUnavailable;
 
                 case WebServerErrorCode.UnknownError:
