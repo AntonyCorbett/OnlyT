@@ -264,7 +264,7 @@
     <value>Settings not available while timer is running!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuració</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
     <value>Treasures</value>
