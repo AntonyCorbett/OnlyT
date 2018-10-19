@@ -305,6 +305,25 @@
                 {
                     _optionsService.Options.ClockHourFormat = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(ShouldEnableShowSeconds));
+                    Messenger.Default.Send(new ClockHourFormatChangedMessage());
+                }
+            }
+        }
+
+        public bool ShouldEnableShowSeconds =>
+            ClockHourFormat != ClockHourFormat.Format12AMPM &&
+            ClockHourFormat != ClockHourFormat.Format12LeadingZeroAMPM;
+
+        public bool ShowDigitalSeconds
+        {
+            get => _optionsService.Options.ShowDigitalSeconds;
+            set
+            {
+                if (_optionsService.Options.ShowDigitalSeconds != value)
+                {
+                    _optionsService.Options.ShowDigitalSeconds = value;
+                    RaisePropertyChanged();
                     Messenger.Default.Send(new ClockHourFormatChangedMessage());
                 }
             }

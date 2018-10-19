@@ -23,7 +23,6 @@
         d:DesignHeight="300" d:DesignWidth="395">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <valueConverters:BoolToCursorConverter x:Key="ToCursorConverter" />
 
         <Style x:Key="ItemComboStyle" BasedOn="{StaticResource MaterialDesignComboBox}" TargetType="{x:Type ComboBox}">
@@ -99,13 +98,13 @@
                       FontSize="14"
                       SelectedValuePath="Id" 
                       DisplayMemberPath="NameIncludingDuration"
-                      Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BoolToVis}, Mode=OneWay}"
+                      Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                       SelectedValue="{Binding TalkId, Mode=TwoWay}"/>
 
             <TextBlock Text="{x:Static resx:Resources.MANUAL_MODE}" 
                        VerticalAlignment="Center"
                        FontSize="14" 
-                       Visibility="{Binding Path=IsManualMode, Converter={StaticResource BoolToVis}, Mode=OneWay}" Margin="0,-7,0,7"/>
+                       Visibility="{Binding Path=IsManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Margin="0,-7,0,7"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,10,0,10">
@@ -123,7 +122,7 @@
 
                     <Button Grid.Column="0" Command="{Binding BellToggleCommand}" Style="{StaticResource ChromelessBtn}">
                         <Path  
-                            Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BoolToVis}, Mode=OneWay}"
+                            Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                             Data="M11.945504,0.99398804C10.951509,0.99398804,10.156516,1.8880005,10.156516,2.9809875L10.156516,3.2799988 10.156516,3.3789978 10.45451,3.3789978C10.85251,3.3789978 11.24951,3.2799988 11.647502,3.2799988 12.243499,3.2799988 12.740497,3.2799988 13.237495,3.3789978L13.535489,3.3789978 13.535489,3.2799988 13.535489,2.9809875C13.734485,1.8880005,12.939492,0.99398804,11.945504,0.99398804z M11.945504,0C13.436491,0,14.628484,1.2919922,14.628484,2.9809875L14.628484,3.5780029 14.42948,3.5780029 14.628484,3.677002C17.80846,4.5709839 20.193438,6.8569946 20.193438,9.7389832 20.193438,10.634003 19.995442,11.428986 19.597449,12.123993 19.398445,14.807007 19.398445,18.881989 21.485436,20.869995 24.765412,23.850983 23.870413,26.036987 23.473414,26.733002L13.237495,26.733002 12.343496,26.733002 12.343496,29.117981 12.442495,29.117981C12.939492,29.316986 13.336493,29.813995 13.336493,30.509003 13.336493,31.303986 12.641499,32 11.846506,32 11.051506,32 10.355512,31.303986 10.355512,30.509003 10.355512,29.912994 10.752512,29.415985 11.24951,29.117981L11.349508,29.117981 11.349508,26.733002 10.45451,26.733002 0.41758832,26.733002C0.020587989,26.036987 -0.87440217,23.751984 2.4055731,20.869995 4.7905499,18.78299 4.5915539,13.912994 4.2935597,11.328979 4.094556,10.733002 3.9955575,10.136993 3.9955575,9.6399841 3.9955575,6.8569946 5.9825427,4.4719849 9.0635216,3.5780029L9.3615238,3.4779968 9.3615238,3.3789978 9.3615238,2.9809875C9.3615238,1.2919922,10.554508,0,11.945504,0z"
                             VerticalAlignment="Top"
                             Stretch="Uniform"
@@ -135,7 +134,7 @@
                     <TextBlock Grid.Column="1" 
                                Margin="0,-5,0,0"
                                Text="{x:Static resx:Resources.CIRCUIT_VISIT_BRACKETS}" 
-                               Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BoolToVis}, Mode=OneWay}"
+                               Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                                VerticalAlignment="Top" Foreground="#f3dcbc" HorizontalAlignment="Right"/>
 
                     <TextBlock TextWrapping="NoWrap" 
@@ -211,7 +210,7 @@
                             Margin="0,0,0,-5"
                             Command="{Binding CountUpToggleCommand}" 
                             IsEnabled="{Binding IsNotRunning}"
-                            Visibility="{Binding Path=IsValidTalk, Converter={StaticResource BoolToVis}}"
+                            Visibility="{Binding Path=IsValidTalk, Converter={StaticResource BooleanToVisibilityConverter}}"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Width="22"
@@ -271,7 +270,7 @@
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 Command="{Binding StartCommand}" 
                 Height="50"
-                Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
+                Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <behaviours:DoubleClickBehaviour />
             </i:Interaction.Behaviors>
@@ -285,7 +284,7 @@
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Command="{Binding StopCommand}"
                 Height="50"
-                Visibility="{Binding Path=IsRunning, Converter={StaticResource BoolToVis}, Mode=OneWay}">
+                Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <behaviours:DoubleClickBehaviour />
             </i:Interaction.Behaviors>
@@ -305,7 +304,7 @@
 
             <StackPanel 
                 IsEnabled="{Binding IsNotRunning}"
-                Visibility="{Binding Path=ShouldShowCircuitVisitToggle, Converter={StaticResource BoolToVis}}"
+                Visibility="{Binding Path=ShouldShowCircuitVisitToggle, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Column="0" 
                 Orientation="Horizontal">
 
@@ -327,7 +326,7 @@
                     Grid.Column="0"
                     FontSize="14"
                     Content="{x:Static resx:Resources.CLOSE_COUNTDOWN}" 
-                    Visibility="{Binding Path=IsCountdownActive, Converter={StaticResource BoolToVis}, Mode=OneWay}"
+                    Visibility="{Binding Path=IsCountdownActive, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                     Command="{Binding CloseCountdownCommand}"/>
 
             <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
@@ -355,7 +354,7 @@
             <Button Style="{StaticResource DownloadButtonStyle}" 
                     ToolTip="{x:Static resx:Resources.NEW_VERSION}" 
                     Grid.Column="1"
-                    Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BoolToVis}, Mode=OneWay}"
+                    Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                     Command="{Binding NewVersionCommand}">
                 <materialDesign:PackIcon
                     Kind="Download"

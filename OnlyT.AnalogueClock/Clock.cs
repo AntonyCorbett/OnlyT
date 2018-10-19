@@ -112,6 +112,27 @@
             }
         }
 
+        public bool DigitalTimeFormat24Hours
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(DigitalTimeFormat24HoursProperty);
+            set => SetValue(DigitalTimeFormat24HoursProperty, value);
+        }
+
+        public bool DigitalTimeFormatAMPM
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(DigitalTimeFormatAMPMProperty);
+            set => SetValue(DigitalTimeFormatAMPMProperty, value);
+        }
+
+        public bool IsRunning
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(IsRunningProperty);
+            set => SetValue(IsRunningProperty, value);
+        }
+
         public DurationSector DurationSector
         {
             get => (DurationSector)GetValue(DurationSectorProperty);
@@ -123,6 +144,22 @@
             // ReSharper disable once PossibleNullReferenceException
             get => (bool)GetValue(DigitalTimeFormatShowLeadingZeroProperty);
             set => SetValue(DigitalTimeFormatShowLeadingZeroProperty, value);
+        }
+
+        private string CurrentTimeHrMin
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once UnusedMember.Local
+            get => (string)GetValue(CurrentTimeHrMinProperty);
+            set => SetValue(CurrentTimeHrMinProperty, value);
+        }
+
+        private string CurrentTimeSec
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once UnusedMember.Local
+            get => (string)GetValue(CurrentTimeSecProperty);
+            set => SetValue(CurrentTimeSecProperty, value);
         }
 
         public override void OnApplyTemplate()
@@ -325,43 +362,6 @@
             return _digitalFormatAMPM ? string.Empty : dt.Second.ToString("D2");
         }
 
-        public bool DigitalTimeFormat24Hours
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (bool)GetValue(DigitalTimeFormat24HoursProperty);
-            set => SetValue(DigitalTimeFormat24HoursProperty, value);
-        }
-
-        public bool DigitalTimeFormatAMPM
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (bool)GetValue(DigitalTimeFormatAMPMProperty);
-            set => SetValue(DigitalTimeFormatAMPMProperty, value);
-        }
-
-        public bool IsRunning
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            get => (bool)GetValue(IsRunningProperty);
-            set => SetValue(IsRunningProperty, value);
-        }
-
-        private string CurrentTimeHrMin
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            // ReSharper disable once UnusedMember.Local
-            get => (string)GetValue(CurrentTimeHrMinProperty);
-            set => SetValue(CurrentTimeHrMinProperty, value);
-        }
-
-        private string CurrentTimeSec
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            // ReSharper disable once UnusedMember.Local
-            get => (string)GetValue(CurrentTimeSecProperty);
-            set => SetValue(CurrentTimeSecProperty, value);
-        }
-        
         private void StartupAnimation()
         {
             _animationTargetAngles = GenerateTargetAngles();

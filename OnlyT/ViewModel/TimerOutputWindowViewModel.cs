@@ -11,10 +11,18 @@
     using Services.Options;
     using Utils;
 
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class TimerOutputWindowViewModel : ViewModelBase
     {
-        private static int _secsPerHour = 60 * 60;
+        private static readonly int _secsPerHour = 60 * 60;
         private readonly IOptionsService _optionsService;
+
+        private int _analogueClockColumnWidthPercentage = -1;
+        private string _timeString;
+        private bool _isRunning;
+        private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
+        private DurationSector _durationSector;
+        private bool _showTimeOfDayUnderTimer;
 
         public TimerOutputWindowViewModel(IOptionsService optionsService)
         {
@@ -37,6 +45,108 @@
         public int TimerColumnWidthPercentage { get; private set; } = -1;
 
         public bool ApplicationClosing { get; private set; }
+
+        public bool ShowTimeOfDayUnderTimer
+        {
+            get => _showTimeOfDayUnderTimer;
+            set
+            {
+                if (_showTimeOfDayUnderTimer != value)
+                {
+                    _showTimeOfDayUnderTimer = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
+
+        public Cursor MousePointer =>
+            _optionsService.Options.ShowMousePointerInTimerDisplay
+                ? Cursors.Arrow
+                : Cursors.None;
+
+        public string TimeString
+        {
+            get => _timeString;
+            set
+            {
+                if (_timeString != value)
+                {
+                    _timeString = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        
+        public DurationSector DurationSector
+        {
+            get => _durationSector;
+            set
+            {
+                if (!ReferenceEquals(_durationSector, value))
+                {
+                    _durationSector = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public Brush TextColor
+        {
+            get => _textColor;
+            set
+            {
+                if (!ReferenceEquals(_textColor, value))
+                {
+                    _textColor = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set
+            {
+                if (_isRunning != value)
+                {
+                    _isRunning = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public int AnalogueClockColumnWidthPercentage
+        {
+            get => _analogueClockColumnWidthPercentage;
+            set
+            {
+                if (_analogueClockColumnWidthPercentage != value)
+                {
+                    _analogueClockColumnWidthPercentage = value;
+                    TimerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(TimerColumnWidthPercentage));
+                }
+            }
+        }
+        
+        public bool DigitalTimeFormatShowLeadingZero =>
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM ||
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
+        
+        public bool DigitalTimeFormat24Hours =>
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24 ||
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
+        
+        public bool DigitalTimeFormatAMPM =>
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12AMPM ||
+            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM;
+
+        public bool DigitalTimeShowSeconds => _optionsService.Options.ShowDigitalSeconds;
 
         public bool SplitAndFullScreenModeIdentical()
         {
@@ -63,6 +173,7 @@
             RaisePropertyChanged(nameof(DigitalTimeFormat24Hours));
             RaisePropertyChanged(nameof(DigitalTimeFormatShowLeadingZero));
             RaisePropertyChanged(nameof(DigitalTimeFormatAMPM));
+            RaisePropertyChanged(nameof(DigitalTimeShowSeconds));
         }
 
         private void OnTimerStopped(TimerStopMessage obj)
@@ -112,12 +223,6 @@
             RaisePropertyChanged(nameof(MousePointer));
         }
 
-        // ReSharper disable once MemberCanBePrivate.Global
-        public Cursor MousePointer =>
-            _optionsService.Options.ShowMousePointerInTimerDisplay
-                ? Cursors.Arrow
-                : Cursors.None;
-
         private void OnTimerChanged(TimerChangedMessage message)
         {
             if (message.TimerIsRunning)
@@ -148,119 +253,5 @@
                 }
             }
         }
-
-        private int _analogueClockColumnWidthPercentage = -1;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public int AnalogueClockColumnWidthPercentage
-        {
-            get => _analogueClockColumnWidthPercentage;
-            set
-            {
-                if (_analogueClockColumnWidthPercentage != value)
-                {
-                    _analogueClockColumnWidthPercentage = value;
-                    TimerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(TimerColumnWidthPercentage));
-                }
-            }
-        }
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public bool DigitalTimeFormatShowLeadingZero =>
-           _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZero ||
-           _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM ||
-           _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public bool DigitalTimeFormat24Hours =>
-           _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24 ||
-           _optionsService.Options.ClockHourFormat == ClockHourFormat.Format24LeadingZero;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public bool DigitalTimeFormatAMPM =>
-            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12AMPM ||
-            _optionsService.Options.ClockHourFormat == ClockHourFormat.Format12LeadingZeroAMPM;
-
-        private string _timeString;
-
-        public string TimeString
-        {
-            get => _timeString;
-            set
-            {
-                if (_timeString != value)
-                {
-                    _timeString = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private bool _isRunning;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public bool IsRunning
-        {
-            get => _isRunning;
-            set
-            {
-                if (_isRunning != value)
-                {
-                    _isRunning = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
-
-        public Brush TextColor
-        {
-            get => _textColor;
-            set
-            {
-                if (!ReferenceEquals(_textColor, value))
-                {
-                    _textColor = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private DurationSector _durationSector;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public DurationSector DurationSector
-        {
-            get => _durationSector;
-            set
-            {
-                if (!ReferenceEquals(_durationSector, value))
-                {
-                    _durationSector = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private bool _showTimeOfDayUnderTimer;
-
-        // ReSharper disable once MemberCanBePrivate.Global
-        public bool ShowTimeOfDayUnderTimer
-        {
-            get => _showTimeOfDayUnderTimer;
-            set
-            {
-                if (_showTimeOfDayUnderTimer != value)
-                {
-                    _showTimeOfDayUnderTimer = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        public FullScreenClockMode FullScreenClockMode => _optionsService.Options.FullScreenClockMode;
     }
 }

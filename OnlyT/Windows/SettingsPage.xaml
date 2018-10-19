@@ -18,7 +18,7 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
 
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1000">
+             d:DesignHeight="1000" d:DesignWidth="1200">
 
     <UserControl.Resources>
         <Style x:Key="LabelStyle" BasedOn="{StaticResource MaterialDesignLabel}" TargetType="{x:Type Label}">
@@ -110,6 +110,11 @@
                                   SelectedValuePath="Format" 
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
+
+                        <CheckBox IsChecked="{Binding ShowDigitalSeconds, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  IsEnabled="{Binding ShouldEnableShowSeconds}"
+                                  Content="{x:Static resx:Resources.SHOW_SECONDS}" />
 
                         <TextBlock Text="{Binding AppVersionStr}"
                                    VerticalAlignment="Bottom"
@@ -204,7 +209,7 @@
                         <CheckBox IsChecked="{Binding ShowMousePointerInTimerDisplay, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.MOUSE_PTR}" />
-                        
+
                         <ComboBox ItemsSource="{Binding PersistDurationItems}" 
                                   Style="{StaticResource SettingsComboStyle}"
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.PERSIST_TALK_DURATION}"

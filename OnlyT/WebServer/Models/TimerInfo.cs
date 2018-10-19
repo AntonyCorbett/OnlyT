@@ -43,7 +43,7 @@
         public int? ModifiedDurationSecs { get; set; }
 
         /// <summary>
-        /// The talk's "adapted" duration (only available after teh timer is started). Can be null
+        /// The talk's "adapted" duration (only available after the timer is started). Can be null
         /// if no adaption is made.
         /// </summary>
         [JsonProperty(PropertyName = "adaptedDurationSecs")]

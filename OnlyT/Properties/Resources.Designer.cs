@@ -822,6 +822,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show seconds.
+        /// </summary>
+        public static string SHOW_SECONDS {
+            get {
+                return ResourceManager.GetString("SHOW_SECONDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Split-screen width:.
         /// </summary>
         public static string SPLIT_WIDTH {

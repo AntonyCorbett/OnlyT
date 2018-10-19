@@ -34,6 +34,7 @@
             IsApiThrottled = true;
             PersistStudentTime = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
+            ShowDigitalSeconds = true;
 
             AdjustClockFormat();
         }
@@ -61,6 +62,8 @@
         public int BellVolumePercent { get; set; }
 
         public ClockHourFormat ClockHourFormat { get; set; }
+
+        public bool ShowDigitalSeconds { get; set; }
 
         public AdaptiveMode MidWeekAdaptiveMode { get; set; }
 

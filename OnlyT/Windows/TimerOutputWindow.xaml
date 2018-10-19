@@ -18,7 +18,6 @@
 
     <Window.Resources>
         <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
 
     <Grid>
@@ -52,8 +51,11 @@
 
                 <Viewbox Grid.Row="1" >
                     <TextBlock VerticalAlignment="Bottom" Margin="5,0,5,0">
-                        <Run Foreground="White" FontSize="24" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
-                        <Run Foreground="#FFCBABAB" FontSize="18" Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
+                        <TextBlock Foreground="White" FontSize="24" FontWeight="Bold" 
+                                   Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
+                        <TextBlock Foreground="#FFCBABAB" FontSize="18" 
+                                   Visibility="{Binding Path=DigitalTimeShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
                     </TextBlock>
                 </Viewbox>
             </Grid>
@@ -76,7 +78,7 @@
                            FontWeight="Bold"/>
 
                 <TextBlock Name="TimerTextBlock2" Grid.Row="1" Opacity="0.0" HorizontalAlignment="Center"
-                           Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BoolToVis}}">
+                           Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Run Foreground="White" FontSize="28" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
                 </TextBlock>
             </Grid>
