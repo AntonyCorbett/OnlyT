@@ -217,7 +217,7 @@
     <value>Estudo Bíblico de Congregação</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Encontre joias espirituais</value>
+    <value>Encontre Joias Espirituais</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Nossa Vida - Parte 1</value>
@@ -423,7 +423,7 @@
     <value>Largura da tela dividida:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>TESTE</value>
+    <value>TESTAR</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
