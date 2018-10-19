@@ -158,7 +158,7 @@
     <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
-    <value>Nie można utworzyć folderu{0}</value>
+    <value>Nie można utworzyć folderu {0}</value>
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
@@ -184,7 +184,7 @@
     <value>Cyfrowy</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Dzwonek włączony</value>
+    <value>Dzwonek wyłączony</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>W tygodniu</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Wyświetlanie czasy ucznia</value>
+    <value>Wyświetlanie czasu ucznia</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -479,7 +479,7 @@
     <value>Włączone</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Włączone</value>
+    <value>Włączony</value>
   </data>
   <data name="ENABLED_COUNTDOWN" xml:space="preserve">
     <value>Włączone</value>
@@ -488,7 +488,7 @@
     <value>Aktywny</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Show seconds</value>
+    <value>Pokaż sekundy</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
 </root>
