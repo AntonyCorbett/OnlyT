@@ -380,7 +380,7 @@
     <value>Show mouse pointer</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Afegeix cada hora d'inici en una nova línia.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Use any time format you like!</value>
