@@ -211,13 +211,13 @@
     <value>Discurs de servei</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Repàs i avanç de la setmana següent</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Estudi bíblic de congregació</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Descobreix perles espirituals</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Living - Part 1</value>
@@ -232,19 +232,19 @@
     <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Discurs públic</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Lectura de la Bíblia</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Discurs de servei</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Discurs - Tresors de la Bíblia</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Estudi de La Torre de Guaita</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
     <value>Cap de setmana</value>
@@ -267,7 +267,7 @@
     <value>Configuració</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Tresors de la Bíblia</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
     <value>Ministry</value>
