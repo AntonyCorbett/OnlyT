@@ -380,7 +380,7 @@
     <value>Mostrar el puntero del ratón</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Pone cada hora de inicio en una nueva línea.</value>
+    <value>Pon cada hora de inicio en una nueva línea.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>¡Utiliza cualquier formato de tiempo que te guste!</value>
