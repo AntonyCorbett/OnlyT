@@ -170,7 +170,7 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
-    <value>Rzeczywisty czas trwania</value>
+    <value>Limit czasu trwania punktu</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
@@ -235,7 +235,7 @@
     <value>Wykład publiczny</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Czytanie Bblii</value>
+    <value>Czytanie Biblii</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Przemówienie służbowe</value>
