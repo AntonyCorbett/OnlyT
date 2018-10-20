@@ -220,10 +220,10 @@
     <value>Descobreix perles espirituals</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>Vida cristiana - Part 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>Vida cristiana - Part 1</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Opening Comments</value>
@@ -270,10 +270,10 @@
     <value>Tresors de la Bíblia</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministry</value>
+    <value>Taller de Predicació</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Vida cristiana</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Cap de setmana</value>
