@@ -279,7 +279,7 @@
     <value>Cap de setmana</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>La configuració està restringida per l'administrador!</value>
+    <value>La configuració està inhabilitada per l'administrador!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
