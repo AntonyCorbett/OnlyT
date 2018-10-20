@@ -450,10 +450,10 @@
     <value>Idioma</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Please restart OnlyT after changing the language.</value>
+    <value>Has de reiniciar OnlyT després de canviar d'idioma.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease</value>
+    <value>Disminueix</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
