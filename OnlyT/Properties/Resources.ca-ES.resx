@@ -356,7 +356,7 @@
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Tipus de rellotge en pantalla completa</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>Adreça IP</value>
@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Hora d'inici de les reunions (1 per línia)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>VARIS</value>
@@ -386,7 +386,7 @@
     <value>Use any time format you like!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>També pots incloure el dia; per exemple, "Dj 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes:</value>
