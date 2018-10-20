@@ -223,13 +223,13 @@
     <value>Vida cristiana - Part 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Vida cristiana - Part 1</value>
+    <value>Vida cristiana - Part 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Introducció</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Presentacions d'aquest mes</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Discurs públic</value>
@@ -293,7 +293,7 @@
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
-    <value>Help</value>
+    <value>Ajuda</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
     <value>[circuit visit]</value>
@@ -359,11 +359,11 @@
     <value>Full-screen clock mode</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>Adreça IP</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Reunió</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
@@ -374,7 +374,7 @@
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Pantalla</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
     <value>Show mouse pointer</value>
@@ -447,7 +447,7 @@
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Language</value>
+    <value>Idioma</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
     <value>Please restart OnlyT after changing the language.</value>
