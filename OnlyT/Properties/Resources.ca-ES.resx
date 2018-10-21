@@ -289,7 +289,7 @@
     <value>Visita Sup. Circuit</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>ATURA EL COMPTE ENRERE</value>
+    <value>ATURA COMPTE ENRERE</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
