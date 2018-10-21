@@ -334,56 +334,56 @@
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>BELL</value>
+    <value>Ringklocka</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB CLOCK</value>
+    <value>Webbklocka</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>MÖTETS NEDRÄKNING</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Kretsbesöket växla</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Digital klockformat</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Aktiverad</value>
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Helskärmsläge för klockan</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP-adress</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Möte</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Mötets starttid (1/rad)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>MISCELLANEOUS</value>
+    <value>ÖVRIGT</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Skärm</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Show mouse pointer</value>
+    <value>Visa muspekaren</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Placera varje starttid på en ny rad.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Använd valfri tidsformat!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
