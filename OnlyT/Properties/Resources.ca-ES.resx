@@ -286,14 +286,14 @@
     <value>Taller de Predicació - Part 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Visita Superintendent de Circuit</value>
+    <value>Visita Sup. Circuit</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>ATURA EL COMPTE ENRERE</value>
+    <value>ATURA COMPTE ENRERE</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
-    <value>Ajuda</value>
+    <value>Ajuda (en anglès)</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
     <value>[visita superintendent de circuit]</value>
@@ -400,7 +400,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Conserva el temps dels estudiants durant el consell</value>
+    <value>Conserva el temps durant el consell</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">

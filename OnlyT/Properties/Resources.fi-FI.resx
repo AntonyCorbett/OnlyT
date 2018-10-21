@@ -267,13 +267,13 @@
     <value>Asetukset</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Aarteita</value>
+    <value>Jumalan sanan aarteita</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Valmennusta</value>
+    <value>Valmennusta kenttäpalvelukseen</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Elämä</value>
+    <value>Elämä kristittynä</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Viikonloppu</value>
@@ -283,7 +283,7 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Palvelus - osa 4</value>
+    <value>Valmennusta kenttäpalvelukseen - osa 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Kierrosviikko</value>
