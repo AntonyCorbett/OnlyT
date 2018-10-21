@@ -267,13 +267,13 @@
     <value>Asetukset</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Aarteita</value>
+    <value>Jumalan sanan aarteita</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Valmennusta</value>
+    <value>Valmennusta kenttäpalvelukseen</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Elämä</value>
+    <value>Elämä kristittynä</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Viikonloppu</value>
