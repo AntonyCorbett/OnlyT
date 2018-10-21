@@ -174,11 +174,11 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Análogico</value>
+    <value>Analógico</value>
     <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Análogico y Digital</value>
+    <value>Analógico y Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
     <value>Digital</value>
@@ -380,7 +380,7 @@
     <value>Mostrar el puntero del ratón</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Pone cada hora de inicio en una nueva línea.</value>
+    <value>Pon cada hora de inicio en una nueva línea.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>¡Utiliza cualquier formato de tiempo que te guste!</value>
@@ -416,7 +416,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Mostrar sector en el reloj análogo</value>
+    <value>Mostrar sector en el reloj analógico</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">

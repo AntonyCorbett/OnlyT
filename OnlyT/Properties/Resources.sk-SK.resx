@@ -338,7 +338,7 @@
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB CLOCK</value>
+    <value>WEBOVÉ HODINY</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
@@ -359,7 +359,7 @@
     <value>Full-screen clock mode</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP adresa</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
