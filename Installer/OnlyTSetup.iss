@@ -80,7 +80,7 @@ Source: "OnlyT\bin\Release\pt-PT\*.dll"; DestDir: "{app}\pt-PT"; Flags: ignoreve
 Source: "OnlyT\bin\Release\ro-RO\*.dll"; DestDir: "{app}\ro-RO"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\ru-RU\*.dll"; DestDir: "{app}\ru-RU"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\sk-SK\*.dll"; DestDir: "{app}\sk-SK"; Flags: ignoreversion
-;Source: "OnlyT\bin\Release\sv-SE\*.dll"; DestDir: "{app}\sv-SE"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\sv-SE\*.dll"; DestDir: "{app}\sv-SE"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\tr-TR\*.dll"; DestDir: "{app}\tr-TR"; Flags: ignoreversion
 Source: "talk_schedule.xml"; DestDir: "{app}"; Flags: ignoreversion
 
