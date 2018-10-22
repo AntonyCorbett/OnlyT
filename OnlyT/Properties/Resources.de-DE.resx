@@ -199,25 +199,25 @@
     <value>Ministry - Item 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatic</value>
+    <value>Automatisch</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>File-based</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
+    <value>Manuell</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Concluding Talk</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Schlussbemerkungen</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Versammlungsbibelstudium</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Nach geistigen Schätzen graben</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Living - Part 1</value>
@@ -226,7 +226,7 @@
     <value>Living - Part 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Einleitende Worte</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>This Month's Presentations</value>
@@ -235,7 +235,7 @@
     <value>Öffentlicher Vortrag</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Bibellesung</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Service Talk</value>
@@ -244,7 +244,7 @@
     <value>Treasures Talk</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Wachtturm-Studium</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
     <value>Wochenende</value>
@@ -264,7 +264,7 @@
     <value>Settings not available while timer is running!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
     <value>Treasures</value>
@@ -276,7 +276,7 @@
     <value>Living</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Wochenende</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
     <value>Settings disabled by administrator!</value>
@@ -299,7 +299,7 @@
     <value>[circuit visit]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>New version available!</value>
+    <value>Neue Version verfügbar!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
     <value>MAIN</value>
@@ -447,7 +447,7 @@
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Language</value>
+    <value>Sprache</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
     <value>Please restart OnlyT after changing the language.</value>
