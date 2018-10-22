@@ -359,11 +359,11 @@
     <value>Full-screen clock mode</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP-Adresse</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Zusammenkunft</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
