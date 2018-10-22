@@ -174,11 +174,11 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Analogue</value>
+    <value>Analog</value>
     <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Analogue and Digital</value>
+    <value>Analog und Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
     <value>Digital</value>
@@ -187,7 +187,7 @@
     <value>Bell is inactive</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
-    <value>Midweek</value>
+    <value>Unter der Woche</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
     <value>Ministry - Item 1</value>
@@ -232,7 +232,7 @@
     <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Öffentlicher Vortrag</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
     <value>Bible Reading</value>
@@ -247,7 +247,7 @@
     <value>Watchtower Study</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Wochenende</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12-hour (am/pm)</value>
