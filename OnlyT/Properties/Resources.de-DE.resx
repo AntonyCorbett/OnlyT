@@ -208,7 +208,7 @@
     <value>Manuell</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>Schlussvortrag</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Schlussbemerkungen</value>
@@ -238,7 +238,7 @@
     <value>Bibellesung</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Dienstansprache</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Treasures Talk</value>
