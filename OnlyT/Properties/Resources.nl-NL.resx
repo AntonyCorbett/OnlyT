@@ -118,23 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>Zil etkin</value>
+    <value>Bel is actief</value>
     <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
-    <value>Yok</value>
+    <value>Geen</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
-    <value>Tek yönlü</value>
+    <value>Enkel</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
-    <value>Çift yönlü</value>
+    <value>Dubbel</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
-    <value>Yazılım sürümü {0}</value>
+    <value>Software-versie {0}</value>
     <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -142,353 +142,353 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12 saat</value>
+    <value>12-uurs</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
-    <value>12-saat (başta sıfır)</value>
+    <value>12-uurs (voorloopnul)</value>
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24 saat</value>
+    <value>24-uurs</value>
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
-    <value>24-saat (başta sıfır)</value>
+    <value>24-uurs (voorloopnul)</value>
     <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
-    <value>Klasör {0} oluşturulamadı</value>
+    <value>Kon de map {0} niet aanmaken</value>
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
-    <value>Uyarlanmış süre</value>
+    <value>Aangepaste duur</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Değiştirilmiş süre</value>
+    <value>Gewijzigde duur</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
-    <value>Asıl süre</value>
+    <value>Oorspronkelijke duur</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Analog</value>
+    <value>Analoog</value>
     <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
-    <value>Analog ve dijital</value>
+    <value>Analoog en digitaal</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
-    <value>Dijital</value>
+    <value>Digitaal</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Zil etkin değil</value>
+    <value>Bel is niet actief</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
-    <value>Haftaiçi</value>
+    <value>Midweek</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Hizmet - 1. görev</value>
+    <value>Velddienst - Aandeel 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Hizmet - 2. görev</value>
+    <value>Velddienst - Aandeel 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Hizmet - 3. görev</value>
+    <value>Velddienst - Aandeel 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Otomatik</value>
+    <value>Automatisch</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Dosya tabanlı</value>
+    <value>Volgens bestand</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manuel</value>
+    <value>Handmatig</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Kapanış Konuşması</value>
+    <value>Slotlezing</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Kapanış Sözleri</value>
+    <value>Besluit</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Cemaat Kutsal Kitap İncelemesi</value>
+    <value>Gemeentebijbelstudie</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Ruhi Hazineleri Keşfedin</value>
+    <value>Graven naar geestelijke juweeltjes</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Yaşam Tarzımız - 1. Kısım</value>
+    <value>Leven - Aandeel 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Yaşam Tarzımız - 2. Kısım</value>
+    <value>Leven - Aandeel 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Açılış Sözleri</value>
+    <value>Inleiding</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>Bu Ayın Sunuşları</value>
+    <value>Maandaanbiedingen</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Umumi Konuşma</value>
+    <value>Openbare lezing</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>KK Okuması</value>
+    <value>Bijbellezen</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Hizmet Konuşması</value>
+    <value>Dienstlezing</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Hazineler Konuşması</value>
+    <value>Schatten lezing</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Gözcü Kulesi İncelemesi</value>
+    <value>Wachttoren-studie</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Haftasonu</value>
+    <value>Weekend</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12 saat (am/pm)</value>
+    <value>12-uurs (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-saat (başta sıfır + am/pm)</value>
+    <value>12-uurs (voorloopnul &amp; am/pm)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>Yok</value>
+    <value>Geen</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Kronometre çalışırken ayarlar kullanılamaz!</value>
+    <value>Instellingen niet beschikbaar terwijl timer loopt!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Ayarlar</value>
+    <value>Instellingen</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Hazineler</value>
+    <value>Schatten</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Hizmet</value>
+    <value>Velddienst</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Yaşam</value>
+    <value>Leven</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Haftasonu</value>
+    <value>Weekend</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Ayarlar sistem yöneticisi tarafından devre dışı bırakılmıştır</value>
+    <value>Instellingen uitgeschakeld door administrator!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Hizmet - 4. görev</value>
+    <value>Velddienst - Aandeel 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Çevre ziyareti</value>
+    <value>Kringopziener</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>GERİ SAYIMI KAPAT</value>
+    <value>SLUIT AFTELKLOK</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
-    <value>Yardım</value>
+    <value>Help</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[çevre ziyareti]</value>
+    <value>[Kringopziener]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>Yeni bir sürümü var!</value>
+    <value>Nieuwe versie beschikbaar!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
-    <value>ANA</value>
+    <value>ALGEMEEN</value>
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
-    <value>Erişim kodu</value>
+    <value>Toegangscode</value>
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Haftaiçi uyarlamalı mod</value>
+    <value>Midweek adaptieve modus</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Haftasonu uyarlamalı mod</value>
+    <value>Weekend adaptieve modus</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>İleri doğru saymaya izin ver</value>
+    <value>Schakelaar optellen toestaan</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
-    <value>Her zaman üstte</value>
+    <value>Altijd op voorgrond</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>UZAK UYGULAMALAR</value>
+    <value>EXTERNE APPS</value>
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>OTOMATİK MOD</value>
+    <value>AUTOMATISCHE MODUS</value>
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>ZİL</value>
+    <value>BEL</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB SAATİ</value>
+    <value>WEBKLOK</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>İBADET İÇİN GERİ SAYIM</value>
+    <value>VERGADERING AFTELKLOK</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Çevre ziyareti aç/kapat</value>
+    <value>Schakelaar kringopziener</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Dijital saat formatı</value>
+    <value>Digitale kloknotatie</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Etkin</value>
+    <value>Ingeschakeld</value>
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Tam ekran saat modu</value>
+    <value>Modus klok op volledig scherm</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP adresi</value>
+    <value>IP-adres</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>İbadet</value>
+    <value>Vergadering</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>İbadet başlangıç saatleri (her satıra 1 tane)</value>
+    <value>Vergadering begintijden (1 per regel)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>DİĞER</value>
+    <value>DIVERSE</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitör</value>
+    <value>Scherm</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Fare işaretçisini göster</value>
+    <value>Muisaanwijzer weergeven</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Her başlangıç saatini yeni bir satıra koy.</value>
+    <value>Zet elke begintijd op een nieuwe regel.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>İstediğiniz zaman biçimini kullanın!</value>
+    <value>Gebruik elk gewenst tijdformaat!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>İsteğe bağlı olarak gün adı belirt, "Per 7:15"</value>
+    <value>Desgewenst ook een dag, bijvoorbeeld "do 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notlar:</value>
+    <value>Notities:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>AÇIK PORT</value>
+    <value>OPEN POORT</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
-    <value>Mod</value>
+    <value>Modus</value>
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Öğrenci süresi kalsın</value>
+    <value>Behoud tijd student</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Konuşma süresi kalsın</value>
+    <value>Behoud tijd aandeel</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
-    <value>Port</value>
+    <value>Poort</value>
     <comment>i.e. the TCP (networking) "port"</comment>
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
-    <value>UZAKTAN ERİŞİM</value>
+    <value>TOEGANG OP AFSTAND</value>
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Kadranı analog saat üstünde göster</value>
+    <value>Toon sector op analoge klok</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Bölünmüş ekran genişliği:</value>
+    <value>Split-scherm breedte:</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>TEST</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Kısıtlanmış</value>
+    <value>Begrensd</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Kronometre ileri doğru saysın</value>
+    <value>Timer telt op</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>KRONOMETRE PENCERESİ</value>
+    <value>TIMER VENSTER</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Kronometre altında saati göster</value>
+    <value>Het uur onder timer</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
-    <value>Ses:</value>
+    <value>Volume:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Dil</value>
+    <value>Taal</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>OnlyT'yi sadece dili değiştirdikten sonra yeniden başlatın.</value>
+    <value>Start OnlyT opnieuw na het wijzigen van de taal.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Azalt</value>
+    <value>Verlagen</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Arttır</value>
+    <value>Verhogen</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Manuel mod</value>
+    <value>Handmatige modus</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Geri sayım yapılıyor</value>
+    <value>Aftellen</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>İleri doğru sayım yapılıyor</value>
+    <value>Optellen</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} saniye</value>
+    <value>{0} seconden</value>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Etkin</value>
+    <value>Ingeschakeld</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Etkin</value>
+    <value>Ingeschakeld</value>
   </data>
   <data name="ENABLED_COUNTDOWN" xml:space="preserve">
-    <value>Etkin</value>
+    <value>Ingeschakeld</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Etkin</value>
+    <value>Ingeschakeld</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Saniyeleri göster</value>
+    <value>Toon seconden</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
 </root>
