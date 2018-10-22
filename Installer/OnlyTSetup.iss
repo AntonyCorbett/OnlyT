@@ -64,6 +64,7 @@ Source: "OnlyT\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; 
 Source: "OnlyT\bin\Release\UnityEngine.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\ca-ES\*.dll"; DestDir: "{app}\ca-ES"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\de-DE\*.dll"; DestDir: "{app}\de-DE"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\el-GR\*.dll"; DestDir: "{app}\el-GR"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\en-US\*.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\es-ES\*.dll"; DestDir: "{app}\es-ES"; Flags: ignoreversion
@@ -73,6 +74,7 @@ Source: "OnlyT\bin\Release\fr-FR\*.dll"; DestDir: "{app}\fr-FR"; Flags: ignoreve
 ;Source: "OnlyT\bin\Release\id-ID\*.dll"; DestDir: "{app}\id-ID"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\it-IT\*.dll"; DestDir: "{app}\it-IT"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\jv-Latn-ID\*.dll"; DestDir: "{app}\jv-Latn-ID"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\nl-NL\*.dll"; DestDir: "{app}\nl-NL"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\no\*.dll"; DestDir: "{app}\no"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pl-PL\*.dll"; DestDir: "{app}\pl-PL"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pt-BR\*.dll"; DestDir: "{app}\pt-BR"; Flags: ignoreversion
