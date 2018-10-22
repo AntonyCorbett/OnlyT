@@ -420,7 +420,7 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Split-screen width:</value>
+    <value>Ширина разделения экрана:</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>Проверить</value>
