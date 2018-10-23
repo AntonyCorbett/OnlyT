@@ -229,7 +229,7 @@
     <value>Innledende kommentarer</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>Denne månedens presentasjoner</value>
+    <value>Video-demonstrasjon</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Offentlig foredrag</value>
@@ -296,7 +296,7 @@
     <value>Hjelp</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[kretstilsyndsmannens besøk]</value>
+    <value>[kretstilsynsmannens besøk]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
     <value>Ny versjon tilgjengelig!</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Via tidtaker resultat</value>
+    <value>Vis tidtaker resultat</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -420,7 +420,7 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Delt skjerm bredde:</value>
+    <value>Delt skjermbredde:</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>TEST</value>
@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Klokkeslettet under tidtaker</value>
+    <value>Klokkeslett under tidtaker</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
