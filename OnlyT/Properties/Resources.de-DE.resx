@@ -202,7 +202,7 @@
     <value>Automatisch</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>File-based</value>
+    <value>Dateibasiert</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manuell</value>
@@ -261,7 +261,7 @@
     <value>Kein Monitor ausgewählt</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>Einstellungen nicht verfügbar, während der Timer läuft!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Einstellungen</value>
@@ -279,7 +279,7 @@
     <value>Wochenende</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Settings disabled by administrator!</value>
+    <value>Einstellungen durch Administrator deaktiviert!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
