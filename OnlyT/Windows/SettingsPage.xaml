@@ -94,7 +94,7 @@
                                   Style="{StaticResource SettingsComboStyle}"
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                   SelectedValuePath="MonitorId" 
-                                  DisplayMemberPath="MonitorName"
+                                  DisplayMemberPath="FriendlyName"
                                   SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
                         
                         <ComboBox ItemsSource="{Binding OperatingModes}" 

@@ -13,5 +13,7 @@
         public string MonitorName { get; set; }
 
         public string MonitorId { get; set; }
+
+        public string FriendlyName { get; set; }
     }
 }

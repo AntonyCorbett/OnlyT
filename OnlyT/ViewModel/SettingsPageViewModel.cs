@@ -736,7 +736,11 @@
             var result = new List<MonitorItem>
             {
                 // empty (i.e. no timer monitor)
-                new MonitorItem { MonitorName = Properties.Resources.MONITOR_NONE } 
+                new MonitorItem
+                {
+                    MonitorName = Properties.Resources.MONITOR_NONE,
+                    FriendlyName = Properties.Resources.MONITOR_NONE
+                } 
             };  
 
             result.AddRange(_monitorsService.GetSystemMonitors());
