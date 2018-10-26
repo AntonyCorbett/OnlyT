@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>Campainha está ativa</value>
+    <value>A campainha está ativa</value>
     <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
@@ -126,11 +126,11 @@
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
-    <value>One-way</value>
+    <value>Apenas reduzir</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
-    <value>Two-way</value>
+    <value>Reduzir ou aumentar</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
@@ -184,7 +184,7 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Campainha está inativa</value>
+    <value>Campainha está desativada</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Meio da Semana</value>
@@ -220,10 +220,10 @@
     <value>Encontre Joias Espirituais</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Nossa Vida - Parte 1</value>
+    <value>Vida Cristã - Parte 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Nossa Vida - Parte 2</value>
+    <value>Vida Cristã - Parte 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Comentários iniciais</value>
@@ -261,7 +261,7 @@
     <value>Nenhum</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>As definições não estão disponíveis enquanto o cronômetro está em uso!</value>
+    <value>As definições não estão disponíveis enquanto o cronômetro estiver em uso!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Configurações</value>
@@ -273,7 +273,7 @@
     <value>Ministério</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Vida</value>
+    <value>Vida Cristã</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Fim de Semana</value>
@@ -299,7 +299,7 @@
     <value>[visita do superintendente]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>Nova versão disponível!</value>
+    <value>Atualização disponível!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
     <value>PRINCIPAL</value>
@@ -310,11 +310,11 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Modo adaptável na Reunião de Meio da Semana</value>
+    <value>Tempo adaptável na Reunião de Meio da Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Modo adaptável na Reunião de Fim de Semana</value>
+    <value>Tempo adaptável na Reunião de Fim de Semana</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
@@ -326,7 +326,7 @@
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>APLICAÇÕES REMOTAS</value>
+    <value>APLICATIVOS REMOTOS</value>
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
@@ -416,7 +416,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Mostrar setor no relógio analógico</value>
+    <value>Mostrar faixa no relógio analógico</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
