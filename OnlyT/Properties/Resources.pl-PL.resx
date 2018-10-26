@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Początek punktów (1 w linii)</value>
+    <value>Wprowadź czas rozpoczęcia (1 w wierszu)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>RÓŻNE USTAWIENIA</value>
@@ -380,7 +380,7 @@
     <value>Pokaż wskaźnik myszy</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Umieścić czas rozpoczęcia w nowym wierszu.</value>
+    <value>Umieść czas rozpoczęcia w nowym wierszu.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Użyj dowolnego formatu czasu!</value>
