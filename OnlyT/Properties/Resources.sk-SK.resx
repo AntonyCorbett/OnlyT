@@ -187,7 +187,7 @@
     <value>Upozornenie nie je aktívne</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
-    <value>Midweek</value>
+    <value>Zhromaždenie v týždni</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
     <value>Ministry - Item 1</value>
@@ -232,7 +232,7 @@
     <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Verejná prednáška</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
     <value>Bible Reading</value>
@@ -244,10 +244,10 @@
     <value>Treasures Talk</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Štúdium Strážnej veže</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Víkend</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12-hodín (do/po)</value>
@@ -264,7 +264,7 @@
     <value>Nastavenie nie je k dispozícii, kým beží časovač!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Nastavenie</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
     <value>Treasures</value>
@@ -276,10 +276,10 @@
     <value>Living</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Zhromaždenie cez víkend</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Settings disabled by administrator!</value>
+    <value>Nastavenia zakázané administrátorom!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
