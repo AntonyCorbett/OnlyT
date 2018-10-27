@@ -208,7 +208,7 @@
     <value>Manuálny</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>Záverečná reč</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Záverečné slová</value>
@@ -229,7 +229,7 @@
     <value>Úvodné slová</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Vzorové predvedenie</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Verejná prednáška</value>
@@ -267,7 +267,7 @@
     <value>Nastavenie</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Poklady</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
     <value>Predvedenie</value>
@@ -289,7 +289,7 @@
     <value>Krajský dozorca</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>CLOSE COUNTDOWN</value>
+    <value>ZATVORTE ODPOČÍTAVANIE</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -342,7 +342,7 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>ODPOČÍTAVANIE PRED ZHROMAŽDENÍM</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
