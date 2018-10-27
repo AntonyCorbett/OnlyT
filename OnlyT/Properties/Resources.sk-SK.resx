@@ -190,13 +190,13 @@
     <value>Zhromaždenie v týždni</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Ministry - Item 1</value>
+    <value>Predvedenie č.1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Ministry - Item 2</value>
+    <value>Predvedenie č.2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Ministry - Item 3</value>
+    <value>Predvedenie č.3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automatic</value>
@@ -211,22 +211,22 @@
     <value>Concluding Talk</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Záverečné slová</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Zborové štúdium Biblie</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Hľadáme duchovné poklady</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>Život kresťana casť-1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>Život kresťana casť-2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Úvodné slová</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>This Month's Presentations</value>
@@ -235,13 +235,13 @@
     <value>Verejná prednáška</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Čítanie Biblie</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Service Talk</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Prejav</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Štúdium Strážnej veže</value>
@@ -270,10 +270,10 @@
     <value>Treasures</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministry</value>
+    <value>Predvedenie</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Život kresťana</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Zhromaždenie cez víkend</value>
@@ -283,7 +283,7 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Ministry - Item 4</value>
+    <value>Predvedenie č.4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Krajský dozorca</value>
