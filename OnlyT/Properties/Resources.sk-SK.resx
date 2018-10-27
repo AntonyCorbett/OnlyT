@@ -241,7 +241,7 @@
     <value>Service Talk</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Prejav</value>
+    <value>Prejav - Poklady z Božieho Slova</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Štúdium Strážnej veže</value>
@@ -267,7 +267,7 @@
     <value>Nastavenie</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Poklady</value>
+    <value>Poklady z Božieho Slova</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
     <value>Predvedenie</value>
@@ -352,7 +352,7 @@
     <value>Formát digitálnych hodín</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Povolené</value>
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
@@ -389,7 +389,7 @@
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Poznámky:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
     <value>OTVORIŤ PORT</value>
@@ -450,14 +450,14 @@
     <value>Jazyk</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Please restart OnlyT after changing the language.</value>
+    <value>Reštartujte OnlyT po zmene jazyka.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease</value>
+    <value>Znížiť</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase</value>
+    <value>Zvýšiť</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -465,15 +465,15 @@
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Currently counting down</value>
+    <value>V súčasnosti počítanie nadol</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>Currently counting up</value>
+    <value>V súčasnosti počítanie nahor</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>{0} Sekúnd</value>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
     <value>Povoliť</value>
