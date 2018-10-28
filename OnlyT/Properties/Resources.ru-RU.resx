@@ -238,7 +238,7 @@
     <value>Чтение Библии</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Служебная речь</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Сокровища – Речь</value>
@@ -488,7 +488,7 @@
     <value>Включено</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Показывать секунды</value>
+    <value>Показать секунды</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
 </root>
