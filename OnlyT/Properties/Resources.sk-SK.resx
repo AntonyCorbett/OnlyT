@@ -238,7 +238,7 @@
     <value>Čítanie Biblie</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Oznamy</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Prejav - Poklady z Božieho Slova</value>
@@ -386,7 +386,7 @@
     <value>Použi ľubovoľný formát času!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Vlož napríklad: "št 18:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Poznámky:</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Persist talk duration</value>
+    <value>Nemeniť dĺžky programov</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -431,7 +431,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Obrátený časovač</value>
+    <value>Časovač - pripočítavanie</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
