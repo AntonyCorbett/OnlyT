@@ -122,7 +122,7 @@
     <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
-    <value>Nenastavené</value>
+    <value>Žiadny</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
@@ -202,10 +202,10 @@
     <value>Automaticky</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Číta zo súboru</value>
+    <value>Zo súboru</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manuálny</value>
+    <value>Manuálne</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Záverečná reč</value>
@@ -238,7 +238,7 @@
     <value>Čítanie Biblie</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Oznamy</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Prejav - Poklady z Božieho Slova</value>
@@ -247,7 +247,7 @@
     <value>Štúdium Strážnej veže</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Víkend</value>
+    <value>Zhromaždenie cez víkend</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12-hodín (do/po)</value>
@@ -289,7 +289,7 @@
     <value>Krajský dozorca</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>ZATVORTE ODPOČÍTAVANIE</value>
+    <value>ZRUŠ ODPOČÍTAVANIE</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Povoľ prepínanie odpočítavania</value>
+    <value>Povoľ vypnutie odpočítavania</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Začiatky zhromaždení (1 na riadok)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>ĎALŠIE</value>
@@ -380,13 +380,13 @@
     <value>Zobraziť ukazovateľ myši</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Daj každý začiatok na nový riadok.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Použi ľubovoľný formát času!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Vlož napríklad: "št 18:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Poznámky:</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Persist talk duration</value>
+    <value>Nemeniť dĺžky programov</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -431,7 +431,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Obrátený časovač</value>
+    <value>Časovač - pripočítavanie</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
@@ -465,11 +465,11 @@
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>V súčasnosti počítanie nadol</value>
+    <value>Počítadlo - odpočítavanie</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>V súčasnosti počítanie nahor</value>
+    <value>Počítadlo - pripočítavanie</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
