@@ -229,7 +229,7 @@
     <value>Einleitende Worte</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Gesprächsvorschläge für diesen Monat</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Öffentlicher Vortrag</value>
@@ -241,7 +241,7 @@
     <value>Dienstansprache</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Vortrag "Schätze"</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Wachtturm-Studium</value>
