@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Dienstwoche-Schalter anzeigen</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Digitaluhrformat</value>
@@ -356,7 +356,7 @@
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Uhrenmodus bei Vollbildanzeige</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>IP-Adresse</value>
@@ -389,10 +389,10 @@
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Hinweise:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OPEN PORT</value>
+    <value>PORT ÖFFNEN</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
