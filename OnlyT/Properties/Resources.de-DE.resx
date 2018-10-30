@@ -166,7 +166,7 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Modified duration</value>
+    <value>Geänderte Zeit</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
@@ -380,13 +380,13 @@
     <value>Mauszeiger nicht ausblenden</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Schreibe jede Zeit in einen eigene Zeile.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Verwende einbeliebiges Zeitformat!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 7:15"</value>
+    <value>Füge optional einen Wochentag hinzu, z.B. "Do 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Hinweise:</value>
@@ -400,7 +400,7 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Persist student time</value>
+    <value>Zeit der Schulaufgaben angezeigt lassen</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
