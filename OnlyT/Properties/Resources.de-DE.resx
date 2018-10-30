@@ -383,7 +383,7 @@
     <value>Put each start time on a new line.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Verwende einbeliebiges Zeitformat!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
@@ -416,7 +416,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Show sector on analogue clock</value>
+    <value>Markieren die Zeit auf der anlogen Uhr</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Time of day under timer</value>
+    <value>Zeige die Uhrzeit unter dem Timer</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
