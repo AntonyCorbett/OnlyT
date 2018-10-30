@@ -184,7 +184,7 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Campainha está desativada</value>
+    <value>A campainha está desativada</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Meio da Semana</value>
@@ -202,7 +202,7 @@
     <value>Automático</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Com base em arquivo (ex. xml)</value>
+    <value>Usando um arquivo base</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manual</value>
