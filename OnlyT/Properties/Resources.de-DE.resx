@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Erlaube die Änderung der Zählrichtung</value>
+    <value>Änderung der Zählrichtung erlauben</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -380,7 +380,7 @@
     <value>Mauszeiger nicht ausblenden</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Schreibe jede Zeit in einen eigene Zeile.</value>
+    <value>Put each start time on a new line.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Verwende einbeliebiges Zeitformat!</value>
@@ -416,7 +416,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Markieren die Zeit auf der anlogen Uhr</value>
+    <value>Zeit auf der anlogen Uhr markieren</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Zeige die Uhrzeit unter dem Timer</value>
+    <value>Uhrzeit unter dem Timer anzeigen</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
