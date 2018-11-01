@@ -380,7 +380,7 @@
     <value>Mauszeiger nicht ausblenden</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Schreibe jede Zeit in eine eigene Zeile.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Verwende einbeliebiges Zeitformat!</value>
