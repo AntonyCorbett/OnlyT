@@ -296,7 +296,7 @@
     <value>Ajuda (en anglès)</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[visita superintendent de circuit]</value>
+    <value>[visita del superintendent de circuit]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
     <value>Hi ha una nova versió disponible!</value>
@@ -386,7 +386,7 @@
     <value>Fes servir el format d'hora que vulguis!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>També pots incloure el dia; per exemple, "Dj 19:15"</value>
+    <value>També pots incloure el dia; per exemple, «Dj 19:15»</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes:</value>

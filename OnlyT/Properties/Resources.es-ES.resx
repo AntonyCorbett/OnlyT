@@ -383,7 +383,7 @@
     <value>Pon cada hora de inicio en una nueva línea.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>¡Utiliza cualquier formato de tiempo que te guste!</value>
+    <value>¡Utiliza cualquier formato de hora que te guste!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
     <value>Opcionalmente, puedes incluir el día, p.ej. "jueves 7:15"</value>
@@ -427,7 +427,7 @@
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Inhibir</value>
+    <value>Limitar</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
@@ -450,7 +450,7 @@
     <value>Idioma</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Por favor reinicie OnlyT después de cambiar el idioma.</value>
+    <value>Por favor, reinicia OnlyT después de cambiar el idioma.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Disminución</value>
