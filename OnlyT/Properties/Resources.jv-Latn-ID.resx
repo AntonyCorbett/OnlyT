@@ -492,4 +492,12 @@
     <value>JW Library compatilibity mode</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
+  <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
+    <value>Show frame</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
+    <value>Show frame</value>
+    <comment>See Settings =&gt;Timer window</comment>
+  </data>
 </root>
