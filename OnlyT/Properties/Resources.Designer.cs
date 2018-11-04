@@ -410,15 +410,6 @@ namespace OnlyT.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
-        public static string ENABLED_COUNTDOWN {
-            get {
-                return ResourceManager.GetString("ENABLED_COUNTDOWN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabled.
-        /// </summary>
         public static string ENABLED_WEB_CLOCK {
             get {
                 return ResourceManager.GetString("ENABLED_WEB_CLOCK", resourceCulture);
@@ -485,6 +476,15 @@ namespace OnlyT.Properties {
         public static string IP_ADDRESS {
             get {
                 return ResourceManager.GetString("IP_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JW Library compatilibity mode.
+        /// </summary>
+        public static string JW_COMPAT_MODE {
+            get {
+                return ResourceManager.GetString("JW_COMPAT_MODE", resourceCulture);
             }
         }
         

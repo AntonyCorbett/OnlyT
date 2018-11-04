@@ -20,7 +20,7 @@
                 
             var result = new List<DisplayDeviceData>();
 
-            for (uint id = 0;; id++)
+            for (uint id = 0; ; id++)
             {
                 Log.Logger.Information($"Seeking device {id}");
                 

@@ -1,6 +1,4 @@
-﻿using System.Windows.Markup;
-
-namespace OnlyT
+﻿namespace OnlyT
 {
     using System.Globalization;
     using System.IO;

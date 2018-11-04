@@ -18,7 +18,7 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
 
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1200">
+             d:DesignHeight="1064" d:DesignWidth="1200">
 
     <UserControl.Resources>
         <Style x:Key="LabelStyle" BasedOn="{StaticResource MaterialDesignLabel}" TargetType="{x:Type Label}">
@@ -158,6 +158,11 @@
                         <CheckBox IsChecked="{Binding PersistStudentTime, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.PERSIST_STUDENT_TIME}" />
+
+                        <CheckBox IsChecked="{Binding JwLibraryCompatibilityMode, Mode=TwoWay}"
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.JW_COMPAT_MODE}"/>
+
                     </StackPanel>
                 </GroupBox>
 
@@ -294,10 +299,14 @@
 
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="{x:Static resx:Resources.COUNTDOWN_SECTION}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
-                        <CheckBox IsChecked="{Binding IsCountdownEnabled, Mode=TwoWay}" 
-                                  Style="{StaticResource SettingsCheckBox}"
-                                  Content="{x:Static resx:Resources.ENABLED_COUNTDOWN}" />
-                        
+
+                        <ComboBox ItemsSource="{Binding Monitors}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
+                                  SelectedValuePath="MonitorId" 
+                                  DisplayMemberPath="FriendlyName"
+                                  SelectedValue="{Binding CountdownMonitorId, Mode=TwoWay}"/>
+
                         <TextBox MinLines="6"
                                  Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING_STARTS}"

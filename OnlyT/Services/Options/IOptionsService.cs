@@ -6,6 +6,8 @@
         
         bool IsTimerMonitorSpecified { get; }
 
+        bool IsCountdownMonitorSpecified { get; }
+
         void Save();
     }
 }

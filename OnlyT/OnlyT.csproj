@@ -160,6 +160,8 @@
     <Compile Include="Services\CountdownTimer\CountdownTimerTriggerService.cs" />
     <Compile Include="Services\CountdownTimer\CountdownTriggerPeriod.cs" />
     <Compile Include="Services\CountdownTimer\ICountdownTimerTriggerService.cs" />
+    <Compile Include="Services\JwLibrary\JwLibHelper.cs" />
+    <Compile Include="Services\JwLibrary\JwLibHelperNativeMethods.cs" />
     <Compile Include="Services\Monitors\DisplayDevices.cs" />
     <Compile Include="Services\Monitors\IMonitorsService.cs" />
     <Compile Include="Services\Monitors\MonitorsService.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />
     <Compile Include="ViewModel\Messages\StopCountDownMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\CountdownMonitorChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerMonitorChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerStartMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerStopMessage.cs" />

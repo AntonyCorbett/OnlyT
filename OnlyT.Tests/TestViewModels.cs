@@ -1,10 +1,9 @@
-﻿using OnlyT.Services.CommandLine;
-
-namespace OnlyT.Tests
+﻿namespace OnlyT.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
     using Moq;
+    using OnlyT.Services.CommandLine;
     using Services.Bell;
     using Services.Options;
     using Services.TalkSchedule;

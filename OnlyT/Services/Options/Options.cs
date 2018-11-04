@@ -22,7 +22,6 @@
             OperatingMode = OperatingMode.Automatic;
             AlwaysOnTop = true;
             IsBellEnabled = true;
-            IsCountdownEnabled = false;
             BellVolumePercent = 70;
             MidWeekAdaptiveMode = AdaptiveMode.None;
             WeekendAdaptiveMode = AdaptiveMode.None;
@@ -35,11 +34,14 @@
             PersistStudentTime = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
             ShowDigitalSeconds = true;
+            JwLibraryCompatibilityMode = true;
 
             AdjustClockFormat();
         }
 
         public string TimerMonitorId { get; set; }
+
+        public string CountdownMonitorId { get; set; }
 
         public string AppWindowPlacement { get; set; }
 
@@ -54,6 +56,8 @@
         public bool ShowCircuitVisitToggle { get; set; }
 
         public bool PersistStudentTime { get; set; }
+
+        public bool JwLibraryCompatibilityMode { get; set; }
 
         public bool AlwaysOnTop { get; set; }
 
@@ -88,8 +92,6 @@
         public bool AllowCountUpToggle { get; set; }
 
         public MeetingStartTimes.MeetingStartTimes MeetingStartTimes { get; set; }
-
-        public bool IsCountdownEnabled { get; set; }
 
         public bool IsApiEnabled { get; set; }
 

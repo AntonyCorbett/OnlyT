@@ -1,3 +1,6 @@
+using System.Threading;
+using OnlyT.Services.JwLibrary;
+
 namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
@@ -243,7 +246,7 @@ namespace OnlyT.ViewModel
             _heartbeatTimer.Stop();
             try
             {
-                if (_optionsService.Options.IsCountdownEnabled)
+                if (_optionsService.IsCountdownMonitorSpecified)
                 {
                     if (!CountDownActive &&
                         !_countdownDone &&
@@ -341,7 +344,7 @@ namespace OnlyT.ViewModel
             {
                 try
                 {
-                    var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+                    var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId);
                     if (targetMonitor != null)
                     {
                         _countdownWindow = new CountdownWindow();
@@ -449,11 +452,22 @@ namespace OnlyT.ViewModel
                 _countdownWindow?.Close();
                 _countdownWindow = null;
 
+                BringJwlToFront();
+
                 RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not close countdown window");
+            }
+        }
+
+        private void BringJwlToFront()
+        {
+            if (_optionsService.Options.JwLibraryCompatibilityMode)
+            {
+                JwLibHelper.BringToFront();
+                Thread.Sleep(100);
             }
         }
 
@@ -473,9 +487,14 @@ namespace OnlyT.ViewModel
                 {
                     Task.Delay(1000).ContinueWith(t =>
                     {
-                        // hide the timer window after a short delay (so that it doesn't appear 
-                        // as another top-level window during alt-TAB)...
-                        DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
+                        if (_optionsService.Options.TimerMonitorId == _optionsService.Options.CountdownMonitorId)
+                        {
+                            // timer monitor and countdown monitor are the same.
+
+                            // hide the timer window after a short delay (so that it doesn't appear 
+                            // as another top-level window during alt-TAB)...
+                            DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
+                        }
                     });
                 }
             }

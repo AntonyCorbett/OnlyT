@@ -10,7 +10,7 @@
 
     internal class SystemApiController : BaseApiController
     {
-        private static Guid SessionId = Guid.NewGuid();
+        private static readonly Guid SessionId = Guid.NewGuid();
         private readonly IOptionsService _optionsService;
         private readonly ApiThrottler _apiThrottler;
 

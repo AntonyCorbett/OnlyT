@@ -50,6 +50,18 @@
         }
 
         /// <summary>
+        /// Gets a value indicating whether the countdown monitor is specified
+        /// </summary>
+        public bool IsCountdownMonitorSpecified
+        {
+            get
+            {
+                Init();
+                return !string.IsNullOrEmpty(Options.CountdownMonitorId);
+            }
+        }
+
+        /// <summary>
         /// Saves the settings (if they have changed since they were last read)
         /// </summary>
         public void Save()

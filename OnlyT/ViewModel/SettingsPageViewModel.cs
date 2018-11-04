@@ -89,6 +89,20 @@
             }
         }
 
+        public string CountdownMonitorId
+        {
+            get => _optionsService.Options.CountdownMonitorId;
+            set
+            {
+                if (_optionsService.Options.CountdownMonitorId != value)
+                {
+                    _optionsService.Options.CountdownMonitorId = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new CountdownMonitorChangedMessage());
+                }
+            }
+        }
+
         public IEnumerable<LanguageItem> Languages => _languages;
 
         public string LanguageId
@@ -248,6 +262,19 @@
             }
         }
 
+        public bool JwLibraryCompatibilityMode
+        {
+            get => _optionsService.Options.JwLibraryCompatibilityMode;
+            set
+            {
+                if (_optionsService.Options.JwLibraryCompatibilityMode != value)
+                {
+                    _optionsService.Options.JwLibraryCompatibilityMode = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public bool PersistStudentTime
         {
             get => _optionsService.Options.PersistStudentTime;
@@ -285,19 +312,6 @@
                     _optionsService.Options.ShowCircuitVisitToggle = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new ShowCircuitVisitToggleChangedMessage());
-                }
-            }
-        }
-
-        public bool IsCountdownEnabled
-        {
-            get => _optionsService.Options.IsCountdownEnabled;
-            set
-            {
-                if (_optionsService.Options.IsCountdownEnabled != value)
-                {
-                    _optionsService.Options.IsCountdownEnabled = value;
-                    RaisePropertyChanged();
                 }
             }
         }

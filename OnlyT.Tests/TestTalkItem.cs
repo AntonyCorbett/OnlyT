@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OnlyT.Models;
-
-namespace OnlyT.Tests
+﻿namespace OnlyT.Tests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using OnlyT.Models;
+
     [TestClass]
     public class TestTalkItem
     {
