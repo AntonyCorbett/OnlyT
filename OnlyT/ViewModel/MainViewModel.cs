@@ -1,12 +1,10 @@
-using System.Threading;
-using OnlyT.Services.JwLibrary;
-
 namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Forms;
@@ -19,6 +17,7 @@ namespace OnlyT.ViewModel
     using GalaSoft.MvvmLight.Threading;
     using Messages;
     using Models;
+    using OnlyT.Services.JwLibrary;
     using Serilog;
     using Services.CommandLine;
     using Services.CountdownTimer;
@@ -77,6 +76,7 @@ namespace OnlyT.ViewModel
             // subscriptions...
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
+            Messenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
             Messenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
@@ -201,11 +201,40 @@ namespace OnlyT.ViewModel
                 if (_optionsService.IsTimerMonitorSpecified)
                 {
                     RelocateTimerWindow();
-                    RelocateCountdownWindow();
+
+                    if (CountDownActive)
+                    {
+                        // ensure countdown is topmost if running
+                        _countdownWindow.Activate();
+                    }
                 }
                 else
                 {
                     HideTimerWindow();
+                }
+
+                RaisePropertyChanged(nameof(AlwaysOnTop));
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not change monitor");
+            }
+        }
+
+        /// <summary>
+        /// Responds to a change in countdown monitor.
+        /// </summary>
+        /// <param name="message">CountdownMonitorChangedMessage message.</param>
+        private void OnCountdownMonitorChanged(CountdownMonitorChangedMessage message)
+        {
+            try
+            {
+                if (_optionsService.IsCountdownMonitorSpecified)
+                {
+                    RelocateCountdownWindow();
+                }
+                else
+                {
                     HideCountdownWindow();
                 }
 
@@ -318,7 +347,7 @@ namespace OnlyT.ViewModel
         {
             if (_timerWindow != null)
             {
-                RelocateWindow(_timerWindow);
+                RelocateWindow(_timerWindow, _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId));
             }
             else
             {
@@ -334,7 +363,7 @@ namespace OnlyT.ViewModel
         {
             if (_countdownWindow != null)
             {
-                RelocateWindow(_countdownWindow);
+                RelocateWindow(_countdownWindow, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
             }
         }
 
@@ -517,15 +546,14 @@ namespace OnlyT.ViewModel
             return renderingTier == 0;
         }
 
-        private void RelocateWindow(Window window)
+        private void RelocateWindow(Window window, MonitorItem monitorItem)
         {
-            var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-            if (targetMonitor != null)
+            if (monitorItem != null)
             {
                 window.Hide();
                 window.WindowState = WindowState.Normal;
 
-                LocateWindowAtOrigin(window, targetMonitor.Monitor);
+                LocateWindowAtOrigin(window, monitorItem.Monitor);
 
                 window.Topmost = true;
                 window.WindowState = WindowState.Maximized;

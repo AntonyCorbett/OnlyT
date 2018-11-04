@@ -23,6 +23,7 @@
         {
             InitializeComponent();
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, BringToFront);
+            Messenger.Default.Register<CountdownMonitorChangedMessage>(this, BringToFront);
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
         }
 
@@ -69,6 +70,11 @@
         }
 
         private void BringToFront(TimerMonitorChangedMessage message)
+        {
+            Activate();
+        }
+
+        private void BringToFront(CountdownMonitorChangedMessage message)
         {
             Activate();
         }
