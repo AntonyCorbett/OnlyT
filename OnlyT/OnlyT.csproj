@@ -207,6 +207,7 @@
     <Compile Include="ViewModel\Messages\AnalogueClockWidthChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\MousePointerInTimerDisplayChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="ViewModel\Messages\StopCountDownMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownMonitorChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\TimerFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerMonitorChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerStartMessage.cs" />
     <Compile Include="ViewModel\Messages\TimerStopMessage.cs" />

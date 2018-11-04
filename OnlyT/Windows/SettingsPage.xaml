@@ -199,6 +199,10 @@
                                 Margin="0,0,0,20"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
 
+                        <CheckBox IsChecked="{Binding ShowTimerFrame, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.SHOW_CLOCK_FRAME}" />
+
                         <CheckBox IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.TIME_UNDER_TIMER}" />
@@ -306,6 +310,10 @@
                                   SelectedValuePath="MonitorId" 
                                   DisplayMemberPath="FriendlyName"
                                   SelectedValue="{Binding CountdownMonitorId, Mode=TwoWay}"/>
+
+                        <CheckBox IsChecked="{Binding ShowCountdownFrame, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}" />
 
                         <TextBox MinLines="6"
                                  Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"

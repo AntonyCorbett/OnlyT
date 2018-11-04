@@ -35,6 +35,8 @@
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
             ShowDigitalSeconds = true;
             JwLibraryCompatibilityMode = true;
+            CountdownFrame = true;
+            TimerFrame = true;
 
             AdjustClockFormat();
         }
@@ -42,6 +44,10 @@
         public string TimerMonitorId { get; set; }
 
         public string CountdownMonitorId { get; set; }
+
+        public bool CountdownFrame { get; set; }
+
+        public bool TimerFrame { get; set; }
 
         public string AppWindowPlacement { get; set; }
 

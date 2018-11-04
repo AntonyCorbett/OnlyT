@@ -40,7 +40,12 @@
             Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
             Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChanged);
             Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
+            Messenger.Default.Register<TimerFrameChangedMessage>(this, OnTimerFrameChanged);
         }
+
+        public int BorderThickness => _optionsService.Options.TimerFrame? 3 : 0;
+
+        public int BackgroundOpacity => _optionsService.Options.TimerFrame ? 100 : 0;
 
         public int TimerColumnWidthPercentage { get; private set; } = -1;
 
@@ -252,6 +257,12 @@
                     }
                 }
             }
+        }
+
+        private void OnTimerFrameChanged(TimerFrameChangedMessage msg)
+        {
+            RaisePropertyChanged(nameof(BorderThickness));
+            RaisePropertyChanged(nameof(BackgroundOpacity));
         }
     }
 }

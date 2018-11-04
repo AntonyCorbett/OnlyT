@@ -316,6 +316,34 @@
             }
         }
 
+        public bool ShowCountdownFrame
+        {
+            get => _optionsService.Options.CountdownFrame;
+            set
+            {
+                if (_optionsService.Options.CountdownFrame != value)
+                {
+                    _optionsService.Options.CountdownFrame = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new CountdownFrameChangedMessage());
+                }
+            }
+        }
+
+        public bool ShowTimerFrame
+        {
+            get => _optionsService.Options.TimerFrame;
+            set
+            {
+                if (_optionsService.Options.TimerFrame != value)
+                {
+                    _optionsService.Options.TimerFrame = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                }
+            }
+        }
+
         public string MeetingStartTimesAsText
         {
             get => _optionsService.Options.MeetingStartTimes.AsText();

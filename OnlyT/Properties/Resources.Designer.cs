@@ -822,6 +822,24 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show frame.
+        /// </summary>
+        public static string SHOW_CLOCK_FRAME {
+            get {
+                return ResourceManager.GetString("SHOW_CLOCK_FRAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show frame.
+        /// </summary>
+        public static string SHOW_COUNTDOWN_FRAME {
+            get {
+                return ResourceManager.GetString("SHOW_COUNTDOWN_FRAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show seconds.
         /// </summary>
         public static string SHOW_SECONDS {
