@@ -199,13 +199,13 @@
     <value>Третий разговор</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Автоматически</value>
+    <value>Автоматический</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>File-based</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Вручную</value>
+    <value>Ручной</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Заключительные слова</value>
@@ -302,7 +302,7 @@
     <value>Доступна новая версия!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
-    <value>Основные настройки</value>
+    <value>Основные</value>
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
