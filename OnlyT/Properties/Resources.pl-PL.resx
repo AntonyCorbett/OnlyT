@@ -500,4 +500,48 @@
     <value>Pokaż ramkę</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
+  <data name="COUNTDOWN_ZOOM" xml:space="preserve">
+    <value>Zoom level:</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="LOCATION_ON_SCREEN" xml:space="preserve">
+    <value>Location</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
+    <value>Bottom</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
+    <value>Bottom left</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
+    <value>Bottom right</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
+    <value>Centre</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
+    <value>Left</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
+    <value>Right</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
+    <value>Top</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
+    <value>Top left</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
+    <value>Top right</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
 </root>
