@@ -26,6 +26,7 @@
         private readonly MonitorItem[] _monitors;
         private readonly LanguageItem[] _languages;
         private readonly OperatingModeItem[] _operatingModes;
+        private readonly OnScreenLocationItem[] _screenLocationItems;
         private readonly AutoMeetingTime[] _autoMeetingTimes;
         private readonly IOptionsService _optionsService;
         private readonly IMonitorsService _monitorsService;
@@ -52,15 +53,16 @@
             _bellService = bellService;
             _countdownTimerService = countdownTimerService;
 
-            _monitors = GetSystemMonitors().ToArray();
+            _monitors = GetSystemMonitors();
             _languages = GetSupportedLanguages();
-            _operatingModes = GetOperatingModes().ToArray();
-            _autoMeetingTimes = GetAutoMeetingTimes().ToArray();
-            _clockHourFormats = GetClockHourFormats().ToArray();
-            _adaptiveModes = GetAdaptiveModes().ToArray();
-            _timeOfDayModes = GetTimeOfDayModes().ToArray();
+            _operatingModes = GetOperatingModes();
+            _screenLocationItems = GetScreenLocationItems();
+            _autoMeetingTimes = GetAutoMeetingTimes();
+            _clockHourFormats = GetClockHourFormats();
+            _adaptiveModes = GetAdaptiveModes();
+            _timeOfDayModes = GetTimeOfDayModes();
             _ports = GetPorts().ToArray();
-            _persistDurationItems = optionsService.Options.GetPersistDurationItems().ToArray();
+            _persistDurationItems = optionsService.Options.GetPersistDurationItems();
             
             // commands...
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
@@ -149,6 +151,22 @@
                     _optionsService.Options.ShowDigitalSeconds = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new ClockHourFormatChangedMessage());
+                }
+            }
+        }
+
+        public IEnumerable<OnScreenLocationItem> ScreenLocationItems => _screenLocationItems;
+
+        public ScreenLocation CountdownScreenLocation
+        {
+            get => _optionsService.Options.CountdownScreenLocation;
+            set
+            {
+                if (_optionsService.Options.CountdownScreenLocation != value)
+                {
+                    _optionsService.Options.CountdownScreenLocation = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
                 }
             }
         }
@@ -440,6 +458,20 @@
             }
         }
 
+        public int CountdownZoomPercent
+        {
+            get => _optionsService.Options.CountdownZoomPercent;
+            set
+            {
+                if (_optionsService.Options.CountdownZoomPercent != value)
+                {
+                    _optionsService.Options.CountdownZoomPercent = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
+                }
+            }
+        }
+
         public bool IsBellEnabled
         {
             get => _optionsService.Options.IsBellEnabled;
@@ -632,9 +664,9 @@
             }
         }
 
-        private IEnumerable<FullScreenClockModeItem> GetTimeOfDayModes()
+        private FullScreenClockModeItem[] GetTimeOfDayModes()
         {
-            return new List<FullScreenClockModeItem>
+            return new[]
             {
                 new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = Properties.Resources.FULL_SCREEN_ANALOGUE },
                 new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = Properties.Resources.FULL_SCREEN_DIGITAL },
@@ -642,9 +674,9 @@
             };
         }
 
-        private IEnumerable<AdaptiveModeItem> GetAdaptiveModes()
+        private AdaptiveModeItem[] GetAdaptiveModes()
         {
-            return new List<AdaptiveModeItem>
+            return new[]
             {
                 new AdaptiveModeItem { Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE },
                 new AdaptiveModeItem { Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY },
@@ -664,7 +696,7 @@
             return result;
         }
 
-        private IEnumerable<ClockHourFormatItem> GetClockHourFormats()
+        private ClockHourFormatItem[] GetClockHourFormats()
         {
             var cultureUsesAmPm = !string.IsNullOrEmpty(DateTime.Now.ToString("tt", CultureInfo.CurrentUICulture));
 
@@ -695,7 +727,7 @@
             result.Add(new ClockHourFormatItem
                 { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero });
 
-            return result;
+            return result.ToArray();
         }
 
         private void OnBellChanged(BellStatusChangedMessage message)
@@ -713,18 +745,34 @@
             _bellService.Play(_optionsService.Options.BellVolumePercent);
         }
 
-        private IEnumerable<AutoMeetingTime> GetAutoMeetingTimes()
+        private AutoMeetingTime[] GetAutoMeetingTimes()
         {
-            return new List<AutoMeetingTime>
+            return new[]
             {
                 new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
                 new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
             };
         }
 
-        private IEnumerable<OperatingModeItem> GetOperatingModes()
+        private OnScreenLocationItem[] GetScreenLocationItems()
         {
-            return new List<OperatingModeItem>
+            return new[]
+            {
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_CENTRE, Location = ScreenLocation.Centre },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_LEFT, Location = ScreenLocation.Left },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_TOP, Location = ScreenLocation.Top },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_RIGHT, Location = ScreenLocation.Right },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_BOTTOM, Location = ScreenLocation.Bottom },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_TOP_LEFT, Location = ScreenLocation.TopLeft },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_TOP_RIGHT, Location = ScreenLocation.TopRight },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_BOTTOM_LEFT, Location = ScreenLocation.BottomLeft },
+                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_BOTTOM_RIGHT, Location = ScreenLocation.BottomRight },
+            };
+        }
+
+        private OperatingModeItem[] GetOperatingModes()
+        {
+            return new[]
             {
                 new OperatingModeItem { Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual },
                 new OperatingModeItem { Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile },
@@ -773,7 +821,7 @@
             return result.ToArray();
         }
 
-        private IEnumerable<MonitorItem> GetSystemMonitors()
+        private MonitorItem[] GetSystemMonitors()
         {
             var result = new List<MonitorItem>
             {
@@ -786,7 +834,7 @@
             };  
 
             result.AddRange(_monitorsService.GetSystemMonitors());
-            return result;
+            return result.ToArray();
         }
 
         private void NavigateOperatorPage()

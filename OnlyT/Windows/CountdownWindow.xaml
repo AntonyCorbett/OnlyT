@@ -12,10 +12,17 @@
         Title="CountdownWindow" Height="305.825" Width="469.418" Cursor="None">
     <Grid>
         <Border Name="ClockPanel" 
+                HorizontalAlignment="{Binding HorizontalAlignment}"
+                VerticalAlignment="{Binding VerticalAlignment}"
                 CornerRadius="20" Grid.Column="0" 
-                BorderBrush="Beige" Margin="10" 
+                BorderBrush="Beige" 
                 BorderThickness="{Binding BorderThickness}" 
+                Width="{Binding Parent.ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+                Height="{Binding Parent.ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
                 Padding="10">
+            <Border.LayoutTransform>
+                <ScaleTransform CenterX="0" CenterY="0" ScaleX="{Binding CountdownScale}" ScaleY="{Binding CountdownScale}"/>
+            </Border.LayoutTransform>
 
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="{Binding BackgroundOpacity}">

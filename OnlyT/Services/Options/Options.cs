@@ -20,12 +20,14 @@
         public Options()
         {
             OperatingMode = OperatingMode.Automatic;
+            CountdownScreenLocation = ScreenLocation.Centre;
             AlwaysOnTop = true;
             IsBellEnabled = true;
             BellVolumePercent = 70;
             MidWeekAdaptiveMode = AdaptiveMode.None;
             WeekendAdaptiveMode = AdaptiveMode.None;
             AnalogueClockWidthPercent = 50;
+            CountdownZoomPercent = 100;
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
             HttpServerPort = DefaultPort;
@@ -55,6 +57,8 @@
 
         public OperatingMode OperatingMode { get; set; }
 
+        public ScreenLocation CountdownScreenLocation { get; set; }
+
         public MidWeekOrWeekend MidWeekOrWeekend { get; set; }
 
         public bool IsCircuitVisit { get; set; }
@@ -80,6 +84,8 @@
         public AdaptiveMode WeekendAdaptiveMode { get; set; }
 
         public int AnalogueClockWidthPercent { get; set; }
+
+        public int CountdownZoomPercent { get; set; }
 
         public FullScreenClockMode FullScreenClockMode { get; set; }
 
@@ -129,12 +135,22 @@
                 AnalogueClockWidthPercent = 50;
             }
 
+            if (CountdownZoomPercent < 10)
+            {
+                CountdownZoomPercent = 10;
+            }
+
+            if (CountdownZoomPercent > 100)
+            {
+                CountdownZoomPercent = 100;
+            }
+
             if (HttpServerPort < DefaultPort || HttpServerPort > DefaultPort + MaxPossiblePorts)
             {
                 HttpServerPort = DefaultPort;
             }
             
-            var persistDurations = GetPersistDurationItems().ToArray();
+            var persistDurations = GetPersistDurationItems();
             if (persistDurations.FirstOrDefault(x => x.Seconds == PersistDurationSecs) == null)
             {
                 PersistDurationSecs = persistDurations[persistDurations.Length / 2].Seconds;
@@ -143,7 +159,7 @@
             MeetingStartTimes.Sanitize();
         }
 
-        public IEnumerable<PersistDurationItem> GetPersistDurationItems()
+        public PersistDurationItem[] GetPersistDurationItems()
         {
             var result = new List<PersistDurationItem>();
 
@@ -158,7 +174,7 @@
                 secs += secsIncrement;
             }
 
-            return result;
+            return result.ToArray();
         }
 
         private void AdjustClockFormat()

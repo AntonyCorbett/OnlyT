@@ -318,6 +318,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zoom level:.
+        /// </summary>
+        public static string COUNTDOWN_ZOOM {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_ZOOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currently counting down.
         /// </summary>
         public static string COUNTING_DOWN {
@@ -494,6 +503,15 @@ namespace OnlyT.Properties {
         public static string LANGUAGE {
             get {
                 return ResourceManager.GetString("LANGUAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string LOCATION_ON_SCREEN {
+            get {
+                return ResourceManager.GetString("LOCATION_ON_SCREEN", resourceCulture);
             }
         }
         
@@ -764,6 +782,87 @@ namespace OnlyT.Properties {
         public static string RESTART_LANGUAGE {
             get {
                 return ResourceManager.GetString("RESTART_LANGUAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottom.
+        /// </summary>
+        public static string SCREEN_LOCATION_BOTTOM {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_BOTTOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottom left.
+        /// </summary>
+        public static string SCREEN_LOCATION_BOTTOM_LEFT {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_BOTTOM_LEFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottom right.
+        /// </summary>
+        public static string SCREEN_LOCATION_BOTTOM_RIGHT {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_BOTTOM_RIGHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Centre.
+        /// </summary>
+        public static string SCREEN_LOCATION_CENTRE {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_CENTRE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left.
+        /// </summary>
+        public static string SCREEN_LOCATION_LEFT {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_LEFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right.
+        /// </summary>
+        public static string SCREEN_LOCATION_RIGHT {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_RIGHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top.
+        /// </summary>
+        public static string SCREEN_LOCATION_TOP {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_TOP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top left.
+        /// </summary>
+        public static string SCREEN_LOCATION_TOP_LEFT {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_TOP_LEFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top right.
+        /// </summary>
+        public static string SCREEN_LOCATION_TOP_RIGHT {
+            get {
+                return ResourceManager.GetString("SCREEN_LOCATION_TOP_RIGHT", resourceCulture);
             }
         }
         

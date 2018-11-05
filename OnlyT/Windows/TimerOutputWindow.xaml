@@ -28,7 +28,7 @@
 
         <Border Name="ClockPanel" 
                 CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" 
-                BorderBrush="Beige" Margin="10" BorderThickness="{Binding BorderThickness}" Padding="10">
+                BorderBrush="Beige" BorderThickness="{Binding BorderThickness}" Padding="10">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="{Binding BackgroundOpacity}">
                     <GradientStop Color="Black" Offset="1"/>

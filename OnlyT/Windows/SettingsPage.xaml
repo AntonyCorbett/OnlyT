@@ -18,7 +18,7 @@
              FontFamily="{DynamicResource MaterialDesignFont}"
 
              mc:Ignorable="d" 
-             d:DesignHeight="1064" d:DesignWidth="1200">
+             d:DesignHeight="1145" d:DesignWidth="1200">
 
     <UserControl.Resources>
         <Style x:Key="LabelStyle" BasedOn="{StaticResource MaterialDesignLabel}" TargetType="{x:Type Label}">
@@ -310,6 +310,19 @@
                                   SelectedValuePath="MonitorId" 
                                   DisplayMemberPath="FriendlyName"
                                   SelectedValue="{Binding CountdownMonitorId, Mode=TwoWay}"/>
+
+                        <ComboBox ItemsSource="{Binding ScreenLocationItems}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.LOCATION_ON_SCREEN}"
+                                  SelectedValuePath="Location" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding CountdownScreenLocation, Mode=TwoWay}"/>
+
+                        <Label Style="{StaticResource LabelStyle}" Content="{x:Static resx:Resources.COUNTDOWN_ZOOM}"/>
+                        <Slider Minimum="10" Maximum="100" LargeChange="10" SmallChange="1" 
+                                Value="{Binding CountdownZoomPercent}"
+                                Margin="0,0,0,20"
+                                TickFrequency="10" TickPlacement="BottomRight"/>
 
                         <CheckBox IsChecked="{Binding ShowCountdownFrame, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
