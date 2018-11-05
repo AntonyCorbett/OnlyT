@@ -279,7 +279,7 @@
     <value>Fine settimana</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Impostazioni disattivate dall'amministratore!</value>
+    <value>Impostazioni disabilitate dall'amministratore!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
