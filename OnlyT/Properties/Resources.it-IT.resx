@@ -383,7 +383,7 @@
     <value>Metti ogni orario di inizio su una nuova riga.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Utilizzare qualsiasi formato!</value>
+    <value>Usa il formato che preferisci!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
     <value>Puoi includere un giorno, ad esempio "Gio 19:15"</value>
