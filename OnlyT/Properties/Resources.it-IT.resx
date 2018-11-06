@@ -386,7 +386,7 @@
     <value>Usa il formato che preferisci!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Eventualmente includi un giorno, ad esempio "Gio 19:15"</value>
+    <value>Includi eventualmente un giorno, ad es. "Gio 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Note:</value>
@@ -400,11 +400,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Mostra tempo studenti</value>
+    <value>Mantieni tempo dello studente</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Durata visualizzazione tempo studenti</value>
+    <value>Mantieni durata parte</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -420,7 +420,7 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Larghezza schermo diviso:</value>
+    <value>Posizione separatore schermo:</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>PROVA</value>
