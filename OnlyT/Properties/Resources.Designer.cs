@@ -489,7 +489,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JW Library compatilibity mode.
+        ///   Looks up a localized string similar to JW Library compatibility mode.
         /// </summary>
         public static string JW_COMPAT_MODE {
             get {
