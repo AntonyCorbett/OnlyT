@@ -380,7 +380,7 @@
     <value>Mostra puntatore del mouse</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Mettere ogni ora di inizio su nuova riga.</value>
+    <value>Metti ogni orario di inizio su una nuova riga.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Utilizzare qualsiasi formato!</value>
