@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>Beep attivo</value>
+    <value>Segnale acustico attivo</value>
     <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
-    <value>Nessuno</value>
+    <value>Nessuna</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
-    <value>Solo riduci</value>
+    <value>Ritardo</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
-    <value>Riduci e aumenta</value>
+    <value>Ritardo e anticipo</value>
     <comment>One of the drop-down options in Settings, Automatic Mode</comment>
   </data>
   <data name="APP_VER" xml:space="preserve">
@@ -184,7 +184,7 @@
     <value>Digitale</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Beep inattivo</value>
+    <value>Segnale acustico inattivo</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>Infrasettimanale</value>
@@ -208,13 +208,13 @@
     <value>Manuale</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Discorso finale</value>
+    <value>Discorso conclusivo</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Ripasso e panoramica</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Studio biblico di Congregazione</value>
+    <value>Studio biblico di congregazione</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Scaviamo per trovare gemme spirituali</value>
@@ -235,13 +235,13 @@
     <value>Discorso pubblico</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Lettura della Bibbia</value>
+    <value>Lettura biblica</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Discorso di servizio</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Tesori</value>
+    <value>Tesori della parola di Dio</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Studio Torre di Guardia</value>
@@ -261,7 +261,7 @@
     <value>Nessuno</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Non puoi modificare le impostazioni mentre il timer è attivo!</value>
+    <value>Impostazioni non disponibili con il timer in funzione!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Impostazioni</value>
@@ -279,7 +279,7 @@
     <value>Fine settimana</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Impostazioni disattivate dall'amministratore!</value>
+    <value>Impostazioni disabilitate dall'amministratore!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
@@ -289,7 +289,7 @@
     <value>Visita sorvegliante</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>CONTO ALLA ROVESCIA</value>
+    <value>FERMA CONTATEMPO</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permetti cronometro</value>
+    <value>Consenti cambio direzione conteggio</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -334,7 +334,7 @@
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>BEEP</value>
+    <value>SEGNALE ACUSTICO</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
@@ -501,47 +501,47 @@
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
-    <value>Zoom level:</value>
+    <value>Livello di zoom:</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
-    <value>Location</value>
+    <value>Posizione</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
-    <value>Bottom</value>
+    <value>In basso</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
-    <value>Bottom left</value>
+    <value>In basso a sinistra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
-    <value>Bottom right</value>
+    <value>In basso a destra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
-    <value>Centre</value>
+    <value>Centro</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
-    <value>Left</value>
+    <value>A sinistra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
-    <value>Right</value>
+    <value>A destra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
-    <value>Top</value>
+    <value>In alto</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
-    <value>Top left</value>
+    <value>In alto a sinistra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
-    <value>Top right</value>
+    <value>In alto a destra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
 </root>
