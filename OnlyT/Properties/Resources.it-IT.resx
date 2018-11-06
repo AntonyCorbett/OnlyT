@@ -293,7 +293,7 @@
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
-    <value>Aiuto</value>
+    <value>Guida</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
     <value>[visita sorvegliante]</value>
