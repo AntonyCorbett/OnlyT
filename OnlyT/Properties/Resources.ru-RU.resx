@@ -220,10 +220,10 @@
     <value>Отыскиваем духовные жемчужины</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Жизнь – Пункт 1</value>
+    <value>Христианская жизнь – Пункт 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Жизнь – Пункт 2</value>
+    <value>Христианская жизнь – Пункт 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Вступительные слова</value>
@@ -273,7 +273,7 @@
     <value>Встреча</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Жизнь</value>
+    <value>Христианская жизнь</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>В выходные дни</value>
@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>Переключатель "Визит районного"</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Формат времени</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Persist talk duration</value>
+    <value>Показывать время учебного задания</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
