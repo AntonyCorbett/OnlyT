@@ -474,6 +474,7 @@
   </data>
   <data name="X_SECONDS" xml:space="preserve">
     <value>{0} sekund</value>
+    <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
     <value>Włączone</value>
