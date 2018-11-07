@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using OnlyT.Services.Snackbar;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -29,6 +31,7 @@
         private readonly OnScreenLocationItem[] _screenLocationItems;
         private readonly AutoMeetingTime[] _autoMeetingTimes;
         private readonly IOptionsService _optionsService;
+        private readonly ISnackbarService _snackbarService;
         private readonly IMonitorsService _monitorsService;
         private readonly IBellService _bellService;
         private readonly ICountdownTimerTriggerService _countdownTimerService;
@@ -42,6 +45,7 @@
            IMonitorsService monitorsService,
            IBellService bellService,
            IOptionsService optionsService,
+           ISnackbarService snackbarService,
            ICountdownTimerTriggerService countdownTimerService)
         {
             // subscriptions...
@@ -49,6 +53,7 @@
             Messenger.Default.Register<BellStatusChangedMessage>(this, OnBellChanged);
 
             _optionsService = optionsService;
+            _snackbarService = snackbarService;
             _monitorsService = monitorsService;
             _bellService = bellService;
             _countdownTimerService = countdownTimerService;
@@ -650,10 +655,14 @@
                 if (rv != 0)
                 {
                     Log.Logger.Warning($"Return value from reserve and open port = {rv}");
+
+                    _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPEN_FAILED);
                 }
                 else
                 {
                     Log.Logger.Information($"Success reserving and opening port: {Port}");
+
+                    _snackbarService.EnqueueWithOk(Properties.Resources.OPEN_PORT);
                 }
                 
                 Messenger.Default.Send(new HttpServerChangedMessage());
@@ -661,6 +670,7 @@
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not reserve port");
+                _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPEN_FAILED);
             }
         }
 

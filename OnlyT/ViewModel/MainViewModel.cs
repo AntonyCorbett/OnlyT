@@ -1,3 +1,5 @@
+using OnlyT.Services.Snackbar;
+
 namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
@@ -15,6 +17,7 @@ namespace OnlyT.ViewModel
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Threading;
+    using MaterialDesignThemes.Wpf;
     using Messages;
     using Models;
     using OnlyT.Services.JwLibrary;
@@ -43,16 +46,18 @@ namespace OnlyT.ViewModel
         private readonly ITalkTimerService _timerService;
         private readonly IHttpServer _httpServer;
         private readonly (int dpiX, int dpiY) _systemDpi;
+        private readonly ISnackbarService _snackbarService;
         private DispatcherTimer _heartbeatTimer;
         private bool _countdownDone;
         private TimerOutputWindow _timerWindow;
         private CountdownWindow _countdownWindow;
         private FrameworkElement _currentPage;
-
+        
         public MainViewModel(
            IOptionsService optionsService,
            IMonitorsService monitorsService,
            ITalkTimerService timerService,
+           ISnackbarService snackbarService,
            IHttpServer httpServer,
            ICommandLineService commandLineService,
            ICountdownTimerTriggerService countdownTimerTriggerService)
@@ -63,6 +68,7 @@ namespace OnlyT.ViewModel
                 RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
             }
 
+            _snackbarService = snackbarService;
             _optionsService = optionsService;
             _monitorsService = monitorsService;
             _httpServer = httpServer;
@@ -97,6 +103,8 @@ namespace OnlyT.ViewModel
 
             InitHeartbeatTimer();
         }
+
+        public ISnackbarMessageQueue TheSnackbarMessageQueue => _snackbarService.TheSnackbarMessageQueue;
 
         public FrameworkElement CurrentPage
         {

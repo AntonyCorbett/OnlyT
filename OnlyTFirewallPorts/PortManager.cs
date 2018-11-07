@@ -4,13 +4,13 @@
 
     internal static class PortManager
     {
-        private static string RuleNamePrefix = "OnlyTClockServer";
+        private static readonly string RuleNamePrefix = "OnlyTClockServer";
 
         public static int ReserveAndOpenPort(int port)
         {
             int rv1 = ReservePort(port);
             int rv2 = OpenPort(port);
-
+            
             return rv1 == 0 || rv1 == 1 ? rv2 : rv1;
         }
 
@@ -25,6 +25,8 @@
 
         public static int OpenPort(int port)
         {
+            ClosePort(port);
+
             string parameter = $"advfirewall firewall add rule name=\"{RuleNamePrefix}{port}\" dir=in action=allow protocol=TCP localport={port}";
             return LaunchNetworkShell(parameter);
         }

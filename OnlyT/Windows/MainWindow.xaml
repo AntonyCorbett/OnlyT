@@ -20,6 +20,9 @@
         Topmost="{Binding AlwaysOnTop, Mode=OneWay}"
         Title="S o u n d B o x - O N L Y T" Height="350" Width="395" Closing="WindowClosing" ResizeMode="CanMinimize" >
     
-    <ContentControl Content="{Binding CurrentPage}" />
-    
+    <Grid>
+        <ContentControl Content="{Binding CurrentPage}" />
+        <materialDesign:Snackbar MessageQueue="{Binding TheSnackbarMessageQueue}" HorizontalAlignment="Stretch"/>
+    </Grid>
+
 </Window>

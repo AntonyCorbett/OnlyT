@@ -696,6 +696,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mode.
         /// </summary>
         public static string OP_MODE {
@@ -764,6 +773,24 @@ namespace OnlyT.Properties {
         public static string PORT {
             get {
                 return ResourceManager.GetString("PORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not open the port (see log)!.
+        /// </summary>
+        public static string PORT_OPEN_FAILED {
+            get {
+                return ResourceManager.GetString("PORT_OPEN_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port opened and reservation made.
+        /// </summary>
+        public static string PORT_OPENED {
+            get {
+                return ResourceManager.GetString("PORT_OPENED", resourceCulture);
             }
         }
         

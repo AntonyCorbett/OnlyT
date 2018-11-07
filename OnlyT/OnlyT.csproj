@@ -179,6 +179,8 @@
     <Compile Include="Services\Options\OptionsService.cs" />
     <Compile Include="Services\Options\FullScreenClockMode.cs" />
     <Compile Include="Services\Options\ScreenLocation.cs" />
+    <Compile Include="Services\Snackbar\ISnackbarService.cs" />
+    <Compile Include="Services\Snackbar\SnackbarService.cs" />
     <Compile Include="Services\TalkSchedule\ITalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleAuto.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleFileBased.cs" />
