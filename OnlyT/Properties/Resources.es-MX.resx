@@ -545,4 +545,16 @@
     <value>Arriba a la derecha</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Caption of the button that closes the snackbar</comment>
+  </data>
+  <data name="PORT_OPENED" xml:space="preserve">
+    <value>Port opened and reservation made</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
+  </data>
+  <data name="PORT_OPEN_FAILED" xml:space="preserve">
+    <value>Could not open the port (see log)!</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
+  </data>
 </root>
