@@ -662,7 +662,7 @@ namespace OnlyT.ViewModel
                 {
                     Log.Logger.Information($"Success reserving and opening port: {Port}");
 
-                    _snackbarService.EnqueueWithOk(Properties.Resources.OPEN_PORT);
+                    _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPENED);
                 }
                 
                 Messenger.Default.Send(new HttpServerChangedMessage());
