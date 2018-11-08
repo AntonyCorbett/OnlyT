@@ -322,7 +322,10 @@ namespace OnlyT.ViewModel
 
             Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = false });
 
-            _timerWindow?.Show();
+            if (_optionsService.IsTimerMonitorSpecified)
+            {
+                _timerWindow?.Show();
+            }
 
             Task.Delay(1000).ContinueWith(t =>
             {
@@ -516,7 +519,7 @@ namespace OnlyT.ViewModel
         /// </param>
         private void StartCountdown(int offsetSeconds)
         {
-            if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
+            if (!IsInDesignMode && _optionsService.IsCountdownMonitorSpecified)
             {
                 Log.Logger.Information("Launching countdown timer");
 
