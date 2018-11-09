@@ -19,7 +19,7 @@
             string everyone = new System.Security.Principal.SecurityIdentifier(
                 "S-1-1-0").Translate(typeof(System.Security.Principal.NTAccount)).ToString();
 
-            string parameter = $"http add urlacl url=http://*:{port}/ user=\\{everyone}";
+            string parameter = $"http add urlacl url=http://*:{port}/ user=\"{everyone}\"";
             return LaunchNetworkShell(parameter);
         }
 
