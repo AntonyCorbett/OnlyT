@@ -1,5 +1,3 @@
-using OnlyT.Services.Snackbar;
-
 namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
@@ -21,6 +19,7 @@ namespace OnlyT.ViewModel
     using Messages;
     using Models;
     using OnlyT.Services.JwLibrary;
+    using OnlyT.Services.Snackbar;
     using Serilog;
     using Services.CommandLine;
     using Services.CountdownTimer;

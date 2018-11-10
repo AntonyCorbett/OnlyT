@@ -1,5 +1,9 @@
 ﻿namespace OnlyT.Utils
 {
+#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
+#pragma warning disable SA1649 // File name must match first type name
+#pragma warning disable SA1310 // Field names must not contain underscore
+
     // ReSharper disable CommentTypo
     // ReSharper disable InconsistentNaming
     // ReSharper disable StyleCop.SA1307
@@ -23,6 +27,7 @@
     // RECT structure required by WINDOWPLACEMENT structure
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
+
     public struct RECT
     {
         public int Left;
@@ -159,4 +164,7 @@
             }
         }
     }
+#pragma warning restore SA1310 // Field names must not contain underscore
+#pragma warning restore SA1649 // File name must match first type name
+#pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
 }

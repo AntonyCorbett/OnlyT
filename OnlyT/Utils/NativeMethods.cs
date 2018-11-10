@@ -1,5 +1,8 @@
 ﻿namespace OnlyT.Utils
 {
+#pragma warning disable SA1121 // Use built-in type alias
+
+    // ReSharper disable BuiltInTypeReferenceStyle
     // ReSharper disable IdentifierTypo
     // ReSharper disable StyleCop.SA1602
     // ReSharper disable InconsistentNaming
@@ -175,4 +178,6 @@
             public string szPath;
         }
     }
+
+#pragma warning restore SA1121 // Use built-in type alias
 }

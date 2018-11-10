@@ -43,7 +43,7 @@
             Messenger.Default.Register<TimerFrameChangedMessage>(this, OnTimerFrameChanged);
         }
 
-        public int BorderThickness => _optionsService.Options.TimerFrame? 3 : 0;
+        public int BorderThickness => _optionsService.Options.TimerFrame ? 3 : 0;
 
         public int BackgroundOpacity => _optionsService.Options.TimerFrame ? 100 : 0;
 

@@ -11,7 +11,6 @@
         public void TestMondayOfWeekCalc()
         {
             var monday = new DateTime(2018, 2, 12);
-            
             {
                 var dt = DateUtils.GetMondayOfWeek(monday);
                 Assert.AreEqual(monday, dt);

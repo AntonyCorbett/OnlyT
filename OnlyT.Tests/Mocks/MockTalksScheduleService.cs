@@ -8,9 +8,10 @@
 
     internal class MockTalksScheduleService : ITalkScheduleService
     {
-        private List<TalkScheduleItem> _talks;
         private readonly int _talkIdStart;
         private readonly int _numTalks;
+
+        private List<TalkScheduleItem> _talks;
 
         public MockTalksScheduleService(int talkIdStart, int numTalks)
         {
