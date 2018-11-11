@@ -77,7 +77,7 @@ Source: "OnlyT\bin\Release\it-IT\*.dll"; DestDir: "{app}\it-IT"; Flags: ignoreve
 Source: "OnlyT\bin\Release\jv-Latn-ID\*.dll"; DestDir: "{app}\jv-Latn-ID"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\nl-NL\*.dll"; DestDir: "{app}\nl-NL"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\no\*.dll"; DestDir: "{app}\no"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\pap-PAP\*.dll"; DestDir: "{app}\pap-PAP"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\pap\*.dll"; DestDir: "{app}\pap"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pl-PL\*.dll"; DestDir: "{app}\pl-PL"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pt-BR\*.dll"; DestDir: "{app}\pt-BR"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\pt-PT\*.dll"; DestDir: "{app}\pt-PT"; Flags: ignoreversion
