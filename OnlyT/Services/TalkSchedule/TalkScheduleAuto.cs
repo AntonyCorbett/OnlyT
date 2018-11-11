@@ -71,6 +71,7 @@
             string talkName,
             TimeSpan startOffset,
             TimeSpan duration,
+            bool isStudentTalk = false,
             bool useBell = false,
             bool persistFinalTimerValue = false)
         {
@@ -82,6 +83,7 @@
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
                 Bell = useBell,
+                IsStudentTalk = isStudentTalk,
                 PersistFinalTimerValue = persistFinalTimerValue
             };
         }
@@ -93,7 +95,7 @@
                 CreateTreasuresItem(TalkTypesAutoMode.OpeningComments, Properties.Resources.TALK_OPENING_COMMENTS, new TimeSpan(0, 5, 0), TimeSpan.FromMinutes(3)),
                 CreateTreasuresItem(TalkTypesAutoMode.TreasuresTalk, Properties.Resources.TALK_TREASURES, new TimeSpan(0, 8, 20), TimeSpan.FromMinutes(10)),
                 CreateTreasuresItem(TalkTypesAutoMode.DiggingTalk, Properties.Resources.TALK_DIGGING, new TimeSpan(0, 18, 40), TimeSpan.FromMinutes(8)),
-                CreateTreasuresItem(TalkTypesAutoMode.Reading, Properties.Resources.TALK_READING, new TimeSpan(0, 27, 0), TimeSpan.FromMinutes(4), true, true)
+                CreateTreasuresItem(TalkTypesAutoMode.Reading, Properties.Resources.TALK_READING, new TimeSpan(0, 27, 0), TimeSpan.FromMinutes(4), true, true, true)
             };
         }
 
@@ -112,6 +114,7 @@
             string talkName,
             TimeSpan startOffset,
             TimeSpan duration,
+            bool isStudentTalk = false,
             bool useBell = false,
             bool persistFinalTimerValue = false,
             bool editableTime = false)
@@ -125,7 +128,8 @@
                 OriginalDuration = duration,
                 Bell = useBell,
                 PersistFinalTimerValue = persistFinalTimerValue,
-                Editable = editableTime
+                Editable = editableTime,
+                IsStudentTalk = isStudentTalk
             };
         }
 
@@ -180,6 +184,7 @@
                     TimeSpan.FromMinutes(timerItem1.Minutes),
                     timerItem1.IsStudentTalk,
                     timerItem1.IsStudentTalk,
+                    timerItem1.IsStudentTalk,
                     true));
 
                 startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem1.Minutes));
@@ -199,6 +204,7 @@
                     GetMinistryItemTitle(2),
                     startOffset,
                     TimeSpan.FromMinutes(timerItem2.Minutes),
+                    timerItem2.IsStudentTalk,
                     timerItem2.IsStudentTalk,
                     timerItem2.IsStudentTalk,
                     true));
@@ -222,6 +228,7 @@
                     TimeSpan.FromMinutes(timerItem3.Minutes),
                     timerItem3.IsStudentTalk,
                     timerItem3.IsStudentTalk,
+                    timerItem3.IsStudentTalk,
                     true));
 
                 startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem3.Minutes));
@@ -241,6 +248,7 @@
                     GetMinistryItemTitle(4),
                     startOffset,
                     TimeSpan.FromMinutes(timerItem4.Minutes),
+                    timerItem4.IsStudentTalk,
                     timerItem4.IsStudentTalk,
                     timerItem4.IsStudentTalk,
                     true));

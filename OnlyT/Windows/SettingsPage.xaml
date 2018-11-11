@@ -329,7 +329,7 @@
                                   Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}" />
 
                         <TextBox MinLines="6"
-                                 Style="{StaticResource MaterialDesignTextFieldBoxTextBox}"
+                                 Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING_STARTS}"
                                  TextWrapping="Wrap"
                                  AcceptsTab="False"

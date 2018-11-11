@@ -3,6 +3,7 @@ namespace OnlyT.ViewModel
     using System;
     using CommonServiceLocator;
     using GalaSoft.MvvmLight.Ioc;
+    using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Services.Bell;
     using Services.CommandLine;
@@ -32,6 +33,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ICommandLineService, CommandLineService>();
             SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
             SimpleIoc.Default.Register<ISnackbarService, SnackbarService>();
+            SimpleIoc.Default.Register<ILocalTimingDataStoreService, LocalTimingDataStoreService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);
 

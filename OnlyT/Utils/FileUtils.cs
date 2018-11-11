@@ -66,6 +66,18 @@
         }
 
         /// <summary>
+        /// Gets the folder for storing the timing reports
+        /// </summary>
+        /// <param name="commandLineIdentifier">Optional command-line id</param>
+        /// <returns>Folder path.</returns>
+        public static string GetTimingReportsFolder(string commandLineIdentifier)
+        {
+            var folder = Path.Combine(GetOnlyTMyDocsFolder(), @"TimingReports", commandLineIdentifier ?? string.Empty);
+            Directory.CreateDirectory(folder);
+            return folder;
+        }
+
+        /// <summary>
         /// Gets the OnlyT application data folder.
         /// </summary>
         /// <returns>AppData folder.</returns>

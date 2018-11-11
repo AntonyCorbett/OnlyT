@@ -179,6 +179,9 @@
     <Compile Include="Services\Options\OptionsService.cs" />
     <Compile Include="Services\Options\FullScreenClockMode.cs" />
     <Compile Include="Services\Options\ScreenLocation.cs" />
+    <Compile Include="Services\Report\ILocalTimingDataStoreService.cs" />
+    <Compile Include="Services\Report\LocalTimingDataStoreService.cs" />
+    <Compile Include="Services\Report\TimingReportGeneration.cs" />
     <Compile Include="Services\Snackbar\ISnackbarService.cs" />
     <Compile Include="Services\Snackbar\SnackbarService.cs" />
     <Compile Include="Services\TalkSchedule\ITalkScheduleService.cs" />
@@ -367,6 +370,10 @@
     <ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj">
       <Project>{279d0da6-28fe-4df9-8eed-d75f55664ff9}</Project>
       <Name>OnlyT.CountdownTimer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj">
+      <Project>{8d954290-a460-49fe-ba0a-1e35de208172}</Project>
+      <Name>OnlyT.Report</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

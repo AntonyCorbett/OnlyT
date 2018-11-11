@@ -91,6 +91,7 @@
     <Compile Include="TestDateCalcs.cs" />
     <Compile Include="TestTalkItem.cs" />
     <Compile Include="TestViewModels.cs" />
+    <Compile Include="TestTimingReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -100,6 +101,10 @@
     <ProjectReference Include="..\OnlyT.AnalogueClock\OnlyT.AnalogueClock.csproj">
       <Project>{5a65feaf-791d-417c-a355-3155a1b1df19}</Project>
       <Name>OnlyT.AnalogueClock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj">
+      <Project>{8d954290-a460-49fe-ba0a-1e35de208172}</Project>
+      <Name>OnlyT.Report</Name>
     </ProjectReference>
     <ProjectReference Include="..\OnlyT\OnlyT.csproj">
       <Project>{4a02d18a-0956-40fa-a4ec-9cb27a72b455}</Project>

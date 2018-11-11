@@ -14,6 +14,7 @@
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
+    using OnlyT.Services.Report;
     using Serilog;
     using Services.Bell;
     using Services.CommandLine;
@@ -51,6 +52,7 @@
         private readonly IAdaptiveTimerService _adaptiveTimerService;
         private readonly IBellService _bellService;
         private readonly ICommandLineService _commandLineService;
+        private readonly ILocalTimingDataStoreService _timingDataService;
 
         private int _secondsElapsed;
         private bool _countUp;
@@ -70,7 +72,8 @@
            IAdaptiveTimerService adaptiveTimerService,
            IOptionsService optionsService,
            ICommandLineService commandLineService,
-           IBellService bellService)
+           IBellService bellService,
+           ILocalTimingDataStoreService timingDataService)
         {
             _scheduleService = scheduleService;
             _optionsService = optionsService;
@@ -78,6 +81,7 @@
             _commandLineService = commandLineService;
             _bellService = bellService;
             _timerService = timerService;
+            _timingDataService = timingDataService;
             _timerService.TimerChangedEvent += TimerChangedHandler;
             _countUp = _optionsService.Options.CountUp;
 
@@ -404,6 +408,7 @@
             var talkId = TalkId;
 
             Messenger.Default.Send(new TimerStartMessage(_targetSeconds, _countUp, talkId));
+            StoreTimerStartData();
 
             Task.Run(() =>
             {
@@ -420,6 +425,39 @@
                     _timerService.Start(_targetSeconds, talkId);
                 }
             });
+        }
+
+        private void StoreTimerStartData()
+        {
+            var talk = GetCurrentTalk();
+            
+            if (IsFirstTalk(talk.Id))
+            {
+                const int totalMtgLengthMins = 105;
+                const int songAndPrayerMins = 5;
+
+                var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
+                _timingDataService.InsertMeetingStart(startTime);
+
+                if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
+                {
+                    var plannedEndTime = startTime.AddMinutes(totalMtgLengthMins - songAndPrayerMins);
+                    _timingDataService.InsertPlannedMeetingEnd(plannedEndTime);
+                }
+            }
+
+            _timingDataService.InsertTimerStart(
+                talk.MeetingSectionNameLocalised, talk.IsStudentTalk, talk.OriginalDuration, talk.ActualDuration);
+        }
+
+        private void StoreTimerStopData()
+        {
+            _timingDataService.InsertTimerStop();
+        }
+
+        private void StoreEndOfMeetingData()
+        {
+            _timingDataService.InsertActualMeetingEnd();
         }
 
         private void AdjustForAdaptiveTime()
@@ -687,12 +725,18 @@
             }
         }
 
+        private bool IsFirstTalk(int talkId)
+        {
+            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
+            return talks != null && talks.Any() && talkId == talks.First().Id;
+        }
+
         private void NavigateSettings()
         {
             Messenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
         }
 
-        private void StopTimer()
+        private async void StopTimer()
         {
             var talk = GetCurrentTalk();
             var msg = new TimerStopMessage(
@@ -702,6 +746,8 @@
             
             _timerService.Stop();
             _isStarting = false;
+
+            StoreTimerStopData();
 
             TextColor = WhiteBrush;
 
@@ -713,6 +759,13 @@
             RaiseCanExecuteChanged();
 
             AutoAdvance();
+
+            if (TalkId == 0)
+            {
+                // end of the meeting.
+                StoreEndOfMeetingData();
+                await GenerateTimingReportAsync().ConfigureAwait(false);
+            }
         }
 
         private void AutoAdvance()
@@ -842,6 +895,14 @@
             DecrementTimerCommand?.RaiseCanExecuteChanged();
             DecrementTimer5Command?.RaiseCanExecuteChanged();
             DecrementTimer15Command?.RaiseCanExecuteChanged();
+        }
+
+        private async Task GenerateTimingReportAsync()
+        {
+            if (_optionsService.Options.GenerateTimingReports)
+            {
+                await TimingReportGeneration.ExecuteAsync(_timingDataService, _commandLineService.OptionsIdentifier).ConfigureAwait(false);
+            }
         }
     }
 }

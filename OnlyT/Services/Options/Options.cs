@@ -115,6 +115,8 @@
 
         public string Culture { get; set; }
 
+        public bool GenerateTimingReports { get; set; }
+
         /// <summary>
         /// Validates the data, correcting automatically as required
         /// </summary>

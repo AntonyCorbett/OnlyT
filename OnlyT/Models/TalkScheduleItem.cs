@@ -66,7 +66,7 @@
         public TimeSpan? AdaptedDuration { get; set; }
 
         /// <summary>
-        /// Gets or sets the actual duration used (may be original, manually adjusted or adapted)
+        /// Gets the actual duration used (may be original, manually adjusted or adapted)
         /// </summary>
         public TimeSpan ActualDuration 
         {
@@ -120,6 +120,8 @@
                 }
             }
         }
+
+        public bool IsStudentTalk { get; set; }
 
         public int GetDurationSeconds()
         {

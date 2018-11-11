@@ -4,6 +4,7 @@
     using Mocks;
     using Moq;
     using OnlyT.Services.CommandLine;
+    using OnlyT.Services.Report;
     using Services.Bell;
     using Services.Options;
     using Services.TalkSchedule;
@@ -28,6 +29,7 @@
             ITalkScheduleService scheduleService = new MockTalksScheduleService(TalkIdStart, NumTalks);
             Mock<IBellService> bellService = new Mock<IBellService>();
             Mock<ICommandLineService> commandLineService = new Mock<ICommandLineService>();
+            Mock<ILocalTimingDataStoreService> timingDataService = new Mock<ILocalTimingDataStoreService>();
 
             var vm = new OperatorPageViewModel(
                 timerService.Object, 
@@ -35,7 +37,8 @@
                 adaptiveTimerService.Object, 
                 optionsService.Object,
                 commandLineService.Object,
-                bellService.Object);
+                bellService.Object,
+                timingDataService.Object);
 
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);
