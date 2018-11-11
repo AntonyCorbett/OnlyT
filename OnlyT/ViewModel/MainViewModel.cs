@@ -85,12 +85,12 @@ namespace OnlyT.ViewModel
             Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
             Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
             Messenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
-            
+
             InitHttpServer();
 
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
-            
+
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
 #pragma warning disable 4014
@@ -346,7 +346,9 @@ namespace OnlyT.ViewModel
 
             CurrentPage = _pages[message.TargetPageName];
             CurrentPageName = message.TargetPageName;
-            ((IPage)CurrentPage.DataContext).Activated(message.State);
+
+            var page = (IPage)CurrentPage.DataContext;
+            page.Activated(message.State);
         }
 
         /// <summary>

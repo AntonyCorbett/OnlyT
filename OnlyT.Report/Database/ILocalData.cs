@@ -10,9 +10,9 @@
 
         MeetingTimes GetMeetingTimes(Guid session);
 
-        IEnumerable<MeetingTimes> GetMeetingTimes(DateTime theDate);
+        IReadOnlyCollection<MeetingTimes> GetMeetingTimes(DateTime theDate);
 
-        IEnumerable<MeetingTimes> GetMeetingTimesRange(DateTime startDate, DateTime endDate);
+        IReadOnlyCollection<MeetingTimes> GetMeetingTimesRange(DateTime startDate, DateTime endDate);
 
         void DeleteAllMeetingTimesData();
     }

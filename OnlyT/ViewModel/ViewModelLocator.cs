@@ -1,3 +1,5 @@
+using OnlyT.Report.Services;
+
 namespace OnlyT.ViewModel
 {
     using System;
@@ -34,6 +36,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
             SimpleIoc.Default.Register<ISnackbarService, SnackbarService>();
             SimpleIoc.Default.Register<ILocalTimingDataStoreService, LocalTimingDataStoreService>();
+            SimpleIoc.Default.Register<IDateTimeService, DateTimeService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);
 

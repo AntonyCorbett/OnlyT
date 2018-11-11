@@ -32,7 +32,7 @@
 
                 var yearFolder = Path.Combine(outputFolder, DateTime.Now.Year.ToString());
                 Directory.CreateDirectory(yearFolder);
-
+                
                 if (Directory.Exists(yearFolder))
                 {
                     var data = dataService.GetCurrentMeetingTimes();

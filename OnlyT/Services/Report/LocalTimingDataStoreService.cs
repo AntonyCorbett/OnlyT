@@ -184,7 +184,15 @@
             try
             {
                 EnsureInitialised();
-                return _localData?.GetHistoricalTimingData(DateTime.Today);
+
+                var now = DateTime.Now.Date;
+
+                if (_dateTimeService != null)
+                {
+                    now = _dateTimeService.Now().Date;
+                }
+
+                return _localData?.GetHistoricalTimingData(now);
             }
             catch (Exception ex)
             {

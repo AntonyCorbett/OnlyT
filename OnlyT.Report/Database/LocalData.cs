@@ -36,7 +36,7 @@
             }
         }
 
-        public IEnumerable<MeetingTimes> GetMeetingTimes(DateTime theDate)
+        public IReadOnlyCollection<MeetingTimes> GetMeetingTimes(DateTime theDate)
         {
             using (var ctx = new LocalDatabaseContext(_localDbFilePath))
             {
@@ -45,11 +45,13 @@
 
                 var minDate = theDate.Date;
                 var maxDate = theDate.Date.AddDays(1);
-                return timings.Find(x => x.MeetingDate >= minDate && x.MeetingDate < maxDate).OrderBy(x => x.MeetingTimesId);
+                return timings.Find(
+                    x => x.MeetingDate >= minDate && x.MeetingDate < maxDate)
+                    .OrderBy(x => x.MeetingTimesId).ToArray();
             }
         }
 
-        public IEnumerable<MeetingTimes> GetMeetingTimesRange(DateTime startDate, DateTime endDate)
+        public IReadOnlyCollection<MeetingTimes> GetMeetingTimesRange(DateTime startDate, DateTime endDate)
         {
             using (var ctx = new LocalDatabaseContext(_localDbFilePath))
             {
@@ -58,7 +60,10 @@
 
                 var minDate = startDate.Date;
                 var maxDate = endDate.Date.AddDays(1);
-                return timings.Find(x => x.MeetingDate >= minDate && x.MeetingDate < maxDate).OrderBy(x => x.MeetingTimesId);
+
+                return timings.Find(
+                    x => x.MeetingDate >= minDate && x.MeetingDate < maxDate)
+                    .OrderBy(x => x.MeetingTimesId).ToArray();
             }
         }
 
