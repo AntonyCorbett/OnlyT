@@ -208,7 +208,7 @@
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>Závěrečná slova</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Concluding Comments</value>
@@ -264,7 +264,7 @@
     <value>Settings not available while timer is running!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Nastavení</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
     <value>Treasures</value>
@@ -359,7 +359,7 @@
     <value>Zobrazení hodin na druhém monitoru</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP adresa</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
@@ -377,7 +377,7 @@
     <value>Monitor</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Show mouse pointer</value>
+    <value>Zobrazit kurzor</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
     <value>Put each start time on a new line.</value>
@@ -389,10 +389,10 @@
     <value>Optionally include a day, e.g. "Thu 7:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Poznámky:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OPEN PORT</value>
+    <value>OTEVŘÍT PORT</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
@@ -412,7 +412,7 @@
     <comment>i.e. the TCP (networking) "port"</comment>
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
-    <value>REMOTE ACCESS</value>
+    <value>VZDÁLENÝ PŘÍSTUP</value>
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
@@ -447,10 +447,10 @@
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Language</value>
+    <value>Jazyk</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Please restart OnlyT after changing the language.</value>
+    <value>Po změně jazyka prosím restartujte OnlyT.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Decrease</value>
@@ -477,13 +477,13 @@
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Povolit</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
     <value>Zapnuto</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Zapnuto</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
     <value>Show seconds</value>
