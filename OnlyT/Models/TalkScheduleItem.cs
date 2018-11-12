@@ -36,8 +36,6 @@
         // ReSharper disable once UnusedMember.Global
         public string NameIncludingDuration => $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
 
-        public string NameForTimerReport => MeetingSectionNameLocalised ?? Name;
-
         public bool? CountUp { get; set; }
 
         /// <summary>

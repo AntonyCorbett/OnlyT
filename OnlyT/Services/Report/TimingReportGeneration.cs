@@ -12,12 +12,11 @@
         // generate report and return file path (or null)
         public static Task<string> ExecuteAsync(
             ILocalTimingDataStoreService dataService, 
-            string commandLineIdentifier,
-            bool autoTimingMode)
+            string commandLineIdentifier)
         {
             return Task.Run(() =>
             {
-                if (!dataService.ValidCurrentMeetingTimes(autoTimingMode))
+                if (!dataService.ValidCurrentMeetingTimes())
                 {
                     dataService.PurgeCurrentMeetingTimes();
                     Log.Logger.Warning("Meeting times invalid so not stored");
@@ -40,9 +39,7 @@
                     var data = dataService.GetCurrentMeetingTimes();
                     if (data != null)
                     {
-                        var historicalTimes = autoTimingMode
-                            ? dataService.GetHistoricalMeetingTimes()
-                            : null;
+                        var historicalTimes = dataService.GetHistoricalMeetingTimes();
 
                         var report = new PdfTimingReport(data, historicalTimes, yearFolder);
                         return report.Execute();

@@ -22,6 +22,8 @@
             Items = new List<MeetingTimedItem>();
         }
 
+        public DateTime LastTimerStop { get; private set; }
+
         public int MeetingTimesId { get; set; }
 
         public Guid Session { get; set; }
@@ -41,16 +43,38 @@
             MeetingPlannedEnd = RoundTimeSpanToSecond(plannedEnd.TimeOfDay);
         }
 
+        public void InsertSongSegment(DateTime startTime, string description, TimeSpan duration)
+        {
+            InsertTimerStartSpecifyingTime(startTime, description, duration);
+            InsertTimerStop(description, false);
+        }
+
         public void InsertMeetingStart(DateTime value)
         {
             InitMtgDate();
             MeetingStart = RoundTimeSpanToSecond(value.TimeOfDay);
         }
 
-        public void InsertActualMeetingEnd()
+        public void InsertActualMeetingEnd(DateTime end)
         {
             InitMtgDate();
-            MeetingActualEnd = RoundTimeSpanToSecond(Now().TimeOfDay);
+            MeetingActualEnd = RoundTimeSpanToSecond(end.TimeOfDay);
+        }
+
+        public void InsertTimerStartSpecifyingTime(
+            DateTime start,
+            string partDescription, 
+            TimeSpan plannedDuration)
+        {
+            InitMtgDate();
+
+            Items.Add(new MeetingTimedItem
+            {
+                Description = partDescription,
+                Start = RoundTimeSpanToSecond(start.TimeOfDay),
+                PlannedDuration = RoundTimeSpanToSecond(plannedDuration),
+                AdaptedDuration = RoundTimeSpanToSecond(plannedDuration)
+            });
         }
 
         public void InsertTimerStart(
@@ -80,6 +104,8 @@
             if (item != null)
             {
                 item.End = RoundTimeSpanToSecond(Now().TimeOfDay);
+
+                LastTimerStop = MeetingDate + item.End;
             }
         }
 

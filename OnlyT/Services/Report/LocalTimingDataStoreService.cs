@@ -31,6 +31,15 @@
             _dateTimeService = dateTimeService;
         }
 
+        public DateTime LastTimerStop
+        {
+            get
+            {
+                EnsureInitialised();
+                return _mtgTimes.LastTimerStop;
+            }
+        }
+
         public void DeleteAllData()
         {
             try
@@ -41,6 +50,19 @@
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not delete data");
+            }
+        }
+
+        public void InsertSongSegment(DateTime startTime, string description, TimeSpan plannedDuration)
+        {
+            try
+            {
+                EnsureInitialised();
+                _mtgTimes?.InsertSongSegment(startTime, description, plannedDuration);
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not insert meeting planned end");
             }
         }
 
@@ -70,12 +92,12 @@
             }
         }
 
-        public void InsertActualMeetingEnd()
+        public void InsertActualMeetingEnd(DateTime end)
         {
             try
             {
                 EnsureInitialised();
-                _mtgTimes?.InsertActualMeetingEnd();
+                _mtgTimes?.InsertActualMeetingEnd(end);
             }
             catch (Exception ex)
             {
@@ -129,14 +151,14 @@
             return null;
         }
 
-        public bool ValidCurrentMeetingTimes(bool autoTimingMode)
+        public bool ValidCurrentMeetingTimes()
         {
             EnsureInitialised();
 
             bool valid =
                _mtgTimes.MeetingStart != default(TimeSpan) &&
                _mtgTimes.MeetingActualEnd != default(TimeSpan) &&
-               (!autoTimingMode || Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes) < MeetingMinsOutOfRange);
+               Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes) < MeetingMinsOutOfRange;
 
             if (!valid)
             {

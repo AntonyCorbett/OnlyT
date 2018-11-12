@@ -433,39 +433,84 @@
 
         private void StoreTimerStartData()
         {
-            var talk = GetCurrentTalk();
-            
-            if (IsFirstTalk(talk.Id))
+            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
-                if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
-                {
-                    var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
-                    _timingDataService.InsertMeetingStart(startTime);
+                var talk = GetCurrentTalk();
 
-                    const int totalMtgLengthMins = 105;
-                    const int songAndPrayerMins = 5;
-
-                    var plannedEndTime = startTime.AddMinutes(totalMtgLengthMins - songAndPrayerMins);
-                    _timingDataService.InsertPlannedMeetingEnd(plannedEndTime);
-                }
-                else
+                if (IsFirstTalk(talk.Id))
                 {
-                    _timingDataService.InsertMeetingStart(DateTime.Now);
+                    StoreTimerDataForStartOfMeeting();
                 }
+
+                if (IsFirstTalkAfterInterim(talk.Id))
+                {
+                    StoreTimerDataForInterim();
+                }
+
+                _timingDataService.InsertTimerStart(
+                    talk.MeetingSectionNameLocalised, 
+                    talk.IsStudentTalk, 
+                    talk.OriginalDuration, 
+                    talk.ActualDuration);
             }
+        }
 
-            _timingDataService.InsertTimerStart(
-                talk.NameForTimerReport, talk.IsStudentTalk, talk.OriginalDuration, talk.ActualDuration);
+        private void StoreTimerDataForInterim()
+        {
+            var lastItemStop = _timingDataService.LastTimerStop;
+            var interimStart = lastItemStop.AddSeconds(15);
+
+            // we plan 3 mins 20 secs for interim song...
+            _timingDataService.InsertSongSegment(
+                interimStart,
+                Properties.Resources.INTERIM_SEGMENT,
+                new TimeSpan(0, 3, 20));
+        }
+
+        private bool IsFirstTalkAfterInterim(int talkId)
+        {
+            var talkType = (TalkTypesAutoMode) talkId;
+
+            return talkType == TalkTypesAutoMode.LivingPart1 ||
+                   talkType == TalkTypesAutoMode.Watchtower;
+        }
+
+        private void StoreTimerDataForStartOfMeeting()
+        {
+            // insert start of meeting...
+            var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
+            _timingDataService.InsertMeetingStart(startTime);
+
+            const int totalMtgLengthMins = 105;
+            const int songAndPrayerMins = 5;
+
+            // and planned end...
+            var plannedEndTime = startTime.AddMinutes(totalMtgLengthMins - songAndPrayerMins);
+            _timingDataService.InsertPlannedMeetingEnd(plannedEndTime);
+
+            _timingDataService.InsertSongSegment(
+                startTime,
+                Properties.Resources.INTRO_SEGMENT,
+                TimeSpan.FromMinutes(5));
         }
 
         private void StoreTimerStopData()
         {
-            _timingDataService.InsertTimerStop();
+            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
+            {
+                _timingDataService.InsertTimerStop();
+            }
         }
 
         private void StoreEndOfMeetingData()
         {
-            _timingDataService.InsertActualMeetingEnd();
+            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
+            {
+                var songStart = DateTime.Now.AddSeconds(5);
+
+                _timingDataService.InsertSongSegment(songStart, Properties.Resources.CONCLUDING_SEGMENT, TimeSpan.FromMinutes(5));
+                _timingDataService.InsertActualMeetingEnd(songStart.AddMinutes(5));
+            }
         }
 
         private void AdjustForAdaptiveTime()
@@ -907,7 +952,8 @@
 
         private async Task GenerateTimingReportAsync()
         {
-            if (_optionsService.Options.GenerateTimingReports)
+            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic &&
+                _optionsService.Options.GenerateTimingReports)
             {
                 _snackbarService.EnqueueWithOk(Properties.Resources.GENERATING_REPORT);
 
@@ -915,8 +961,7 @@
 
                 await TimingReportGeneration.ExecuteAsync(
                     _timingDataService, 
-                    _commandLineService.OptionsIdentifier,
-                    _optionsService.Options.OperatingMode == OperatingMode.Automatic).ConfigureAwait(false);
+                    _commandLineService.OptionsIdentifier).ConfigureAwait(false);
             }
         }
     }

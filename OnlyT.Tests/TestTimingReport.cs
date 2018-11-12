@@ -128,7 +128,7 @@
 
             if (week == weekCount - 1)
             {
-                var file = TimingReportGeneration.ExecuteAsync(service, null, true).Result;
+                var file = TimingReportGeneration.ExecuteAsync(service, null).Result;
                 Assert.IsNotNull(file);
             }
         }

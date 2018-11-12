@@ -36,5 +36,27 @@
                 Assert.AreEqual(dt, monday.AddDays(7));
             }
         }
+
+        [TestMethod]
+        public void TestNearest15Mins()
+        {
+            DateTime tenAm = DateTime.Today + TimeSpan.FromHours(10);
+            DateTime tenFifteenAm = DateTime.Today + TimeSpan.FromHours(10) + TimeSpan.FromMinutes(15);
+
+            var result = DateUtils.GetNearestQuarterOfAnHour(tenAm);
+            Assert.AreEqual(result, tenAm);
+
+            var dt = tenAm.AddMinutes(5);
+            result = DateUtils.GetNearestQuarterOfAnHour(dt);
+            Assert.AreEqual(result, tenAm);
+
+            dt = tenAm.AddMinutes(10);
+            result = DateUtils.GetNearestQuarterOfAnHour(dt);
+            Assert.AreEqual(result, tenAm);
+
+            dt = tenAm.AddMinutes(11);
+            result = DateUtils.GetNearestQuarterOfAnHour(dt);
+            Assert.AreEqual(result, tenFifteenAm);
+        }
     }
 }

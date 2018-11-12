@@ -309,6 +309,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Concluding Segment.
+        /// </summary>
+        public static string CONCLUDING_SEGMENT {
+            get {
+                return ResourceManager.GetString("CONCLUDING_SEGMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MEETING COUNTDOWN.
         /// </summary>
         public static string COUNTDOWN_SECTION {
@@ -485,6 +494,24 @@ namespace OnlyT.Properties {
         public static string INACTIVE_BELL {
             get {
                 return ResourceManager.GetString("INACTIVE_BELL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Interim Segment.
+        /// </summary>
+        public static string INTERIM_SEGMENT {
+            get {
+                return ResourceManager.GetString("INTERIM_SEGMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introductory Segment.
+        /// </summary>
+        public static string INTRO_SEGMENT {
+            get {
+                return ResourceManager.GetString("INTRO_SEGMENT", resourceCulture);
             }
         }
         
