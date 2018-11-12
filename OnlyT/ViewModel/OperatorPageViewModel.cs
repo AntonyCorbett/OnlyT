@@ -15,6 +15,7 @@
     using Messages;
     using Models;
     using OnlyT.Services.Report;
+    using OnlyT.Services.Snackbar;
     using Serilog;
     using Services.Bell;
     using Services.CommandLine;
@@ -53,6 +54,7 @@
         private readonly IBellService _bellService;
         private readonly ICommandLineService _commandLineService;
         private readonly ILocalTimingDataStoreService _timingDataService;
+        private readonly ISnackbarService _snackbarService;
 
         private int _secondsElapsed;
         private bool _countUp;
@@ -73,7 +75,8 @@
            IOptionsService optionsService,
            ICommandLineService commandLineService,
            IBellService bellService,
-           ILocalTimingDataStoreService timingDataService)
+           ILocalTimingDataStoreService timingDataService,
+           ISnackbarService snackbarService)
         {
             _scheduleService = scheduleService;
             _optionsService = optionsService;
@@ -81,6 +84,7 @@
             _commandLineService = commandLineService;
             _bellService = bellService;
             _timerService = timerService;
+            _snackbarService = snackbarService;
             _timingDataService = timingDataService;
             _timerService.TimerChangedEvent += TimerChangedHandler;
             _countUp = _optionsService.Options.CountUp;
@@ -901,7 +905,12 @@
         {
             if (_optionsService.Options.GenerateTimingReports)
             {
-                await TimingReportGeneration.ExecuteAsync(_timingDataService, _commandLineService.OptionsIdentifier).ConfigureAwait(false);
+                _snackbarService.EnqueueWithOk(Properties.Resources.GENERATING_REPORT);
+
+                await TimingReportGeneration.ExecuteAsync(
+                    _timingDataService, 
+                    _commandLineService.OptionsIdentifier,
+                    _optionsService.Options.OperatingMode == OperatingMode.Automatic).ConfigureAwait(false);
             }
         }
     }

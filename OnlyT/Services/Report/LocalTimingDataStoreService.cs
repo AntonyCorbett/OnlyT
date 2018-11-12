@@ -129,14 +129,14 @@
             return null;
         }
 
-        public bool ValidCurrentMeetingTimes()
+        public bool ValidCurrentMeetingTimes(bool autoTimingMode)
         {
             EnsureInitialised();
 
             bool valid =
                _mtgTimes.MeetingStart != default(TimeSpan) &&
                _mtgTimes.MeetingActualEnd != default(TimeSpan) &&
-               Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes) < MeetingMinsOutOfRange;
+               (!autoTimingMode || Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes) < MeetingMinsOutOfRange);
 
             if (!valid)
             {
@@ -215,7 +215,7 @@
         {
             try
             {
-                string folder = FileUtils.GetTimingReportsFolder(_commandLineService?.OptionsIdentifier);
+                string folder = FileUtils.GetTimingReportsDatabaseFolder(_commandLineService?.OptionsIdentifier);
                 string dbFilePath = Path.Combine(folder, "TimingData.db");
 
                 _localData = new LocalData(dbFilePath);

@@ -43,6 +43,7 @@ namespace OnlyT.ViewModel
         private readonly IMonitorsService _monitorsService;
         private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
+        private readonly ICommandLineService _commandLineService;
         private readonly IHttpServer _httpServer;
         private readonly (int dpiX, int dpiY) _systemDpi;
         private readonly ISnackbarService _snackbarService;
@@ -61,6 +62,8 @@ namespace OnlyT.ViewModel
            ICommandLineService commandLineService,
            ICountdownTimerTriggerService countdownTimerTriggerService)
         {
+            _commandLineService = commandLineService;
+
             if (commandLineService.NoGpu || ForceSoftwareRendering())
             {
                 // disable hardware (GPU) rendering so that it's all done by the CPU...
@@ -150,7 +153,7 @@ namespace OnlyT.ViewModel
             // we only init the settings page when first used.
             if (!_pages.ContainsKey(SettingsPageViewModel.PageName))
             {
-                _pages.Add(SettingsPageViewModel.PageName, new SettingsPage());
+                _pages.Add(SettingsPageViewModel.PageName, new SettingsPage(_commandLineService));
             }
         }
 

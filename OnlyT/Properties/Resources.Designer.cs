@@ -462,6 +462,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generating timing report.
+        /// </summary>
+        public static string GENERATING_REPORT {
+            get {
+                return ResourceManager.GetString("GENERATING_REPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string HELP {
@@ -944,6 +953,15 @@ namespace OnlyT.Properties {
         public static string SETTINGS {
             get {
                 return ResourceManager.GetString("SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate reports.
+        /// </summary>
+        public static string SHOULD_GENERATE_REPORTS {
+            get {
+                return ResourceManager.GetString("SHOULD_GENERATE_REPORTS", resourceCulture);
             }
         }
         

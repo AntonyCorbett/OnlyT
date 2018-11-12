@@ -379,6 +379,19 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.ALWAYS_ON_TOP}" />
 
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding ShouldGenerateReports, Mode=TwoWay}" 
+                                      Style="{StaticResource SettingsCheckBox}"
+                                      Content="{x:Static resx:Resources.SHOULD_GENERATE_REPORTS}" />
+                            
+                            <materialDesign:PackIcon Kind="FolderOpen" 
+                                                     Cursor="Hand"
+                                                     Margin="10,0"
+                                                     VerticalAlignment="Top"
+                                                     Width="18" 
+                                                     Height="18" MouseLeftButtonDown="ReportIconMouseLeftButtonDown"/>
+                        </StackPanel>
+
                         <DockPanel>
                             <materialDesign:PackIcon Kind="Translate" 
                                                      Width="24" 

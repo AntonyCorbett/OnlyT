@@ -21,7 +21,7 @@
 
         MeetingTimes GetCurrentMeetingTimes();
 
-        bool ValidCurrentMeetingTimes();
+        bool ValidCurrentMeetingTimes(bool autoTimingMode);
 
         void PurgeCurrentMeetingTimes();
 

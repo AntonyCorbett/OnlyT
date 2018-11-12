@@ -9,8 +9,13 @@
     public class TestTimingReport
     {
         private const int TotalMtgLengthMins = 105;
-        
+
+        // 3 mins 20 secs for interim song
+        private readonly TimeSpan _interimDuration = new TimeSpan(0, 3, 20);
+
         private readonly Random _random = new Random();
+
+        private bool _useRandomTimes = false;
 
         [TestMethod]
         public void TestReportGeneration()
@@ -53,18 +58,18 @@
             dateTimeService.Add(TimeSpan.FromSeconds(1));
 
             // song and prayer
-            InsertTimer(service, dateTimeService, "Introductory Segment", false, 5);
+            InsertTimer(service, dateTimeService, "Introductory Segment", false, 5, false);
 
             // public talk...
             InsertTimer(service, dateTimeService, "Public Talk", false, 30);
 
             // song
-            InsertTimer(service, dateTimeService, "Interim Segment", false, 5);
+            InsertTimer(service, dateTimeService, "Interim Segment", false, _interimDuration, false);
 
             // WT...
             InsertTimer(service, dateTimeService, "Watchtower Study", false, 60);
 
-            InsertTimer(service, dateTimeService, "Concluding Segment", false, 5);
+            InsertTimer(service, dateTimeService, "Concluding Segment", false, 5, false);
 
             service.InsertActualMeetingEnd();
 
@@ -86,10 +91,8 @@
 
             service.InsertMeetingStart(startOfMtg);
             service.InsertPlannedMeetingEnd(plannedEnd);
-
-            dateTimeService.Add(TimeSpan.FromMinutes(1));
-
-            InsertTimer(service, dateTimeService, "Introductory Segment", false, 5);
+            
+            InsertTimer(service, dateTimeService, "Introductory Segment", false, 5, false);
 
             InsertTimer(service, dateTimeService, "Opening Comments", false, 3);
 
@@ -97,18 +100,19 @@
 
             InsertTimer(service, dateTimeService, "Digging for Spiritual Gems", false, 8);
 
-            InsertTimer(service, dateTimeService, "Bible Reading", true, 10);
-            dateTimeService.Add(TimeSpan.FromSeconds(70));
+            InsertTimer(service, dateTimeService, "Bible Reading", true, 4);
+            dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Ministry Talk 1", false, 4);
+            InsertTimer(service, dateTimeService, "Ministry Talk 1", true, 2);
+            dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Ministry Talk 2", true, 3);
-            dateTimeService.Add(TimeSpan.FromSeconds(70));
+            InsertTimer(service, dateTimeService, "Ministry Talk 2", true, 4);
+            dateTimeService.Add(GetCounselDuration());
 
             InsertTimer(service, dateTimeService, "Ministry Talk 3", true, 6);
-            dateTimeService.Add(TimeSpan.FromSeconds(70));
+            dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Interim Segment", false, 5);
+            InsertTimer(service, dateTimeService, "Interim Segment", false, _interimDuration, false);
 
             InsertTimer(service, dateTimeService, "Living Item 1", false, 15);
 
@@ -116,7 +120,7 @@
 
             InsertTimer(service, dateTimeService, "Review", false, 3);
 
-            InsertTimer(service, dateTimeService, "Concluding Segment", false, 5);
+            InsertTimer(service, dateTimeService, "Concluding Segment", false, 5, false);
 
             service.InsertActualMeetingEnd();
 
@@ -124,9 +128,19 @@
 
             if (week == weekCount - 1)
             {
-                var file = TimingReportGeneration.ExecuteAsync(service, null).Result;
+                var file = TimingReportGeneration.ExecuteAsync(service, null, true).Result;
                 Assert.IsNotNull(file);
             }
+        }
+
+        private TimeSpan GetCounselDuration()
+        {
+            if (_useRandomTimes)
+            {
+                return TimeSpan.FromSeconds(_random.Next(70, 90));
+            }
+
+            return TimeSpan.FromSeconds(80);
         }
 
         private void InsertTimer(
@@ -134,14 +148,44 @@
             DateTimeServiceForTests dateTimeService,
             string talkDescription, 
             bool isStudentTalk, 
-            int targetMins)
+            TimeSpan target,
+            bool addChangeoverTime = true)
         {
-            service.InsertTimerStart(talkDescription, isStudentTalk, TimeSpan.FromMinutes(targetMins), TimeSpan.FromMinutes(targetMins));
-            dateTimeService.Add(GetDuration(targetMins));
+            service.InsertTimerStart(talkDescription, isStudentTalk, target, target);
+            dateTimeService.Add(GetDuration(target.TotalMinutes));
             service.InsertTimerStop();
 
-            // add an amount for speaker swap
-            dateTimeService.Add(GetDuration(0.3));
+            if (addChangeoverTime)
+            {
+                // add an amount for speaker swap
+                AddSpeakerChangeoverTime(dateTimeService, isStudentTalk);
+            }
+        }
+
+        private void AddSpeakerChangeoverTime(DateTimeServiceForTests dateTimeService, bool isStudentTalk)
+        {
+            if (_useRandomTimes)
+            {
+                dateTimeService.Add(GetDuration(0.3));
+            }
+            else
+            {
+                if (!isStudentTalk)
+                {
+                    dateTimeService.Add(new TimeSpan(0, 0, 20));
+                }
+            }
+        }
+
+        private void InsertTimer(
+            LocalTimingDataStoreService service,
+            DateTimeServiceForTests dateTimeService,
+            string talkDescription,
+            bool isStudentTalk,
+            int targetMins,
+            bool addChangeoverTime = true)
+        {
+            InsertTimer(service, dateTimeService, talkDescription, isStudentTalk, TimeSpan.FromMinutes(targetMins), addChangeoverTime);
         }
 
         private DateTime GetNearestDayOnOrAfter(DateTime dt, DayOfWeek dayOfWeek)
@@ -151,11 +195,16 @@
 
         private TimeSpan GetDuration(double targetMinutes)
         {
-            int variationSecs = (int)((targetMinutes / 20.0) * 60);
-            var secsToAdd = _random.Next(-variationSecs, variationSecs);
+            if (_useRandomTimes)
+            {
+                int variationSecs = (int)((targetMinutes / 20.0) * 60);
+                var secsToAdd = _random.Next(-variationSecs, variationSecs);
 
-            var result = targetMinutes + (secsToAdd / 60.0);
-            return TimeSpan.FromMinutes(result);
+                var result = targetMinutes + (secsToAdd / 60.0);
+                return TimeSpan.FromMinutes(result);
+            }
+
+            return TimeSpan.FromMinutes(targetMinutes);
         }
 
         private class DateTimeServiceForTests : IDateTimeService

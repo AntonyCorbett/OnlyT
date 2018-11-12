@@ -1,37 +1,38 @@
 ﻿namespace OnlyT.Services.TalkSchedule
 {
-    // sample midweek meeting times (used to determine values 
-    // for StartOffsetIntoMeeting)
-    //
-    //    7:00:00 (00:00) Start, song / prayer
-    //    7:05:00 (05:00) Opening comments
-    //    7:08:20 (08:20) Talk(10 mins)
-    //    7:18:40 (18:40) Digging(8 mins)
-    //    7:27:00 (27:00) Reading(4 mins)
-    //    7:31:20 (31:20) Counsel
-    //    7:32:40 (32:40) Prepare presentations(15 mins)
-    //    7:48:20 Song
-    //    7:51:40 (51:40) Part 1 (15 mins)
-    //    8:07:00 (67:00) Cong study(30 mins)
-    //    8:37:00 (97:00) Concluding comments(3 mins)
-    //    8:40:00 Song / prayer
-    //    7:00:00 (00:00) Start, song / prayer
-    //    7:05:00 (05:00) Opening comments
-    //    7:08:20 (08:20) Talk (10 mins)
-    //    7:18:40 (18:40) Digging(8 mins)
-    //    7:27:00 (27:00) Reading(4 mins)
-    //    7:31:10 (31:10) Counsel
-    //    7:32:20 (32:20) Initial call (2 mins)
-    //    7:34:30 (34:30) Counsel
-    //    7:35:40 (35:40) Return visit (4 mins)
-    //    7:39:50 (39:50) Counsel
-    //    7:41:00 (41:00) Bible study or talk (6 mins)
-    //    7:47:10 (47:10) Counsel
-    //    7:48:20 Song
-    //    7:51:40 (51:40) Part 1 (15 mins)
-    //    8:07:00 (67:00) Cong study(30 mins)
-    //    8:37:00 (97:00) Concluding comments(3 mins)
-    //    8:40:00 Song / prayer
+    //// sample midweek meeting times (used to determine values 
+    //// for StartOffsetIntoMeeting)
+    ////
+    ////    7:00:00 (00:00) Start, song / prayer
+    ////    7:05:00 (05:00) Opening comments
+    ////    7:08:20 (08:20) Talk(10 mins)
+    ////    7:18:40 (18:40) Digging(8 mins)
+    ////    7:27:00 (27:00) Reading(4 mins)
+    ////    7:31:20 (31:20) Counsel
+    ////    7:32:40 (32:40) Prepare presentations(15 mins)
+    ////    7:48:20 Song
+    ////    7:51:40 (51:40) Part 1 (15 mins)
+    ////    8:07:00 (67:00) Cong study(30 mins)
+    ////    8:37:00 (97:00) Concluding comments(3 mins)
+    ////    8:40:00 Song / prayer
+    
+    ////    7:00:00 (00:00) Start, song / prayer (19:00 - 19:05)
+    ////    7:05:00 (05:00) Opening comments (19:05 - 19:08)
+    ////    7:08:20 (08:20) Talk (10 mins) (19:08:20 - 19:18:20)
+    ////    7:18:40 (18:40) Digging(8 mins) (19:18:40 - 19:26:40)
+    ////    7:27:00 (27:00) Reading(4 mins) (19:27 - 19:31)
+    ////    7:31:10 (31:10) Counsel (19:31:10 - 19:32:10)
+    ////    7:32:20 (32:20) Initial call (2 mins) (19:32:20 - 
+    ////    7:34:30 (34:30) Counsel
+    ////    7:35:40 (35:40) Return visit (4 mins)
+    ////    7:39:50 (39:50) Counsel
+    ////    7:41:00 (41:00) Bible study or talk (6 mins)
+    ////    7:47:10 (47:10) Counsel
+    ////    7:48:20 Song
+    ////    7:51:40 (51:40) Part 1 (15 mins)
+    ////    8:07:00 (67:00) Cong study(30 mins)
+    ////    8:37:00 (97:00) Concluding comments(3 mins)
+    ////    8:40:00 Song / prayer
     using System;
     using System.Collections.Generic;
     using System.Linq;

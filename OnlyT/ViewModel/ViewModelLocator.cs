@@ -1,10 +1,9 @@
-using OnlyT.Report.Services;
-
 namespace OnlyT.ViewModel
 {
     using System;
     using CommonServiceLocator;
     using GalaSoft.MvvmLight.Ioc;
+    using OnlyT.Report.Services;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Services.Bell;

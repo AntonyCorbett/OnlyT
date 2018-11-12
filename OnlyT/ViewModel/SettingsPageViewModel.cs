@@ -408,6 +408,19 @@
             }
         }
 
+        public bool ShouldGenerateReports
+        {
+            get => _optionsService.Options.GenerateTimingReports;
+            set
+            {
+                if (_optionsService.Options.GenerateTimingReports != value)
+                {
+                    _optionsService.Options.GenerateTimingReports = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public bool ShowTimeOfDayUnderTimer
         {
             get => _optionsService.Options.ShowTimeOfDayUnderTimer;

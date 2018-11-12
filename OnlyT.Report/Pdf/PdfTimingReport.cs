@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Text;
     using OnlyT.Report.Models;
     using OnlyT.Report.Properties;
@@ -20,7 +19,6 @@
         private readonly MeetingTimes _data;
         private readonly string _outputFolder;
         private readonly XBrush _blackBrush = XBrushes.Black;
-        private readonly XBrush _whiteBrush = XBrushes.White;
         private readonly XBrush _grayBrush = XBrushes.Gray;
         private readonly XBrush _greenBrush = XBrushes.Green;
         private readonly XBrush _redBrush = XBrushes.Red;
@@ -81,7 +79,7 @@
                         if (item.IsStudentTalk && n != itemArray.Length - 1)
                         {
                             var nextItem = itemArray[n + 1];
-                            TimeSpan counselDuration = nextItem.Start - item.End;
+                            var counselDuration = nextItem.Start - item.End;
 
                             DrawCounselItem(g, counselDuration);
                         }
@@ -110,7 +108,7 @@
                 // ignore very short items that are likely mistakes
                 if ((item.End - item.Start).TotalSeconds > 20)
                 {
-                    if (item.Start > _data.MeetingStart && item.End <= _data.MeetingActualEnd)
+                    if (item.Start >= _data.MeetingStart && item.End <= _data.MeetingActualEnd)
                     {
                         result.Add(item);
                     }
@@ -127,7 +125,7 @@
                 var page = doc.AddPage();
                 CalcMetrics(page);
 
-                using (XGraphics g = XGraphics.FromPdfPage(page))
+                using (var g = XGraphics.FromPdfPage(page))
                 {
                     DrawTitle(g, Resources.TIMING_SUMMARY);
 
@@ -145,8 +143,8 @@
                 Chart c = new Chart(ChartType.Column2D);
                 c.Font.Name = "Verdana";
 
-                var xseries = c.XValues.AddXSeries();
-                var yseries = c.SeriesCollection.AddSeries();
+                var xSeries = c.XValues.AddXSeries();
+                var ySeries = c.SeriesCollection.AddSeries();
 
                 c.YAxis.MaximumScale = LargestDeviationMins;
                 c.YAxis.MinimumScale = -LargestDeviationMins;
@@ -177,7 +175,7 @@
                         break;
                 }
 
-                DateTime currentMonth = default(DateTime);
+                var currentMonth = default(DateTime);
 
                 foreach (var summary in _historicalASummary.Summaries)
                 {
@@ -187,20 +185,20 @@
                             summary.MeetingDate.Month != currentMonth.Month)
                         {
                             string monthName = summary.MeetingDate.ToString("MMM", CultureInfo.CurrentUICulture);
-                            xseries.Add(monthName);
+                            xSeries.Add(monthName);
                             currentMonth = summary.MeetingDate;
                         }
                         else
                         {
-                            xseries.AddBlank();
+                            xSeries.AddBlank();
                         }
 
-                        var p = yseries.Add(LimitOvertime(summary.Overtime.TotalMinutes));
+                        var p = ySeries.Add(LimitOvertime(summary.Overtime.TotalMinutes));
                         p.FillFormat.Color = XColor.FromName(p.Value > 0 ? "Red" : "Green");
                     }
                 }
 
-                ChartFrame frame = new ChartFrame();
+                var frame = new ChartFrame();
 
                 var chartHeight = _itemFont.Height * 15;
                 frame.Size = new XSize(page.Width - (_leftMargin * 2), chartHeight);
@@ -263,14 +261,14 @@
             g.DrawString(title, _itemFont, _grayBrush, new XPoint(x, _currentY));
 
             counselDuration = NormaliseCounselDuration(counselDuration);
-            DrawItemOvertime(g, x + sz.Width, counselDuration, TimeSpan.FromMinutes(1));
+            DrawItemOvertime(g, x + sz.Width, counselDuration, TimeSpan.FromSeconds(60));
 
             _currentY += (3 * (double)_itemTitleFont.Height) / 2;
         }
 
         private TimeSpan NormaliseCounselDuration(TimeSpan counselDuration)
         {
-            TimeSpan result = counselDuration - TimeSpan.FromSeconds(30);
+            TimeSpan result = counselDuration - TimeSpan.FromSeconds(20);
             if (result.TotalSeconds <= 5)
             {
                 result = counselDuration;
@@ -349,28 +347,6 @@
 
             TimeSpan ts = item.AdaptedDuration == default(TimeSpan) ? item.PlannedDuration : item.AdaptedDuration;
             DrawItemOvertime(g, curX, duration, ts);
-        }
-
-        private void DrawSongItem(XGraphics g, MeetingTimedItem item)
-        {
-            _currentY += (double)_itemFont.Height / 2;
-
-            double curX = _leftIndent;
-            string desc = item.Description;
-
-            XBrush textBrush = _whiteBrush;
-
-            var startY = _currentY - _itemTitleFont.Height;
-            g.DrawRectangle(_grayBrush, new XRect(_leftMargin, startY, _rightX - _leftMargin, _itemTitleFont.Height * 2.4));
-
-            g.DrawString(desc, _itemTitleFont, textBrush, new XPoint(curX, _currentY));
-            _currentY += _itemTitleFont.Height;
-
-            var duration = item.End - item.Start;
-            XSize szDur = DrawDurationString(g, duration, curX, textBrush);
-            curX += szDur.Width;
-
-            DrawTimesString(g, item, curX, textBrush);
         }
 
         private double DrawTimesString(XGraphics g, MeetingTimedItem item, double curX, XBrush textBrush)

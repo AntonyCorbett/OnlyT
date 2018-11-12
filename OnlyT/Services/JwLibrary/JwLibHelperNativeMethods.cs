@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace OnlyT.Services.JwLibrary
+﻿namespace OnlyT.Services.JwLibrary
 {
     using System;
     using System.Runtime.InteropServices;
