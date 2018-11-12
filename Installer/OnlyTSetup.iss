@@ -45,6 +45,7 @@ Source: "OnlyT\bin\Release\FluentCommandLineParser.dll"; DestDir: "{app}"; Flags
 Source: "OnlyT\bin\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\LiteDB.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\MaterialDesignColors.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\MaterialDesignThemes.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion   
 Source: "OnlyT\bin\Release\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -54,6 +55,9 @@ Source: "OnlyT\bin\Release\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ig
 Source: "OnlyT\bin\Release\OnlyT.CountdownTimer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\OnlyT.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\OnlyT.Report.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\PdfSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\PdfSharp.Charting.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\QRCoder.dll"; DestDir: "{app}"; Flags: ignoreversion
