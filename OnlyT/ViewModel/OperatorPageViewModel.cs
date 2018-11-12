@@ -437,21 +437,25 @@
             
             if (IsFirstTalk(talk.Id))
             {
-                const int totalMtgLengthMins = 105;
-                const int songAndPrayerMins = 5;
-
-                var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
-                _timingDataService.InsertMeetingStart(startTime);
-
                 if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
                 {
+                    var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
+                    _timingDataService.InsertMeetingStart(startTime);
+
+                    const int totalMtgLengthMins = 105;
+                    const int songAndPrayerMins = 5;
+
                     var plannedEndTime = startTime.AddMinutes(totalMtgLengthMins - songAndPrayerMins);
                     _timingDataService.InsertPlannedMeetingEnd(plannedEndTime);
+                }
+                else
+                {
+                    _timingDataService.InsertMeetingStart(DateTime.Now);
                 }
             }
 
             _timingDataService.InsertTimerStart(
-                talk.MeetingSectionNameLocalised, talk.IsStudentTalk, talk.OriginalDuration, talk.ActualDuration);
+                talk.NameForTimerReport, talk.IsStudentTalk, talk.OriginalDuration, talk.ActualDuration);
         }
 
         private void StoreTimerStopData()
@@ -906,6 +910,8 @@
             if (_optionsService.Options.GenerateTimingReports)
             {
                 _snackbarService.EnqueueWithOk(Properties.Resources.GENERATING_REPORT);
+
+                _timingDataService.Save();
 
                 await TimingReportGeneration.ExecuteAsync(
                     _timingDataService, 
