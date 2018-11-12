@@ -20,6 +20,7 @@
         private readonly string _outputFolder;
         private readonly XBrush _blackBrush = XBrushes.Black;
         private readonly XBrush _grayBrush = XBrushes.Gray;
+        private readonly XBrush _lightGrayBrush = XBrushes.LightGray;
         private readonly XBrush _greenBrush = XBrushes.Green;
         private readonly XBrush _redBrush = XBrushes.Red;
         private readonly HistoricalMeetingTimes _historicalASummary;
@@ -325,28 +326,36 @@
 
         private void DrawItem(XGraphics g, MeetingTimedItem item)
         {
-            DrawStdItem(g, item);
-            _currentY += (3 * (double)_itemTitleFont.Height) / 2;
-        }
+            var curX = _leftIndent;
+            var desc = item.Description;
 
-        private void DrawStdItem(XGraphics g, MeetingTimedItem item)
-        {
-            double curX = _leftIndent;
-            string desc = item.Description;
+            var textBrush = _blackBrush;
 
-            XBrush textBrush = _blackBrush;
+            if (item.IsSongSegment)
+            {
+                var itemHeight = _itemTitleFont.Height;
+
+                g.DrawRectangle(
+                    _lightGrayBrush, 
+                    _leftMargin, 
+                    _currentY - itemHeight, 
+                    _rightX - _leftMargin, 
+                    _itemTitleFont.Height * 2.5);
+            }
 
             g.DrawString(desc, _itemTitleFont, textBrush, new XPoint(curX, _currentY));
             _currentY += _itemTitleFont.Height;
 
             var duration = item.End - item.Start;
-            XSize szDur = DrawDurationString(g, duration, curX, textBrush);
+            var szDur = DrawDurationString(g, duration, curX, textBrush);
             curX += szDur.Width;
 
             curX = DrawTimesString(g, item, curX, textBrush);
 
-            TimeSpan ts = item.AdaptedDuration == default(TimeSpan) ? item.PlannedDuration : item.AdaptedDuration;
+            var ts = item.AdaptedDuration == default(TimeSpan) ? item.PlannedDuration : item.AdaptedDuration;
             DrawItemOvertime(g, curX, duration, ts);
+
+            _currentY += (3 * (double)_itemTitleFont.Height) / 2;
         }
 
         private double DrawTimesString(XGraphics g, MeetingTimedItem item, double curX, XBrush textBrush)

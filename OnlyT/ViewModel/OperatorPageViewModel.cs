@@ -449,6 +449,7 @@
 
                 _timingDataService.InsertTimerStart(
                     talk.MeetingSectionNameLocalised, 
+                    false,
                     talk.IsStudentTalk, 
                     talk.OriginalDuration, 
                     talk.ActualDuration);
@@ -469,7 +470,7 @@
 
         private bool IsFirstTalkAfterInterim(int talkId)
         {
-            var talkType = (TalkTypesAutoMode) talkId;
+            var talkType = (TalkTypesAutoMode)talkId;
 
             return talkType == TalkTypesAutoMode.LivingPart1 ||
                    talkType == TalkTypesAutoMode.Watchtower;

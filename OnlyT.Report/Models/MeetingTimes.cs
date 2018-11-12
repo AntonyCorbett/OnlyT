@@ -45,7 +45,7 @@
 
         public void InsertSongSegment(DateTime startTime, string description, TimeSpan duration)
         {
-            InsertTimerStartSpecifyingTime(startTime, description, duration);
+            InsertTimerStartSpecifyingTime(startTime, description, duration, true);
             InsertTimerStop(description, false);
         }
 
@@ -61,30 +61,19 @@
             MeetingActualEnd = RoundTimeSpanToSecond(end.TimeOfDay);
         }
 
-        public void InsertTimerStartSpecifyingTime(
-            DateTime start,
-            string partDescription, 
-            TimeSpan plannedDuration)
-        {
-            InitMtgDate();
-
-            Items.Add(new MeetingTimedItem
-            {
-                Description = partDescription,
-                Start = RoundTimeSpanToSecond(start.TimeOfDay),
-                PlannedDuration = RoundTimeSpanToSecond(plannedDuration),
-                AdaptedDuration = RoundTimeSpanToSecond(plannedDuration)
-            });
-        }
-
         public void InsertTimerStart(
-            string partDescription, bool isStudentTalk, TimeSpan plannedDuration, TimeSpan adaptedDuration)
+            string partDescription, 
+            bool isSongSegment,
+            bool isStudentTalk, 
+            TimeSpan plannedDuration, 
+            TimeSpan adaptedDuration)
         {
             InitMtgDate();
 
             Items.Add(new MeetingTimedItem
             {
                 Description = partDescription,
+                IsSongSegment = isSongSegment,
                 IsStudentTalk = isStudentTalk,
                 Start = RoundTimeSpanToSecond(Now().TimeOfDay),
                 PlannedDuration = RoundTimeSpanToSecond(plannedDuration),
@@ -145,6 +134,24 @@
         private DateTime Now()
         {
             return _dateTimeService?.Now() ?? DateTime.Now;
+        }
+
+        private void InsertTimerStartSpecifyingTime(
+            DateTime start,
+            string partDescription,
+            TimeSpan plannedDuration,
+            bool isSongSegment)
+        {
+            InitMtgDate();
+
+            Items.Add(new MeetingTimedItem
+            {
+                Description = partDescription,
+                IsSongSegment = isSongSegment,
+                Start = RoundTimeSpanToSecond(start.TimeOfDay),
+                PlannedDuration = RoundTimeSpanToSecond(plannedDuration),
+                AdaptedDuration = RoundTimeSpanToSecond(plannedDuration)
+            });
         }
     }
 }

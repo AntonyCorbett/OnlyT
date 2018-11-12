@@ -15,7 +15,7 @@
 
         private readonly Random _random = new Random();
 
-        private bool _useRandomTimes = false;
+        private bool _useRandomTimes = true;
 
         [TestMethod]
         public void TestReportGeneration()
@@ -58,20 +58,20 @@
             dateTimeService.Add(TimeSpan.FromSeconds(1));
 
             // song and prayer
-            InsertTimer(service, dateTimeService, "Introductory Segment", false, 5, false);
+            InsertTimer(service, dateTimeService, "Introductory Segment", true, false, 5, false);
 
             // public talk...
-            InsertTimer(service, dateTimeService, "Public Talk", false, 30);
+            InsertTimer(service, dateTimeService, "Public Talk", false, false, 30);
 
             // song
-            InsertTimer(service, dateTimeService, "Interim Segment", false, _interimDuration, false);
+            InsertTimer(service, dateTimeService, "Interim Segment", true, false, _interimDuration, false);
 
             // WT...
-            InsertTimer(service, dateTimeService, "Watchtower Study", false, 60);
+            InsertTimer(service, dateTimeService, "Watchtower Study", false, false, 60);
 
-            InsertTimer(service, dateTimeService, "Concluding Segment", false, 5, false);
+            InsertTimer(service, dateTimeService, "Concluding Segment", true, false, 5, false);
 
-            service.InsertActualMeetingEnd();
+            service.InsertActualMeetingEnd(dateTimeService.Now());
 
             service.Save();
         }
@@ -92,37 +92,37 @@
             service.InsertMeetingStart(startOfMtg);
             service.InsertPlannedMeetingEnd(plannedEnd);
             
-            InsertTimer(service, dateTimeService, "Introductory Segment", false, 5, false);
+            InsertTimer(service, dateTimeService, "Introductory Segment", true, false, 5, false);
 
-            InsertTimer(service, dateTimeService, "Opening Comments", false, 3);
+            InsertTimer(service, dateTimeService, "Opening Comments", false, false, 3);
 
-            InsertTimer(service, dateTimeService, "Treasures", false, 10);
+            InsertTimer(service, dateTimeService, "Treasures", false, false, 10);
 
-            InsertTimer(service, dateTimeService, "Digging for Spiritual Gems", false, 8);
+            InsertTimer(service, dateTimeService, "Digging for Spiritual Gems", false, false, 8);
 
-            InsertTimer(service, dateTimeService, "Bible Reading", true, 4);
+            InsertTimer(service, dateTimeService, "Bible Reading", false, true, 4);
             dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Ministry Talk 1", true, 2);
+            InsertTimer(service, dateTimeService, "Ministry Talk 1", false, true, 2);
             dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Ministry Talk 2", true, 4);
+            InsertTimer(service, dateTimeService, "Ministry Talk 2", false, true, 4);
             dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Ministry Talk 3", true, 6);
+            InsertTimer(service, dateTimeService, "Ministry Talk 3", false, true, 6);
             dateTimeService.Add(GetCounselDuration());
 
-            InsertTimer(service, dateTimeService, "Interim Segment", false, _interimDuration, false);
+            InsertTimer(service, dateTimeService, "Interim Segment", true, false, _interimDuration, false);
 
-            InsertTimer(service, dateTimeService, "Living Item 1", false, 15);
+            InsertTimer(service, dateTimeService, "Living Item 1", false, false, 15);
 
-            InsertTimer(service, dateTimeService, "Congregation Bible Study", false, 30);
+            InsertTimer(service, dateTimeService, "Congregation Bible Study", false, false, 30);
 
-            InsertTimer(service, dateTimeService, "Review", false, 3);
+            InsertTimer(service, dateTimeService, "Review", false, false, 3);
 
-            InsertTimer(service, dateTimeService, "Concluding Segment", false, 5, false);
+            InsertTimer(service, dateTimeService, "Concluding Segment", true, false, 5, false);
 
-            service.InsertActualMeetingEnd();
+            service.InsertActualMeetingEnd(dateTimeService.Now());
 
             service.Save();
 
@@ -147,11 +147,12 @@
             LocalTimingDataStoreService service,
             DateTimeServiceForTests dateTimeService,
             string talkDescription, 
+            bool isSongSegment,
             bool isStudentTalk, 
             TimeSpan target,
             bool addChangeoverTime = true)
         {
-            service.InsertTimerStart(talkDescription, isStudentTalk, target, target);
+            service.InsertTimerStart(talkDescription, isSongSegment, isStudentTalk, target, target);
             dateTimeService.Add(GetDuration(target.TotalMinutes));
             service.InsertTimerStop();
 
@@ -181,11 +182,12 @@
             LocalTimingDataStoreService service,
             DateTimeServiceForTests dateTimeService,
             string talkDescription,
+            bool isSongSegment,
             bool isStudentTalk,
             int targetMins,
             bool addChangeoverTime = true)
         {
-            InsertTimer(service, dateTimeService, talkDescription, isStudentTalk, TimeSpan.FromMinutes(targetMins), addChangeoverTime);
+            InsertTimer(service, dateTimeService, talkDescription, isSongSegment, isStudentTalk, TimeSpan.FromMinutes(targetMins), addChangeoverTime);
         }
 
         private DateTime GetNearestDayOnOrAfter(DateTime dt, DayOfWeek dayOfWeek)

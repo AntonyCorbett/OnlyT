@@ -17,6 +17,7 @@
 
         void InsertTimerStart(
             string description, 
+            bool isSongSegment,
             bool isStudentTalk,
             TimeSpan plannedDuration,
             TimeSpan adaptedDuration);

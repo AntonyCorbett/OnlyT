@@ -10,6 +10,8 @@
 
         public TimeSpan End { get; set; }
 
+        public bool IsSongSegment { get; set; }
+
         public TimeSpan PlannedDuration { get; set; }
 
         public TimeSpan AdaptedDuration { get; set; }

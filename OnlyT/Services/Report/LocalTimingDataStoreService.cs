@@ -106,14 +106,20 @@
         }
 
         public void InsertTimerStart(
-            string description, bool isStudentTalk, TimeSpan plannedDuration, TimeSpan adaptedDuration)
+            string description, 
+            bool isSongSegment, 
+            bool isStudentTalk, 
+            TimeSpan plannedDuration, 
+            TimeSpan adaptedDuration)
         {
             try
             {
                 EnsureInitialised();
                 _currentPartDescription = description;
                 _currentPartIsStudentTalk = isStudentTalk;
-                _mtgTimes?.InsertTimerStart(description, isStudentTalk, plannedDuration, adaptedDuration);
+
+                _mtgTimes?.InsertTimerStart(
+                    description, isSongSegment, isStudentTalk, plannedDuration, adaptedDuration);
             }
             catch (Exception ex)
             {
