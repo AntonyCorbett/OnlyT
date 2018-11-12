@@ -232,7 +232,7 @@
     <value>This Month's Presentations</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Přednáška pro veřejnost</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
     <value>Čtení Bible</value>
@@ -241,20 +241,20 @@
     <value>Service Talk</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Poklady - Proslov</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Studium Strážné věže</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Shromáždění o víkendu</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12-hour (am/pm)</value>
+    <value>12-hodinový (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-hour (leading zero &amp; am/pm)</value>
+    <value>12-hodinový (am/pm, s nulou na začátku)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
@@ -267,13 +267,13 @@
     <value>Nastavení</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Poklady z Božího Slova</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
     <value>Ministry</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Život křesťana</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>Weekend</value>
