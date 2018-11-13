@@ -18,7 +18,7 @@ See the [wiki](https://github.com/AntonyCorbett/OnlyT/wiki) for basic instructio
 
 OnlyT is Copyright &copy; 2018 Antony Corbett and other contributors under the [MIT license](LICENSE).
 
-NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). GalaSoft MVVM Light (Laurent Bugnion et al). MaterialDesign themes (James Willock, Mulholland Software and Contributors) is used under the MIT license. NUglify, Copyright (c) 2016, Alexandre Mutel. QRCode (Raffael Herrmann) is used under MIT. Serilog is used under the Apache License Version 2.0, January 2004. 
+NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). GalaSoft MVVM Light (Laurent Bugnion et al). MaterialDesign themes (James Willock, Mulholland Software and Contributors) is used under the MIT license. NUglify, Copyright (c) 2016, Alexandre Mutel. QRCode (Raffael Herrmann) is used under MIT. Serilog is used under the Apache License Version 2.0, January 2004. LiteDB (Mauricio David) is used under the MIT License. PDFSharp is used under the MIT License.
 
 With thanks to:
 * Crowdin.com for localisation tools
