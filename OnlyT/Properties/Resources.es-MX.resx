@@ -558,11 +558,11 @@
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Generating timing report</value>
+    <value>Generando informe de los tiempos</value>
     <comment>Displayed in the notification bar when the timing report is being created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
-    <value>Generar informe</value>
+    <value>Generar informes</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
