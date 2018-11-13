@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.Timer
+﻿using OnlyT.Utils;
+
+namespace OnlyT.Services.Timer
 {
     using System;
     using System.Diagnostics;
@@ -245,7 +247,7 @@
         {
             if (!message.Showing)
             {
-                _meetingStartTimeUtcFromCountdown = DateTime.UtcNow;
+                _meetingStartTimeUtcFromCountdown = DateUtils.GetNearestMinute(DateTime.UtcNow);
             }
             else
             {

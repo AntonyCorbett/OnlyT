@@ -15,6 +15,11 @@
             return theDate.AddDays(-daysToDeduct).Date;
         }
 
+        public static DateTime GetNearestMinute(DateTime dt)
+        {
+            return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, 0);
+        }
+
         public static DateTime GetNearestQuarterOfAnHour(DateTime value)
         {
             int mins = value.Minute;

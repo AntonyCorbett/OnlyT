@@ -725,7 +725,7 @@
             }
             else
             {
-                _meetingStartTimeFromCountdown = DateTime.Now;
+                _meetingStartTimeFromCountdown = DateUtils.GetNearestMinute(DateTime.Now);
             }
 
             IsCountdownActive = message.Showing;
