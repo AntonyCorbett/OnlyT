@@ -11,6 +11,8 @@
 
         void InsertSongSegment(DateTime startTime, string description, TimeSpan plannedDuration);
 
+        void InsertConcludingSongSegment(DateTime startTime, DateTime endTime, string description, TimeSpan plannedDuration);
+
         void InsertMeetingStart(DateTime value);
 
         void InsertActualMeetingEnd(DateTime end);

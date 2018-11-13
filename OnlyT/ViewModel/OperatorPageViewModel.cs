@@ -483,10 +483,9 @@
             _timingDataService.InsertMeetingStart(startTime);
 
             const int totalMtgLengthMins = 105;
-            const int songAndPrayerMins = 5;
 
             // and planned end...
-            var plannedEndTime = startTime.AddMinutes(totalMtgLengthMins - songAndPrayerMins);
+            var plannedEndTime = startTime.AddMinutes(totalMtgLengthMins);
             _timingDataService.InsertPlannedMeetingEnd(plannedEndTime);
 
             _timingDataService.InsertSongSegment(
@@ -509,8 +508,11 @@
             {
                 var songStart = DateTime.Now.AddSeconds(5);
 
-                _timingDataService.InsertSongSegment(songStart, Properties.Resources.CONCLUDING_SEGMENT, TimeSpan.FromMinutes(5));
-                _timingDataService.InsertActualMeetingEnd(songStart.AddMinutes(5));
+                // a guess!
+                var actualMeetingEnd = songStart.AddMinutes(5);
+
+                _timingDataService.InsertConcludingSongSegment(songStart, actualMeetingEnd, Properties.Resources.CONCLUDING_SEGMENT, TimeSpan.FromMinutes(5));
+                _timingDataService.InsertActualMeetingEnd(actualMeetingEnd);
             }
         }
 

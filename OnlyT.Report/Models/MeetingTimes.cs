@@ -49,6 +49,12 @@
             InsertTimerStop(description, false);
         }
 
+        public void InsertConcludingSongSegment(DateTime startTime, DateTime endTime, string description, TimeSpan duration)
+        {
+            InsertTimerStartSpecifyingTime(startTime, description, duration, true);
+            InsertTimerStopSpecifyingTime(endTime, description, false);
+        }
+
         public void InsertMeetingStart(DateTime value)
         {
             InitMtgDate();
@@ -152,6 +158,23 @@
                 PlannedDuration = RoundTimeSpanToSecond(plannedDuration),
                 AdaptedDuration = RoundTimeSpanToSecond(plannedDuration)
             });
+        }
+
+        private void InsertTimerStopSpecifyingTime(DateTime endTime, string partDescription, bool isStudentTalk)
+        {
+            InitMtgDate();
+
+            var item = Items.FirstOrDefault(
+                x => x.Description.Equals(partDescription) &&
+                     x.IsStudentTalk == isStudentTalk &&
+                     x.End.Equals(default(TimeSpan)));
+
+            if (item != null)
+            {
+                item.End = RoundTimeSpanToSecond(endTime.TimeOfDay);
+
+                LastTimerStop = MeetingDate + item.End;
+            }
         }
     }
 }

@@ -66,6 +66,19 @@
             }
         }
 
+        public void InsertConcludingSongSegment(DateTime startTime, DateTime endTime, string description, TimeSpan plannedDuration)
+        {
+            try
+            {
+                EnsureInitialised();
+                _mtgTimes?.InsertConcludingSongSegment(startTime, endTime, description, plannedDuration);
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not insert meeting planned end");
+            }
+        }
+
         public void InsertPlannedMeetingEnd(DateTime plannedEnd)
         {
             try
