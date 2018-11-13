@@ -562,7 +562,7 @@
     <comment>Displayed in the notification bar when the timing report is being created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
-    <value>Generate reports</value>
+    <value>Genera informes</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
