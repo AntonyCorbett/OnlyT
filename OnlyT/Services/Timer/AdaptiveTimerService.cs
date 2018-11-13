@@ -3,7 +3,9 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
+    using GalaSoft.MvvmLight.Messaging;
     using Models;
+    using OnlyT.ViewModel.Messages;
     using Options;
     using TalkSchedule;
 
@@ -25,10 +27,16 @@
 
         private DateTime? _meetingStartTimeUtc;
 
-        public AdaptiveTimerService(IOptionsService optionsService, ITalkScheduleService scheduleService)
+        private DateTime? _meetingStartTimeUtcFromCountdown;
+
+        public AdaptiveTimerService(
+            IOptionsService optionsService, 
+            ITalkScheduleService scheduleService)
         {
             _optionsService = optionsService;
             _scheduleService = scheduleService;
+
+            Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
         }
 
         /// <summary>
@@ -79,15 +87,42 @@
         {
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
+                DateTime? start = null;
+
                 switch (_optionsService.Options.MidWeekOrWeekend)
                 {
                     case MidWeekOrWeekend.Weekend:
-                        _meetingStartTimeUtc = CalculateWeekendStartTime(talk);
+                        start = CalculateWeekendStartTime(talk);
                         break;
 
                     case MidWeekOrWeekend.MidWeek:
-                        _meetingStartTimeUtc = CalculateMidWeekStartTime(talk);
+                        start = CalculateMidWeekStartTime(talk);
                         break;
+                }
+
+                if (start == null)
+                {
+                    _meetingStartTimeUtc = _meetingStartTimeUtcFromCountdown;
+                }
+                else if (_meetingStartTimeUtcFromCountdown == null)
+                {
+                    _meetingStartTimeUtc = start;
+                }
+                else
+                {
+                    // prefer the start time as provided by the countdown
+                    // so long as it's within a reasonable time frame...
+                    var toleranceSeconds = TimeSpan.FromMinutes(10).TotalSeconds;
+
+                    var diff = _meetingStartTimeUtcFromCountdown - start;
+                    if (diff != null && Math.Abs(diff.Value.TotalSeconds) < toleranceSeconds)
+                    {
+                        _meetingStartTimeUtc = _meetingStartTimeUtcFromCountdown;
+                    }
+                    else
+                    {
+                        _meetingStartTimeUtc = start;
+                    }
                 }
             }
         }
@@ -204,6 +239,18 @@
             }
 
             return result;
+        }
+
+        private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
+        {
+            if (!message.Showing)
+            {
+                _meetingStartTimeUtcFromCountdown = DateTime.UtcNow;
+            }
+            else
+            {
+                _meetingStartTimeUtcFromCountdown = null;
+            }
         }
     }
 }

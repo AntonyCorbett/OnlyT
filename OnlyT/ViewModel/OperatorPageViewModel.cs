@@ -67,6 +67,7 @@
         private string _duration2String;
         private string _duration3String;
         private int _secondsRemaining;
+        private DateTime? _meetingStartTimeFromCountdown;
 
         public OperatorPageViewModel(
            ITalkTimerService timerService,
@@ -489,7 +490,7 @@
             Log.Logger.Debug("Storing timer data for introductory segment");
 
             // insert start of meeting...
-            var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
+            var startTime = CalculateStartOfMeeting();
             _timingDataService.InsertMeetingStart(startTime);
 
             const int totalMtgLengthMins = 105;
@@ -502,6 +503,25 @@
                 startTime,
                 Properties.Resources.INTRO_SEGMENT,
                 TimeSpan.FromMinutes(5));
+        }
+
+        private DateTime CalculateStartOfMeeting()
+        {
+            var estimated = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
+            if (_meetingStartTimeFromCountdown == null)
+            {
+                return estimated;
+            }
+
+            var diff = estimated - _meetingStartTimeFromCountdown.Value;
+            var toleranceSeconds = TimeSpan.FromMinutes(10).TotalSeconds;
+
+            if (Math.Abs(diff.TotalSeconds) < toleranceSeconds)
+            {
+                return _meetingStartTimeFromCountdown.Value;
+            }
+
+            return estimated;
         }
 
         private void StoreTimerStopData()
@@ -699,6 +719,15 @@
 
         private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
         {
+            if (message.Showing)
+            {
+                _meetingStartTimeFromCountdown = null;
+            }
+            else
+            {
+                _meetingStartTimeFromCountdown = DateTime.Now;
+            }
+
             IsCountdownActive = message.Showing;
             RaisePropertyChanged(nameof(IsCountdownActive));
         }
