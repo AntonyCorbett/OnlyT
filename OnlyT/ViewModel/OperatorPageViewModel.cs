@@ -385,6 +385,8 @@
 
         public void Activated(object state)
         {
+            Log.Logger.Debug("Operator page activated");
+
             // "CountUp" setting may have changed
             var talk = GetCurrentTalk();
             RefreshCountUpFlag(talk);
@@ -396,6 +398,8 @@
 
         private void StartTimer()
         {
+            Log.Logger.Debug("Starting timer");
+
             _isStarting = true;
             _secondsElapsed = 0;
 
@@ -435,6 +439,8 @@
         {
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
+                Log.Logger.Debug("Storing timer start data");
+
                 var talk = GetCurrentTalk();
 
                 if (IsFirstTalk(talk.Id))
@@ -448,7 +454,7 @@
                 }
 
                 _timingDataService.InsertTimerStart(
-                    talk.MeetingSectionNameLocalised, 
+                    talk.Name, 
                     false,
                     talk.IsStudentTalk, 
                     talk.OriginalDuration, 
@@ -458,6 +464,8 @@
 
         private void StoreTimerDataForInterim()
         {
+            Log.Logger.Debug("Storing timer data for interim segment");
+
             var lastItemStop = _timingDataService.LastTimerStop;
             var interimStart = lastItemStop.AddSeconds(15);
 
@@ -478,6 +486,8 @@
 
         private void StoreTimerDataForStartOfMeeting()
         {
+            Log.Logger.Debug("Storing timer data for introductory segment");
+
             // insert start of meeting...
             var startTime = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
             _timingDataService.InsertMeetingStart(startTime);
@@ -498,6 +508,8 @@
         {
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
+                Log.Logger.Debug("Storing timer stop data");
+
                 _timingDataService.InsertTimerStop();
             }
         }
@@ -506,6 +518,8 @@
         {
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
+                Log.Logger.Debug("Storing end of meeting timer data");
+
                 var songStart = DateTime.Now.AddSeconds(5);
 
                 // a guess!
@@ -527,7 +541,9 @@
                     {
                         var talk = GetCurrentTalk();
                         if (talk != null)
-                        { 
+                        {
+                            Log.Logger.Debug($"Adjusting item for adaptive time. New duration = {newDuration.Value}");
+
                             talk.AdaptedDuration = newDuration.Value;
                             SetDurationStringAttributes(talk);
                             TargetSeconds = (int)talk.ActualDuration.TotalSeconds;
@@ -661,13 +677,18 @@
             var talk = GetCurrentTalk();
             if (talk != null && talk.Editable)
             {
-                talk.ModifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
+                var modifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
+
+                Log.Logger.Debug($"Talk timer adjusted for this session. Modified duration = {modifiedDuration}");
+
+                talk.ModifiedDuration = modifiedDuration;
                 SetDurationStringAttributes(talk);
             }
         }
 
         private void CloseCountdownWindow()
         {
+            Log.Logger.Debug("Sending StopCountDownMessage");
             Messenger.Default.Send(new StopCountDownMessage());
         }
 
@@ -712,6 +733,8 @@
         {
             try
             {
+                Log.Logger.Debug("Meeting schedule changing");
+
                 _scheduleService.Reset();
                 TalkId = 0;
                 RaisePropertyChanged(nameof(Talks));
@@ -765,6 +788,8 @@
 
         private void OnOperatingModeChanged(OperatingModeChangedMessage message)
         {
+            Log.Logger.Debug("Responding to change in operating mode");
+
             RaisePropertyChanged(nameof(IsAutoMode));
             RaisePropertyChanged(nameof(ShouldShowCircuitVisitToggle));
             RaisePropertyChanged(nameof(IsManualMode));
@@ -794,6 +819,8 @@
 
         private async void StopTimer()
         {
+            Log.Logger.Debug("Stopping timer");
+
             var talk = GetCurrentTalk();
             var msg = new TimerStopMessage(
                 TalkId, 
@@ -889,6 +916,9 @@
             Application.Current.Dispatcher.Invoke(() =>
             {
                 // always on UI thread to prevent synchronisation issues.
+
+                Log.Logger.Debug("Handling timer control from API");
+
                 CheckTalkExists(e.TalkId);
 
                 bool success = TalkId == e.TalkId || IsNotRunning;
@@ -958,6 +988,8 @@
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic &&
                 _optionsService.Options.GenerateTimingReports)
             {
+                Log.Logger.Debug("Generating timer report");
+
                 _snackbarService.EnqueueWithOk(Properties.Resources.GENERATING_REPORT);
 
                 _timingDataService.Save();
