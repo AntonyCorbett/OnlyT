@@ -7,7 +7,10 @@
     using System.Windows;
     using System.Windows.Markup;
     using CommandLine;
+    using GalaSoft.MvvmLight.Messaging;
     using Newtonsoft.Json;
+    using OnlyT.Services.LogLevelSwitch;
+    using OnlyT.ViewModel.Messages;
     using Serilog;
     using Utils;
 
@@ -18,14 +21,20 @@
     internal class OptionsService : IOptionsService
     {
         private readonly ICommandLineService _commandLineService;
+        private readonly ILogLevelSwitchService _logLevelSwitchService;
         private readonly int _optionsVersion = 1;
         private Options _options;
         private string _optionsFilePath;
         private string _originalOptionsSignature;
 
-        public OptionsService(ICommandLineService commandLineService)
+        public OptionsService(
+            ICommandLineService commandLineService,
+            ILogLevelSwitchService logLevelSwitchService)
         {
             _commandLineService = commandLineService;
+            _logLevelSwitchService = logLevelSwitchService;
+            
+            Messenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
         }
 
         public Options Options
@@ -105,6 +114,8 @@
                     // store the original settings so that we can determine if they have changed
                     // when we come to save them
                     _originalOptionsSignature = GetOptionsSignature(_options);
+
+                    _logLevelSwitchService.SetMinimumLevel(Options.LogEventLevel);
                 }
                 catch (Exception ex)
                 {
@@ -206,6 +217,11 @@
                     _originalOptionsSignature = GetOptionsSignature(_options);
                 }
             }
+        }
+
+        private void OnLogLevelChanged(LogLevelChangedMessage message)
+        {
+            _logLevelSwitchService.SetMinimumLevel(Options.LogEventLevel);
         }
     }
 }

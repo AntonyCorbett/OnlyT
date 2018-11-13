@@ -5,6 +5,8 @@
     using System.Threading;
     using System.Windows;
     using GalaSoft.MvvmLight.Threading;
+    using OnlyT.AutoUpdates;
+    using OnlyT.Services.LogLevelSwitch;
     using OnlyT.ViewModel;
     using Serilog;
     using Utils;
@@ -45,11 +47,15 @@
             string logsDirectory = FileUtils.GetLogFolder();
 
             Log.Logger = new LoggerConfiguration()
-               .MinimumLevel.Information()
-               .WriteTo.RollingFile(Path.Combine(logsDirectory, "log-{Date}.txt"), retainedFileCountLimit: 28)
-               .CreateLogger();
+                .MinimumLevel.ControlledBy(LogLevelSwitchService.LevelSwitch)
+                .WriteTo.RollingFile(Path.Combine(logsDirectory, "log-{Date}.txt"), retainedFileCountLimit: 28)
+#if DEBUG
+                .WriteTo.Console()
+#endif
+                .CreateLogger();
 
             Log.Logger.Information("==== Launched ====");
+            Log.Logger.Information($"Version {VersionDetection.GetCurrentVersion()}");
         }
 
         private bool AnotherInstanceRunning()

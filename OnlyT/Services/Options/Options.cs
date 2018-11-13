@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Windows;
     using Models;
+    using Serilog.Events;
 
     /// <summary>
     /// All program options. The full structure is written to disk in JSON format on change
@@ -39,6 +40,7 @@
             JwLibraryCompatibilityMode = true;
             CountdownFrame = true;
             TimerFrame = true;
+            LogEventLevel = LogEventLevel.Information;
 
             AdjustClockFormat();
         }
@@ -116,6 +118,8 @@
         public string Culture { get; set; }
 
         public bool GenerateTimingReports { get; set; }
+
+        public LogEventLevel LogEventLevel { get; set; }
 
         /// <summary>
         /// Validates the data, correcting automatically as required

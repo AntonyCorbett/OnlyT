@@ -15,6 +15,7 @@
     using Models;
     using OnlyT.Services.Snackbar;
     using Serilog;
+    using Serilog.Events;
     using Services.Bell;
     using Services.CountdownTimer;
     using Services.Monitors;
@@ -39,6 +40,7 @@
         private readonly FullScreenClockModeItem[] _timeOfDayModes;
         private readonly WebClockPortItem[] _ports;
         private readonly PersistDurationItem[] _persistDurationItems;
+        private readonly LoggingLevel[] _loggingLevels;
 
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
@@ -67,7 +69,8 @@
             _timeOfDayModes = GetTimeOfDayModes();
             _ports = GetPorts().ToArray();
             _persistDurationItems = optionsService.Options.GetPersistDurationItems();
-            
+            _loggingLevels = GetLoggingLevels();
+
             // commands...
             NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
             TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
@@ -394,6 +397,22 @@
             }
         }
 
+        public IEnumerable<LoggingLevel> LoggingLevels => _loggingLevels;
+
+        public LogEventLevel LogEventLevel
+        {
+            get => _optionsService.Options.LogEventLevel;
+            set
+            {
+                if (_optionsService.Options.LogEventLevel != value)
+                {
+                    _optionsService.Options.LogEventLevel = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new LogLevelChangedMessage());
+                }
+            }
+        }
+
         public bool AlwaysOnTop
         {
             get => _optionsService.Options.AlwaysOnTop;
@@ -583,7 +602,7 @@
                 }
             }
         }
-
+        
         public BitmapImage WebClockQrCode
         {
             get
@@ -863,6 +882,22 @@
         {
             Save();
             Messenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
+        }
+
+        private LoggingLevel[] GetLoggingLevels()
+        {
+            var result = new List<LoggingLevel>();
+
+            foreach (LogEventLevel v in Enum.GetValues(typeof(LogEventLevel)))
+            {
+                result.Add(new LoggingLevel
+                {
+                    Level = v,
+                    Name = v.GetDescriptiveName()
+                });
+            }
+
+            return result.ToArray();
         }
     }
 }

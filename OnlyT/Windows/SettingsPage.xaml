@@ -89,40 +89,42 @@
                       VerticalScrollBarVisibility="Auto">
             <WrapPanel Orientation="Horizontal">
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="{x:Static resx:Resources.MAIN_SECTION}">
-                    <StackPanel Style="{StaticResource SettingsStackPanel}">
-                        <ComboBox ItemsSource="{Binding Monitors}" 
-                                  Style="{StaticResource SettingsComboStyle}"
-                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
-                                  SelectedValuePath="MonitorId" 
-                                  DisplayMemberPath="FriendlyName"
-                                  SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
-                        
-                        <ComboBox ItemsSource="{Binding OperatingModes}" 
-                                  Style="{StaticResource SettingsComboStyle}"
-                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.OP_MODE}"
-                                  SelectedValuePath="Mode" 
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
-                        
-                        <ComboBox ItemsSource="{Binding ClockHourFormats}" 
-                                  Style="{StaticResource SettingsComboStyle}"
-                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.DIGITAL_CLOCK_FORMAT}"
-                                  SelectedValuePath="Format" 
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
+                    <DockPanel>
+                        <StackPanel Style="{StaticResource SettingsStackPanel}" DockPanel.Dock="Top">
+                            <ComboBox ItemsSource="{Binding Monitors}" 
+                                      Style="{StaticResource SettingsComboStyle}"
+                                      materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
+                                      SelectedValuePath="MonitorId" 
+                                      DisplayMemberPath="FriendlyName"
+                                      SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
+                            
+                            <ComboBox ItemsSource="{Binding OperatingModes}" 
+                                      Style="{StaticResource SettingsComboStyle}"
+                                      materialDesign:HintAssist.Hint="{x:Static resx:Resources.OP_MODE}"
+                                      SelectedValuePath="Mode" 
+                                      DisplayMemberPath="Name"
+                                      SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
+                            
+                            <ComboBox ItemsSource="{Binding ClockHourFormats}" 
+                                      Style="{StaticResource SettingsComboStyle}"
+                                      materialDesign:HintAssist.Hint="{x:Static resx:Resources.DIGITAL_CLOCK_FORMAT}"
+                                      SelectedValuePath="Format" 
+                                      DisplayMemberPath="Name"
+                                      SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
 
-                        <CheckBox IsChecked="{Binding ShowDigitalSeconds, Mode=TwoWay}" 
-                                  Style="{StaticResource SettingsCheckBox}"
-                                  IsEnabled="{Binding ShouldEnableShowSeconds}"
-                                  Content="{x:Static resx:Resources.SHOW_SECONDS}" />
+                            <CheckBox IsChecked="{Binding ShowDigitalSeconds, Mode=TwoWay}" 
+                                      Style="{StaticResource SettingsCheckBox}"
+                                      IsEnabled="{Binding ShouldEnableShowSeconds}"
+                                      Content="{x:Static resx:Resources.SHOW_SECONDS}" />
+                        </StackPanel>
 
                         <TextBlock Text="{Binding AppVersionStr}"
+                                   HorizontalAlignment="Right"
                                    VerticalAlignment="Bottom"
                                    FontSize="11" 
                                    Margin="0,15,0,0"
                                    Foreground="{StaticResource PrimaryHueDarkBrush}"/>
-
-                    </StackPanel>
+                    </DockPanel>
                 </GroupBox>
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="{x:Static resx:Resources.AUTO_SECTION}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
@@ -391,6 +393,15 @@
                         <CheckBox IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.ALWAYS_ON_TOP}" />
+
+                        <ComboBox ItemsSource="{Binding LoggingLevels}"
+                                  Style="{StaticResource SettingsComboStyle}" 
+                                  materialDesign:HintAssist.IsFloating="True"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.LOGGING_LEVEL}"
+                                  SelectedValuePath="Level" 
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding LogEventLevel, Mode=TwoWay}"/>
+
 
                         <DockPanel>
                             <materialDesign:PackIcon Kind="Translate" 

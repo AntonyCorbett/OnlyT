@@ -4,6 +4,7 @@ namespace OnlyT.ViewModel
     using CommonServiceLocator;
     using GalaSoft.MvvmLight.Ioc;
     using OnlyT.Report.Services;
+    using OnlyT.Services.LogLevelSwitch;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Services.Bell;
@@ -36,6 +37,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ISnackbarService, SnackbarService>();
             SimpleIoc.Default.Register<ILocalTimingDataStoreService, LocalTimingDataStoreService>();
             SimpleIoc.Default.Register<IDateTimeService, DateTimeService>();
+            SimpleIoc.Default.Register<ILogLevelSwitchService, LogLevelSwitchService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);
 

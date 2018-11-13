@@ -82,6 +82,9 @@
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
@@ -141,6 +144,7 @@
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\LanguageItem.cs" />
+    <Compile Include="Models\LoggingLevel.cs" />
     <Compile Include="Models\OnScreenLocationItem.cs" />
     <Compile Include="Models\PersistDurationItem.cs" />
     <Compile Include="Models\StartStopTimerCommands.cs" />
@@ -163,6 +167,8 @@
     <Compile Include="Services\CountdownTimer\ICountdownTimerTriggerService.cs" />
     <Compile Include="Services\JwLibrary\JwLibHelper.cs" />
     <Compile Include="Services\JwLibrary\JwLibHelperNativeMethods.cs" />
+    <Compile Include="Services\LogLevelSwitch\ILogLevelSwitchService.cs" />
+    <Compile Include="Services\LogLevelSwitch\LogLevelSwitchService.cs" />
     <Compile Include="Services\Monitors\DisplayDevices.cs" />
     <Compile Include="Services\Monitors\IMonitorsService.cs" />
     <Compile Include="Services\Monitors\MonitorsService.cs" />
@@ -196,6 +202,7 @@
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\BitmapConverter.cs" />
     <Compile Include="Utils\DateUtils.cs" />
+    <Compile Include="Utils\EnumExtensions.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FirewallPortsClient.cs" />
     <Compile Include="Utils\GreenYellowRedSelector.cs" />
@@ -217,6 +224,7 @@
     <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownZoomOrPositionChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\LogLevelChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\MousePointerInTimerDisplayChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />

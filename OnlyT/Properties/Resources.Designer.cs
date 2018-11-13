@@ -552,6 +552,69 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        public static string LOG_LEVEL_DEBUG {
+            get {
+                return ResourceManager.GetString("LOG_LEVEL_DEBUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string LOG_LEVEL_ERROR {
+            get {
+                return ResourceManager.GetString("LOG_LEVEL_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fatal.
+        /// </summary>
+        public static string LOG_LEVEL_FATAL {
+            get {
+                return ResourceManager.GetString("LOG_LEVEL_FATAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string LOG_LEVEL_INFORMATION {
+            get {
+                return ResourceManager.GetString("LOG_LEVEL_INFORMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbose.
+        /// </summary>
+        public static string LOG_LEVEL_VERBOSE {
+            get {
+                return ResourceManager.GetString("LOG_LEVEL_VERBOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string LOG_LEVEL_WARNING {
+            get {
+                return ResourceManager.GetString("LOG_LEVEL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging level.
+        /// </summary>
+        public static string LOGGING_LEVEL {
+            get {
+                return ResourceManager.GetString("LOGGING_LEVEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MAIN.
         /// </summary>
         public static string MAIN_SECTION {
