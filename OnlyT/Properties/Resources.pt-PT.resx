@@ -558,8 +558,8 @@
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>A gerar relatório de tempos</value>
-    <comment>Displayed in the notification bar when the timing report is being created</comment>
+    <value>Generated timing report</value>
+    <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Gerar relatórios</value>
@@ -604,5 +604,13 @@
   <data name="LOG_LEVEL_WARNING" xml:space="preserve">
     <value>Aviso</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
+    <value>Analysing meeting timer data</value>
+    <comment>Displayed in the notification bar before a timing report is generated</comment>
+  </data>
+  <data name="NO_REPORT" xml:space="preserve">
+    <value>Report NOT generated!</value>
+    <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
   </data>
 </root>
