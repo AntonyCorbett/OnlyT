@@ -10,6 +10,7 @@
     using PdfSharp.Charting;
     using PdfSharp.Drawing;
     using PdfSharp.Pdf;
+    using Serilog;
 
     public class PdfTimingReport
     {
@@ -56,16 +57,19 @@
 
         public string Execute()
         {
-            string fileName = GetOutputFileName();
+            var fileName = GetOutputFileName();
 
-            using (PdfDocument doc = new PdfDocument())
+            Log.Logger.Debug($"Executing PdfTimerReport: {fileName}");
+
+            using (var doc = new PdfDocument())
             {
                 _pdfOptions = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
 
                 var page = doc.AddPage();
 
-                using (XGraphics g = XGraphics.FromPdfPage(page))
+                using (var g = XGraphics.FromPdfPage(page))
                 {
+                    Log.Logger.Debug("Creating fonts and page metrics");
                     CreateFonts();
                     CalcMetrics(page);
 
@@ -75,6 +79,8 @@
                     for (int n = 0; n < itemArray.Length; ++n)
                     {
                         var item = itemArray[n];
+
+                        Log.Logger.Debug($"Printing item: {item.Description}, {item.Start} - {item.End}");
 
                         DrawItem(g, item);
                         if (item.IsStudentTalk && n != itemArray.Length - 1)
@@ -88,10 +94,12 @@
 
                     if (_data.MeetingPlannedEnd != default(TimeSpan) && _data.MeetingActualEnd != default(TimeSpan))
                     {
+                        Log.Logger.Debug("Printing summary");
                         DrawSummary(g, _data.MeetingPlannedEnd, _data.MeetingActualEnd);
                     }
                 }
 
+                Log.Logger.Debug("Printing historical summary");
                 DrawHistoricalSummary(doc);
 
                 doc.Save(fileName);
