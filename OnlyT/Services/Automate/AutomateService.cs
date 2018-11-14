@@ -10,7 +10,7 @@
 
     internal class AutomateService : IAutomateService
     {
-        private const int TimerIntervalSeconds = 5;
+        private const int TimerIntervalSeconds = 3;
 
         private readonly IOptionsService _optionsService;
         private readonly ITalkTimerService _timerService;
@@ -136,8 +136,8 @@
 
         private TimeSpan GetAboutXSeconds(int x)
         {
-            var tolerance = x / 20;
-            return TimeSpan.FromSeconds(_random.Next(x - tolerance, x + tolerance + 1));
+            var tolerance = x / 12;
+            return TimeSpan.FromSeconds(_random.Next(x - tolerance, x + tolerance));
         }
 
         private TimeSpan? CalculateNextStartTimeMidWeek(TimerStatus status, DateTime now)

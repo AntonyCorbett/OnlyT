@@ -31,7 +31,7 @@
                     return null;
                 }
 
-                var yearFolder = Path.Combine(outputFolder, DateTime.Now.Year.ToString());
+                var yearFolder = GetDatedOutputFolder(outputFolder);
                 Directory.CreateDirectory(yearFolder);
                 
                 if (Directory.Exists(yearFolder))
@@ -48,6 +48,13 @@
 
                 return null;
             });
+        }
+
+        private static string GetDatedOutputFolder(string outputFolder)
+        {
+            var now = DateTime.Now;
+            var monthFolderName = $"{now.Year}-{now.Month:D2}";
+            return Path.Combine(outputFolder, now.Year.ToString(), monthFolderName);
         }
     }
 }
