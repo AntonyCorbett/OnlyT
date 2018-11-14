@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using System.IO;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -1036,9 +1038,25 @@
                     _timingDataService, 
                     _commandLineService.OptionsIdentifier).ConfigureAwait(false);
 
-                _snackbarService.EnqueueWithOk(string.IsNullOrEmpty(reportPath)
-                    ? Properties.Resources.NO_REPORT
-                    : Properties.Resources.GENERATING_REPORT);
+                if (string.IsNullOrEmpty(reportPath))
+                {
+                    _snackbarService.EnqueueWithOk(Properties.Resources.NO_REPORT);
+                }
+                else
+                {
+                    _snackbarService.Enqueue(
+                        Properties.Resources.GENERATING_REPORT,
+                        Properties.Resources.VIEW_REPORT,
+                        () => LaunchPdf(reportPath));
+                }
+            }
+        }
+
+        private void LaunchPdf(string pdf)
+        {
+            if (File.Exists(pdf))
+            {
+                Process.Start(pdf);
             }
         }
     }

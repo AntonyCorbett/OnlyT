@@ -1290,6 +1290,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VIEW.
+        /// </summary>
+        public static string VIEW_REPORT {
+            get {
+                return ResourceManager.GetString("VIEW_REPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Volume:.
         /// </summary>
         public static string VOLUME {
