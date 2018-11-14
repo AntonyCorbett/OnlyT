@@ -9,5 +9,7 @@
         bool NoSettings { get; set; }
 
         bool IgnoreMutex { get; set; }
+
+        bool Automate { get; set; }
     }
 }

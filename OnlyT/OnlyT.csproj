@@ -150,6 +150,8 @@
     <Compile Include="Models\StartStopTimerCommands.cs" />
     <Compile Include="Models\TimerStatus.cs" />
     <Compile Include="Models\WebClockPortItem.cs" />
+    <Compile Include="Services\Automate\AutomateService.cs" />
+    <Compile Include="Services\Automate\IAutomateService.cs" />
     <Compile Include="Services\Bell\BellService.cs" />
     <Compile Include="Services\Bell\BellStatusChangedMessage.cs" />
     <Compile Include="Services\Bell\IBellService.cs" />

@@ -142,6 +142,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analysing meeting timer data.
+        /// </summary>
+        public static string ANALYSING_REPORT_DATA {
+            get {
+                return ResourceManager.GetString("ANALYSING_REPORT_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Software version {0}.
         /// </summary>
         public static string APP_VER {
@@ -471,7 +480,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generating timing report.
+        ///   Looks up a localized string similar to Generated timing report.
         /// </summary>
         public static string GENERATING_REPORT {
             get {
@@ -764,6 +773,15 @@ namespace OnlyT.Properties {
         public static string NEW_VERSION {
             get {
                 return ResourceManager.GetString("NEW_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report NOT generated!.
+        /// </summary>
+        public static string NO_REPORT {
+            get {
+                return ResourceManager.GetString("NO_REPORT", resourceCulture);
             }
         }
         

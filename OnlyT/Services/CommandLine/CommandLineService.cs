@@ -22,6 +22,9 @@
             p.Setup<bool>("nomutex")
                 .Callback(s => { IgnoreMutex = s; }).SetDefault(false);
 
+            p.Setup<bool>("automate")
+                .Callback(s => { Automate = s; }).SetDefault(false);
+
             p.Parse(Environment.GetCommandLineArgs());
         }
 
@@ -32,5 +35,7 @@
         public bool NoSettings { get; set; }
 
         public bool IgnoreMutex { get; set; }
+
+        public bool Automate { get; set; }
     }
 }

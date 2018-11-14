@@ -14,6 +14,7 @@
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
+    using OnlyT.Services.Automate;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Serilog;
@@ -122,6 +123,14 @@
             }
 
             GetVersionData();
+
+            if (commandLineService.Automate)
+            {
+#if DEBUG
+                var automationService = new AutomateService(_optionsService, _timerService, scheduleService);
+                automationService.Execute();
+#endif
+            }
         }
         
         public static string PageName => "OperatorPage";
@@ -1019,13 +1028,17 @@
             {
                 Log.Logger.Debug("Generating timer report");
 
-                _snackbarService.EnqueueWithOk(Properties.Resources.GENERATING_REPORT);
+                _snackbarService.EnqueueWithOk(Properties.Resources.ANALYSING_REPORT_DATA);
 
                 _timingDataService.Save();
 
-                await TimingReportGeneration.ExecuteAsync(
+                var reportPath = await TimingReportGeneration.ExecuteAsync(
                     _timingDataService, 
                     _commandLineService.OptionsIdentifier).ConfigureAwait(false);
+
+                _snackbarService.EnqueueWithOk(string.IsNullOrEmpty(reportPath)
+                    ? Properties.Resources.NO_REPORT
+                    : Properties.Resources.GENERATING_REPORT);
             }
         }
     }

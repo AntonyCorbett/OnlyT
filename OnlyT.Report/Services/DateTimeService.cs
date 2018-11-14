@@ -2,6 +2,7 @@
 {
     using System;
 
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class DateTimeService : IDateTimeService
     {
         public DateTime Now()
