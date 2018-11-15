@@ -14,6 +14,8 @@ If you just want to install the application, please download the [OnlyTSetup.exe
 
 See the [wiki](https://github.com/AntonyCorbett/OnlyT/wiki) for basic instructions.
 
+See the [FAQ](https://github.com/AntonyCorbett/OnlyT/wiki/FAQ) for frequently asked questions.
+
 ### License, etc
 
 OnlyT is Copyright &copy; 2018 Antony Corbett and other contributors under the [MIT license](LICENSE).

@@ -1,3 +1,5 @@
 files:
   - source: /OnlyT/Properties/Resources.resx
     translation: /OnlyT/Properties/%file_name%.%locale%.resx
+  - source: /OnlyT.Report/Properties/Resources.resx
+    translation: /OnlyT.Report/Properties/%file_name%.%locale%.resx
