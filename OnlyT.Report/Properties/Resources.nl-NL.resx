@@ -118,23 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="COUNSEL" xml:space="preserve">
-    <value>counsel and commendation</value>
+    <value>raad</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Midweek and Weekend Meetings</value>
+    <value>Midweek- en weekendvergaderingen</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Midweek Meetings</value>
+    <value>Midweekvergaderingen</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
-    <value>Meeting on time</value>
+    <value>Vergadering op tijd</value>
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
-    <value>Overall Status</value>
+    <value>Algemene status</value>
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
