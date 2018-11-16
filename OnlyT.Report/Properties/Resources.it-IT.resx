@@ -126,7 +126,7 @@
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Adunanze del fine settimana</value>
+    <value>Adunanze infrasettimanali</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
@@ -150,7 +150,7 @@
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
-    <value>Rapporto sui tempi</value>
+    <value>Rapporto dei tempi</value>
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
@@ -162,11 +162,11 @@
     <comment>Summary text in the Timing Report when the meeting was undertime by more than 1 minute</comment>
   </data>
   <data name="UNDERTIME_BY_1" xml:space="preserve">
-    <value>Meeting undertime by 1 minute</value>
+    <value>Adunanza in anticipo di 1 minuto</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Weekend Meetings</value>
+    <value>Adunanze del fine settimana</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
