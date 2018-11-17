@@ -154,7 +154,7 @@
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
-    <value>Timming-Übersicht</value>
+    <value>Timing-Übersicht</value>
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
