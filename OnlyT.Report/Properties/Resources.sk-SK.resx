@@ -126,7 +126,7 @@
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Midweek Meetings</value>
+    <value>Zhromaždenie v týždni</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
@@ -166,7 +166,7 @@
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Weekend Meetings</value>
+    <value>Zhromaždenie cez víkend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
