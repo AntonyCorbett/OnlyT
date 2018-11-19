@@ -130,7 +130,7 @@
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
-    <value>Reunión en el tiempo</value>
+    <value>La reunión ha acabado puntualmente</value>
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
