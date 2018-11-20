@@ -236,11 +236,10 @@
                         Margin="0,0,0,2" Command="{Binding IncrementTimerCommand}">
                     <Button.InputBindings>
                         <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding IncrementTimer15Command}"/>
+                        <MouseBinding Gesture="Ctrl+LeftDoubleClick" Command="{Binding IncrementTimer15Command}"/>
                         <MouseBinding Gesture="Shift+LeftClick" Command="{Binding IncrementTimer5Command}"/>
+                        <MouseBinding Gesture="Shift+LeftDoubleClick" Command="{Binding IncrementTimer5Command}"/>
                     </Button.InputBindings>
-                    <i:Interaction.Behaviors>
-                        <behaviours:DoubleClickBehaviour />
-                    </i:Interaction.Behaviors>
                     <materialDesign:PackIcon
                         Kind="Plus"
                         Height="24"
@@ -253,11 +252,10 @@
                         Margin="0,2,0,0" Command="{Binding DecrementTimerCommand}">
                     <Button.InputBindings>
                         <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding DecrementTimer15Command}"/>
+                        <MouseBinding Gesture="Ctrl+LeftDoubleClick" Command="{Binding DecrementTimer15Command}"/>
                         <MouseBinding Gesture="Shift+LeftClick" Command="{Binding DecrementTimer5Command}"/>
+                        <MouseBinding Gesture="Shift+LeftDoubleClick" Command="{Binding DecrementTimer5Command}"/>
                     </Button.InputBindings>
-                    <i:Interaction.Behaviors>
-                        <behaviours:DoubleClickBehaviour />
-                    </i:Interaction.Behaviors>
                     <materialDesign:PackIcon
                         Kind="Minus"
                         Height="24"

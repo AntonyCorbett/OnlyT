@@ -123,4 +123,9 @@
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>copy "$(ProjectDir)Properties\Resources.jv-ID.resx" "$(ProjectDir)Properties\Resources.jv-Latn-ID.resx"
+copy "$(ProjectDir)Properties\Resources.no-NO.resx" "$(ProjectDir)Properties\Resources.no.resx"
+copy "$(ProjectDir)Properties\Resources.pap-PAP.resx" "$(ProjectDir)Properties\Resources.pap.resx"</PreBuildEvent>
+  </PropertyGroup>
 </Project>
