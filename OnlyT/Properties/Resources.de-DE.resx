@@ -338,7 +338,7 @@
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB UHR</value>
+    <value>INTERNET-UHR</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
@@ -380,13 +380,13 @@
     <value>Mauszeiger nicht ausblenden</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Schreibe jede Zeit in eine eigene Zeile.</value>
+    <value>Neue Zeile für Jede Anfangszeit.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Verwende einbeliebiges Zeitformat!</value>
+    <value>Jedes beliebige Zeitformat kann verwendet werden!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Füge optional einen Wochentag hinzu, z.B. "Do 7:15"</value>
+    <value>Optional kann ein Wochentag hinzugefügt werden, z.B. "Do. 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Hinweise:</value>
@@ -558,7 +558,7 @@
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Erstelle Timing-Bericht</value>
+    <value>Bericht über Zeiteinhaltung wurde erstellt</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
