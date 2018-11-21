@@ -122,7 +122,7 @@
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Midweek and Weekend Meetings</value>
+    <value>Všetky zhromaždenia</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
@@ -150,11 +150,11 @@
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
-    <value>Timing Report</value>
+    <value>Report časovačov</value>
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
-    <value>Timing Summary</value>
+    <value>Celkový čas</value>
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
