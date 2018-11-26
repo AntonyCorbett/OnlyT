@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.JwLibrary
+﻿using System.Text;
+
+namespace OnlyT.Services.JwLibrary
 {
     using System;
     using System.Runtime.InteropServices;
@@ -26,5 +28,11 @@
 
         [DllImport("User32.dll")]
         public static extern bool ShowWindow(IntPtr handle, int nCmdShow);
+
+        [DllImport("User32.dll")]
+        public static extern void GetClassName(IntPtr handle, StringBuilder s, int nMaxCount);
+
+        [DllImport("User32.dll")]
+        public static extern void GetWindowText(IntPtr handle, StringBuilder s, int nMaxCount);
     }
 }
