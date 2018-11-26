@@ -1,9 +1,8 @@
-﻿using System.Text;
-
-namespace OnlyT.Services.JwLibrary
+﻿namespace OnlyT.Services.JwLibrary
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Text;
 
     internal static class JwLibHelperNativeMethods
     {
