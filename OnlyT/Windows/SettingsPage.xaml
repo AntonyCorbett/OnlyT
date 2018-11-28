@@ -41,14 +41,6 @@
         </Style>
         <Style x:Key="SettingsComboStyle" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
             <Setter Property="Margin" Value="0,0,0,15" />
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                            <VirtualizingStackPanel 
-                                Background="{StaticResource MaterialDesignChipBackground}" />
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
         <Style x:Key="SettingsCheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
             <Setter Property="Margin" Value="0,0,0,10" />
@@ -96,6 +88,7 @@
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                       SelectedValuePath="MonitorId" 
                                       DisplayMemberPath="FriendlyName"
+                                      materialDesign:ComboBoxAssist.ClassicMode="true"
                                       SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
                             
                             <ComboBox ItemsSource="{Binding OperatingModes}" 
@@ -103,6 +96,7 @@
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.OP_MODE}"
                                       SelectedValuePath="Mode" 
                                       DisplayMemberPath="Name"
+                                      materialDesign:ComboBoxAssist.ClassicMode="true"
                                       SelectedValue="{Binding OperatingMode, Mode=TwoWay}"/>
                             
                             <ComboBox ItemsSource="{Binding ClockHourFormats}" 
@@ -110,6 +104,7 @@
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.DIGITAL_CLOCK_FORMAT}"
                                       SelectedValuePath="Format" 
                                       DisplayMemberPath="Name"
+                                      materialDesign:ComboBoxAssist.ClassicMode="true"
                                       SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"/>
 
                             <CheckBox IsChecked="{Binding ShowDigitalSeconds, Mode=TwoWay}" 
@@ -133,6 +128,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING}"
                                   SelectedValuePath="Id" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding MidWeekOrWeekend, Mode=TwoWay}"/>
 
                         <ComboBox ItemsSource="{Binding AdaptiveModes}" 
@@ -140,6 +136,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.ADAPTIVE_MIDWEEK}"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding MidWeekAdaptiveMode, Mode=TwoWay}"/>
                         
                         <ComboBox ItemsSource="{Binding AdaptiveModes}" 
@@ -147,6 +144,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.ADAPTIVE_WEEKEND}"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding WeekendAdaptiveMode, Mode=TwoWay}"/>
 
                         <CheckBox IsChecked="{Binding IsCircuitVisit, Mode=TwoWay}" 
@@ -206,6 +204,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.FULL_SCREEN_CLOCK}"
                                   SelectedValuePath="Mode" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding TimeOfDayMode, Mode=TwoWay}"/>
 
                         <Label Style="{StaticResource LabelStyle}" Content="{x:Static resx:Resources.SPLIT_WIDTH}"/>
@@ -239,6 +238,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.PERSIST_TALK_DURATION}"
                                   SelectedValuePath="Seconds" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding PersistDurationSecs, Mode=TwoWay}"/>
 
                     </StackPanel>
@@ -251,6 +251,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.PORT}"
                                   SelectedValuePath="Port" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding Port, Mode=TwoWay}"/>
 
                         <Button Width="160" HorizontalAlignment="Left" 
@@ -324,6 +325,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                   SelectedValuePath="MonitorId" 
                                   DisplayMemberPath="FriendlyName"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding CountdownMonitorId, Mode=TwoWay}"/>
 
                         <ComboBox ItemsSource="{Binding ScreenLocationItems}" 
@@ -331,6 +333,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.LOCATION_ON_SCREEN}"
                                   SelectedValuePath="Location" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding CountdownScreenLocation, Mode=TwoWay}"/>
 
                         <Label Style="{StaticResource LabelStyle}" Content="{x:Static resx:Resources.COUNTDOWN_ZOOM}"/>
@@ -400,6 +403,7 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.LOGGING_LEVEL}"
                                   SelectedValuePath="Level" 
                                   DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding LogEventLevel, Mode=TwoWay}"/>
 
 
@@ -414,6 +418,7 @@
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.LANGUAGE}"
                                       SelectedValuePath="LanguageId" 
                                       DisplayMemberPath="LanguageName"
+                                      materialDesign:ComboBoxAssist.ClassicMode="true"
                                       SelectedValue="{Binding LanguageId, Mode=TwoWay}"/>
                         </DockPanel>
                         <TextBlock Style="{StaticResource MiscNotesStyle}" 

@@ -121,35 +121,15 @@
             <ComboBox ItemsSource="{Binding Talks, Mode=OneWay}" 
                       Style="{StaticResource MaterialDesignComboBox}"
                       IsEnabled="{Binding IsNotRunning}"
-                      materialDesign:ComboBoxAssist.ClassicMode ="true"
+                      materialDesign:ComboBoxAssist.ClassicMode="true"
                       FontSize="14"
                       MaxDropDownHeight="600"
                       SelectedValuePath="Id"
                       Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                       SelectedValue="{Binding TalkId, Mode=TwoWay}"
                       ItemTemplateSelector="{utils:ComboBoxTemplateSelector
-        SelectedItemTemplate={StaticResource SelectedTalkTemplate},
-        DropdownItemsTemplate={StaticResource DropDownTalkTemplate}}" >
-                <!--<ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <TextBlock Grid.Column="0" 
-                                       Text="{Binding OriginalDurationAsString, Mode=OneWay}" 
-                                       Foreground="{StaticResource MaterialDesignBodyLight}"/>
-                            <TextBlock Grid.Column="1" 
-                                       Text="{Binding Name, Mode=OneWay}" />
-                            <TextBlock Grid.Column="2" 
-                                       Text="{Binding CompletedTimeSecs, Mode=OneWay}" 
-                                       Foreground="Red"/>
-                        </Grid>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>-->
+                        SelectedItemTemplate={StaticResource SelectedTalkTemplate},
+                        DropdownItemsTemplate={StaticResource DropDownTalkTemplate}}" >
             </ComboBox>
 
             <TextBlock Text="{x:Static resx:Resources.MANUAL_MODE}" 
