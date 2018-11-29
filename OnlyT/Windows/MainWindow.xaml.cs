@@ -44,6 +44,7 @@
             {
                 // We don't allow the main window to be resized...
                 ResizeMode = ResizeMode.CanMinimize;
+                WindowState = WindowState.Normal;
                 Width = MainWindowWidth;
                 Height = MainWindowHeight;
             }

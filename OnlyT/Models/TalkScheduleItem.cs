@@ -1,13 +1,16 @@
-﻿namespace OnlyT.Models
+﻿using System.Windows.Media;
+
+namespace OnlyT.Models
 {
     using System;
+    using GalaSoft.MvvmLight;
     using Services.TalkSchedule;
     using Utils;
 
     /// <summary>
     /// Represents a talk in the meeting schedule
     /// </summary>
-    public class TalkScheduleItem
+    public class TalkScheduleItem : ObservableObject
     {
         /// <summary>
         /// Manually modified duration (after user modification)
@@ -15,6 +18,7 @@
         private TimeSpan? _modifiedDuration;
         private bool? _originalBell;
         private bool _bell;
+        private int? _completedSeconds;
 
         public TalkScheduleItem()
         {
@@ -34,14 +38,62 @@
         public string MeetingSectionNameLocalised { get; set; }
 
         // ReSharper disable once UnusedMember.Global
-        public string NameIncludingDuration => $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
+        public string NameIncludingDuration => 
+            $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
+
+        public string OriginalDurationAsString =>
+            TimeFormatter.FormatTimerDisplayString((int) OriginalDuration.TotalSeconds);
 
         public bool? CountUp { get; set; }
 
         /// <summary>
         /// Gets or sets the duration for which the timer ran (or null if not run yet)
         /// </summary>
-        public int? CompletedTimeSecs { get; set; }
+        public int? CompletedTimeSecs
+        {
+            get => _completedSeconds;
+            set
+            {
+                if (_completedSeconds != value)
+                {
+                    _completedSeconds = value;
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(OvertimeString));
+                    RaisePropertyChanged(nameof(OvertimeBrush));
+                }
+            }
+        }
+
+        public string OvertimeString
+        {
+            get
+            {
+                if (CompletedTimeSecs == null || CompletedTimeSecs == 0)
+                {
+                    return null;
+                }
+
+                var overtimeSecs = (int)(ActualDuration.TotalSeconds - CompletedTimeSecs ?? 0);
+                var timeString = TimeFormatter.FormatTimerDisplayString(Math.Abs(overtimeSecs));
+                return overtimeSecs >= 0
+                    ? $"-{timeString}"
+                    : $"+{timeString}";
+            }
+        }
+
+        public Brush OvertimeBrush
+        {
+            get
+            {
+                var overtimeSecs = ActualDuration.TotalSeconds - CompletedTimeSecs ?? 0;
+                if (overtimeSecs >= 0)
+                {
+                    return Brushes.Green;
+                }
+                
+                return Brushes.Red;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the original duration (before any user modification)

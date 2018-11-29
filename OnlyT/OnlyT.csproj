@@ -203,6 +203,8 @@
     <Compile Include="Services\Timer\ITalkTimerService.cs" />
     <Compile Include="Services\Timer\TalkTimerService.cs" />
     <Compile Include="Utils\BitmapConverter.cs" />
+    <Compile Include="Utils\ComboBoxTemplateSelector.cs" />
+    <Compile Include="Utils\ComboBoxTemplateSelectorExtension.cs" />
     <Compile Include="Utils\DateUtils.cs" />
     <Compile Include="Utils\EnumExtensions.cs" />
     <Compile Include="Utils\FileUtils.cs" />
