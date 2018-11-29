@@ -130,7 +130,7 @@
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
-    <value>Czas trwania zebrania był zgodny</value>
+    <value>Czas trwania zebrania nie został przekroczony</value>
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
