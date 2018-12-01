@@ -261,7 +261,7 @@
     <value>Niciunul</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Setările nu sunt disponibile în timp ce rulează cronometrul!</value>
+    <value>Setările nu sunt accesibile în timp ce rulează cronometrul!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Setări</value>
