@@ -184,7 +184,7 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Clopoțelul este activ</value>
+    <value>Clopoțelul este inactiv</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>În timpul săptămânii</value>
