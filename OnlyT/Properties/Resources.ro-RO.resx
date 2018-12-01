@@ -431,7 +431,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Cronometrul este pornit</value>
+    <value>Cronometru crescător</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
@@ -453,11 +453,11 @@
     <value>Vă rugăm să reporniţi OnlyT după schimbarea limbii.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Scădere</value>
+    <value>Scade</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Creştere</value>
+    <value>Creşte</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
