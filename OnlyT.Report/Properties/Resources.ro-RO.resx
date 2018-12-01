@@ -122,11 +122,11 @@
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Întrunirea din timpul și de la sfârșitul săptămânii</value>
+    <value>Întrunirile din timpul și de la sfârșitul săptămânii</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Întrunirea din timpul săptămânii</value>
+    <value>Întrunirile din timpul săptămânii</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
