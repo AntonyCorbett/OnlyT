@@ -427,7 +427,7 @@
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Reglat</value>
+    <value>Limitare cereri API</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
@@ -486,7 +486,7 @@
     <value>Activat</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Arată secunde</value>
+    <value>Arată secundele</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
