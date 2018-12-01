@@ -205,19 +205,19 @@
     <value>File-based</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
+    <value>Ručně</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Závěrečná slova</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Závěrečná slova</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Sborové studium Bible</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Hledání duchovních drahokamů</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Život křesťana - část 1</value>
@@ -229,7 +229,7 @@
     <value>Úvodní slova</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Vzorové předvedení</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Přednáška pro veřejnost</value>
@@ -238,7 +238,7 @@
     <value>Čtení Bible</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Služební proslov</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>Poklady - Proslov</value>
@@ -258,7 +258,7 @@
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>Nenastaveno</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
     <value>Settings not available while timer is running!</value>
