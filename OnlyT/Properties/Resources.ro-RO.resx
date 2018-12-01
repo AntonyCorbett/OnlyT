@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Ora începerii întrunirii (1 pe rând)</value>
+    <value>Ora începerii întrunirilor (1 pe rând)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERSE</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Menține timpul temei cursantului</value>
+    <value>Menține durata temei cursantului</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
