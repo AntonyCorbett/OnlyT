@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Horas de início de reuniões (1 por linha)</value>
+    <value>Horário de início da reunião (1 por linha)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERSOS</value>
