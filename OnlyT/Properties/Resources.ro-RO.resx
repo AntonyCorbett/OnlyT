@@ -202,13 +202,13 @@
     <value>Automat</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Bazate pe fişier</value>
+    <value>Bazat pe fişier</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Cuvântare de încheiere</value>
+    <value>Cuvântarea de încheiere</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Recapitulare</value>
