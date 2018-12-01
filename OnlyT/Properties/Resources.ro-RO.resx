@@ -190,13 +190,13 @@
     <value>În timpul săptămânii</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Predicare -Tema 1</value>
+    <value>Predicare - Tema 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Predicare -Tema 2</value>
+    <value>Predicare - Tema 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Predicare -Tema 3</value>
+    <value>Predicare - Tema 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automat</value>
@@ -241,7 +241,7 @@
     <value>Cuvântarea de serviciu</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Comori - cuvântare</value>
+    <value>Comori - Cuvântare</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Studiul Turnului de veghe</value>
@@ -270,7 +270,7 @@
     <value>Comori</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Predicarea</value>
+    <value>Predicare</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
     <value>Viața de creștin</value>
