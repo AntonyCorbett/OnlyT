@@ -261,7 +261,7 @@
     <value>Niciunul</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Setări nu sunt disponibile în timp ce rulează cronometrul!</value>
+    <value>Setările nu sunt disponibile în timp ce rulează cronometrul!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Setări</value>
@@ -289,7 +289,7 @@
     <value>Vizita supraveghetorului</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>Închide contracronometru</value>
+    <value>Închide contracronometrul</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permite cronometru crescător</value>
+    <value>Schimbă cronometrul crescător/descrescător</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -465,11 +465,11 @@
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Se utilizează cronometru descrescător</value>
+    <value>Cronometru descrescător</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>Se utilizează cronometru crescător</value>
+    <value>Cronometru crescător</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
