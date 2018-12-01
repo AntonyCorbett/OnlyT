@@ -211,7 +211,7 @@
     <value>Cuvântarea de încheiere</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Recapitulare</value>
+    <value>Cuvinte de încheiere</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Studiul Bibliei în congregație</value>
@@ -226,7 +226,7 @@
     <value>Viața de creștin - Tema 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Introducere</value>
+    <value>Cuvinte introductive</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>Prezentările acestei luni</value>
