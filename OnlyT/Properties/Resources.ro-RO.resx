@@ -400,11 +400,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Menține timpul cursantului</value>
+    <value>Menține afișat timpul cursantului</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Menține durata temei cursantului</value>
+    <value>Durata menținerii timpului temei cursantului</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
