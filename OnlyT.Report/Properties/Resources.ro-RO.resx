@@ -134,7 +134,7 @@
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
-    <value>Situația generală</value>
+    <value>Statistică generală</value>
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
