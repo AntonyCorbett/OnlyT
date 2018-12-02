@@ -142,23 +142,23 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12 ore</value>
+    <value>12 ore (format h:mm)</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
-    <value>12 ore (pornind de la zero)</value>
+    <value>12 ore (format hh:mm)</value>
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24 ore</value>
+    <value>24 ore (format H:mm)</value>
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
-    <value>24 ore (pornind de la zero)</value>
+    <value>24 ore (format HH:mm)</value>
     <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
-    <value>Nu s-a putut crea un dosar nou {0}</value>
+    <value>Nu s-a putut crea dosarul {0}</value>
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
@@ -174,7 +174,7 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
-    <value>Analog</value>
+    <value>Analogic</value>
     <comment>i.e. an analogue clock (with face and hands)</comment>
   </data>
   <data name="FULL_SCREEN_BOTH" xml:space="preserve">
@@ -184,34 +184,34 @@
     <value>Digital</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>Clopoțelul este activ</value>
+    <value>Clopoțelul este inactiv</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
     <value>În timpul săptămânii</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Predicare -Tema 1</value>
+    <value>Predicare - Tema 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Predicare -Tema 2</value>
+    <value>Predicare - Tema 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Predicare -Tema 3</value>
+    <value>Predicare - Tema 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automat</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Bazate pe fişier</value>
+    <value>Bazat pe fişier</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Cuvântare de încheiere</value>
+    <value>Cuvântarea de încheiere</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Recapitulare</value>
+    <value>Cuvinte de încheiere</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Studiul Bibliei în congregație</value>
@@ -226,7 +226,7 @@
     <value>Viața de creștin - Tema 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Introducere</value>
+    <value>Cuvinte introductive</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>Prezentările acestei luni</value>
@@ -241,7 +241,7 @@
     <value>Cuvântarea de serviciu</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Comori - cuvântare</value>
+    <value>Comori - Cuvântare</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Studiul Turnului de veghe</value>
@@ -250,18 +250,18 @@
     <value>Sfârșit de săptămână</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12 ore (am/pm)</value>
+    <value>12 ore (format h:mm am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12 ore (pornind de la zero)</value>
+    <value>12 ore (format hh:mm am/pm)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
     <value>Niciunul</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Setări nu sunt disponibile în timp ce rulează cronometrul!</value>
+    <value>Setările nu sunt accesibile în timp ce rulează cronometrul!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Setări</value>
@@ -270,7 +270,7 @@
     <value>Comori</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Predicarea</value>
+    <value>Predicare</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
     <value>Viața de creștin</value>
@@ -283,13 +283,13 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Predicare -Tema 4</value>
+    <value>Predicare - Tema 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Vizita supraveghetorului</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>Închide contracronometru</value>
+    <value>Închide contracronometrul</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -299,7 +299,7 @@
     <value>[vizita supraveghetorului]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>O nouă versiune este disponibilă!</value>
+    <value>Versiune nouă disponibilă!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
     <value>PAGINA PRINCIPALĂ</value>
@@ -310,15 +310,15 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Modul de adaptare în timpul săptămânii</value>
+    <value>Cronometru adaptiv în timpul săptămânii</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Mod de adaptare la sfârșit de săptămână</value>
+    <value>Cronometru adaptiv la sfârșit de săptămână</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permite schimbare contracronometru</value>
+    <value>Schimbă direcția cronometrului</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Schimbă pt vizita supraveghetorului</value>
+    <value>Comutator vizita supraveghetorului</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Format ceas digital</value>
@@ -356,7 +356,7 @@
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Mod afisare a ceasului pe tot ecranul</value>
+    <value>Mod de afișare a ceasului</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>Adresă IP</value>
@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Când începe întrunirea (1 pe rând)</value>
+    <value>Ora începerii întrunirilor (una pe rând)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>DIVERSE</value>
@@ -380,7 +380,7 @@
     <value>Arată indicatorul mouse-ului</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Pune fiecare moment de începere a întrunirii pe un rând nou.</value>
+    <value>Pune fiecare oră de începere a întrunirii pe un rând nou.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Folosiți orice format de oră vă place!</value>
@@ -400,11 +400,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Menține timpul cursantului</value>
+    <value>Menține afișat timpul cursantului</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Menține durata cuvântării</value>
+    <value>Durata menținerii timpului temei cursantului</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -420,18 +420,18 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Separator pentru împărțirea ecranului:</value>
+    <value>Ajustează împărțirea ecranului:</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>TEST</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Reglat</value>
+    <value>Limitat</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Cronometrul este pornit</value>
+    <value>Cronometru crescător</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
@@ -453,11 +453,11 @@
     <value>Vă rugăm să reporniţi OnlyT după schimbarea limbii.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Scădere</value>
+    <value>Scade</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Creştere</value>
+    <value>Creşte</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -465,11 +465,11 @@
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Se utilizează cronometru descrescător</value>
+    <value>Cronometru descrescător</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>Se utilizează cronometru crescător</value>
+    <value>Cronometru crescător</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
@@ -490,59 +490,59 @@
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library compatibility mode</value>
+    <value>Compatibilitate cu JW Library</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Arată cadran</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Arată cadran</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
-    <value>Zoom level:</value>
+    <value>Nivel zoom:</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
-    <value>Location</value>
+    <value>Poziție</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Jos</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
-    <value>Bottom left</value>
+    <value>Jos stânga</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
-    <value>Bottom right</value>
+    <value>Jos dreapta</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
-    <value>Centre</value>
+    <value>Centru</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
-    <value>Left</value>
+    <value>Stânga</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
-    <value>Right</value>
+    <value>Dreapta</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
-    <value>Top</value>
+    <value>Sus</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
-    <value>Top left</value>
+    <value>Sus stânga</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
-    <value>Top right</value>
+    <value>Sus dreapta</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="OK" xml:space="preserve">
@@ -550,43 +550,43 @@
     <comment>Caption of the button that closes the snackbar</comment>
   </data>
   <data name="PORT_OPENED" xml:space="preserve">
-    <value>Port opened and reservation made</value>
+    <value>Port deschis și rezervare făcută</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
   </data>
   <data name="PORT_OPEN_FAILED" xml:space="preserve">
-    <value>Could not open the port (see log)!</value>
+    <value>Portul nu a putut fi deschis! (vezi logurile)</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Generated timing report</value>
+    <value>Se generează raportul</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
-    <value>Generate reports</value>
+    <value>Generează raport</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
-    <value>Concluding Segment</value>
+    <value>Cântarea și rugăciunea de încheiere</value>
     <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTERIM_SEGMENT" xml:space="preserve">
-    <value>Interim Segment</value>
+    <value>Cântarea de la mijlocul întrunirii</value>
     <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTRO_SEGMENT" xml:space="preserve">
-    <value>Introductory Segment</value>
+    <value>Cântarea și rugăciunea de deschidere</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
-    <value>Logging level</value>
+    <value>Nivel de logare</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
-    <value>Debug</value>
+    <value>Depanare</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_ERROR" xml:space="preserve">
-    <value>Error</value>
+    <value>Eroare</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_FATAL" xml:space="preserve">
@@ -594,7 +594,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
-    <value>Information</value>
+    <value>Informație</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
@@ -602,19 +602,19 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_WARNING" xml:space="preserve">
-    <value>Warning</value>
+    <value>Avertisment</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
-    <value>Analysing meeting timer data</value>
+    <value>Analizează durata temelor întrunirii</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
-    <value>Report NOT generated!</value>
+    <value>Raportul NU s-a generat!</value>
     <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
   </data>
   <data name="VIEW_REPORT" xml:space="preserve">
-    <value>VIEW</value>
+    <value>VEZI</value>
     <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
   </data>
 </root>
