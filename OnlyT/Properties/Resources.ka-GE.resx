@@ -142,7 +142,7 @@
     <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
-    <value>12-hour</value>
+    <value>12 საათი</value>
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
@@ -150,7 +150,7 @@
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
-    <value>24-hour</value>
+    <value>24 საათი</value>
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
@@ -181,7 +181,7 @@
     <value>Analogue and Digital</value>
   </data>
   <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
-    <value>Digital</value>
+    <value>ციფრული</value>
   </data>
   <data name="INACTIVE_BELL" xml:space="preserve">
     <value>Bell is inactive</value>
@@ -199,13 +199,13 @@
     <value>Ministry - Item 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatic</value>
+    <value>ავტომატურად</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>File-based</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
+    <value>ხელით</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Concluding Talk</value>
@@ -286,7 +286,7 @@
     <value>Ministry - Item 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Circuit visit</value>
+    <value>სარაიონო მონახულება</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>CLOSE COUNTDOWN</value>
@@ -310,11 +310,11 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Midweek adaptive mode</value>
+    <value>შუაკვირის ადაპტირებული გეგმა</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Weekend adaptive mode</value>
+    <value>შაბათკვირის ადაპტირებული გეგმა</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
@@ -447,25 +447,25 @@
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Language</value>
+    <value>ენა</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Please restart OnlyT after changing the language.</value>
+    <value>ენის შესაცვლელად გადატვირთეთ OnlyT.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease</value>
+    <value>შემცირება</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase</value>
+    <value>გადიდება</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Manual mode</value>
+    <value>ხელით მართვა</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Currently counting down</value>
+    <value>უკუთვლის რეჟიმი</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
@@ -473,24 +473,24 @@
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>"{0}"წამები</value>
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>ნებადართული</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Enabled</value>
+    <value>ნებადართული</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Enabled</value>
+    <value>ნებადართული</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Show seconds</value>
+    <value>წამების ჩვენება</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library compatibility mode</value>
+    <value>"{JW Library}" თავსებადობის რეჟიმი</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
