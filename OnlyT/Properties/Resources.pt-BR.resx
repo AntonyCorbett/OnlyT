@@ -289,7 +289,7 @@
     <value>Visita do superintendente</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>FECHAR A CONTAGEM REGRESSIVA</value>
+    <value>FECHAR A CONTAGEM</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
