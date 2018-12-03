@@ -202,7 +202,7 @@
     <value>Автоматический</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>File-based</value>
+    <value>Из файла</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Ручной</value>
@@ -494,11 +494,11 @@
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Показать рамку</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Показать рамку</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
