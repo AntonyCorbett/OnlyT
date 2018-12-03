@@ -130,11 +130,11 @@
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
-    <value>Meeting on time</value>
+    <value>Встреча закончилась вовремя</value>
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
-    <value>Overall Status</value>
+    <value>Общее состояние</value>
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
@@ -150,7 +150,7 @@
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
-    <value>Timing Report</value>
+    <value>Отчет времени</value>
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
@@ -166,7 +166,7 @@
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Weekend Meetings</value>
+    <value>Встреча в выходные дни</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
