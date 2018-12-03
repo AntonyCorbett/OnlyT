@@ -25,6 +25,7 @@
         private readonly XBrush _greenBrush = XBrushes.Green;
         private readonly XBrush _redBrush = XBrushes.Red;
         private readonly HistoricalMeetingTimes _historicalASummary;
+        private readonly TimeSpan _allowanceForInterim = new TimeSpan(0, 3, 20);
 
         private XFont _titleFont;
         private XFont _subTitleFont;
@@ -86,7 +87,15 @@
                         if (item.IsStudentTalk && n != itemArray.Length - 1)
                         {
                             var nextItem = itemArray[n + 1];
-                            var counselDuration = nextItem.Start - item.End;
+
+                            var counselDuration = nextItem.IsSongSegment
+                                ? nextItem.Start - item.End - _allowanceForInterim
+                                : nextItem.Start - item.End;
+
+                            if (counselDuration.TotalSeconds < 0.0)
+                            {
+                                counselDuration = TimeSpan.FromSeconds(0);
+                            }
 
                             DrawCounselItem(g, counselDuration);
                         }
