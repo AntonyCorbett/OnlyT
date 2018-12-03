@@ -349,7 +349,7 @@
     <value>Alternar para visita do superintendente</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Formato do relógio digital</value>
+    <value>Formato de relógio digital</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Habilitado</value>
