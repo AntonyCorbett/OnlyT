@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Timpul zilei sub cronometru</value>
+    <value>Ora zilei sub cronometru</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
@@ -450,7 +450,7 @@
     <value>Limba</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Vă rugăm reporniţi OnlyT după schimbarea limbii.</value>
+    <value>Vă rugăm să reporniţi OnlyT după schimbarea limbii.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Scade</value>
