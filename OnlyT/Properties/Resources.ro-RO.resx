@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Durata menținerii timpului temei cursantului</value>
+    <value>Durata menținerii temei cursantului</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -450,7 +450,7 @@
     <value>Limba</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Vă rugăm să reporniţi OnlyT după schimbarea limbii.</value>
+    <value>Vă rugăm reporniţi OnlyT după schimbarea limbii.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Scade</value>
@@ -502,7 +502,7 @@
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
-    <value>Nivel zoom:</value>
+    <value>Zoom:</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
@@ -578,7 +578,7 @@
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
-    <value>Nivel de logare</value>
+    <value>Nivel logare</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
@@ -594,7 +594,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
-    <value>Informație</value>
+    <value>Informare</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
@@ -602,7 +602,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_WARNING" xml:space="preserve">
-    <value>Avertisment</value>
+    <value>Avertizare</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
