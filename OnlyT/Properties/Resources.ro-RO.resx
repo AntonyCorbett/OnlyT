@@ -276,7 +276,7 @@
     <value>Viața de creștin</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Sfârșit de săptămână</value>
+    <value>La sfârșit de săptămână</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
     <value>Setări dezactivate de către administrator!</value>
@@ -494,11 +494,11 @@
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
-    <value>Arată cadran</value>
+    <value>Arată chenar</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Arată cadran</value>
+    <value>Arată chenar</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
