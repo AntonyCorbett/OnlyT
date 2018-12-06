@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="COUNSEL" xml:space="preserve">
-    <value>sfaturi și sugestii</value>
+    <value>sfaturi</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
@@ -146,15 +146,15 @@
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
-    <value>Timp (minute)</value>
+    <value>Timp depășit (minute)</value>
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
-    <value>Raportul întrunirii</value>
+    <value>Raportul cu timpii întrunirii</value>
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
-    <value>Raportul lunar</value>
+    <value>Rezumatul timpilor</value>
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
