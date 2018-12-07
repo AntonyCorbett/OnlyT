@@ -146,7 +146,7 @@
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
-    <value>Timp depășit (minute)</value>
+    <value>Timp depășit (min)</value>
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
