@@ -25,7 +25,6 @@
         private readonly XBrush _greenBrush = XBrushes.Green;
         private readonly XBrush _redBrush = XBrushes.Red;
         private readonly HistoricalMeetingTimes _historicalASummary;
-        private readonly TimeSpan _allowanceForInterim = new TimeSpan(0, 3, 20);
 
         private XFont _titleFont;
         private XFont _subTitleFont;
@@ -88,9 +87,7 @@
                         {
                             var nextItem = itemArray[n + 1];
 
-                            var counselDuration = nextItem.IsSongSegment
-                                ? nextItem.Start - item.End - _allowanceForInterim
-                                : nextItem.Start - item.End;
+                            var counselDuration = nextItem.Start - item.End;
 
                             if (counselDuration.TotalSeconds < 0.0)
                             {
@@ -417,12 +414,12 @@
 
         private void DrawItemOvertime(XGraphics g, double curX, TimeSpan duration, TimeSpan allowedDuration)
         {
-            TimeSpan overtime = allowedDuration - duration;
-            bool inTheRed = (int)overtime.TotalSeconds < 0;
-            bool inTheGreen = (int)overtime.TotalSeconds > 0;
+            var overtime = allowedDuration - duration;
+            var inTheRed = (int)overtime.TotalSeconds < 0;
+            var inTheGreen = (int)overtime.TotalSeconds >= 0;
 
-            string prefix = inTheGreen ? "-" : inTheRed ? "+" : string.Empty;
-            string s = $"{prefix}{Math.Abs(overtime.Minutes):D2}:{Math.Abs(overtime.Seconds):D2}";
+            var prefix = inTheGreen ? "-" : inTheRed ? "+" : string.Empty;
+            var s = $"{prefix}{Math.Abs(overtime.Minutes):D2}:{Math.Abs(overtime.Seconds):D2}";
 
             var sz = g.MeasureString(s, _durationFont);
 
@@ -431,7 +428,7 @@
             var dotsStartX = curX + _stdTimeFont.Height;
             var dotsLength = startX - _stdTimeFont.Height - dotsStartX;
 
-            StringBuilder sb = new StringBuilder(".");
+            var sb = new StringBuilder(".");
             var dotsSz = g.MeasureString(sb.ToString(), _smallTimeFont);
             while (dotsSz.Width < dotsLength)
             {

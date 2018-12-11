@@ -461,7 +461,8 @@
 
                 if (IsFirstTalkAfterInterim(talk.Id))
                 {
-                    StoreTimerDataForInterim();
+                    var prevTalk = GetPreviousTalk(talk.Id);
+                    StoreTimerDataForInterim(prevTalk?.IsStudentTalk ?? false);
                 }
 
                 _timingDataService.InsertTimerStart(
@@ -473,12 +474,12 @@
             }
         }
 
-        private void StoreTimerDataForInterim()
+        private void StoreTimerDataForInterim(bool allowForCounselTime)
         {
             Log.Logger.Debug("Storing timer data for interim segment");
 
             var lastItemStop = _timingDataService.LastTimerStop;
-            var interimStart = lastItemStop.AddSeconds(15);
+            var interimStart = lastItemStop.AddSeconds(allowForCounselTime ? 75 : 15);
 
             // we plan 3 mins 20 secs for interim song...
             _timingDataService.InsertSongSegment(
@@ -849,6 +850,28 @@
         {
             var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
             return talks != null && talks.Any() && talkId == talks.First().Id;
+        }
+
+        private TalkScheduleItem GetPreviousTalk(int talkId)
+        {
+            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
+            if (talks != null)
+            {
+                TalkScheduleItem prevTalk = null;
+                foreach (var talk in talks)
+                {
+                    if (talk.Id == talkId)
+                    {
+                        break;
+                    }
+
+                    prevTalk = talk;
+                }
+
+                return prevTalk;
+            }
+
+            return null;
         }
 
         private void NavigateSettings()
