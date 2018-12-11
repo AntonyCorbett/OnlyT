@@ -276,7 +276,7 @@
     <value>Viața de creștin</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>La sfârșit de săptămână</value>
+    <value>La sfârșitul săptămânii</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
     <value>Setări dezactivate de către administrator!</value>
@@ -314,7 +314,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Cronometru adaptiv la sfârșit de săptămână</value>
+    <value>Cronometru adaptiv la sfârșitul săptămânii</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
