@@ -247,7 +247,7 @@
     <value>Studiul Turnului de veghe</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>La sfârșit de săptămână</value>
+    <value>La sfârșitul săptămânii</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
     <value>12 ore (am/pm)</value>
