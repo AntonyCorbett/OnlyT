@@ -565,7 +565,7 @@
         {
             try
             {
-                if (TalkId > 0)
+                if (TalkId > 0 && IsNotManualMode)
                 {
                     var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
                     if (newDuration != null)
@@ -712,7 +712,15 @@
 
                 Log.Logger.Debug($"Talk timer adjusted for this session. Modified duration = {modifiedDuration}");
 
-                talk.ModifiedDuration = modifiedDuration;
+                if (IsManualMode)
+                {
+                    talk.OriginalDuration = modifiedDuration;
+                }
+                else
+                {
+                    talk.ModifiedDuration = modifiedDuration;
+                }
+                
                 SetDurationStringAttributes(talk);
             }
         }
