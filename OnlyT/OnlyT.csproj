@@ -39,7 +39,7 @@
     <NoWarn>SA1008;SA1009</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon2.ico</ApplicationIcon>
+    <ApplicationIcon>icon4.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -396,7 +396,7 @@
     <Content Include="bell.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="icon2.ico" />
+    <Resource Include="icon4.ico" />
     <None Include="Resources\ClockHtmlTemplate.txt" />
   </ItemGroup>
   <ItemGroup>
