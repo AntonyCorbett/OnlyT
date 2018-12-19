@@ -146,20 +146,20 @@
             set => SetValue(DigitalTimeFormatShowLeadingZeroProperty, value);
         }
 
-        private string CurrentTimeHrMin
+        public string CurrentTimeHrMin
         {
             // ReSharper disable once PossibleNullReferenceException
             // ReSharper disable once UnusedMember.Local
             get => (string)GetValue(CurrentTimeHrMinProperty);
-            set => SetValue(CurrentTimeHrMinProperty, value);
+            private set => SetValue(CurrentTimeHrMinProperty, value);
         }
 
-        private string CurrentTimeSec
+        public string CurrentTimeSec
         {
             // ReSharper disable once PossibleNullReferenceException
             // ReSharper disable once UnusedMember.Local
             get => (string)GetValue(CurrentTimeSecProperty);
-            set => SetValue(CurrentTimeSecProperty, value);
+            private set => SetValue(CurrentTimeSecProperty, value);
         }
 
         public override void OnApplyTemplate()
