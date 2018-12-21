@@ -986,7 +986,6 @@
             Application.Current.Dispatcher.Invoke(() =>
             {
                 // always on UI thread to prevent synchronisation issues.
-
                 Log.Logger.Debug("Handling timer control from API");
 
                 CheckTalkExists(e.TalkId);

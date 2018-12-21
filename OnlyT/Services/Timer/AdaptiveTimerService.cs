@@ -1,12 +1,11 @@
-﻿using OnlyT.Utils;
-
-namespace OnlyT.Services.Timer
+﻿namespace OnlyT.Services.Timer
 {
     using System;
     using System.Diagnostics;
     using System.Linq;
     using GalaSoft.MvvmLight.Messaging;
     using Models;
+    using OnlyT.Utils;
     using OnlyT.ViewModel.Messages;
     using Options;
     using TalkSchedule;

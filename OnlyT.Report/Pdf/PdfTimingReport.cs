@@ -39,7 +39,6 @@
         private double _currentY;
         private double _rightX;
         private double _rightXIndent;
-        private XPdfFontOptions _pdfOptions;
         
         public PdfTimingReport(MeetingTimes data, HistoricalMeetingTimes historicalASummary, string outputFolder)
         {
@@ -63,8 +62,6 @@
 
             using (var doc = new PdfDocument())
             {
-                _pdfOptions = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-
                 var page = doc.AddPage();
 
                 using (var g = XGraphics.FromPdfPage(page))
@@ -157,7 +154,7 @@
             {
                 Chart c = new Chart(ChartType.Column2D);
                 c.Font.Name = "Verdana";
-
+                
                 var xSeries = c.XValues.AddXSeries();
                 var ySeries = c.SeriesCollection.AddSeries();
 
@@ -388,15 +385,17 @@
             var timesStr3 = $"{item.End.Hours:D2}:{item.End.Minutes:D2}";
             var timesStr4 = $":{item.End.Seconds:D2}";
 
-            var szHyphen = g.MeasureString(
-                hyphenStr, 
-                _stdTimeFont,
-                new XStringFormat { FormatFlags = XStringFormatFlags.MeasureTrailingSpaces });
+            // note that MeasureString ignores trailing spaces
+            // so we must explicitly calculate the size of
+            // a space character.
+            var szSpace = g.MeasureString(" ", _stdTimeFont);
+            var szHyphen = g.MeasureString(hyphenStr, _stdTimeFont);
+            var widthHyphenStr = szHyphen.Width + szSpace.Width;
 
             var sz3 = g.MeasureString(timesStr3, _stdTimeFont);
             var sz4 = g.MeasureString(timesStr4, _smallTimeFont);
-
-            g.DrawString(timesStr3, _stdTimeFont, textBrush, new XPoint(curX += szHyphen.Width, _currentY));
+            
+            g.DrawString(timesStr3, _stdTimeFont, textBrush, new XPoint(curX += widthHyphenStr, _currentY));
             g.DrawString(timesStr4, _smallTimeFont, textBrush, new XPoint(curX += sz3.Width, _currentY));
 
             g.DrawString(")", _stdTimeFont, textBrush, new XPoint(curX += sz4.Width, _currentY));
@@ -472,13 +471,13 @@
 
         private void CreateFonts()
         {
-            _titleFont = new XFont("Verdana", 22, XFontStyle.Bold, _pdfOptions);
-            _subTitleFont = new XFont("Verdana", 16, XFontStyle.Bold, _pdfOptions);
-            _itemTitleFont = new XFont("Verdana", 11, XFontStyle.Bold, _pdfOptions);
-            _itemFont = new XFont("Verdana", 10, XFontStyle.Regular, _pdfOptions);
-            _stdTimeFont = new XFont("Verdana", 10, XFontStyle.Regular, _pdfOptions);
-            _durationFont = new XFont("Verdana", 10, XFontStyle.Bold, _pdfOptions);
-            _smallTimeFont = new XFont("Verdana", 8.5, XFontStyle.Regular, _pdfOptions);
+            _titleFont = new XFont("Verdana", 22, XFontStyle.Bold, XPdfFontOptions.UnicodeDefault);
+            _subTitleFont = new XFont("Verdana", 16, XFontStyle.Bold, XPdfFontOptions.UnicodeDefault);
+            _itemTitleFont = new XFont("Verdana", 11, XFontStyle.Bold, XPdfFontOptions.UnicodeDefault);
+            _itemFont = new XFont("Verdana", 10, XFontStyle.Regular, XPdfFontOptions.UnicodeDefault);
+            _stdTimeFont = new XFont("Verdana", 10, XFontStyle.Regular, XPdfFontOptions.UnicodeDefault);
+            _durationFont = new XFont("Verdana", 10, XFontStyle.Bold, XPdfFontOptions.UnicodeDefault);
+            _smallTimeFont = new XFont("Verdana", 8.5, XFontStyle.Regular, XPdfFontOptions.UnicodeDefault);
         }
 
         private string GetOutputFileName()

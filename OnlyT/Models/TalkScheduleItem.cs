@@ -1,8 +1,7 @@
-﻿using System.Windows.Media;
-
-namespace OnlyT.Models
+﻿namespace OnlyT.Models
 {
     using System;
+    using System.Windows.Media;
     using GalaSoft.MvvmLight;
     using Services.TalkSchedule;
     using Utils;
@@ -42,7 +41,7 @@ namespace OnlyT.Models
             $"{TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds)} {Name}";
 
         public string OriginalDurationAsString =>
-            TimeFormatter.FormatTimerDisplayString((int) OriginalDuration.TotalSeconds);
+            TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds);
 
         public bool? CountUp { get; set; }
 
