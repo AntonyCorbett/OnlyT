@@ -24,7 +24,7 @@ DefaultDirName={pf}\OnlyT
 DefaultGroupName={#MyAppName}
 OutputDir="Installer\Output"
 OutputBaseFilename=OnlyTSetup
-SetupIconFile=OnlyT\icon.ico
+SetupIconFile=OnlyT\icon4.ico
 SourceDir={#MySource}
 Compression=lzma
 SolidCompression=yes
@@ -66,7 +66,6 @@ Source: "OnlyT\bin\Release\Serilog.Sinks.Console.dll"; DestDir: "{app}"; Flags: 
 Source: "OnlyT\bin\Release\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\UnityEngine.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\ca-ES\*.dll"; DestDir: "{app}\ca-ES"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\cs-CZ\*.dll"; DestDir: "{app}\cs-CZ"; Flags: ignoreversion
