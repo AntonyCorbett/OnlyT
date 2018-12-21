@@ -392,7 +392,7 @@
     <value>Uwagi:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OTWÓRZ PORT</value>
+    <value>REZERWUJ PORT</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Wyświetlanie czasu ucznia</value>
+    <value>Czas trwania porad</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -439,7 +439,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Pokaż godzinę pod zegarem</value>
+    <value>Pokaż godzinę pod stoperem</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
@@ -453,11 +453,11 @@
     <value>Po zmianie języka uruchom ponownie OnlyT.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Zmniejsz</value>
+    <value>Odejmij minutę</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Zwiększ</value>
+    <value>Dodaj minutę</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -483,7 +483,7 @@
     <value>Włączony</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Aktywny</value>
+    <value>Włączony</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
     <value>Pokaż sekundy</value>
@@ -506,7 +506,7 @@
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
-    <value>Lokalizacja</value>
+    <value>Położenie</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
