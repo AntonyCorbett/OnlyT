@@ -33,7 +33,8 @@
         {
             _optionsService = optionsService;
 
-            _clock24Hour = new DateTime(1, 1, 1, 23, 1, 1).ToShortTimeString().Contains("23");
+            _clock24Hour = Use24HrClockFormat();
+            
             _apiThrottler = new ApiThrottler(optionsService);
 
             _apiRouter = new ApiRouter(_apiThrottler, _optionsService, bellService, timerService, talksService);
@@ -199,6 +200,18 @@
         private void OnRequestForTimerDataEvent(TimerInfoEventArgs timerInfo)
         {
             RequestForTimerDataEvent?.Invoke(this, timerInfo);
+        }
+
+        private bool Use24HrClockFormat()
+        {
+            switch (_optionsService.Options.ClockHourFormat)
+            {
+                case ClockHourFormat.Format24:
+                case ClockHourFormat.Format24LeadingZero:
+                    return true;
+            }
+
+            return false;
         }
     }
 }

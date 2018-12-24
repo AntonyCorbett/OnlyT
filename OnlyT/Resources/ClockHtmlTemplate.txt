@@ -208,8 +208,13 @@
 						d.setTime(d.getTime() + + serverTimeOfDayAdjustment);
 						var h = d.getHours();
 						var m = d.getMinutes();
-						s = formatTimeOfDay(h, m, true);
 
+						// note that the following line is duplicated in 
+						// ClockWebPageController.ReplaceTimeFormat
+						// because the code is modified depending on whether 
+						// or not 24hr clock format is used...						
+						s = formatTimeOfDay(h, m, true);
+						
 						textElem.className = "clockstyle";						
 						currentDisplayMode = currentMode;
 						break;
