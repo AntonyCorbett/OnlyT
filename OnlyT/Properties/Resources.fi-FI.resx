@@ -617,4 +617,8 @@
     <value>NÄYTÄ</value>
     <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
   </data>
+  <data name="JWL_TRADEMARK" xml:space="preserve">
+    <value>"JW Library" is a registered trademark of Watch Tower Bible and Tract Society of Pennsylvania</value>
+    <comment>See Settings =&gt; Automatic Mode</comment>
+  </data>
 </root>
