@@ -606,7 +606,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
-    <value>Gemeten tijden analyseren</value>
+    <value>Timergegevens analyseren</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
@@ -616,5 +616,9 @@
   <data name="VIEW_REPORT" xml:space="preserve">
     <value>BEKIJKEN</value>
     <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
+  </data>
+  <data name="JWL_TRADEMARK" xml:space="preserve">
+    <value>"JW Library" is a registered trademark of Watch Tower Bible and Tract Society of Pennsylvania</value>
+    <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
 </root>
