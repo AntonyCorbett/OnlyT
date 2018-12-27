@@ -176,8 +176,7 @@
                                                      Height="18" MouseLeftButtonDown="ReportIconMouseLeftButtonDown"/>
                         </StackPanel>
 
-                        <TextBlock Width="260"
-                                   Margin="0,10,0,0"
+                        <TextBlock Width="305"
                                    HorizontalAlignment="Left"
                                    TextWrapping="Wrap"
                                    Style="{StaticResource MiscNotesStyle}" 
