@@ -405,7 +405,7 @@
 
         private XSize DrawDurationString(XGraphics g, TimeSpan duration, double curX, XBrush textBrush)
         {
-            string durStr = $"{duration.Minutes:D2}:{duration.Seconds:D2}";
+            string durStr = $"{(int)duration.TotalMinutes:D2}:{duration.Seconds:D2}";
             var szDur = g.MeasureString(durStr, _durationFont);
             g.DrawString(durStr, _durationFont, textBrush, new XPoint(curX, _currentY));
             return szDur;
