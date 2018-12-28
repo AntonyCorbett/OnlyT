@@ -3,6 +3,7 @@
     using Serilog.Core;
     using Serilog.Events;
 
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class LogLevelSwitchService : ILogLevelSwitchService
     {
         public static readonly LoggingLevelSwitch LevelSwitch = new LoggingLevelSwitch

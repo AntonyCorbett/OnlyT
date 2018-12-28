@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
-        xmlns:local="clr-namespace:OnlyT"
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
         DataContext="{Binding Source={StaticResource Locator}, Path=Output}"
         mc:Ignorable="d"

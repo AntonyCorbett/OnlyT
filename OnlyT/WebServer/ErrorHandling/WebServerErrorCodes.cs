@@ -43,6 +43,7 @@
                 case WebServerErrorCode.Throttled:
                     return "Client throttled";
 
+                // ReSharper disable once RedundantCaseLabel
                 case WebServerErrorCode.UnknownError:
                 default:
                     return "Unknown error";
@@ -78,6 +79,7 @@
                 case WebServerErrorCode.ApiNotEnabled:
                     return HttpStatusCode.Unauthorized;
 
+                // ReSharper disable once RedundantCaseLabel
                 case WebServerErrorCode.Success:
                 default:
                     return HttpStatusCode.OK;

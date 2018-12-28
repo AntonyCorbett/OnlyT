@@ -49,11 +49,13 @@
                     return 500;
 
                 default:
+                // ReSharper disable RedundantCaseLabel
                 case ApiRequestType.Version:
                 case ApiRequestType.ClockPage:
                 case ApiRequestType.Bell:
                 case ApiRequestType.DateTime:
                 case ApiRequestType.System:
+                // ReSharper restore RedundantCaseLabel
                     return 1000;
             }
         }

@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Tests
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace OnlyT.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -76,6 +78,7 @@
             service.Save();
         }
 
+        [SuppressMessage("ReSharper", "ParameterOnlyUsedForPreconditionCheck.Local")]
         private void StoreMidweekData(
             int week,
             int weekCount,

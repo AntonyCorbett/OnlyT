@@ -204,6 +204,7 @@
             return item;
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private void CheckItem(TalkScheduleItem item)
         {
             if (item == null)
@@ -212,6 +213,7 @@
             }
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private void CheckIsCurrentTalk(TimerStatus status)
         {
             if (status.TalkId == null)
@@ -220,6 +222,7 @@
             }
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private void CheckNotRunning(TimerStatus status)
         {
             if (status.IsRunning)
@@ -228,6 +231,7 @@
             }
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private void CheckIsRunning(TimerStatus status)
         {
             if (!status.IsRunning)

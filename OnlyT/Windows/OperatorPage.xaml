@@ -4,7 +4,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         DataContext="{Binding Operator, Mode=OneWay, Source={StaticResource Locator}}"             
-        xmlns:local="clr-namespace:OnlyT.Windows"
         xmlns:resx="clr-namespace:OnlyT.Properties"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
