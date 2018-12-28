@@ -9,7 +9,6 @@
     internal class ClockWebPageController
     {
         private static byte[] WebPageHtml;
-        private static bool TwentyFourHourClockUsed;
 
         public void HandleRequestForTimerData(HttpListenerResponse response, TimerInfoEventArgs timerInfo)
         {
@@ -26,9 +25,10 @@
             }
         }
 
-        public void HandleRequestForWebPage(HttpListenerResponse response, bool twentyFourHourClock)
+        public void HandleRequestForWebPage(
+            HttpListenerResponse response)
         {
-            EnsureWebPageHtmlPrepared(twentyFourHourClock);
+            EnsureWebPageHtmlPrepared();
 
             response.ContentType = "text/html";
             response.ContentEncoding = Encoding.UTF8;
@@ -40,27 +40,13 @@
             }
         }
 
-        private void EnsureWebPageHtmlPrepared(bool twentyFourHourClock)
+        private void EnsureWebPageHtmlPrepared()
         {
-            if (WebPageHtml == null || TwentyFourHourClockUsed != twentyFourHourClock)
+            if (WebPageHtml == null)
             {
                 var content = Properties.Resources.ClockHtmlTemplate;
-                if (!twentyFourHourClock)
-                {
-                    content = ReplaceTimeFormat(content);
-                }
-                
                 WebPageHtml = Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
-                TwentyFourHourClockUsed = twentyFourHourClock;
             }
-        }
-
-        private string ReplaceTimeFormat(string responseString)
-        {
-            string origLineOfCode = "s = formatTimeOfDay(h, m, true);";
-            string newLineOfCode = "s = formatTimeOfDay(h, m, false);";
-
-            return responseString.Replace(origLineOfCode, newLineOfCode);
         }
 
         private string CreateXml(TimerInfoEventArgs timerInfo)
@@ -79,13 +65,15 @@
                 case ClockServerMode.TimeOfDay:
                     // in this mode mins and secs hold the total offset time into the day
                     DateTime now = DateTime.Now;
+                    int use24Hrs = timerInfo.Use24HrFormat ? 1 : 0;
                     sb.AppendLine(
-                        $" <clock mode=\"TimeOfDay\" mins=\"{(now.Hour * 60) + now.Minute}\" secs=\"{now.Second}\" ms=\"{now.Millisecond}\" targetSecs=\"0\" />");
+                        $" <clock mode=\"TimeOfDay\" mins=\"{(now.Hour * 60) + now.Minute}\" secs=\"{now.Second}\" ms=\"{now.Millisecond}\" targetSecs=\"0\" use24Hr=\"{use24Hrs}\"/>");
                     break;
 
                 case ClockServerMode.Timer:
+                    int countingUp = timerInfo.IsCountingUp ? 1 : 0;
                     sb.AppendLine(
-                        $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" />");
+                        $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" countUp=\"{countingUp}\"/>");
                     break;
             }
 

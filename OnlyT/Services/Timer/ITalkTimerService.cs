@@ -14,7 +14,7 @@
 
         bool IsRunning { get; }
 
-        void Start(int targetSecs, int talkId);
+        void Start(int targetSecs, int talkId, bool isCountingUp);
 
         void Stop();
 

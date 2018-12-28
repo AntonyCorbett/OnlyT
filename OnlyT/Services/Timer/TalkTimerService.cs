@@ -19,6 +19,7 @@
         private int? _talkId;
         private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
         private int _currentSecondsElapsed;
+        private bool _isCountingUp;
 
         public TalkTimerService()
         {
@@ -107,10 +108,12 @@
         /// </summary>
         /// <param name="targetSecs">The target duration of the talk.</param>
         /// <param name="talkId">The Id of the talk that is being timed.</param>
-        public void Start(int targetSecs, int talkId)
+        /// <param name="isCountingUp">Indicates if the timer is counting up rather than down.</param>
+        public void Start(int targetSecs, int talkId, bool isCountingUp)
         {
             _targetSecs = targetSecs;
             _talkId = talkId;
+            _isCountingUp = isCountingUp;
             _stopWatch.Start();
             UpdateTimerValue();
             _timer.Start();
@@ -145,7 +148,8 @@
             {
                 TargetSeconds = _targetSecs,
                 ElapsedTime = _currentTimeElapsed,
-                IsRunning = IsRunning
+                IsRunning = IsRunning,
+                IsCountingUp = _isCountingUp
             };
         }
 

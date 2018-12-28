@@ -176,6 +176,8 @@ namespace OnlyT.ViewModel
             // we received a web request for the timer clock info...
             var info = _timerService.GetClockRequestInfo();
 
+            timerData.Use24HrFormat = _optionsService.Use24HrClockFormat();
+
             if (info == null || !info.IsRunning)
             {
                 timerData.Mode = ClockServerMode.TimeOfDay;
@@ -188,6 +190,8 @@ namespace OnlyT.ViewModel
                 timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
                 timerData.Secs = info.ElapsedTime.Seconds;
                 timerData.Millisecs = info.ElapsedTime.Milliseconds;
+
+                timerData.IsCountingUp = info.IsCountingUp;
             }
         }
 

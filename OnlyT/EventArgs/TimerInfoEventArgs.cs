@@ -13,5 +13,9 @@
         public int Millisecs { get; set; }
 
         public int TargetSecs { get; set; }
+
+        public bool Use24HrFormat { get; set; }
+
+        public bool IsCountingUp { get; set; }
     }
 }

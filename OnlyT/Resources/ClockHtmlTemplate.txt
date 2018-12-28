@@ -50,7 +50,7 @@
 		
 		<script type="text/javascript">
 			"use strict";
-			
+											
 			var textElem = document.getElementById("clocktext");
 			var textNode = document.createTextNode("");
 			textElem.appendChild(textNode);
@@ -61,10 +61,12 @@
 			var currentTimerMins = 0;
 			var currentTimerSecs = 0;
 			var currentTimerMillisecs = 0;
+			var currentlyCountingUp = false;
 			var timerStartDateTime = new Date();
 			var modeTransition = false;
 			var serverTimeOfDayAdjustment = 0;
 			var POLLING_INTERVAL_SECS = 4;
+			var use24HrClockFormat = false;
 									
 			function getOnlyTXml() 
 			{	
@@ -101,6 +103,7 @@
 										currentTimerSecs=parseInt(entry.getAttribute("secs"));
 										currentTimerMillisecs=parseInt(entry.getAttribute("ms"));
 										currentTargetSecs=parseInt(entry.getAttribute("targetSecs"));
+										currentlyCountingUp=parseInt(entry.getAttribute("countUp")) == 1;
 										
 										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000) + currentTimerMillisecs;
 										var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);										
@@ -116,6 +119,7 @@
 									case "TimeOfDay":									
 										var minsIntoDay=parseInt(entry.getAttribute("mins"));
 										var secs=parseInt(entry.getAttribute("secs"));
+										use24HrClockFormat = parseInt(entry.getAttribute("use24Hr")) == 1;
 										var serverStamp = new Date(clientDate.getTime());
 										serverStamp.setHours(minsIntoDay / 60, minsIntoDay % 60, secs);
 										serverTimeOfDayAdjustment = serverStamp - clientDate;									
@@ -157,9 +161,9 @@
 				return s;			
 			}
 
-			function formatTimeOfDay(hrs, mins, use24HrFormat)
+			function formatTimeOfDay(hrs, mins)
 			{
-				if(use24HrFormat)
+				if(use24HrClockFormat)
 				{
 					return formatMajorMinor(hrs, mins);
 				}
@@ -198,7 +202,7 @@
 			function getDisplayString()
 			{
 				var s = "";
-				
+								
 				modeTransition = (currentDisplayMode != currentMode);
 											
 				switch(currentMode)
@@ -209,11 +213,7 @@
 						var h = d.getHours();
 						var m = d.getMinutes();
 
-						// note that the following line is duplicated in 
-						// ClockWebPageController.ReplaceTimeFormat
-						// because the code is modified depending on whether 
-						// or not 24hr clock format is used...						
-						s = formatTimeOfDay(h, m, true);
+						s = formatTimeOfDay(h, m);
 						
 						textElem.className = "clockstyle";						
 						currentDisplayMode = currentMode;
@@ -227,26 +227,12 @@
 						
 						setClockColour(remainingSecs);
 						
-						if(remainingSecs < 0)
-						{
-							remainingSecs = Math.abs(remainingSecs);							
-							var remainingMins = Math.floor(remainingSecs / 60.0);
-							var secs = Math.floor(remainingSecs % 60);							
-						}
-						else
-						{
-							remainingSecs = Math.abs(remainingSecs);							
-							var remainingMins = Math.floor(remainingSecs / 60.0);
-							var secs = Math.ceil(remainingSecs % 60);
-							if(secs === 60)
-							{
-								secs = 0;
-								++remainingMins;
-							}							
-						}
-						
-						s = formatMajorMinor(remainingMins, secs);
 						currentDisplayMode = currentMode;
+
+						return currentlyCountingUp
+							? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
+							: getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+												
 						break;
 
 					case "Nameplate":
@@ -263,6 +249,40 @@
 				}
 				
 				return s;
+			}
+
+			function getTimeDisplayStringCountingUp(elapsedSecs)
+			{
+				var integralSecs = Math.abs(Math.floor(elapsedSecs % 60));
+				var integralMins = Math.abs(Math.floor(elapsedSecs / 60));
+
+				if(integralSecs === 60)
+				{
+					integralSecs = 0;
+					++integralMins;
+				}
+
+				return formatMajorMinor(integralMins, integralSecs);
+			}
+
+			function getTimeDisplayStringCountingDown(elapsedSecs, targetSecs)
+			{								
+				var remainingSecs = targetSecs - elapsedSecs;							
+				var integralSecs = Math.abs(Math.ceil(remainingSecs % 60));
+				var integralMins = Math.abs(Math.floor(remainingSecs / 60));
+
+				if(integralSecs === 60)
+				{
+					integralSecs = 0;
+					++integralMins;
+				}
+
+				if(remainingSecs < 0 && integralMins > 0)
+				{
+					--integralMins;
+				}
+
+				return formatMajorMinor(integralMins, integralSecs);
 			}
 
 			function updateClock() 

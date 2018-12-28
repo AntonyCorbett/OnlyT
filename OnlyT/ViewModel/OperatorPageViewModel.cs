@@ -441,7 +441,7 @@
 
                 if (_isStarting)
                 {
-                    _timerService.Start(_targetSeconds, talkId);
+                    _timerService.Start(_targetSeconds, talkId, _countUp);
                 }
             });
         }

@@ -9,5 +9,7 @@
         public TimeSpan ElapsedTime { get; set; }
 
         public bool IsRunning { get; set; }
+
+        public bool IsCountingUp { get; set; }
     }
 }

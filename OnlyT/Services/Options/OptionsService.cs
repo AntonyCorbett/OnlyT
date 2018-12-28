@@ -70,6 +70,19 @@
             }
         }
 
+        public bool Use24HrClockFormat()
+        {
+            switch (Options.ClockHourFormat)
+            {
+                case ClockHourFormat.Format24:
+                case ClockHourFormat.Format24LeadingZero:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         /// <summary>
         /// Saves the settings (if they have changed since they were last read)
         /// </summary>

@@ -9,5 +9,7 @@
         bool IsCountdownMonitorSpecified { get; }
 
         void Save();
+
+        bool Use24HrClockFormat();
     }
 }
