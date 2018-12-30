@@ -10,6 +10,8 @@
 
         public bool IsOvertime { get; set; }
 
+        public bool ShowElapsedSector { get; set; }
+
         public DurationSector Clone()
         {
             return new DurationSector
@@ -17,7 +19,8 @@
                 StartAngle = StartAngle,
                 CurrentAngle = CurrentAngle,
                 EndAngle = EndAngle,
-                IsOvertime = IsOvertime
+                IsOvertime = IsOvertime,
+                ShowElapsedSector = ShowElapsedSector
             };
         }
     }

@@ -78,6 +78,7 @@
         private AnglesOfHands _animationTargetAngles;
         private AnglesOfHands _animationCurrentAngles;
 
+        private bool _showElapsedSector;
         private Line _minuteHand;
         private Line _hourHand;
         private Line _secondHand;
@@ -98,6 +99,8 @@
         public Clock()
         {
             var isInDesignMode = DesignerProperties.GetIsInDesignMode(this);
+
+            _showElapsedSector = true;
 
             _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimerInterval };
             _timer.Tick += TimerCallback;
@@ -250,9 +253,11 @@
                 DrawSector(c._sectorPath1, sector.StartAngle, sector.EndAngle, IsLargeArc(sector.StartAngle, sector.EndAngle));
             }
 
+            c.ShowElapsedSector = sector.ShowElapsedSector;
+
             // light green sector...
             DrawSector(c._sectorPath2, sector.StartAngle, sector.CurrentAngle, IsLargeArc(sector.StartAngle, sector.CurrentAngle));
-
+            
             if (sector.IsOvertime)
             {
                 // red sector...
@@ -604,6 +609,29 @@
             if (GetTemplateChild("SectorPath3") is Path sectorPath3)
             {
                 _sectorPath3 = sectorPath3;
+            }
+        }
+
+        private bool ShowElapsedSector
+        {
+            get => _showElapsedSector;
+            set
+            {
+                if (_showElapsedSector != value)
+                {
+                    _showElapsedSector = value;
+
+                    if (_showElapsedSector)
+                    {
+                        _sectorPath2.Fill = new SolidColorBrush(Color.FromRgb(230, 255, 230));
+                        _sectorPath2.StrokeThickness = 1;
+                    }
+                    else
+                    {
+                        _sectorPath2.Fill = Brushes.White;
+                        _sectorPath2.StrokeThickness = 0;
+                    }
+                }
             }
         }
     }

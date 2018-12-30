@@ -196,20 +196,20 @@
                 : message.TargetSeconds);
 
             IsRunning = true;
-            InitOverallDurationSector(message.TargetSeconds);
+            InitOverallDurationSector(0, message.TargetSeconds);
         }
 
-        private void InitOverallDurationSector(int targetSecs)
+        private void InitOverallDurationSector(int elapsedSecs, int remainingSecs)
         {
             if (DurationSector == null && _optionsService.Options.ShowDurationSector)
             {
                 // can't display duration sector effectively when >= 1 hr
-                if (targetSecs < _secsPerHour) 
+                if (remainingSecs < _secsPerHour) 
                 {
                     var now = DateTime.Now;
                     var startAngle = CalcAngleFromTime(now);
 
-                    var endTime = now.AddSeconds(targetSecs);
+                    var endTime = now.AddSeconds(remainingSecs);
                     var endAngle = CalcAngleFromTime(endTime);
 
                     DurationSector = new DurationSector
@@ -217,7 +217,8 @@
                         StartAngle = startAngle,
                         EndAngle = endAngle,
                         CurrentAngle = startAngle,
-                        IsOvertime = false
+                        IsOvertime = false,
+                        ShowElapsedSector = (elapsedSecs + remainingSecs) < _secsPerHour
                     };
                 }
             }
@@ -240,7 +241,7 @@
 
                 // if duration of talk is greater than 1hr we only start showing the sector
                 // when remaining time is less than 1 hr (for sake of clarity)...
-                InitOverallDurationSector(message.RemainingSecs);
+                InitOverallDurationSector(message.ElapsedSecs, message.RemainingSecs);
 
                 if (DurationSector != null)
                 {
@@ -253,6 +254,8 @@
                         var d = DurationSector.Clone();
                         d.CurrentAngle = currentAngle;
                         d.IsOvertime = message.RemainingSecs < 0;
+                        d.ShowElapsedSector = (message.ElapsedSecs + message.RemainingSecs) < _secsPerHour;
+
                         DurationSector = d;
                     }
                 }
