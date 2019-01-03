@@ -241,7 +241,7 @@
     <value>Przemówienie służbowe</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Skarby</value>
+    <value>Skarby ze Słowa Bożego</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Studium Strażnicy</value>
@@ -267,13 +267,13 @@
     <value>Ustawienia</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Skarby</value>
+    <value>Skarby ze Słowa Bożego</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Służba</value>
+    <value>Ulepszajmy swą służbę</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Życie</value>
+    <value>Chrześcijański tryb życia</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
     <value>W sobotę/niedzielę</value>
