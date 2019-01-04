@@ -166,7 +166,7 @@
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Spotkania w weekend</value>
+    <value>Zebranie w weekend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
