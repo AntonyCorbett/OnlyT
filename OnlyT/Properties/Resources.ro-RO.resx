@@ -621,4 +621,12 @@
     <value>"JW Library" este o marcă înregistrată a Watch Tower Bible and Tract Society of Pennsylvania</value>
     <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
+  <data name="AUTO_BELL" xml:space="preserve">
+    <value>Automatically sound</value>
+    <comment>See Settings =&gt; Bell</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Sound the bell</value>
+    <comment>Tooltip displayed for manual bell button</comment>
+  </data>
 </root>
