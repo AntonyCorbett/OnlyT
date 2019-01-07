@@ -49,6 +49,8 @@
 
         private readonly SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
 
+        private readonly SolidColorBrush _bellColorManual = new SolidColorBrush(Colors.Red);
+
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
         private readonly IOptionsService _optionsService;
@@ -70,7 +72,8 @@
         private string _duration3String;
         private int _secondsRemaining;
         private DateTime? _meetingStartTimeFromCountdown;
-
+        private bool _isOvertime;
+        
         public OperatorPageViewModel(
            ITalkTimerService timerService,
            ITalkScheduleService scheduleService,
@@ -117,6 +120,7 @@
             Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
             Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
             Messenger.Default.Register<ShowCircuitVisitToggleChangedMessage>(this, OnShowCircuitVisitToggleChanged);
+            Messenger.Default.Register<AutoBellSettingChangedMessage>(this, OnAutoBellSettingChanged);
 
             if (IsInDesignMode)
             {
@@ -133,7 +137,7 @@
 #endif
             }
         }
-        
+
         public static string PageName => "OperatorPage";
 
         public string CurrentTimerValueString => TimeFormatter.FormatTimerDisplayString(_countUp
@@ -145,7 +149,7 @@
             get
             {
                 var talk = GetCurrentTalk();
-                return talk != null && talk.OriginalBell && _optionsService.Options.IsBellEnabled;
+                return talk != null && talk.BellApplicable && _optionsService.Options.IsBellEnabled;
             }
         }
 
@@ -259,6 +263,21 @@
             }
         }
 
+        public bool IsOvertime
+        {
+            get => _isOvertime;
+            set
+            {
+                if (_isOvertime != value)
+                {
+                    _isOvertime = value;
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(BellColour));
+                    RaisePropertyChanged(nameof(BellTooltip));
+                }
+            }
+        }
+
         public string Duration3String
         {
             get => _duration3String;
@@ -304,6 +323,8 @@
                     StartCommand?.RaiseCanExecuteChanged();
                     SetDurationStringAttributes(talk);
 
+                    IsOvertime = false;
+
                     _timerService.SetupTalk(_talkId, TargetSeconds);
                 }
             }
@@ -316,9 +337,14 @@
                 var talk = GetCurrentTalk();
                 if (talk != null)
                 {
-                    return talk.Bell
-                       ? _bellColorActive
-                       : _bellColorInactive;
+                    if (IsOvertime)
+                    {
+                        return _bellColorManual;
+                    }
+
+                    return talk.AutoBell
+                        ? _bellColorActive
+                        : _bellColorInactive;
                 }
 
                 return _bellColorInactive;
@@ -339,7 +365,12 @@
                 var talk = GetCurrentTalk();
                 if (talk != null)
                 {
-                    return talk.Bell
+                    if (_isOvertime)
+                    {
+                        return Properties.Resources.SOUND_BELL;
+                    }
+
+                    return talk.AutoBell
                        ? Properties.Resources.ACTIVE_BELL
                        : Properties.Resources.INACTIVE_BELL;
                 }
@@ -625,12 +656,17 @@
 
             if (e.RemainingSecs == 0)
             {
+                IsOvertime = true;
+
                 var talk = GetCurrentTalk();
                 if (talk != null)
                 {
-                    if (talk.Bell && _optionsService.Options.IsBellEnabled)
+                    if (_optionsService.Options.IsBellEnabled && talk.BellApplicable)
                     {
-                        _bellService.Play(_optionsService.Options.BellVolumePercent);
+                        if (talk.AutoBell)
+                        {
+                            _bellService.Play(_optionsService.Options.BellVolumePercent);
+                        }
                     }
                 }
             }
@@ -891,6 +927,8 @@
         {
             Log.Logger.Debug("Stopping timer");
 
+            IsOvertime = false;
+
             var talk = GetCurrentTalk();
             var msg = new TimerStopMessage(
                 TalkId, 
@@ -975,9 +1013,18 @@
             var talk = GetCurrentTalk();
             if (talk != null)
             {
-                talk.Bell = !talk.Bell;
-                RaisePropertyChanged(nameof(BellColour));
-                RaisePropertyChanged(nameof(BellTooltip));
+                if (_isOvertime)
+                {
+                    // manually sound the bell
+                    _bellService.Play(_optionsService.Options.BellVolumePercent);
+                }
+                else
+                {
+                    // toggle state
+                    talk.AutoBell = !talk.AutoBell;
+                    RaisePropertyChanged(nameof(BellColour));
+                    RaisePropertyChanged(nameof(BellTooltip));
+                }
             }
         }
 
@@ -1087,6 +1134,26 @@
             {
                 Process.Start(pdf);
             }
+        }
+
+        private void OnAutoBellSettingChanged(AutoBellSettingChangedMessage message)
+        {
+            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
+            if (talks != null)
+            {
+                var autoBell = _optionsService.Options.AutoBell;
+
+                foreach (var talk in talks)
+                {
+                    if (talk.AutoBell != autoBell)
+                    {
+                        talk.AutoBell = autoBell;
+                    }
+                }
+            }
+
+            RaisePropertyChanged(nameof(BellColour));
+            RaisePropertyChanged(nameof(BellTooltip));
         }
     }
 }

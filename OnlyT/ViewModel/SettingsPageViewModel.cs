@@ -521,6 +521,20 @@
             }
         }
 
+        public bool AutoBell
+        {
+            get => _optionsService.Options.AutoBell;
+            set
+            {
+                if (_optionsService.Options.AutoBell != value)
+                {
+                    _optionsService.Options.AutoBell = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new AutoBellSettingChangedMessage());
+                }
+            }
+        }
+
         public int BellVolumePercent
         {
             get => _optionsService.Options.BellVolumePercent;

@@ -10,13 +10,13 @@
         [TestMethod]
         public void TestOriginalBell()
         {
-            TalkScheduleItem item = new TalkScheduleItem { Bell = true };
-            Assert.IsTrue(item.Bell);
-            Assert.IsTrue(item.OriginalBell);
+            TalkScheduleItem item = new TalkScheduleItem { AutoBell = true };
+            Assert.IsTrue(item.AutoBell);
+            Assert.IsTrue(item.OriginalAutoBell);
 
-            item.Bell = false;
-            Assert.IsFalse(item.Bell);
-            Assert.IsTrue(item.OriginalBell);
+            item.AutoBell = false;
+            Assert.IsFalse(item.AutoBell);
+            Assert.IsTrue(item.OriginalAutoBell);
         }
 
         [TestMethod]

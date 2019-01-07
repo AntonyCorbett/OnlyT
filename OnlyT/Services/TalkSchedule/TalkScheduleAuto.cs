@@ -64,7 +64,10 @@
             
             return optionsService.Options.MidWeekOrWeekend == MidWeekOrWeekend.Weekend
                 ? GetWeekendMeetingSchedule(isCircuitVisit)
-                : GetMidweekMeetingSchedule(isCircuitVisit, new TimesFeed().GetMeetingDataForToday());
+                : GetMidweekMeetingSchedule(
+                    isCircuitVisit, 
+                    optionsService.Options.IsBellEnabled && optionsService.Options.AutoBell,
+                    new TimesFeed().GetMeetingDataForToday());
         }
 
         private static TalkScheduleItem CreateTreasuresItem(
@@ -72,9 +75,10 @@
             string talkName,
             TimeSpan startOffset,
             TimeSpan duration,
-            bool isStudentTalk = false,
-            bool useBell = false,
-            bool persistFinalTimerValue = false)
+            bool isStudentTalk,
+            bool useBell,
+            bool autoBell,
+            bool persistFinalTimerValue)
         {
             return new TalkScheduleItem(talkType)
             {
@@ -83,20 +87,56 @@
                 MeetingSectionNameInternal = SectionTreasures,
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
-                Bell = useBell,
+                BellApplicable = useBell,
+                AutoBell = autoBell,
                 IsStudentTalk = isStudentTalk,
                 PersistFinalTimerValue = persistFinalTimerValue
             };
         }
 
-        private static List<TalkScheduleItem> GetTreasuresSchedule()
+        private static List<TalkScheduleItem> GetTreasuresSchedule(bool autoBell)
         {
             return new List<TalkScheduleItem>
             {
-                CreateTreasuresItem(TalkTypesAutoMode.OpeningComments, Properties.Resources.TALK_OPENING_COMMENTS, new TimeSpan(0, 5, 0), TimeSpan.FromMinutes(3)),
-                CreateTreasuresItem(TalkTypesAutoMode.TreasuresTalk, Properties.Resources.TALK_TREASURES, new TimeSpan(0, 8, 20), TimeSpan.FromMinutes(10)),
-                CreateTreasuresItem(TalkTypesAutoMode.DiggingTalk, Properties.Resources.TALK_DIGGING, new TimeSpan(0, 18, 40), TimeSpan.FromMinutes(8)),
-                CreateTreasuresItem(TalkTypesAutoMode.Reading, Properties.Resources.TALK_READING, new TimeSpan(0, 27, 0), TimeSpan.FromMinutes(4), true, true, true)
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.OpeningComments, 
+                    Properties.Resources.TALK_OPENING_COMMENTS, 
+                    new TimeSpan(0, 5, 0), 
+                    TimeSpan.FromMinutes(3),
+                    false,
+                    false,
+                    autoBell,
+                    false),
+
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.TreasuresTalk, 
+                    Properties.Resources.TALK_TREASURES, 
+                    new TimeSpan(0, 8, 20), 
+                    TimeSpan.FromMinutes(10),
+                    false,
+                    false,
+                    autoBell,
+                    false),
+
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.DiggingTalk, 
+                    Properties.Resources.TALK_DIGGING, 
+                    new TimeSpan(0, 18, 40), 
+                    TimeSpan.FromMinutes(8),
+                    false,
+                    false,
+                    autoBell,
+                    false),
+
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.Reading, 
+                    Properties.Resources.TALK_READING, 
+                    new TimeSpan(0, 27, 0), 
+                    TimeSpan.FromMinutes(4), 
+                    true, 
+                    true,
+                    autoBell,
+                    true)
             };
         }
 
@@ -115,10 +155,11 @@
             string talkName,
             TimeSpan startOffset,
             TimeSpan duration,
-            bool isStudentTalk = false,
-            bool useBell = false,
-            bool persistFinalTimerValue = false,
-            bool editableTime = false)
+            bool isStudentTalk,
+            bool useBell,
+            bool autoBell,
+            bool persistFinalTimerValue,
+            bool editableTime)
         {
             return new TalkScheduleItem(talkType)
             {
@@ -127,132 +168,80 @@
                 MeetingSectionNameInternal = SectionMinistry,
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
-                Bell = useBell,
+                BellApplicable = useBell,
+                AutoBell = autoBell,
                 PersistFinalTimerValue = persistFinalTimerValue,
                 Editable = editableTime,
                 IsStudentTalk = isStudentTalk
             };
         }
 
-        private static IEnumerable<TalkScheduleItem> GetMinistrySchedule(Meeting meetingData)
+        private static IEnumerable<TalkScheduleItem> GetMinistrySchedule(Meeting meetingData, bool autoBell)
         {
             var result = new List<TalkScheduleItem>();
 
-            TalkTimer timerItem1 = null;
-            TalkTimer timerItem2 = null;
-            TalkTimer timerItem3 = null;
-            TalkTimer timerItem4 = null;
+            var timers = new List<TalkTimer>();
 
             if (meetingData != null)
             {
                 if (meetingData.Date.Year < 2019)
                 {
-                    timerItem1 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Ministry1)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Pre2019Ministry1);
-                    timerItem2 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Ministry2)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Pre2019Ministry2);
-                    timerItem3 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Ministry3)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Pre2019Ministry3);
+                    const int maxItems = 3;
+
+                    for (int n = 0; n < maxItems; ++n)
+                    {
+                        var talkType = TalkTypesUtils.GetMinistryTalkTypePre2019(n);
+
+                        var item =
+                            meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType)) ??
+                            CreateDefaultMinistryTalkTimer(talkType);
+
+                        timers.Add(item);
+                    }
                 }
                 else
                 {
-                    timerItem1 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry1)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry1);
-                    timerItem2 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry2)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry2);
-                    timerItem3 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry3)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry3);
-                    timerItem4 =
-                        meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Ministry4)) ??
-                        CreateDefaultMinistryTalkTimer(TalkTypes.Ministry4);
+                    const int maxItems = 4;
+
+                    for (int n = 0; n < maxItems; ++n)
+                    {
+                        var talkType = TalkTypesUtils.GetMinistryTalkType(n);
+
+                        var item = meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType));
+                        if (item != null)
+                        {
+                            timers.Add(item);
+                        }
+                    }
                 }
             }
 
             TimeSpan startOffset = new TimeSpan(0, 32, 20);
 
-            if (timerItem1 != null)
+            for (var n = 0; n < timers.Count; ++n)
             {
+                var talkType = TalkTypesUtils.GetAutoModeMinistryTalkType(n);
+                var timer = timers[n];
+
                 result.Add(CreateMinistryItem(
-                    TalkTypesAutoMode.MinistryItem1,
-                    GetMinistryItemTitle(1),
+                    talkType,
+                    GetMinistryItemTitle(n + 1),
                     startOffset,
-                    TimeSpan.FromMinutes(timerItem1.Minutes),
-                    timerItem1.IsStudentTalk,
-                    timerItem1.IsStudentTalk,
-                    timerItem1.IsStudentTalk,
+                    TimeSpan.FromMinutes(timer.Minutes),
+                    timer.IsStudentTalk,
+                    timer.IsStudentTalk,
+                    autoBell,
+                    timer.IsStudentTalk,
                     true));
 
-                startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem1.Minutes));
-                if (timerItem1.IsStudentTalk)
+                startOffset = startOffset.Add(TimeSpan.FromMinutes(timer.Minutes));
+                if (timer.IsStudentTalk)
                 {
                     // counsel...
                     startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
                 }
 
                 startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
-            }
-
-            if (timerItem2 != null)
-            {
-                result.Add(CreateMinistryItem(
-                    TalkTypesAutoMode.MinistryItem2,
-                    GetMinistryItemTitle(2),
-                    startOffset,
-                    TimeSpan.FromMinutes(timerItem2.Minutes),
-                    timerItem2.IsStudentTalk,
-                    timerItem2.IsStudentTalk,
-                    timerItem2.IsStudentTalk,
-                    true));
-
-                startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem2.Minutes));
-                if (timerItem2.IsStudentTalk)
-                {
-                    // counsel...
-                    startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
-                }
-
-                startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
-            }
-
-            if (timerItem3 != null)
-            {
-                result.Add(CreateMinistryItem(
-                    TalkTypesAutoMode.MinistryItem3,
-                    GetMinistryItemTitle(3),
-                    startOffset,
-                    TimeSpan.FromMinutes(timerItem3.Minutes),
-                    timerItem3.IsStudentTalk,
-                    timerItem3.IsStudentTalk,
-                    timerItem3.IsStudentTalk,
-                    true));
-
-                startOffset = startOffset.Add(TimeSpan.FromMinutes(timerItem3.Minutes));
-                if (timerItem3.IsStudentTalk)
-                {
-                    // counsel...
-                    startOffset = startOffset.Add(TimeSpan.FromMinutes(1));
-                }
-
-                startOffset = startOffset.Add(TimeSpan.FromSeconds(20));
-            }
-
-            if (timerItem4 != null)
-            {
-                result.Add(CreateMinistryItem(
-                    TalkTypesAutoMode.MinistryItem4,
-                    GetMinistryItemTitle(4),
-                    startOffset,
-                    TimeSpan.FromMinutes(timerItem4.Minutes),
-                    timerItem4.IsStudentTalk,
-                    timerItem4.IsStudentTalk,
-                    timerItem4.IsStudentTalk,
-                    true));
             }
 
             return result;
@@ -346,15 +335,16 @@
             return result;
         }
 
-        private static List<TalkScheduleItem> GetMidweekMeetingSchedule(bool isCircuitVisit, Meeting meetingData)
+        private static List<TalkScheduleItem> GetMidweekMeetingSchedule(
+            bool isCircuitVisit, bool autoBell, Meeting meetingData)
         {
             var result = new List<TalkScheduleItem>();
 
             // Treasures...
-            result.AddRange(GetTreasuresSchedule());
+            result.AddRange(GetTreasuresSchedule(autoBell));
 
             // Ministry...
-            result.AddRange(GetMinistrySchedule(meetingData));
+            result.AddRange(GetMinistrySchedule(meetingData, autoBell));
 
             // Living...
             result.AddRange(GetLivingSchedule(isCircuitVisit, meetingData));

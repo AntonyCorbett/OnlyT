@@ -17,7 +17,8 @@
                     Id = 10000,
                     OriginalDuration = TimeSpan.FromMinutes(30),
                     Editable = true,
-                    Bell = optionsService.Options.IsBellEnabled,
+                    BellApplicable = optionsService.Options.IsBellEnabled,
+                    AutoBell = optionsService.Options.AutoBell,
                     Name = "Manual"
                 }
             };

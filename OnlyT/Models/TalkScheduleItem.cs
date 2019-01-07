@@ -15,9 +15,9 @@
         /// Manually modified duration (after user modification)
         /// </summary>
         private TimeSpan? _modifiedDuration;
-        private bool? _originalBell;
-        private bool _bell;
         private int? _completedSeconds;
+        private bool _autoBell;
+        private bool? _originalAutoBell;
 
         public TalkScheduleItem()
         {
@@ -144,30 +144,32 @@
         public bool PersistFinalTimerValue { get; set; }
 
         // can the timer be modified manually?
-        public bool Editable { get; set; } 
+        public bool Editable { get; set; }
 
-        public bool OriginalBell
+        public bool BellApplicable { get; set; }
+
+        // should a bell be sounded at time-up?
+        public bool AutoBell
         {
-            get => _originalBell ?? false;
-            private set
+            get => _autoBell;
+            set
             {
-                if (_originalBell == null)
+                if (_autoBell != value)
                 {
-                    _originalBell = value;
+                    _autoBell = value;
+                    OriginalAutoBell = value;
                 }
             }
         }
-        
-        // should a bell be sounded at time-up?
-        public bool Bell
+
+        public bool OriginalAutoBell
         {
-            get => _bell;
-            set
+            get => _originalAutoBell ?? false;
+            private set
             {
-                if (_bell != value)
+                if (_originalAutoBell == null)
                 {
-                    _bell = value;
-                    OriginalBell = value;
+                    _originalAutoBell = value;
                 }
             }
         }

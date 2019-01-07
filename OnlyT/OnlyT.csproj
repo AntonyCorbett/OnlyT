@@ -134,6 +134,7 @@
     <Compile Include="MeetingTalkTimesFeed\Meeting.cs" />
     <Compile Include="MeetingTalkTimesFeed\TalkTimer.cs" />
     <Compile Include="MeetingTalkTimesFeed\TalkTypes.cs" />
+    <Compile Include="MeetingTalkTimesFeed\TalkTypesUtils.cs" />
     <Compile Include="MeetingTalkTimesFeed\TimesFeed.cs" />
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="ViewModel\IPage.cs" />
     <Compile Include="ViewModel\Messages\AlwaysOnTopChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AnalogueClockWidthChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\AutoBellSettingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />

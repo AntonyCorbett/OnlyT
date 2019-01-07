@@ -150,6 +150,7 @@
                         <ColumnDefinition Width="284*"/>
                     </Grid.ColumnDefinitions>
 
+                    <!-- Bell icon -->
                     <Button Grid.Column="0" Command="{Binding BellToggleCommand}" Style="{StaticResource ChromelessBtn}">
                         <Path  
                             Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"

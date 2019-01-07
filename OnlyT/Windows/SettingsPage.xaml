@@ -189,6 +189,10 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.ENABLED_BELL}" />
 
+                        <CheckBox IsChecked="{Binding AutoBell, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.AUTO_BELL}" />
+
                         <Label Style="{StaticResource LabelStyle}" Content="{x:Static resx:Resources.VOLUME}"/>
                         <Slider Maximum="100" LargeChange="10" SmallChange="1" 
                                 Value="{Binding BellVolumePercent}"

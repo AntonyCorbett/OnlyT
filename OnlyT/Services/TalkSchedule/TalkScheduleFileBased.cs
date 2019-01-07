@@ -16,7 +16,7 @@
         private static readonly string FileName = "talk_schedule.xml";
         private static readonly int StartId = 5000;
 
-        public static IEnumerable<TalkScheduleItem> Read()
+        public static IEnumerable<TalkScheduleItem> Read(bool autoBell)
         {
             List<TalkScheduleItem> result = null;
 
@@ -43,7 +43,8 @@
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
-                                Bell = AttributeToBool(elem.Attribute("bell"), false),
+                                BellApplicable = AttributeToBool(elem.Attribute("bell"), false),
+                                AutoBell = autoBell,
                                 PersistFinalTimerValue = AttributeToBool(elem.Attribute("persist"), false)
                             });
                         }

@@ -67,7 +67,7 @@
                     ? null
                     : (int?)talk.AdaptedDuration.Value.TotalSeconds,
                 ActualDurationSecs = (int)talk.ActualDuration.TotalSeconds,
-                UsesBell = talk.Bell,
+                UsesBell = talk.BellApplicable,
                 CompletedTimeSecs = talk.CompletedTimeSecs,
                 CountUp = talk.CountUp ?? countUpByDefault
             };

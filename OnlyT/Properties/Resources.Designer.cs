@@ -169,6 +169,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatically sound.
+        /// </summary>
+        public static string AUTO_BELL {
+            get {
+                return ResourceManager.GetString("AUTO_BELL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AUTOMATIC MODE.
         /// </summary>
         public static string AUTO_SECTION {
@@ -1106,6 +1115,15 @@ namespace OnlyT.Properties {
         public static string SHOW_SECONDS {
             get {
                 return ResourceManager.GetString("SHOW_SECONDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sound the bell.
+        /// </summary>
+        public static string SOUND_BELL {
+            get {
+                return ResourceManager.GetString("SOUND_BELL", resourceCulture);
             }
         }
         

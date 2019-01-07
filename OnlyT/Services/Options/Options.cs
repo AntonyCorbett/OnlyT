@@ -24,6 +24,7 @@
             CountdownScreenLocation = ScreenLocation.Centre;
             AlwaysOnTop = true;
             IsBellEnabled = true;
+            AutoBell = true;
             BellVolumePercent = 70;
             MidWeekAdaptiveMode = AdaptiveMode.None;
             WeekendAdaptiveMode = AdaptiveMode.None;
@@ -74,6 +75,8 @@
         public bool AlwaysOnTop { get; set; }
 
         public bool IsBellEnabled { get; set; }
+
+        public bool AutoBell { get; set; }
 
         public int BellVolumePercent { get; set; }
 
