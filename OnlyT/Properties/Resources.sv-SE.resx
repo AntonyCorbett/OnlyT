@@ -626,7 +626,7 @@
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
-    <value>Sound the bell</value>
+    <value>Ge ljudsignal</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
 </root>
