@@ -12,7 +12,7 @@ If you just want to install the application, please download the [OnlyTSetup.exe
 
 ### Help
 
-See the [wiki](https://github.com/AntonyCorbett/OnlyT/wiki) for basic instructions.
+See the [wiki](https://github.com/AntonyCorbett/OnlyT/wiki) for basic instructions and for information on where to get further help.
 
 See the [FAQ](https://github.com/AntonyCorbett/OnlyT/wiki/FAQ) for frequently asked questions.
 
