@@ -8,6 +8,7 @@
     using OnlyT.Utils;
     using OnlyT.ViewModel.Messages;
     using Options;
+    using Serilog;
     using TalkSchedule;
 
     /// <summary>
@@ -47,47 +48,74 @@
         /// <returns>Adapted time (or null if time is not adapted)</returns>
         public TimeSpan? CalculateAdaptedDuration(int itemId)
         {
-            TalkScheduleItem talk = _scheduleService.GetTalkScheduleItem(itemId);
-            if (talk != null)
+            var talk = _scheduleService.GetTalkScheduleItem(itemId);
+            if (talk == null)
             {
-                EnsureMeetingStartTimeIsSet(talk);
-
-                if (_meetingStartTimeUtc != null)
-                {
-                    AdaptiveMode adaptiveMode = GetAdaptiveMode();
-                    if (adaptiveMode != AdaptiveMode.None)
-                    {
-                        if (talk.AllowAdaptive)
-                        {
-                            var talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
-                            var talkActualStartTime = DateTime.UtcNow;
-                            var deviation = talkActualStartTime - talkPlannedStartTime;
-
-                            if (DeviationWithinRange(deviation))
-                            {
-                                if (adaptiveMode == AdaptiveMode.TwoWay || talkPlannedStartTime < talkActualStartTime)
-                                {
-                                    TimeSpan remainingAdaptiveTime = CalculateRemainingAdaptiveTime(talk);
-
-                                    double fractionToApplyToThisTalk =
-                                       talk.GetDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
-
-                                    double secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
-                                    return talk.OriginalDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
-                                }
-                            }
-                        }
-                    }
-                }
+                return null;
             }
 
-            return null;
+            Log.Logger.Debug($"Calculating adapted talk duration for item {talk.Name}");
+
+            EnsureMeetingStartTimeIsSet(talk);
+
+            if (_meetingStartTimeUtc == null)
+            {
+                return null;
+            }
+
+            var adaptiveMode = GetAdaptiveMode();
+
+            Log.Logger.Debug($"Adaptive mode = {adaptiveMode}");
+            if (adaptiveMode == AdaptiveMode.None)
+            {
+                return null;
+            }
+
+            if (!talk.AllowAdaptive)
+            {
+                return null;
+            }
+
+            var talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
+            
+            var talkActualStartTime = DateTime.UtcNow;
+            
+            var deviation = talkActualStartTime - talkPlannedStartTime;
+
+            Log.Logger.Debug($"Talk planned start = {talkPlannedStartTime}, actual start ={talkActualStartTime}, deviation={deviation}");
+
+            if (!DeviationWithinRange(deviation))
+            {
+                return null;
+            }
+
+            if (adaptiveMode != AdaptiveMode.TwoWay && talkPlannedStartTime >= talkActualStartTime)
+            {
+                return null;
+            }
+
+            var remainingAdaptiveTime = CalculateRemainingAdaptiveTime(talk);
+
+            Log.Logger.Debug($"Remaining time = {remainingAdaptiveTime}");
+
+            var fractionToApplyToThisTalk =
+               talk.GetDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
+
+            Log.Logger.Debug($"Fraction to apply = {fractionToApplyToThisTalk}");
+
+            var secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
+
+            Log.Logger.Debug($"Seconds to apply = {secondsToApply}");
+
+            return talk.OriginalDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
         }
 
         private void SetMeetingStartUtc(TalkScheduleItem talk)
         {
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
+                Log.Logger.Debug("Setting meeting start time UTC for adaptive timer service");
+
                 DateTime? start = null;
 
                 switch (_optionsService.Options.MidWeekOrWeekend)
@@ -125,6 +153,8 @@
                         _meetingStartTimeUtc = start;
                     }
                 }
+
+                Log.Logger.Debug($"Meeting start time UTC = {_meetingStartTimeUtc}");
             }
         }
 

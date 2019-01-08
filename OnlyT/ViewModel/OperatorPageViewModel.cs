@@ -601,6 +601,8 @@
                     var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
                     if (newDuration != null)
                     {
+                        Log.Logger.Debug($"New duration = {newDuration}");
+
                         var talk = GetCurrentTalk();
                         if (talk != null)
                         {
