@@ -122,11 +122,11 @@
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Midweek and Weekend Meetings</value>
+    <value>Réunion de la semaine et du weekend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Midweek Meetings</value>
+    <value>Réunion de la semaine</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
@@ -138,15 +138,15 @@
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
-    <value>Meeting overtime by ~{0} minutes</value>
+    <value>Réunion en retard de ~{0} minutes</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by more than 1 minute</comment>
   </data>
   <data name="OVERTIME_BY_1" xml:space="preserve">
-    <value>Meeting overtime by 1 minute</value>
+    <value>Réunion en retard de 1 minute</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
-    <value>Overtime (mins)</value>
+    <value>Retard (mins)</value>
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
@@ -166,7 +166,7 @@
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Weekend Meetings</value>
+    <value>Réunion du weekend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
