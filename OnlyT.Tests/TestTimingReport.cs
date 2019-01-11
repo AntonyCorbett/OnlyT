@@ -1,8 +1,12 @@
-﻿namespace OnlyT.Tests
+﻿using System.IO;
+using OnlyT.Report.Models;
+
+namespace OnlyT.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using OnlyT.Report.Pdf;
     using OnlyT.Report.Services;
     using OnlyT.Services.Report;
 
@@ -26,14 +30,26 @@
             const int weekCount = 20;
             var dateOfFirstMeeting = GetNearestDayOnOrAfter(DateTime.Today.AddDays(-weekCount * 7), DayOfWeek.Sunday).Date;
 
+            MeetingTimes lastMtgTimes = null;
             for (int wk = 0; wk < weekCount; ++wk)
             {
                 var dateOfWeekendMtg = dateOfFirstMeeting.AddDays(wk * 7);
                 var dateOfMidweekMtg = dateOfWeekendMtg.AddDays(4);
 
                 StoreWeekendData(wk, dateOfWeekendMtg, dateTimeService);
-                StoreMidweekData(wk, weekCount, dateOfMidweekMtg, dateTimeService);
+                lastMtgTimes = StoreMidweekData(wk, weekCount, dateOfMidweekMtg, dateTimeService);
             }
+
+            WriteReport(dateTimeService, lastMtgTimes);
+        }
+
+        private void WriteReport(DateTimeServiceForTests dateTimeService, MeetingTimes lastMtgTimes)
+        {
+            var service = new LocalTimingDataStoreService(null, dateTimeService);
+            var historicalTimes = service.GetHistoricalMeetingTimes();
+
+            PdfTimingReport report = new PdfTimingReport(lastMtgTimes, historicalTimes, Path.GetTempPath());
+            report.Execute();
         }
 
         private void StoreWeekendData(
@@ -78,7 +94,7 @@
         }
 
         [SuppressMessage("ReSharper", "ParameterOnlyUsedForPreconditionCheck.Local", Justification = "false positive")]
-        private void StoreMidweekData(
+        private MeetingTimes StoreMidweekData(
             int week,
             int weekCount,
             DateTime dateOfMidweekMtg,
@@ -133,6 +149,8 @@
                 var file = TimingReportGeneration.ExecuteAsync(service, null).Result;
                 Assert.IsNotNull(file);
             }
+
+            return service.MeetingTimes;
         }
 
         private TimeSpan GetCounselDuration()

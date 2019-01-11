@@ -206,7 +206,7 @@
                         }
 
                         var p = ySeries.Add(LimitOvertime(summary.Overtime.TotalMinutes));
-                        p.FillFormat.Color = XColor.FromName(p.Value > 0 ? "Red" : "Green");
+                        p.FillFormat.Color = XColor.FromKnownColor(p.Value > 0 ? XKnownColor.Red : XKnownColor.Green);
                     }
                 }
 

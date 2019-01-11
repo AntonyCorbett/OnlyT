@@ -31,6 +31,8 @@
             _dateTimeService = dateTimeService;
         }
 
+        public MeetingTimes MeetingTimes => _mtgTimes;
+
         public DateTime LastTimerStop
         {
             get

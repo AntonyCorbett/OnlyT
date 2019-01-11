@@ -23,7 +23,7 @@
         }
 
         public DateTime LastTimerStop { get; private set; }
-
+        
         public int MeetingTimesId { get; set; }
 
         public Guid Session { get; set; }
