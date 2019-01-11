@@ -190,13 +190,13 @@
     <value>W tygodniu</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Punkt ćwiczebny nr 1</value>
+    <value>Ulepszajmy swą służbę, pkt 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Punkt ćwiczebny nr 2</value>
+    <value>Ulepszajmy swą służbę, pkt 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Punkt ćwiczebny nr 3</value>
+    <value>Ulepszajmy swą służbę, pkt 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automatyczny</value>
@@ -283,7 +283,7 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Punkt ćwiczebny nr 4</value>
+    <value>Ulepszajmy swą służbę, pkt 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Wizyta nadzorcy obwodu</value>
@@ -620,5 +620,13 @@
   <data name="JWL_TRADEMARK" xml:space="preserve">
     <value>"JW Library" jest zastrzeżonym znakiem towarowym WatchTower Bible and Tract Society of Pennsylvania</value>
     <comment>See Settings =&gt; Automatic Mode</comment>
+  </data>
+  <data name="AUTO_BELL" xml:space="preserve">
+    <value>Automatyczny sygnał akustyczny</value>
+    <comment>See Settings =&gt; Bell</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Dźwięk dzwonka</value>
+    <comment>Tooltip displayed for manual bell button</comment>
   </data>
 </root>
