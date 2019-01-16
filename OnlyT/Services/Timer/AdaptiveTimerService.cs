@@ -235,7 +235,17 @@
                     }
                 }
 
-                return _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting + changeInStartTime);
+                var originalPlannedStart = _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting);
+                
+                if (changeInStartTime != TimeSpan.Zero)
+                {
+                    var revisedStart = _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting + changeInStartTime);
+                    Log.Logger.Debug($"Original planned start time = {originalPlannedStart}. Revised = {revisedStart}");
+
+                    return revisedStart;
+                }
+
+                return originalPlannedStart;
             }
 
             return DateTime.MinValue;
