@@ -215,6 +215,7 @@
         private DateTime CalculatePlannedStartTimeOfItem(TalkScheduleItem talk)
         {
             Debug.Assert(_meetingStartTimeUtc != null, "Meeting start time is null");
+            Debug.Assert(GetAdaptiveMode() != AdaptiveMode.None, "GetAdaptiveMode() != AdaptiveMode.None");
 
             if (_meetingStartTimeUtc != null)
             {

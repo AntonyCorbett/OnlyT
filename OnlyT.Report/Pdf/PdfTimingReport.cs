@@ -354,15 +354,18 @@
                     _itemTitleFont.Height * 2.5);
             }
 
+            // title
             g.DrawString(desc, _itemTitleFont, textBrush, new XPoint(curX, _currentY));
             _currentY += _itemTitleFont.Height;
 
+            // duration
             var duration = item.End - item.Start;
             var szDur = DrawDurationString(g, duration, curX, textBrush);
             curX += szDur.Width;
 
+            // start/end times
             curX = DrawTimesString(g, item, curX, textBrush);
-
+            
             var ts = item.AdaptedDuration == default(TimeSpan) ? item.PlannedDuration : item.AdaptedDuration;
             DrawItemOvertime(g, curX, duration, ts);
 
@@ -400,6 +403,19 @@
 
             g.DrawString(")", _stdTimeFont, textBrush, new XPoint(curX += sz4.Width, _currentY));
 
+            if (item.AdaptedDuration != item.PlannedDuration)
+            {
+                var adaptedTimeStr = $"{item.AdaptedDuration.Hours:D2}:{item.AdaptedDuration.Minutes:D2}:{item.AdaptedDuration.Seconds:D2}";
+
+                // "adapted duration = {0}"
+                var adaptedStr = $" {string.Format(Resources.ADAPTED_DURATION, adaptedTimeStr)}";
+                var sz = g.MeasureString(adaptedStr, _smallTimeFont);
+
+                g.DrawString(adaptedStr, _smallTimeFont, _lightGrayBrush, new XPoint(curX += widthHyphenStr, _currentY));
+
+                curX += sz.Width;
+            }
+
             return curX;
         }
 
@@ -416,9 +432,16 @@
             var overtime = allowedDuration - duration;
             var inTheRed = (int)overtime.TotalSeconds < 0;
             var inTheGreen = (int)overtime.TotalSeconds >= 0;
+            var spotOn = (int)overtime.TotalSeconds == 0;
 
-            var prefix = inTheGreen ? "-" : inTheRed ? "+" : string.Empty;
-            var s = $"{prefix}{Math.Abs(overtime.Minutes):D2}:{Math.Abs(overtime.Seconds):D2}";
+            var prefix = string.Empty;
+
+            if (!spotOn)
+            {
+                prefix = inTheGreen ? "-" : "+";
+            }
+
+            var s = $"{prefix} {Math.Abs(overtime.Minutes):D2}:{Math.Abs(overtime.Seconds):D2}";
 
             var sz = g.MeasureString(s, _durationFont);
 

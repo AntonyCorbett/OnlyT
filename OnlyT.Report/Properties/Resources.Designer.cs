@@ -61,6 +61,15 @@ namespace OnlyT.Report.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to adapted duration = {0}.
+        /// </summary>
+        internal static string ADAPTED_DURATION {
+            get {
+                return ResourceManager.GetString("ADAPTED_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to counsel and commendation.
         /// </summary>
         internal static string COUNSEL {

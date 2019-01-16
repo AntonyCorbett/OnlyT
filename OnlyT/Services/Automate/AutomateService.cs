@@ -136,7 +136,7 @@
 
         private TimeSpan GetAboutXSeconds(int x)
         {
-            var tolerance = x / 12;
+            var tolerance = x / 10;
             return TimeSpan.FromSeconds(_random.Next(x - tolerance, x + tolerance));
         }
 

@@ -43,15 +43,17 @@
             MeetingPlannedEnd = RoundTimeSpanToSecond(plannedEnd.TimeOfDay);
         }
 
-        public void InsertSongSegment(DateTime startTime, string description, TimeSpan duration)
+        public void InsertSongSegment(
+            DateTime startTime, string description, TimeSpan duration)
         {
-            InsertTimerStartSpecifyingTime(startTime, description, duration, true);
+            InsertSongTime(startTime, description, duration, true);
             InsertTimerStop(description, false);
         }
 
-        public void InsertConcludingSongSegment(DateTime startTime, DateTime endTime, string description, TimeSpan duration)
+        public void InsertConcludingSongSegment(
+            DateTime startTime, DateTime endTime, string description, TimeSpan duration)
         {
-            InsertTimerStartSpecifyingTime(startTime, description, duration, true);
+            InsertSongTime(startTime, description, duration, true);
             InsertTimerStopSpecifyingTime(endTime, description, false);
         }
 
@@ -142,10 +144,10 @@
             return _dateTimeService?.Now() ?? DateTime.Now;
         }
 
-        private void InsertTimerStartSpecifyingTime(
+        private void InsertSongTime(
             DateTime start,
             string partDescription,
-            TimeSpan plannedDuration,
+            TimeSpan duration,
             bool isSongSegment)
         {
             InitMtgDate();
@@ -155,8 +157,8 @@
                 Description = partDescription,
                 IsSongSegment = isSongSegment,
                 Start = RoundTimeSpanToSecond(start.TimeOfDay),
-                PlannedDuration = RoundTimeSpanToSecond(plannedDuration),
-                AdaptedDuration = RoundTimeSpanToSecond(plannedDuration)
+                PlannedDuration = RoundTimeSpanToSecond(duration),
+                AdaptedDuration = RoundTimeSpanToSecond(duration)
             });
         }
 
