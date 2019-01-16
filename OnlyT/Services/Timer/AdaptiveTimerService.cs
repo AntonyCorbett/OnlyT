@@ -82,7 +82,7 @@
             
             var deviation = talkActualStartTime - talkPlannedStartTime;
 
-            Log.Logger.Debug($"Talk planned start = {talkPlannedStartTime}, actual start ={talkActualStartTime}, deviation={deviation}");
+            Log.Logger.Debug($"Talk planned start = {talkPlannedStartTime}, actual start = {talkActualStartTime}, deviation = {deviation:g}");
 
             if (!DeviationWithinRange(deviation))
             {
@@ -101,11 +101,11 @@
             var fractionToApplyToThisTalk =
                talk.GetDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
 
-            Log.Logger.Debug($"Fraction to apply = {fractionToApplyToThisTalk}");
+            Log.Logger.Debug($"Fraction to apply = {fractionToApplyToThisTalk:F2}");
 
             var secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
 
-            Log.Logger.Debug($"Seconds to apply = {secondsToApply}");
+            Log.Logger.Debug($"Seconds to apply = {secondsToApply:F1}");
 
             return talk.OriginalDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
         }

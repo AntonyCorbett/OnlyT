@@ -184,34 +184,16 @@
 
             if (meetingData != null)
             {
-                if (meetingData.Date.Year < 2019)
+                const int maxItems = 4;
+
+                for (int n = 0; n < maxItems; ++n)
                 {
-                    const int maxItems = 3;
+                    var talkType = TalkTypesUtils.GetMinistryTalkType(n);
 
-                    for (int n = 0; n < maxItems; ++n)
+                    var item = meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType));
+                    if (item != null)
                     {
-                        var talkType = TalkTypesUtils.GetMinistryTalkTypePre2019(n);
-
-                        var item =
-                            meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType)) ??
-                            CreateDefaultMinistryTalkTimer(talkType);
-
                         timers.Add(item);
-                    }
-                }
-                else
-                {
-                    const int maxItems = 4;
-
-                    for (int n = 0; n < maxItems; ++n)
-                    {
-                        var talkType = TalkTypesUtils.GetMinistryTalkType(n);
-
-                        var item = meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType));
-                        if (item != null)
-                        {
-                            timers.Add(item);
-                        }
                     }
                 }
             }
@@ -286,10 +268,10 @@
         {
             var result = new List<TalkScheduleItem>();
 
-            TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Living1)) ??
-                                   new TalkTimer { Minutes = 15, TalkType = TalkTypes.Pre2019Living1 };
+            TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living1)) ??
+                                   new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
 
-            TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Pre2019Living2));
+            TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
 
             result.Add(CreateLivingItem(
                 TalkTypesAutoMode.LivingPart1,

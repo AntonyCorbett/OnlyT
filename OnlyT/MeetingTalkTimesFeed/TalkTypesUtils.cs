@@ -4,22 +4,6 @@
 
     internal static class TalkTypesUtils
     {
-        public static TalkTypes GetMinistryTalkTypePre2019(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    return TalkTypes.Pre2019Ministry1;
-                case 1:
-                    return TalkTypes.Pre2019Ministry2;
-                case 2:
-                    return TalkTypes.Pre2019Ministry3;
-
-                default:
-                    return TalkTypes.Unknown;
-            }
-        }
-
         public static TalkTypes GetMinistryTalkType(int index)
         {
             switch (index)

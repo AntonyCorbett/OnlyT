@@ -601,12 +601,12 @@
                     var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
                     if (newDuration != null)
                     {
-                        Log.Logger.Debug($"New duration = {newDuration}");
+                        Log.Logger.Debug($"New duration = {newDuration.Value:g}");
 
                         var talk = GetCurrentTalk();
                         if (talk != null)
                         {
-                            Log.Logger.Debug($"Adjusting item for adaptive time. New duration = {newDuration.Value}");
+                            Log.Logger.Debug($"Adjusting item for adaptive time. New duration = {newDuration.Value:g}");
 
                             talk.AdaptedDuration = newDuration.Value;
                             SetDurationStringAttributes(talk);
@@ -748,7 +748,7 @@
             {
                 var modifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
 
-                Log.Logger.Debug($"Talk timer adjusted for this session. Modified duration = {modifiedDuration}");
+                Log.Logger.Debug($"Talk timer ({talk.Name}) adjusted for this session. Modified duration = {modifiedDuration}");
 
                 if (IsManualMode)
                 {

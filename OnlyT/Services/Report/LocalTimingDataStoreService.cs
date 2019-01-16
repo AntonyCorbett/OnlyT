@@ -193,10 +193,14 @@
                     Log.Logger.Warning("Meeting End not set");
                 }
 
+                var minsOvertime = _mtgTimes.GetMeetingOvertime().TotalMinutes;
                 double mins = Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes);
+
                 if (mins >= MeetingMinsOutOfRange)
                 {
-                    Log.Logger.Warning($"Meeting duration is out of range ({mins} overtime)");
+                    var t = TimeSpan.FromMinutes(mins);
+                    var overOrUnderStr = minsOvertime > 0 ? "overtime" : "undertime";
+                    Log.Logger.Warning($"Meeting duration is out of range ({t:g} {overOrUnderStr})");
                 }
             }
 
