@@ -193,7 +193,7 @@
 
         private TimeSpan CalculateRemainingAdaptiveTime(TalkScheduleItem talk)
         {
-            TimeSpan result = TimeSpan.Zero;
+            var result = TimeSpan.Zero;
 
             var allItems = _scheduleService.GetTalkScheduleItems().Reverse();
             foreach (var item in allItems)
@@ -218,7 +218,24 @@
 
             if (_meetingStartTimeUtc != null)
             {
-                return _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting);
+                // determine the expected start time of this talk (we need to 
+                // take into account any manual or adaptive changes to previous items).
+                var allItems = _scheduleService.GetTalkScheduleItems();
+                var changeInStartTime = TimeSpan.Zero;
+                foreach (var item in allItems)
+                {
+                    if (item == talk)
+                    {
+                        break;
+                    }
+
+                    if (item.ActualDuration != item.OriginalDuration)
+                    {
+                        changeInStartTime += item.OriginalDuration - item.ActualDuration;
+                    }
+                }
+
+                return _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting + changeInStartTime);
             }
 
             return DateTime.MinValue;
