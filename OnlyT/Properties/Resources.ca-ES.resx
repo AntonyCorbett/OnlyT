@@ -622,11 +622,11 @@
     <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
   <data name="AUTO_BELL" xml:space="preserve">
-    <value>Automatically sound</value>
+    <value>Sona automàticament</value>
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
-    <value>Sound the bell</value>
+    <value>Fes sonar el timbre</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
 </root>
