@@ -27,6 +27,49 @@
             return _meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
         }
 
+        public Meeting GetSampleMidweekMeetingDataForTesting(DateTime theDate)
+        {
+            var result = new Meeting();
+
+            result.Date = theDate;
+
+            result.Talks.Add(new TalkTimer
+            {
+                TalkType = TalkTypes.Ministry1,
+                IsStudentTalk = false,
+                Minutes = 4
+            });
+
+            result.Talks.Add(new TalkTimer
+            {
+                TalkType = TalkTypes.Ministry2,
+                IsStudentTalk = true,
+                Minutes = 2
+            });
+
+            result.Talks.Add(new TalkTimer
+            {
+                TalkType = TalkTypes.Ministry3,
+                IsStudentTalk = true,
+                Minutes = 3
+            });
+
+            result.Talks.Add(new TalkTimer
+            {
+                TalkType = TalkTypes.Ministry4,
+                IsStudentTalk = true,
+                Minutes = 3
+            });
+
+            result.Talks.Add(new TalkTimer
+            {
+                TalkType = TalkTypes.Living1,
+                Minutes = 15
+            });
+
+            return result;
+        }
+
         private bool LocalFileToOld()
         {
             bool tooOld = true;

@@ -70,6 +70,14 @@
                     new TimesFeed().GetMeetingDataForToday());
         }
 
+        public static IEnumerable<TalkScheduleItem> GetMidweekScheduleForTesting(DateTime theDate)
+        {
+            return GetMidweekMeetingSchedule(
+                false,
+                false,
+                new TimesFeed().GetSampleMidweekMeetingDataForTesting(theDate));
+        }
+
         private static TalkScheduleItem CreateTreasuresItem(
             TalkTypesAutoMode talkType, 
             string talkName,
@@ -137,16 +145,6 @@
                     true,
                     autoBell,
                     true)
-            };
-        }
-
-        private static TalkTimer CreateDefaultMinistryTalkTimer(TalkTypes talkType)
-        {
-            return new TalkTimer
-            {
-                Minutes = 4,
-                IsStudentTalk = false,
-                TalkType = talkType,
             };
         }
 

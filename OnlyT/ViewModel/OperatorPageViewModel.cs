@@ -596,7 +596,7 @@
         {
             try
             {
-                if (TalkId > 0 && IsNotManualMode)
+                if (TalkId > 0 && IsAutoMode)
                 {
                     var newDuration = _adaptiveTimerService.CalculateAdaptedDuration(TalkId);
                     if (newDuration != null)

@@ -36,7 +36,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
             SimpleIoc.Default.Register<ISnackbarService, SnackbarService>();
             SimpleIoc.Default.Register<ILocalTimingDataStoreService, LocalTimingDataStoreService>();
-            SimpleIoc.Default.Register<IDateTimeService, DateTimeService>();
+            SimpleIoc.Default.Register<Services.DateTime.IDateTimeService, Services.DateTime.DateTimeService>();
             SimpleIoc.Default.Register<ILogLevelSwitchService, LogLevelSwitchService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);

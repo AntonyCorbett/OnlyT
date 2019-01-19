@@ -4,7 +4,6 @@
     using System.IO;
     using OnlyT.Report.Database;
     using OnlyT.Report.Models;
-    using OnlyT.Report.Services;
     using OnlyT.Services.CommandLine;
     using OnlyT.Utils;
     using Serilog;
@@ -15,7 +14,7 @@
         private const int MeetingMinsOutOfRange = 20;
 
         private readonly ICommandLineService _commandLineService;
-        private readonly IDateTimeService _dateTimeService;
+        private readonly OnlyT.Report.Services.IDateTimeService _dateTimeService;
 
         private LocalData _localData;
         private string _currentPartDescription;
@@ -25,7 +24,7 @@
         
         public LocalTimingDataStoreService(
             ICommandLineService commandLineService,
-            IDateTimeService dateTimeService)
+            OnlyT.Report.Services.IDateTimeService dateTimeService)
         {
             _commandLineService = commandLineService;
             _dateTimeService = dateTimeService;

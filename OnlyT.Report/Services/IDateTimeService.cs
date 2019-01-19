@@ -5,5 +5,7 @@
     public interface IDateTimeService
     {
         DateTime Now();
+
+        DateTime UtcNow();
     }
 }

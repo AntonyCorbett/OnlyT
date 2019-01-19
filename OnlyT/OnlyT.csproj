@@ -165,6 +165,8 @@
     <Compile Include="Services\CountdownTimer\CountdownTimerTriggerService.cs" />
     <Compile Include="Services\CountdownTimer\CountdownTriggerPeriod.cs" />
     <Compile Include="Services\CountdownTimer\ICountdownTimerTriggerService.cs" />
+    <Compile Include="Services\DateTime\DateTimeService.cs" />
+    <Compile Include="Services\DateTime\IDateTimeService.cs" />
     <Compile Include="Services\JwLibrary\JwLibHelper.cs" />
     <Compile Include="Services\JwLibrary\JwLibHelperNativeMethods.cs" />
     <Compile Include="Services\LogLevelSwitch\ILogLevelSwitchService.cs" />

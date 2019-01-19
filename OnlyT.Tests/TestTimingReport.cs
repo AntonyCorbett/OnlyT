@@ -1,11 +1,10 @@
-﻿using System.IO;
-using OnlyT.Report.Models;
-
-namespace OnlyT.Tests
+﻿namespace OnlyT.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using OnlyT.Report.Models;
     using OnlyT.Report.Pdf;
     using OnlyT.Report.Services;
     using OnlyT.Services.Report;
@@ -232,7 +231,7 @@ namespace OnlyT.Tests
         private class DateTimeServiceForTests : IDateTimeService
         {
             private DateTime _value;
-
+            
             public void Set(DateTime dt)
             {
                 _value = dt;
@@ -251,6 +250,11 @@ namespace OnlyT.Tests
                 }
 
                 return _value;
+            }
+
+            public DateTime UtcNow()
+            {
+                return Now();
             }
         }
     }

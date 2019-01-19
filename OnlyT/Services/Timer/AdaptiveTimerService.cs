@@ -5,6 +5,7 @@
     using System.Linq;
     using GalaSoft.MvvmLight.Messaging;
     using Models;
+    using OnlyT.Services.DateTime;
     using OnlyT.Utils;
     using OnlyT.ViewModel.Messages;
     using Options;
@@ -27,18 +28,27 @@
 
         private readonly ITalkScheduleService _scheduleService;
 
+        private readonly IDateTimeService _dateTimeService;
+
         private DateTime? _meetingStartTimeUtc;
 
         private DateTime? _meetingStartTimeUtcFromCountdown;
 
         public AdaptiveTimerService(
             IOptionsService optionsService, 
-            ITalkScheduleService scheduleService)
+            ITalkScheduleService scheduleService,
+            IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
             _scheduleService = scheduleService;
+            _dateTimeService = dateTimeService;
 
             Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
+        }
+
+        public void SetMeetingStartTimeForTesting(DateTime startTime)
+        {
+            _meetingStartTimeUtc = startTime;
         }
 
         /// <summary>
@@ -53,7 +63,7 @@
             {
                 return null;
             }
-
+            
             Log.Logger.Debug($"Calculating adapted talk duration for item {talk.Name}");
 
             EnsureMeetingStartTimeIsSet(talk);
@@ -78,7 +88,7 @@
 
             var talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
             
-            var talkActualStartTime = DateTime.UtcNow;
+            var talkActualStartTime = _dateTimeService.UtcNow();
             
             var deviation = talkActualStartTime - talkPlannedStartTime;
 
@@ -91,6 +101,7 @@
 
             if (adaptiveMode != AdaptiveMode.TwoWay && talkPlannedStartTime >= talkActualStartTime)
             {
+                // there is time in hand and we don't want to adaptively increase talk durations.
                 return null;
             }
 
@@ -106,8 +117,8 @@
             var secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
 
             Log.Logger.Debug($"Seconds to apply = {secondsToApply:F1}");
-
-            return talk.OriginalDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
+            
+            return talk.ActualDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
         }
 
         private void SetMeetingStartUtc(TalkScheduleItem talk)
@@ -220,21 +231,8 @@
             if (_meetingStartTimeUtc != null)
             {
                 // determine the expected start time of this talk (we need to 
-                // take into account any manual or adaptive changes to previous items).
-                var allItems = _scheduleService.GetTalkScheduleItems();
-                var changeInStartTime = TimeSpan.Zero;
-                foreach (var item in allItems)
-                {
-                    if (item == talk)
-                    {
-                        break;
-                    }
-
-                    if (item.ActualDuration != item.OriginalDuration)
-                    {
-                        changeInStartTime += item.OriginalDuration - item.ActualDuration;
-                    }
-                }
+                // take into account any manual changes to previous items).
+                var changeInStartTime = GetChangeInStartTime(talk);
 
                 var originalPlannedStart = _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting);
                 
@@ -252,12 +250,32 @@
             return DateTime.MinValue;
         }
 
+        private TimeSpan GetChangeInStartTime(TalkScheduleItem talk)
+        {
+            var changeInStartTime = TimeSpan.Zero;
+            
+            foreach (var item in _scheduleService.GetTalkScheduleItems())
+            {
+                if (item == talk)
+                {
+                    break;
+                }
+
+                if (item.ModifiedDuration != null)
+                {
+                    changeInStartTime += item.ModifiedDuration.Value - item.OriginalDuration;
+                }
+            }
+
+            return changeInStartTime;
+        }
+
         private DateTime? CalculateWeekendStartTime(TalkScheduleItem talk)
         {
             DateTime? result = null;
             if (talk.Id == (int)TalkTypesAutoMode.PublicTalk)
             {
-                result = GetNearest15MinsBefore(DateTime.UtcNow);
+                result = GetNearest15MinsBefore(_dateTimeService.UtcNow());
             }
 
             return result;
@@ -270,7 +288,7 @@
             {
                 case (int)TalkTypesAutoMode.OpeningComments:
                 case (int)TalkTypesAutoMode.TreasuresTalk:
-                    result = GetNearest15MinsBefore(DateTime.UtcNow);
+                    result = GetNearest15MinsBefore(_dateTimeService.UtcNow());
                     break;
             }
 
@@ -304,7 +322,7 @@
         {
             if (!message.Showing)
             {
-                _meetingStartTimeUtcFromCountdown = DateUtils.GetNearestMinute(DateTime.UtcNow);
+                _meetingStartTimeUtcFromCountdown = DateUtils.GetNearestMinute(_dateTimeService.UtcNow());
             }
             else
             {
