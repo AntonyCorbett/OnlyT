@@ -104,6 +104,10 @@
       <Project>{5a65feaf-791d-417c-a355-3155a1b1df19}</Project>
       <Name>OnlyT.AnalogueClock</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj">
+      <Project>{4C312217-BCB6-4CAF-8191-F9583866F4E3}</Project>
+      <Name>OnlyT.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj">
       <Project>{8d954290-a460-49fe-ba0a-1e35de208172}</Project>
       <Name>OnlyT.Report</Name>

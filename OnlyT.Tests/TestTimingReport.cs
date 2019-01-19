@@ -4,9 +4,9 @@
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Report.Models;
     using OnlyT.Report.Pdf;
-    using OnlyT.Report.Services;
     using OnlyT.Services.Report;
 
     [TestClass]

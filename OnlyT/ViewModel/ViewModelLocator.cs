@@ -3,7 +3,7 @@ namespace OnlyT.ViewModel
     using System;
     using CommonServiceLocator;
     using GalaSoft.MvvmLight.Ioc;
-    using OnlyT.Report.Services;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.LogLevelSwitch;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
@@ -36,7 +36,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ICountdownTimerTriggerService, CountdownTimerTriggerService>();
             SimpleIoc.Default.Register<ISnackbarService, SnackbarService>();
             SimpleIoc.Default.Register<ILocalTimingDataStoreService, LocalTimingDataStoreService>();
-            SimpleIoc.Default.Register<Services.DateTime.IDateTimeService, Services.DateTime.DateTimeService>();
+            SimpleIoc.Default.Register<IDateTimeService, DateTimeService>();
             SimpleIoc.Default.Register<ILogLevelSwitchService, LogLevelSwitchService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);

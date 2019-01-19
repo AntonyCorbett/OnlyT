@@ -52,6 +52,7 @@ Source: "OnlyT\bin\Release\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\NUglify.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\OnlyT.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\OnlyT.CountdownTimer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\OnlyT.exe.config"; DestDir: "{app}"; Flags: ignoreversion

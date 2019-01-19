@@ -1,4 +1,4 @@
-﻿namespace OnlyT.Services.DateTime
+﻿namespace OnlyT.Common.Services.DateTime
 {
     public interface IDateTimeService
     {

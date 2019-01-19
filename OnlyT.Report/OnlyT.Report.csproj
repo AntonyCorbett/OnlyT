@@ -83,8 +83,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\DateTimeService.cs" />
-    <Compile Include="Services\IDateTimeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -126,6 +124,12 @@
     <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
     <EmbeddedResource Include="Properties\Resources.sv-SE.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj">
+      <Project>{4c312217-bcb6-4caf-8191-f9583866f4e3}</Project>
+      <Name>OnlyT.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

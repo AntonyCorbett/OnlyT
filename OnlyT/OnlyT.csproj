@@ -165,8 +165,6 @@
     <Compile Include="Services\CountdownTimer\CountdownTimerTriggerService.cs" />
     <Compile Include="Services\CountdownTimer\CountdownTriggerPeriod.cs" />
     <Compile Include="Services\CountdownTimer\ICountdownTimerTriggerService.cs" />
-    <Compile Include="Services\DateTime\DateTimeService.cs" />
-    <Compile Include="Services\DateTime\IDateTimeService.cs" />
     <Compile Include="Services\JwLibrary\JwLibHelper.cs" />
     <Compile Include="Services\JwLibrary\JwLibHelperNativeMethods.cs" />
     <Compile Include="Services\LogLevelSwitch\ILogLevelSwitchService.cs" />
@@ -384,6 +382,10 @@
     <ProjectReference Include="..\OnlyT.AnalogueClock\OnlyT.AnalogueClock.csproj">
       <Project>{5a65feaf-791d-417c-a355-3155a1b1df19}</Project>
       <Name>OnlyT.AnalogueClock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj">
+      <Project>{4c312217-bcb6-4caf-8191-f9583866f4e3}</Project>
+      <Name>OnlyT.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj">
       <Project>{279d0da6-28fe-4df9-8eed-d75f55664ff9}</Project>

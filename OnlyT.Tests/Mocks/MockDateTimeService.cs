@@ -1,8 +1,8 @@
 ﻿namespace OnlyT.Tests.Mocks
 {
     using System;
-    using OnlyT.Services.DateTime;
-
+    using OnlyT.Common.Services.DateTime;
+    
     internal class MockDateTimeService : IDateTimeService
     {
         private DateTime _value;

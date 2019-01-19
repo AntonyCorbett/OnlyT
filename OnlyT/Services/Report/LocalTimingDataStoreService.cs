@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Report.Database;
     using OnlyT.Report.Models;
     using OnlyT.Services.CommandLine;
@@ -14,7 +15,7 @@
         private const int MeetingMinsOutOfRange = 20;
 
         private readonly ICommandLineService _commandLineService;
-        private readonly OnlyT.Report.Services.IDateTimeService _dateTimeService;
+        private readonly IDateTimeService _dateTimeService;
 
         private LocalData _localData;
         private string _currentPartDescription;
@@ -24,7 +25,7 @@
         
         public LocalTimingDataStoreService(
             ICommandLineService commandLineService,
-            OnlyT.Report.Services.IDateTimeService dateTimeService)
+            IDateTimeService dateTimeService)
         {
             _commandLineService = commandLineService;
             _dateTimeService = dateTimeService;
