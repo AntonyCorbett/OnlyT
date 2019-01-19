@@ -91,6 +91,18 @@
             TestManuallyAdjustedSchedule2(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
+        [TestMethod]
+        public void TestManuallyAdjustedSchedule3()
+        {
+            TestManuallyAdjustedSchedule3(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
+        }
+
+        [TestMethod]
+        public void TestManuallyAdjustedSchedule4()
+        {
+            TestManuallyAdjustedSchedule4(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
+        }
+
         private void TestPerfectSchedule(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService, 
@@ -220,6 +232,37 @@
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
 
+            // add 5 mins to Study and remove 3 mins from Living1 and 2 minutes from concluding
+            study.ModifiedDuration = study.OriginalDuration.Add(TimeSpan.FromMinutes(5));
+            living1.ModifiedDuration = study.OriginalDuration.Add(-TimeSpan.FromMinutes(3));
+            concluding.ModifiedDuration = study.OriginalDuration.Add(-TimeSpan.FromMinutes(2));
+
+            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting);
+
+            var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
+            Assert.IsNull(adaptedDuration1);
+
+            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + TimeSpan.FromMinutes(-3));
+
+            var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
+            Assert.IsNull(adaptedDuration2);
+
+            dateTimeService.Set(mtgStart + concluding.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
+
+            var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
+            Assert.IsNull(adaptedDuration3);
+        }
+
+        private void TestManuallyAdjustedSchedule3(
+            Mock<ITalkScheduleService> scheduleService,
+            MockDateTimeService dateTimeService,
+            DateTime mtgStart,
+            AdaptiveTimerService service)
+        {
+            var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+
             // add 5 mins to concluding but don't compensate elsewhere
             concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
             
@@ -242,6 +285,41 @@
             var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
             Assert.IsNotNull(adaptedDuration3);
             AssertTimeSpansAboutEqual(adaptedDuration3.Value, new TimeSpan(0, 5, 34));
+            concluding.AdaptedDuration = adaptedDuration3;
+        }
+
+        private void TestManuallyAdjustedSchedule4(
+            Mock<ITalkScheduleService> scheduleService,
+            MockDateTimeService dateTimeService,
+            DateTime mtgStart,
+            AdaptiveTimerService service)
+        {
+            var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+
+            // take 5 mins from study but don't compensate elsewhere
+            study.ModifiedDuration = study.OriginalDuration.Add(-TimeSpan.FromMinutes(5));
+
+            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting);
+
+            var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
+            Assert.IsNotNull(adaptedDuration1);
+            AssertTimeSpansAboutEqual(adaptedDuration1.Value, new TimeSpan(0, 16, 44));
+            living1.AdaptedDuration = adaptedDuration1;
+
+            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting + adaptedDuration1.Value);
+
+            var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
+            Assert.IsNotNull(adaptedDuration2);
+            AssertTimeSpansAboutEqual(adaptedDuration2.Value, new TimeSpan(0, 28, 12));
+            study.AdaptedDuration = adaptedDuration2;
+
+            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + adaptedDuration2.Value);
+
+            var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
+            Assert.IsNotNull(adaptedDuration3);
+            AssertTimeSpansAboutEqual(adaptedDuration3.Value, new TimeSpan(0, 4, 47));
             concluding.AdaptedDuration = adaptedDuration3;
         }
 
