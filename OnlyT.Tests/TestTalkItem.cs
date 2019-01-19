@@ -32,13 +32,13 @@
             Assert.IsNull(item.ModifiedDuration);
             Assert.IsNull(item.AdaptedDuration);
             
-            Assert.IsTrue(item.GetDurationSeconds() == (int)testDur.TotalSeconds);
+            Assert.IsTrue(item.GetPlannedDurationSeconds() == (int)testDur.TotalSeconds);
 
             item.ModifiedDuration = changedDur;
             Assert.AreEqual(item.OriginalDuration, testDur);
             Assert.AreEqual(item.ModifiedDuration, changedDur);
             
-            Assert.IsTrue(item.GetDurationSeconds() == (int)changedDur.TotalSeconds);
+            Assert.IsTrue(item.GetPlannedDurationSeconds() == (int)changedDur.TotalSeconds);
         }
     }
 }

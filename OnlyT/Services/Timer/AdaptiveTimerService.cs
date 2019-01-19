@@ -76,49 +76,87 @@
             var adaptiveMode = GetAdaptiveMode();
 
             Log.Logger.Debug($"Adaptive mode = {adaptiveMode}");
-            if (adaptiveMode == AdaptiveMode.None)
+            if (adaptiveMode == AdaptiveMode.None || !talk.AllowAdaptive)
             {
                 return null;
             }
 
-            if (!talk.AllowAdaptive)
+            var mtgEnd = GetPlannedMeetingEnd();
+            var totalTimeRemaining = mtgEnd - _dateTimeService.UtcNow();
+            var remainingProgramTimeRequired = GetRemainingProgramTimeRequired(talk);
+
+            var deviation = totalTimeRemaining - remainingProgramTimeRequired;
+
+            if (!IsDeviationSignificant(deviation))
             {
                 return null;
             }
 
-            var talkPlannedStartTime = CalculatePlannedStartTimeOfItem(talk);
-            
-            var talkActualStartTime = _dateTimeService.UtcNow();
-            
-            var deviation = talkActualStartTime - talkPlannedStartTime;
-
-            Log.Logger.Debug($"Talk planned start = {talkPlannedStartTime}, actual start = {talkActualStartTime}, deviation = {deviation:g}");
-
-            if (!DeviationWithinRange(deviation))
-            {
-                return null;
-            }
-
-            if (adaptiveMode != AdaptiveMode.TwoWay && talkPlannedStartTime >= talkActualStartTime)
+            if (adaptiveMode != AdaptiveMode.TwoWay && totalTimeRemaining >= remainingProgramTimeRequired)
             {
                 // there is time in hand and we don't want to adaptively increase talk durations.
                 return null;
             }
 
-            var remainingAdaptiveTime = CalculateRemainingAdaptiveTime(talk);
+            var remainingAdaptiveTime = CalculateRemainingAdaptiveTimerValues(talk);
 
             Log.Logger.Debug($"Remaining time = {remainingAdaptiveTime}");
 
             var fractionToApplyToThisTalk =
-               talk.GetDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
+               talk.GetPlannedDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
 
             Log.Logger.Debug($"Fraction to apply = {fractionToApplyToThisTalk:F2}");
 
             var secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
 
-            Log.Logger.Debug($"Seconds to apply = {secondsToApply:F1}");
+            Log.Logger.Debug($"Seconds to add = {secondsToApply:F1}");
             
-            return talk.ActualDuration.Subtract(TimeSpan.FromSeconds(secondsToApply));
+            return talk.ActualDuration.Add(TimeSpan.FromSeconds(secondsToApply));
+        }
+
+        private TimeSpan GetRemainingProgramTimeRequired(TalkScheduleItem talk)
+        {
+            var result = TimeSpan.Zero;
+
+            var started = false;
+            var items = _scheduleService.GetTalkScheduleItems().ToArray();
+            var lastItem = items.Last();
+
+            for (var n = 0; n < items.Length; ++n)
+            {
+                var item = items[n];
+
+                if (item == talk)
+                {
+                    started = true;
+                }
+
+                if (started)
+                {
+                    result += item.PlannedDuration;
+
+                    if (item != lastItem)
+                    {
+                        result += GetTimeForChangeover(item, items[n + 1]);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private TimeSpan GetTimeForChangeover(TalkScheduleItem item1, TalkScheduleItem item2)
+        {
+            var endItem1 = item1.StartOffsetIntoMeeting.Add(item1.OriginalDuration);
+            return item2.StartOffsetIntoMeeting - endItem1;
+        }
+
+        private DateTime GetPlannedMeetingEnd()
+        {
+            Debug.Assert(_meetingStartTimeUtc != null, "_meetingStartTimeUtc != null");
+
+            var lastItem = _scheduleService.GetTalkScheduleItems().Last();
+            return _meetingStartTimeUtc.Value.Add(lastItem.StartOffsetIntoMeeting + lastItem.OriginalDuration);
         }
 
         private void SetMeetingStartUtc(TalkScheduleItem talk)
@@ -177,7 +215,7 @@
             }
         }
 
-        private bool DeviationWithinRange(TimeSpan deviation)
+        private bool IsDeviationSignificant(TimeSpan deviation)
         {
             return Math.Abs(deviation.TotalSeconds) > SmallestDeviationSecs
                    && Math.Abs(deviation.TotalMinutes) <= LargestDeviationMinutes;
@@ -202,72 +240,28 @@
             return result;
         }
 
-        private TimeSpan CalculateRemainingAdaptiveTime(TalkScheduleItem talk)
+        private TimeSpan CalculateRemainingAdaptiveTimerValues(TalkScheduleItem talk)
         {
             var result = TimeSpan.Zero;
 
-            var allItems = _scheduleService.GetTalkScheduleItems().Reverse();
-            foreach (var item in allItems)
-            {
-                if (item.AllowAdaptive)
-                {
-                    result = result.Add(item.ActualDuration);
-                }
-
-                if (item == talk)
-                {
-                    break;
-                }
-            }
-
-            return result;
-        }
-
-        private DateTime CalculatePlannedStartTimeOfItem(TalkScheduleItem talk)
-        {
-            Debug.Assert(_meetingStartTimeUtc != null, "Meeting start time is null");
-            Debug.Assert(GetAdaptiveMode() != AdaptiveMode.None, "GetAdaptiveMode() != AdaptiveMode.None");
-
-            if (_meetingStartTimeUtc != null)
-            {
-                // determine the expected start time of this talk (we need to 
-                // take into account any manual changes to previous items).
-                var changeInStartTime = GetChangeInStartTime(talk);
-
-                var originalPlannedStart = _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting);
-                
-                if (changeInStartTime != TimeSpan.Zero)
-                {
-                    var revisedStart = _meetingStartTimeUtc.Value.Add(talk.StartOffsetIntoMeeting + changeInStartTime);
-                    Log.Logger.Debug($"Original planned start time = {originalPlannedStart}. Revised = {revisedStart}");
-
-                    return revisedStart;
-                }
-
-                return originalPlannedStart;
-            }
-
-            return DateTime.MinValue;
-        }
-
-        private TimeSpan GetChangeInStartTime(TalkScheduleItem talk)
-        {
-            var changeInStartTime = TimeSpan.Zero;
-            
+            var started = false;
             foreach (var item in _scheduleService.GetTalkScheduleItems())
             {
                 if (item == talk)
                 {
-                    break;
+                    started = true;
                 }
 
-                if (item.ModifiedDuration != null)
+                if (started)
                 {
-                    changeInStartTime += item.ModifiedDuration.Value - item.OriginalDuration;
+                    if (item.AllowAdaptive)
+                    {
+                        result = result.Add(item.PlannedDuration);
+                    }
                 }
             }
 
-            return changeInStartTime;
+            return result;
         }
 
         private DateTime? CalculateWeekendStartTime(TalkScheduleItem talk)

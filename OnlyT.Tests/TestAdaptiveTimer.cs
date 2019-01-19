@@ -230,18 +230,18 @@
             AssertTimeSpansAboutEqual(adaptedDuration1.Value, new TimeSpan(0, 13, 35));
             living1.AdaptedDuration = adaptedDuration1;
 
-            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting);
+            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting + adaptedDuration1.Value);
 
             var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
             Assert.IsNotNull(adaptedDuration2);
-            AssertTimeSpansAboutEqual(adaptedDuration2.Value, new TimeSpan(0, 27, 5));
+            AssertTimeSpansAboutEqual(adaptedDuration2.Value, new TimeSpan(0, 27, 25));
             study.AdaptedDuration = adaptedDuration2;
 
-            dateTimeService.Set(mtgStart + concluding.StartOffsetIntoMeeting - TimeSpan.FromMinutes(3));
+            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + adaptedDuration2.Value);
 
             var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
             Assert.IsNotNull(adaptedDuration3);
-            AssertTimeSpansAboutEqual(adaptedDuration3.Value, new TimeSpan(0, 27, 5));
+            AssertTimeSpansAboutEqual(adaptedDuration3.Value, new TimeSpan(0, 5, 34));
             concluding.AdaptedDuration = adaptedDuration3;
         }
 

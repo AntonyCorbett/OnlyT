@@ -312,7 +312,7 @@
                     var talk = GetCurrentTalk();
                     RefreshCountUpFlag(talk);
 
-                    TargetSeconds = GetTargetSecondsFromTalkSchedule(talk);
+                    TargetSeconds = GetPlannedSecondsFromTalkSchedule(talk);
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(IsBellVisible));
                     RaisePropertyChanged(nameof(BellColour));
@@ -643,9 +643,9 @@
             return _scheduleService.GetTalkScheduleItem(TalkId);
         }
 
-        private int GetTargetSecondsFromTalkSchedule(TalkScheduleItem talk)
+        private int GetPlannedSecondsFromTalkSchedule(TalkScheduleItem talk)
         {
-            return talk?.GetDurationSeconds() ?? 0;
+            return talk?.GetPlannedDurationSeconds() ?? 0;
         }
         
         private void TimerChangedHandler(object sender, OnlyT.EventArgs.TimerChangedEventArgs e)

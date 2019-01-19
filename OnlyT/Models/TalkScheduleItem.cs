@@ -137,6 +137,11 @@
             }
         }
 
+        /// <summary>
+        /// Gets the planned duration used (may be original or manually adjusted)
+        /// </summary>
+        public TimeSpan PlannedDuration => ModifiedDuration ?? OriginalDuration;
+
         public TimeSpan StartOffsetIntoMeeting { get; set; }
 
         public bool AllowAdaptive { get; set; }
@@ -176,9 +181,9 @@
 
         public bool IsStudentTalk { get; set; }
 
-        public int GetDurationSeconds()
+        public int GetPlannedDurationSeconds()
         {
-            return (int)ActualDuration.TotalSeconds;
+            return (int)PlannedDuration.TotalSeconds;
         }
     }
 }
