@@ -190,13 +190,13 @@
     <value>Midtuke</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Forkynnelsen - Del 1</value>
+    <value>Opplæring i forkynnelsen - Del 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Forkynnelsen - Del 2</value>
+    <value>Opplæring i forkynnelsen - Del 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Forkynnelsen - Del 3</value>
+    <value>Opplæring i forkynnelsen - Del 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automatisk</value>
@@ -283,7 +283,7 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Forkynnelsen - del 4</value>
+    <value>Opplæring i forkynnelsen - Del 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Kretstilsynsmannens besøk</value>
@@ -574,7 +574,7 @@
     <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTRO_SEGMENT" xml:space="preserve">
-    <value>Introduksjone</value>
+    <value>Introduksjon</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
@@ -590,7 +590,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_FATAL" xml:space="preserve">
-    <value>Kritiskq</value>
+    <value>Kritisk</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
