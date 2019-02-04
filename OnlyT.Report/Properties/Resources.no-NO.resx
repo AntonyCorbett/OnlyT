@@ -125,7 +125,7 @@
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Mitduke- og helgemøter</value>
+    <value>Midtuke- og helgemøter</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
