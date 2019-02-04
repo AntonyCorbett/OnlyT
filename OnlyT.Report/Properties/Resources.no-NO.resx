@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ADAPTED_DURATION" xml:space="preserve">
-    <value>adapted duration = {0}</value>
+    <value>tilpasset varighet = {0}</value>
   </data>
   <data name="COUNSEL" xml:space="preserve">
-    <value>counsel and commendation</value>
+    <value>Tilbakemelding</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
