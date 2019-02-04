@@ -220,10 +220,10 @@
     <value>Let etter åndelige perler</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Vårt liv - del 1</value>
+    <value>Vårt liv som kristne - del 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Vårt liv - del 2</value>
+    <value>Vårt liv som kristne - del 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Innledende kommentarer</value>
@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Kretstilsynsmannens besøk valg</value>
+    <value>Kretstilsynsmannens besøk</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Digitalt klokkeformat</value>
@@ -374,7 +374,7 @@
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Skjerm</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
     <value>Vis musepekeren</value>
@@ -400,11 +400,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Vis elevens tid</value>
+    <value>Vis elevens tid lenger</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Vis tidtaker resultat</value>
+    <value>Visingstid tidtakerresultat</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -622,11 +622,11 @@
     <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
   <data name="AUTO_BELL" xml:space="preserve">
-    <value>Automatically sound</value>
+    <value>Automatisk lydvarsel</value>
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
-    <value>Sound the bell</value>
+    <value>Gi lydvarsel</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
 </root>
