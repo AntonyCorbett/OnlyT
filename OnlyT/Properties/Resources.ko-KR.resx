@@ -190,22 +190,22 @@
     <value>주중 집회</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>야외 봉사 - 첫번째</value>
+    <value>야외 봉사에 힘쓰십시오 - 첫번째</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>야외 봉사 - 두번째</value>
+    <value>야외 봉사에 힘쓰십시오 - 두번째</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>야외 봉사 - 세번째</value>
+    <value>야외 봉사에 힘쓰십시오 - 세번째</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>자동</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>File-based</value>
+    <value>파일 기반</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
+    <value>수동</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
     <value>Concluding Talk</value>
@@ -214,54 +214,54 @@
     <value>Concluding Comments</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>회중 성서 연구</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>성경에 담긴 보물</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>그리스도인 생활 - 첫번째</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>그리스도인 생활 - 두번째</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>소개말</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>이달의 대화 방법을 준비하십시오</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>공개 강연</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>성경 낭독</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>봉사 강연</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>성경에 담긴 보물 - 연설</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>「파수대」 연구</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>주말 집회</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12-hour (am/pm)</value>
+    <value>12시간제 (오전/오후)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-hour (leading zero &amp; am/pm)</value>
+    <value>12시간제 (시간앞에 0으로 자리 맞춤 &amp; 오전/오후)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>타이머를 사용하는 동안 설정할 수 없습니다!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Settings</value>
