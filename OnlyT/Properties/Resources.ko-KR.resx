@@ -208,10 +208,10 @@
     <value>수동</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>봉사 강연</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>복습 및 다음주 소개</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>회중 성서 연구</value>
@@ -258,7 +258,7 @@
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>사용 안함</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
     <value>타이머를 사용하는 동안 설정할 수 없습니다!</value>
@@ -622,7 +622,7 @@
     <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
   <data name="AUTO_BELL" xml:space="preserve">
-    <value>Automatically sound</value>
+    <value>자동 벨소리 울림</value>
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
