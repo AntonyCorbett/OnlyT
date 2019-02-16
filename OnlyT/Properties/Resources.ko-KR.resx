@@ -342,14 +342,14 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>집회 시작 전 카운트 다운</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
     <value>순회 방문 토글 스위치</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>디지털 시계 형식</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
     <value>Enabled</value>
@@ -374,13 +374,13 @@
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>모니터</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
     <value>마우스 포인터 표시</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>새로운 줄에 각각의 시작 시간을 기입하십시오.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>원하는 시간 포맷을 사용하십시오!</value>
