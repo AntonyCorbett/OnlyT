@@ -386,7 +386,7 @@
     <value>Koristi oblik vremena koji ti se sviđa!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Ako želiš, uključi dan, npr "čet 19:15"</value>
+    <value>Optionally include a day, e.g. "Thu 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Napomene:</value>
