@@ -125,11 +125,11 @@
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Zebranie w tygodniu i w weekend</value>
+    <value>Zebrania w tygodniu i w weekend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Zebranie w tygodniu</value>
+    <value>Zebrania w tygodniu</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
@@ -169,7 +169,7 @@
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Zebranie w weekend</value>
+    <value>Zebrania w weekend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>

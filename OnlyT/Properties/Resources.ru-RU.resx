@@ -190,13 +190,13 @@
     <value>В будние дни</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Первый разговор</value>
+    <value>Навыки - пункт 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Второй разговор</value>
+    <value>Навыки - пункт 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Третий разговор</value>
+    <value>Навыки - пункт 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Автоматический</value>
@@ -270,7 +270,7 @@
     <value>Сокровища</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Встреча</value>
+    <value>Навыки</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
     <value>Христианская жизнь</value>
@@ -283,7 +283,7 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Четвертый разговор</value>
+    <value>Навыки - пункт 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Визит районного</value>
@@ -622,11 +622,11 @@
     <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
   <data name="AUTO_BELL" xml:space="preserve">
-    <value>Automatically sound</value>
+    <value>Автоматически звук</value>
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
-    <value>Sound the bell</value>
+    <value>Звук колокола</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
 </root>
