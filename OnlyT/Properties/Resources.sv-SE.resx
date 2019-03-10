@@ -386,7 +386,7 @@
     <value>Använd valfri tidsformat!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>Ta med veckodagen, exempelvis "Tors 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Anteckningar:</value>
