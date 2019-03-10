@@ -386,7 +386,7 @@
     <value>Käytä haluamaasi aikaformaattia!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Halutessasi voit sisällyttää päivän, esimerkiksi ”to 19:15”</value>
+    <value>Optionally include a day, e.g. "Thu 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Huomioi:</value>
