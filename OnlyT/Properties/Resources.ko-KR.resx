@@ -386,7 +386,7 @@
     <value>원하는 시간 포맷을 사용하십시오!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>카운트 다운을 설정할 때, "목 7:15" 와 같이 요일을 포함시키십시오.</value>
+    <value>Optionally include a day, e.g. "Thu 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>참고 사항</value>

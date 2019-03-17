@@ -386,7 +386,7 @@
     <value>Jedes beliebige Zeitformat kann verwendet werden!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optional kann ein Wochentag hinzugefügt werden, z.B. "Do. 19:15"</value>
+    <value>Optionally include a day, e.g. "Thu 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Hinweise:</value>

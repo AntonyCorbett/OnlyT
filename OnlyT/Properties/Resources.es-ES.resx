@@ -386,7 +386,7 @@
     <value>¡Utiliza cualquier formato de hora que te guste!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Opcionalmente, puedes incluir el día, p.ej. "jueves 7:15"</value>
+    <value>Opcionalmente puedes incluir un día, por ej. "Jue 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
