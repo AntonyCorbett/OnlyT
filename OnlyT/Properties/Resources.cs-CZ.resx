@@ -386,7 +386,7 @@
     <value>Použij libovolný formát času!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>Je možné zadat i den takto: "st 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Poznámky:</value>
