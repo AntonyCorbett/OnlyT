@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Bell is active</value>
+    <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
+    <value>None</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
+    <value>One-way</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
+    <value>Two-way</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="APP_VER" xml:space="preserve">
+    <value>Software version {0}</value>
+    <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CLOCK_FORMAT_12" xml:space="preserve">
+    <value>12-hour</value>
+    <comment>The 12-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
+    <value>12-hour (leading zero)</value>
+    <comment>The 12-hour clock format with a leading zero where appropriate</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24" xml:space="preserve">
+    <value>24-hour</value>
+    <comment>The 24-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
+    <value>24-hour (leading zero)</value>
+    <comment>The 24-hour clock format with leading zero where appropriate</comment>
+  </data>
+  <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
+    <value>Could not create folder {0}</value>
+    <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <data name="DURATION_ADAPTED" xml:space="preserve">
+    <value>Adapted duration</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_MODIFIED" xml:space="preserve">
+    <value>Modified duration</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_ORIGINAL" xml:space="preserve">
+    <value>Original duration</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
+    <value>Analogue</value>
+    <comment>i.e. an analogue clock (with face and hands)</comment>
+  </data>
+  <data name="FULL_SCREEN_BOTH" xml:space="preserve">
+    <value>Analogue and Digital</value>
+  </data>
+  <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
+    <value>Digital</value>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Bell is inactive</value>
+  </data>
+  <data name="MIDWEEK" xml:space="preserve">
+    <value>Midweek</value>
+  </data>
+  <data name="MINISTRY1" xml:space="preserve">
+    <value>Ministry - Item 1</value>
+  </data>
+  <data name="MINISTRY2" xml:space="preserve">
+    <value>Ministry - Item 2</value>
+  </data>
+  <data name="MINISTRY3" xml:space="preserve">
+    <value>Ministry - Item 3</value>
+  </data>
+  <data name="OP_MODE_AUTO" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="OP_MODE_FILE" xml:space="preserve">
+    <value>File-based</value>
+  </data>
+  <data name="OP_MODE_MANUAL" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="TALK_CONCLUDING" xml:space="preserve">
+    <value>Concluding Talk</value>
+  </data>
+  <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
+    <value>Concluding Comments</value>
+  </data>
+  <data name="TALK_CONG_STUDY" xml:space="preserve">
+    <value>Congregation Bible Study</value>
+  </data>
+  <data name="TALK_DIGGING" xml:space="preserve">
+    <value>Digging for Spiritual Gems</value>
+  </data>
+  <data name="TALK_LIVING1" xml:space="preserve">
+    <value>Living - Part 1</value>
+  </data>
+  <data name="TALK_LIVING2" xml:space="preserve">
+    <value>Living - Part 2</value>
+  </data>
+  <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
+    <value>Opening Comments</value>
+  </data>
+  <data name="TALK_PRESENTATIONS" xml:space="preserve">
+    <value>This Month's Presentations</value>
+  </data>
+  <data name="TALK_PUBLIC" xml:space="preserve">
+    <value>Public Talk</value>
+  </data>
+  <data name="TALK_READING" xml:space="preserve">
+    <value>Bible Reading</value>
+  </data>
+  <data name="TALK_SERVICE" xml:space="preserve">
+    <value>Service Talk</value>
+  </data>
+  <data name="TALK_TREASURES" xml:space="preserve">
+    <value>Treasures Talk</value>
+  </data>
+  <data name="TALK_WT" xml:space="preserve">
+    <value>Watchtower Study</value>
+  </data>
+  <data name="WEEKEND" xml:space="preserve">
+    <value>Weekend</value>
+  </data>
+  <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
+    <value>12-hour (am/pm)</value>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
+    <value>12-hour (leading zero &amp; am/pm)</value>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="MONITOR_NONE" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
+    <value>Settings not available while timer is running!</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SECTION_TREASURES" xml:space="preserve">
+    <value>Treasures</value>
+  </data>
+  <data name="SECTION_MINISTRY" xml:space="preserve">
+    <value>Ministry</value>
+  </data>
+  <data name="SECTION_LIVING" xml:space="preserve">
+    <value>Living</value>
+  </data>
+  <data name="SECTION_WEEKEND" xml:space="preserve">
+    <value>Weekend</value>
+  </data>
+  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
+    <value>Settings disabled by administrator!</value>
+    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
+  </data>
+  <data name="MINISTRY4" xml:space="preserve">
+    <value>Ministry - Item 4</value>
+  </data>
+  <data name="CIRCUIT_VISIT" xml:space="preserve">
+    <value>Circuit visit</value>
+  </data>
+  <data name="CLOSE_COUNTDOWN" xml:space="preserve">
+    <value>CLOSE COUNTDOWN</value>
+    <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
+    <value>[circuit visit]</value>
+  </data>
+  <data name="NEW_VERSION" xml:space="preserve">
+    <value>New version available!</value>
+  </data>
+  <data name="MAIN_SECTION" xml:space="preserve">
+    <value>MAIN</value>
+    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
+  </data>
+  <data name="ACCESS_CODE" xml:space="preserve">
+    <value>Access code</value>
+    <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
+  </data>
+  <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
+    <value>Midweek adaptive mode</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
+    <value>Weekend adaptive mode</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
+    <value>Allow count-up toggle</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALWAYS_ON_TOP" xml:space="preserve">
+    <value>Always on top</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="APPS_SECTION" xml:space="preserve">
+    <value>REMOTE APPS</value>
+    <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
+  </data>
+  <data name="AUTO_SECTION" xml:space="preserve">
+    <value>AUTOMATIC MODE</value>
+    <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
+  </data>
+  <data name="BELL_SECTION" xml:space="preserve">
+    <value>BELL</value>
+    <comment>Title for Settings, BELL section. Please keep capitals</comment>
+  </data>
+  <data name="CLOCK_SECTION" xml:space="preserve">
+    <value>WEB CLOCK</value>
+    <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
+  </data>
+  <data name="COUNTDOWN_SECTION" xml:space="preserve">
+    <value>MEETING COUNTDOWN</value>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="CO_VISIT_TOGGLE" xml:space="preserve">
+    <value>Circuit visit toggle</value>
+  </data>
+  <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
+    <value>Digital clock format</value>
+  </data>
+  <data name="ENABLED" xml:space="preserve">
+    <value>Enabled</value>
+    <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
+  </data>
+  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
+    <value>Full-screen clock mode</value>
+  </data>
+  <data name="IP_ADDRESS" xml:space="preserve">
+    <value>IP address</value>
+    <comment>Network address</comment>
+  </data>
+  <data name="MEETING" xml:space="preserve">
+    <value>Meeting</value>
+    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
+  </data>
+  <data name="MEETING_STARTS" xml:space="preserve">
+    <value>Meeting start times (1 per line)</value>
+  </data>
+  <data name="MISC_SECTION" xml:space="preserve">
+    <value>MISCELLANEOUS</value>
+    <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
+  </data>
+  <data name="MONITOR" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
+  <data name="MOUSE_PTR" xml:space="preserve">
+    <value>Show mouse pointer</value>
+  </data>
+  <data name="MTG_START_NOTES1" xml:space="preserve">
+    <value>Put each start time on a new line.</value>
+  </data>
+  <data name="MTG_START_NOTES2" xml:space="preserve">
+    <value>Use any time format you like!</value>
+  </data>
+  <data name="MTG_START_NOTES3" xml:space="preserve">
+    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+  </data>
+  <data name="NOTES" xml:space="preserve">
+    <value>Notes:</value>
+  </data>
+  <data name="OPEN_PORT" xml:space="preserve">
+    <value>OPEN PORT</value>
+    <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="OP_MODE" xml:space="preserve">
+    <value>Mode</value>
+    <comment>The operating mode (i.e. manual, auto or file-based)</comment>
+  </data>
+  <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
+    <value>Persist student time</value>
+    <comment>All the monitor to display the final student time for a little longer than normal</comment>
+  </data>
+  <data name="PERSIST_TALK_DURATION" xml:space="preserve">
+    <value>Persist talk duration</value>
+    <comment>How long the talk timer is shown after the end of the item</comment>
+  </data>
+  <data name="PORT" xml:space="preserve">
+    <value>Port</value>
+    <comment>i.e. the TCP (networking) "port"</comment>
+  </data>
+  <data name="REMOTE_SECTION" xml:space="preserve">
+    <value>REMOTE ACCESS</value>
+    <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
+  </data>
+  <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
+    <value>Show sector on analogue clock</value>
+    <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
+  </data>
+  <data name="SPLIT_WIDTH" xml:space="preserve">
+    <value>Split-screen width:</value>
+  </data>
+  <data name="TEST" xml:space="preserve">
+    <value>TEST</value>
+    <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="THROTTLED" xml:space="preserve">
+    <value>Throttled</value>
+    <comment>Communication is deliberately limited to prevent overloading</comment>
+  </data>
+  <data name="TIMER_COUNT_UP" xml:space="preserve">
+    <value>Timer counts up</value>
+    <comment>Counts up rather than down</comment>
+  </data>
+  <data name="TIMER_WIN_SECTION" xml:space="preserve">
+    <value>TIMER WINDOW</value>
+    <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
+  </data>
+  <data name="TIME_UNDER_TIMER" xml:space="preserve">
+    <value>Time of day under timer</value>
+    <comment>Show time of day underneath the timer</comment>
+  </data>
+  <data name="VOLUME" xml:space="preserve">
+    <value>Volume:</value>
+    <comment>Label for the volume control in the Bell settings</comment>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="RESTART_LANGUAGE" xml:space="preserve">
+    <value>Please restart OnlyT after changing the language.</value>
+  </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Decrease</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Increase</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Manual mode</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Currently counting down</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Currently counting up</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="X_SECONDS" xml:space="preserve">
+    <value>{0} seconds</value>
+    <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
+  </data>
+  <data name="ENABLED_API" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ENABLED_BELL" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="SHOW_SECONDS" xml:space="preserve">
+    <value>Show seconds</value>
+    <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
+  </data>
+  <data name="JW_COMPAT_MODE" xml:space="preserve">
+    <value>JW Library compatibility mode</value>
+    <comment>See Settings =&gt; Automatic mode</comment>
+  </data>
+  <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
+    <value>Show frame</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
+    <value>Show frame</value>
+    <comment>See Settings =&gt;Timer window</comment>
+  </data>
+  <data name="COUNTDOWN_ZOOM" xml:space="preserve">
+    <value>Zoom level:</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="LOCATION_ON_SCREEN" xml:space="preserve">
+    <value>Location</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
+    <value>Bottom</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
+    <value>Bottom left</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
+    <value>Bottom right</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
+    <value>Centre</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
+    <value>Left</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
+    <value>Right</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
+    <value>Top</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
+    <value>Top left</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
+    <value>Top right</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Caption of the button that closes the snackbar</comment>
+  </data>
+  <data name="PORT_OPENED" xml:space="preserve">
+    <value>Port opened and reservation made</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
+  </data>
+  <data name="PORT_OPEN_FAILED" xml:space="preserve">
+    <value>Could not open the port (see log)!</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
+  </data>
+  <data name="GENERATING_REPORT" xml:space="preserve">
+    <value>Generated timing report</value>
+    <comment>Displayed in the notification bar when the timing report is created</comment>
+  </data>
+  <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
+    <value>Generate reports</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="CONCLUDING_SEGMENT" xml:space="preserve">
+    <value>Concluding Segment</value>
+    <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTERIM_SEGMENT" xml:space="preserve">
+    <value>Interim Segment</value>
+    <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTRO_SEGMENT" xml:space="preserve">
+    <value>Introductory Segment</value>
+    <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="LOGGING_LEVEL" xml:space="preserve">
+    <value>Logging level</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
+    <value>Debug</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
+    <value>Error</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
+    <value>Fatal</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
+    <value>Information</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
+    <value>Verbose</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
+    <value>Warning</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
+    <value>Analysing meeting timer data</value>
+    <comment>Displayed in the notification bar before a timing report is generated</comment>
+  </data>
+  <data name="NO_REPORT" xml:space="preserve">
+    <value>Report NOT generated!</value>
+    <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
+  </data>
+  <data name="VIEW_REPORT" xml:space="preserve">
+    <value>VIEW</value>
+    <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
+  </data>
+  <data name="JWL_TRADEMARK" xml:space="preserve">
+    <value>"JW Library" is a registered trademark of Watch Tower Bible and Tract Society of Pennsylvania</value>
+    <comment>See Settings =&gt; Automatic Mode</comment>
+  </data>
+  <data name="AUTO_BELL" xml:space="preserve">
+    <value>Automatically sound</value>
+    <comment>See Settings =&gt; Bell</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Sound the bell</value>
+    <comment>Tooltip displayed for manual bell button</comment>
+  </data>
+</root>
