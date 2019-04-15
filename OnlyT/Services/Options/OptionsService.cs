@@ -83,6 +83,25 @@
             }
         }
 
+        public AdaptiveMode GetAdaptiveMode()
+        {
+            AdaptiveMode result = AdaptiveMode.None;
+
+            if (Options.OperatingMode == OperatingMode.Automatic)
+            {
+                switch (Options.MidWeekOrWeekend)
+                {
+                    case MidWeekOrWeekend.MidWeek:
+                        return Options.MidWeekAdaptiveMode;
+
+                    case MidWeekOrWeekend.Weekend:
+                        return Options.WeekendAdaptiveMode;
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Saves the settings (if they have changed since they were last read)
         /// </summary>

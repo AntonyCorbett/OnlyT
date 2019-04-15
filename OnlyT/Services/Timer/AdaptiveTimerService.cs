@@ -73,7 +73,7 @@
                 return null;
             }
 
-            var adaptiveMode = GetAdaptiveMode();
+            var adaptiveMode = _optionsService.GetAdaptiveMode();
 
             Log.Logger.Debug($"Adaptive mode = {adaptiveMode}");
             if (adaptiveMode == AdaptiveMode.None || !talk.AllowAdaptive)
@@ -219,25 +219,6 @@
         {
             return Math.Abs(deviation.TotalSeconds) > SmallestDeviationSecs
                    && Math.Abs(deviation.TotalMinutes) <= LargestDeviationMinutes;
-        }
-
-        private AdaptiveMode GetAdaptiveMode()
-        {
-            AdaptiveMode result = AdaptiveMode.None;
-
-            if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
-            {
-                switch (_optionsService.Options.MidWeekOrWeekend)
-                {
-                    case MidWeekOrWeekend.MidWeek:
-                        return _optionsService.Options.MidWeekAdaptiveMode;
-
-                    case MidWeekOrWeekend.Weekend:
-                        return _optionsService.Options.WeekendAdaptiveMode;
-                }
-            }
-
-            return result;
         }
 
         private TimeSpan CalculateRemainingAdaptiveTimerValues(TalkScheduleItem talk)

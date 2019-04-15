@@ -686,7 +686,12 @@
                     Duration2String = TimeFormatter.FormatTimerDisplayString((int)talk.ModifiedDuration.Value.TotalSeconds);
                     Duration2Tooltip = Properties.Resources.DURATION_MODIFIED;
 
-                    if (talk.AdaptedDuration != null)
+                    var adaptiveMode = _optionsService.GetAdaptiveMode();
+                    var showAdaptedDuration = talk.AdaptedDuration != null &&
+                                               (adaptiveMode == AdaptiveMode.TwoWay ||
+                                                talk.AdaptedDuration.Value < talk.ModifiedDuration.Value);
+
+                    if (showAdaptedDuration)
                     {
                         Duration3String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration.Value.TotalSeconds);
                         Duration3Tooltip = Properties.Resources.DURATION_ADAPTED;

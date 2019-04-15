@@ -11,5 +11,7 @@
         void Save();
 
         bool Use24HrClockFormat();
+
+        AdaptiveMode GetAdaptiveMode();
     }
 }
