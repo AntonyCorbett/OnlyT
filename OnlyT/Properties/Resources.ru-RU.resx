@@ -386,7 +386,7 @@
     <value>Используйте любой формат времени, который вам нравится!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>При желании можно включить день, например "Чт 7:15"</value>
+    <value>При желании можно включить день, например "Чт 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Примечания:</value>
