@@ -383,28 +383,28 @@
     <value>Kezdési időpontokat külön sorba írd.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Bármilyen időformátumot használatsz!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>Tartalmazhat napot is, pl.: "CS 18:00"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Megjegyzések:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OPEN PORT</value>
+    <value>PORT NYITÁSA</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
-    <value>Mode</value>
+    <value>Mód</value>
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Persist student time</value>
+    <value>Tanuló idejének kint tartása</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Persist talk duration</value>
+    <value>Program idejének kint tartása</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -412,137 +412,137 @@
     <comment>i.e. the TCP (networking) "port"</comment>
   </data>
   <data name="REMOTE_SECTION" xml:space="preserve">
-    <value>REMOTE ACCESS</value>
+    <value>TÁVOLI ELÉRÉS</value>
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Show sector on analogue clock</value>
+    <value>Mutassa az analóg óra szegmenseit</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Split-screen width:</value>
+    <value>Osztott képernyő szélesség:</value>
   </data>
   <data name="TEST" xml:space="preserve">
-    <value>TEST</value>
+    <value>TESZT</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Throttled</value>
+    <value>Korlátozva</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Timer counts up</value>
+    <value>Időzítő előre számol</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>TIMER WINDOW</value>
+    <value>IDŐZÍTŐ ABLAK</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Time of day under timer</value>
+    <value>Idő mutatása az időzítő alatt</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
-    <value>Volume:</value>
+    <value>Hangerő:</value>
     <comment>Label for the volume control in the Bell settings</comment>
   </data>
   <data name="LANGUAGE" xml:space="preserve">
-    <value>Language</value>
+    <value>Nyelvek</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Please restart OnlyT after changing the language.</value>
+    <value>A nyelv módosítása után indítsd újra a OnlyT-t.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease</value>
+    <value>Csökkentés</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase</value>
+    <value>Növelés</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
-    <value>Manual mode</value>
+    <value>Kézi üzemmód</value>
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>Currently counting down</value>
+    <value>Jelenleg vissza számol</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>Currently counting up</value>
+    <value>Jelenleg előre számol</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>{0} másodperc</value>
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Engedélyezve</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Engedélyezve</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Engedélyezve</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Show seconds</value>
+    <value>Másodpercek mutatása</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library compatibility mode</value>
+    <value>JW-Library kompatibilitási mód</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Keret mutatása</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Keret mutatása</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
-    <value>Zoom level:</value>
+    <value>Nagyítási szint:</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
-    <value>Location</value>
+    <value>Pozíció</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Alul</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
-    <value>Bottom left</value>
+    <value>Bal alul</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
-    <value>Bottom right</value>
+    <value>Jobb alul</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
-    <value>Centre</value>
+    <value>Középen</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
-    <value>Left</value>
+    <value>Balra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
-    <value>Right</value>
+    <value>Jobbra</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
-    <value>Top</value>
+    <value>Felül</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
-    <value>Top left</value>
+    <value>Bal fent</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
-    <value>Top right</value>
+    <value>Jobb fent</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="OK" xml:space="preserve">
