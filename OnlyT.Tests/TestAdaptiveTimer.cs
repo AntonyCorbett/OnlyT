@@ -34,6 +34,7 @@
 
             Mock<IOptionsService> optionsService = new Mock<IOptionsService>();
             optionsService.Setup(o => o.Options).Returns(options);
+            optionsService.Setup(x => x.GetAdaptiveMode()).Returns(options.MidWeekAdaptiveMode);
 
             _scheduleService = new Mock<ITalkScheduleService>();
             _scheduleService.Setup(x => x.GetTalkScheduleItems()).Returns(_items);
