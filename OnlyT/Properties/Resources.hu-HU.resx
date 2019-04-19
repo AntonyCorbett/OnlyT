@@ -214,7 +214,7 @@
     <value>Ismétlés és a jövő heti program...</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Gyülekezeti Bibliatanulmányozás</value>
+    <value>Gyülekezeti bibliatanulmányozás</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Kutassunk szellemi kincsek után</value>
@@ -241,7 +241,7 @@
     <value>Szolgálati előadás</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Szellemi kincsek előadás</value>
+    <value>Gyöngyszemek előadás</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Őrtorony-tanulmányozás</value>
