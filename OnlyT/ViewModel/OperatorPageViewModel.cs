@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using GalaSoft.MvvmLight.Threading;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
