@@ -223,6 +223,11 @@
             _secondsBall.Width = (double)_innerCircleRadius / 6;
             _secondsBall.Height = (double)_innerCircleRadius / 6;
 
+            if (_countdownDurationMins == 1)
+            {
+                _secondsBall.Visibility = Visibility.Hidden;
+            }
+
             _time.Text = GetTimeText();
             
             var sz = GetTextSize(_time.Text, useExtent: true);
