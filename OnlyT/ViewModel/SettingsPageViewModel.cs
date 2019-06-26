@@ -29,6 +29,7 @@
         private readonly LanguageItem[] _languages;
         private readonly OperatingModeItem[] _operatingModes;
         private readonly OnScreenLocationItem[] _screenLocationItems;
+        private readonly CountdownDurationItem[] _countdownDurationItems;
         private readonly AutoMeetingTime[] _autoMeetingTimes;
         private readonly IOptionsService _optionsService;
         private readonly ISnackbarService _snackbarService;
@@ -63,6 +64,7 @@
             _languages = GetSupportedLanguages();
             _operatingModes = GetOperatingModes();
             _screenLocationItems = GetScreenLocationItems();
+            _countdownDurationItems = GetCountdownDurationItems();
             _autoMeetingTimes = GetAutoMeetingTimes();
             _clockHourFormats = GetClockHourFormats();
             _adaptiveModes = GetAdaptiveModes();
@@ -158,6 +160,22 @@
                     _optionsService.Options.ShowDigitalSeconds = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new ClockHourFormatChangedMessage());
+                }
+            }
+        }
+
+        public IEnumerable<CountdownDurationItem> CountdownDurationItems => _countdownDurationItems;
+
+        public int CountdownDurationMins
+        {
+            get => _optionsService.Options.CountdownDurationMins;
+            set
+            {
+                if (_optionsService.Options.CountdownDurationMins != value)
+                {
+                    _optionsService.Options.CountdownDurationMins = value;
+                    RaisePropertyChanged();
+                    _countdownTimerService.UpdateTriggerPeriods();
                 }
             }
         }
@@ -807,6 +825,11 @@
                 new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
                 new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
             };
+        }
+
+        private CountdownDurationItem[] GetCountdownDurationItems()
+        {
+            return _optionsService.Options.GetCountdownDurationItems();
         }
 
         private OnScreenLocationItem[] GetScreenLocationItems()

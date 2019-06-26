@@ -1,5 +1,7 @@
 ﻿namespace OnlyT.Services.Options
 {
+    using OnlyT.Models;
+
     public interface IOptionsService
     {
         Options Options { get; }

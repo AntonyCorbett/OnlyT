@@ -29,6 +29,11 @@
 
         public double CountdownScale => _optionsService.Options.CountdownZoomPercent / 100.0;
 
+        public int CountdownDurationMins
+        {
+            get => _optionsService.Options.CountdownDurationMins;
+        }
+
         public HorizontalAlignment HorizontalAlignment
         {
             get

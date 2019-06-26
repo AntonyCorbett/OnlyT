@@ -354,6 +354,14 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}" />
 
+                        <ComboBox ItemsSource="{Binding CountdownDurationItems}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_DURATION_MINS}"
+                                  SelectedValuePath="DurationMins" 
+                                  DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
+                                  SelectedValue="{Binding CountdownDurationMins, Mode=TwoWay}"/>
+
                         <TextBox MinLines="6"
                                  Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING_STARTS}"

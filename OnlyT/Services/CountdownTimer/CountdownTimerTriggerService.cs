@@ -9,7 +9,6 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class CountdownTimerTriggerService : ICountdownTimerTriggerService
     {
-        private const int CountdownDurationMins = 5;
         private readonly object _locker = new object();
         private readonly IOptionsService _optionsService;
         private List<CountdownTriggerPeriod> _triggerPeriods;
@@ -60,6 +59,7 @@
             var triggerPeriods = new List<CountdownTriggerPeriod>();
 
             DateTime today = DateTime.Today; // local time
+            int countdownDurationMins = _optionsService.Options.CountdownDurationMins;
 
             foreach (var time in meetingStartTimes)
             {
@@ -69,7 +69,7 @@
                     {
                         Start = today.Add(
                             TimeSpan.FromMinutes(
-                                (time.StartTime.Hours * 60) + time.StartTime.Minutes - CountdownDurationMins)),
+                                (time.StartTime.Hours * 60) + time.StartTime.Minutes - countdownDurationMins)),
                         End = today.Add(new TimeSpan(time.StartTime.Hours, time.StartTime.Minutes, 0))
                     });
                 }

@@ -139,6 +139,7 @@
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Models\ClockRequestInfo.cs" />
+    <Compile Include="Models\CountdownDurationItem.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\LanguageItem.cs" />

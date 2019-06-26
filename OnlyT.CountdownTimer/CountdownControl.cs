@@ -11,7 +11,7 @@
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class CountdownControl : Control
     {
-        private const int MinsToCountdown = 5;
+        private const int DefaultCountdownDurationMins = 5;
 
         private readonly DispatcherTimer _timer;
         private Path _donut;
@@ -27,6 +27,15 @@
         private Point _centrePoint;
         private DateTime _start;
         private double _pixelsPerDip;
+        private int _countdownDurationMins = DefaultCountdownDurationMins;
+        private bool _twoDigitMins;
+
+        public static readonly DependencyProperty CountdownDurationMinsProperty =
+            DependencyProperty.Register(
+                "CountdownDurationMins",
+                typeof(int),
+                typeof(CountdownControl),
+                new FrameworkPropertyMetadata(CountdownDurationMinsPropertyChanged));
 
         static CountdownControl()
         {
@@ -46,6 +55,13 @@
         }
 
         public event EventHandler TimeUpEvent;
+
+        public int CountdownDurationMins
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (int)GetValue(CountdownDurationMinsProperty);
+            set => SetValue(CountdownDurationMinsProperty, value);
+        }
 
         public override void OnApplyTemplate()
         {
@@ -84,6 +100,14 @@
             TimeUpEvent?.Invoke(this, EventArgs.Empty);
         }
 
+        private static void CountdownDurationMinsPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var c = (CountdownControl)d;
+            c._countdownDurationMins = (int)e.NewValue;
+        }
+
         private void RenderPieSliceAndBall(double angle, double secondsElapsed)
         {
             if (!Dispatcher.HasShutdownStarted)
@@ -109,7 +133,7 @@
 
             if (_start != default(DateTime))
             {
-                var secsInCountdown = MinsToCountdown * 60;
+                var secsInCountdown = _countdownDurationMins * 60;
                 var secondsElapsed = (DateTime.UtcNow - _start).TotalSeconds;
                 var secondsLeft = secsInCountdown - secondsElapsed;
 
@@ -177,6 +201,8 @@
             _canvasWidth = canvas.ActualWidth;
             _canvasHeight = canvas.ActualHeight;
 
+            _twoDigitMins = _countdownDurationMins > 9;
+
             _time.FontSize = 12;
             _time.FontWeight = FontWeights.Bold;
 
@@ -189,6 +215,7 @@
             _innerCircleRadius = (int)(_canvasHeight * innerRadiusFactor);
 
             var totalWidthNeeded = 3.25 * _outerCircleDiameter;
+
             _centrePoint = CalcCentrePoint(totalWidthNeeded);
 
             _donut.Data = PieSlice.Get(0.1, _centrePoint, _innerCircleRadius, _outerCircleRadius);
@@ -197,15 +224,19 @@
             _secondsBall.Height = (double)_innerCircleRadius / 6;
 
             _time.Text = GetTimeText();
+            
+            var sz = GetTextSize(_time.Text, useExtent: true);
+            var szFactor = _twoDigitMins
+                ? 0.60
+                : 0.75;
 
-            Size sz = GetTextSize(useExtent: true);
-            while (sz.Height < (3 * (double)_outerCircleDiameter) / 4)
+            while (sz.Height < szFactor * _outerCircleDiameter)
             {
                 _time.FontSize += 0.5;
-                sz = GetTextSize(useExtent: true);
+                sz = GetTextSize(_time.Text, useExtent: true);
             }
 
-            sz = GetTextSize(useExtent: true);
+            sz = GetTextSize(_time.Text, useExtent: true);
 
             Canvas.SetLeft(_time, _centrePoint.X - _outerCircleRadius + totalWidthNeeded - sz.Width);
             Canvas.SetTop(_time, _centrePoint.Y - sz.Height);
@@ -279,11 +310,11 @@
             {
                 if (_start == default(DateTime))
                 {
-                    secondsLeft = MinsToCountdown * 60;
+                    secondsLeft = _countdownDurationMins * 60;
                 }
                 else
                 {
-                    var secsInCountdown = MinsToCountdown * 60;
+                    var secsInCountdown = _countdownDurationMins * 60;
                     var secondsElapsed = (DateTime.UtcNow - _start).TotalSeconds;
                     secondsLeft = secsInCountdown - secondsElapsed + 1;
                 }
@@ -292,13 +323,15 @@
             int mins = (int)secondsLeft / 60;
             int secs = (int)(secondsLeft % 60);
 
-            return $"{mins}:{secs:D2}";
+            return _twoDigitMins
+                ? $"{mins:D2}:{secs:D2}"
+                : $"{mins}:{secs:D2}";
         }
 
-        private Size GetTextSize(bool useExtent)
+        private Size GetTextSize(string text, bool useExtent)
         {
             var formattedText = new FormattedText(
-                GetTimeText(), 
+                text, 
                 CultureInfo.CurrentUICulture,
                 FlowDirection.LeftToRight, 
                 new Typeface(_time.FontFamily, _time.FontStyle, _time.FontWeight, FontStretches.Normal),

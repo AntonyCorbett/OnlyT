@@ -278,7 +278,6 @@ namespace OnlyT.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;!DOCTYPE html&gt;
         ///&lt;html style=&quot;display:block; height:100%; margin:0; padding:0&quot;&gt;
         ///	&lt;head&gt;
         ///		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;		
@@ -300,7 +299,8 @@ namespace OnlyT.Properties {
         ///				font-weight: bold;
         ///				color: #FFFF66;
         ///			}
-        ///			.clock [rest of string was truncated]&quot;;.
+        ///			.clockstyle_green
+        ///			{ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ClockHtmlTemplate {
             get {
@@ -332,6 +332,15 @@ namespace OnlyT.Properties {
         public static string CONCLUDING_SEGMENT {
             get {
                 return ResourceManager.GetString("CONCLUDING_SEGMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration (mins).
+        /// </summary>
+        public static string COUNTDOWN_DURATION_MINS {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_DURATION_MINS", resourceCulture);
             }
         }
         
