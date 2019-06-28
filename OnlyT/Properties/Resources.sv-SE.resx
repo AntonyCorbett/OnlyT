@@ -630,7 +630,7 @@
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duration (mins)</value>
+    <value>Varaktighet (min)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
 </root>
