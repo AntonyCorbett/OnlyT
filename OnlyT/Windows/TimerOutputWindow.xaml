@@ -41,7 +41,7 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <clock:Clock x:Name="TheClock" Grid.Row="0" 
+                <clock:ClockControl x:Name="TheClock" Grid.Row="0" 
                              Margin="15" 
                              DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
                              DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"

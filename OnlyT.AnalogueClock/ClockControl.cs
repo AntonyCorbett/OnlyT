@@ -12,53 +12,53 @@
     using System.Windows.Shapes;
     using System.Windows.Threading;
 
-    public class Clock : Control
+    public class ClockControl : Control
     {
         public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
             DependencyProperty.Register(
                 "DigitalTimeFormatShowLeadingZero", 
                 typeof(bool), 
-                typeof(Clock),
+                typeof(ClockControl),
                 new FrameworkPropertyMetadata(DigitalTimeFormatShowLeadingZeroPropertyChanged));
 
         public static readonly DependencyProperty DigitalTimeFormat24HoursProperty =
             DependencyProperty.Register(
                 "DigitalTimeFormat24Hours", 
                 typeof(bool), 
-                typeof(Clock),
+                typeof(ClockControl),
                 new FrameworkPropertyMetadata(DigitalTimeFormat24HoursPropertyChanged));
 
         public static readonly DependencyProperty DigitalTimeFormatAMPMProperty =
             DependencyProperty.Register(
                 "DigitalTimeFormatAMPM", 
                 typeof(bool), 
-                typeof(Clock),
+                typeof(ClockControl),
                 new FrameworkPropertyMetadata(DigitalTimeFormatAMPMPropertyChanged));
 
         public static readonly DependencyProperty IsRunningProperty =
             DependencyProperty.Register(
                 "IsRunning", 
                 typeof(bool), 
-                typeof(Clock),
+                typeof(ClockControl),
                 new FrameworkPropertyMetadata(IsRunningPropertyChanged));
 
         public static readonly DependencyProperty CurrentTimeHrMinProperty =
             DependencyProperty.Register(
                 "CurrentTimeHrMin", 
                 typeof(string), 
-                typeof(Clock));
+                typeof(ClockControl));
 
         public static readonly DependencyProperty CurrentTimeSecProperty =
             DependencyProperty.Register(
                 "CurrentTimeSec", 
                 typeof(string), 
-                typeof(Clock));
+                typeof(ClockControl));
 
         public static readonly DependencyProperty DurationSectorProperty =
             DependencyProperty.Register(
                 "DurationSector", 
                 typeof(DurationSector), 
-                typeof(Clock),
+                typeof(ClockControl),
                 new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
 
         private const double HourHandDropShadowOpacity = 1.0;
@@ -89,14 +89,14 @@
         private bool _digitalFormat24Hours;
         private bool _digitalFormatAMPM;
         
-        static Clock()
+        static ClockControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(Clock),
-                new FrameworkPropertyMetadata(typeof(Clock)));
+                typeof(ClockControl),
+                new FrameworkPropertyMetadata(typeof(ClockControl)));
         }
 
-        public Clock()
+        public ClockControl()
         {
             var isInDesignMode = DesignerProperties.GetIsInDesignMode(this);
 
@@ -182,7 +182,7 @@
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            var c = (Clock)d;
+            var c = (ClockControl)d;
             c._digitalFormatLeadingZero = (bool)e.NewValue;
         }
 
@@ -190,7 +190,7 @@
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            var c = (Clock)d;
+            var c = (ClockControl)d;
             c._digitalFormat24Hours = (bool)e.NewValue;
         }
 
@@ -198,14 +198,14 @@
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
-            var c = (Clock)d;
+            var c = (ClockControl)d;
             c._digitalFormatAMPM = (bool)e.NewValue;
         }
 
         private static void IsRunningPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var b = (bool)e.NewValue;
-            var c = (Clock)d;
+            var c = (ClockControl)d;
             if (b)
             {
                 c.StartupAnimation();
@@ -219,7 +219,7 @@
         private static void DurationSectorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var sector = (DurationSector)e.NewValue;
-            var c = (Clock)d;
+            var c = (ClockControl)d;
 
             if (sector == null)
             {
@@ -243,7 +243,7 @@
             }
         }
 
-        private static void DrawSector(Clock c, DurationSector sector)
+        private static void DrawSector(ClockControl c, DurationSector sector)
         {
             // we may have 1, 2 or 3 sectors to draw...
 
