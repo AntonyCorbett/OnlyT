@@ -13,6 +13,7 @@
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
+    using OnlyT.CountdownTimer;
     using OnlyT.Services.Snackbar;
     using Serilog;
     using Serilog.Events;
@@ -30,6 +31,7 @@
         private readonly OperatingModeItem[] _operatingModes;
         private readonly OnScreenLocationItem[] _screenLocationItems;
         private readonly CountdownDurationItem[] _countdownDurationItems;
+        private readonly CountdownElementsToShowItem[] _countdownElementsToShowItems;
         private readonly AutoMeetingTime[] _autoMeetingTimes;
         private readonly IOptionsService _optionsService;
         private readonly ISnackbarService _snackbarService;
@@ -65,6 +67,7 @@
             _operatingModes = GetOperatingModes();
             _screenLocationItems = GetScreenLocationItems();
             _countdownDurationItems = GetCountdownDurationItems();
+            _countdownElementsToShowItems = GetCountdownElementsToShowItems();
             _autoMeetingTimes = GetAutoMeetingTimes();
             _clockHourFormats = GetClockHourFormats();
             _adaptiveModes = GetAdaptiveModes();
@@ -160,6 +163,22 @@
                     _optionsService.Options.ShowDigitalSeconds = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new ClockHourFormatChangedMessage());
+                }
+            }
+        }
+
+        public IEnumerable<CountdownElementsToShowItem> CountdownElementsToShowItems => _countdownElementsToShowItems;
+
+        public ElementsToShow CountdownElementsToShow
+        {
+            get => _optionsService.Options.CountdownElementsToShow;
+            set
+            {
+                if (_optionsService.Options.CountdownElementsToShow != value)
+                {
+                    _optionsService.Options.CountdownElementsToShow = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new CountdownElementsChangedMessage());
                 }
             }
         }
@@ -824,6 +843,16 @@
             {
                 new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
                 new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
+            };
+        }
+
+        private CountdownElementsToShowItem[] GetCountdownElementsToShowItems()
+        {
+            return new[]
+            {
+                new CountdownElementsToShowItem { Elements = ElementsToShow.DialAndDigital, Name = Properties.Resources.DIAL_AND_DIGITAL },
+                new CountdownElementsToShowItem { Elements = ElementsToShow.Dial, Name = Properties.Resources.DIAL },
+                new CountdownElementsToShowItem { Elements = ElementsToShow.Digital, Name = Properties.Resources.DIGITAL }
             };
         }
 

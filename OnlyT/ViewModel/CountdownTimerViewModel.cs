@@ -4,6 +4,7 @@
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
+    using OnlyT.CountdownTimer;
     using OnlyT.Services.Options;
 
     // ReSharper disable once ClassNeverInstantiated.Global
@@ -19,6 +20,7 @@
             Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
             Messenger.Default.Register<CountdownFrameChangedMessage>(this, OnFrameChanged);
             Messenger.Default.Register<CountdownZoomOrPositionChangedMessage>(this, OnZoomOrPositionChanged);
+            Messenger.Default.Register<CountdownElementsChangedMessage>(this, OnElementsChanged);
         }
 
         public bool ApplicationClosing { get; private set; }
@@ -28,6 +30,8 @@
         public int BackgroundOpacity => _optionsService.Options.CountdownFrame ? 100 : 0;
 
         public double CountdownScale => _optionsService.Options.CountdownZoomPercent / 100.0;
+
+        public ElementsToShow ElementsToShow => _optionsService.Options.CountdownElementsToShow;
 
         public int CountdownDurationMins
         {
@@ -94,6 +98,11 @@
             RaisePropertyChanged(nameof(CountdownScale));
             RaisePropertyChanged(nameof(HorizontalAlignment));
             RaisePropertyChanged(nameof(VerticalAlignment));
+        }
+
+        private void OnElementsChanged(CountdownElementsChangedMessage obj)
+        {
+            RaisePropertyChanged(nameof(ElementsToShow));
         }
     }
 }

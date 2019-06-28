@@ -140,6 +140,7 @@
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Models\ClockRequestInfo.cs" />
     <Compile Include="Models\CountdownDurationItem.cs" />
+    <Compile Include="Models\CountdownElementsToShowItem.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\LanguageItem.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="ViewModel\Messages\AutoBellSettingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\CountdownElementsChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownZoomOrPositionChangedMessage.cs" />

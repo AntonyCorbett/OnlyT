@@ -11,9 +11,24 @@
     // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class CountdownControl : Control
     {
+        public static readonly DependencyProperty CountdownDurationMinsProperty =
+            DependencyProperty.Register(
+                "CountdownDurationMins",
+                typeof(int),
+                typeof(CountdownControl),
+                new FrameworkPropertyMetadata(CountdownDurationMinsPropertyChanged));
+
+        public static readonly DependencyProperty ElementsToShowProperty =
+            DependencyProperty.Register(
+                "ElementsToShow",
+                typeof(ElementsToShow),
+                typeof(CountdownControl),
+                new FrameworkPropertyMetadata(ElementsToShowPropertyChanged));
+
         private const int DefaultCountdownDurationMins = 5;
 
         private readonly DispatcherTimer _timer;
+
         private Path _donut;
         private Path _pie;
         private Ellipse _secondsBall;
@@ -21,21 +36,13 @@
         private bool _registeredNames;
         private double _canvasWidth;
         private double _canvasHeight;
-        private int _outerCircleDiameter;
-        private int _outerCircleRadius;
-        private int _innerCircleRadius;
+        private AnnulusSize _annulusSize;
         private Point _centrePoint;
         private DateTime _start;
         private double _pixelsPerDip;
         private int _countdownDurationMins = DefaultCountdownDurationMins;
         private bool _twoDigitMins;
-
-        public static readonly DependencyProperty CountdownDurationMinsProperty =
-            DependencyProperty.Register(
-                "CountdownDurationMins",
-                typeof(int),
-                typeof(CountdownControl),
-                new FrameworkPropertyMetadata(CountdownDurationMinsPropertyChanged));
+        private ElementsToShow _elementsToShow = ElementsToShow.DialAndDigital;
 
         static CountdownControl()
         {
@@ -58,9 +65,14 @@
 
         public int CountdownDurationMins
         {
-            // ReSharper disable once PossibleNullReferenceException
             get => (int)GetValue(CountdownDurationMinsProperty);
             set => SetValue(CountdownDurationMinsProperty, value);
+        }
+
+        public ElementsToShow ElementsToShow
+        {
+            get => (ElementsToShow)GetValue(ElementsToShowProperty);
+            set => SetValue(ElementsToShowProperty, value);
         }
 
         public override void OnApplyTemplate()
@@ -108,17 +120,30 @@
             c._countdownDurationMins = (int)e.NewValue;
         }
 
+        private static void ElementsToShowPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var c = (CountdownControl)d;
+            c._elementsToShow = (ElementsToShow)e.NewValue;
+
+            if (c.GetTemplateChild("CountdownCanvas") is Canvas canvas)
+            {
+                c.InitLayout(canvas);
+            }
+        }
+
         private void RenderPieSliceAndBall(double angle, double secondsElapsed)
         {
             if (!Dispatcher.HasShutdownStarted)
             {
-                _pie.Data = PieSlice.Get(angle, _centrePoint, _innerCircleRadius, _outerCircleRadius);
+                _pie.Data = PieSlice.Get(angle, _centrePoint, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 
                 var ballPt = SecondsBall.GetPos(
                     _centrePoint,
                     (int)secondsElapsed % 60,
                     _secondsBall.Width / 2,
-                    _innerCircleRadius);
+                    _annulusSize.InnerRadius);
 
                 Canvas.SetLeft(_secondsBall, ballPt.X);
                 Canvas.SetTop(_secondsBall, ballPt.Y);
@@ -196,6 +221,14 @@
             
             RegisterNames(canvas);
 
+            InitLayout(canvas);
+            
+            Visibility = Visibility.Visible;
+            Animations.FadeIn(this, new FrameworkElement[] { _donut, _secondsBall, _pie, _time });
+        }
+
+        private void InitLayout(Canvas canvas)
+        {
             _pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
 
             _canvasWidth = canvas.ActualWidth;
@@ -206,36 +239,27 @@
             _time.FontSize = 12;
             _time.FontWeight = FontWeights.Bold;
 
-            double outerRadiusFactor = 0.24;
-            double innerRadiusFactor = 0.15;
+            _annulusSize = GetAnnulusSize();
 
-            _outerCircleRadius = (int)(_canvasHeight * outerRadiusFactor);
-            _outerCircleDiameter = _outerCircleRadius * 2;
-
-            _innerCircleRadius = (int)(_canvasHeight * innerRadiusFactor);
-
-            var totalWidthNeeded = 3.25 * _outerCircleDiameter;
+            var totalWidthNeeded = GetTotalWidthNeeded();
 
             _centrePoint = CalcCentrePoint(totalWidthNeeded);
 
-            _donut.Data = PieSlice.Get(0.1, _centrePoint, _innerCircleRadius, _outerCircleRadius);
+            _donut.Data = PieSlice.Get(0.1, _centrePoint, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 
-            _secondsBall.Width = (double)_innerCircleRadius / 6;
-            _secondsBall.Height = (double)_innerCircleRadius / 6;
+            _secondsBall.Width = (double)_annulusSize.InnerRadius / 6;
+            _secondsBall.Height = (double)_annulusSize.InnerRadius / 6;
 
-            if (_countdownDurationMins == 1)
-            {
-                _secondsBall.Visibility = Visibility.Hidden;
-            }
+            SetElementsVisibility();
 
             _time.Text = GetTimeText();
-            
+
             var sz = GetTextSize(_time.Text, useExtent: true);
             var szFactor = _twoDigitMins
                 ? 0.60
                 : 0.75;
 
-            while (sz.Height < szFactor * _outerCircleDiameter)
+            while (sz.Height < szFactor * _annulusSize.OuterDiameter)
             {
                 _time.FontSize += 0.5;
                 sz = GetTextSize(_time.Text, useExtent: true);
@@ -243,13 +267,80 @@
 
             sz = GetTextSize(_time.Text, useExtent: true);
 
-            Canvas.SetLeft(_time, _centrePoint.X - _outerCircleRadius + totalWidthNeeded - sz.Width);
+            Canvas.SetLeft(_time, _centrePoint.X - _annulusSize.OuterRadius + totalWidthNeeded - sz.Width);
             Canvas.SetTop(_time, _centrePoint.Y - sz.Height);
 
             RenderPieSliceAndBall(0.1, 0);
+        }
 
-            Visibility = Visibility.Visible;
-            Animations.FadeIn(this, new FrameworkElement[] { _donut, _secondsBall, _pie, _time });
+        private AnnulusSize GetAnnulusSize()
+        {
+            var outerRadiusFactor = 0.24;
+            var innerRadiusFactor = 0.15;
+
+            switch (_elementsToShow)
+            {
+                case ElementsToShow.Dial:
+                    outerRadiusFactor *= 1.75;
+                    innerRadiusFactor *= 1.75;
+                    break;
+            }
+
+            return new AnnulusSize
+            {
+                InnerRadius = (int)(_canvasHeight * innerRadiusFactor),
+                OuterRadius = (int)(_canvasHeight * outerRadiusFactor)
+            };
+        }
+
+        private void SetElementsVisibility()
+        {
+            switch (_elementsToShow)
+            {
+                case ElementsToShow.DialAndDigital:
+                    _secondsBall.Visibility = Visibility.Visible;
+                    _donut.Visibility = Visibility.Visible;
+                    _time.Visibility = Visibility.Visible;
+                    _pie.Visibility = Visibility.Visible;
+                    break;
+
+                case ElementsToShow.Dial:
+                    _secondsBall.Visibility = Visibility.Visible;
+                    _donut.Visibility = Visibility.Visible;
+                    _pie.Visibility = Visibility.Visible;
+
+                    _time.Visibility = Visibility.Hidden;
+                    break;
+
+                case ElementsToShow.Digital:
+                    _time.Visibility = Visibility.Visible;
+
+                    _secondsBall.Visibility = Visibility.Hidden;
+                    _donut.Visibility = Visibility.Hidden;
+                    _pie.Visibility = Visibility.Hidden;
+                    break;
+            }
+
+            if (_countdownDurationMins == 1)
+            {
+                // gratuitous
+                _secondsBall.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private double GetTotalWidthNeeded()
+        {
+            switch (_elementsToShow)
+            {
+                case ElementsToShow.Dial:
+                    return _annulusSize.OuterDiameter;
+
+                case ElementsToShow.Digital:
+                    return 2 * _annulusSize.OuterDiameter;
+
+                default:
+                    return 3.25 * _annulusSize.OuterDiameter;
+            }
         }
 
         private Color ToColor(string htmlColor)
@@ -304,7 +395,7 @@
         private Point CalcCentrePoint(double totalWidthNeeded)
         {
             var margin = (_canvasWidth - totalWidthNeeded) / 2;
-            return new Point(margin + _outerCircleRadius, _canvasHeight / 2);
+            return new Point(margin + _annulusSize.OuterRadius, _canvasHeight / 2);
         }
 
         private string GetTimeText(int? secsLeft = null)

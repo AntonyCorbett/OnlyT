@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Windows;
     using Models;
+    using OnlyT.CountdownTimer;
     using Serilog.Events;
 
     /// <summary>
@@ -53,6 +54,8 @@
         public string CountdownMonitorId { get; set; }
 
         public bool CountdownFrame { get; set; }
+
+        public ElementsToShow CountdownElementsToShow { get; set; }
 
         public bool TimerFrame { get; set; }
 

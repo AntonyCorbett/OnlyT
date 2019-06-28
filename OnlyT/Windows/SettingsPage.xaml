@@ -354,6 +354,14 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}" />
 
+                        <ComboBox ItemsSource="{Binding CountdownElementsToShowItems}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_ELEMENTS}"
+                                  SelectedValuePath="Elements" 
+                                  DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
+                                  SelectedValue="{Binding CountdownElementsToShow, Mode=TwoWay}"/>
+
                         <ComboBox ItemsSource="{Binding CountdownDurationItems}" 
                                   Style="{StaticResource SettingsComboStyle}"
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_DURATION_MINS}"

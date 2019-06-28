@@ -32,6 +32,7 @@
 
             <countdownTimer:CountdownControl x:Name="CountDown" 
                                              CountdownDurationMins="{Binding CountdownDurationMins}"
+                                             ElementsToShow="{Binding ElementsToShow}"
                                              Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
 
         </Border>
