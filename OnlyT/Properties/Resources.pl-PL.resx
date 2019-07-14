@@ -630,7 +630,23 @@
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duration (mins)</value>
+    <value>Czas (minuty)</value>
     <comment>See Settings =&gt;Countdown section</comment>
+  </data>
+  <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
+    <value>Wyświetlaj czas do rozpoczęcia</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="DIAL" xml:space="preserve">
+    <value>Graficznie</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIAL_AND_DIGITAL" xml:space="preserve">
+    <value>Graficznie i cyfrowo</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIGITAL" xml:space="preserve">
+    <value>Cyfrowo</value>
+    <comment>See Settings =&gt;Countdown</comment>
   </data>
 </root>
