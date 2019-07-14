@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using OnlyT.Models;
-
-namespace OnlyT.Services.Options
+﻿namespace OnlyT.Services.Options
 {
     using System;
     using System.Globalization;
@@ -36,7 +33,7 @@ namespace OnlyT.Services.Options
         {
             _commandLineService = commandLineService;
             _logLevelSwitchService = logLevelSwitchService;
-            
+
             Messenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
         }
 

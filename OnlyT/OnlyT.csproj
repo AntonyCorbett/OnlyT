@@ -142,6 +142,7 @@
     <Compile Include="Models\CountdownDurationItem.cs" />
     <Compile Include="Models\CountdownElementsToShowItem.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
+    <Compile Include="Models\DurationStringProperties.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\LanguageItem.cs" />
     <Compile Include="Models\LoggingLevel.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Utils\ComboBoxTemplateSelector.cs" />
     <Compile Include="Utils\ComboBoxTemplateSelectorExtension.cs" />
     <Compile Include="Utils\DateUtils.cs" />
+    <Compile Include="Utils\DurationStringGeneration.cs" />
     <Compile Include="Utils\EnumExtensions.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FirewallPortsClient.cs" />
