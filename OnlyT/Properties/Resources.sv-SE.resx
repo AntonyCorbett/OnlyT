@@ -633,4 +633,20 @@
     <value>Varaktighet (min)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
+  <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
+    <value>Element</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="DIAL" xml:space="preserve">
+    <value>Urtavla</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIAL_AND_DIGITAL" xml:space="preserve">
+    <value>Urtavla och digitalt</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIGITAL" xml:space="preserve">
+    <value>Digital</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
 </root>
