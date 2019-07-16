@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ADAPTED_DURATION" xml:space="preserve">
-    <value>adapted duration = {0}</value>
+    <value>temps imparti adapté = {0}</value>
   </data>
   <data name="COUNSEL" xml:space="preserve">
-    <value>counsel and commendation</value>
+    <value>conseils</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Réunion de la semaine et du weekend</value>
+    <value>Réunions de la semaine et du weekend</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
@@ -141,15 +141,15 @@
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
-    <value>La Réunion est en retard de ~{0} minutes</value>
+    <value>Réunion en retard de ~{0} minutes</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by more than 1 minute</comment>
   </data>
   <data name="OVERTIME_BY_1" xml:space="preserve">
-    <value>La Réunion dépasse de 1 minute</value>
+    <value>Réunion en retard d'une minute</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
-    <value>Temps dépassé (mins)</value>
+    <value>Retard (min)</value>
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
@@ -161,7 +161,7 @@
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
-    <value>La Réunion a fini en avance de ~{0} minutes</value>
+    <value>Réunion en avance de ~{0} minutes</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by more than 1 minute</comment>
   </data>
   <data name="UNDERTIME_BY_1" xml:space="preserve">
