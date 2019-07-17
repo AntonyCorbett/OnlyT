@@ -386,7 +386,7 @@
     <value>Utilisez n'importe quel format d'heure!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>Vous pouvez inclure le jour (en anglais), par exemple "Thu 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes :</value>
@@ -490,27 +490,27 @@
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library compatibility mode</value>
+    <value>Compatibilité avec JW Library</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Afficher le cadre</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Afficher le cadre</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
-    <value>Niveau de grossissement:</value>
+    <value>Niveau de zoom:</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
-    <value>Emplacement</value>
+    <value>Position</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
-    <value>Bas</value>
+    <value>En bas</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
@@ -526,15 +526,15 @@
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
-    <value>Gauche</value>
+    <value>À gauche</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
-    <value>Droite</value>
+    <value>À droite</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
-    <value>Haut</value>
+    <value>En haut</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
@@ -550,35 +550,35 @@
     <comment>Caption of the button that closes the snackbar</comment>
   </data>
   <data name="PORT_OPENED" xml:space="preserve">
-    <value>Port opened and reservation made</value>
+    <value>Port ouvert et réservation effectuée</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
   </data>
   <data name="PORT_OPEN_FAILED" xml:space="preserve">
-    <value>Impossible d'ouvrir le port (voir Journal d’événements)!</value>
+    <value>Impossible d'ouvrir le port (voir journal d’événements) !</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Rapport sur les temps crée</value>
+    <value>Rapport des temps créé</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
-    <value>Générer des rapports</value>
+    <value>Créer des rapports</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
-    <value>Concluding Segment</value>
+    <value>Segment de fin</value>
     <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTERIM_SEGMENT" xml:space="preserve">
-    <value>Interim Segment</value>
+    <value>Segment central</value>
     <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTRO_SEGMENT" xml:space="preserve">
-    <value>Introductory Segment</value>
+    <value>Segment d'introduction</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
-    <value>Journal d'événements</value>
+    <value>Détail du journal d'événements</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
@@ -602,23 +602,23 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_WARNING" xml:space="preserve">
-    <value>Avertissement</value>
+    <value>Alerte</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
-    <value>Analysing meeting timer data</value>
+    <value>Analyse des données en cours</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
-    <value>Report NOT generated!</value>
+    <value>Le rapport n'a PAS été créé !</value>
     <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
   </data>
   <data name="VIEW_REPORT" xml:space="preserve">
-    <value>VIEW</value>
+    <value>VOIR</value>
     <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
   </data>
   <data name="JWL_TRADEMARK" xml:space="preserve">
-    <value>"JW Library" is a registered trademark of Watch Tower Bible and Tract Society of Pennsylvania</value>
+    <value>"JW Library" est une marque déposée de Watch Tower Bible and Tract Society of Pennsylvania</value>
     <comment>See Settings =&gt; Automatic Mode</comment>
   </data>
   <data name="AUTO_BELL" xml:space="preserve">
@@ -626,27 +626,27 @@
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
-    <value>Envoyé un signal sonore</value>
+    <value>Envoyer un signal sonore</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duration (mins)</value>
+    <value>Durée (min)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
   <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
-    <value>Elements</value>
+    <value>Éléments</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="DIAL" xml:space="preserve">
-    <value>Dial</value>
+    <value>Analogique</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="DIAL_AND_DIGITAL" xml:space="preserve">
-    <value>Dial and digital</value>
+    <value>Analogique et numérique</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="DIGITAL" xml:space="preserve">
-    <value>Digital</value>
+    <value>Numérique</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
 </root>
