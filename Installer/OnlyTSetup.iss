@@ -95,6 +95,7 @@ Source: "OnlyT\bin\Release\ru-RU\*.dll"; DestDir: "{app}\ru-RU"; Flags: ignoreve
 Source: "OnlyT\bin\Release\sk-SK\*.dll"; DestDir: "{app}\sk-SK"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\sv-SE\*.dll"; DestDir: "{app}\sv-SE"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\tr-TR\*.dll"; DestDir: "{app}\tr-TR"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\vi-VN\*.dll"; DestDir: "{app}\vi-VN"; Flags: ignoreversion
 
 Source: "talk_schedule.xml"; DestDir: "{app}"; Flags: ignoreversion
 

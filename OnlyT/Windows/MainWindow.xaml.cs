@@ -29,6 +29,8 @@
 
         protected override void OnSourceInitialized(System.EventArgs e)
         {
+            base.OnSourceInitialized(e);
+
             AdjustMainWindowPositionAndSize();
         }
 
@@ -85,7 +87,6 @@
             var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
             if (!string.IsNullOrEmpty(optionsService.Options.AppWindowPlacement))
             {
-                this.SetPlacement(optionsService.Options.AppWindowPlacement);
                 this.SetPlacement(optionsService.Options.AppWindowPlacement, new Size(MainWindowWidth, MainWindowHeight));
             }
         }
