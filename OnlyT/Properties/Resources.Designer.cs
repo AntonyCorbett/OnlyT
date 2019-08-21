@@ -363,6 +363,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transparent background.
+        /// </summary>
+        public static string COUNTDOWN_TRANSPARENT {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_TRANSPARENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zoom level:.
         /// </summary>
         public static string COUNTDOWN_ZOOM {

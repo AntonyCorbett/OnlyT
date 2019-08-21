@@ -219,6 +219,7 @@
     <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WebUtils.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
+    <Compile Include="ValueConverters\BoolToBackgroundConverter.cs" />
     <Compile Include="ValueConverters\BoolToCursorConverter.cs" />
     <Compile Include="ValueConverters\ColWidthPercentageToString.cs" />
     <Compile Include="ViewModel\CountdownTimerViewModel.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="ViewModel\Messages\CountdownElementsChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\CountdownWindowTransparencyChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownZoomOrPositionChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\LogLevelChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\MousePointerInTimerDisplayChangedMessage.cs" />

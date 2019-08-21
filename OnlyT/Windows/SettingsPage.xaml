@@ -354,6 +354,10 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}" />
 
+                        <CheckBox IsChecked="{Binding IsCountdownWindowTransparent, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.COUNTDOWN_TRANSPARENT}" />
+
                         <ComboBox ItemsSource="{Binding CountdownElementsToShowItems}" 
                                   Style="{StaticResource SettingsComboStyle}"
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_ELEMENTS}"

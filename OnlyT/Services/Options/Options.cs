@@ -99,6 +99,8 @@
 
         public int CountdownDurationMins { get; set; }
 
+        public bool IsCountdownWindowTransparent { get; set; }
+
         public FullScreenClockMode FullScreenClockMode { get; set; }
 
         public bool ShowTimeOfDayUnderTimer { get; set; }

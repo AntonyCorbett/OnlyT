@@ -199,6 +199,20 @@
             }
         }
 
+        public bool IsCountdownWindowTransparent
+        {
+            get => _optionsService.Options.IsCountdownWindowTransparent;
+            set
+            {
+                if (_optionsService.Options.IsCountdownWindowTransparent != value)
+                {
+                    _optionsService.Options.IsCountdownWindowTransparent = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new CountdownWindowTransparencyChangedMessage());
+                }
+            }
+        }
+
         public IEnumerable<OnScreenLocationItem> ScreenLocationItems => _screenLocationItems;
 
         public ScreenLocation CountdownScreenLocation

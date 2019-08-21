@@ -21,6 +21,7 @@
             Messenger.Default.Register<CountdownFrameChangedMessage>(this, OnFrameChanged);
             Messenger.Default.Register<CountdownZoomOrPositionChangedMessage>(this, OnZoomOrPositionChanged);
             Messenger.Default.Register<CountdownElementsChangedMessage>(this, OnElementsChanged);
+            Messenger.Default.Register<CountdownWindowTransparencyChangedMessage>(this, OnWindowTransparencyChanged);
         }
 
         public bool ApplicationClosing { get; private set; }
@@ -33,10 +34,9 @@
 
         public ElementsToShow ElementsToShow => _optionsService.Options.CountdownElementsToShow;
 
-        public int CountdownDurationMins
-        {
-            get => _optionsService.Options.CountdownDurationMins;
-        }
+        public bool IsWindowTransparent => _optionsService.Options.IsCountdownWindowTransparent;
+
+        public int CountdownDurationMins => _optionsService.Options.CountdownDurationMins;
 
         public HorizontalAlignment HorizontalAlignment
         {
@@ -91,6 +91,11 @@
         {
             RaisePropertyChanged(nameof(BorderThickness));
             RaisePropertyChanged(nameof(BackgroundOpacity));
+        }
+
+        private void OnWindowTransparencyChanged(CountdownWindowTransparencyChangedMessage msg)
+        {
+            RaisePropertyChanged(nameof(IsWindowTransparent));
         }
 
         private void OnZoomOrPositionChanged(CountdownZoomOrPositionChangedMessage obj)
