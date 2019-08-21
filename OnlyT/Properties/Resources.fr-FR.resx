@@ -650,7 +650,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
-    <value>Transparent background</value>
+    <value>Arrière-plan transparent</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
 </root>
