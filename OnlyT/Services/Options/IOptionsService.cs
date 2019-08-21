@@ -8,6 +8,10 @@
 
         bool IsCountdownMonitorSpecified { get; }
 
+        bool IsTimerMonitorSetByCommandLine { get; }
+
+        bool IsCountdownMonitorSetByCommandLine { get; }
+
         void Save();
 
         bool Use24HrClockFormat();

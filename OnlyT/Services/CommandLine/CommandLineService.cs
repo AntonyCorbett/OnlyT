@@ -22,6 +22,12 @@
             p.Setup<bool>("nomutex")
                 .Callback(s => { IgnoreMutex = s; }).SetDefault(false);
 
+            p.Setup<int>("monitor")
+                .Callback(s => { TimerMonitorIndex = s; }).SetDefault(0);
+
+            p.Setup<int>("cmonitor")
+                .Callback(s => { CountdownMonitorIndex = s; }).SetDefault(0);
+
             p.Setup<bool>("automate")
                 .Callback(s => { Automate = s; }).SetDefault(false);
 
@@ -36,6 +42,14 @@
 
         public bool IgnoreMutex { get; set; }
 
+        public int TimerMonitorIndex { get; set; }
+
+        public int CountdownMonitorIndex { get; set; }
+
         public bool Automate { get; set; }
+
+        public bool IsTimerMonitorSpecified => TimerMonitorIndex > 0;
+
+        public bool IsCountdownMonitorSpecified => CountdownMonitorIndex > 0;
     }
 }

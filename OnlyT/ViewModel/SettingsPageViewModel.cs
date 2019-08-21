@@ -14,6 +14,7 @@
     using Messages;
     using Models;
     using OnlyT.CountdownTimer;
+    using OnlyT.Services.CommandLine;
     using OnlyT.Services.Snackbar;
     using Serilog;
     using Serilog.Events;
@@ -50,7 +51,8 @@
            IBellService bellService,
            IOptionsService optionsService,
            ISnackbarService snackbarService,
-           ICountdownTimerTriggerService countdownTimerService)
+           ICountdownTimerTriggerService countdownTimerService,
+           ICommandLineService commandLineService)
         {
             // subscriptions...
             Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
@@ -61,7 +63,7 @@
             _monitorsService = monitorsService;
             _bellService = bellService;
             _countdownTimerService = countdownTimerService;
-
+            
             _monitors = GetSystemMonitors();
             _languages = GetSupportedLanguages();
             _operatingModes = GetOperatingModes();
@@ -102,6 +104,14 @@
                 }
             }
         }
+
+        public bool IsTimerMonitorViaCommandLine => _optionsService.IsTimerMonitorSetByCommandLine;
+
+        public bool NotIsTimerMonitorViaCommandLine => !IsTimerMonitorViaCommandLine;
+
+        public bool IsCountdownMonitorViaCommandLine => _optionsService.IsCountdownMonitorSetByCommandLine;
+
+        public bool NotIsCountdownMonitorViaCommandLine => !IsCountdownMonitorViaCommandLine;
 
         public string CountdownMonitorId
         {

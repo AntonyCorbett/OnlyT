@@ -336,6 +336,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note that the monitor is controlled by a command-line setting.
+        /// </summary>
+        public static string CONTROLLED_BY_CMD_LINE {
+            get {
+                return ResourceManager.GetString("CONTROLLED_BY_CMD_LINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duration (mins).
         /// </summary>
         public static string COUNTDOWN_DURATION_MINS {
