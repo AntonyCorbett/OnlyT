@@ -12,7 +12,7 @@ Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed 
 * .NET Framework 4.7 or later
 * 2GB RAM
 * 20MB Hard disk space
-* Internet connection optional
+* Internet connection (for "Automatic" Operating Mode only)
 
 ### Download
 
