@@ -24,7 +24,7 @@
         public Meeting GetMeetingDataForToday()
         {
             LoadFile();
-            return _meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
+            return GetMeetingDataForTodayInternal(_meetingData);
         }
 
         public Meeting GetSampleMidweekMeetingDataForTesting(DateTime theDate)
@@ -106,7 +106,7 @@
                 try
                 {
                     result = JsonConvert.DeserializeObject<List<Meeting>>(File.ReadAllText(_localFeedFile));
-                    if (result == null || !result.Any())
+                    if (result == null || !result.Any() || GetMeetingDataForTodayInternal(result) == null)
                     {
                         needRefresh = true;
                     }
@@ -133,6 +133,11 @@
             }
             
             return result;
+        }
+
+        private Meeting GetMeetingDataForTodayInternal(IEnumerable<Meeting> meetingData)
+        {
+            return meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
         }
     }
 }
