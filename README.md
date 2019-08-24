@@ -6,6 +6,14 @@ Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed 
 
 ![Timer Display](http://cv8.org.uk/soundbox/OnlyT/Images/Monitor02.png)
 
+### System Requirements
+
+* Windows 7, 8 or 10
+* .NET Framework 4.7 or later
+* 2GB RAM
+* 20MB Hard disk space
+* Internet connection optional
+
 ### Download
 
 If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file.
