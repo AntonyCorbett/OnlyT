@@ -654,7 +654,7 @@
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
-    <value>Nota che il monitor è controllato da un'impostazione di linea di comando</value>
+    <value>Nota che il monitor è controllato da un'impostazione della riga di comando</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
 </root>
