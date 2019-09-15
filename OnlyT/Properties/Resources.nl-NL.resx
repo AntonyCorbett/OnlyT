@@ -386,7 +386,7 @@
     <value>Gebruik elk gewenst tijdformaat!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>Voeg optioneel een dag toe, bijvoorbeeld "Do 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notities:</value>
@@ -630,11 +630,11 @@
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duration (mins)</value>
+    <value>Duur (min)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
   <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
-    <value>Elements</value>
+    <value>Elementen</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="DIAL" xml:space="preserve">
@@ -646,15 +646,15 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="DIGITAL" xml:space="preserve">
-    <value>Digital</value>
+    <value>Digitaal</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
-    <value>Transparent background</value>
+    <value>Transparante achtergrond</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
-    <value>Note that the monitor is controlled by a command-line setting</value>
+    <value>Let op dat de monitor wordt gecontroleerd door een opdrachtregel instelling</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
 </root>
