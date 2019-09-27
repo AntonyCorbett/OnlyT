@@ -196,97 +196,97 @@
     <value>Вдосконалюймо служіння - пункт 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Ministry - Item 3</value>
+    <value>Вдосконалюймо служіння - пункт 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatic</value>
+    <value>Вдосконалюймо служіння - пункт 4</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>File-based</value>
+    <value>З файлу</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
-    <value>Manual</value>
+    <value>Ручний</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Concluding Talk</value>
+    <value>Завершальні слова</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Завершальні слова</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Вивчення Біблії у зборі</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Розшукуймо духовні перлини</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>Християнське життя – Пункт 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>Християнське життя – Пункт 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Вступні слова</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Вступи цього місяця</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Публічна промова</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Читання Біблії</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Service Talk</value>
+    <value>Службова промова</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Treasures Talk</value>
+    <value>Скарби – Промова</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Watchtower Study</value>
+    <value>Вивчення Вартової башти</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>У вихідні дні</value>
   </data>
   <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
-    <value>12-hour (am/pm)</value>
+    <value>12-годинний (am/pm)</value>
     <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
-    <value>12-hour (leading zero &amp; am/pm)</value>
+    <value>12-годинний (leading zero &amp; am/pm)</value>
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>Не вибрано</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>Під час работи таймеру налаштування недоступні!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Налаштування</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Скарби</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministry</value>
+    <value>Вдосконалюймо служіння</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Християнське життя</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>У вихідні дні</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Settings disabled by administrator!</value>
+    <value>Налаштування вимкнені адміністратором!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Ministry - Item 4</value>
+    <value>Вдосконалюймо служіння - пункт 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Circuit visit</value>
+    <value>Візит районного</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>CLOSE COUNTDOWN</value>
@@ -473,108 +473,108 @@
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>{0} секунд</value>
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Увімкнено</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Увімкнено</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Увімкнено</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Show seconds</value>
+    <value>Показувати секунди</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library compatibility mode</value>
+    <value>Режим сумісності з JW Library</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Показати рамку</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Show frame</value>
+    <value>Показати рамку</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
-    <value>Zoom level:</value>
+    <value>Маштаб:</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="LOCATION_ON_SCREEN" xml:space="preserve">
-    <value>Location</value>
+    <value>Разташування</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
-    <value>Bottom</value>
+    <value>Внизу</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
-    <value>Bottom left</value>
+    <value>Внизу зліва</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
-    <value>Bottom right</value>
+    <value>Внизу зправа</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
-    <value>Centre</value>
+    <value>По центрі</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
-    <value>Left</value>
+    <value>Зліва</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
-    <value>Right</value>
+    <value>Зправа</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
-    <value>Top</value>
+    <value>Вгорі</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
-    <value>Top left</value>
+    <value>Вгорі зліва</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
-    <value>Top right</value>
+    <value>Вгорі зправа</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Так</value>
     <comment>Caption of the button that closes the snackbar</comment>
   </data>
   <data name="PORT_OPENED" xml:space="preserve">
-    <value>Port opened and reservation made</value>
+    <value>Порт відкрито і зарезервовано</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
   </data>
   <data name="PORT_OPEN_FAILED" xml:space="preserve">
-    <value>Could not open the port (see log)!</value>
+    <value>Не вдалося відкрити порт (дивись журнал)!</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Generated timing report</value>
+    <value>Формування звіту</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
-    <value>Generate reports</value>
+    <value>Формувати звіт</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
-    <value>Concluding Segment</value>
+    <value>3 Пісня і молитва</value>
     <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTERIM_SEGMENT" xml:space="preserve">
-    <value>Interim Segment</value>
+    <value>2 Пісня</value>
     <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTRO_SEGMENT" xml:space="preserve">
-    <value>Introductory Segment</value>
+    <value>1 Пісня і молитва</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
