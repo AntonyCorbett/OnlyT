@@ -199,7 +199,7 @@
     <value>Вдосконалюймо служіння - пункт 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Вдосконалюймо служіння - пункт 4</value>
+    <value>Автоматичний</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>З файлу</value>

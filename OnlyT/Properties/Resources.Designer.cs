@@ -278,7 +278,6 @@ namespace OnlyT.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;!DOCTYPE html&gt;
         ///&lt;html style=&quot;display:block; height:100%; margin:0; padding:0&quot;&gt;
         ///	&lt;head&gt;
         ///		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;		
@@ -300,7 +299,8 @@ namespace OnlyT.Properties {
         ///				font-weight: bold;
         ///				color: #FFFF66;
         ///			}
-        ///			.clock [rest of string was truncated]&quot;;.
+        ///			.clockstyle_green
+        ///			{ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ClockHtmlTemplate {
             get {
@@ -336,11 +336,47 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note that the monitor is controlled by a command-line setting.
+        /// </summary>
+        public static string CONTROLLED_BY_CMD_LINE {
+            get {
+                return ResourceManager.GetString("CONTROLLED_BY_CMD_LINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration (mins).
+        /// </summary>
+        public static string COUNTDOWN_DURATION_MINS {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_DURATION_MINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elements.
+        /// </summary>
+        public static string COUNTDOWN_ELEMENTS {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_ELEMENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MEETING COUNTDOWN.
         /// </summary>
         public static string COUNTDOWN_SECTION {
             get {
                 return ResourceManager.GetString("COUNTDOWN_SECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transparent background.
+        /// </summary>
+        public static string COUNTDOWN_TRANSPARENT {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_TRANSPARENT", resourceCulture);
             }
         }
         
@@ -377,6 +413,33 @@ namespace OnlyT.Properties {
         public static string CREATE_FOLDER_ERROR {
             get {
                 return ResourceManager.GetString("CREATE_FOLDER_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dial.
+        /// </summary>
+        public static string DIAL {
+            get {
+                return ResourceManager.GetString("DIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dial and digital.
+        /// </summary>
+        public static string DIAL_AND_DIGITAL {
+            get {
+                return ResourceManager.GetString("DIAL_AND_DIGITAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Digital.
+        /// </summary>
+        public static string DIGITAL {
+            get {
+                return ResourceManager.GetString("DIGITAL", resourceCulture);
             }
         }
         

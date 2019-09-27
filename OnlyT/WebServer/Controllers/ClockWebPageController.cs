@@ -8,7 +8,7 @@
 
     internal class ClockWebPageController
     {
-        private static byte[] WebPageHtml;
+        private static readonly Lazy<byte[]> WebPageHtml = new Lazy<byte[]>(GenerateWebPageHtml);
 
         public void HandleRequestForTimerData(HttpListenerResponse response, TimerInfoEventArgs timerInfo)
         {
@@ -28,25 +28,20 @@
         public void HandleRequestForWebPage(
             HttpListenerResponse response)
         {
-            EnsureWebPageHtmlPrepared();
-
             response.ContentType = "text/html";
             response.ContentEncoding = Encoding.UTF8;
             
-            response.ContentLength64 = WebPageHtml.Length;
+            response.ContentLength64 = WebPageHtml.Value.Length;
             using (System.IO.Stream output = response.OutputStream)
             {
-                output.Write(WebPageHtml, 0, WebPageHtml.Length);
+                output.Write(WebPageHtml.Value, 0, WebPageHtml.Value.Length);
             }
         }
 
-        private void EnsureWebPageHtmlPrepared()
+        private static byte[] GenerateWebPageHtml()
         {
-            if (WebPageHtml == null)
-            {
-                var content = Properties.Resources.ClockHtmlTemplate;
-                WebPageHtml = Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
-            }
+            var content = Properties.Resources.ClockHtmlTemplate;
+            return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }
 
         private string CreateXml(TimerInfoEventArgs timerInfo)

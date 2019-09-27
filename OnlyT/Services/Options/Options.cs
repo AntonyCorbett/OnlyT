@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Windows;
     using Models;
+    using OnlyT.CountdownTimer;
     using Serilog.Events;
 
     /// <summary>
@@ -17,6 +18,7 @@
     {
         public const int DefaultPort = 8096;
         public const int MaxPossiblePorts = 0x80;
+        public const int DefaultCountdownDurationMins = 5;
 
         public Options()
         {
@@ -30,6 +32,7 @@
             WeekendAdaptiveMode = AdaptiveMode.None;
             AnalogueClockWidthPercent = 50;
             CountdownZoomPercent = 100;
+            CountdownDurationMins = DefaultCountdownDurationMins;
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
             HttpServerPort = DefaultPort;
@@ -42,7 +45,7 @@
             CountdownFrame = true;
             TimerFrame = true;
             LogEventLevel = LogEventLevel.Information;
-
+            
             AdjustClockFormat();
         }
 
@@ -51,6 +54,8 @@
         public string CountdownMonitorId { get; set; }
 
         public bool CountdownFrame { get; set; }
+
+        public ElementsToShow CountdownElementsToShow { get; set; }
 
         public bool TimerFrame { get; set; }
 
@@ -92,6 +97,10 @@
 
         public int CountdownZoomPercent { get; set; }
 
+        public int CountdownDurationMins { get; set; }
+
+        public bool IsCountdownWindowTransparent { get; set; }
+
         public FullScreenClockMode FullScreenClockMode { get; set; }
 
         public bool ShowTimeOfDayUnderTimer { get; set; }
@@ -124,6 +133,21 @@
 
         public LogEventLevel LogEventLevel { get; set; }
 
+        public CountdownDurationItem[] GetCountdownDurationItems()
+        {
+            var result = new List<CountdownDurationItem>();
+
+            for (int n = 0; n < 30; ++n)
+            {
+                result.Add(new CountdownDurationItem { DurationMins = n + 1 });
+            }
+
+            result.Add(new CountdownDurationItem { DurationMins = 45 });
+            result.Add(new CountdownDurationItem { DurationMins = 60 });
+
+            return result.ToArray();
+        }
+
         /// <summary>
         /// Validates the data, correcting automatically as required
         /// </summary>
@@ -153,6 +177,8 @@
             {
                 CountdownZoomPercent = 100;
             }
+
+            SanitizeCountdownDurationMins();
 
             if (HttpServerPort < DefaultPort || HttpServerPort > DefaultPort + MaxPossiblePorts)
             {
@@ -210,6 +236,16 @@
                     ClockHourFormat = ampm
                         ? ClockHourFormat.Format12AMPM : ClockHourFormat.Format12;
                 }
+            }
+        }
+
+        private void SanitizeCountdownDurationMins()
+        {
+            var validValues = GetCountdownDurationItems();
+
+            if (validValues.All(x => x.DurationMins != CountdownDurationMins))
+            {
+                CountdownDurationMins = DefaultCountdownDurationMins;
             }
         }
     }

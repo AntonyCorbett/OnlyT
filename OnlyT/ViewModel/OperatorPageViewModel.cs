@@ -34,12 +34,6 @@
     {
         private static readonly string Arrow = "→";
         
-        // ReSharper disable once PossibleNullReferenceException
-        private static readonly Brush DurationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
-        
-        // ReSharper disable once PossibleNullReferenceException
-        private static readonly Brush DurationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
-
         private static readonly Brush WhiteBrush = Brushes.White;
         private static readonly int MaxTimerMins = 99;
         private static readonly int MaxTimerSecs = MaxTimerMins * 60;
@@ -351,12 +345,20 @@
             }
         }
 
-        public string SettingsHint =>
-            _commandLineService.NoSettings
-                ? Properties.Resources.NOT_AVAIL_ADMIN
-                : IsRunning
-                    ? Properties.Resources.NOT_AVAIL_TIMER_RUNNING
-                    : Properties.Resources.SETTINGS;
+        public string SettingsHint
+        {
+            get
+            {
+                if (_commandLineService.NoSettings)
+                {
+                    return Properties.Resources.NOT_AVAIL_ADMIN;
+                }
+
+                return IsRunning
+                        ? Properties.Resources.NOT_AVAIL_TIMER_RUNNING
+                        : Properties.Resources.SETTINGS;
+            }
+        }
 
         public string BellTooltip
         {
@@ -403,24 +405,11 @@
                 if (_targetSeconds != value)
                 {
                     _targetSeconds = value;
-                    SecondsRemaining = _targetSeconds;
+                    SetSecondsRemaining(_targetSeconds);
 
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(CurrentTimerValueString));
                     RaiseCanExecuteIncrementDecrementChanged();
-                }
-            }
-        }
-
-        private int SecondsRemaining
-        {
-            set
-            {
-                if (_secondsRemaining != value)
-                {
-                    _secondsRemaining = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(CurrentTimerValueString));
                 }
             }
         }
@@ -652,7 +641,7 @@
         {
             TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
             _secondsElapsed = e.ElapsedSecs;
-            SecondsRemaining = e.RemainingSecs;
+            SetSecondsRemaining(e.RemainingSecs);
             
             Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, _countUp));
 
@@ -661,81 +650,28 @@
                 IsOvertime = true;
 
                 var talk = GetCurrentTalk();
-                if (talk != null)
+                if (talk != null && _optionsService.Options.IsBellEnabled && talk.BellApplicable && talk.AutoBell)
                 {
-                    if (_optionsService.Options.IsBellEnabled && talk.BellApplicable)
-                    {
-                        if (talk.AutoBell)
-                        {
-                            _bellService.Play(_optionsService.Options.BellVolumePercent);
-                        }
-                    }
+                    _bellService.Play(_optionsService.Options.BellVolumePercent);
                 }
             }
         }
         
         private void SetDurationStringAttributes(TalkScheduleItem talk)
         {
-            if (talk != null)
-            {
-                Duration1String = TimeFormatter.FormatTimerDisplayString((int)talk.OriginalDuration.TotalSeconds);
-                Duration1Tooltip = Properties.Resources.DURATION_ORIGINAL;
+            var properties = DurationStringGeneration.Get(_optionsService.GetAdaptiveMode(), talk);
 
-                if (talk.ModifiedDuration != null)
-                {
-                    Duration2String = TimeFormatter.FormatTimerDisplayString((int)talk.ModifiedDuration.Value.TotalSeconds);
-                    Duration2Tooltip = Properties.Resources.DURATION_MODIFIED;
+            Duration1String = properties.Duration1String;
+            Duration1Tooltip = properties.Duration1Tooltip;
+            Duration1Colour = properties.Duration1Colour;
 
-                    var adaptiveMode = _optionsService.GetAdaptiveMode();
-                    var showAdaptedDuration = talk.AdaptedDuration != null &&
-                                               (adaptiveMode == AdaptiveMode.TwoWay ||
-                                                talk.AdaptedDuration.Value < talk.ModifiedDuration.Value);
+            Duration2String = properties.Duration2String;
+            Duration2Tooltip = properties.Duration2Tooltip;
+            Duration2Colour = properties.Duration2Colour;
 
-                    if (showAdaptedDuration)
-                    {
-                        Duration3String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration.Value.TotalSeconds);
-                        Duration3Tooltip = Properties.Resources.DURATION_ADAPTED;
-                    }
-                    else
-                    {
-                        Duration3String = string.Empty;
-                    }
-                }
-                else if (talk.AdaptedDuration != null)
-                {
-                    Duration2String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration.Value.TotalSeconds);
-                    Duration2Tooltip = Properties.Resources.DURATION_ADAPTED;
-                    Duration3String = string.Empty;
-                }
-                else
-                {
-                    Duration2String = string.Empty;
-                    Duration3String = string.Empty;
-                }
-            }
-            else
-            {
-                Duration1String = string.Empty;
-                Duration2String = string.Empty;
-                Duration3String = string.Empty;
-            }
-
-            Duration1Colour = DurationDimBrush;
-            Duration2Colour = DurationDimBrush;
-            Duration3Colour = DurationDimBrush;
-            
-            if (!string.IsNullOrEmpty(Duration3String))
-            {
-                Duration3Colour = DurationBrush;
-            }
-            else if (!string.IsNullOrEmpty(Duration2String))
-            {
-                Duration2Colour = DurationBrush;
-            }
-            else
-            {
-                Duration1Colour = DurationBrush;
-            }
+            Duration3String = properties.Duration3String;
+            Duration3Tooltip = properties.Duration3Tooltip;
+            Duration3Colour = properties.Duration3Colour;
             
             RaisePropertyChanged(nameof(Duration1Colour));
             RaisePropertyChanged(nameof(Duration2Colour));
@@ -1161,6 +1097,15 @@
 
             RaisePropertyChanged(nameof(BellColour));
             RaisePropertyChanged(nameof(BellTooltip));
+        }
+
+        private void SetSecondsRemaining(int value)
+        {
+            if (_secondsRemaining != value)
+            {
+                _secondsRemaining = value;
+                RaisePropertyChanged(nameof(CurrentTimerValueString));
+            }
         }
     }
 }

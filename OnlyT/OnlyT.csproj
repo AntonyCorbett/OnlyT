@@ -139,7 +139,10 @@
     <Compile Include="Models\AdaptiveModeItem.cs" />
     <Compile Include="Models\ClockHourFormatItem.cs" />
     <Compile Include="Models\ClockRequestInfo.cs" />
+    <Compile Include="Models\CountdownDurationItem.cs" />
+    <Compile Include="Models\CountdownElementsToShowItem.cs" />
     <Compile Include="Models\DayOfWeekAndUserSuppliedDayName.cs" />
+    <Compile Include="Models\DurationStringProperties.cs" />
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\LanguageItem.cs" />
     <Compile Include="Models\LoggingLevel.cs" />
@@ -204,6 +207,7 @@
     <Compile Include="Utils\ComboBoxTemplateSelector.cs" />
     <Compile Include="Utils\ComboBoxTemplateSelectorExtension.cs" />
     <Compile Include="Utils\DateUtils.cs" />
+    <Compile Include="Utils\DurationStringGeneration.cs" />
     <Compile Include="Utils\EnumExtensions.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\FirewallPortsClient.cs" />
@@ -215,6 +219,7 @@
     <Compile Include="Utils\TimeFormatter.cs" />
     <Compile Include="Utils\WebUtils.cs" />
     <Compile Include="Utils\WindowPlacement.cs" />
+    <Compile Include="ValueConverters\BoolToBackgroundConverter.cs" />
     <Compile Include="ValueConverters\BoolToCursorConverter.cs" />
     <Compile Include="ValueConverters\ColWidthPercentageToString.cs" />
     <Compile Include="ViewModel\CountdownTimerViewModel.cs" />
@@ -224,8 +229,10 @@
     <Compile Include="ViewModel\Messages\AutoBellSettingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\CountdownElementsChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\CountdownWindowTransparencyChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownZoomOrPositionChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\LogLevelChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\MousePointerInTimerDisplayChangedMessage.cs" />
@@ -363,6 +370,8 @@
     <EmbeddedResource Include="Properties\Resources.sk-SK.resx" />
     <EmbeddedResource Include="Properties\Resources.sv-SE.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
+    <EmbeddedResource Include="Properties\Resources.uk-UA.resx" />
+    <EmbeddedResource Include="Properties\Resources.vi-VN.resx" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>

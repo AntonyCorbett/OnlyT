@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using System.Threading;
     using System.Windows;
     using System.Windows.Markup;
@@ -10,6 +11,7 @@
     using GalaSoft.MvvmLight.Messaging;
     using Newtonsoft.Json;
     using OnlyT.Services.LogLevelSwitch;
+    using OnlyT.Services.Monitors;
     using OnlyT.ViewModel.Messages;
     using Serilog;
     using Utils;
@@ -22,18 +24,21 @@
     {
         private readonly ICommandLineService _commandLineService;
         private readonly ILogLevelSwitchService _logLevelSwitchService;
+        private readonly IMonitorsService _monitorsService;
         private readonly int _optionsVersion = 1;
         private Options _options;
         private string _optionsFilePath;
         private string _originalOptionsSignature;
-
+        
         public OptionsService(
             ICommandLineService commandLineService,
-            ILogLevelSwitchService logLevelSwitchService)
+            ILogLevelSwitchService logLevelSwitchService,
+            IMonitorsService monitorsService)
         {
             _commandLineService = commandLineService;
             _logLevelSwitchService = logLevelSwitchService;
-            
+            _monitorsService = monitorsService;
+
             Messenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
         }
 
@@ -69,6 +74,10 @@
                 return !string.IsNullOrEmpty(Options.CountdownMonitorId);
             }
         }
+
+        public bool IsTimerMonitorSetByCommandLine { get; private set; }
+
+        public bool IsCountdownMonitorSetByCommandLine { get; private set; }
 
         public bool Use24HrClockFormat()
         {
@@ -195,9 +204,9 @@
             }
             else
             {
-                using (StreamReader file = File.OpenText(_optionsFilePath))
+                using (var file = File.OpenText(_optionsFilePath))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
+                    var serializer = new JsonSerializer();
                     _options = (Options)serializer.Deserialize(file, typeof(Options));
                     
                     SetMidWeekOrWeekend();
@@ -205,7 +214,37 @@
                     
                     _options.Sanitize();
 
+                    CommandLineMonitorOverride();
+
                     SetCulture();
+                }
+            }
+        }
+        
+        private void CommandLineMonitorOverride()
+        {
+            // if the monitors are specified on the command-line then override those
+            // stored in options...
+            if (_commandLineService.IsTimerMonitorSpecified || _commandLineService.IsCountdownMonitorSpecified)
+            {
+                var monitors = _monitorsService.GetSystemMonitors().ToArray();
+
+                IsTimerMonitorSetByCommandLine =
+                    _commandLineService.IsTimerMonitorSpecified &&
+                    _commandLineService.TimerMonitorIndex <= monitors.Length;
+
+                if (IsTimerMonitorSetByCommandLine)
+                {
+                    _options.TimerMonitorId = monitors[_commandLineService.TimerMonitorIndex - 1].MonitorId;
+                }
+
+                IsCountdownMonitorSetByCommandLine =
+                    _commandLineService.IsCountdownMonitorSpecified &&
+                    _commandLineService.CountdownMonitorIndex <= monitors.Length;
+
+                if (IsCountdownMonitorSetByCommandLine)
+                {
+                    _options.CountdownMonitorId = monitors[_commandLineService.CountdownMonitorIndex - 1].MonitorId;
                 }
             }
         }

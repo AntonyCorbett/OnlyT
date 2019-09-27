@@ -81,14 +81,24 @@
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="{x:Static resx:Resources.MAIN_SECTION}">
                     <DockPanel>
                         <StackPanel Style="{StaticResource SettingsStackPanel}" DockPanel.Dock="Top">
+
+                            <TextBlock Width="305"
+                                       HorizontalAlignment="Left"
+                                       TextWrapping="Wrap"
+                                       Visibility="{Binding Path=IsTimerMonitorViaCommandLine, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Style="{StaticResource MiscNotesStyle}" 
+                                       Margin="0,0,0,10"
+                                       Text="{x:Static resx:Resources.CONTROLLED_BY_CMD_LINE}" />
+
                             <ComboBox ItemsSource="{Binding Monitors}" 
                                       Style="{StaticResource SettingsComboStyle}"
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                       SelectedValuePath="MonitorId" 
                                       DisplayMemberPath="FriendlyName"
+                                      IsEnabled="{Binding NotIsTimerMonitorViaCommandLine}"
                                       materialDesign:ComboBoxAssist.ClassicMode="true"
                                       SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
-                            
+
                             <ComboBox ItemsSource="{Binding OperatingModes}" 
                                       Style="{StaticResource SettingsComboStyle}"
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.OP_MODE}"
@@ -328,11 +338,20 @@
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="{x:Static resx:Resources.COUNTDOWN_SECTION}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
 
+                        <TextBlock Width="305"
+                                   HorizontalAlignment="Left"
+                                   TextWrapping="Wrap"
+                                   Visibility="{Binding Path=IsCountdownMonitorViaCommandLine, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Style="{StaticResource MiscNotesStyle}" 
+                                   Margin="0,0,0,10"
+                                   Text="{x:Static resx:Resources.CONTROLLED_BY_CMD_LINE}" />
+
                         <ComboBox ItemsSource="{Binding Monitors}" 
                                   Style="{StaticResource SettingsComboStyle}"
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                   SelectedValuePath="MonitorId" 
                                   DisplayMemberPath="FriendlyName"
+                                  IsEnabled="{Binding NotIsCountdownMonitorViaCommandLine}"
                                   materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding CountdownMonitorId, Mode=TwoWay}"/>
 
@@ -353,6 +372,26 @@
                         <CheckBox IsChecked="{Binding ShowCountdownFrame, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}" />
+
+                        <CheckBox IsChecked="{Binding IsCountdownWindowTransparent, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.COUNTDOWN_TRANSPARENT}" />
+
+                        <ComboBox ItemsSource="{Binding CountdownElementsToShowItems}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_ELEMENTS}"
+                                  SelectedValuePath="Elements" 
+                                  DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
+                                  SelectedValue="{Binding CountdownElementsToShow, Mode=TwoWay}"/>
+
+                        <ComboBox ItemsSource="{Binding CountdownDurationItems}" 
+                                  Style="{StaticResource SettingsComboStyle}"
+                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_DURATION_MINS}"
+                                  SelectedValuePath="DurationMins" 
+                                  DisplayMemberPath="Name"
+                                  materialDesign:ComboBoxAssist.ClassicMode="true"
+                                  SelectedValue="{Binding CountdownDurationMins, Mode=TwoWay}"/>
 
                         <TextBox MinLines="6"
                                  Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"

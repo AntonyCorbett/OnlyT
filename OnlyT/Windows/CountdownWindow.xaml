@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:countdownTimer="clr-namespace:OnlyT.CountdownTimer;assembly=OnlyT.CountdownTimer"
+        xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
         DataContext="{Binding Source={StaticResource Locator}, Path=Countdown}"
         mc:Ignorable="d"
-        WindowStyle="None" Background="Black" ShowInTaskbar="False" ResizeMode="NoResize"
+        AllowsTransparency="True"
+        WindowStyle="None" Background="{Binding Path=IsWindowTransparent, Converter={StaticResource ToBackgroundConverter}}" ShowInTaskbar="False" ResizeMode="NoResize"
         Loaded="OnLoaded"
         Title="CountdownWindow" Height="305.825" Width="469.418" Cursor="None">
+
     <Grid>
         <Border Name="ClockPanel" 
                 HorizontalAlignment="{Binding HorizontalAlignment}"
@@ -30,7 +33,10 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <countdownTimer:CountdownControl x:Name="CountDown" Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
+            <countdownTimer:CountdownControl x:Name="CountDown" 
+                                             CountdownDurationMins="{Binding CountdownDurationMins}"
+                                             ElementsToShow="{Binding ElementsToShow}"
+                                             Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
 
         </Border>
     </Grid>

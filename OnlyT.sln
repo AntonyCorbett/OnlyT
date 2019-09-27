@@ -12,6 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT.AnalogueClock", "Only
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{627A8CD8-B9F3-4D53-A7A3-AA2BEE9442EC}"
 	ProjectSection(SolutionItems) = preProject
+		OnlyT.ruleset = OnlyT.ruleset
 		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject

@@ -11,5 +11,13 @@
         bool IgnoreMutex { get; set; }
 
         bool Automate { get; set; }
+
+        int TimerMonitorIndex { get; set; }
+
+        int CountdownMonitorIndex { get; set; }
+
+        bool IsTimerMonitorSpecified { get; }
+
+        bool IsCountdownMonitorSpecified { get; }
     }
 }

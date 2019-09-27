@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Services.Monitors
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
@@ -46,6 +47,17 @@
 
                 result.Add(monitor);
             }
+
+            result.Sort((x, y) =>
+            {
+                var rv = string.Compare(x.FriendlyName, y.FriendlyName, StringComparison.InvariantCultureIgnoreCase);
+                if (rv == 0)
+                {
+                    rv = string.Compare(x.MonitorId, y.MonitorId, StringComparison.InvariantCultureIgnoreCase);
+                }
+
+                return rv;
+            });
 
             return result;
         }
