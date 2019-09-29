@@ -235,6 +235,10 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.SHOW_CLOCK_FRAME}" />
 
+                        <CheckBox IsChecked="{Binding ShowBackgroundOnTimer, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.SHOW_BACKGROUND_TIMER}" />
+
                         <CheckBox IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.TIME_UNDER_TIMER}" />

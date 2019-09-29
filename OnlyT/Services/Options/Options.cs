@@ -45,7 +45,7 @@
             CountdownFrame = true;
             TimerFrame = true;
             LogEventLevel = LogEventLevel.Information;
-            
+            ShowBackgroundOnTimer = true;
             AdjustClockFormat();
         }
 
@@ -56,6 +56,8 @@
         public bool CountdownFrame { get; set; }
 
         public ElementsToShow CountdownElementsToShow { get; set; }
+
+        public bool ShowBackgroundOnTimer { get; set; }
 
         public bool TimerFrame { get; set; }
 
