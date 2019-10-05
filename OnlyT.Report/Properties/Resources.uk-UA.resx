@@ -121,15 +121,15 @@
     <value>адаптована тривалість = {0}</value>
   </data>
   <data name="COUNSEL" xml:space="preserve">
-    <value>counsel and commendation</value>
+    <value>поради та похвала</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Midweek and Weekend Meetings</value>
+    <value>Зібрання серед тижня та у вихідні</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Midweek Meetings</value>
+    <value>Зібрання серед тижня</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
