@@ -141,11 +141,11 @@
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
-    <value>Зібрання завершилося пізніше на ~{0}</value>
+    <value>Зібрання тривало на ~{0} хвилин довше</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by more than 1 minute</comment>
   </data>
   <data name="OVERTIME_BY_1" xml:space="preserve">
-    <value>Зібрання завершилося пізніше на 1 хвилину</value>
+    <value>Зібрання тривало на 1 хвилину довше</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
@@ -157,7 +157,7 @@
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
-    <value>Підсумок часу</value>
+    <value>Загальний час</value>
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
