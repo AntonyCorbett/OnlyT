@@ -658,6 +658,6 @@
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
   <data name="SHOW_BACKGROUND_TIMER" xml:space="preserve">
-    <value>Show background on timer</value>
+    <value>Näytä tausta ajastimella</value>
   </data>
 </root>
