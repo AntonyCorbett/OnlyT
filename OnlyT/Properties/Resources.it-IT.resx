@@ -657,4 +657,7 @@
     <value>Nota che il monitor è controllato da un'impostazione della riga di comando</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
+  <data name="SHOW_BACKGROUND_TIMER" xml:space="preserve">
+    <value>Show background on timer</value>
+  </data>
 </root>
