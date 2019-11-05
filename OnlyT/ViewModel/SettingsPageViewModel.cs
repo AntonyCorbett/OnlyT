@@ -501,6 +501,20 @@
             }
         }
 
+        public bool ShowBackgroundOnTimer
+        {
+            get => _optionsService.Options.ShowBackgroundOnTimer;
+            set
+            {
+                if (_optionsService.Options.ShowBackgroundOnTimer != value)
+                {
+                    _optionsService.Options.ShowBackgroundOnTimer = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                }
+            }
+        }
+
         public bool ShowTimeOfDayUnderTimer
         {
             get => _optionsService.Options.ShowTimeOfDayUnderTimer;

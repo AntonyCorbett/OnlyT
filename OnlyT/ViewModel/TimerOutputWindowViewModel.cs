@@ -1,4 +1,6 @@
-﻿namespace OnlyT.ViewModel
+﻿using System.Windows;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable UnusedMember.Global
     using System;
@@ -153,6 +155,8 @@
 
         public bool DigitalTimeShowSeconds => _optionsService.Options.ShowDigitalSeconds;
 
+        public int ShowBackgroundOnTimer => _optionsService.Options.ShowBackgroundOnTimer ? 1 : 0;
+
         public bool SplitAndFullScreenModeIdentical()
         {
             return _optionsService.Options.AnalogueClockWidthPercent == 100;
@@ -266,6 +270,7 @@
         {
             RaisePropertyChanged(nameof(BorderThickness));
             RaisePropertyChanged(nameof(BackgroundOpacity));
+            RaisePropertyChanged(nameof(ShowBackgroundOnTimer));
         }
     }
 }

@@ -1155,6 +1155,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show background on timer.
+        /// </summary>
+        public static string SHOW_BACKGROUND_TIMER {
+            get {
+                return ResourceManager.GetString("SHOW_BACKGROUND_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show frame.
         /// </summary>
         public static string SHOW_CLOCK_FRAME {
