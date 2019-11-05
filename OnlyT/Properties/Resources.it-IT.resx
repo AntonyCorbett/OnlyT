@@ -498,7 +498,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Clock frame</value>
+    <value>Cornice orologio</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -666,7 +666,7 @@
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Timer frame</value>
+    <value>Cornice timer</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
 </root>
