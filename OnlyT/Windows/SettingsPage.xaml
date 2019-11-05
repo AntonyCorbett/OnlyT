@@ -231,13 +231,21 @@
                                 Margin="0,0,0,20"
                                 TickFrequency="10" TickPlacement="BottomRight"/>
 
-                        <CheckBox IsChecked="{Binding ShowTimerFrame, Mode=TwoWay}" 
+                        <CheckBox IsChecked="{Binding ShowClockFrame, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.SHOW_CLOCK_FRAME}" />
 
+                        <CheckBox IsChecked="{Binding ShowTimerFrame, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.SHOW_TIMER_FRAME}" />
+
+                        <CheckBox IsChecked="{Binding ShowBackgroundOnClock, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.CLOCK_BACKGROUND_COLOUR}" />
+
                         <CheckBox IsChecked="{Binding ShowBackgroundOnTimer, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
-                                  Content="{x:Static resx:Resources.SHOW_BACKGROUND_TIMER}" />
+                                  Content="{x:Static resx:Resources.TIMER_BACKGROUND_COLOUR}" />
 
                         <CheckBox IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"

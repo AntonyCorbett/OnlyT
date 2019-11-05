@@ -1,9 +1,8 @@
-﻿using System.Windows;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable UnusedMember.Global
     using System;
+    using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
     using AnalogueClock;
@@ -47,7 +46,7 @@ namespace OnlyT.ViewModel
 
         public int BorderThickness => _optionsService.Options.TimerFrame ? 3 : 0;
 
-        public int BackgroundOpacity => _optionsService.Options.TimerFrame ? 100 : 0;
+        public int TimerBorderThickness => _optionsService.Options.ClockTimerFrame ? 3 : 0;
 
         public int TimerColumnWidthPercentage { get; private set; } = -1;
 
@@ -155,7 +154,9 @@ namespace OnlyT.ViewModel
 
         public bool DigitalTimeShowSeconds => _optionsService.Options.ShowDigitalSeconds;
 
-        public int ShowBackgroundOnTimer => _optionsService.Options.ShowBackgroundOnTimer ? 1 : 0;
+        public bool UseTimerBackgroundGradient => _optionsService.Options.ShowBackgroundOnTimer;
+
+        public bool UseClockBackgroundGradient => _optionsService.Options.ShowBackgroundOnClock;
 
         public bool SplitAndFullScreenModeIdentical()
         {
@@ -269,8 +270,9 @@ namespace OnlyT.ViewModel
         private void OnTimerFrameChanged(TimerFrameChangedMessage msg)
         {
             RaisePropertyChanged(nameof(BorderThickness));
-            RaisePropertyChanged(nameof(BackgroundOpacity));
-            RaisePropertyChanged(nameof(ShowBackgroundOnTimer));
+            RaisePropertyChanged(nameof(TimerBorderThickness));
+            RaisePropertyChanged(nameof(UseTimerBackgroundGradient));
+            RaisePropertyChanged(nameof(UseClockBackgroundGradient));
         }
     }
 }

@@ -14,7 +14,7 @@
     [TestClass]
     public class TestAdaptiveTimer
     {
-        private readonly DateTime _theDate = new DateTime(2019, 1, 14);
+        private readonly DateTime _theDate = new DateTime(2020, 1, 6);
         private List<TalkScheduleItem> _items;
         private Mock<ITalkScheduleService> _scheduleService;
         private MockDateTimeService _dateTimeService;
@@ -24,6 +24,10 @@
         [TestInitialize]
         public void InitializeTests()
         {
+            _dateTimeService = new MockDateTimeService();
+            _mtgStart = _theDate + TimeSpan.FromHours(19);  // 7pm
+            _dateTimeService.Set(_mtgStart);
+
             _items = GenerateTalkItems(_theDate);
 
             var options = MockOptions.Create();
@@ -39,10 +43,6 @@
             _scheduleService = new Mock<ITalkScheduleService>();
             _scheduleService.Setup(x => x.GetTalkScheduleItems()).Returns(_items);
             _scheduleService.Setup(x => x.GetTalkScheduleItem(It.IsAny<int>())).Returns((int id) => _items.Single(y => y.Id == id));
-
-            _dateTimeService = new MockDateTimeService();
-            _mtgStart = _theDate + TimeSpan.FromHours(19);  // 7pm
-            _dateTimeService.Set(_mtgStart);
 
             _adaptiveTimerService = new AdaptiveTimerService(
                 optionsService.Object, _scheduleService.Object, _dateTimeService);
@@ -326,7 +326,8 @@
 
         private List<TalkScheduleItem> GenerateTalkItems(DateTime theDate)
         {
-            return TalkScheduleAuto.GetMidweekScheduleForTesting(theDate).ToList();
+            bool isJanuary2020OrLater = _dateTimeService.Now().Date >= new DateTime(2020, 1, 6);
+            return TalkScheduleAuto.GetMidweekScheduleForTesting(theDate, isJanuary2020OrLater).ToList();
         }
 
         private void AssertTimeSpansAboutEqual(TimeSpan ts1, TimeSpan ts2)

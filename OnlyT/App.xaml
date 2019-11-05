@@ -9,6 +9,7 @@
   <Application.Resources>
     <ResourceDictionary>
         <valueConverters:BoolToBackgroundConverter x:Key="ToBackgroundConverter" />
+        <valueConverters:BoolToGradientConverter x:Key="ToBackgroundGradientConverter" />
         <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:OnlyT.ViewModel" />
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

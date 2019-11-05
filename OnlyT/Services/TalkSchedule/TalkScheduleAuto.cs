@@ -1,12 +1,12 @@
 ﻿namespace OnlyT.Services.TalkSchedule
 {
     //// sample midweek meeting times (used to determine values 
-    //// for StartOffsetIntoMeeting)
+    //// for StartOffsetIntoMeeting). From Jan 2020
     ////
     ////    7:00:00 (00:00) Start, song / prayer
     ////    7:05:00 (05:00) Opening comments
-    ////    7:08:20 (08:20) Talk(10 mins)
-    ////    7:18:40 (18:40) Digging(8 mins)
+    ////    7:06:20 (06:20) Talk(10 mins)
+    ////    7:16:40 (16:40) Digging(10 mins)
     ////    7:27:00 (27:00) Reading(4 mins)
     ////    7:31:20 (31:20) Counsel
     ////    7:32:40 (32:40) Prepare presentations(15 mins)
@@ -57,8 +57,11 @@
         /// Gets the talk schedule.
         /// </summary>
         /// <param name="optionsService">Options service.</param>
+        /// <param name="isJanuary2020OrLater">True if current date is greater than 5 Jan 2020.</param>
         /// <returns>A collection of TalkScheduleItem.</returns>
-        public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)
+        public static IEnumerable<TalkScheduleItem> Read(
+            IOptionsService optionsService,
+            bool isJanuary2020OrLater)
         {
             var isCircuitVisit = optionsService.Options.IsCircuitVisit;
             
@@ -67,14 +70,18 @@
                 : GetMidweekMeetingSchedule(
                     isCircuitVisit, 
                     optionsService.Options.IsBellEnabled && optionsService.Options.AutoBell,
+                    isJanuary2020OrLater,
                     new TimesFeed().GetMeetingDataForToday());
         }
 
-        public static IEnumerable<TalkScheduleItem> GetMidweekScheduleForTesting(DateTime theDate)
+        public static IEnumerable<TalkScheduleItem> GetMidweekScheduleForTesting(
+            DateTime theDate,
+            bool isJanuary2020OrLater)
         {
             return GetMidweekMeetingSchedule(
                 false,
                 false,
+                isJanuary2020OrLater,
                 new TimesFeed().GetSampleMidweekMeetingDataForTesting(theDate));
         }
 
@@ -102,15 +109,21 @@
             };
         }
 
-        private static List<TalkScheduleItem> GetTreasuresSchedule(bool autoBell)
+        private static List<TalkScheduleItem> GetTreasuresSchedule(
+            bool autoBell, bool isJanuary2020OrLater)
         {
+            if (!isJanuary2020OrLater)
+            {
+                return GetTreasuresSchedulePreJan2020(autoBell);
+            }
+
             return new List<TalkScheduleItem>
             {
                 CreateTreasuresItem(
                     TalkTypesAutoMode.OpeningComments, 
                     Properties.Resources.TALK_OPENING_COMMENTS, 
-                    new TimeSpan(0, 5, 0), 
-                    TimeSpan.FromMinutes(3),
+                    new TimeSpan(0, 5, 0),
+                    TimeSpan.FromMinutes(1),
                     false,
                     false,
                     autoBell,
@@ -119,7 +132,7 @@
                 CreateTreasuresItem(
                     TalkTypesAutoMode.TreasuresTalk, 
                     Properties.Resources.TALK_TREASURES, 
-                    new TimeSpan(0, 8, 20), 
+                    new TimeSpan(0, 6, 20), 
                     TimeSpan.FromMinutes(10),
                     false,
                     false,
@@ -129,8 +142,8 @@
                 CreateTreasuresItem(
                     TalkTypesAutoMode.DiggingTalk, 
                     Properties.Resources.TALK_DIGGING, 
-                    new TimeSpan(0, 18, 40), 
-                    TimeSpan.FromMinutes(8),
+                    new TimeSpan(0, 16, 40), 
+                    TimeSpan.FromMinutes(10),
                     false,
                     false,
                     autoBell,
@@ -142,6 +155,52 @@
                     new TimeSpan(0, 27, 0), 
                     TimeSpan.FromMinutes(4), 
                     true, 
+                    true,
+                    autoBell,
+                    true)
+            };
+        }
+
+        private static List<TalkScheduleItem> GetTreasuresSchedulePreJan2020(bool autoBell)
+        {
+            return new List<TalkScheduleItem>
+            {
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.OpeningComments,
+                    Properties.Resources.TALK_OPENING_COMMENTS,
+                    new TimeSpan(0, 5, 0),
+                    TimeSpan.FromMinutes(3),
+                    false,
+                    false,
+                    autoBell,
+                    false),
+
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.TreasuresTalk,
+                    Properties.Resources.TALK_TREASURES,
+                    new TimeSpan(0, 8, 20),
+                    TimeSpan.FromMinutes(10),
+                    false,
+                    false,
+                    autoBell,
+                    false),
+
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.DiggingTalk,
+                    Properties.Resources.TALK_DIGGING,
+                    new TimeSpan(0, 18, 40),
+                    TimeSpan.FromMinutes(8),
+                    false,
+                    false,
+                    autoBell,
+                    false),
+
+                CreateTreasuresItem(
+                    TalkTypesAutoMode.Reading,
+                    Properties.Resources.TALK_READING,
+                    new TimeSpan(0, 27, 0),
+                    TimeSpan.FromMinutes(4),
+                    true,
                     true,
                     autoBell,
                     true)
@@ -316,12 +375,15 @@
         }
 
         private static List<TalkScheduleItem> GetMidweekMeetingSchedule(
-            bool isCircuitVisit, bool autoBell, Meeting meetingData)
+            bool isCircuitVisit, 
+            bool autoBell,
+            bool isJanuary2020OrLater,
+            Meeting meetingData)
         {
             var result = new List<TalkScheduleItem>();
 
             // Treasures...
-            result.AddRange(GetTreasuresSchedule(autoBell));
+            result.AddRange(GetTreasuresSchedule(autoBell, isJanuary2020OrLater));
 
             // Ministry...
             result.AddRange(GetMinistrySchedule(meetingData, autoBell));

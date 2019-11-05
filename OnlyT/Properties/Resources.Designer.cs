@@ -214,6 +214,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clock background gradient.
+        /// </summary>
+        public static string CLOCK_BACKGROUND_COLOUR {
+            get {
+                return ResourceManager.GetString("CLOCK_BACKGROUND_COLOUR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 12-hour.
         /// </summary>
         public static string CLOCK_FORMAT_12 {
@@ -1155,16 +1164,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show background on timer.
-        /// </summary>
-        public static string SHOW_BACKGROUND_TIMER {
-            get {
-                return ResourceManager.GetString("SHOW_BACKGROUND_TIMER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show frame.
+        ///   Looks up a localized string similar to Clock frame.
         /// </summary>
         public static string SHOW_CLOCK_FRAME {
             get {
@@ -1187,6 +1187,15 @@ namespace OnlyT.Properties {
         public static string SHOW_SECONDS {
             get {
                 return ResourceManager.GetString("SHOW_SECONDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer frame.
+        /// </summary>
+        public static string SHOW_TIMER_FRAME {
+            get {
+                return ResourceManager.GetString("SHOW_TIMER_FRAME", resourceCulture);
             }
         }
         
@@ -1367,6 +1376,15 @@ namespace OnlyT.Properties {
         public static string TIME_UNDER_TIMER {
             get {
                 return ResourceManager.GetString("TIME_UNDER_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer background gradient.
+        /// </summary>
+        public static string TIMER_BACKGROUND_COLOUR {
+            get {
+                return ResourceManager.GetString("TIMER_BACKGROUND_COLOUR", resourceCulture);
             }
         }
         

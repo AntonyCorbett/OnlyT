@@ -416,7 +416,7 @@
             }
         }
 
-        public bool ShowTimerFrame
+        public bool ShowClockFrame
         {
             get => _optionsService.Options.TimerFrame;
             set
@@ -424,6 +424,34 @@
                 if (_optionsService.Options.TimerFrame != value)
                 {
                     _optionsService.Options.TimerFrame = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                }
+            }
+        }
+
+        public bool ShowClockTimerFrame
+        {
+            get => _optionsService.Options.ClockTimerFrame;
+            set
+            {
+                if (_optionsService.Options.ClockTimerFrame != value)
+                {
+                    _optionsService.Options.ClockTimerFrame = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                }
+            }
+        }
+
+        public bool ShowTimerFrame
+        {
+            get => _optionsService.Options.ClockTimerFrame;
+            set
+            {
+                if (_optionsService.Options.ClockTimerFrame != value)
+                {
+                    _optionsService.Options.ClockTimerFrame = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }
@@ -509,6 +537,20 @@
                 if (_optionsService.Options.ShowBackgroundOnTimer != value)
                 {
                     _optionsService.Options.ShowBackgroundOnTimer = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                }
+            }
+        }
+
+        public bool ShowBackgroundOnClock
+        {
+            get => _optionsService.Options.ShowBackgroundOnClock;
+            set
+            {
+                if (_optionsService.Options.ShowBackgroundOnClock != value)
+                {
+                    _optionsService.Options.ShowBackgroundOnClock = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }

@@ -5,6 +5,7 @@
     using System.Linq;
     using GalaSoft.MvvmLight.Messaging;
     using Models;
+    using OnlyT.Common.Services.DateTime;
     using Options;
     using ViewModel.Messages;
 
@@ -14,16 +15,24 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class TalkScheduleService : ITalkScheduleService
     {
+        private static readonly DateTime _january2020Change = new DateTime(2020, 1, 6);
+
         private readonly IOptionsService _optionsService;
+        private readonly bool _isJanuary2020OrLater;
 
         // the "talk_schedule.xml" file may exist in MyDocs\OnlyT..
         private Lazy<IEnumerable<TalkScheduleItem>> _fileBasedSchedule;
         private Lazy<IEnumerable<TalkScheduleItem>> _autoSchedule;
         private Lazy<IEnumerable<TalkScheduleItem>> _manualSchedule;
 
-        public TalkScheduleService(IOptionsService optionsService)
+        public TalkScheduleService(
+            IOptionsService optionsService,
+            IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
+
+            _isJanuary2020OrLater = dateTimeService.Now().Date >= _january2020Change;
+
             Reset();
 
             // subscriptions...
@@ -33,7 +42,7 @@
         public void Reset()
         {
             _fileBasedSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleFileBased.Read(_optionsService.Options.AutoBell));
-            _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService));
+            _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService, _isJanuary2020OrLater));
             _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
 

@@ -221,6 +221,7 @@
     <Compile Include="Utils\WindowPlacement.cs" />
     <Compile Include="ValueConverters\BoolToBackgroundConverter.cs" />
     <Compile Include="ValueConverters\BoolToCursorConverter.cs" />
+    <Compile Include="ValueConverters\BoolToGradientConverter.cs" />
     <Compile Include="ValueConverters\ColWidthPercentageToString.cs" />
     <Compile Include="ViewModel\CountdownTimerViewModel.cs" />
     <Compile Include="ViewModel\IPage.cs" />

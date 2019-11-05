@@ -24,21 +24,12 @@
             <ColumnDefinition Width="{Binding AnalogueClockColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
             <ColumnDefinition Width="{Binding TimerColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
         </Grid.ColumnDefinitions>
-        <Grid.Background >
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="{Binding ShowBackgroundOnTimer}" >
-                <GradientStop Color="Black" Offset="1"/>
-                <GradientStop Color="#FF5D4343"/>
-            </LinearGradientBrush>
-        </Grid.Background>
         <Border Name="ClockPanel" 
+                Margin="0,0,5,0"
                 CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" 
-                BorderBrush="Beige" BorderThickness="{Binding BorderThickness}" Padding="10">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="{Binding BackgroundOpacity}">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="#FF5D4343"/>
-                </LinearGradientBrush>
-            </Border.Background>
+                BorderBrush="Beige" BorderThickness="{Binding BorderThickness}" 
+                Padding="10" 
+                Background="{Binding Path=UseClockBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}">
 
             <Grid Name="ClockGrid">
                 <Grid.RowDefinitions>
@@ -67,27 +58,36 @@
 
         </Border>
 
-        <Viewbox Grid.Column="1" Margin="10" VerticalAlignment="Top">
-            <Grid>
+        <Border Name="TimerPanel" 
+                Margin="5,0,0,0"
+                Grid.Column="1"
+                CornerRadius="20" 
+                BorderBrush="Beige" BorderThickness="{Binding TimerBorderThickness}" 
+                Padding="10" 
+                Opacity="0"
+                Background="{Binding Path=UseTimerBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}">
+
+            <Viewbox VerticalAlignment="Top">
+                <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*" />
                     <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                
-                <TextBlock Name="TimerTextBlock" Grid.Row="0"
-                           Opacity="0.0"
+
+                <TextBlock Grid.Row="0"
                            HorizontalAlignment="Center"
                            Foreground="{Binding TextColor}" 
                            Text="{Binding TimeString}"
                            FontSize="40"
                            FontWeight="Bold"/>
 
-                <TextBlock Name="TimerTextBlock2" Grid.Row="1" Opacity="0.0" HorizontalAlignment="Center"
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center"
                            Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Run Foreground="White" FontSize="28" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
                 </TextBlock>
-            </Grid>
+                </Grid>
         </Viewbox>
+            </Border>
     </Grid>
 
 </Window>
