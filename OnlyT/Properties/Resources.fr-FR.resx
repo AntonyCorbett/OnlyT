@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Afficher la bascule Semaine spéciale</value>
+    <value>Afficher le raccourci Semaine spéciale</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Format de l’horloge numérique</value>
@@ -383,10 +383,10 @@
     <value>Mettez chaque réunion sur une ligne différente.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Utilisez n'importe quel format d'heure!</value>
+    <value>Utilisez n'importe quel format d'heure !</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Vous pouvez inclure le jour, par exemple "Jeu 19:15"</value>
+    <value>Vous pouvez inclure le jour, par exemple "Jeu 19:15".</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notes :</value>
@@ -498,7 +498,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Afficher le cadre</value>
+    <value>Encadrer l'horloge</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -657,7 +657,16 @@
     <value>Notez que le moniteur est contrôlé par un paramètre de ligne de commande</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
-  <data name="SHOW_BACKGROUND_TIMER" xml:space="preserve">
-    <value>Show background on timer</value>
+  <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Arrière-plan minuteur en dégradé</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Arrière-plan horloge en dégradé</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="SHOW_TIMER_FRAME" xml:space="preserve">
+    <value>Encadrer le minuteur</value>
+    <comment>See Settings =&gt; Timer window</comment>
   </data>
 </root>
