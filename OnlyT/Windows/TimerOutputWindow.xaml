@@ -48,8 +48,8 @@
                     <TextBlock VerticalAlignment="Bottom" Margin="5,0,5,0">
                         <TextBlock Foreground="White" FontSize="24" FontWeight="Bold" 
                                    Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
-                        <TextBlock Foreground="#FFCBABAB" FontSize="16"
-                                   Margin="-2,0,0,0"
+                        <TextBlock Foreground="#FFCBABAB" FontSize="13"
+                                   Margin="-2,-8,0,0"
                                    Visibility="{Binding Path=DigitalTimeShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}"
                                    Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
                     </TextBlock>
