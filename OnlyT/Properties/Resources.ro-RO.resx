@@ -380,13 +380,13 @@
     <value>Arată indicatorul mouse-ului</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Pune fiecare oră de începere a întrunirii pe un rând nou.</value>
+    <value>Puneți fiecare oră de începere a întrunirii pe un rând nou.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Folosiți orice format de oră vă place!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Opțional poți include o zi, de exemplu "Joi 19:15"</value>
+    <value>Opțional puteți include o zi, de exemplu "Joi 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Note:</value>
@@ -498,7 +498,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Arată chenar</value>
+    <value>Chenar ceas</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -650,14 +650,23 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
-    <value>Fundal Transparent</value>
+    <value>Fundal transparent</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
     <value>Monitorul este selectat din linia de comandă</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
-  <data name="SHOW_BACKGROUND_TIMER" xml:space="preserve">
-    <value>Arată imagine de fundal sub cronometru</value>
+  <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Fundal gradient cronometru</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Fundal gradient ceas</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="SHOW_TIMER_FRAME" xml:space="preserve">
+    <value>Chenar cronometru</value>
+    <comment>See Settings =&gt; Timer window</comment>
   </data>
 </root>
