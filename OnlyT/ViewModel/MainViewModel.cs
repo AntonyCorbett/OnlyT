@@ -52,7 +52,8 @@ namespace OnlyT.ViewModel
         private TimerOutputWindow _timerWindow;
         private CountdownWindow _countdownWindow;
         private FrameworkElement _currentPage;
-        
+        private DateTime _lastRefreshedSchedule = DateTime.MinValue;
+
         public MainViewModel(
            IOptionsService optionsService,
            IMonitorsService monitorsService,
@@ -289,23 +290,8 @@ namespace OnlyT.ViewModel
             _heartbeatTimer.Stop();
             try
             {
-                if (_optionsService.IsCountdownMonitorSpecified)
-                {
-                    if (!CountDownActive &&
-                        !_countdownDone &&
-                        _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
-                    {
-                        StartCountdown(secondsOffset);
-                    }
-                }
-                else
-                {
-                    // countdown not enabled...
-                    if (CountDownActive)
-                    {
-                        StopCountdown();
-                    }
-                }
+                ManageCountdownOnHeartbeat();
+                ManageScheduleOnHeartbeat();
             }
             catch (Exception ex)
             {
@@ -314,6 +300,36 @@ namespace OnlyT.ViewModel
             finally
             {
                 _heartbeatTimer.Start();
+            }
+        }
+
+        private void ManageScheduleOnHeartbeat()
+        {
+            if ((DateTime.Now - _lastRefreshedSchedule).Seconds > 10)
+            {
+                _lastRefreshedSchedule = DateTime.Now;
+                Messenger.Default.Send(new RefreshScheduleMessage());
+            }
+        }
+
+        private void ManageCountdownOnHeartbeat()
+        {
+            if (_optionsService.IsCountdownMonitorSpecified)
+            {
+                if (!CountDownActive &&
+                    !_countdownDone &&
+                    _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
+                {
+                    StartCountdown(secondsOffset);
+                }
+            }
+            else
+            {
+                // countdown not enabled...
+                if (CountDownActive)
+                {
+                    StopCountdown();
+                }
             }
         }
 

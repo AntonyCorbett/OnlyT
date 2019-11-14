@@ -46,6 +46,11 @@
             _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
 
+        public bool SuccessGettingAutoFeed()
+        {
+            return TalkScheduleAuto.SuccessGettingAutoFeed;
+        }
+
         public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
         {
             switch (_optionsService.Options.OperatingMode)

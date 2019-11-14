@@ -12,5 +12,7 @@
         int GetNext(int currentTalkId);
 
         void Reset();
+
+        bool SuccessGettingAutoFeed();
     }
 }

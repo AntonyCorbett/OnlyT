@@ -115,6 +115,7 @@
             Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
             Messenger.Default.Register<ShowCircuitVisitToggleChangedMessage>(this, OnShowCircuitVisitToggleChanged);
             Messenger.Default.Register<AutoBellSettingChangedMessage>(this, OnAutoBellSettingChanged);
+            Messenger.Default.Register<RefreshScheduleMessage>(this, OnRefreshSchedule);
 
             if (IsInDesignMode)
             {
@@ -762,10 +763,7 @@
             {
                 Log.Logger.Debug("Meeting schedule changing");
 
-                _scheduleService.Reset();
-                TalkId = 0;
-                RaisePropertyChanged(nameof(Talks));
-                SelectFirstTalk();
+                RefreshSchedule();
             }
             catch (Exception ex)
             {
@@ -1106,6 +1104,28 @@
                 _secondsRemaining = value;
                 RaisePropertyChanged(nameof(CurrentTimerValueString));
             }
+        }
+
+        private void OnRefreshSchedule(RefreshScheduleMessage message)
+        {
+            if (!IsRunning &&
+                _optionsService.Options.OperatingMode == OperatingMode.Automatic &&
+                !_scheduleService.SuccessGettingAutoFeed())
+            {
+                // for one reason or another we have been unable to download the 
+                // auto schedule so try again...
+                RefreshSchedule();
+            }
+        }
+
+        private void RefreshSchedule()
+        {
+            Log.Logger.Debug("Refreshing schedule");
+
+            _scheduleService.Reset();
+            TalkId = 0;
+            RaisePropertyChanged(nameof(Talks));
+            SelectFirstTalk();
         }
     }
 }

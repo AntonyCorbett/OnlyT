@@ -63,5 +63,10 @@
         {
             _talks = null;
         }
+
+        public bool SuccessGettingAutoFeed()
+        {
+            return true;
+        }
     }
 }

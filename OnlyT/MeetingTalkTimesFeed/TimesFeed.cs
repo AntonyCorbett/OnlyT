@@ -70,7 +70,7 @@
             return result;
         }
 
-        private bool LocalFileToOld()
+        private bool LocalFileTooOld()
         {
             bool tooOld = true;
 
@@ -99,7 +99,7 @@
         {
             List<Meeting> result = null;
 
-            var needRefresh = LocalFileToOld();
+            var needRefresh = LocalFileTooOld();
 
             if (!needRefresh)
             {

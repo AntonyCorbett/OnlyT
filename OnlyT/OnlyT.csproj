@@ -240,6 +240,7 @@
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\HttpServerChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\RefreshScheduleMessage.cs" />
     <Compile Include="ViewModel\Messages\ShowCircuitVisitToggleChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShowTimeOfDayUnderTimerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ShutDownMessage.cs" />

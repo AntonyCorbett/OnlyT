@@ -53,6 +53,8 @@
         // weekend sections.
         private const string SectionWeekend = "Weekend";
 
+        public static bool SuccessGettingAutoFeed { get; private set; }
+
         /// <summary>
         /// Gets the talk schedule.
         /// </summary>
@@ -71,7 +73,7 @@
                     isCircuitVisit, 
                     optionsService.Options.IsBellEnabled && optionsService.Options.AutoBell,
                     isJanuary2020OrLater,
-                    new TimesFeed().GetMeetingDataForToday());
+                    GetFeedForToday());
         }
 
         public static IEnumerable<TalkScheduleItem> GetMidweekScheduleForTesting(
@@ -83,6 +85,17 @@
                 false,
                 isJanuary2020OrLater,
                 new TimesFeed().GetSampleMidweekMeetingDataForTesting(theDate));
+        }
+        
+        private static Meeting GetFeedForToday()
+        {
+            var feed = new TimesFeed().GetMeetingDataForToday();
+            if (feed != null)
+            {
+                SuccessGettingAutoFeed = true;
+            }
+
+            return feed;
         }
 
         private static TalkScheduleItem CreateTreasuresItem(
@@ -239,23 +252,36 @@
 
             var timers = new List<TalkTimer>();
 
-            if (meetingData != null)
+            const int maxItems = 4;
+
+            for (int n = 0; n < maxItems; ++n)
             {
-                const int maxItems = 4;
+                var talkType = TalkTypesUtils.GetMinistryTalkType(n);
 
-                for (int n = 0; n < maxItems; ++n)
+                TalkTimer item;
+
+                if (meetingData == null)
                 {
-                    var talkType = TalkTypesUtils.GetMinistryTalkType(n);
-
-                    var item = meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType));
-                    if (item != null)
+                    // failed to download auto schedule!
+                    item = new TalkTimer
                     {
-                        timers.Add(item);
-                    }
+                        IsStudentTalk = true,
+                        Minutes = 3, // as good a guess as any
+                        TalkType = talkType
+                    };
+                }
+                else
+                {
+                    item = meetingData.Talks.FirstOrDefault(x => x.TalkType.Equals(talkType));
+                }
+
+                if (item != null)
+                {
+                    timers.Add(item);
                 }
             }
 
-            TimeSpan startOffset = new TimeSpan(0, 32, 20);
+            var startOffset = new TimeSpan(0, 32, 20);
 
             for (var n = 0; n < timers.Count; ++n)
             {
