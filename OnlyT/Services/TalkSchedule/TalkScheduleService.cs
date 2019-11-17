@@ -46,9 +46,9 @@
             _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
 
-        public bool SuccessGettingAutoFeed()
+        public bool SuccessGettingAutoFeedForMidWeekMtg()
         {
-            return TalkScheduleAuto.SuccessGettingAutoFeed;
+            return TalkScheduleAuto.SuccessGettingAutoFeedForMidWeekMtg;
         }
 
         public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()

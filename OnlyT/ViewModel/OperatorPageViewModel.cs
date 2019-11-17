@@ -1108,14 +1108,20 @@
 
         private void OnRefreshSchedule(RefreshScheduleMessage message)
         {
-            if (!IsRunning &&
-                _optionsService.Options.OperatingMode == OperatingMode.Automatic &&
-                !_scheduleService.SuccessGettingAutoFeed())
+            if (ShouldRefreshMidWeekSchedule())
             {
                 // for one reason or another we have been unable to download the 
-                // auto schedule so try again...
+                // auto schedule for the midweek mtg, so try again...
                 RefreshSchedule();
             }
+        }
+
+        private bool ShouldRefreshMidWeekSchedule()
+        {
+            return !IsRunning &&
+                   _optionsService.Options.OperatingMode == OperatingMode.Automatic &&
+                   _optionsService.Options.MidWeekOrWeekend == MidWeekOrWeekend.MidWeek &&
+                   !_scheduleService.SuccessGettingAutoFeedForMidWeekMtg();
         }
 
         private void RefreshSchedule()

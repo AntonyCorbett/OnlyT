@@ -13,6 +13,6 @@
 
         void Reset();
 
-        bool SuccessGettingAutoFeed();
+        bool SuccessGettingAutoFeedForMidWeekMtg();
     }
 }

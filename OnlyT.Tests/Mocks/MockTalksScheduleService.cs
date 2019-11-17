@@ -64,7 +64,7 @@
             _talks = null;
         }
 
-        public bool SuccessGettingAutoFeed()
+        public bool SuccessGettingAutoFeedForMidWeekMtg()
         {
             return true;
         }

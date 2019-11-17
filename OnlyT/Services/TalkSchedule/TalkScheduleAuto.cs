@@ -53,7 +53,7 @@
         // weekend sections.
         private const string SectionWeekend = "Weekend";
 
-        public static bool SuccessGettingAutoFeed { get; private set; }
+        public static bool SuccessGettingAutoFeedForMidWeekMtg { get; private set; }
 
         /// <summary>
         /// Gets the talk schedule.
@@ -92,7 +92,7 @@
             var feed = new TimesFeed().GetMeetingDataForToday();
             if (feed != null)
             {
-                SuccessGettingAutoFeed = true;
+                SuccessGettingAutoFeedForMidWeekMtg = true;
             }
 
             return feed;
