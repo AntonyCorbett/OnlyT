@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="ClockBrushes.cs" />
     <Compile Include="ClockControl.cs">
       <SubType>Code</SubType>
     </Compile>

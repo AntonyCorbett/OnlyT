@@ -61,10 +61,6 @@
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
 
-        private const double HourHandDropShadowOpacity = 1.0;
-        private const double MinuteHandDropShadowOpacity = 0.4;
-        private const double SecondHandDropShadowOpacity = 0.3;
-
         private static readonly double ClockRadius = 250;
         private static readonly double SectorRadius = 230;
         private static readonly Point ClockOrigin = new Point(ClockRadius, ClockRadius);
@@ -78,7 +74,15 @@
         private AnglesOfHands _animationTargetAngles;
         private AnglesOfHands _animationCurrentAngles;
 
+        private double _hourHandDropShadowOpacity;
+        private double _minuteHandDropShadowOpacity;
+        private double _secondHandDropShadowOpacity;
+
         private bool _showElapsedSector;
+        private bool _isFlat;
+        private Ellipse _outerDial;
+        private Ellipse _middleDial;
+        private Ellipse _centrePointDial;
         private Line _minuteHand;
         private Line _hourHand;
         private Line _secondHand;
@@ -165,11 +169,57 @@
             private set => SetValue(CurrentTimeSecProperty, value);
         }
 
+        private bool ShowElapsedSector
+        {
+            get => _showElapsedSector;
+            set
+            {
+                if (_showElapsedSector != value)
+                {
+                    _showElapsedSector = value;
+
+                    if (_showElapsedSector)
+                    {
+                        _sectorPath2.Fill = new SolidColorBrush(Color.FromRgb(230, 255, 230));
+                        _sectorPath2.StrokeThickness = 1;
+                    }
+                    else
+                    {
+                        _sectorPath2.Fill = Brushes.White;
+                        _sectorPath2.StrokeThickness = 0;
+                    }
+                }
+            }
+        }
+
+        private bool IsFlat
+        {
+            get => _isFlat;
+            set
+            {
+                if (_isFlat != value)
+                {
+                    _isFlat = value;
+
+                    if (!_isFlat)
+                    {
+                        SetDefaultNonFlatStyle();
+                    }
+                    else
+                    {
+                        SetFlatStyle();
+                    }
+                }
+            }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             GetElementRefs();
+
+            SetDefaultNonFlatStyle();
 
             if (GetTemplateChild("ClockCanvas") is Canvas cc)
             {
@@ -324,9 +374,9 @@
         {
             var now = DateTime.Now;
             
-            PositionClockHand(_secondHand, CalculateAngleSeconds(now), SecondHandDropShadowOpacity);
-            PositionClockHand(_minuteHand, CalculateAngleMinutes(now), MinuteHandDropShadowOpacity);
-            PositionClockHand(_hourHand, CalculateAngleHours(now), HourHandDropShadowOpacity);
+            PositionClockHand(_secondHand, CalculateAngleSeconds(now), _secondHandDropShadowOpacity);
+            PositionClockHand(_minuteHand, CalculateAngleMinutes(now), _minuteHandDropShadowOpacity);
+            PositionClockHand(_hourHand, CalculateAngleHours(now), _hourHandDropShadowOpacity);
 
             CurrentTimeHrMin = FormatTimeOfDayHoursAndMins(now);
             CurrentTimeSec = FormatTimeOfDaySeconds(now);
@@ -334,7 +384,12 @@
 
         private string FormatTimeOfDayHoursAndMins(DateTime dt)
         {
-            int hours = _digitalFormat24Hours ? dt.Hour : dt.Hour > 12 ? dt.Hour - 12 : dt.Hour;
+            int hours = _digitalFormat24Hours 
+                ? dt.Hour 
+                : dt.Hour > 12 
+                    ? dt.Hour - 12 
+                    : dt.Hour;
+
             var ampm = GetAmPmPostfix(dt);
 
             if (_digitalFormatLeadingZero)
@@ -399,19 +454,19 @@
                 _secondHand, 
                 _animationCurrentAngles.SecondsAngle, 
                 _animationTargetAngles.SecondsAngle,
-                SecondHandDropShadowOpacity);
+                _secondHandDropShadowOpacity);
 
             _animationCurrentAngles.MinutesAngle = AnimateHand(
                 _minuteHand, 
                 _animationCurrentAngles.MinutesAngle, 
                 _animationTargetAngles.MinutesAngle,
-                MinuteHandDropShadowOpacity);
+                _minuteHandDropShadowOpacity);
 
             _animationCurrentAngles.HoursAngle = AnimateHand(
                 _hourHand, 
                 _animationCurrentAngles.HoursAngle, 
                 _animationTargetAngles.HoursAngle,
-                HourHandDropShadowOpacity);
+                _hourHandDropShadowOpacity);
 
             if (AnimationShouldContinue())
             {
@@ -560,6 +615,10 @@
 
         private void GetElementRefs()
         {
+            _outerDial = GetTemplateChild("OuterDial") as Ellipse;
+            _middleDial = GetTemplateChild("MiddleDial") as Ellipse;
+            _centrePointDial = GetTemplateChild("CentrePointDial") as Ellipse;
+
             if (GetTemplateChild("MinuteHand") is Line line1)
             {
                 _minuteHand = line1;
@@ -568,7 +627,7 @@
                     Color = Colors.DarkGray,
                     BlurRadius = 5,
                     ShadowDepth = 3,
-                    Opacity = MinuteHandDropShadowOpacity
+                    Opacity = _minuteHandDropShadowOpacity
                 };
             }
 
@@ -580,7 +639,7 @@
                     Color = Colors.DarkGray,
                     BlurRadius = 5,
                     ShadowDepth = 3,
-                    Opacity = HourHandDropShadowOpacity
+                    Opacity = _hourHandDropShadowOpacity
                 };
             }
 
@@ -592,7 +651,7 @@
                     Color = Colors.DarkGray,
                     BlurRadius = 1.2,
                     ShadowDepth = 3,
-                    Opacity = SecondHandDropShadowOpacity
+                    Opacity = _secondHandDropShadowOpacity
                 };
             }
 
@@ -612,27 +671,26 @@
             }
         }
 
-        private bool ShowElapsedSector
+        private void SetDefaultNonFlatStyle()
         {
-            get => _showElapsedSector;
-            set
-            {
-                if (_showElapsedSector != value)
-                {
-                    _showElapsedSector = value;
+            _outerDial.Fill = ClockBrushes.GetOuterDialBrush();
+            _middleDial.Fill = ClockBrushes.GetMiddleDialBrush();
+            _centrePointDial.Effect = ClockBrushes.GetCentrePointDropShadow();
 
-                    if (_showElapsedSector)
-                    {
-                        _sectorPath2.Fill = new SolidColorBrush(Color.FromRgb(230, 255, 230));
-                        _sectorPath2.StrokeThickness = 1;
-                    }
-                    else
-                    {
-                        _sectorPath2.Fill = Brushes.White;
-                        _sectorPath2.StrokeThickness = 0;
-                    }
-                }
-            }
+            _secondHandDropShadowOpacity = 0.3;
+            _hourHandDropShadowOpacity = 1.0;
+            _minuteHandDropShadowOpacity = 0.4;
+        }
+
+        private void SetFlatStyle()
+        {
+            _outerDial.Fill = ClockBrushes.GetOuterDialBrushFlat();
+            _middleDial.Fill = ClockBrushes.GetMiddleDialBrushFlat();
+            _centrePointDial.Effect = null;
+
+            _secondHandDropShadowOpacity = 0.0;
+            _hourHandDropShadowOpacity = 0.0;
+            _minuteHandDropShadowOpacity = 0.0;
         }
     }
 }

@@ -13,24 +13,8 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
 
                             <Canvas Width="500" Height="500" x:Name="ClockCanvas">
-                                <Ellipse x:Name="OuterDial" Width="500" Height="500" >
-                                    <Ellipse.Fill>
-                                        <LinearGradientBrush EndPoint="0.0,0.5" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFB1B2AA" Offset="0"/>
-                                            <GradientStop Color="#FFACACA2" Offset="1"/>
-                                            <GradientStop Color="#FFD1D1D1" Offset="0.673"/>
-                                        </LinearGradientBrush>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <Ellipse x:Name="MiddleDial" Width="480" Height="480" Margin="10,10,0,0">
-                                    <Ellipse.Fill>
-                                        <LinearGradientBrush EndPoint="0.0,0.5" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                            <GradientStop Color="#FF151515" Offset="0"/>
-                                            <GradientStop Color="#FF130101" Offset="1"/>
-                                            <GradientStop Color="#FFD1D1D1" Offset="0.673"/>
-                                        </LinearGradientBrush>
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                <Ellipse x:Name="OuterDial" Width="500" Height="500" />
+                                <Ellipse x:Name="MiddleDial" Width="480" Height="480" Margin="10,10,0,0"/>
                                 <Ellipse x:Name="InnerDial" Width="466" Height="466" Fill="White" Margin="17,17,0,0"/>
 
                                 <Path x:Name="SectorPath1" Data="" Fill="#99FF99" Stroke="#dddddd" StrokeThickness="1"/>
@@ -51,12 +35,8 @@
                                       Stroke="Firebrick" StrokeThickness="2" >
                                 </Line>
 
-                                <Ellipse Width="30" Height="30" Stroke="Black" StrokeThickness="3" 
-                                         Fill="#FFD1D1D1" Margin="235,235,0,0">
-                                    <Ellipse.Effect>
-                                        <DropShadowEffect ShadowDepth="-15"></DropShadowEffect>
-                                    </Ellipse.Effect>
-                                </Ellipse>
+                                <Ellipse x:Name="CentrePointDial" Width="30" Height="30" Stroke="Black" StrokeThickness="3" 
+                                         Fill="#FFD1D1D1" Margin="235,235,0,0"/>
                             </Canvas>
                         </Border>
                     </Viewbox>
