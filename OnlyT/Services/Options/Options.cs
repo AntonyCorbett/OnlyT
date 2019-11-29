@@ -70,6 +70,8 @@
 
         public Size SettingsPageSize { get; set; }
 
+        public Size OperatorPageSize { get; set; }
+
         public OperatingMode OperatingMode { get; set; }
 
         public ScreenLocation CountdownScreenLocation { get; set; }

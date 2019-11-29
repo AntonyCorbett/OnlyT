@@ -107,8 +107,9 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-
-    <Grid Margin="10">
+    
+<Viewbox>
+    <Grid Margin="10" Width="379" Height="311">
         <Grid.RowDefinitions>
             <RowDefinition Height="31*" />
             <RowDefinition Height="130*"/>
@@ -169,7 +170,7 @@
                                VerticalAlignment="Top" Foreground="#f3dcbc" HorizontalAlignment="Right"/>
 
                     <TextBlock TextWrapping="NoWrap" 
-                           FontSize="72" 
+                           FontSize="80" 
                            VerticalAlignment="Stretch"
                            HorizontalAlignment="Center"
                            FontWeight="Bold" 
@@ -298,7 +299,7 @@
         <Button Grid.Row="2" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 Command="{Binding StartCommand}" 
-                Height="50"
+                Height="54"
                 Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <behaviours:DoubleClickBehaviour />
@@ -312,7 +313,7 @@
         <Button Grid.Row="2" 
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Command="{Binding StopCommand}"
-                Height="50"
+                Height="54"
                 Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <behaviours:DoubleClickBehaviour />
@@ -393,5 +394,6 @@
         </Grid>
 
     </Grid>
+</Viewbox>
 </UserControl>
  

@@ -18,7 +18,7 @@
         DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
         Topmost="{Binding AlwaysOnTop, Mode=OneWay}"
         Title="S o u n d B o x - O N L Y T" Height="350" Width="395" 
-        Closing="WindowClosing" ResizeMode="CanMinimize" Icon="/OnlyT;component/icon4.ico" >
+        Closing="WindowClosing" ResizeMode="CanResize" Icon="/OnlyT;component/icon4.ico" >
     
     <Grid>
         <ContentControl Content="{Binding CurrentPage}" />
