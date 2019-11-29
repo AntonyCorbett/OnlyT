@@ -2,7 +2,6 @@
 {
     // ReSharper disable UnusedMember.Global
     using System;
-    using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
     using AnalogueClock;
@@ -42,6 +41,7 @@
             Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChanged);
             Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
             Messenger.Default.Register<TimerFrameChangedMessage>(this, OnTimerFrameChanged);
+            Messenger.Default.Register<ClockIsFlatChangedMessage>(this, OnClockIsFlatChanged);
         }
 
         public int BorderThickness => _optionsService.Options.TimerFrame ? 3 : 0;
@@ -51,6 +51,8 @@
         public int TimerColumnWidthPercentage { get; private set; } = -1;
 
         public bool ApplicationClosing { get; private set; }
+
+        public bool ClockIsFlat => _optionsService.Options.ClockIsFlat;
 
         public bool ShowTimeOfDayUnderTimer
         {
@@ -273,6 +275,11 @@
             RaisePropertyChanged(nameof(TimerBorderThickness));
             RaisePropertyChanged(nameof(UseTimerBackgroundGradient));
             RaisePropertyChanged(nameof(UseClockBackgroundGradient));
+        }
+
+        private void OnClockIsFlatChanged(ClockIsFlatChangedMessage msg)
+        {
+            RaisePropertyChanged(nameof(ClockIsFlat));
         }
     }
 }

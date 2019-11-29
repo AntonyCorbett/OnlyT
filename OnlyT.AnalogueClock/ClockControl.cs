@@ -14,6 +14,13 @@
 
     public class ClockControl : Control
     {
+        public static readonly DependencyProperty IsFlatProperty =
+            DependencyProperty.Register(
+                "IsFlat",
+                typeof(bool),
+                typeof(ClockControl),
+                new FrameworkPropertyMetadata(IsFlatPropertyChanged));
+
         public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
             DependencyProperty.Register(
                 "DigitalTimeFormatShowLeadingZero", 
@@ -78,8 +85,8 @@
         private double _minuteHandDropShadowOpacity;
         private double _secondHandDropShadowOpacity;
 
+        private bool _elementsAvailable;
         private bool _showElapsedSector;
-        private bool _isFlat;
         private Ellipse _outerDial;
         private Ellipse _middleDial;
         private Ellipse _centrePointDial;
@@ -153,6 +160,13 @@
             set => SetValue(DigitalTimeFormatShowLeadingZeroProperty, value);
         }
 
+        public bool IsFlat
+        {
+            // ReSharper disable once PossibleNullReferenceException
+            get => (bool)GetValue(IsFlatProperty);
+            set => SetValue(IsFlatProperty, value);
+        }
+
         public string CurrentTimeHrMin
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -169,63 +183,27 @@
             private set => SetValue(CurrentTimeSecProperty, value);
         }
 
-        private bool ShowElapsedSector
-        {
-            get => _showElapsedSector;
-            set
-            {
-                if (_showElapsedSector != value)
-                {
-                    _showElapsedSector = value;
-
-                    if (_showElapsedSector)
-                    {
-                        _sectorPath2.Fill = new SolidColorBrush(Color.FromRgb(230, 255, 230));
-                        _sectorPath2.StrokeThickness = 1;
-                    }
-                    else
-                    {
-                        _sectorPath2.Fill = Brushes.White;
-                        _sectorPath2.StrokeThickness = 0;
-                    }
-                }
-            }
-        }
-
-        private bool IsFlat
-        {
-            get => _isFlat;
-            set
-            {
-                if (_isFlat != value)
-                {
-                    _isFlat = value;
-
-                    if (!_isFlat)
-                    {
-                        SetDefaultNonFlatStyle();
-                    }
-                    else
-                    {
-                        SetFlatStyle();
-                    }
-                }
-            }
-        }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             GetElementRefs();
 
-            SetDefaultNonFlatStyle();
-
+            SetFlatOrNonFlatStyle();
+            
             if (GetTemplateChild("ClockCanvas") is Canvas cc)
             {
                 GenerateHourMarkers(cc);
                 GenerateHourNumbers(cc);
             }
+        }
+
+        private static void IsFlatPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var c = (ClockControl)d;
+            c.SetFlatOrNonFlatStyle();
         }
 
         private static void DigitalTimeFormatShowLeadingZeroPropertyChanged(
@@ -279,18 +257,28 @@
             }
             else
             {
-                bool delay = e.OldValue == null;
+                var delay = e.OldValue == null;
                 if (delay)
                 {
                     // the first time we display the sector we delay it for aesthetics
                     // (so it doesn't appear just as the clock is fading out)
-                    Task.Delay(1000).ContinueWith(t => { c.Dispatcher.Invoke(() => { DrawSector(c, sector); }); });
+                    Task.Delay(1000).ContinueWith(t => { c.Dispatcher?.Invoke(() => { DrawSector(c, sector); }); });
                 }
                 else
                 {
                     DrawSector(c, sector);
                 }
             }
+        }
+
+        private static bool IsLargeArc(double startAngle, double endAngle)
+        {
+            if (endAngle < startAngle)
+            {
+                return (360 - startAngle + endAngle) > 180;
+            }
+
+            return endAngle - startAngle >= 180.0;
         }
 
         private static void DrawSector(ClockControl c, DurationSector sector)
@@ -303,26 +291,16 @@
                 DrawSector(c._sectorPath1, sector.StartAngle, sector.EndAngle, IsLargeArc(sector.StartAngle, sector.EndAngle));
             }
 
-            c.ShowElapsedSector = sector.ShowElapsedSector;
+            c.SetShowElapsedSector(sector.ShowElapsedSector);
 
             // light green sector...
             DrawSector(c._sectorPath2, sector.StartAngle, sector.CurrentAngle, IsLargeArc(sector.StartAngle, sector.CurrentAngle));
-            
+
             if (sector.IsOvertime)
             {
                 // red sector...
                 DrawSector(c._sectorPath3, sector.EndAngle, sector.CurrentAngle, IsLargeArc(sector.EndAngle, sector.CurrentAngle));
             }
-        }
-
-        private static bool IsLargeArc(double startAngle, double endAngle)
-        {
-            if (endAngle < startAngle)
-            {
-                return (360 - startAngle + endAngle) > 180;
-            }
-
-            return endAngle - startAngle >= 180.0;
         }
 
         private static void DrawSector(Path sectorPath, double startAngle, double endAngle, bool isLargeArc)
@@ -669,6 +647,23 @@
             {
                 _sectorPath3 = sectorPath3;
             }
+
+            _elementsAvailable = true;
+        }
+
+        private void SetFlatOrNonFlatStyle()
+        {
+            if (_elementsAvailable)
+            {
+                if (IsFlat)
+                {
+                    SetFlatStyle();
+                }
+                else
+                {
+                    SetDefaultNonFlatStyle();
+                }
+            }
         }
 
         private void SetDefaultNonFlatStyle()
@@ -691,6 +686,25 @@
             _secondHandDropShadowOpacity = 0.0;
             _hourHandDropShadowOpacity = 0.0;
             _minuteHandDropShadowOpacity = 0.0;
+        }
+
+        private void SetShowElapsedSector(bool value)
+        {
+            if (_showElapsedSector != value)
+            {
+                _showElapsedSector = value;
+
+                if (_showElapsedSector)
+                {
+                    _sectorPath2.Fill = new SolidColorBrush(Color.FromRgb(230, 255, 230));
+                    _sectorPath2.StrokeThickness = 1;
+                }
+                else
+                {
+                    _sectorPath2.Fill = Brushes.White;
+                    _sectorPath2.StrokeThickness = 0;
+                }
+            }
         }
     }
 }

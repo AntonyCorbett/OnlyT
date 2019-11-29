@@ -230,6 +230,7 @@
     <Compile Include="ViewModel\Messages\AutoBellSettingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\ClockIsFlatChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownElementsChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownFrameChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownWindowStatusChangedMessage.cs" />

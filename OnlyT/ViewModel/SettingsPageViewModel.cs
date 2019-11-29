@@ -720,6 +720,20 @@
             }
         }
 
+        public bool ClockIsFlat
+        {
+            get => _optionsService.Options.ClockIsFlat;
+            set
+            {
+                if (_optionsService.Options.ClockIsFlat != value)
+                {
+                    _optionsService.Options.ClockIsFlat = value;
+                    RaisePropertyChanged();
+                    Messenger.Default.Send(new ClockIsFlatChangedMessage());
+                }
+            }
+        }
+
         public string ApiCode
         {
             get => _optionsService.Options.ApiCode;

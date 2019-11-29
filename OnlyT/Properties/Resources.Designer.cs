@@ -525,6 +525,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flat clock.
+        /// </summary>
+        public static string FLAT_CLOCK {
+            get {
+                return ResourceManager.GetString("FLAT_CLOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analogue.
         /// </summary>
         public static string FULL_SCREEN_ANALOGUE {

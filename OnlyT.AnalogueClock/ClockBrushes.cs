@@ -1,9 +1,8 @@
-﻿using System.Windows.Media.Effects;
-
-namespace OnlyT.AnalogueClock
+﻿namespace OnlyT.AnalogueClock
 {
     using System.Windows;
     using System.Windows.Media;
+    using System.Windows.Media.Effects;
 
     internal static class ClockBrushes
     {

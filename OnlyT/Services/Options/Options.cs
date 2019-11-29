@@ -140,6 +140,8 @@
 
         public LogEventLevel LogEventLevel { get; set; }
 
+        public bool ClockIsFlat { get; set; }
+
         public CountdownDurationItem[] GetCountdownDurationItems()
         {
             var result = new List<CountdownDurationItem>();

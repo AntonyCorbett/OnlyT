@@ -263,6 +263,10 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.MOUSE_PTR}" />
 
+                        <CheckBox IsChecked="{Binding ClockIsFlat, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.FLAT_CLOCK}" />
+
                         <ComboBox ItemsSource="{Binding PersistDurationItems}" 
                                   Style="{StaticResource SettingsComboStyle}"
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.PERSIST_TALK_DURATION}"
