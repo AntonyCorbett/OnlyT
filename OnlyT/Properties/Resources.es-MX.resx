@@ -673,4 +673,8 @@
     <value>Reloj plano</value>
     <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
   </data>
+  <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
+    <value>Weekend includes Friday</value>
+    <comment>See Settings =&gt; Automatic mode</comment>
+  </data>
 </root>
