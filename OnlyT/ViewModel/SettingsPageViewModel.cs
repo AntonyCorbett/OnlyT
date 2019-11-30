@@ -400,10 +400,10 @@
                     _optionsService.Options.WeekendIncludesFriday = value;
                     RaisePropertyChanged();
 
-                    if (_dateTimeService.Now().DayOfWeek == DayOfWeek.Friday)
-                    {
-                        Messenger.Default.Send(new AutoMeetingChangedMessage());
-                    }
+                    // may need to change the talk schedule (i.e. if today is Friday)...
+                    MidWeekOrWeekend = _optionsService.IsNowWeekend()
+                        ? MidWeekOrWeekend.Weekend
+                        : MidWeekOrWeekend.MidWeek;
                 }
             }
         }
