@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Windows.Threading;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Models;
     using OnlyT.Services.Options;
     using OnlyT.Services.TalkSchedule;
@@ -15,6 +16,7 @@
         private readonly IOptionsService _optionsService;
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly DispatcherTimer _timer = new DispatcherTimer();
         private readonly Stopwatch _stopwatch = new Stopwatch();
         private readonly Random _random = new Random();
@@ -25,11 +27,13 @@
         public AutomateService(
             IOptionsService optionsService, 
             ITalkTimerService timerService,
-            ITalkScheduleService scheduleService)
+            ITalkScheduleService scheduleService,
+            IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
             _timerService = timerService;
             _scheduleService = scheduleService;
+            _dateTimeService = dateTimeService;
         }
         
         public void Execute()
@@ -46,7 +50,7 @@
 
         private void TimerTick(object sender, System.EventArgs e)
         {
-            var now = DateTime.Now;
+            var now = _dateTimeService.Now();
 
             if (!_stopwatch.IsRunning)
             {

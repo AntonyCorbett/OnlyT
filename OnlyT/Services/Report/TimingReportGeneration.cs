@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Report.Pdf;
     using OnlyT.Utils;
     using Serilog;
@@ -12,6 +13,7 @@
         // generate report and return file path (or null)
         public static Task<string> ExecuteAsync(
             ILocalTimingDataStoreService dataService, 
+            IDateTimeService dateTimeService,
             string commandLineIdentifier)
         {
             return Task.Run(() =>
@@ -31,7 +33,7 @@
                     return null;
                 }
 
-                var yearFolder = GetDatedOutputFolder(outputFolder);
+                var yearFolder = GetDatedOutputFolder(outputFolder, dateTimeService.Now());
                 Directory.CreateDirectory(yearFolder);
                 
                 if (Directory.Exists(yearFolder))
@@ -50,9 +52,8 @@
             });
         }
 
-        private static string GetDatedOutputFolder(string outputFolder)
+        private static string GetDatedOutputFolder(string outputFolder, DateTime now)
         {
-            var now = DateTime.Now;
             var monthFolderName = $"{now.Year}-{now.Month:D2}";
             return Path.Combine(outputFolder, now.Year.ToString(), monthFolderName);
         }

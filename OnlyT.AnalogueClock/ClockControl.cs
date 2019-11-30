@@ -12,7 +12,7 @@
     using System.Windows.Shapes;
     using System.Windows.Threading;
 
-    public class ClockControl : Control
+    public sealed class ClockControl : Control
     {
         public static readonly DependencyProperty IsFlatProperty =
             DependencyProperty.Register(
@@ -67,7 +67,7 @@
                 typeof(DurationSector), 
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(DurationSectorPropertyChanged));
-
+        
         private static readonly double ClockRadius = 250;
         private static readonly double SectorRadius = 230;
         private static readonly Point ClockOrigin = new Point(ClockRadius, ClockRadius);
@@ -125,6 +125,8 @@
                 CurrentTimeSec = "20";
             }
         }
+
+        public event EventHandler<DateTimeQueryEventArgs> QueryDateTimeEvent;
 
         public bool DigitalTimeFormat24Hours
         {
@@ -350,7 +352,7 @@
 
         private void TimerCallback(object sender, EventArgs eventArgs)
         {
-            var now = DateTime.Now;
+            var now = GetNow();
             
             PositionClockHand(_secondHand, CalculateAngleSeconds(now), _secondHandDropShadowOpacity);
             PositionClockHand(_minuteHand, CalculateAngleMinutes(now), _minuteHandDropShadowOpacity);
@@ -414,7 +416,7 @@
 
         private AnglesOfHands GenerateTargetAngles()
         {
-            DateTime targetTime = DateTime.Now;
+            var targetTime = GetNow();
 
             return new AnglesOfHands
             {
@@ -705,6 +707,23 @@
                     _sectorPath2.StrokeThickness = 0;
                 }
             }
+        }
+
+        private DateTime GetNow()
+        {
+            var args = new DateTimeQueryEventArgs();
+            OnQueryDateTime(args);
+            return args.DateTime;
+        }
+
+        private void OnQueryDateTime(DateTimeQueryEventArgs e)
+        {
+            if (QueryDateTimeEvent == null)
+            {
+                e.DateTime = DateTime.Now;
+            }
+
+            QueryDateTimeEvent?.Invoke(this, e);
         }
     }
 }

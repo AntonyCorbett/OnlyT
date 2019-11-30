@@ -7,6 +7,8 @@
     using System.Windows.Threading;
     using Animations;
     using GalaSoft.MvvmLight.Messaging;
+    using OnlyT.AnalogueClock;
+    using OnlyT.Common.Services.DateTime;
     using Services.Options;
     using Utils;
     using ViewModel;
@@ -19,13 +21,17 @@
     {
         private readonly DispatcherTimer _persistTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
         private readonly IOptionsService _optionsService;
+        private readonly IDateTimeService _dateTimeService;
         private bool _persistingTalkDuration;
         
-        public TimerOutputWindow(IOptionsService optionsService)
+        public TimerOutputWindow(
+            IOptionsService optionsService, 
+            IDateTimeService dateTimeService)
         {
             InitializeComponent();
 
             _optionsService = optionsService;
+            _dateTimeService = dateTimeService;
 
             Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
             Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
@@ -291,6 +297,11 @@
                 // prevent window from being closed independently of application.
                 e.Cancel = true;
             }
+        }
+
+        private void ClockQueryDateTimeEvent(object sender, DateTimeQueryEventArgs e)
+        {
+            e.DateTime = _dateTimeService.Now();
         }
     }
 }

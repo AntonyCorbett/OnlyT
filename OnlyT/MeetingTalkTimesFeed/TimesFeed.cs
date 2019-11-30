@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Text;
     using Newtonsoft.Json;
+    using OnlyT.Common.Services.DateTime;
     using Serilog;
     using Utils;
 
@@ -21,9 +22,9 @@
             _localFeedFile = Path.Combine(FileUtils.GetAppDataFolder(), "feed.json");
         }
 
-        public Meeting GetMeetingDataForToday()
+        public Meeting GetMeetingDataForToday(IDateTimeService dateTimeService)
         {
-            LoadFile();
+            LoadFile(dateTimeService.Now().Date);
             return GetMeetingDataForTodayInternal(_meetingData);
         }
 
@@ -70,14 +71,14 @@
             return result;
         }
 
-        private bool LocalFileTooOld()
+        private bool LocalFileTooOld(DateTime today)
         {
-            bool tooOld = true;
+            var tooOld = true;
 
             if (File.Exists(_localFeedFile))
             {
                 var created = File.GetLastWriteTime(_localFeedFile);
-                var diff = DateTime.Now - created;
+                var diff = today - created;
                 if (diff.TotalDays <= _tooOldDays)
                 {
                     tooOld = false;
@@ -87,19 +88,19 @@
             return tooOld;
         }
 
-        private void LoadFile()
+        private void LoadFile(DateTime today)
         {
             if (_meetingData == null)
             {
-                _meetingData = LoadFileInternal();
+                _meetingData = LoadFileInternal(today);
             }
         }
 
-        private IReadOnlyCollection<Meeting> LoadFileInternal()
+        private IReadOnlyCollection<Meeting> LoadFileInternal(DateTime today)
         {
             List<Meeting> result = null;
 
-            var needRefresh = LocalFileTooOld();
+            var needRefresh = LocalFileTooOld(today);
 
             if (!needRefresh)
             {

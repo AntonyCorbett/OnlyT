@@ -155,6 +155,10 @@
                                   materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding WeekendAdaptiveMode, Mode=TwoWay}"/>
 
+                        <CheckBox IsChecked="{Binding WeekendIncludesFriday, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.WEEKEND_INCLUDES_FRIDAY}" />
+
                         <CheckBox IsChecked="{Binding IsCircuitVisit, Mode=TwoWay}" 
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.CIRCUIT_VISIT}" />

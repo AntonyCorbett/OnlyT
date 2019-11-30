@@ -144,6 +144,8 @@
 
         public bool ClockIsFlat { get; set; }
 
+        public bool WeekendIncludesFriday { get; set; }
+
         public CountdownDurationItem[] GetCountdownDurationItems()
         {
             var result = new List<CountdownDurationItem>();

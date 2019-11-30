@@ -1443,6 +1443,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Weekend includes Friday.
+        /// </summary>
+        public static string WEEKEND_INCLUDES_FRIDAY {
+            get {
+                return ResourceManager.GetString("WEEKEND_INCLUDES_FRIDAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} seconds.
         /// </summary>
         public static string X_SECONDS {

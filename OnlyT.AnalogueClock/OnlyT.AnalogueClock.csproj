@@ -64,6 +64,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeQueryEventArgs.cs" />
     <Compile Include="DurationSector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -33,10 +33,12 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <countdownTimer:CountdownControl x:Name="CountDown" 
-                                             CountdownDurationMins="{Binding CountdownDurationMins}"
-                                             ElementsToShow="{Binding ElementsToShow}"
-                                             Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
+            <countdownTimer:CountdownControl 
+                x:Name="CountDown" 
+                QueryUtcDateTimeEvent="CountDownQueryUtcDateTime"
+                CountdownDurationMins="{Binding CountdownDurationMins}"
+                ElementsToShow="{Binding ElementsToShow}"
+                Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
 
         </Border>
     </Grid>

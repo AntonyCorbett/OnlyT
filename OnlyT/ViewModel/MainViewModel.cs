@@ -18,6 +18,7 @@ namespace OnlyT.ViewModel
     using MaterialDesignThemes.Wpf;
     using Messages;
     using Models;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.JwLibrary;
     using OnlyT.Services.Snackbar;
     using Serilog;
@@ -44,6 +45,7 @@ namespace OnlyT.ViewModel
         private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
         private readonly ICommandLineService _commandLineService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly IHttpServer _httpServer;
         private readonly (int dpiX, int dpiY) _systemDpi;
         private readonly ISnackbarService _snackbarService;
@@ -61,9 +63,11 @@ namespace OnlyT.ViewModel
            ISnackbarService snackbarService,
            IHttpServer httpServer,
            ICommandLineService commandLineService,
-           ICountdownTimerTriggerService countdownTimerTriggerService)
+           ICountdownTimerTriggerService countdownTimerTriggerService,
+           IDateTimeService dateTimeService)
         {
             _commandLineService = commandLineService;
+            _dateTimeService = dateTimeService;
 
             if (commandLineService.NoGpu || ForceSoftwareRendering())
             {
@@ -305,9 +309,9 @@ namespace OnlyT.ViewModel
 
         private void ManageScheduleOnHeartbeat()
         {
-            if ((DateTime.Now - _lastRefreshedSchedule).Seconds > 10)
+            if ((_dateTimeService.Now() - _lastRefreshedSchedule).Seconds > 10)
             {
-                _lastRefreshedSchedule = DateTime.Now;
+                _lastRefreshedSchedule = _dateTimeService.Now();
                 Messenger.Default.Send(new RefreshScheduleMessage());
             }
         }
@@ -411,7 +415,7 @@ namespace OnlyT.ViewModel
                     var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId);
                     if (targetMonitor != null)
                     {
-                        _countdownWindow = new CountdownWindow();
+                        _countdownWindow = new CountdownWindow(_dateTimeService);
                         _countdownWindow.TimeUpEvent += OnCountdownTimeUp;
                         ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
                         _countdownWindow.Start(offsetSeconds);
@@ -442,7 +446,7 @@ namespace OnlyT.ViewModel
                 var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
                 if (targetMonitor != null)
                 {
-                    _timerWindow = new TimerOutputWindow(_optionsService);
+                    _timerWindow = new TimerOutputWindow(_optionsService, _dateTimeService);
                     ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
                 }
             }

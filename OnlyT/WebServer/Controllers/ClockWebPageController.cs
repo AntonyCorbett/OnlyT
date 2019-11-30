@@ -10,12 +10,15 @@
     {
         private static readonly Lazy<byte[]> WebPageHtml = new Lazy<byte[]>(GenerateWebPageHtml);
 
-        public void HandleRequestForTimerData(HttpListenerResponse response, TimerInfoEventArgs timerInfo)
+        public void HandleRequestForTimerData(
+            HttpListenerResponse response, 
+            TimerInfoEventArgs timerInfo,
+            DateTime now)
         {
             response.ContentType = "text/xml";
             response.ContentEncoding = Encoding.UTF8;
 
-            string responseString = CreateXml(timerInfo);
+            string responseString = CreateXml(timerInfo, now);
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
 
             response.ContentLength64 = buffer.Length;
@@ -44,7 +47,7 @@
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }
 
-        private string CreateXml(TimerInfoEventArgs timerInfo)
+        private string CreateXml(TimerInfoEventArgs timerInfo, DateTime now)
         {
             var sb = new StringBuilder();
            
@@ -59,7 +62,6 @@
 
                 case ClockServerMode.TimeOfDay:
                     // in this mode mins and secs hold the total offset time into the day
-                    DateTime now = DateTime.Now;
                     int use24Hrs = timerInfo.Use24HrFormat ? 1 : 0;
                     sb.AppendLine(
                         $" <clock mode=\"TimeOfDay\" mins=\"{(now.Hour * 60) + now.Minute}\" secs=\"{now.Second}\" ms=\"{now.Millisecond}\" targetSecs=\"0\" use24Hr=\"{use24Hrs}\"/>");

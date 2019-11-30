@@ -3,6 +3,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
     using Moq;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.CommandLine;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
@@ -32,6 +33,7 @@
             Mock<ICommandLineService> commandLineService = new Mock<ICommandLineService>();
             Mock<ILocalTimingDataStoreService> timingDataService = new Mock<ILocalTimingDataStoreService>();
             Mock<ISnackbarService> snackbarService = new Mock<ISnackbarService>();
+            IDateTimeService dateTimeService = new MockDateTimeService();
 
             var vm = new OperatorPageViewModel(
                 timerService.Object, 
@@ -41,7 +43,8 @@
                 commandLineService.Object,
                 bellService.Object,
                 timingDataService.Object,
-                snackbarService.Object);
+                snackbarService.Object,
+                dateTimeService);
 
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);

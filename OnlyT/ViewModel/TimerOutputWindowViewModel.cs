@@ -8,6 +8,7 @@
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
+    using OnlyT.Common.Services.DateTime;
     using Services.Options;
     using Utils;
 
@@ -16,6 +17,7 @@
     {
         private static readonly int _secsPerHour = 60 * 60;
         private readonly IOptionsService _optionsService;
+        private readonly IDateTimeService _dateTimeService;
 
         private int _analogueClockColumnWidthPercentage = -1;
         private string _timeString;
@@ -24,10 +26,13 @@
         private DurationSector _durationSector;
         private bool _showTimeOfDayUnderTimer;
 
-        public TimerOutputWindowViewModel(IOptionsService optionsService)
+        public TimerOutputWindowViewModel(
+            IOptionsService optionsService,
+            IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
-        
+            _dateTimeService = dateTimeService;
+
             AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
             ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
 
@@ -213,7 +218,7 @@
                 // can't display duration sector effectively when >= 1 hr
                 if (remainingSecs < _secsPerHour) 
                 {
-                    var now = DateTime.Now;
+                    var now = _dateTimeService.Now();
                     var startAngle = CalcAngleFromTime(now);
 
                     var endTime = now.AddSeconds(remainingSecs);
@@ -252,7 +257,7 @@
 
                 if (DurationSector != null)
                 {
-                    var now = DateTime.Now;
+                    var now = _dateTimeService.Now();
                     var currentAngle = CalcAngleFromTime(now);
 
                     // prevent gratuitous updates

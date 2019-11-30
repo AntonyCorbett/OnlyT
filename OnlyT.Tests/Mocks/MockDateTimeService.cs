@@ -31,5 +31,10 @@
         {
             return Now();
         }
+
+        public DateTime Today()
+        {
+            return Now().Date;
+        }
     }
 }

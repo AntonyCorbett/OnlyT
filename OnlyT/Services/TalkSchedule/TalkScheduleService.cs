@@ -18,6 +18,7 @@
         private static readonly DateTime _january2020Change = new DateTime(2020, 1, 6);
 
         private readonly IOptionsService _optionsService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly bool _isJanuary2020OrLater;
 
         // the "talk_schedule.xml" file may exist in MyDocs\OnlyT..
@@ -30,6 +31,7 @@
             IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
+            _dateTimeService = dateTimeService;
 
             _isJanuary2020OrLater = dateTimeService.Now().Date >= _january2020Change;
 
@@ -42,7 +44,7 @@
         public void Reset()
         {
             _fileBasedSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleFileBased.Read(_optionsService.Options.AutoBell));
-            _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService, _isJanuary2020OrLater));
+            _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService, _dateTimeService, _isJanuary2020OrLater));
             _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
 

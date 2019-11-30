@@ -15,7 +15,7 @@
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
-    using OnlyT.Services.Automate;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Serilog;
@@ -52,6 +52,7 @@
         private readonly IBellService _bellService;
         private readonly ICommandLineService _commandLineService;
         private readonly ILocalTimingDataStoreService _timingDataService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly ISnackbarService _snackbarService;
 
         private int _secondsElapsed;
@@ -76,7 +77,8 @@
            ICommandLineService commandLineService,
            IBellService bellService,
            ILocalTimingDataStoreService timingDataService,
-           ISnackbarService snackbarService)
+           ISnackbarService snackbarService,
+           IDateTimeService dateTimeService)
         {
             _scheduleService = scheduleService;
             _optionsService = optionsService;
@@ -86,6 +88,8 @@
             _timerService = timerService;
             _snackbarService = snackbarService;
             _timingDataService = timingDataService;
+            _dateTimeService = dateTimeService;
+
             _timerService.TimerChangedEvent += TimerChangedHandler;
             _countUp = _optionsService.Options.CountUp;
 
@@ -452,7 +456,7 @@
 
             Task.Run(() =>
             {
-                int ms = DateTime.Now.Millisecond;
+                int ms = _dateTimeService.Now().Millisecond;
                 if (ms > 100)
                 {
                     // sync to the second (so that the timer window clock and countdown
@@ -539,7 +543,7 @@
 
         private DateTime CalculateStartOfMeeting()
         {
-            var estimated = DateUtils.GetNearestQuarterOfAnHour(DateTime.Now);
+            var estimated = DateUtils.GetNearestQuarterOfAnHour(_dateTimeService.Now());
             if (_meetingStartTimeFromCountdown == null)
             {
                 return estimated;
@@ -572,7 +576,7 @@
             {
                 Log.Logger.Debug("Storing end of meeting timer data");
 
-                var songStart = DateTime.Now.AddSeconds(5);
+                var songStart = _dateTimeService.Now().AddSeconds(5);
 
                 // a guess!
                 var actualMeetingEnd = songStart.AddMinutes(5);
@@ -724,7 +728,7 @@
             }
             else
             {
-                _meetingStartTimeFromCountdown = DateUtils.GetNearestMinute(DateTime.Now);
+                _meetingStartTimeFromCountdown = DateUtils.GetNearestMinute(_dateTimeService.Now());
             }
 
             IsCountdownActive = message.Showing;
@@ -1053,6 +1057,7 @@
 
                 var reportPath = await TimingReportGeneration.ExecuteAsync(
                     _timingDataService, 
+                    _dateTimeService,
                     _commandLineService.OptionsIdentifier).ConfigureAwait(false);
 
                 if (string.IsNullOrEmpty(reportPath))

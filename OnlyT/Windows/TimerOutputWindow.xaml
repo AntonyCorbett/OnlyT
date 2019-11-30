@@ -39,6 +39,7 @@
 
                 <clock:ClockControl x:Name="TheClock" Grid.Row="0" 
                              Margin="15" 
+                             QueryDateTimeEvent="ClockQueryDateTimeEvent"
                              IsFlat="{Binding ClockIsFlat}"
                              DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
                              DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"

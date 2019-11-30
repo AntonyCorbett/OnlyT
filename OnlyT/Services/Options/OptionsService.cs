@@ -10,6 +10,7 @@
     using CommandLine;
     using GalaSoft.MvvmLight.Messaging;
     using Newtonsoft.Json;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.LogLevelSwitch;
     using OnlyT.Services.Monitors;
     using OnlyT.ViewModel.Messages;
@@ -25,6 +26,7 @@
         private readonly ICommandLineService _commandLineService;
         private readonly ILogLevelSwitchService _logLevelSwitchService;
         private readonly IMonitorsService _monitorsService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly int _optionsVersion = 1;
         private Options _options;
         private string _optionsFilePath;
@@ -33,11 +35,13 @@
         public OptionsService(
             ICommandLineService commandLineService,
             ILogLevelSwitchService logLevelSwitchService,
-            IMonitorsService monitorsService)
+            IMonitorsService monitorsService,
+            IDateTimeService dateTimeService)
         {
             _commandLineService = commandLineService;
             _logLevelSwitchService = logLevelSwitchService;
             _monitorsService = monitorsService;
+            _dateTimeService = dateTimeService;
 
             Messenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
         }
@@ -258,7 +262,7 @@
 
         private bool IsWeekend()
         {
-            var now = DateTime.Now;
+            var now = _dateTimeService.Now();
             return now.DayOfWeek == DayOfWeek.Saturday || now.DayOfWeek == DayOfWeek.Sunday;
         }
 

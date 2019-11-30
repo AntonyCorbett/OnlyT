@@ -4,15 +4,21 @@
     using System.Threading.Tasks;
     using System.Windows;
     using GalaSoft.MvvmLight.Threading;
+    using OnlyT.Common.Services.DateTime;
+    using OnlyT.CountdownTimer;
 
     /// <summary>
     /// Interaction logic for CountdownWindow.xaml
     /// </summary>
     public partial class CountdownWindow : Window
     {
-        public CountdownWindow()
+        private readonly IDateTimeService _dateTimeService;
+
+        public CountdownWindow(IDateTimeService dateTimeService)
         {
             InitializeComponent();
+
+            _dateTimeService = dateTimeService;
         }
 
         public event EventHandler TimeUpEvent;
@@ -40,6 +46,11 @@
         private void OnTimeUpEvent()
         {
             TimeUpEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CountDownQueryUtcDateTime(object sender, UtcDateTimeQueryEventArgs e)
+        {
+            e.UtcDateTime = _dateTimeService.UtcNow();
         }
     }
 }

@@ -4,6 +4,7 @@
     using System.Net;
     using ErrorHandling;
     using Models;
+    using OnlyT.Common.Services.DateTime;
     using Services.Bell;
     using Services.Options;
     using Services.TalkSchedule;
@@ -17,7 +18,8 @@
 
         private readonly ApiThrottler _apiThrottler;
         private readonly IOptionsService _optionsService;
-        
+        private readonly IDateTimeService _dateTimeService;
+
         private readonly Lazy<TimersApiController> _timersApiController;
         private readonly Lazy<DateTimeApiController> _dateTimeApiController;
         private readonly Lazy<BellApiController> _bellApiController;
@@ -29,11 +31,13 @@
             IOptionsService optionsService,
             IBellService bellService,
             ITalkTimerService timerService,
-            ITalkScheduleService talksService)
+            ITalkScheduleService talksService,
+            IDateTimeService dateTimeService)
         {
             _apiThrottler = apiThrottler;
             _optionsService = optionsService;
-        
+            _dateTimeService = dateTimeService;
+
             _timersApiController = new Lazy<TimersApiController>(() => 
                 new TimersApiController(timerService, talksService, _optionsService, _apiThrottler));
 
@@ -100,7 +104,7 @@
 
                         case "datetime":
                             DisableCache(response);
-                            _dateTimeApiController.Value.Handler(request, response);
+                            _dateTimeApiController.Value.Handler(request, response, _dateTimeService.Now());
                             break;
 
                         case "system":

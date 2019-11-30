@@ -61,6 +61,8 @@
             _timer.Tick += TimerFire;
         }
 
+        public event EventHandler<UtcDateTimeQueryEventArgs> QueryUtcDateTimeEvent;
+
         public event EventHandler TimeUpEvent;
 
         public int CountdownDurationMins
@@ -87,7 +89,7 @@
 
         public void Start(int secsElapsed)
         {
-            _start = DateTime.UtcNow.AddSeconds(-secsElapsed);
+            _start = GetNowUtc().AddSeconds(-secsElapsed);
             _timer.Start();
         }
 
@@ -159,7 +161,7 @@
             if (_start != default(DateTime))
             {
                 var secsInCountdown = _countdownDurationMins * 60;
-                var secondsElapsed = (DateTime.UtcNow - _start).TotalSeconds;
+                var secondsElapsed = (GetNowUtc() - _start).TotalSeconds;
                 var secondsLeft = secsInCountdown - secondsElapsed;
 
                 if (secondsLeft >= 0)
@@ -411,7 +413,7 @@
                 else
                 {
                     var secsInCountdown = _countdownDurationMins * 60;
-                    var secondsElapsed = (DateTime.UtcNow - _start).TotalSeconds;
+                    var secondsElapsed = (GetNowUtc() - _start).TotalSeconds;
                     secondsLeft = secsInCountdown - secondsElapsed + 1;
                 }
             }
@@ -436,6 +438,23 @@
                 _pixelsPerDip);
 
             return new Size(formattedText.Width, useExtent ? formattedText.Extent : formattedText.Height);
+        }
+
+        private DateTime GetNowUtc()
+        {
+            var args = new UtcDateTimeQueryEventArgs();
+            OnQueryDateTime(args);
+            return args.UtcDateTime;
+        }
+
+        private void OnQueryDateTime(UtcDateTimeQueryEventArgs e)
+        {
+            if (QueryUtcDateTimeEvent == null)
+            {
+                e.UtcDateTime = DateTime.UtcNow;
+            }
+
+            QueryUtcDateTimeEvent?.Invoke(this, e);
         }
     }
 }

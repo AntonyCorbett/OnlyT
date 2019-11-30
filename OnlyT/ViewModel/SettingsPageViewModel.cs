@@ -13,8 +13,8 @@
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.CountdownTimer;
-    using OnlyT.Services.CommandLine;
     using OnlyT.Services.Snackbar;
     using Serilog;
     using Serilog.Events;
@@ -39,6 +39,7 @@
         private readonly IMonitorsService _monitorsService;
         private readonly IBellService _bellService;
         private readonly ICountdownTimerTriggerService _countdownTimerService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly ClockHourFormatItem[] _clockHourFormats;
         private readonly AdaptiveModeItem[] _adaptiveModes;
         private readonly FullScreenClockModeItem[] _timeOfDayModes;
@@ -52,7 +53,7 @@
            IOptionsService optionsService,
            ISnackbarService snackbarService,
            ICountdownTimerTriggerService countdownTimerService,
-           ICommandLineService commandLineService)
+           IDateTimeService dateTimeService)
         {
             // subscriptions...
             Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
@@ -63,7 +64,8 @@
             _monitorsService = monitorsService;
             _bellService = bellService;
             _countdownTimerService = countdownTimerService;
-            
+            _dateTimeService = dateTimeService;
+
             _monitors = GetSystemMonitors();
             _languages = GetSupportedLanguages();
             _operatingModes = GetOperatingModes();
@@ -384,6 +386,24 @@
                     _optionsService.Options.IsCircuitVisit = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
+                }
+            }
+        }
+
+        public bool WeekendIncludesFriday
+        {
+            get => _optionsService.Options.WeekendIncludesFriday;
+            set
+            {
+                if (_optionsService.Options.WeekendIncludesFriday != value)
+                {
+                    _optionsService.Options.WeekendIncludesFriday = value;
+                    RaisePropertyChanged();
+
+                    if (_dateTimeService.Now().DayOfWeek == DayOfWeek.Friday)
+                    {
+                        Messenger.Default.Send(new AutoMeetingChangedMessage());
+                    }
                 }
             }
         }
@@ -884,7 +904,7 @@
 
         private ClockHourFormatItem[] GetClockHourFormats()
         {
-            var cultureUsesAmPm = !string.IsNullOrEmpty(DateTime.Now.ToString("tt", CultureInfo.CurrentUICulture));
+            var cultureUsesAmPm = !string.IsNullOrEmpty(_dateTimeService.Now().ToString("tt", CultureInfo.CurrentUICulture));
 
             var result = new List<ClockHourFormatItem>
             {

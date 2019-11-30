@@ -12,5 +12,10 @@
         {
             return System.DateTime.UtcNow;
         }
+
+        public System.DateTime Today()
+        {
+            return System.DateTime.Today;
+        }
     }
 }

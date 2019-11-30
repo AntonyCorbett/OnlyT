@@ -15,7 +15,6 @@
     ////    8:07:00 (67:00) Cong study(30 mins)
     ////    8:37:00 (97:00) Concluding comments(3 mins)
     ////    8:40:00 Song / prayer
-    
     ////    7:00:00 (00:00) Start, song / prayer (19:00 - 19:05)
     ////    7:05:00 (05:00) Opening comments (19:05 - 19:08)
     ////    7:08:20 (08:20) Talk (10 mins) (19:08:20 - 19:18:20)
@@ -38,6 +37,7 @@
     using System.Linq;
     using MeetingTalkTimesFeed;
     using Models;
+    using OnlyT.Common.Services.DateTime;
     using Options;
 
     /// <summary>
@@ -59,10 +59,12 @@
         /// Gets the talk schedule.
         /// </summary>
         /// <param name="optionsService">Options service.</param>
+        /// <param name="dateTimeService">DateTime service.</param>
         /// <param name="isJanuary2020OrLater">True if current date is greater than 5 Jan 2020.</param>
         /// <returns>A collection of TalkScheduleItem.</returns>
         public static IEnumerable<TalkScheduleItem> Read(
             IOptionsService optionsService,
+            IDateTimeService dateTimeService,
             bool isJanuary2020OrLater)
         {
             var isCircuitVisit = optionsService.Options.IsCircuitVisit;
@@ -73,7 +75,7 @@
                     isCircuitVisit, 
                     optionsService.Options.IsBellEnabled && optionsService.Options.AutoBell,
                     isJanuary2020OrLater,
-                    GetFeedForToday());
+                    GetFeedForToday(dateTimeService));
         }
 
         public static IEnumerable<TalkScheduleItem> GetMidweekScheduleForTesting(
@@ -87,9 +89,9 @@
                 new TimesFeed().GetSampleMidweekMeetingDataForTesting(theDate));
         }
         
-        private static Meeting GetFeedForToday()
+        private static Meeting GetFeedForToday(IDateTimeService dateTimeService)
         {
-            var feed = new TimesFeed().GetMeetingDataForToday();
+            var feed = new TimesFeed().GetMeetingDataForToday(dateTimeService);
             if (feed != null)
             {
                 SuccessGettingAutoFeedForMidWeekMtg = true;

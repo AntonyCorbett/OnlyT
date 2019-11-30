@@ -5,5 +5,7 @@
         System.DateTime Now();
 
         System.DateTime UtcNow();
+
+        System.DateTime Today();
     }
 }

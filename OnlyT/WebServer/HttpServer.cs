@@ -1,6 +1,5 @@
 ﻿namespace OnlyT.WebServer
 {
-    // ReSharper disable CatchAllClause
     using System;
     using System.Net;
     using System.Threading.Tasks;
@@ -8,6 +7,7 @@
     using ErrorHandling;
     using EventArgs;
     using Models;
+    using OnlyT.Common.Services.DateTime;
     using Serilog;
     using Services.Bell;
     using Services.Options;
@@ -19,6 +19,7 @@
     internal sealed class HttpServer : IHttpServer, IDisposable
     {
         private readonly IOptionsService _optionsService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly ApiThrottler _apiThrottler;
         private readonly ApiRouter _apiRouter;
         private HttpListener _listener;
@@ -28,13 +29,21 @@
             IOptionsService optionsService, 
             IBellService bellService,
             ITalkTimerService timerService,
-            ITalkScheduleService talksService)
+            ITalkScheduleService talksService,
+            IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
-            
+            _dateTimeService = dateTimeService;
+
             _apiThrottler = new ApiThrottler(optionsService);
 
-            _apiRouter = new ApiRouter(_apiThrottler, _optionsService, bellService, timerService, talksService);
+            _apiRouter = new ApiRouter(
+                _apiThrottler, 
+                _optionsService, 
+                bellService, 
+                timerService, 
+                talksService,
+                dateTimeService);
         }
 
         public event EventHandler<TimerInfoEventArgs> RequestForTimerDataEvent;
@@ -190,7 +199,7 @@
                 OnRequestForTimerDataEvent(timerInfo);
 
                 ClockWebPageController controller = new ClockWebPageController();
-                controller.HandleRequestForTimerData(response, timerInfo);
+                controller.HandleRequestForTimerData(response, timerInfo, _dateTimeService.Now());
             }
         }
 

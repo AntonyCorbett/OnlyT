@@ -14,7 +14,10 @@
             _apiThrottler = apiThrottler;
         }
 
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+        public void Handler(
+            HttpListenerRequest request, 
+            HttpListenerResponse response,
+            DateTime now)
         {
             CheckMethodGet(request);
             CheckSegmentLength(request, 4);
@@ -23,16 +26,14 @@
 
             // segments: "/" "api/" "v1/" "datetime/"
             // system clock
-            var dt = DateTime.Now;
-
             var lt = new LocalTime
             {
-                Year = dt.Year,
-                Month = dt.Month,
-                Day = dt.Day,
-                Hour = dt.Hour,
-                Min = dt.Minute,
-                Second = dt.Second
+                Year = now.Year,
+                Month = now.Month,
+                Day = now.Day,
+                Hour = now.Hour,
+                Min = now.Minute,
+                Second = now.Second
             };
 
             WriteResponse(response, lt);

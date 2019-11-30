@@ -145,7 +145,11 @@
 
             if (week == weekCount - 1)
             {
-                var file = TimingReportGeneration.ExecuteAsync(service, null).Result;
+                var file = TimingReportGeneration.ExecuteAsync(
+                    service, 
+                    dateTimeService, 
+                    null).Result;
+
                 Assert.IsNotNull(file);
             }
 
@@ -255,6 +259,11 @@
             public DateTime UtcNow()
             {
                 return Now();
+            }
+
+            public DateTime Today()
+            {
+                return Now().Date;
             }
         }
     }

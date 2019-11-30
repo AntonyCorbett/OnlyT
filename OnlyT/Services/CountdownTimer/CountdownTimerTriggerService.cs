@@ -3,19 +3,25 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using OnlyT.Common.Services.DateTime;
     using Options;
     using Options.MeetingStartTimes;
-    
+
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class CountdownTimerTriggerService : ICountdownTimerTriggerService
     {
         private readonly object _locker = new object();
         private readonly IOptionsService _optionsService;
+        private readonly IDateTimeService _dateTimeService;
         private List<CountdownTriggerPeriod> _triggerPeriods;
 
-        public CountdownTimerTriggerService(IOptionsService optionsService)
+        public CountdownTimerTriggerService(
+            IOptionsService optionsService,
+            IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
+            _dateTimeService = dateTimeService;
+
             UpdateTriggerPeriods();
         }
 
@@ -39,7 +45,7 @@
             {
                 if (_triggerPeriods != null)
                 {
-                    var now = DateTime.Now;
+                    var now = _dateTimeService.Now();
 
                     var trigger = _triggerPeriods.FirstOrDefault(x => x.Start <= now && x.End > now);
                     if (trigger != null)
@@ -58,7 +64,7 @@
         {
             var triggerPeriods = new List<CountdownTriggerPeriod>();
 
-            DateTime today = DateTime.Today; // local time
+            DateTime today = _dateTimeService.Today(); // local time
             int countdownDurationMins = _optionsService.Options.CountdownDurationMins;
 
             foreach (var time in meetingStartTimes)
