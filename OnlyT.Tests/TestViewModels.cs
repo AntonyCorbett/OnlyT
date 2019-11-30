@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Tests
+﻿using System;
+
+namespace OnlyT.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
@@ -23,8 +25,15 @@
             const int TalkIdStart = 500;
             const int NumTalks = 3;
 
-            Mock<IOptionsService> optionsService = new Mock<IOptionsService>();
-            optionsService.Setup(o => o.Options).Returns(MockOptions.Create());
+            var options = MockOptions.Create();
+            options.GenerateTimingReports = false;
+            options.MidWeekAdaptiveMode = AdaptiveMode.TwoWay;
+            options.MidWeekOrWeekend = MidWeekOrWeekend.MidWeek;
+            options.OperatingMode = OperatingMode.Automatic;
+
+            var optionsService = new Mock<IOptionsService>();
+            optionsService.Setup(o => o.Options).Returns(options);
+            optionsService.Setup(x => x.GetAdaptiveMode()).Returns(options.MidWeekAdaptiveMode);
 
             Mock<ITalkTimerService> timerService = new Mock<ITalkTimerService>();
             Mock<IAdaptiveTimerService> adaptiveTimerService = new Mock<IAdaptiveTimerService>();
@@ -33,8 +42,10 @@
             Mock<ICommandLineService> commandLineService = new Mock<ICommandLineService>();
             Mock<ILocalTimingDataStoreService> timingDataService = new Mock<ILocalTimingDataStoreService>();
             Mock<ISnackbarService> snackbarService = new Mock<ISnackbarService>();
-            IDateTimeService dateTimeService = new MockDateTimeService();
+            MockDateTimeService dateTimeService = new MockDateTimeService();
             IQueryWeekendService queryWeekendService = new QueryWeekendService();
+            
+            dateTimeService.Set(new DateTime(2019, 11, 28) + TimeSpan.FromHours(19));
 
             var vm = new OperatorPageViewModel(
                 timerService.Object, 
