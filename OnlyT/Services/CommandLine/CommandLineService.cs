@@ -1,6 +1,7 @@
 ﻿namespace OnlyT.Services.CommandLine
 {
     using System;
+    using System.Globalization;
     using Fclp;
 
     // ReSharper disable once ClassNeverInstantiated.Global
@@ -31,6 +32,20 @@
             p.Setup<bool>("automate")
                 .Callback(s => { Automate = s; }).SetDefault(false);
 
+            p.Setup<string>("datetime")
+                .Callback(s =>
+                {
+                    if (DateTime.TryParseExact(
+                        s, 
+                        "yyyy-MM-dd:HH:mm",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out var result))
+                    {
+                        DateTimeOnLaunch = result;
+                    }
+                }).SetDefault(null);
+
             p.Parse(Environment.GetCommandLineArgs());
         }
 
@@ -47,6 +62,8 @@
         public int CountdownMonitorIndex { get; set; }
 
         public bool Automate { get; set; }
+
+        public DateTime DateTimeOnLaunch { get; set; }
 
         public bool IsTimerMonitorSpecified => TimerMonitorIndex > 0;
 

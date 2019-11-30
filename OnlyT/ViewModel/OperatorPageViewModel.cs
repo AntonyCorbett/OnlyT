@@ -16,6 +16,7 @@
     using Messages;
     using Models;
     using OnlyT.Common.Services.DateTime;
+    using OnlyT.Services.Automate;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Serilog;
@@ -131,7 +132,12 @@
             if (commandLineService.Automate)
             {
 #if DEBUG
-                var automationService = new AutomateService(_optionsService, _timerService, scheduleService);
+                var automationService = new AutomateService(
+                    _optionsService, 
+                    _timerService, 
+                    scheduleService,
+                    dateTimeService);
+
                 automationService.Execute();
 #endif
             }
