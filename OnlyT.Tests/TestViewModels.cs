@@ -34,6 +34,7 @@
             Mock<ILocalTimingDataStoreService> timingDataService = new Mock<ILocalTimingDataStoreService>();
             Mock<ISnackbarService> snackbarService = new Mock<ISnackbarService>();
             IDateTimeService dateTimeService = new MockDateTimeService();
+            IQueryWeekendService queryWeekendService = new QueryWeekendService();
 
             var vm = new OperatorPageViewModel(
                 timerService.Object, 
@@ -44,7 +45,8 @@
                 bellService.Object,
                 timingDataService.Object,
                 snackbarService.Object,
-                dateTimeService);
+                dateTimeService,
+                queryWeekendService);
 
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);

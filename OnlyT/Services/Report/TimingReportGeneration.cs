@@ -4,6 +4,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using OnlyT.Common.Services.DateTime;
+    using OnlyT.Report.Models;
     using OnlyT.Report.Pdf;
     using OnlyT.Utils;
     using Serilog;
@@ -14,6 +15,8 @@
         public static Task<string> ExecuteAsync(
             ILocalTimingDataStoreService dataService, 
             IDateTimeService dateTimeService,
+            IQueryWeekendService queryWeekendService,
+            bool weekendIncludesFriday,
             string commandLineIdentifier)
         {
             return Task.Run(() =>
@@ -43,7 +46,13 @@
                     {
                         var historicalTimes = dataService.GetHistoricalMeetingTimes();
 
-                        var report = new PdfTimingReport(data, historicalTimes, yearFolder);
+                        var report = new PdfTimingReport(
+                            data, 
+                            historicalTimes,
+                            queryWeekendService,
+                            weekendIncludesFriday,
+                            yearFolder);
+
                         return report.Execute();
                     }
                 }

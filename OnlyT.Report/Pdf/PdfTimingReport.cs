@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.IO;
     using System.Text;
+    using OnlyT.Common.Services.DateTime;
     using OnlyT.Report.Models;
     using OnlyT.Report.Properties;
     using PdfSharp.Charting;
@@ -12,7 +13,7 @@
     using PdfSharp.Pdf;
     using Serilog;
 
-    public class PdfTimingReport
+    public sealed class PdfTimingReport
     {
         private const int LargestDeviationMins = 10;
         private const int MinChartSeries = 5;
@@ -25,6 +26,9 @@
         private readonly XBrush _greenBrush = XBrushes.Green;
         private readonly XBrush _redBrush = XBrushes.Red;
         private readonly HistoricalMeetingTimes _historicalASummary;
+
+        private readonly IQueryWeekendService _queryWeekendService;
+        private readonly bool _weekendIncludesFriday;
 
         private XFont _titleFont;
         private XFont _subTitleFont;
@@ -40,10 +44,17 @@
         private double _rightX;
         private double _rightXIndent;
         
-        public PdfTimingReport(MeetingTimes data, HistoricalMeetingTimes historicalASummary, string outputFolder)
+        public PdfTimingReport(
+            MeetingTimes data, 
+            HistoricalMeetingTimes historicalASummary, 
+            IQueryWeekendService queryWeekendService,
+            bool weekendIncludesFriday,
+            string outputFolder)
         {
             _data = data;
             _historicalASummary = historicalASummary;
+            _queryWeekendService = queryWeekendService;
+            _weekendIncludesFriday = weekendIncludesFriday;
             _outputFolder = outputFolder;
         }
 
@@ -239,11 +250,12 @@
 
         private bool UseSummary(MeetingTimeSummary summary, ChartMeetingType mtgType)
         {
+            var isWeekend = _queryWeekendService.IsWeekend(
+                summary.MeetingDate, _weekendIncludesFriday);
+
             if (mtgType == ChartMeetingType.Both ||
-                (mtgType == ChartMeetingType.Weekend &&
-                 (summary.MeetingDate.DayOfWeek == DayOfWeek.Saturday || summary.MeetingDate.DayOfWeek == DayOfWeek.Sunday)) ||
-                (mtgType == ChartMeetingType.Midweek && summary.MeetingDate.DayOfWeek != DayOfWeek.Saturday &&
-                 summary.MeetingDate.DayOfWeek != DayOfWeek.Sunday))
+                (mtgType == ChartMeetingType.Weekend && isWeekend) ||
+                (mtgType == ChartMeetingType.Midweek && !isWeekend))
             {
                 return Math.Abs(summary.Overtime.TotalMinutes) < 30;
             }

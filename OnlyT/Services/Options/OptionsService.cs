@@ -27,6 +27,7 @@
         private readonly ILogLevelSwitchService _logLevelSwitchService;
         private readonly IMonitorsService _monitorsService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly IQueryWeekendService _queryWeekendService;
         private readonly int _optionsVersion = 1;
         private Options _options;
         private string _optionsFilePath;
@@ -36,12 +37,14 @@
             ICommandLineService commandLineService,
             ILogLevelSwitchService logLevelSwitchService,
             IMonitorsService monitorsService,
-            IDateTimeService dateTimeService)
+            IDateTimeService dateTimeService,
+            IQueryWeekendService queryWeekendService)
         {
             _commandLineService = commandLineService;
             _logLevelSwitchService = logLevelSwitchService;
             _monitorsService = monitorsService;
             _dateTimeService = dateTimeService;
+            _queryWeekendService = queryWeekendService;
 
             Messenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
         }
@@ -113,6 +116,16 @@
             }
 
             return result;
+        }
+
+        public bool IsWeekend(DateTime theDate)
+        {
+            return _queryWeekendService.IsWeekend(theDate, _options.WeekendIncludesFriday);
+        }
+
+        public bool IsNowWeekend()
+        {
+            return IsWeekend(_dateTimeService.Now());
         }
 
         /// <summary>
@@ -260,17 +273,11 @@
             _options.IsCircuitVisit = false;
         }
 
-        private bool IsWeekend()
-        {
-            var now = _dateTimeService.Now();
-            return now.DayOfWeek == DayOfWeek.Saturday || now.DayOfWeek == DayOfWeek.Sunday;
-        }
-
         private void SetMidWeekOrWeekend()
         {
             // when the settings are read we ignore this saved setting 
             // and reset according to current day of week.
-            _options.MidWeekOrWeekend = IsWeekend()
+            _options.MidWeekOrWeekend = IsNowWeekend()
                ? MidWeekOrWeekend.Weekend
                : MidWeekOrWeekend.MidWeek;
         }

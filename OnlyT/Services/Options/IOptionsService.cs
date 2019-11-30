@@ -1,5 +1,7 @@
 ﻿namespace OnlyT.Services.Options
 {
+    using System;
+
     public interface IOptionsService
     {
         Options Options { get; }
@@ -11,6 +13,10 @@
         bool IsTimerMonitorSetByCommandLine { get; }
 
         bool IsCountdownMonitorSetByCommandLine { get; }
+
+        bool IsNowWeekend();
+
+        bool IsWeekend(DateTime theDate);
 
         void Save();
 

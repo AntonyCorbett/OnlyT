@@ -76,6 +76,7 @@
     <Compile Include="Models\MeetingTimedItem.cs" />
     <Compile Include="Models\MeetingTimes.cs" />
     <Compile Include="Models\MeetingTimeSummary.cs" />
+    <Compile Include="Models\QueryIsWeekendDateEventArgs.cs" />
     <Compile Include="Pdf\PdfTimingReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

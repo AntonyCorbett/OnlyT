@@ -55,6 +55,7 @@
         private readonly ILocalTimingDataStoreService _timingDataService;
         private readonly IDateTimeService _dateTimeService;
         private readonly ISnackbarService _snackbarService;
+        private readonly IQueryWeekendService _queryWeekendService;
 
         private int _secondsElapsed;
         private bool _countUp;
@@ -79,7 +80,8 @@
            IBellService bellService,
            ILocalTimingDataStoreService timingDataService,
            ISnackbarService snackbarService,
-           IDateTimeService dateTimeService)
+           IDateTimeService dateTimeService,
+           IQueryWeekendService queryWeekendService)
         {
             _scheduleService = scheduleService;
             _optionsService = optionsService;
@@ -90,6 +92,7 @@
             _snackbarService = snackbarService;
             _timingDataService = timingDataService;
             _dateTimeService = dateTimeService;
+            _queryWeekendService = queryWeekendService;
 
             _timerService.TimerChangedEvent += TimerChangedHandler;
             _countUp = _optionsService.Options.CountUp;
@@ -1064,6 +1067,8 @@
                 var reportPath = await TimingReportGeneration.ExecuteAsync(
                     _timingDataService, 
                     _dateTimeService,
+                    _queryWeekendService,
+                    _optionsService.Options.WeekendIncludesFriday,
                     _commandLineService.OptionsIdentifier).ConfigureAwait(false);
 
                 if (string.IsNullOrEmpty(reportPath))

@@ -38,6 +38,7 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<ILocalTimingDataStoreService, LocalTimingDataStoreService>();
             SimpleIoc.Default.Register<IDateTimeService>(() => new DateTimeService(CommandLineServiceInstance.Value.DateTimeOnLaunch));
             SimpleIoc.Default.Register<ILogLevelSwitchService, LogLevelSwitchService>();
+            SimpleIoc.Default.Register<IQueryWeekendService, QueryWeekendService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);
 

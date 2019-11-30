@@ -19,7 +19,7 @@
 
         private readonly Random _random = new Random();
 
-        private bool _useRandomTimes = true;
+        private readonly bool _useRandomTimes = true;
 
         [TestMethod]
         public void TestReportGeneration()
@@ -39,16 +39,33 @@
                 lastMtgTimes = StoreMidweekData(wk, weekCount, dateOfMidweekMtg, dateTimeService);
             }
 
-            WriteReport(dateTimeService, lastMtgTimes);
+            WriteReport(dateTimeService, new QueryWeekendService(), lastMtgTimes);
         }
 
-        private void WriteReport(DateTimeServiceForTests dateTimeService, MeetingTimes lastMtgTimes)
+        private void WriteReport(
+            DateTimeServiceForTests dateTimeService, 
+            IQueryWeekendService queryWeekendService,
+            MeetingTimes lastMtgTimes)
         {
             var service = new LocalTimingDataStoreService(null, dateTimeService);
             var historicalTimes = service.GetHistoricalMeetingTimes();
 
-            PdfTimingReport report = new PdfTimingReport(lastMtgTimes, historicalTimes, Path.GetTempPath());
+            var report = new PdfTimingReport(
+                lastMtgTimes, 
+                historicalTimes,
+                queryWeekendService,
+                false,
+                Path.GetTempPath());
+
             report.Execute();
+        }
+
+        private void ReportQueryIsWeekendDateEvent(
+            object sender, 
+            QueryIsWeekendDateEventArgs e)
+        {
+            e.IsWeekend = e.Date.DayOfWeek == DayOfWeek.Saturday || 
+                          e.Date.DayOfWeek == DayOfWeek.Sunday;
         }
 
         private void StoreWeekendData(
@@ -148,6 +165,8 @@
                 var file = TimingReportGeneration.ExecuteAsync(
                     service, 
                     dateTimeService, 
+                    new QueryWeekendService(), 
+                    false,
                     null).Result;
 
                 Assert.IsNotNull(file);
