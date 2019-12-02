@@ -285,23 +285,35 @@
 
         private static void DrawSector(ClockControl c, DurationSector sector)
         {
-            // we may have 1, 2 or 3 sectors to draw...
-
+            // we may have 1 or 2 sectors to draw...
+            
             // green sector...
             if (!sector.IsOvertime)
             {
-                DrawSector(c._sectorPath1, sector.StartAngle, sector.EndAngle, IsLargeArc(sector.StartAngle, sector.EndAngle));
+                DrawSector(
+                    c._sectorPath1, 
+                    sector.StartAngle, 
+                    sector.EndAngle, 
+                    IsLargeArc(sector.StartAngle, sector.EndAngle));
             }
 
             c.SetShowElapsedSector(sector.ShowElapsedSector);
-
+            
             // light green sector...
-            DrawSector(c._sectorPath2, sector.StartAngle, sector.CurrentAngle, IsLargeArc(sector.StartAngle, sector.CurrentAngle));
+            DrawSector(
+                c._sectorPath2, 
+                sector.StartAngle, 
+                sector.CurrentAngle,
+                IsLargeArc(sector.StartAngle, sector.CurrentAngle));
 
             if (sector.IsOvertime)
             {
                 // red sector...
-                DrawSector(c._sectorPath3, sector.EndAngle, sector.CurrentAngle, IsLargeArc(sector.EndAngle, sector.CurrentAngle));
+                DrawSector(
+                    c._sectorPath3, 
+                    sector.EndAngle, 
+                    sector.CurrentAngle, 
+                    IsLargeArc(sector.EndAngle, sector.CurrentAngle));
             }
         }
 

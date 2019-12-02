@@ -266,7 +266,7 @@
                         var d = DurationSector.Clone();
                         d.CurrentAngle = currentAngle;
                         d.IsOvertime = message.RemainingSecs < 0;
-                        d.ShowElapsedSector = (message.ElapsedSecs + message.RemainingSecs) < _secsPerHour;
+                        d.ShowElapsedSector = (message.ElapsedSecs + message.RemainingSecs) <= _secsPerHour;
 
                         DurationSector = d;
                     }

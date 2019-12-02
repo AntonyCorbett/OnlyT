@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace OnlyT.Tests
+﻿namespace OnlyT.Tests
 {
+    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Mocks;
     using Moq;
