@@ -370,33 +370,33 @@
     <value>Sapulču sākuma laiki (1 katrā rindā)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>MISCELLANEOUS</value>
+    <value>DAŽĀDI</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Monitors</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Show mouse pointer</value>
+    <value>Parādīt peles rādītāju</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Put each start time on a new line.</value>
+    <value>Ieraksti katru laiku savā rindā.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Use any time format you like!</value>
+    <value>Izmanto jebkuru laika formātu!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>Pēc izvēles pievieno dienu, piemēram: "Cet 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
-    <value>Notes:</value>
+    <value>Piezīmes:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OPEN PORT</value>
+    <value>ATVĒRT PORTU</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
-    <value>Mode</value>
+    <value>Režīms</value>
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
