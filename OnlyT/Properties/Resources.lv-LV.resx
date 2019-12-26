@@ -258,35 +258,35 @@
     <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
   </data>
   <data name="MONITOR_NONE" xml:space="preserve">
-    <value>None</value>
+    <value>Nav izvēlēts</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Settings not available while timer is running!</value>
+    <value>Iestatījumi nav pieejami, kamēr notiek laika uzskaite!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
-    <value>Settings</value>
+    <value>Iestatījumi</value>
   </data>
   <data name="SECTION_TREASURES" xml:space="preserve">
-    <value>Treasures</value>
+    <value>Dārgumi</value>
   </data>
   <data name="SECTION_MINISTRY" xml:space="preserve">
-    <value>Ministry</value>
+    <value>Sludināšana</value>
   </data>
   <data name="SECTION_LIVING" xml:space="preserve">
-    <value>Living</value>
+    <value>Kristīga dzīve</value>
   </data>
   <data name="SECTION_WEEKEND" xml:space="preserve">
-    <value>Weekend</value>
+    <value>Nedēļas nogales</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>Settings disabled by administrator!</value>
+    <value>Administrators ir bloķējis iestatījumus!</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Ministry - Item 4</value>
+    <value>Sludināšana - 4. daļa</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Circuit visit</value>
+    <value>RP apmeklējums</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>CLOSE COUNTDOWN</value>
@@ -473,24 +473,24 @@
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>{0} sekundes</value>
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Ieslēgts</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Ieslēgts</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Ieslēgts</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
-    <value>Show seconds</value>
+    <value>Parādīt sekundes</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library compatibility mode</value>
+    <value>JW Library atbalsta režīms</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
