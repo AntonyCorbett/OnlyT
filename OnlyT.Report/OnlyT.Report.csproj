@@ -110,6 +110,7 @@
     <EmbeddedResource Include="Properties\Resources.jv-Latn-ID.resx" />
     <EmbeddedResource Include="Properties\Resources.ka-GE.resx" />
     <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
+    <EmbeddedResource Include="Properties\Resources.lv-LV.resx" />
     <EmbeddedResource Include="Properties\Resources.nl-NL.resx" />
     <EmbeddedResource Include="Properties\Resources.no-NO.resx" />
     <EmbeddedResource Include="Properties\Resources.no.resx" />
