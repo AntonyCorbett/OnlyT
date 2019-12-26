@@ -118,58 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ADAPTED_DURATION" xml:space="preserve">
-    <value>adapted duration = {0}</value>
+    <value>adaptēts ilgums = {0}</value>
   </data>
   <data name="COUNSEL" xml:space="preserve">
-    <value>counsel and commendation</value>
+    <value>uzslava un padomi</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>Midweek and Weekend Meetings</value>
+    <value>Darbdienu un nedēļas nogales sapulces</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>Midweek Meetings</value>
+    <value>Darbdienu sapulces</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
-    <value>Meeting on time</value>
+    <value>Sapulce risinājās laikā</value>
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
-    <value>Overall Status</value>
+    <value>Vispārējā situācija</value>
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
-    <value>Meeting overtime by ~{0} minutes</value>
+    <value>Sapulce aizkavējās ap {0} minūtes</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by more than 1 minute</comment>
   </data>
   <data name="OVERTIME_BY_1" xml:space="preserve">
-    <value>Meeting overtime by 1 minute</value>
+    <value>Sapulce aizkavējās par 1 minūti</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
-    <value>Overtime (mins)</value>
+    <value>Pārsniegts (min)</value>
     <comment>Timing Report Chart y-axis title</comment>
   </data>
   <data name="REPORT_TITLE" xml:space="preserve">
-    <value>Timing Report</value>
+    <value>Laiku pārskats</value>
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
-    <value>Timing Summary</value>
+    <value>Laiku kopsavilkums</value>
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
-    <value>Meeting undertime by ~{0} minutes</value>
+    <value>Sapulce beidzās ap {0} minūtes pirms laika</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by more than 1 minute</comment>
   </data>
   <data name="UNDERTIME_BY_1" xml:space="preserve">
-    <value>Meeting undertime by 1 minute</value>
+    <value>Sapulce beidzās 1 minūti pirms laika</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Weekend Meetings</value>
+    <value>Nedēļas nogales sapulces</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
