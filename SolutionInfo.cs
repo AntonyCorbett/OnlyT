@@ -2,8 +2,8 @@
 
 [assembly: AssemblyCompany("SoundBox")]
 [assembly: AssemblyProduct("OnlyT")]
-[assembly: AssemblyCopyright("Copyright © 2019 Antony Corbett")]
+[assembly: AssemblyCopyright("Copyright © 2019, 2020 Antony Corbett")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("1.2.0.23")]
+[assembly: AssemblyVersion("1.2.0.24")]
