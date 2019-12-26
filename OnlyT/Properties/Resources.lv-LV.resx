@@ -302,72 +302,72 @@
     <value>Pieejama jauna versija!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
-    <value>MAIN</value>
+    <value>PAMATIESTATĪJUMI</value>
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
-    <value>Access code</value>
+    <value>Piekļuves kods</value>
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Midweek adaptive mode</value>
+    <value>Darbdienu adaptīvs režīms</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Weekend adaptive mode</value>
+    <value>Nedēļas nogales adaptīvs režīms</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Allow count-up toggle</value>
+    <value>Atļaut skaitīšanas virziena maiņu</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
-    <value>Always on top</value>
+    <value>Vienmēr priekšā</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>REMOTE APPS</value>
+    <value>TĀLVADĪBAS LIETOTNES</value>
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
-    <value>AUTOMATIC MODE</value>
+    <value>AUTOMĀTISKS REŽĪMS</value>
     <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
   </data>
   <data name="BELL_SECTION" xml:space="preserve">
-    <value>BELL</value>
+    <value>ZVANS</value>
     <comment>Title for Settings, BELL section. Please keep capitals</comment>
   </data>
   <data name="CLOCK_SECTION" xml:space="preserve">
-    <value>WEB CLOCK</value>
+    <value>WEB PULKSTENIS</value>
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>MEETING COUNTDOWN</value>
+    <value>SAPULCES LAIKA ATSKAITE</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Circuit visit toggle</value>
+    <value>RP apmeklējuma slēdzis</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
-    <value>Digital clock format</value>
+    <value>Ciparu pulkstenis</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Ieslēgts</value>
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Full-screen clock mode</value>
+    <value>Pilnā ekrāna pulkstenis</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>IP address</value>
+    <value>IP adrese</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
-    <value>Meeting</value>
+    <value>Sapulce</value>
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Meeting start times (1 per line)</value>
+    <value>Sapulču sākuma laiki (1 katrā rindā)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>MISCELLANEOUS</value>
