@@ -202,7 +202,7 @@
     <value>Automātisks</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Pamatojoties uz failiem</value>
+    <value>No faila</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manuāls</value>
@@ -380,7 +380,7 @@
     <value>Parādīt peles rādītāju</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Ieraksti katru laiku savā rindā.</value>
+    <value>Ieraksti katru laiku savā rindā</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
     <value>Izmanto jebkuru laika formātu!</value>
@@ -400,11 +400,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Notur uzdevuma laiku</value>
+    <value>Noturēt uzdevuma laiku</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Notur runas laiku</value>
+    <value>Uzdevuma laika noturēšana</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -477,7 +477,7 @@
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Ieslēgts</value>
+    <value>Ieslēgtas</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
     <value>Ieslēgts</value>
@@ -586,7 +586,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_ERROR" xml:space="preserve">
-    <value>Ķļūdas</value>
+    <value>Kļūdas</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_FATAL" xml:space="preserve">
