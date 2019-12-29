@@ -453,11 +453,11 @@
     <value>Lūdzu restartē OnlyT pēc valodas izmaiņas.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Samazināt</value>
+    <value>Saīsināt</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Palielināt</value>
+    <value>Pagarināt</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
