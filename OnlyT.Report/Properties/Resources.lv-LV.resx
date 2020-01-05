@@ -137,11 +137,11 @@
     <comment>Summary text in the Timing Report when the meeting was on time</comment>
   </data>
   <data name="OVERALL_STATUS" xml:space="preserve">
-    <value>Vispārējā situācija</value>
+    <value>Vispārīgs pārskats</value>
     <comment>Title of the Timing Report summary section</comment>
   </data>
   <data name="OVERTIME_BY" xml:space="preserve">
-    <value>Sapulce aizkavējās ap {0} minūtes</value>
+    <value>Sapulce aizkavējās par ~{0} minūtēm</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by more than 1 minute</comment>
   </data>
   <data name="OVERTIME_BY_1" xml:space="preserve">
@@ -161,7 +161,7 @@
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
-    <value>Sapulce beidzās ap {0} minūtes pirms laika</value>
+    <value>Sapulce beidzās ~{0} minūtes pirms laika</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by more than 1 minute</comment>
   </data>
   <data name="UNDERTIME_BY_1" xml:space="preserve">
