@@ -157,19 +157,19 @@
     <comment>Timing Report title page 1</comment>
   </data>
   <data name="TIMING_SUMMARY" xml:space="preserve">
-    <value>Timing Summary</value>
+    <value>Ringkasan Waktu</value>
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
-    <value>Meeting undertime by ~{0} minutes</value>
+    <value>Perhimpunan lebih cepat ~{0} menit</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by more than 1 minute</comment>
   </data>
   <data name="UNDERTIME_BY_1" xml:space="preserve">
-    <value>Meeting undertime by 1 minute</value>
+    <value>Perhimpunan lebih cepat 1 menit</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
-    <value>Weekend Meetings</value>
+    <value>Perhimpunan Akhir Pekan</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
 </root>
