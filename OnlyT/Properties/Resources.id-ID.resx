@@ -190,16 +190,16 @@
     <value>Tengah Pekan</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Ministry - Item 1</value>
+    <value>Bersemangat dalam pelayanan 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Ministry - Item 2</value>
+    <value>Bersemangat dalam pelayanan 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Ministry - Item 3</value>
+    <value>Bersemangat dalam pelayanan 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatic</value>
+    <value>Otomatis</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
     <value>File-based</value>
@@ -211,31 +211,31 @@
     <value>Concluding Talk</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Bagian Penutup</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Pelajaran Alkitab Sidang</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Menggali Permata Rohani</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Living - Part 1</value>
+    <value>Kehidupan Kristen 1</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Living - Part 2</value>
+    <value>Kehidupan Kristen 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Bagian Pembuka</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Presentasi Bulan Ini</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
-    <value>Public Talk</value>
+    <value>Khotbah Umum</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Pembacaan Alkitab</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Service Talk</value>
