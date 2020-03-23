@@ -36,7 +36,7 @@
             options.MidWeekOrWeekend = MidWeekOrWeekend.MidWeek;
             options.OperatingMode = OperatingMode.Automatic;
 
-            Mock<IOptionsService> optionsService = new Mock<IOptionsService>();
+            var optionsService = new Mock<IOptionsService>();
             optionsService.Setup(o => o.Options).Returns(options);
             optionsService.Setup(x => x.GetAdaptiveMode()).Returns(options.MidWeekAdaptiveMode);
 
@@ -72,6 +72,12 @@
         public void TestLateSchedule()
         {
             TestLateSchedule(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
+        }
+
+        [TestMethod]
+        public void TestLateSchedule2()
+        {
+            TestLateSchedule2(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
@@ -158,6 +164,47 @@
             var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
             Assert.IsNotNull(adaptedDuration3);
             AssertTimeSpansAboutEqual(adaptedDuration3.Value, new TimeSpan(0, 2, 0));
+            concluding.AdaptedDuration = adaptedDuration3;
+        }
+
+        private void TestLateSchedule2(
+            Mock<ITalkScheduleService> scheduleService,
+            MockDateTimeService dateTimeService,
+            DateTime mtgStart,
+            AdaptiveTimerService service)
+        {
+            var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+
+            // 10 mins late starting the "Living" section.
+            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting + TimeSpan.FromMinutes(10));
+
+            var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
+            Assert.IsNotNull(adaptedDuration1);
+            AssertTimeSpansAboutEqual(adaptedDuration1.Value, new TimeSpan(0, 11, 52));
+            living1.AdaptedDuration = adaptedDuration1;
+
+            // at start of study we're only 5 mins behind
+            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
+
+            // remove 5 mins from study and add to conclusion.
+            study.ModifiedDuration = study.OriginalDuration.Add(TimeSpan.FromMinutes(-5));
+            concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
+            
+            // remaining meeting duration = 28 mins shared between study of 25 mins and conc of 8 mins (total 33 mins)
+            // => adapted duration of study = 21 mins 12 secs, conc = 6 mins 47 secs
+
+            var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
+            Assert.IsNotNull(adaptedDuration2);
+            AssertTimeSpansAboutEqual(adaptedDuration2.Value, new TimeSpan(0, 21, 12));
+            study.AdaptedDuration = adaptedDuration2;
+
+            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5) + study.AdaptedDuration.Value);
+            
+            var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
+            Assert.IsNotNull(adaptedDuration3);
+            AssertTimeSpansAboutEqual(adaptedDuration3.Value, new TimeSpan(0, 6, 47));
             concluding.AdaptedDuration = adaptedDuration3;
         }
 

@@ -70,6 +70,7 @@
 
             if (_nextStartTime != null && now.TimeOfDay > _nextStartTime)
             {
+                // Start the talk timer...
                 CheckNotRunning(status);
             
                 if (status.TalkId != null)
@@ -85,6 +86,7 @@
 
             if (_nextStopTime != null && now.TimeOfDay > _nextStopTime)
             {
+                // Stop the talk timer...
                 CheckIsRunning(status);
                 
                 if (status.TalkId != null)
@@ -94,7 +96,7 @@
 
                 _nextStopTime = null;
                 _nextStartTime = CalculateNextStartTime(status, now);
-
+                
                 if (_nextStartTime == null)
                 {
                     // all done
@@ -194,7 +196,7 @@
             }
 
             item = _scheduleService.GetTalkScheduleItem((int)TalkTypesAutoMode.MinistryItem3);
-            if (item.OriginalDuration == TimeSpan.Zero)
+            if (item == null || item.OriginalDuration == TimeSpan.Zero)
             {
                 return _scheduleService.GetTalkScheduleItem((int)TalkTypesAutoMode.MinistryItem2);
             }
