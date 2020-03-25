@@ -193,7 +193,7 @@
             concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
             
             // remaining meeting duration = 28 mins shared between study of 25 mins and conc of 8 mins (total 33 mins)
-            // => adapted duration of study = 21 mins 12 secs, conc = 6 mins 47 secs
+            // adapted duration of study = 21 mins 12 secs, conc = 6 mins 47 secs
 
             var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
             Assert.IsNotNull(adaptedDuration2);

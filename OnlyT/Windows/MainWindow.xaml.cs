@@ -28,10 +28,7 @@
         {
             InitializeComponent();
 
-            Messenger.Default.Register<TimerMonitorChangedMessage>(this, BringToFront);
-            Messenger.Default.Register<CountdownMonitorChangedMessage>(this, BringToFront);
-            Messenger.Default.Register<OpenedTimerWindowInMonitorMessage>(this, BringToFront);
-            Messenger.Default.Register<OpenedCountdownWindowInMonitorMessage>(this, BringToFront);
+            Messenger.Default.Register<BringMainWindowToFrontMessage>(this, BringToFront);
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
 
             MinHeight = MainWindowMinHeight;
@@ -97,22 +94,7 @@
             }
         }
 
-        private void BringToFront(TimerMonitorChangedMessage message)
-        {
-            BringMainWindowToFront();
-        }
-
-        private void BringToFront(CountdownMonitorChangedMessage message)
-        {
-            BringMainWindowToFront();
-        }
-
-        private void BringToFront(OpenedTimerWindowInMonitorMessage message)
-        {
-            BringMainWindowToFront();
-        }
-
-        private void BringToFront(OpenedCountdownWindowInMonitorMessage message)
+        private void BringToFront(BringMainWindowToFrontMessage message)
         {
             BringMainWindowToFront();
         }

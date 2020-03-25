@@ -38,7 +38,11 @@
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.CountdownOutputWindowPlacement))
             {
-                this.SetPlacement(_optionsService.Options.CountdownOutputWindowPlacement);
+                this.SetPlacement(
+                    _optionsService.Options.CountdownOutputWindowPlacement, 
+                    new Size(DefWindowWidth, DefWindowHeight));
+
+                SetWindowSize();
             }
             else
             {
@@ -48,10 +52,11 @@
                 Height = DefWindowHeight;
             }
         }
-
+        
         public void SaveWindowPos()
         {
             _optionsService.Options.CountdownOutputWindowPlacement = this.GetPlacement();
+            _optionsService.Options.CountdownWindowSize = new Size(Width, Height);
             _optionsService.Save();
         }
 
@@ -87,6 +92,21 @@
             if (model.WindowedOperation)
             {
                 SaveWindowPos();
+            }
+        }
+
+        private void SetWindowSize()
+        {
+            var sz = _optionsService.Options.CountdownWindowSize;
+            if (sz != default)
+            {
+                Width = sz.Width;
+                Height = sz.Height;
+            }
+            else
+            {
+                Width = DefWindowWidth;
+                Height = DefWindowHeight;
             }
         }
     }

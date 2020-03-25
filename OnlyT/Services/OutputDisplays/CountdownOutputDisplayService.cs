@@ -50,7 +50,10 @@
 
         public void RelocateWindow()
         {
-            RelocateWindow(_countdownWindow, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
+            if (IsWindowAvailable())
+            {
+                RelocateWindow(_countdownWindow, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
+            }
         }
 
         public bool OpenWindowInMonitor()
@@ -68,7 +71,7 @@
                         ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
                         
                         Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
-                        Messenger.Default.Send(new OpenedTimerWindowInMonitorMessage());
+                        Messenger.Default.Send(new BringMainWindowToFrontMessage());
 
                         return true;
                     }
@@ -91,6 +94,8 @@
                 try
                 {
                     ConfigureForWindowedOperation();
+
+                    _countdownWindow.Show();
                     _countdownWindow.AdjustWindowPositionAndSize();
 
                     Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });

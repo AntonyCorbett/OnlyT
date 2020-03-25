@@ -9,7 +9,6 @@
         xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
         DataContext="{Binding Source={StaticResource Locator}, Path=Countdown}"
         mc:Ignorable="d"
-        AllowsTransparency="True"
         WindowStyle="None" Background="{Binding Path=IsWindowTransparent, Converter={StaticResource ToBackgroundConverter}}" 
         ShowInTaskbar="False" 
         ResizeMode="NoResize"

@@ -80,18 +80,18 @@
         private static readonly Encoding Encoding = new UTF8Encoding();
         private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
 
-        public static void SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
+        public static Rect SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
         {
             double width = window.Width;
             double height = window.Height;
 
-            if (overrideSize != default(Size))
+            if (overrideSize != default)
             {
                 width = overrideSize.Width;
                 height = overrideSize.Height;
             }
 
-            SetPlacement(new WindowInteropHelper(window).Handle, placementJson, width, height);
+            return SetPlacement(new WindowInteropHelper(window).Handle, placementJson, width, height);
         }
 
         public static string GetPlacement(this Window window)
@@ -112,7 +112,7 @@
             return ((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
         }
 
-        private static void SetPlacement(IntPtr windowHandle, string placementJson, double width, double height)
+        private static Rect SetPlacement(IntPtr windowHandle, string placementJson, double width, double height)
         {
             if (!string.IsNullOrEmpty(placementJson))
             {
@@ -133,12 +133,20 @@
                     placement.normalPosition.Right = placement.normalPosition.Left + (int)adjustedDimensions.Item1;
                     placement.normalPosition.Bottom = placement.normalPosition.Top + (int)adjustedDimensions.Item2;
                     NativeMethods.SetWindowPlacement(windowHandle, ref placement);
+
+                    return new Rect(
+                        placement.normalPosition.Left,
+                        placement.normalPosition.Top,
+                        (int)adjustedDimensions.Item1,
+                        (int)adjustedDimensions.Item2);
                 }
                 catch (InvalidOperationException)
                 {
                     // Parsing placement XML failed. Fail silently.
                 }
             }
+
+            return default;
         }
 
         private static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)

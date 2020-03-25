@@ -16,6 +16,7 @@ namespace OnlyT.ViewModel
     using MaterialDesignThemes.Wpf;
     using Messages;
     using OnlyT.Common.Services.DateTime;
+    using OnlyT.Models;
     using OnlyT.Services.OutputDisplays;
     using OnlyT.Services.Snackbar;
     using Serilog;
@@ -120,7 +121,7 @@ namespace OnlyT.ViewModel
 
         public string CurrentPageName { get; private set; }
 
-        private bool CountDownActive => _countdownDisplayService.IsCountdownDone;
+        private bool CountDownActive => _countdownDisplayService.IsCountingDown;
 
         public void Closing(CancelEventArgs e)
         {
@@ -209,36 +210,41 @@ namespace OnlyT.ViewModel
         {
             try
             {
-                if (message.ChangeWindowedMode &&
-                    !_optionsService.Options.MainMonitorIsWindowed)
+                if (message.Change == MonitorChangeDescription.WindowToNone ||
+                    message.Change == MonitorChangeDescription.WindowToMonitor)
                 {
                     _timerOutputDisplayService.SaveWindowedPos();
                 }
 
-                if (!_optionsService.Options.MainMonitorIsWindowed && _optionsService.IsTimerMonitorSpecified)
+                switch (message.Change)
                 {
-                    if (message.ChangeWindowedMode)
-                    {
-                        _timerOutputDisplayService.OpenWindowInMonitor();
-                    }
-                    else
-                    {
+                    case MonitorChangeDescription.MonitorToMonitor:
                         RelocateTimerWindow();
-                    }
+                        break;
 
-                    if (CountDownActive)
-                    {
-                        // ensure countdown is topmost if running
-                        _countdownDisplayService.Activate();
-                    }
+                    case MonitorChangeDescription.WindowToMonitor:
+                    case MonitorChangeDescription.NoneToMonitor:
+                        _timerOutputDisplayService.OpenWindowInMonitor();
+                        break;
+
+                    case MonitorChangeDescription.MonitorToWindow:
+                    case MonitorChangeDescription.NoneToWindow:
+                        _timerOutputDisplayService.OpenWindowWindowed();
+                        break;
+
+                    case MonitorChangeDescription.WindowToNone:
+                    case MonitorChangeDescription.MonitorToNone:
+                        _timerOutputDisplayService.HideWindow();
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
                 }
-                else if (_optionsService.Options.MainMonitorIsWindowed)
+
+                if (CountDownActive)
                 {
-                    _timerOutputDisplayService.OpenWindowWindowed();
-                }
-                else 
-                {
-                    _timerOutputDisplayService.HideWindow();
+                    // ensure countdown remains topmost if running
+                    _countdownDisplayService.Activate();
                 }
 
                 RaisePropertyChanged(nameof(AlwaysOnTop));
@@ -257,36 +263,37 @@ namespace OnlyT.ViewModel
         {
             try
             {
-                if (message.ChangeWindowedMode &&
-                    !_optionsService.Options.CountdownMonitorIsWindowed)
+                if (message.Change == MonitorChangeDescription.WindowToNone ||
+                    message.Change == MonitorChangeDescription.WindowToMonitor)
                 {
                     _countdownDisplayService.SaveWindowedPos();
                 }
 
-                if (!_optionsService.Options.CountdownMonitorIsWindowed && _optionsService.IsCountdownMonitorSpecified)
+                switch (message.Change)
                 {
-                    if (message.ChangeWindowedMode)
-                    {
-                        // from windowed mode to a monitor
+                    case MonitorChangeDescription.MonitorToMonitor:
+                        _countdownDisplayService.RelocateWindow();
+                        break;
+
+                    case MonitorChangeDescription.WindowToMonitor:
+                    case MonitorChangeDescription.NoneToMonitor:
                         _countdownDisplayService.OpenWindowInMonitor();
-                    }
-                    else
-                    {
-                        // relocate from one monitor to another
-                        RelocateCountdownWindow();
-                    }
+                        break;
+
+                    case MonitorChangeDescription.MonitorToWindow:
+                    case MonitorChangeDescription.NoneToWindow:
+                        _countdownDisplayService.OpenWindowWindowed();
+                        break;
+
+                    case MonitorChangeDescription.WindowToNone:
+                    case MonitorChangeDescription.MonitorToNone:
+                        _countdownDisplayService.Hide();
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
                 }
-                else if (_optionsService.Options.CountdownMonitorIsWindowed)
-                {
-                    // in windowed mode
-                    _countdownDisplayService.OpenWindowWindowed();
-                }
-                else
-                {
-                    // no display
-                    _countdownDisplayService.Hide();
-                }
-                
+
                 RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
@@ -349,14 +356,12 @@ namespace OnlyT.ViewModel
 
         private void ManageCountdownOnHeartbeat()
         {
-            if (_optionsService.CanDisplayCountdownWindow)
+            if (_optionsService.CanDisplayCountdownWindow && 
+                !CountDownActive && 
+                !_countdownDisplayService.IsCountdownDone && 
+                _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
             {
-                if (!CountDownActive &&
-                    !_countdownDisplayService.IsCountdownDone &&
-                    _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
-                {
-                    StartCountdown(secondsOffset);
-                }
+                StartCountdown(secondsOffset);
             }
         }
 
@@ -397,18 +402,6 @@ namespace OnlyT.ViewModel
             else
             {
                 OpenTimerWindow();
-            }
-        }
-
-        /// <summary>
-        /// If the countdown window is open when we change the timer display then relocate it;
-        /// otherwise open it
-        /// </summary>
-        private void RelocateCountdownWindow()
-        {
-            if (_countdownDisplayService.IsWindowAvailable())
-            {
-                _countdownDisplayService.RelocateWindow();
             }
         }
 

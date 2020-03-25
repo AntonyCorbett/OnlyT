@@ -1,6 +1,6 @@
 ﻿namespace OnlyT.ViewModel.Messages
 {
-    internal class OpenedTimerWindowInMonitorMessage
+    internal class BringMainWindowToFrontMessage
     {
     }
 }

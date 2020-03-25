@@ -76,6 +76,10 @@
 
         public Size OperatorPageSize { get; set; }
 
+        public Size CountdownWindowSize { get; set; }
+
+        public Size TimerWindowSize { get; set; }
+
         public OperatingMode OperatingMode { get; set; }
 
         public ScreenLocation CountdownScreenLocation { get; set; }

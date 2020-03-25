@@ -137,7 +137,7 @@
 
         private void RenderPieSliceAndBall(double angle, double secondsElapsed)
         {
-            if (!Dispatcher.HasShutdownStarted)
+            if (!Dispatcher.HasShutdownStarted && IsLoaded)
             {
                 _pie.Data = PieSlice.Get(angle, _centrePoint, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 

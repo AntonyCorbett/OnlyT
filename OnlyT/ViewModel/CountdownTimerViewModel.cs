@@ -24,15 +24,15 @@
             Messenger.Default.Register<CountdownWindowTransparencyChangedMessage>(this, OnWindowTransparencyChanged);
         }
         
-        public int BorderThickness => _optionsService.Options.CountdownFrame ? 3 : 0;
+        public int BorderThickness => !WindowedOperation && _optionsService.Options.CountdownFrame ? 3 : 0;
 
-        public int BackgroundOpacity => _optionsService.Options.CountdownFrame ? 100 : 0;
+        public int BackgroundOpacity => !WindowedOperation && _optionsService.Options.CountdownFrame ? 100 : 0;
 
         public double CountdownScale => WindowedOperation ? 1 : _optionsService.Options.CountdownZoomPercent / 100.0;
 
         public ElementsToShow ElementsToShow => _optionsService.Options.CountdownElementsToShow;
 
-        public bool IsWindowTransparent => _optionsService.Options.IsCountdownWindowTransparent;
+        public bool IsWindowTransparent => !WindowedOperation && _optionsService.Options.IsCountdownWindowTransparent;
 
         public int CountdownDurationMins => _optionsService.Options.CountdownDurationMins;
 
@@ -46,6 +46,10 @@
                     _windowedOperation = value;
 
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(BorderThickness));
+                    RaisePropertyChanged(nameof(BackgroundOpacity));
+                    RaisePropertyChanged(nameof(CountdownScale));
+                    RaisePropertyChanged(nameof(IsWindowTransparent));
                 }
             }
         }

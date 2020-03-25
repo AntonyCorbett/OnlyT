@@ -1,14 +1,15 @@
-﻿using Serilog;
-
-namespace OnlyT.Services.OutputDisplays
+﻿namespace OnlyT.Services.OutputDisplays
 {
     using System.Threading;
     using System.Windows;
     using System.Windows.Forms;
+    using GalaSoft.MvvmLight.Messaging;
     using OnlyT.Models;
     using OnlyT.Services.JwLibrary;
     using OnlyT.Services.Options;
     using OnlyT.Utils;
+    using OnlyT.ViewModel.Messages;
+    using Serilog;
 
     internal class OutputDisplayServiceBase
     {
@@ -29,6 +30,8 @@ namespace OnlyT.Services.OutputDisplays
                 window.WindowState = WindowState.Normal;
 
                 ShowWindowFullScreenOnTop(window, monitor);
+
+                Messenger.Default.Send(new BringMainWindowToFrontMessage());
             }
         }
 
@@ -38,12 +41,6 @@ namespace OnlyT.Services.OutputDisplays
             {
                 LocateWindowAtOrigin(window, monitor.Monitor);
                 
-                Log.Logger.Debug(
-                    "Maximizing window ({Left},{Top}) on {MonitorName}", 
-                    window.Left, 
-                    window.Top,
-                    monitor.FriendlyName);
-
                 window.Topmost = true;
                 window.Show();
 

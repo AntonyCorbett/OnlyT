@@ -47,7 +47,11 @@
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
             {
-                this.SetPlacement(_optionsService.Options.TimerOutputWindowPlacement);
+                this.SetPlacement(
+                    _optionsService.Options.TimerOutputWindowPlacement,
+                    new Size(DefWindowWidth, DefWindowHeight));
+
+                SetWindowSize();
             }
             else
             {
@@ -61,6 +65,7 @@
         public void SaveWindowPos()
         {
             _optionsService.Options.TimerOutputWindowPlacement = this.GetPlacement();
+            _optionsService.Options.TimerWindowSize = new Size(Width, Height);
             _optionsService.Save();
         }
 
@@ -335,6 +340,21 @@
         private void ClockQueryDateTimeEvent(object sender, DateTimeQueryEventArgs e)
         {
             e.DateTime = _dateTimeService.Now();
+        }
+
+        private void SetWindowSize()
+        {
+            var sz = _optionsService.Options.TimerWindowSize;
+            if (sz != default)
+            {
+                Width = sz.Width;
+                Height = sz.Height;
+            }
+            else
+            {
+                Width = DefWindowWidth;
+                Height = DefWindowHeight;
+            }
         }
     }
 }

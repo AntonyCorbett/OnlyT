@@ -100,9 +100,12 @@
             {
                 if (_optionsService.Options.TimerMonitorId != value)
                 {
+                    var change = GetChangeInMonitor(_optionsService.Options.TimerMonitorId, value);
+
                     _optionsService.Options.TimerMonitorId = value;
                     RaisePropertyChanged();
-                    Messenger.Default.Send(new TimerMonitorChangedMessage());
+
+                    Messenger.Default.Send(new TimerMonitorChangedMessage(change));
                 }
             }
         }
@@ -122,9 +125,12 @@
             {
                 if (_optionsService.Options.CountdownMonitorId != value)
                 {
+                    var change = GetChangeInMonitor(_optionsService.Options.CountdownMonitorId, value);
+
                     _optionsService.Options.CountdownMonitorId = value;
                     RaisePropertyChanged();
-                    Messenger.Default.Send(new CountdownMonitorChangedMessage());
+
+                    Messenger.Default.Send(new CountdownMonitorChangedMessage(change));
                 }
             }
         }
@@ -397,11 +403,13 @@
             {
                 if (_optionsService.Options.MainMonitorIsWindowed != value)
                 {
+                    var change = GetChangeInMonitor(_optionsService.Options.TimerMonitorId, value);
+
                     _optionsService.Options.MainMonitorIsWindowed = value;
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(AllowMainMonitorSelection));
 
-                    Messenger.Default.Send(new TimerMonitorChangedMessage { ChangeWindowedMode = true });
+                    Messenger.Default.Send(new TimerMonitorChangedMessage(change));
                 }
             }
         }
@@ -413,11 +421,13 @@
             {
                 if (_optionsService.Options.CountdownMonitorIsWindowed != value)
                 {
+                    var change = GetChangeInMonitor(_optionsService.Options.CountdownMonitorId, value);
+
                     _optionsService.Options.CountdownMonitorIsWindowed = value;
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(AllowCountdownMonitorSelection));
 
-                    Messenger.Default.Send(new CountdownMonitorChangedMessage { ChangeWindowedMode = true });
+                    Messenger.Default.Send(new CountdownMonitorChangedMessage(change));
                 }
             }
         }
@@ -1110,6 +1120,35 @@
             }
 
             return result.ToArray();
+        }
+
+        private MonitorChangeDescription GetChangeInMonitor(string monitorId, bool newWindowedMode)
+        {
+            if (newWindowedMode)
+            {
+                return string.IsNullOrEmpty(monitorId)
+                    ? MonitorChangeDescription.NoneToWindow
+                    : MonitorChangeDescription.MonitorToWindow;
+            }
+
+            return string.IsNullOrEmpty(monitorId)
+                ? MonitorChangeDescription.WindowToNone
+                : MonitorChangeDescription.WindowToMonitor;
+        }
+
+        private MonitorChangeDescription GetChangeInMonitor(string origMonitorId, string newMonitorId)
+        {
+            if (string.IsNullOrEmpty(origMonitorId))
+            {
+                return MonitorChangeDescription.NoneToMonitor;
+            }
+
+            if (string.IsNullOrEmpty(newMonitorId))
+            {
+                return MonitorChangeDescription.MonitorToNone;
+            }
+
+            return MonitorChangeDescription.MonitorToMonitor;
         }
     }
 }

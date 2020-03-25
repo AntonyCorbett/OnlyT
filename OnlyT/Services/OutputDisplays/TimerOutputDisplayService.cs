@@ -1,12 +1,12 @@
 ﻿namespace OnlyT.Services.OutputDisplays
 {
-    using GalaSoft.MvvmLight.Messaging;
-    using OnlyT.ViewModel.Messages;
     using System.Windows;
+    using GalaSoft.MvvmLight.Messaging;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.Monitors;
     using OnlyT.Services.Options;
     using OnlyT.ViewModel;
+    using OnlyT.ViewModel.Messages;
     using OnlyT.Windows;
     using Serilog;
 
@@ -60,7 +60,7 @@
 
                 ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
 
-                Messenger.Default.Send(new OpenedTimerWindowInMonitorMessage());
+                Messenger.Default.Send(new BringMainWindowToFrontMessage());
             }
         }
 

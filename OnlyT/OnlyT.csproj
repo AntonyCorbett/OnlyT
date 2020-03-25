@@ -147,6 +147,7 @@
     <Compile Include="Models\FullScreenClockModeItem.cs" />
     <Compile Include="Models\LanguageItem.cs" />
     <Compile Include="Models\LoggingLevel.cs" />
+    <Compile Include="Models\MonitorChangeDescription.cs" />
     <Compile Include="Models\OnScreenLocationItem.cs" />
     <Compile Include="Models\PersistDurationItem.cs" />
     <Compile Include="Models\StartStopTimerCommands.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="ViewModel\Messages\AnalogueClockWidthChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoBellSettingChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\AutoMeetingChangedMessage.cs" />
+    <Compile Include="ViewModel\Messages\BringMainWindowToFrontMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockHourFormatChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\ClockIsFlatChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\CountdownElementsChangedMessage.cs" />
@@ -245,8 +247,6 @@
     <Compile Include="ViewModel\Messages\LogLevelChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\MousePointerInTimerDisplayChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
-    <Compile Include="ViewModel\Messages\OpenedCountdownWindowInMonitorMessage.cs" />
-    <Compile Include="ViewModel\Messages\OpenedTimerWindowInMonitorMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\HttpServerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\RefreshScheduleMessage.cs" />
