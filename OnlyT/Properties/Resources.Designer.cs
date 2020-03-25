@@ -327,6 +327,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close Countdown Window.
+        /// </summary>
+        public static string CLOSE_COUNTDOWN_TOOLTIP {
+            get {
+                return ResourceManager.GetString("CLOSE_COUNTDOWN_TOOLTIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Circuit visit toggle.
         /// </summary>
         public static string CO_VISIT_TOGGLE {

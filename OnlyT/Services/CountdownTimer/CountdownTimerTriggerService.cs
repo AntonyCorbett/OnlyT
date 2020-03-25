@@ -51,7 +51,7 @@
                     if (trigger != null)
                     {
                         secondsOffset = (int)(now - trigger.Start).TotalSeconds;
-                        return true;
+                        return secondsOffset >= 5;
                     }
                 }
             }

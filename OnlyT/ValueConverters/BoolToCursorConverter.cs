@@ -13,7 +13,7 @@
                 return "Hand";
             }
 
-            return "Default";
+            return "Arrow";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -685,4 +685,8 @@
     <value>Windowed</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
+  <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
+    <value>Close Countdown Window</value>
+    <comment>Tooltip for main window button</comment>
+  </data>
 </root>
