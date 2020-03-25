@@ -1,6 +1,4 @@
-﻿using OnlyT.Services.Snackbar;
-
-namespace OnlyT.Services.OutputDisplays
+﻿namespace OnlyT.Services.OutputDisplays
 {
     using System;
     using System.Threading.Tasks;
@@ -10,6 +8,7 @@ namespace OnlyT.Services.OutputDisplays
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.Monitors;
     using OnlyT.Services.Options;
+    using OnlyT.Services.Snackbar;
     using OnlyT.ViewModel;
     using OnlyT.ViewModel.Messages;
     using OnlyT.Windows;
