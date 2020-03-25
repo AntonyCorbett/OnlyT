@@ -289,7 +289,7 @@
     <value>Visita sorvegliante</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
-    <value>FERMA CONTATEMPO</value>
+    <value>CHIUDI CONTATEMPO</value>
     <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="HELP" xml:space="preserve">
@@ -676,5 +676,17 @@
   <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
     <value>Il fine settimana include il venerdì</value>
     <comment>See Settings =&gt; Automatic mode</comment>
+  </data>
+  <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
+    <value>Finestra</value>
+    <comment>See Settings =&gt; Main</comment>
+  </data>
+  <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
+    <value>Finestra</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
+    <value>Chiudi finestra contatempo</value>
+    <comment>Tooltip for main window button</comment>
   </data>
 </root>

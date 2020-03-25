@@ -677,4 +677,16 @@
     <value>Weekend-ul include și vinerea</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
+  <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
+    <value>În fereastră</value>
+    <comment>See Settings =&gt; Main</comment>
+  </data>
+  <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
+    <value>În fereastră</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
+    <value>Închide fereastra cu contracronomotru</value>
+    <comment>Tooltip for main window button</comment>
+  </data>
 </root>
