@@ -9,7 +9,6 @@
     using OnlyT.Services.Options;
     using OnlyT.Utils;
     using OnlyT.ViewModel.Messages;
-    using Serilog;
 
     internal class OutputDisplayServiceBase
     {

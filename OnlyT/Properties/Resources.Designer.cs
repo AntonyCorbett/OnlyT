@@ -399,6 +399,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot open transparent &quot;windowed&quot; countdown.
+        /// </summary>
+        public static string COUNTDOWN_STYLE_CONFLICT {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_STYLE_CONFLICT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transparent background.
         /// </summary>
         public static string COUNTDOWN_TRANSPARENT {

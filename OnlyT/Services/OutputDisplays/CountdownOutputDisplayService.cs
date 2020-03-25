@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.OutputDisplays
+﻿using OnlyT.Services.Snackbar;
+
+namespace OnlyT.Services.OutputDisplays
 {
     using System;
     using System.Threading.Tasks;
@@ -20,19 +22,22 @@
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
         private readonly ITimerOutputDisplayService _timerOutputDisplayService;
+        private readonly ISnackbarService _snackbarService;
         private CountdownWindow _countdownWindow;
 
         public CountdownOutputDisplayService(
             IMonitorsService monitorsService,
             IOptionsService optionsService,
             IDateTimeService dateTimeService,
-            ITimerOutputDisplayService timerOutputDisplayService)
+            ITimerOutputDisplayService timerOutputDisplayService,
+            ISnackbarService snackbarService)
             : base(optionsService)
         {
             _monitorsService = monitorsService;
             _optionsService = optionsService;
             _dateTimeService = dateTimeService;
             _timerOutputDisplayService = timerOutputDisplayService;
+            _snackbarService = snackbarService;
         }
 
         public bool IsCountdownDone { get; private set; }
@@ -88,11 +93,19 @@
         public bool OpenWindowWindowed()
         {
             EnsureCountdownWindowExists();
-
+            
             if (IsCountingDown)
             {
                 try
                 {
+                    if (_countdownWindow.AllowsTransparency)
+                    {
+                        // we can't convert the window to WindowStyle.SingleBorderWindow since it has
+                        // "AllowsTransparency" set. Warn the user and back out.
+                        _snackbarService.EnqueueWithOk(Properties.Resources.COUNTDOWN_STYLE_CONFLICT);
+                        return false;
+                    }
+
                     ConfigureForWindowedOperation();
 
                     _countdownWindow.Show();
@@ -196,7 +209,8 @@
         {
             var dataContext = (CountdownTimerViewModel)_countdownWindow.DataContext;
             dataContext.WindowedOperation = false;
-            
+
+            _countdownWindow.WindowState = WindowState.Normal;
             _countdownWindow.ResizeMode = ResizeMode.NoResize;
             _countdownWindow.ShowInTaskbar = false;
             _countdownWindow.WindowStyle = WindowStyle.None;
@@ -209,6 +223,13 @@
             if (_countdownWindow == null)
             {
                 _countdownWindow = new CountdownWindow(_optionsService, _dateTimeService);
+
+                if (_optionsService.Options.IsCountdownWindowTransparent &&
+                    !_optionsService.Options.CountdownMonitorIsWindowed)
+                {
+                    _countdownWindow.AllowsTransparency = true;
+                }
+
                 _countdownWindow.TimeUpEvent += OnCountdownTimeUp;
             }
         }

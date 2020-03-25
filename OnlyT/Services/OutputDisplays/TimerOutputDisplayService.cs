@@ -100,7 +100,8 @@
         {
             var dataContext = (TimerOutputWindowViewModel)_timerWindow.DataContext;
             dataContext.WindowedOperation = false;
-            
+
+            _timerWindow.WindowState = WindowState.Normal;
             _timerWindow.ResizeMode = ResizeMode.NoResize;
             _timerWindow.ShowInTaskbar = false;
             _timerWindow.WindowStyle = WindowStyle.None;
@@ -117,7 +118,7 @@
 
             _timerWindow.MinHeight = 300;
             _timerWindow.MinWidth = 400;
-
+            
             _timerWindow.ResizeMode = ResizeMode.CanResize;
             _timerWindow.ShowInTaskbar = true;
             _timerWindow.WindowStyle = WindowStyle.SingleBorderWindow;
