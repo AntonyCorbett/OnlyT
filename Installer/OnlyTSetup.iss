@@ -63,7 +63,6 @@ Source: "OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe"; DestDir: "{app}
 Source: "OnlyTFirewallPorts\bin\Release\OnlyTFirewallPorts.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\QRCoder.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\Serilog.Sinks.Console.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
