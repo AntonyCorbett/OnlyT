@@ -5,12 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:countdownTimer="clr-namespace:OnlyT.CountdownTimer;assembly=OnlyT.CountdownTimer"
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
         DataContext="{Binding Source={StaticResource Locator}, Path=Countdown}"
         mc:Ignorable="d"
         AllowsTransparency="True"
-        WindowStyle="None" Background="{Binding Path=IsWindowTransparent, Converter={StaticResource ToBackgroundConverter}}" ShowInTaskbar="False" ResizeMode="NoResize"
-        Loaded="OnLoaded"
-        Title="CountdownWindow" Height="305.825" Width="469.418" Cursor="None">
+        WindowStyle="None" Background="{Binding Path=IsWindowTransparent, Converter={StaticResource ToBackgroundConverter}}" 
+        ShowInTaskbar="False" 
+        ResizeMode="NoResize"
+        Closing="WindowClosing"
+        Title="OnlyT Countdown Output" Height="305.825" Width="469.418" 
+        Cursor="None">
+
+    <i:Interaction.Behaviors>
+        <behaviours:HideCloseButtonBehaviour />
+    </i:Interaction.Behaviors>
 
     <Grid>
         <Border Name="ClockPanel" 

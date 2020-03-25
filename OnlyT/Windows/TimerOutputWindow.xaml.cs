@@ -19,11 +19,14 @@
     /// </summary>
     public partial class TimerOutputWindow : Window
     {
+        private const double DefWindowWidth = 700;
+        private const double DefWindowHeight = 500;
+
         private readonly DispatcherTimer _persistTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
         private bool _persistingTalkDuration;
-        
+
         public TimerOutputWindow(
             IOptionsService optionsService, 
             IDateTimeService dateTimeService)
@@ -38,6 +41,27 @@
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
             
             _persistTimer.Tick += HandlePersistTimerTick;
+        }
+
+        public void AdjustWindowPositionAndSize()
+        {
+            if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
+            {
+                this.SetPlacement(_optionsService.Options.TimerOutputWindowPlacement);
+            }
+            else
+            {
+                Left = 10;
+                Top = 10;
+                Width = DefWindowWidth;
+                Height = DefWindowHeight;
+            }
+        }
+
+        public void SaveWindowPos()
+        {
+            _optionsService.Options.TimerOutputWindowPlacement = this.GetPlacement();
+            _optionsService.Save();
         }
 
         private void HandlePersistTimerTick(object sender, EventArgs e)
@@ -284,8 +308,12 @@
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            InitFullScreenMode();
-            WindowState = WindowState.Maximized;
+            var model = (TimerOutputWindowViewModel)DataContext;
+            if (!model.WindowedOperation)
+            {
+                InitFullScreenMode();
+            }
+
             TheClock.IsRunning = true;
         }
 
@@ -296,6 +324,11 @@
             {
                 // prevent window from being closed independently of application.
                 e.Cancel = true;
+            }
+
+            if (model.WindowedOperation)
+            {
+                SaveWindowPos();
             }
         }
 

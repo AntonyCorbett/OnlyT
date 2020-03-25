@@ -109,12 +109,12 @@
 
         public bool IsTimerMonitorViaCommandLine => _optionsService.IsTimerMonitorSetByCommandLine;
 
-        public bool NotIsTimerMonitorViaCommandLine => !IsTimerMonitorViaCommandLine;
+        public bool AllowMainMonitorSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
 
         public bool IsCountdownMonitorViaCommandLine => _optionsService.IsCountdownMonitorSetByCommandLine;
-
-        public bool NotIsCountdownMonitorViaCommandLine => !IsCountdownMonitorViaCommandLine;
-
+        
+        public bool AllowCountdownMonitorSelection => !IsCountdownMonitorViaCommandLine && !CountdownMonitorIsWindowed;
+        
         public string CountdownMonitorId
         {
             get => _optionsService.Options.CountdownMonitorId;
@@ -386,6 +386,38 @@
                     _optionsService.Options.IsCircuitVisit = value;
                     RaisePropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
+                }
+            }
+        }
+
+        public bool MainMonitorIsWindowed
+        {
+            get => _optionsService.Options.MainMonitorIsWindowed;
+            set
+            {
+                if (_optionsService.Options.MainMonitorIsWindowed != value)
+                {
+                    _optionsService.Options.MainMonitorIsWindowed = value;
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(AllowMainMonitorSelection));
+
+                    Messenger.Default.Send(new TimerMonitorChangedMessage { ChangeWindowedMode = true });
+                }
+            }
+        }
+
+        public bool CountdownMonitorIsWindowed
+        {
+            get => _optionsService.Options.CountdownMonitorIsWindowed;
+            set
+            {
+                if (_optionsService.Options.CountdownMonitorIsWindowed != value)
+                {
+                    _optionsService.Options.CountdownMonitorIsWindowed = value;
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(AllowCountdownMonitorSelection));
+
+                    Messenger.Default.Send(new CountdownMonitorChangedMessage { ChangeWindowedMode = true });
                 }
             }
         }

@@ -95,9 +95,13 @@
                                       materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                       SelectedValuePath="MonitorId" 
                                       DisplayMemberPath="FriendlyName"
-                                      IsEnabled="{Binding NotIsTimerMonitorViaCommandLine}"
+                                      IsEnabled="{Binding AllowMainMonitorSelection}"
                                       materialDesign:ComboBoxAssist.ClassicMode="true"
                                       SelectedValue="{Binding MonitorId, Mode=TwoWay}"/>
+
+                            <CheckBox IsChecked="{Binding MainMonitorIsWindowed, Mode=TwoWay}" 
+                                      Style="{StaticResource SettingsCheckBox}"
+                                      Content="{x:Static resx:Resources.MONITOR_IS_WINDOWED}" />
 
                             <ComboBox ItemsSource="{Binding OperatingModes}" 
                                       Style="{StaticResource SettingsComboStyle}"
@@ -371,9 +375,13 @@
                                   materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
                                   SelectedValuePath="MonitorId" 
                                   DisplayMemberPath="FriendlyName"
-                                  IsEnabled="{Binding NotIsCountdownMonitorViaCommandLine}"
+                                  IsEnabled="{Binding AllowCountdownMonitorSelection}"
                                   materialDesign:ComboBoxAssist.ClassicMode="true"
                                   SelectedValue="{Binding CountdownMonitorId, Mode=TwoWay}"/>
+
+                        <CheckBox IsChecked="{Binding CountdownMonitorIsWindowed, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.COUNTDOWN_IS_WINDOWED}" />
 
                         <ComboBox ItemsSource="{Binding ScreenLocationItems}" 
                                   Style="{StaticResource SettingsComboStyle}"

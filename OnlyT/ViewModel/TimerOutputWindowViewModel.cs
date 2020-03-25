@@ -25,6 +25,7 @@
         private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
         private DurationSector _durationSector;
         private bool _showTimeOfDayUnderTimer;
+        private bool _windowedOperation;
 
         public TimerOutputWindowViewModel(
             IOptionsService optionsService,
@@ -49,15 +50,15 @@
             Messenger.Default.Register<ClockIsFlatChangedMessage>(this, OnClockIsFlatChanged);
         }
 
-        public int BorderThickness => _optionsService.Options.TimerFrame ? 3 : 0;
-
-        public int TimerBorderThickness => _optionsService.Options.ClockTimerFrame ? 3 : 0;
+        public int BorderThickness => !WindowedOperation && _optionsService.Options.TimerFrame ? 3 : 0;
+        
+        public int TimerBorderThickness => !WindowedOperation && _optionsService.Options.ClockTimerFrame ? 3 : 0;
 
         public int TimerColumnWidthPercentage { get; private set; } = -1;
 
         public bool ApplicationClosing { get; private set; }
 
-        public bool ClockIsFlat => _optionsService.Options.ClockIsFlat;
+        public bool ClockIsFlat => WindowedOperation || _optionsService.Options.ClockIsFlat;
 
         public bool ShowTimeOfDayUnderTimer
         {
@@ -161,15 +162,34 @@
 
         public bool DigitalTimeShowSeconds => _optionsService.Options.ShowDigitalSeconds;
 
-        public bool UseTimerBackgroundGradient => _optionsService.Options.ShowBackgroundOnTimer;
+        public bool UseTimerBackgroundGradient => !WindowedOperation && _optionsService.Options.ShowBackgroundOnTimer;
 
-        public bool UseClockBackgroundGradient => _optionsService.Options.ShowBackgroundOnClock;
+        public bool UseClockBackgroundGradient => !WindowedOperation && _optionsService.Options.ShowBackgroundOnClock;
+
+        public bool WindowedOperation
+        {
+            get => _windowedOperation;
+            set
+            {
+                if (_windowedOperation != value)
+                {
+                    _windowedOperation = value;
+
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(UseTimerBackgroundGradient));
+                    RaisePropertyChanged(nameof(UseClockBackgroundGradient));
+                    RaisePropertyChanged(nameof(BorderThickness));
+                    RaisePropertyChanged(nameof(TimerBorderThickness));
+                    RaisePropertyChanged(nameof(ClockIsFlat));
+                }
+            }
+        }
 
         public bool SplitAndFullScreenModeIdentical()
         {
             return _optionsService.Options.AnalogueClockWidthPercent == 100;
         }
-        
+
         private void OnShutDown(ShutDownMessage obj)
         {
             ApplicationClosing = true;

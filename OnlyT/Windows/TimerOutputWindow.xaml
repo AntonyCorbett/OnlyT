@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
         DataContext="{Binding Source={StaticResource Locator}, Path=Output}"
         mc:Ignorable="d"
-        Title="TimerOutputWindow" Height="300" Width="458" Loaded="WindowLoaded" 
+        Title="OnlyT Timer Output" Height="300" Width="458" 
+        Loaded="WindowLoaded" 
         WindowStyle="None" 
         Background="Black" 
         ShowInTaskbar="False" 
@@ -18,6 +21,10 @@
     <Window.Resources>
         <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />
     </Window.Resources>
+
+    <i:Interaction.Behaviors>
+        <behaviours:HideCloseButtonBehaviour />
+    </i:Interaction.Behaviors>
 
     <Grid>
         <Grid.ColumnDefinitions>

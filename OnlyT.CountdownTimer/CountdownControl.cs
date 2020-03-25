@@ -158,7 +158,7 @@
         {
             _timer.Stop();
 
-            if (_start != default(DateTime))
+            if (_start != default)
             {
                 var secsInCountdown = _countdownDurationMins * 60;
                 var secondsElapsed = (GetNowUtc() - _start).TotalSeconds;
@@ -406,7 +406,7 @@
 
             if (secsLeft == null)
             {
-                if (_start == default(DateTime))
+                if (_start == default)
                 {
                     secondsLeft = _countdownDurationMins * 60;
                 }

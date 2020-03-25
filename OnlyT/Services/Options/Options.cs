@@ -68,6 +68,10 @@
 
         public string AppWindowPlacement { get; set; }
 
+        public string TimerOutputWindowPlacement { get; set; }
+
+        public string CountdownOutputWindowPlacement { get; set; }
+
         public Size SettingsPageSize { get; set; }
 
         public Size OperatorPageSize { get; set; }
@@ -145,6 +149,10 @@
         public bool ClockIsFlat { get; set; }
 
         public bool WeekendIncludesFriday { get; set; }
+
+        public bool MainMonitorIsWindowed { get; set; }
+
+        public bool CountdownMonitorIsWindowed { get; set; }
 
         public CountdownDurationItem[] GetCountdownDurationItems()
         {

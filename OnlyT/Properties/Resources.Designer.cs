@@ -19,7 +19,7 @@ namespace OnlyT.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -368,6 +368,15 @@ namespace OnlyT.Properties {
         public static string COUNTDOWN_ELEMENTS {
             get {
                 return ResourceManager.GetString("COUNTDOWN_ELEMENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windowed.
+        /// </summary>
+        public static string COUNTDOWN_IS_WINDOWED {
+            get {
+                return ResourceManager.GetString("COUNTDOWN_IS_WINDOWED", resourceCulture);
             }
         }
         
@@ -818,6 +827,15 @@ namespace OnlyT.Properties {
         public static string MONITOR {
             get {
                 return ResourceManager.GetString("MONITOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windowed.
+        /// </summary>
+        public static string MONITOR_IS_WINDOWED {
+            get {
+                return ResourceManager.GetString("MONITOR_IS_WINDOWED", resourceCulture);
             }
         }
         

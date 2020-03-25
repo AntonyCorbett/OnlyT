@@ -5,6 +5,7 @@ namespace OnlyT.ViewModel
     using GalaSoft.MvvmLight.Ioc;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.LogLevelSwitch;
+    using OnlyT.Services.OutputDisplays;
     using OnlyT.Services.Report;
     using OnlyT.Services.Snackbar;
     using Services.Bell;
@@ -39,6 +40,8 @@ namespace OnlyT.ViewModel
             SimpleIoc.Default.Register<IDateTimeService>(() => new DateTimeService(CommandLineServiceInstance.Value.DateTimeOnLaunch));
             SimpleIoc.Default.Register<ILogLevelSwitchService, LogLevelSwitchService>();
             SimpleIoc.Default.Register<IQueryWeekendService, QueryWeekendService>();
+            SimpleIoc.Default.Register<ITimerOutputDisplayService, TimerOutputDisplayService>();
+            SimpleIoc.Default.Register<ICountdownOutputDisplayService, CountdownOutputDisplayService>();
 
             SimpleIoc.Default.Register(CommandLineServiceFactory);
 

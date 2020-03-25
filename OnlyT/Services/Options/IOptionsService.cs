@@ -5,7 +5,11 @@
     public interface IOptionsService
     {
         Options Options { get; }
-        
+
+        bool CanDisplayTimerWindow { get; }
+
+        bool CanDisplayCountdownWindow { get; }
+
         bool IsTimerMonitorSpecified { get; }
 
         bool IsCountdownMonitorSpecified { get; }

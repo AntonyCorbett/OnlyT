@@ -1,8 +1,10 @@
 ﻿namespace OnlyT.Windows
 {
+    using System.Threading.Tasks;
     using System.Windows;
     using CommonServiceLocator;
     using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Threading;
     using Services.Options;
     using Utils;
     using ViewModel;
@@ -28,6 +30,8 @@
 
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, BringToFront);
             Messenger.Default.Register<CountdownMonitorChangedMessage>(this, BringToFront);
+            Messenger.Default.Register<OpenedTimerWindowInMonitorMessage>(this, BringToFront);
+            Messenger.Default.Register<OpenedCountdownWindowInMonitorMessage>(this, BringToFront);
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
 
             MinHeight = MainWindowMinHeight;
@@ -64,7 +68,7 @@
             {
                 var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
                 var sz = optionsService.Options.SettingsPageSize;
-                if (sz != default(Size))
+                if (sz != default)
                 {
                     Width = sz.Width;
                     Height = sz.Height;
@@ -81,7 +85,7 @@
         {
             var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
             var sz = optionsService.Options.OperatorPageSize;
-            if (sz != default(Size))
+            if (sz != default)
             {
                 Width = sz.Width;
                 Height = sz.Height;
@@ -95,12 +99,33 @@
 
         private void BringToFront(TimerMonitorChangedMessage message)
         {
-            Activate();
+            BringMainWindowToFront();
         }
 
         private void BringToFront(CountdownMonitorChangedMessage message)
         {
-            Activate();
+            BringMainWindowToFront();
+        }
+
+        private void BringToFront(OpenedTimerWindowInMonitorMessage message)
+        {
+            BringMainWindowToFront();
+        }
+
+        private void BringToFront(OpenedCountdownWindowInMonitorMessage message)
+        {
+            BringMainWindowToFront();
+        }
+
+        private void BringMainWindowToFront()
+        {
+            Task.Delay(100).ContinueWith((t) =>
+            {
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    Activate();
+                });
+            });
         }
 
         private void AdjustMainWindowPositionAndSize()

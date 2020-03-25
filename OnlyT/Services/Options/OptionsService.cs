@@ -70,6 +70,10 @@
             }
         }
 
+        public bool CanDisplayTimerWindow => IsTimerMonitorSpecified || Options.MainMonitorIsWindowed;
+
+        public bool CanDisplayCountdownWindow => IsCountdownMonitorSpecified || Options.CountdownMonitorIsWindowed;
+
         /// <summary>
         /// Gets a value indicating whether the countdown monitor is specified
         /// </summary>
@@ -253,6 +257,7 @@
                 if (IsTimerMonitorSetByCommandLine)
                 {
                     _options.TimerMonitorId = monitors[_commandLineService.TimerMonitorIndex - 1].MonitorId;
+                    _options.MainMonitorIsWindowed = false;
                 }
 
                 IsCountdownMonitorSetByCommandLine =
@@ -262,6 +267,7 @@
                 if (IsCountdownMonitorSetByCommandLine)
                 {
                     _options.CountdownMonitorId = monitors[_commandLineService.CountdownMonitorIndex - 1].MonitorId;
+                    _options.CountdownMonitorIsWindowed = false;
                 }
             }
         }

@@ -1,6 +1,5 @@
 ﻿namespace OnlyT
 {
-    using System.Globalization;
     using System.IO;
     using System.Threading;
     using System.Windows;
@@ -49,8 +48,9 @@
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(LogLevelSwitchService.LevelSwitch)
                 .WriteTo.RollingFile(Path.Combine(logsDirectory, "log-{Date}.txt"), retainedFileCountLimit: 28)
+
 #if DEBUG
-                .WriteTo.Console()
+                .WriteTo.Debug()
 #endif
                 .CreateLogger();
 

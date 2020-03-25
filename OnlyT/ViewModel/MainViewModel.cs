@@ -4,10 +4,8 @@ namespace OnlyT.ViewModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
-    using System.Windows.Forms;
     using System.Windows.Interop;
     using System.Windows.Media;
     using System.Windows.Threading;
@@ -17,17 +15,14 @@ namespace OnlyT.ViewModel
     using GalaSoft.MvvmLight.Threading;
     using MaterialDesignThemes.Wpf;
     using Messages;
-    using Models;
     using OnlyT.Common.Services.DateTime;
-    using OnlyT.Services.JwLibrary;
+    using OnlyT.Services.OutputDisplays;
     using OnlyT.Services.Snackbar;
     using Serilog;
     using Services.CommandLine;
     using Services.CountdownTimer;
-    using Services.Monitors;
     using Services.Options;
     using Services.Timer;
-    using Utils;
     using WebServer;
     using Windows;
 
@@ -35,39 +30,38 @@ namespace OnlyT.ViewModel
     /// <summary>
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
     /// </summary>
-    /// <remarks>Needs refactoring to move _timerWindow and _countdownWindow into a "window service"</remarks>
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MainViewModel : ViewModelBase
     {
         private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
         private readonly IOptionsService _optionsService;
-        private readonly IMonitorsService _monitorsService;
         private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
         private readonly ICommandLineService _commandLineService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly ITimerOutputDisplayService _timerOutputDisplayService;
+        private readonly ICountdownOutputDisplayService _countdownDisplayService;
         private readonly IHttpServer _httpServer;
-        private readonly (int dpiX, int dpiY) _systemDpi;
         private readonly ISnackbarService _snackbarService;
         private DispatcherTimer _heartbeatTimer;
-        private bool _countdownDone;
-        private TimerOutputWindow _timerWindow;
-        private CountdownWindow _countdownWindow;
         private FrameworkElement _currentPage;
         private DateTime _lastRefreshedSchedule = DateTime.MinValue;
 
         public MainViewModel(
            IOptionsService optionsService,
-           IMonitorsService monitorsService,
            ITalkTimerService timerService,
            ISnackbarService snackbarService,
            IHttpServer httpServer,
            ICommandLineService commandLineService,
            ICountdownTimerTriggerService countdownTimerTriggerService,
-           IDateTimeService dateTimeService)
+           IDateTimeService dateTimeService,
+           ITimerOutputDisplayService timerOutputDisplayService,
+           ICountdownOutputDisplayService countdownDisplayService)
         {
             _commandLineService = commandLineService;
             _dateTimeService = dateTimeService;
+            _timerOutputDisplayService = timerOutputDisplayService;
+            _countdownDisplayService = countdownDisplayService;
 
             if (commandLineService.NoGpu || ForceSoftwareRendering())
             {
@@ -77,15 +71,12 @@ namespace OnlyT.ViewModel
 
             _snackbarService = snackbarService;
             _optionsService = optionsService;
-            _monitorsService = monitorsService;
             _httpServer = httpServer;
             _timerService = timerService;
             _countdownTimerTriggerService = countdownTimerTriggerService;
 
             _httpServer.RequestForTimerDataEvent += OnRequestForTimerData;
-
-            _systemDpi = WindowPlacement.GetDpiSettings();
-
+            
             // subscriptions...
             Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
             Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
@@ -101,13 +92,9 @@ namespace OnlyT.ViewModel
 
             Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
-#pragma warning disable 4014
-
             // (fire and forget)
-            LaunchTimerWindowAsync();
-
-#pragma warning restore 4014
-
+            Task.Run(LaunchTimerWindowAsync);
+            
             InitHeartbeatTimer();
         }
 
@@ -126,21 +113,14 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public bool AlwaysOnTop
-        {
-            get
-            {
-                var result = _optionsService.Options.AlwaysOnTop ||
-                             (_timerWindow != null && _timerWindow.IsVisible) ||
-                             (_countdownWindow != null && _countdownWindow.IsVisible);
-
-                return result;
-            }
-        }
+        public bool AlwaysOnTop =>
+            _optionsService.Options.AlwaysOnTop ||
+            _timerOutputDisplayService.IsWindowVisible() ||
+            _countdownDisplayService.IsWindowVisible();
 
         public string CurrentPageName { get; private set; }
 
-        private bool CountDownActive => _countdownWindow != null;
+        private bool CountDownActive => _countdownDisplayService.IsCountdownDone;
 
         public void Closing(CancelEventArgs e)
         {
@@ -150,6 +130,18 @@ namespace OnlyT.ViewModel
                 Messenger.Default.Send(new ShutDownMessage(CurrentPageName));
                 CloseTimerWindow();
                 CloseCountdownWindow();
+            }
+        }
+
+        private void CloseCountdownWindow()
+        {
+            try
+            {
+                _countdownDisplayService.Close();
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not close countdown window");
             }
         }
 
@@ -217,19 +209,36 @@ namespace OnlyT.ViewModel
         {
             try
             {
-                if (_optionsService.IsTimerMonitorSpecified)
+                if (message.ChangeWindowedMode &&
+                    !_optionsService.Options.MainMonitorIsWindowed)
                 {
-                    RelocateTimerWindow();
+                    _timerOutputDisplayService.SaveWindowedPos();
+                }
+
+                if (!_optionsService.Options.MainMonitorIsWindowed && _optionsService.IsTimerMonitorSpecified)
+                {
+                    if (message.ChangeWindowedMode)
+                    {
+                        _timerOutputDisplayService.OpenWindowInMonitor();
+                    }
+                    else
+                    {
+                        RelocateTimerWindow();
+                    }
 
                     if (CountDownActive)
                     {
                         // ensure countdown is topmost if running
-                        _countdownWindow.Activate();
+                        _countdownDisplayService.Activate();
                     }
                 }
-                else
+                else if (_optionsService.Options.MainMonitorIsWindowed)
                 {
-                    HideTimerWindow();
+                    _timerOutputDisplayService.OpenWindowWindowed();
+                }
+                else 
+                {
+                    _timerOutputDisplayService.HideWindow();
                 }
 
                 RaisePropertyChanged(nameof(AlwaysOnTop));
@@ -248,15 +257,36 @@ namespace OnlyT.ViewModel
         {
             try
             {
-                if (_optionsService.IsCountdownMonitorSpecified)
+                if (message.ChangeWindowedMode &&
+                    !_optionsService.Options.CountdownMonitorIsWindowed)
                 {
-                    RelocateCountdownWindow();
+                    _countdownDisplayService.SaveWindowedPos();
+                }
+
+                if (!_optionsService.Options.CountdownMonitorIsWindowed && _optionsService.IsCountdownMonitorSpecified)
+                {
+                    if (message.ChangeWindowedMode)
+                    {
+                        // from windowed mode to a monitor
+                        _countdownDisplayService.OpenWindowInMonitor();
+                    }
+                    else
+                    {
+                        // relocate from one monitor to another
+                        RelocateCountdownWindow();
+                    }
+                }
+                else if (_optionsService.Options.CountdownMonitorIsWindowed)
+                {
+                    // in windowed mode
+                    _countdownDisplayService.OpenWindowWindowed();
                 }
                 else
                 {
-                    HideCountdownWindow();
+                    // no display
+                    _countdownDisplayService.Hide();
                 }
-
+                
                 RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
@@ -267,11 +297,12 @@ namespace OnlyT.ViewModel
 
         private async Task LaunchTimerWindowAsync()
         {
-            if (!IsInDesignMode && _optionsService.IsTimerMonitorSpecified)
+            if (!IsInDesignMode && _optionsService.CanDisplayTimerWindow)
             {
                 // on launch we display the timer window after a short delay (for aesthetics only)
                 await Task.Delay(1000).ConfigureAwait(true);
-                OpenTimerWindow();
+
+                DispatcherHelper.CheckBeginInvokeOnUI(OpenTimerWindow);
             }
         }
 
@@ -318,47 +349,22 @@ namespace OnlyT.ViewModel
 
         private void ManageCountdownOnHeartbeat()
         {
-            if (_optionsService.IsCountdownMonitorSpecified)
+            if (_optionsService.CanDisplayCountdownWindow)
             {
                 if (!CountDownActive &&
-                    !_countdownDone &&
+                    !_countdownDisplayService.IsCountdownDone &&
                     _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
                 {
                     StartCountdown(secondsOffset);
-                }
-            }
-            else
-            {
-                // countdown not enabled...
-                if (CountDownActive)
-                {
-                    StopCountdown();
                 }
             }
         }
 
         private void OnStopCountdown(StopCountDownMessage message)
         {
-            StopCountdown();
+            _countdownDisplayService.Stop();
         }
-
-        private void StopCountdown()
-        {
-            _countdownDone = true;
-
-            Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = false });
-
-            if (_optionsService.IsTimerMonitorSpecified)
-            {
-                _timerWindow?.Show();
-            }
-
-            Task.Delay(1000).ContinueWith(t =>
-            {
-                DispatcherHelper.CheckBeginInvokeOnUI(CloseCountdownWindow);
-            });
-        }
-
+        
         /// <summary>
         /// Responds to the NavigateMessage and swaps out one page for another.
         /// </summary>
@@ -384,9 +390,9 @@ namespace OnlyT.ViewModel
         /// </summary>
         private void RelocateTimerWindow()
         {
-            if (_timerWindow != null)
+            if (_timerOutputDisplayService.IsWindowAvailable())
             {
-                RelocateWindow(_timerWindow, _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId));
+                _timerOutputDisplayService.RelocateWindow();
             }
             else
             {
@@ -400,54 +406,24 @@ namespace OnlyT.ViewModel
         /// </summary>
         private void RelocateCountdownWindow()
         {
-            if (_countdownWindow != null)
+            if (_countdownDisplayService.IsWindowAvailable())
             {
-                RelocateWindow(_countdownWindow, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
+                _countdownDisplayService.RelocateWindow();
             }
-        }
-
-        private bool OpenCountdownWindow(int offsetSeconds)
-        {
-            if (!CountDownActive)
-            {
-                try
-                {
-                    var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId);
-                    if (targetMonitor != null)
-                    {
-                        _countdownWindow = new CountdownWindow(_dateTimeService);
-                        _countdownWindow.TimeUpEvent += OnCountdownTimeUp;
-                        ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
-                        _countdownWindow.Start(offsetSeconds);
-
-                        Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
-
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Logger.Error(ex, "Could not open countdown window");
-                }
-            }
-
-            return false;
-        }
-
-        private void OnCountdownTimeUp(object sender, EventArgs e)
-        {
-            StopCountdown();
         }
 
         private void OpenTimerWindow()
         {
             try
             {
-                var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-                if (targetMonitor != null)
+                if (_optionsService.Options.MainMonitorIsWindowed)
                 {
-                    _timerWindow = new TimerOutputWindow(_optionsService, _dateTimeService);
-                    ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
+                    _timerOutputDisplayService.OpenWindowWindowed();                    
+                }
+                else
+                {
+                    _timerOutputDisplayService.OpenWindowInMonitor();
+                    RaisePropertyChanged(nameof(AlwaysOnTop));
                 }
             }
             catch (Exception ex)
@@ -456,86 +432,16 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void LocateWindowAtOrigin(Window window, Screen monitor)
-        {
-            var area = monitor.WorkingArea;
-
-            var left = (area.Left * 96) / _systemDpi.dpiX;
-            var top = (area.Top * 96) / _systemDpi.dpiY;
-
-            // these seemingly redundant sizing statements are required!
-            window.Left = 0;
-            window.Top = 0;
-            window.Width = 0;
-            window.Height = 0;
-
-            window.Left = left;
-            window.Top = top;
-        }
-
-        private void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
-        {
-            LocateWindowAtOrigin(window, monitor.Monitor);
-
-            window.Topmost = true;
-            window.Show();
-
-            RaisePropertyChanged(nameof(AlwaysOnTop));
-        }
-
-        private void HideTimerWindow()
-        {
-            _timerWindow?.Hide();
-        }
-
-        private void HideCountdownWindow()
-        {
-            _countdownWindow?.Hide();
-        }
-
         private void CloseTimerWindow()
         {
             try
             {
-                _timerWindow?.Close();
-                _timerWindow = null;
-
+                _timerOutputDisplayService.Close();
                 RaisePropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {
                 Log.Logger.Error(ex, "Could not close timer window");
-            }
-        }
-
-        private void CloseCountdownWindow()
-        {
-            try
-            {
-                if (_countdownWindow != null)
-                {
-                    _countdownWindow.TimeUpEvent -= OnCountdownTimeUp;
-                }
-
-                _countdownWindow?.Close();
-                _countdownWindow = null;
-
-                BringJwlToFront();
-
-                RaisePropertyChanged(nameof(AlwaysOnTop));
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not close countdown window");
-            }
-        }
-
-        private void BringJwlToFront()
-        {
-            if (_optionsService.Options.JwLibraryCompatibilityMode)
-            {
-                JwLibHelper.BringToFront();
-                Thread.Sleep(100);
             }
         }
 
@@ -547,25 +453,41 @@ namespace OnlyT.ViewModel
         /// </param>
         private void StartCountdown(int offsetSeconds)
         {
-            if (!IsInDesignMode && _optionsService.IsCountdownMonitorSpecified)
+            if (!IsInDesignMode && _optionsService.CanDisplayCountdownWindow)
             {
                 Log.Logger.Information("Launching countdown timer");
 
-                if (OpenCountdownWindow(offsetSeconds))
+                _countdownDisplayService.Start(offsetSeconds);
+
+                bool launched = _optionsService.Options.CountdownMonitorIsWindowed 
+                    ? _countdownDisplayService.OpenWindowWindowed() 
+                    : _countdownDisplayService.OpenWindowInMonitor();
+
+                if (launched)
                 {
                     Task.Delay(1000).ContinueWith(t =>
                     {
-                        if (_optionsService.Options.TimerMonitorId == _optionsService.Options.CountdownMonitorId)
+                        if (CountdownAndTimerShareSameMonitor())
                         {
                             // timer monitor and countdown monitor are the same.
 
                             // hide the timer window after a short delay (so that it doesn't appear 
                             // as another top-level window during alt-TAB)...
-                            DispatcherHelper.CheckBeginInvokeOnUI(HideTimerWindow);
+                            DispatcherHelper.CheckBeginInvokeOnUI(_timerOutputDisplayService.HideWindow);
                         }
                     });
                 }
             }
+        }
+
+        private bool CountdownAndTimerShareSameMonitor()
+        {
+            if (_optionsService.Options.MainMonitorIsWindowed || _optionsService.Options.CountdownMonitorIsWindowed)
+            {
+                return false;
+            }
+
+            return _optionsService.Options.TimerMonitorId == _optionsService.Options.CountdownMonitorId;
         }
 
         private bool ForceSoftwareRendering()
@@ -583,21 +505,6 @@ namespace OnlyT.ViewModel
             //      than or equal to 9.0.
             int renderingTier = RenderCapability.Tier >> 16;
             return renderingTier == 0;
-        }
-
-        private void RelocateWindow(Window window, MonitorItem monitorItem)
-        {
-            if (monitorItem != null)
-            {
-                window.Hide();
-                window.WindowState = WindowState.Normal;
-
-                LocateWindowAtOrigin(window, monitorItem.Monitor);
-
-                window.Topmost = true;
-                window.WindowState = WindowState.Maximized;
-                window.Show();
-            }
         }
     }
 }

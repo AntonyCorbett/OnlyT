@@ -5,5 +5,6 @@
     /// </summary>
     internal class CountdownMonitorChangedMessage
     {
+        public bool ChangeWindowedMode { get; set; }
     }
 }

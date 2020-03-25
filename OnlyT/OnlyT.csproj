@@ -82,8 +82,8 @@
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    <Reference Include="Serilog.Sinks.Debug, Version=1.0.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Debug.1.0.1\lib\net46\Serilog.Sinks.Debug.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
@@ -129,6 +129,7 @@
     <Compile Include="Animations\GridLengthAnimation.cs" />
     <Compile Include="AutoUpdates\VersionDetection.cs" />
     <Compile Include="Behaviours\DoubleClickBehaviour.cs" />
+    <Compile Include="Behaviours\HideCloseButtonBehaviour.cs" />
     <Compile Include="EventArgs\TimerInfoEventArgs.cs" />
     <Compile Include="EventArgs\TimerStartStopEventArgs.cs" />
     <Compile Include="MeetingTalkTimesFeed\Meeting.cs" />
@@ -188,6 +189,10 @@
     <Compile Include="Services\Options\OptionsService.cs" />
     <Compile Include="Services\Options\FullScreenClockMode.cs" />
     <Compile Include="Services\Options\ScreenLocation.cs" />
+    <Compile Include="Services\OutputDisplays\CountdownOutputDisplayService.cs" />
+    <Compile Include="Services\OutputDisplays\ICountdownOutputDisplayService.cs" />
+    <Compile Include="Services\OutputDisplays\ITimerOutputDisplayService.cs" />
+    <Compile Include="Services\OutputDisplays\OutputDisplayServiceBase.cs" />
     <Compile Include="Services\Report\ILocalTimingDataStoreService.cs" />
     <Compile Include="Services\Report\LocalTimingDataStoreService.cs" />
     <Compile Include="Services\Report\TimingReportGeneration.cs" />
@@ -199,6 +204,7 @@
     <Compile Include="Services\TalkSchedule\TalkScheduleManual.cs" />
     <Compile Include="Services\TalkSchedule\TalkScheduleService.cs" />
     <Compile Include="Services\TalkSchedule\TalkTypesAutoMode.cs" />
+    <Compile Include="Services\OutputDisplays\TimerOutputDisplayService.cs" />
     <Compile Include="Services\Timer\AdaptiveTimerService.cs" />
     <Compile Include="Services\Timer\IAdaptiveTimerService.cs" />
     <Compile Include="Services\Timer\ITalkTimerService.cs" />
@@ -239,6 +245,8 @@
     <Compile Include="ViewModel\Messages\LogLevelChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\MousePointerInTimerDisplayChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\NavigateMessage.cs" />
+    <Compile Include="ViewModel\Messages\OpenedCountdownWindowInMonitorMessage.cs" />
+    <Compile Include="ViewModel\Messages\OpenedTimerWindowInMonitorMessage.cs" />
     <Compile Include="ViewModel\Messages\OperatingModeChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\HttpServerChangedMessage.cs" />
     <Compile Include="ViewModel\Messages\RefreshScheduleMessage.cs" />

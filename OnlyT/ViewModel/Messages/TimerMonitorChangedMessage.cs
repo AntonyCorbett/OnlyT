@@ -5,5 +5,6 @@
     /// </summary>
     internal class TimerMonitorChangedMessage
     {
+        public bool ChangeWindowedMode { get; set; }
     }
 }

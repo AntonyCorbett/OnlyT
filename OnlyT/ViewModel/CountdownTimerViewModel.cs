@@ -11,32 +11,44 @@
     public class CountdownTimerViewModel : ViewModelBase
     {
         private readonly IOptionsService _optionsService;
+        private bool _windowedOperation;
 
         public CountdownTimerViewModel(IOptionsService optionsService)
         {
             _optionsService = optionsService;
 
             // subscriptions...
-            Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
             Messenger.Default.Register<CountdownFrameChangedMessage>(this, OnFrameChanged);
             Messenger.Default.Register<CountdownZoomOrPositionChangedMessage>(this, OnZoomOrPositionChanged);
             Messenger.Default.Register<CountdownElementsChangedMessage>(this, OnElementsChanged);
             Messenger.Default.Register<CountdownWindowTransparencyChangedMessage>(this, OnWindowTransparencyChanged);
         }
-
-        public bool ApplicationClosing { get; private set; }
-
+        
         public int BorderThickness => _optionsService.Options.CountdownFrame ? 3 : 0;
 
         public int BackgroundOpacity => _optionsService.Options.CountdownFrame ? 100 : 0;
 
-        public double CountdownScale => _optionsService.Options.CountdownZoomPercent / 100.0;
+        public double CountdownScale => WindowedOperation ? 1 : _optionsService.Options.CountdownZoomPercent / 100.0;
 
         public ElementsToShow ElementsToShow => _optionsService.Options.CountdownElementsToShow;
 
         public bool IsWindowTransparent => _optionsService.Options.IsCountdownWindowTransparent;
 
         public int CountdownDurationMins => _optionsService.Options.CountdownDurationMins;
+
+        public bool WindowedOperation
+        {
+            get => _windowedOperation;
+            set
+            {
+                if (_windowedOperation != value)
+                {
+                    _windowedOperation = value;
+
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         public HorizontalAlignment HorizontalAlignment
         {
@@ -80,11 +92,6 @@
                         return VerticalAlignment.Center;
                 }
             }
-        }
-
-        private void OnShutDown(ShutDownMessage obj)
-        {
-            ApplicationClosing = true;
         }
 
         private void OnFrameChanged(CountdownFrameChangedMessage msg)
