@@ -686,7 +686,7 @@
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
-    <value>Close Countdown Window</value>
+    <value>Închide fereastra cu contracronomotru</value>
     <comment>Tooltip for main window button</comment>
   </data>
 </root>
