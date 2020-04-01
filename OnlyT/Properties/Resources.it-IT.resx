@@ -211,7 +211,7 @@
     <value>Discorso conclusivo</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Ripasso e panoramica</value>
+    <value>Commenti conclusivi</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Studio biblico di congregazione</value>
@@ -690,7 +690,7 @@
     <comment>Tooltip for main window button</comment>
   </data>
   <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
-    <value>Cannot open transparent "windowed" countdown</value>
+    <value>Impossibile aprire timer trasparente in finestra</value>
     <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
   </data>
 </root>
