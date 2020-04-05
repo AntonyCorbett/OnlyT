@@ -6,9 +6,14 @@
     using EventArgs;
     using NUglify;
 
-    internal class ClockWebPageController
+    internal class WebPageController
     {
-        private static readonly Lazy<byte[]> WebPageHtml = new Lazy<byte[]>(GenerateWebPageHtml);
+        private readonly Lazy<byte[]> WebPageHtml;
+
+        public WebPageController(string webPageTemplate)
+        {
+            WebPageHtml = new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate));
+        }
 
         public void HandleRequestForTimerData(
             HttpListenerResponse response, 
@@ -41,9 +46,8 @@
             }
         }
 
-        private static byte[] GenerateWebPageHtml()
+        private static byte[] GenerateWebPageHtml(string content)
         {
-            var content = Properties.Resources.ClockHtmlTemplate;
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }
 

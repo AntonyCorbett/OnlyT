@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>OnlyT Timers</title>
+    <style type="text/css">
+        html {
+            background: #000000;
+            display: block;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: table;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            display: table-cell;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .clockstyle {
+            font-family: sans-serif;
+            font-weight: bold;
+            color: #FFFFFF;
+            font-size: 24pt;
+            font-kerning: none;
+        }
+
+        .clockstyle_yellow {
+            font-family: sans-serif;
+            font-weight: bold;
+            color: #FFFF66;
+        }
+
+        .clockstyle_green {
+            font-family: sans-serif;
+            font-weight: bold;
+            color: #00FF00;
+        }
+
+        .clockstyle_red {
+            font-family: sans-serif;
+            font-weight: bold;
+            color: #FF0000;
+        }
+
+        .clockstyle_dim {
+            font-family: sans-serif;
+            color: #668080;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <span id="clocktext" onclick="location.reload(); return false" class="clockstyle"></span>
+    </div>
+
+    <script type="text/javascript">
+        "use strict";
+
+        var textElem = document.getElementById("clocktext");
+        var textNode = document.createTextNode("");
+        textElem.appendChild(textNode);
+
+        var currentMode = "Nameplate";
+        var currentDisplayMode = "Nameplate";
+        var currentTargetSecs = 0;
+        var currentTimerMins = 0;
+        var currentTimerSecs = 0;
+        var currentTimerMillisecs = 0;
+        var currentlyCountingUp = false;
+        var timerStartDateTime = new Date();
+        var modeTransition = false;
+        var serverTimeOfDayAdjustment = 0;
+        var POLLING_INTERVAL_SECS = 4;
+        var use24HrClockFormat = false;
+
+        function getOnlyTXml() {
+            var clientDate = new Date();
+
+            var myGetRequest = new XMLHttpRequest();
+            if (myGetRequest.overrideMimeType) {
+                myGetRequest.overrideMimeType("text/xml")
+            }
+
+            myGetRequest.onreadystatechange = function () {
+                var responseDate = new Date();
+
+                if (myGetRequest.readyState == 4) {
+                    if (myGetRequest.status == 200 || window.location.href.indexOf("http") == -1) {
+                        var xmldata = myGetRequest.responseXML;
+                        var entry = xmldata.getElementsByTagName("clock")[0];
+
+                        if (entry != null) {
+                            currentMode = entry.getAttribute("mode");
+
+                            switch (currentMode) {
+                                case "Timer":
+                                    var requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
+                                    var timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
+
+                                    currentTimerMins = parseInt(entry.getAttribute("mins"));
+                                    currentTimerSecs = parseInt(entry.getAttribute("secs"));
+                                    currentTimerMillisecs = parseInt(entry.getAttribute("ms"));
+                                    currentTargetSecs = parseInt(entry.getAttribute("targetSecs"));
+                                    currentlyCountingUp = parseInt(entry.getAttribute("countUp")) == 1;
+
+                                    var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000) + currentTimerMillisecs;
+                                    var diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
+
+                                    if (Math.abs(diffMillisecs) > 100) {
+                                        // client timer out by more than 1/10 sec so adjust the timerStart
+                                        timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
+                                        console.log("timer adjustment: " + diffMillisecs + "ms")
+                                    }
+                                    break;
+
+                                case "TimeOfDay":
+                                    var minsIntoDay = parseInt(entry.getAttribute("mins"));
+                                    var secs = parseInt(entry.getAttribute("secs"));
+                                    use24HrClockFormat = parseInt(entry.getAttribute("use24Hr")) == 1;
+                                    var serverStamp = new Date(clientDate.getTime());
+                                    serverStamp.setHours(minsIntoDay / 60, minsIntoDay % 60, secs);
+                                    serverTimeOfDayAdjustment = serverStamp - clientDate;
+                                    break;
+                            }
+                        }
+                    }
+                    else {
+                        currentMode = "Offline";
+                    }
+                }
+            }
+
+            myGetRequest.ontimeout = function (e) {
+                console.log("timeout");
+            };
+
+            var url = "../data/" + clientDate.getTime();	// unique uri to prevent reuse of cached xml
+            myGetRequest.open("GET", url, true);
+            myGetRequest.timeout = 2000;
+            myGetRequest.send(null);
+
+            setTimeout(getOnlyTXml, POLLING_INTERVAL_SECS * 1000);
+        }
+
+        function getClientTimerElapsedMilliSecs() {
+            var milliSecsNow = new Date().getTime();
+            var clientStartMilliSecs = timerStartDateTime.getTime();
+            return (milliSecsNow - clientStartMilliSecs);
+        }
+
+        function formatMajorMinor(major, minor) {
+            var s = "";
+            s += (major < 10 ? "0" : "") + major + ":";
+            s += (minor < 10 ? "0" : "") + minor;
+            return s;
+        }
+
+        function formatTimeOfDay(hrs, mins) {
+            if (use24HrClockFormat) {
+                return formatMajorMinor(hrs, mins);
+            }
+            else {
+                return formatMajorMinor(hrs > 12 ? hrs - 12 : hrs, mins);
+            }
+        }
+
+        function setClockColour(remainingSecs) {
+            if (remainingSecs <= 0) {
+                textElem.className = "clockstyle_red";
+            }
+
+            else if (remainingSecs <= 30) {
+                textElem.className = "clockstyle_yellow";
+            }
+
+            else {
+                textElem.className = "clockstyle_green";
+            }
+        }
+
+        function conditionalUpdateTxtSize() {
+            if (modeTransition) {
+                updateTextSize();
+            }
+        }
+
+        function getDisplayString() {
+            var s = "";
+
+            modeTransition = (currentDisplayMode != currentMode);
+
+            switch (currentMode) {
+                case "TimeOfDay":
+                    var d = new Date();
+                    d.setTime(d.getTime() + + serverTimeOfDayAdjustment);
+                    var h = d.getHours();
+                    var m = d.getMinutes();
+
+                    s = formatTimeOfDay(h, m);
+
+                    textElem.className = "clockstyle";
+                    currentDisplayMode = currentMode;
+                    break;
+
+                case "Timer":
+                    var clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
+
+                    var targetSecs = currentTargetSecs;
+                    var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
+
+                    setClockColour(remainingSecs);
+
+                    currentDisplayMode = currentMode;
+
+                    return currentlyCountingUp
+                        ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
+                        : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+
+                    break;
+
+                case "Nameplate":
+                    s = "OnlyT";
+                    currentDisplayMode = currentMode;
+                    textElem.className = "clockstyle_dim";
+                    break;
+
+                case "Offline":
+                    s = "offline...";
+                    currentDisplayMode = currentMode;
+                    textElem.className = "clockstyle_dim";
+                    break;
+            }
+
+            return s;
+        }
+
+        function getTimeDisplayStringCountingUp(elapsedSecs) {
+            var integralSecs = Math.abs(Math.floor(elapsedSecs % 60));
+            var integralMins = Math.abs(Math.floor(elapsedSecs / 60));
+
+            if (integralSecs === 60) {
+                integralSecs = 0;
+                ++integralMins;
+            }
+
+            return formatMajorMinor(integralMins, integralSecs);
+        }
+
+        function getTimeDisplayStringCountingDown(elapsedSecs, targetSecs) {
+            var remainingSecs = targetSecs - elapsedSecs;
+            var integralSecs = Math.abs(Math.ceil(remainingSecs % 60));
+            var integralMins = Math.abs(Math.floor(remainingSecs / 60));
+
+            if (integralSecs === 60) {
+                integralSecs = 0;
+                ++integralMins;
+            }
+
+            if (remainingSecs < 0 && integralMins > 0) {
+                --integralMins;
+            }
+
+            return formatMajorMinor(integralMins, integralSecs);
+        }
+
+        function updateClock() {
+            var s = getDisplayString();
+            if (s != "stet") {
+                textNode.data = s;
+            }
+
+            conditionalUpdateTxtSize();
+            setTimeout(updateClock, 100);	// every 1/10 sec
+        }
+
+        function updateTextSize() {
+            var curFontSize = 24;
+            var targetWidth = 0.9;  // Proportion of full screen width
+            for (var i = 0; 3 > i; i++) {
+                // Iterate for better better convergence
+                var newFontSize = textElem.parentNode.offsetWidth * targetWidth / textElem.offsetWidth * curFontSize;
+                textElem.style.fontSize = newFontSize.toFixed(3) + "pt";
+                curFontSize = newFontSize;
+            }
+        }
+
+        getOnlyTXml();
+        updateClock();
+        updateTextSize();
+
+        window.addEventListener("resize", updateTextSize);
+    </script>
+</body>
+</html>

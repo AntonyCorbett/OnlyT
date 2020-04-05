@@ -1452,6 +1452,37 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;title&gt;OnlyT Timers&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///        html {
+        ///            background: #000000;
+        ///            display: block;
+        ///            height: 100%;
+        ///            margin: 0;
+        ///            padding: 0;
+        ///        }
+        ///
+        ///        body {
+        ///            display: table;
+        ///            width: 100%;
+        ///            height: 100%;
+        ///            margin: 0;
+        ///            padding: 0;
+        ///        }
+        ///
+        ///        .main  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string TimersHtmlTemplate {
+            get {
+                return ResourceManager.GetString("TimersHtmlTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VIEW.
         /// </summary>
         public static string VIEW_REPORT {

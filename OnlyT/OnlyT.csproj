@@ -273,7 +273,7 @@
     <Compile Include="WebServer\ErrorHandling\WebServerException.cs" />
     <Compile Include="WebServer\ClockServerMode.cs" />
     <Compile Include="WebServer\Controllers\ApiRouter.cs" />
-    <Compile Include="WebServer\Controllers\ClockWebPageController.cs" />
+    <Compile Include="WebServer\Controllers\WebPageController.cs" />
     <Compile Include="WebServer\ErrorHandling\WebServerErrorCode.cs" />
     <Compile Include="WebServer\HttpServer.cs" />
     <Compile Include="WebServer\IHttpServer.cs" />
@@ -423,6 +423,7 @@
     <Content Include="bell.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\TimersHtmlTemplate.html" />
     <Resource Include="icon4.ico" />
     <None Include="Resources\ClockHtmlTemplate.txt" />
   </ItemGroup>

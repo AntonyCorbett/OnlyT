@@ -76,6 +76,7 @@
         {
             _listener.Prefixes.Clear();
             _listener.Prefixes.Add($"http://*:{_port}/index/");
+            _listener.Prefixes.Add($"http://*:{_port}/timers/");
             _listener.Prefixes.Add($"http://*:{_port}/data/");
             _listener.Prefixes.Add($"http://*:{_port}/api/");
 
@@ -145,6 +146,10 @@
                                         HandleRequestForClockWebPage(context.Request, response);
                                         break;
 
+                                    case "timers":
+                                        HandleRequestForTimersWebPage(context.Request, response);
+                                        break;
+
                                     case "api":
                                         HandleApiRequest(context.Request, response);
                                         break;
@@ -182,7 +187,18 @@
             {
                 _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
 
-                ClockWebPageController controller = new ClockWebPageController();
+                WebPageController controller = new WebPageController(Properties.Resources.ClockHtmlTemplate);
+                controller.HandleRequestForWebPage(response);
+            }
+        }
+
+        private void HandleRequestForTimersWebPage(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            if (_optionsService.Options.IsWebClockEnabled)
+            {
+                _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
+
+                WebPageController controller = new WebPageController(Properties.Resources.TimersHtmlTemplate);
                 controller.HandleRequestForWebPage(response);
             }
         }
@@ -198,7 +214,7 @@
                 var timerInfo = new TimerInfoEventArgs();
                 OnRequestForTimerDataEvent(timerInfo);
 
-                ClockWebPageController controller = new ClockWebPageController();
+                WebPageController controller = new WebPageController(Properties.Resources.ClockHtmlTemplate);
                 controller.HandleRequestForTimerData(response, timerInfo, _dateTimeService.Now());
             }
         }
