@@ -187,7 +187,7 @@
             {
                 _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
 
-                WebPageController controller = new WebPageController(Properties.Resources.ClockHtmlTemplate);
+                WebPageController controller = new WebPageController(WebPageTypes.Clock);
                 controller.HandleRequestForWebPage(response);
             }
         }
@@ -198,7 +198,7 @@
             {
                 _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
 
-                WebPageController controller = new WebPageController(Properties.Resources.TimersHtmlTemplate);
+                WebPageController controller = new WebPageController(WebPageTypes.Timers);
                 controller.HandleRequestForWebPage(response);
             }
         }
@@ -214,7 +214,7 @@
                 var timerInfo = new TimerInfoEventArgs();
                 OnRequestForTimerDataEvent(timerInfo);
 
-                WebPageController controller = new WebPageController(Properties.Resources.ClockHtmlTemplate);
+                WebPageController controller = new WebPageController(WebPageTypes.Clock);
                 controller.HandleRequestForTimerData(response, timerInfo, _dateTimeService.Now());
             }
         }

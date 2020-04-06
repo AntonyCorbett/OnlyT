@@ -266,6 +266,7 @@
     <Compile Include="WebServer\Controllers\BaseApiController.cs" />
     <Compile Include="WebServer\Controllers\BellApiController.cs" />
     <Compile Include="WebServer\Controllers\DateTimeApiController.cs" />
+    <Compile Include="WebServer\Controllers\WebPageTypes.cs" />
     <Compile Include="WebServer\Controllers\SystemApiController.cs" />
     <Compile Include="WebServer\Controllers\TimersApiController.cs" />
     <Compile Include="WebServer\Controllers\WebHooksApiController.cs" />

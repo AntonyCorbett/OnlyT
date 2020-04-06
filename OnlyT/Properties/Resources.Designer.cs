@@ -1501,6 +1501,33 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clock.
+        /// </summary>
+        public static string WEB_LINK_CLOCK {
+            get {
+                return ResourceManager.GetString("WEB_LINK_CLOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timers.
+        /// </summary>
+        public static string WEB_LINK_TIMERS {
+            get {
+                return ResourceManager.GetString("WEB_LINK_TIMERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to offline....
+        /// </summary>
+        public static string WEB_OFFLINE {
+            get {
+                return ResourceManager.GetString("WEB_OFFLINE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Weekend.
         /// </summary>
         public static string WEEKEND {
