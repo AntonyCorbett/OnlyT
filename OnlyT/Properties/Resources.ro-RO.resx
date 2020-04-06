@@ -689,4 +689,8 @@
     <value>Închide fereastra cu contracronomotru</value>
     <comment>Tooltip for main window button</comment>
   </data>
+  <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
+    <value>Nu se poate deschide contracronometrul în ”fereastră” cu modul transparent</value>
+    <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
+  </data>
 </root>
