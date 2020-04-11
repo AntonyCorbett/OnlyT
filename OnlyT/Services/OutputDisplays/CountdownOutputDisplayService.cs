@@ -199,7 +199,7 @@
 
             _countdownWindow.ResizeMode = ResizeMode.CanResize;
             _countdownWindow.ShowInTaskbar = true;
-            _countdownWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+            _countdownWindow.WindowStyle = WindowStyle.None;
 
             _countdownWindow.Topmost = false;
         }

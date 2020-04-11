@@ -16,7 +16,14 @@
         ShowInTaskbar="False" 
         ResizeMode="NoResize" 
         Closing="WindowClosing" 
+        MouseDown="Window_MouseDown"
         Cursor="{Binding MousePointer}">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            CaptionHeight="0"
+            ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
 
     <Window.Resources>
         <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />

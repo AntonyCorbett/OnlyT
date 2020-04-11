@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Input;
     using GalaSoft.MvvmLight.Threading;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.CountdownTimer;
@@ -33,7 +34,7 @@
         }
 
         public event EventHandler TimeUpEvent;
-
+        
         public void AdjustWindowPositionAndSize()
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.CountdownOutputWindowPlacement))
@@ -107,6 +108,17 @@
             {
                 Width = DefWindowWidth;
                 Height = DefWindowHeight;
+            }
+        }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var isWindowed = ((CountdownTimerViewModel) DataContext).WindowedOperation;
+
+            // allow drag when no title bar is shown
+            if (isWindowed && e.ChangedButton == MouseButton.Left && WindowStyle == WindowStyle.None)
+            {
+                DragMove();
             }
         }
     }

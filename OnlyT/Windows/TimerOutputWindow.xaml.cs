@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media.Animation;
     using System.Windows.Threading;
     using Animations;
@@ -42,7 +43,7 @@
             
             _persistTimer.Tick += HandlePersistTimerTick;
         }
-
+        
         public void AdjustWindowPositionAndSize()
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
@@ -354,6 +355,17 @@
             {
                 Width = DefWindowWidth;
                 Height = DefWindowHeight;
+            }
+        }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var isWindowed = ((TimerOutputWindowViewModel)DataContext).WindowedOperation;
+
+            // allow drag when no title bar is shown
+            if (isWindowed && e.ChangedButton == MouseButton.Left && WindowStyle == WindowStyle.None)
+            {
+                DragMove();
             }
         }
     }
