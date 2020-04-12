@@ -1,4 +1,6 @@
-﻿namespace OnlyT.CountdownTimer
+﻿using System.Windows.Data;
+
+namespace OnlyT.CountdownTimer
 {
     using System;
     using System.Globalization;
@@ -37,7 +39,7 @@
         private double _canvasWidth;
         private double _canvasHeight;
         private AnnulusSize _annulusSize;
-        private Point _centrePoint;
+        private Point _centrePointOfDial;
         private DateTime _start;
         private double _pixelsPerDip;
         private int _countdownDurationMins = DefaultCountdownDurationMins;
@@ -137,12 +139,12 @@
 
         private void RenderPieSliceAndBall(double angle, double secondsElapsed)
         {
-            if (!Dispatcher.HasShutdownStarted && IsLoaded)
+            if (!Dispatcher.HasShutdownStarted && IsLoaded && _annulusSize != null)
             {
-                _pie.Data = PieSlice.Get(angle, _centrePoint, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
+                _pie.Data = PieSlice.Get(angle, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 
                 var ballPt = SecondsBall.GetPos(
-                    _centrePoint,
+                    _centrePointOfDial,
                     (int)secondsElapsed % 60,
                     _secondsBall.Width / 2,
                     _annulusSize.InnerRadius);
@@ -238,16 +240,34 @@
 
             _twoDigitMins = _countdownDurationMins > 9;
 
+            _annulusSize = GetAnnulusSize();
+
             _time.FontSize = 12;
             _time.FontWeight = FontWeights.Bold;
 
-            _annulusSize = GetAnnulusSize();
+            switch (_elementsToShow)
+            {
+                case ElementsToShow.Digital:
+                    InitLayoutJustDigital();
+                    break;
 
-            var totalWidthNeeded = GetTotalWidthNeeded();
+                case ElementsToShow.Dial:
+                    InitLayoutJustDial();
+                    break;
 
-            _centrePoint = CalcCentrePoint(totalWidthNeeded);
+                case ElementsToShow.DialAndDigital:
+                    InitLayoutDigitalAndDial();
+                    break;
+            }
+        }
 
-            _donut.Data = PieSlice.Get(0.1, _centrePoint, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
+        private void InitLayoutDigitalAndDial()
+        {
+            var totalWidthNeeded = 3.25 * _annulusSize.OuterDiameter;
+
+            _centrePointOfDial = CalcCentrePointOfDIal(totalWidthNeeded);
+
+            _donut.Data = PieSlice.Get(0.1, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 
             _secondsBall.Width = (double)_annulusSize.InnerRadius / 6;
             _secondsBall.Height = (double)_annulusSize.InnerRadius / 6;
@@ -256,10 +276,66 @@
 
             _time.Text = GetTimeText();
 
+            var sz = CalculateTextFontSizeWithDial();
+
+            Canvas.SetLeft(_time, _centrePointOfDial.X - _annulusSize.OuterRadius + totalWidthNeeded - sz.Width);
+
+            Canvas.SetTop(_time, _centrePointOfDial.Y - sz.Height);
+
+            RenderPieSliceAndBall(0.1, 0);
+        }
+
+        private void InitLayoutJustDial()
+        {
+            var totalWidthNeeded = _annulusSize.OuterDiameter;
+
+            _centrePointOfDial = CalcCentrePointOfDIal(totalWidthNeeded);
+
+            _donut.Data = PieSlice.Get(0.1, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
+
+            _secondsBall.Width = (double)_annulusSize.InnerRadius / 6;
+            _secondsBall.Height = (double)_annulusSize.InnerRadius / 6;
+
+            SetElementsVisibility();
+            
+            RenderPieSliceAndBall(0.1, 0);
+        }
+
+        private void InitLayoutJustDigital()
+        {
+            SetElementsVisibility();
+
+            _time.Text = GetTimeText();
+
+            var sz = CalculateTextFontSizeNoDial();
+
+            Canvas.SetLeft(_time, (_canvasWidth - sz.Width) / 2);
+            Canvas.SetTop(_time, (_canvasHeight - sz.Height) / 2);
+        }
+
+        private Size CalculateTextFontSizeNoDial()
+        {
+            var sz = GetTextSize(_time.Text, useExtent: false);
+
+            var szFactor = 0.95;
+
+            while (sz.Width < szFactor * _canvasWidth)
+            {
+                _time.FontSize += 0.5;
+                sz = GetTextSize(_time.Text, useExtent: false);
+            }
+
+            sz = GetTextSize(_time.Text, useExtent: false);
+
+            return sz;
+        }
+
+        private Size CalculateTextFontSizeWithDial()
+        {
             var sz = GetTextSize(_time.Text, useExtent: true);
-            var szFactor = _twoDigitMins
-                ? 0.60
-                : 0.75;
+            double szFactor = _twoDigitMins
+                    ? 0.60
+                    : 0.75;
 
             while (sz.Height < szFactor * _annulusSize.OuterDiameter)
             {
@@ -269,10 +345,7 @@
 
             sz = GetTextSize(_time.Text, useExtent: true);
 
-            Canvas.SetLeft(_time, _centrePoint.X - _annulusSize.OuterRadius + totalWidthNeeded - sz.Width);
-            Canvas.SetTop(_time, _centrePoint.Y - sz.Height);
-
-            RenderPieSliceAndBall(0.1, 0);
+            return sz;
         }
 
         private AnnulusSize GetAnnulusSize()
@@ -310,13 +383,11 @@
                     _secondsBall.Visibility = Visibility.Visible;
                     _donut.Visibility = Visibility.Visible;
                     _pie.Visibility = Visibility.Visible;
-
                     _time.Visibility = Visibility.Hidden;
                     break;
 
                 case ElementsToShow.Digital:
                     _time.Visibility = Visibility.Visible;
-
                     _secondsBall.Visibility = Visibility.Hidden;
                     _donut.Visibility = Visibility.Hidden;
                     _pie.Visibility = Visibility.Hidden;
@@ -327,21 +398,6 @@
             {
                 // gratuitous
                 _secondsBall.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private double GetTotalWidthNeeded()
-        {
-            switch (_elementsToShow)
-            {
-                case ElementsToShow.Dial:
-                    return _annulusSize.OuterDiameter;
-
-                case ElementsToShow.Digital:
-                    return 2 * _annulusSize.OuterDiameter;
-
-                default:
-                    return 3.25 * _annulusSize.OuterDiameter;
             }
         }
 
@@ -394,7 +450,7 @@
             canvas.Children.Add(_time);
         }
 
-        private Point CalcCentrePoint(double totalWidthNeeded)
+        private Point CalcCentrePointOfDIal(double totalWidthNeeded)
         {
             var margin = (_canvasWidth - totalWidthNeeded) / 2;
             return new Point(margin + _annulusSize.OuterRadius, _canvasHeight / 2);
