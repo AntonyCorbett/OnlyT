@@ -1,6 +1,4 @@
-﻿using System.Windows.Data;
-
-namespace OnlyT.CountdownTimer
+﻿namespace OnlyT.CountdownTimer
 {
     using System;
     using System.Globalization;
@@ -29,7 +27,7 @@ namespace OnlyT.CountdownTimer
 
         private const int DefaultCountdownDurationMins = 5;
 
-        private readonly DispatcherTimer _timer;
+        private DispatcherTimer _timer;
 
         private Path _donut;
         private Path _pie;
@@ -61,6 +59,8 @@ namespace OnlyT.CountdownTimer
             };
             
             _timer.Tick += TimerFire;
+
+            RegisterToCleanupWhenParentCloses();
         }
 
         public event EventHandler<UtcDateTimeQueryEventArgs> QueryUtcDateTimeEvent;
@@ -511,6 +511,29 @@ namespace OnlyT.CountdownTimer
             }
 
             QueryUtcDateTimeEvent?.Invoke(this, e);
+        }
+
+        private void RegisterToCleanupWhenParentCloses()
+        {
+            // get opportunity to clear the timer event handler
+            // when the parent window closes.
+            Loaded += (s, e) =>
+            {
+                var parent = Window.GetWindow(this);
+                if (parent != null)
+                {
+                    parent.Closing += (s1, e1) => DisposeLogic();
+                }
+            };
+        }
+
+        private void DisposeLogic()
+        {
+            // clear the handler 
+            _timer.Tick -= TimerFire;
+
+            // and break the retention link to the global dispatch timer list
+            _timer = null;
         }
     }
 }

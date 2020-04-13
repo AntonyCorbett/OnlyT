@@ -113,7 +113,7 @@
 
         private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var isWindowed = ((CountdownTimerViewModel) DataContext).WindowedOperation;
+            var isWindowed = ((CountdownTimerViewModel)DataContext).WindowedOperation;
 
             // allow drag when no title bar is shown
             if (isWindowed && e.ChangedButton == MouseButton.Left && WindowStyle == WindowStyle.None)
