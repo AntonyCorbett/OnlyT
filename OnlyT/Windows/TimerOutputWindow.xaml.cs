@@ -314,12 +314,7 @@
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.WindowedOperation)
-            {
-                InitFullScreenMode();
-            }
-
+            InitFullScreenMode();
             TheClock.IsRunning = true;
         }
 
