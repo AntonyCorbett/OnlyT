@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyT Timers</title>
     <style type="text/css">
         html {
+            font-family: sans-serif;
             background: #000000;
             display: block;
             height: 100%;
@@ -23,82 +25,110 @@
         .main {
             display: table-cell;
             width: 100%;
-            height: 100%;
-            text-align: center;
+            height: 97%;
             vertical-align: middle;
+            text-align: center;
+        }
+
+        #maintext {
+            font-size: 10em;
         }
 
         .clockstyle {
-            font-family: sans-serif;
             font-weight: bold;
             color: #FFFFFF;
             font-kerning: none;
         }
 
         .clockstyle_yellow {
-            font-family: sans-serif;
             font-weight: bold;
             color: #FFFF66;
         }
 
         .clockstyle_green {
-            font-family: sans-serif;
             font-weight: bold;
             color: #00FF00;
         }
 
         .clockstyle_red {
-            font-family: sans-serif;
             font-weight: bold;
             color: #FF0000;
         }
 
         .clockstyle_dim {
-            font-family: sans-serif;
             color: #668080;
         }
 
         .link_container {
             display: table-row;
-            width: 100%;
+            width: 99%;
             text-align: right;
             padding: 5px;
         }
 
-        dl.talk_info {
-            font-size: 2em;
-            color: #ffffff;
-            width: 80%;
-            overflow: hidden;
-            margin: 0 auto;
-            float: right;
-            margin-bottom: 10px;
-            margin-top: 10px;
+        .link_container a {
+            margin-right: 5px;
+            padding: 5px;
+            background-color: gray;
+            text-decoration: none;
         }
 
-        .talk_info dt {
-            float: left;
-            width: 45%;
-            text-align: left;
+        .talk_timers {
+            min-width: 50%;
+            margin: 0 auto;
+            font-size: 2em;
         }
-        
-        .talk_info dd {
-            float: left;
-            width: 20%;
-            text-align: right;
+
+        .talk_timers th {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
+            padding: 5px;
+            background-color: #4d4d4d;
+        }
+
+        tr.talk_info {
+            color: #ffffff;
+            margin: 0 10px;
+        }
+
+        .talk_info td {
+            padding: 10px;
+        }
+
+        .talk_info td:first-child {
+            width: 80%;
+            text-align: left;
+            background-color: white;
+            color: black;
+        }
+
+        .talk_info td:last-child {
+            text-align: center;
+            background-color: #191818;
         }
 
         a,
         a:visited {
-            color: blue;
+            color: white;
             font-weight: bold;
+        }
+
+        a:hover {
+            color: silver;
+        }
+
+        @media (max-width: 700px) {
+            .talk_timers {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
     <div id="main" class="main">
-        <span id="maintext" onclick="location.reload(); return false" style="display:none"></span>
+        <span id="maintext" onclick="location.reload(); return false" style="display:none;"></span>
     </div>
     <div class="link_container"><a href="./index">{WEB_LINK_CLOCK}</a></div>
 
@@ -106,9 +136,9 @@
         "use strict";
 
         const mainDiv = document.getElementById("main");
-        const textElem = document.getElementById("maintext");
+        const offlineTextElem = document.getElementById("maintext");
         const textNode = document.createTextNode("");
-        textElem.appendChild(textNode);
+        offlineTextElem.appendChild(textNode);
 
         let currentMode = "Nameplate";
         let currentDisplayMode = "Nameplate";
@@ -135,23 +165,33 @@
 
                         if (!timersLoaded) {
                             const keys = ["talkId", "talkTitle"];
-                            const talkHtml = `<dl class="talk_info" id="talk_{${keys[0]}}"><dt>{${keys[1]}}</dt><dd>{timer}</dd></dl>`;
+                            const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td>{timer}</td></tr>`;
                             // Load the timers list
                             const parts = [];
                             for (var i = 0; i < jsondata.timerInfo.length; i++) {
                                 const timerInfo = jsondata.timerInfo[i];
                                 let currPart = talkHtml;
                                 keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
-                                const totalUsedSecs = (timerInfo.adaptedDurationSecs || timerInfo.originalDurationSecs) - timerInfo.completedTimeSecs;
+                                const totalUsedSecs = (timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs) - timerInfo.completedTimeSecs;
                                 const minutes = Math.floor(totalUsedSecs / 60);
                                 const seconds = totalUsedSecs - (minutes * 60);
-                                currPart = currPart.replace('{timer}', `${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`);
+                                const timerText = formatMajorMinor(minutes, seconds);
+                                
+                                if (!!timerInfo.completedTimeSecs) {
+                                    const talkRow = {className: null};
+                                    setClockColour(totalUsedSecs, talkRow);
+                                    currPart = currPart.replace('{timer}', `<span class="${talkRow.className}">${timerText}</span>`);
+                                } else {
+                                    currPart = currPart.replace('{timer}', timerText);
+                                }
                                 parts.push(currPart);
                             }
-                            const div = document.createElement("div");
-                            div.id = "timers";
-                            div.innerHTML = parts.join("\n");
-                            mainDiv.appendChild(div);
+                            const table = document.createElement("table");
+                            table.id = "timers";
+                            table.className = 'talk_timers';
+                            const tableHeaderHtml = '<tr><th colspan="2">{WEB_LINK_TIMERS}</th></tr>';
+                            table.innerHTML = tableHeaderHtml + parts.join("\n");
+                            mainDiv.appendChild(table);
                             timersLoaded = true;
                         }
 
@@ -175,11 +215,22 @@
                             if (Math.abs(diffMillisecs) > 100) {
                                 // client timer out by more than 1/10 sec so adjust the timerStart
                                 timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
-                                console.log("timer adjustment: " + diffMillisecs + "ms")
                             }
                         } else {
                             currentTalk = null;
                             currentMode = "Timers";
+                            // Adjust timer colors for completed parts
+                            for (var i = 0; i < jsondata.timerInfo.length; i++) {
+                                const timerInfo = jsondata.timerInfo[i];
+                                if (!!timerInfo.completedTimeSecs) {
+                                    const totalUsedSecs = (timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs) - timerInfo.completedTimeSecs;
+                                    const minutes = Math.floor(totalUsedSecs / 60);
+                                    const seconds = totalUsedSecs - (minutes * 60);
+                                    const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
+                                    talkRow.getElementsByTagName('td')[1].innerHTML = formatMajorMinor(minutes, seconds);
+                                    setClockColour(totalUsedSecs, talkRow.getElementsByTagName('td')[1]);
+                                }
+                            }
                         }
                     }
                     else {
@@ -190,10 +241,10 @@
 
             myGetRequest.ontimeout = function (e) {
                 currentMode = "Offline";
-                console.log("timeout");
             };
 
-            let url = "../api/v3/timers?" + clientDate.getTime();	// unique uri to prevent reuse of cached json
+            // TODO: the ApiCode is currently embedded here. Need to figure out how to best get this, maybe an input box for the user
+            const url = `../api/v3/timers?ApiCode=1916&${clientDate.getTime()}`;	// unique uri to prevent reuse of cached json
             myGetRequest.open("GET", url, true);
             myGetRequest.timeout = 2000;
             myGetRequest.send(null);
@@ -208,29 +259,18 @@
         }
 
         function formatMajorMinor(major, minor) {
-            let s = "";
-            s += (major < 10 ? "0" : "") + major + ":";
-            s += (minor < 10 ? "0" : "") + minor;
-            return s;
+            return `${("0" + major).slice(-2)}:${("0" + minor).slice(-2)}`;
         }
 
-        function setClockColour(remainingSecs) {
+        function setClockColour(remainingSecs, targetElem) {
             if (remainingSecs <= 0) {
-                textElem.className = "clockstyle_red";
+                targetElem.className = "clockstyle_red";
             }
-
             else if (remainingSecs <= 30) {
-                textElem.className = "clockstyle_yellow";
+                targetElem.className = "clockstyle_yellow";
             }
-
             else {
-                textElem.className = "clockstyle_green";
-            }
-        }
-
-        function conditionalUpdateTxtSize() {
-            if (modeTransition) {
-                updateTextSize();
+                targetElem.className = "clockstyle_green";
             }
         }
 
@@ -239,17 +279,19 @@
 
             switch (currentMode) {
                 case "Timers":
-                    textElem.style.display = "none";
+                    offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
                     return "";
 
                 case "Timer":
-                    textElem.style.display = "none";
+                    offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
                     const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
                     const remainingSecs = currentTargetSecs - clientTimerTotalElapsedSecs;
 
-                    setClockColour(remainingSecs);
+                    if (!!currentTalk && !!currentTalk.getElementsByTagName('td')[1]) {
+                        setClockColour(remainingSecs, currentTalk.getElementsByTagName('td')[1]);
+                    }
                     currentDisplayMode = currentMode;
 
                     return currentlyCountingUp
@@ -257,9 +299,8 @@
                         : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
 
                 default:
-                    if (!!textElem.style.display) {
-                        textElem.style.display = "";
-                        updateTextSize();
+                    if (!!offlineTextElem.style.display) {
+                        offlineTextElem.style.display = "";
                     }
                     if (timersLoaded) {
                         document.getElementById("timers").remove();
@@ -267,7 +308,7 @@
                     currentTalk = null;
                     timersLoaded = false;
                     currentDisplayMode = currentMode;
-                    textElem.className = "clockstyle_dim";
+                    offlineTextElem.className = "clockstyle_dim";
                     return currentMode !== "Nameplate" ? "{WEB_OFFLINE}" : "OnlyT";
             }
         }
@@ -305,32 +346,18 @@
             let s = getDisplayString();
             if (s != "stet") {
                 if (!!currentTalk) {
-                    currentTalk.getElementsByTagName("dd")[0].innerHTML = s;
+                    currentTalk.getElementsByTagName("td")[1].innerHTML = s;
                 } else {
                     textNode.data = s;
                 }
             }
 
-            conditionalUpdateTxtSize();
             setTimeout(updateTimer, 100);	// every 1/10 sec
-        }
-
-        function updateTextSize() {
-            let curFontSize = 24;
-            const targetWidth = 0.9;  // Proportion of full screen width
-            for (let i = 0; i < 3; i++) {
-                // Iterate for better better convergence
-                const newFontSize = mainDiv.offsetWidth * targetWidth / textElem.offsetWidth * curFontSize;
-                textElem.style.fontSize = newFontSize.toFixed(3) + "pt";
-                curFontSize = newFontSize;
-            }
         }
 
         getOnlyTJson();
         updateTimer();
-        updateTextSize();
 
-        window.addEventListener("resize", updateTextSize);
     </script>
 </body>
 </html>
