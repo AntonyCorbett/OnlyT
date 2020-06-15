@@ -12,17 +12,17 @@
     internal class WebPageController
     {
         private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = new Dictionary<WebPageTypes, Lazy<byte[]>>();
-        private readonly WebPageTypes WebPageType;
+        private readonly WebPageTypes _webPageType;
 
         public WebPageController(WebPageTypes webPageType)
         {
-            WebPageType = webPageType;
+            _webPageType = webPageType;
             lock (WebPageHtml)
             {
-                if (!WebPageHtml.ContainsKey(WebPageType))
+                if (!WebPageHtml.ContainsKey(_webPageType))
                 {
                     string webPageTemplate = string.Empty;
-                    switch (WebPageType)
+                    switch (_webPageType)
                     {
                         case WebPageTypes.Clock:
                             webPageTemplate = Properties.Resources.ClockHtmlTemplate;
@@ -31,7 +31,8 @@
                             webPageTemplate = Properties.Resources.TimersHtmlTemplate;
                             break;
                     }
-                    WebPageHtml.Add(WebPageType, new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate)));
+
+                    WebPageHtml.Add(_webPageType, new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate)));
                 }
             }
         }
@@ -60,16 +61,16 @@
             response.ContentType = "text/html";
             response.ContentEncoding = Encoding.UTF8;
             
-            response.ContentLength64 = WebPageHtml[WebPageType].Value.Length;
+            response.ContentLength64 = WebPageHtml[_webPageType].Value.Length;
             using (System.IO.Stream output = response.OutputStream)
             {
-                output.Write(WebPageHtml[WebPageType].Value, 0, WebPageHtml[WebPageType].Value.Length);
+                output.Write(WebPageHtml[_webPageType].Value, 0, WebPageHtml[_webPageType].Value.Length);
             }
         }
 
         private static byte[] GenerateWebPageHtml(string content)
         {
-            var resourceKeys = new[]{ "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
+            var resourceKeys = new[] { "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
             var resourceMan = new ResourceManager(typeof(Properties.Resources));
             resourceKeys.ToList().ForEach(k => content = content.Replace($"{{{k}}}", resourceMan.GetString(k)));
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);

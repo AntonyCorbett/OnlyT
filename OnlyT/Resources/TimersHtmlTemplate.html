@@ -32,6 +32,7 @@
 
         #maintext {
             font-size: 10em;
+            cursor: pointer;
         }
 
         .clockstyle {
@@ -103,6 +104,10 @@
             color: black;
         }
 
+        .talk_info.completed td:first-child {
+            color: #737373;
+        }
+
         .talk_info td:last-child {
             text-align: center;
             background-color: #191818;
@@ -165,24 +170,26 @@
 
                         if (!timersLoaded) {
                             const keys = ["talkId", "talkTitle"];
-                            const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td>{timer}</td></tr>`;
+                            const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td{colour}>{timer}</td></tr>`;
                             // Load the timers list
                             const parts = [];
                             for (var i = 0; i < jsondata.timerInfo.length; i++) {
                                 const timerInfo = jsondata.timerInfo[i];
                                 let currPart = talkHtml;
                                 keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
-                                const totalUsedSecs = (timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs) - timerInfo.completedTimeSecs;
-                                const minutes = Math.floor(totalUsedSecs / 60);
-                                const seconds = totalUsedSecs - (minutes * 60);
-                                const timerText = formatMajorMinor(minutes, seconds);
-                                
+                                const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
+                                const timerText = timerInfo.countUp ?
+                                                    getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
+                                                    getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
+
+                                currPart = currPart.replace('{timer}', timerText);
                                 if (!!timerInfo.completedTimeSecs) {
                                     const talkRow = {className: null};
-                                    setClockColour(totalUsedSecs, talkRow);
-                                    currPart = currPart.replace('{timer}', `<span class="${talkRow.className}">${timerText}</span>`);
+                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, talkRow);
+                                    currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
+                                    currPart = currPart.replace('"talk_info"', '"talk_info completed"');
                                 } else {
-                                    currPart = currPart.replace('{timer}', timerText);
+                                    currPart = currPart.replace('{colour}', '');
                                 }
                                 parts.push(currPart);
                             }
@@ -223,12 +230,15 @@
                             for (var i = 0; i < jsondata.timerInfo.length; i++) {
                                 const timerInfo = jsondata.timerInfo[i];
                                 if (!!timerInfo.completedTimeSecs) {
-                                    const totalUsedSecs = (timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs) - timerInfo.completedTimeSecs;
-                                    const minutes = Math.floor(totalUsedSecs / 60);
-                                    const seconds = totalUsedSecs - (minutes * 60);
+                                    const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
+                                    const timerText = timerInfo.countUp ?
+                                                        getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
+                                                        getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
                                     const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
-                                    talkRow.getElementsByTagName('td')[1].innerHTML = formatMajorMinor(minutes, seconds);
-                                    setClockColour(totalUsedSecs, talkRow.getElementsByTagName('td')[1]);
+                                    talkRow.className = "talk_info completed";
+                                    const timerCell = talkRow.getElementsByTagName('td')[1];
+                                    timerCell.innerHTML = timerText;
+                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerCell);
                                 }
                             }
                         }
@@ -243,8 +253,7 @@
                 currentMode = "Offline";
             };
 
-            // TODO: the ApiCode is currently embedded here. Need to figure out how to best get this, maybe an input box for the user
-            const url = `../api/v3/timers?ApiCode=1916&${clientDate.getTime()}`;	// unique uri to prevent reuse of cached json
+            const url = `../api/v3/timers?${clientDate.getTime()}`;	// unique uri to prevent reuse of cached json
             myGetRequest.open("GET", url, true);
             myGetRequest.timeout = 2000;
             myGetRequest.send(null);
@@ -289,8 +298,10 @@
                     const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
                     const remainingSecs = currentTargetSecs - clientTimerTotalElapsedSecs;
 
-                    if (!!currentTalk && !!currentTalk.getElementsByTagName('td')[1]) {
-                        setClockColour(remainingSecs, currentTalk.getElementsByTagName('td')[1]);
+                    let timerCell = null;
+                    if (!!currentTalk && !!(timerCell = currentTalk.getElementsByTagName('td')[1])) {
+                        currentTalk.className = 'talk_info';
+                        setClockColour(remainingSecs, timerCell);
                     }
                     currentDisplayMode = currentMode;
 
@@ -352,7 +363,7 @@
                 }
             }
 
-            setTimeout(updateTimer, 100);	// every 1/10 sec
+            setTimeout(updateTimer, 100);	// every 1/100 sec
         }
 
         getOnlyTJson();
