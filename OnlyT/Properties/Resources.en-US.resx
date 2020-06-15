@@ -697,4 +697,7 @@
     <value>Timers</value>
     <comment>Link to timers on web interface</comment>
   </data>
+  <data name="WEB_LINK_CLOCK" xml:space="preserve">
+    <value>Clock</value>
+  </data>
 </root>

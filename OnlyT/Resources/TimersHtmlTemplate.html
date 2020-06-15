@@ -28,6 +28,7 @@
             height: 97%;
             vertical-align: middle;
             text-align: center;
+            padding-bottom: 5px;
         }
 
         #maintext {
@@ -80,14 +81,6 @@
             font-size: 2em;
         }
 
-        .talk_timers th {
-            text-transform: uppercase;
-            font-weight: bold;
-            color: white;
-            padding: 5px;
-            background-color: #4d4d4d;
-        }
-
         tr.talk_info {
             color: #ffffff;
             margin: 0 10px;
@@ -98,19 +91,39 @@
         }
 
         .talk_info td:first-child {
-            width: 80%;
+            min-width: 80%;
             text-align: left;
             background-color: white;
             color: black;
         }
 
         .talk_info.completed td:first-child {
-            color: #737373;
+            color: #8d8d8d;
         }
 
         .talk_info td:last-child {
             text-align: center;
             background-color: #191818;
+        }
+
+        .section td {
+            color: white;
+            text-align: left;
+            padding: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .treasures td {
+            background-color: #5a6a70;
+        }
+
+        .ministry td {
+            background-color: #c18626;
+        }
+
+        .living td {
+            background-color: #961526;
         }
 
         a,
@@ -145,15 +158,17 @@
         const textNode = document.createTextNode("");
         offlineTextElem.appendChild(textNode);
 
+        const POLLING_INTERVAL_SECS = 4;
+        const MAX_OFFLINE_TO_OFFLINE_COUNT = 3;
         let currentMode = "Nameplate";
         let currentDisplayMode = "Nameplate";
         let currentTargetSecs = 0;
         let currentlyCountingUp = false;
         let timerStartDateTime = new Date();
         let modeTransition = false;
-        let POLLING_INTERVAL_SECS = 4;
         let currentTalk = null;
         let timersLoaded = false;
+        let onlineToOfflineCount = 0;
 
         function getOnlyTJson() {
             let clientDate = new Date();
@@ -170,11 +185,17 @@
 
                         if (!timersLoaded) {
                             const keys = ["talkId", "talkTitle"];
+                            const sectionHtml = `<tr class="section {section}"><td colspan="2">{name}</td></tr>`;
                             const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td{colour}>{timer}</td></tr>`;
                             // Load the timers list
                             const parts = [];
+                            let currentSection = null;
                             for (var i = 0; i < jsondata.timerInfo.length; i++) {
                                 const timerInfo = jsondata.timerInfo[i];
+                                if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
+                                    currentSection = timerInfo.meetingSectionNameInternal;
+                                    parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replace(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
+                                }
                                 let currPart = talkHtml;
                                 keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
                                 const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
@@ -196,8 +217,7 @@
                             const table = document.createElement("table");
                             table.id = "timers";
                             table.className = 'talk_timers';
-                            const tableHeaderHtml = '<tr><th colspan="2">{WEB_LINK_TIMERS}</th></tr>';
-                            table.innerHTML = tableHeaderHtml + parts.join("\n");
+                            table.innerHTML = parts.join("\n");
                             mainDiv.appendChild(table);
                             timersLoaded = true;
                         }
@@ -288,11 +308,13 @@
 
             switch (currentMode) {
                 case "Timers":
+                    onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
                     return "";
 
                 case "Timer":
+                    onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
                     const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
@@ -310,16 +332,18 @@
                         : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
 
                 default:
-                    if (!!offlineTextElem.style.display) {
+                    //
+                    if (!timersLoaded || (timersLoaded && onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT)) {
+                        onlineToOfflineCount++;
                         offlineTextElem.style.display = "";
+                        if (timersLoaded) {
+                            document.getElementById("timers").remove();
+                        }
+                        currentTalk = null;
+                        timersLoaded = false;
+                        currentDisplayMode = currentMode;
+                        offlineTextElem.className = "clockstyle_dim";
                     }
-                    if (timersLoaded) {
-                        document.getElementById("timers").remove();
-                    }
-                    currentTalk = null;
-                    timersLoaded = false;
-                    currentDisplayMode = currentMode;
-                    offlineTextElem.className = "clockstyle_dim";
                     return currentMode !== "Nameplate" ? "{WEB_OFFLINE}" : "OnlyT";
             }
         }
