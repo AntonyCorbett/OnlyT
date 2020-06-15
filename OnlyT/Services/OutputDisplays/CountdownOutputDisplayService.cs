@@ -194,12 +194,12 @@
 
             _countdownWindow.WindowState = WindowState.Normal;
 
-            _countdownWindow.MinHeight = 300;
-            _countdownWindow.MinWidth = 400;
+            _countdownWindow.MinHeight = 100;
+            _countdownWindow.MinWidth = 200;
 
             _countdownWindow.ResizeMode = ResizeMode.CanResize;
             _countdownWindow.ShowInTaskbar = true;
-            _countdownWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+            _countdownWindow.WindowStyle = WindowStyle.None;
 
             _countdownWindow.Topmost = false;
         }

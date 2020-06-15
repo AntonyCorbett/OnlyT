@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media.Animation;
     using System.Windows.Threading;
     using Animations;
@@ -42,7 +43,7 @@
             
             _persistTimer.Tick += HandlePersistTimerTick;
         }
-
+        
         public void AdjustWindowPositionAndSize()
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
@@ -313,12 +314,7 @@
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.WindowedOperation)
-            {
-                InitFullScreenMode();
-            }
-
+            InitFullScreenMode();
             TheClock.IsRunning = true;
         }
 
@@ -354,6 +350,17 @@
             {
                 Width = DefWindowWidth;
                 Height = DefWindowHeight;
+            }
+        }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var isWindowed = ((TimerOutputWindowViewModel)DataContext).WindowedOperation;
+
+            // allow drag when no title bar is shown
+            if (isWindowed && e.ChangedButton == MouseButton.Left && WindowStyle == WindowStyle.None)
+            {
+                DragMove();
             }
         }
     }

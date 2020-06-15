@@ -1,6 +1,7 @@
 ﻿namespace OnlyT.ViewModel
 {
     using System.Windows;
+    using System.Windows.Input;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
     using Messages;
@@ -22,6 +23,7 @@
             Messenger.Default.Register<CountdownZoomOrPositionChangedMessage>(this, OnZoomOrPositionChanged);
             Messenger.Default.Register<CountdownElementsChangedMessage>(this, OnElementsChanged);
             Messenger.Default.Register<CountdownWindowTransparencyChangedMessage>(this, OnWindowTransparencyChanged);
+            Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
         }
         
         public int BorderThickness => !WindowedOperation && _optionsService.Options.CountdownFrame ? 3 : 0;
@@ -35,6 +37,11 @@
         public bool IsWindowTransparent => !WindowedOperation && _optionsService.Options.IsCountdownWindowTransparent;
 
         public int CountdownDurationMins => _optionsService.Options.CountdownDurationMins;
+
+        public Cursor MousePointer =>
+            _optionsService.Options.ShowMousePointerInTimerDisplay
+                ? Cursors.Arrow
+                : Cursors.None;
 
         public bool WindowedOperation
         {
@@ -107,6 +114,11 @@
         private void OnWindowTransparencyChanged(CountdownWindowTransparencyChangedMessage msg)
         {
             RaisePropertyChanged(nameof(IsWindowTransparent));
+        }
+
+        private void OnMousePointerChanged(MousePointerInTimerDisplayChangedMessage message)
+        {
+            RaisePropertyChanged(nameof(MousePointer));
         }
 
         private void OnZoomOrPositionChanged(CountdownZoomOrPositionChangedMessage obj)

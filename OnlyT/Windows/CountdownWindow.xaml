@@ -13,8 +13,15 @@
         ShowInTaskbar="False" 
         ResizeMode="NoResize"
         Closing="WindowClosing"
+        MouseDown="Window_MouseDown"
         Title="OnlyT Countdown Output" Height="305.825" Width="469.418" 
-        Cursor="None">
+        Cursor="{Binding MousePointer}">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            CaptionHeight="0"
+            ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
 
     <i:Interaction.Behaviors>
         <behaviours:HideCloseButtonBehaviour />
@@ -30,6 +37,7 @@
                 Width="{Binding Parent.ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}"
                 Height="{Binding Parent.ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
                 Padding="10">
+            
             <Border.LayoutTransform>
                 <ScaleTransform CenterX="0" CenterY="0" ScaleX="{Binding CountdownScale}" ScaleY="{Binding CountdownScale}"/>
             </Border.LayoutTransform>

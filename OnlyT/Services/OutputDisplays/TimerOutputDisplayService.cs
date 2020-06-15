@@ -121,7 +121,7 @@
             
             _timerWindow.ResizeMode = ResizeMode.CanResize;
             _timerWindow.ShowInTaskbar = true;
-            _timerWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+            _timerWindow.WindowStyle = WindowStyle.None;
 
             _timerWindow.Topmost = false;
         }
