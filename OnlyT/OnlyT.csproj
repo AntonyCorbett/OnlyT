@@ -266,6 +266,7 @@
     <Compile Include="WebServer\Controllers\BaseApiController.cs" />
     <Compile Include="WebServer\Controllers\BellApiController.cs" />
     <Compile Include="WebServer\Controllers\DateTimeApiController.cs" />
+    <Compile Include="WebServer\Controllers\WebPageTypes.cs" />
     <Compile Include="WebServer\Controllers\SystemApiController.cs" />
     <Compile Include="WebServer\Controllers\TimersApiController.cs" />
     <Compile Include="WebServer\Controllers\WebHooksApiController.cs" />
@@ -273,7 +274,7 @@
     <Compile Include="WebServer\ErrorHandling\WebServerException.cs" />
     <Compile Include="WebServer\ClockServerMode.cs" />
     <Compile Include="WebServer\Controllers\ApiRouter.cs" />
-    <Compile Include="WebServer\Controllers\ClockWebPageController.cs" />
+    <Compile Include="WebServer\Controllers\WebPageController.cs" />
     <Compile Include="WebServer\ErrorHandling\WebServerErrorCode.cs" />
     <Compile Include="WebServer\HttpServer.cs" />
     <Compile Include="WebServer\IHttpServer.cs" />
@@ -423,6 +424,7 @@
     <Content Include="bell.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\TimersHtmlTemplate.html" />
     <Resource Include="icon4.ico" />
     <None Include="Resources\ClockHtmlTemplate.txt" />
   </ItemGroup>
