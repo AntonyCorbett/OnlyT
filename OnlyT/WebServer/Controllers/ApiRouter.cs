@@ -161,9 +161,9 @@
 
         private void CheckApiCode(HttpListenerRequest request, string apiCode)
         {
-            // use of api code is enabled...
+            // use of api code is enabled... skip check if it's a GET request
             var code = request.Headers["ApiCode"] ?? request.QueryString["ApiCode"];
-            if (string.IsNullOrEmpty(code) && string.IsNullOrEmpty(apiCode))
+            if (string.IsNullOrEmpty(code) && (string.IsNullOrEmpty(apiCode) || request.HttpMethod.Equals("GET")))
             {
                 return;
             }

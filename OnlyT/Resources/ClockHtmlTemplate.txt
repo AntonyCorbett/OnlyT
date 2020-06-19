@@ -6,6 +6,7 @@
 		<style type="text/css">			
 			html 
 			{
+				font-family: sans-serif;
 				background: #000000;
 			}
 			.clockstyle 
@@ -36,15 +37,40 @@
 			{
 				font-family: sans-serif;				
 				color: #668080;
-			}			
+			}
+			a,
+			a:visited
+			{
+				color: white;
+				font-weight: bold;
+			}
+			a:hover
+			{
+				color: silver;
+			}
+
+			.link_container {
+				display: table-row;
+				width: 99%;
+				text-align: right;
+				padding: 5px;
+			}
+
+			.link_container a {
+				margin-right: 5px;
+				padding: 5px;
+				background-color: gray;
+				text-decoration: none;
+			}
 
 		</style>
 	</head>
 	
 	<body style="display:table; width:100%; height:100%; margin:0; padding:0">
-		<div style="display:table-cell; width:100%; height:100%; text-align:center; vertical-align:middle">
+		<div style="display:table-cell; width:100%; height:97%; text-align:center; vertical-align:middle">
 			<span id="clocktext" onclick="location.reload(); return false" class="clockstyle" style="font-size:24pt; font-kerning:none"></span>
 		</div>
+		<div class="link_container"><a href="./timers">{WEB_LINK_TIMERS}</a></div>
 		
 		<script type="text/javascript">
 			"use strict";
@@ -240,7 +266,7 @@
 						break;
 
 					case "Offline":
-						s = "offline...";
+						s = "{WEB_OFFLINE}";
 						currentDisplayMode = currentMode;
 						textElem.className = "clockstyle_dim";						
 						break;

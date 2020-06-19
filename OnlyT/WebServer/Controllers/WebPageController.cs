@@ -1,14 +1,41 @@
 ﻿namespace OnlyT.WebServer.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
+    using System.Resources;
     using System.Text;
     using EventArgs;
     using NUglify;
 
-    internal class ClockWebPageController
+    internal class WebPageController
     {
-        private static readonly Lazy<byte[]> WebPageHtml = new Lazy<byte[]>(GenerateWebPageHtml);
+        private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = new Dictionary<WebPageTypes, Lazy<byte[]>>();
+        private readonly WebPageTypes _webPageType;
+
+        public WebPageController(WebPageTypes webPageType)
+        {
+            _webPageType = webPageType;
+            lock (WebPageHtml)
+            {
+                if (!WebPageHtml.ContainsKey(_webPageType))
+                {
+                    string webPageTemplate = string.Empty;
+                    switch (_webPageType)
+                    {
+                        case WebPageTypes.Clock:
+                            webPageTemplate = Properties.Resources.ClockHtmlTemplate;
+                            break;
+                        case WebPageTypes.Timers:
+                            webPageTemplate = Properties.Resources.TimersHtmlTemplate;
+                            break;
+                    }
+
+                    WebPageHtml.Add(_webPageType, new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate)));
+                }
+            }
+        }
 
         public void HandleRequestForTimerData(
             HttpListenerResponse response, 
@@ -34,16 +61,18 @@
             response.ContentType = "text/html";
             response.ContentEncoding = Encoding.UTF8;
             
-            response.ContentLength64 = WebPageHtml.Value.Length;
+            response.ContentLength64 = WebPageHtml[_webPageType].Value.Length;
             using (System.IO.Stream output = response.OutputStream)
             {
-                output.Write(WebPageHtml.Value, 0, WebPageHtml.Value.Length);
+                output.Write(WebPageHtml[_webPageType].Value, 0, WebPageHtml[_webPageType].Value.Length);
             }
         }
 
-        private static byte[] GenerateWebPageHtml()
+        private static byte[] GenerateWebPageHtml(string content)
         {
-            var content = Properties.Resources.ClockHtmlTemplate;
+            var resourceKeys = new[] { "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
+            var resourceMan = new ResourceManager(typeof(Properties.Resources));
+            resourceKeys.ToList().ForEach(k => content = content.Replace($"{{{k}}}", resourceMan.GetString(k)));
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }
 
