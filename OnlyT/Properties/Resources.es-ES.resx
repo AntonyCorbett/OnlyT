@@ -490,7 +490,7 @@
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
   </data>
   <data name="JW_COMPAT_MODE" xml:space="preserve">
-    <value>JW Library® compatibility mode</value>
+    <value>Modo de compatibilidad con JW Library®</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
