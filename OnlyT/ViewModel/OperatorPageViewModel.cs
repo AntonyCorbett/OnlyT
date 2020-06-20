@@ -1137,6 +1137,7 @@
             return !IsRunning &&
                    _optionsService.Options.OperatingMode == OperatingMode.Automatic &&
                    _optionsService.Options.MidWeekOrWeekend == MidWeekOrWeekend.MidWeek &&
+                   TalkId == (int)TalkTypesAutoMode.OpeningComments && 
                    !_scheduleService.SuccessGettingAutoFeedForMidWeekMtg();
         }
 
