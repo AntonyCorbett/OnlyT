@@ -697,15 +697,15 @@
     <value>..\resources\timershtmltemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="WEB_LINK_CLOCK" xml:space="preserve">
-    <value>Clock</value>
+    <value>Kello</value>
     <comment>Link to clock on web interface</comment>
   </data>
   <data name="WEB_LINK_TIMERS" xml:space="preserve">
-    <value>Timers</value>
+    <value>Ajastimet</value>
     <comment>Link to timers on web interface</comment>
   </data>
   <data name="WEB_OFFLINE" xml:space="preserve">
-    <value>offline...</value>
+    <value>ei verkossa...</value>
     <comment>Text displayed in web interface</comment>
   </data>
 </root>
