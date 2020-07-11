@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Utils
 {
+#pragma warning disable S101 // Types should be named in PascalCase
 #pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
 #pragma warning disable SA1649 // File name must match first type name
 #pragma warning disable SA1310 // Field names must not contain underscore
@@ -153,8 +154,8 @@
         {
             var dpi = GetDpiSettings();
 
-            var adjustedWidth = (width * dpi.Item1) / 96.0;
-            var adjustedHeight = (height * dpi.Item2) / 96.0;
+            var adjustedWidth = (width * dpi.x) / 96.0;
+            var adjustedHeight = (height * dpi.y) / 96.0;
 
             return new Tuple<double, double>(adjustedWidth, adjustedHeight);
         }
@@ -175,4 +176,5 @@
 #pragma warning restore SA1310 // Field names must not contain underscore
 #pragma warning restore SA1649 // File name must match first type name
 #pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
+#pragma warning restore S101 // Types should be named in PascalCase
 }

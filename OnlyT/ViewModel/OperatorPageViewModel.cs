@@ -926,14 +926,11 @@
                 Task.Delay(2000).ContinueWith(_ =>
                 {
                     var latestVersion = VersionDetection.GetLatestReleaseVersion();
-                    if (latestVersion != null)
+                    if (latestVersion != null && latestVersion > VersionDetection.GetCurrentVersion())
                     {
-                        if (latestVersion > VersionDetection.GetCurrentVersion())
-                        {
-                            // there is a new version....
-                            IsNewVersionAvailable = true;
-                            RaisePropertyChanged(nameof(IsNewVersionAvailable));
-                        }
+                        // there is a new version....
+                        IsNewVersionAvailable = true;
+                        RaisePropertyChanged(nameof(IsNewVersionAvailable));
                     }
                 });
             }

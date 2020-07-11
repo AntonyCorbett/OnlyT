@@ -1,5 +1,7 @@
 ﻿namespace OnlyT.Services.Monitors
 {
+#pragma warning disable S101 // Types should be named in PascalCase
+
     // ReSharper disable StyleCop.SA1602
     // ReSharper disable UnusedMember.Global
     // ReSharper disable InconsistentNaming
@@ -42,7 +44,7 @@
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern bool EnumDisplayDevices(
+        internal static extern bool EnumDisplayDevices(
             string lpDevice, 
             uint iDevNum, 
             ref DISPLAY_DEVICE lpDisplayDevice, 
@@ -65,4 +67,6 @@
             public string DeviceKey;
         }
     }
+
+#pragma warning restore S101 // Types should be named in PascalCase
 }

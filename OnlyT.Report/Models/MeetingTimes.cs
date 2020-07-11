@@ -121,11 +121,6 @@
             Items.Clear();
         }
 
-        private static DateTime RoundDateTimeToSecond(DateTime dt)
-        {
-            return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
-        }
-
         private static TimeSpan RoundTimeSpanToSecond(TimeSpan ts)
         {
             return TimeSpan.FromSeconds((int)Math.Round(ts.TotalSeconds));

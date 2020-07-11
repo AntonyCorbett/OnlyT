@@ -1,5 +1,8 @@
 ﻿namespace OnlyT.Services.Monitors
 {
+#pragma warning disable S101 // Types should be named in PascalCase
+#pragma warning disable S1144 
+
     // ReSharper disable FieldCanBeMadeReadOnly.Local
     // ReSharper disable FieldCanBeMadeReadOnly.Global
     // ReSharper disable MemberCanBePrivate.Global
@@ -252,11 +255,11 @@
         }
 
         [DllImport("user32.dll")]
-        public static extern int GetDisplayConfigBufferSizes(
+        internal static extern int GetDisplayConfigBufferSizes(
             QUERY_DEVICE_CONFIG_FLAGS flags, out uint numPathArrayElements, out uint numModeInfoArrayElements);
 
         [DllImport("user32.dll")]
-        public static extern int QueryDisplayConfig(
+        internal static extern int QueryDisplayConfig(
             QUERY_DEVICE_CONFIG_FLAGS flags,
             ref uint numPathArrayElements,
             [Out] DISPLAYCONFIG_PATH_INFO[] PathInfoArray,
@@ -265,7 +268,7 @@
             IntPtr currentTopologyId);
 
         [DllImport("user32.dll")]
-        public static extern int DisplayConfigGetDeviceInfo(ref DISPLAYCONFIG_TARGET_DEVICE_NAME deviceName);
+        internal static extern int DisplayConfigGetDeviceInfo(ref DISPLAYCONFIG_TARGET_DEVICE_NAME deviceName);
 
         private static string MonitorFriendlyName(LUID adapterId, uint targetId)
         {
@@ -349,4 +352,7 @@
 #pragma warning restore SX1309 // Field names must begin with underscore
 #pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
     }
+
+#pragma warning restore S1144 
+#pragma warning restore S101 // Types should be named in PascalCase
 }

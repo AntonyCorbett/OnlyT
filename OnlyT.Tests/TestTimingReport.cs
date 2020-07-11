@@ -60,14 +60,6 @@
             report.Execute();
         }
 
-        private void ReportQueryIsWeekendDateEvent(
-            object sender, 
-            QueryIsWeekendDateEventArgs e)
-        {
-            e.IsWeekend = e.Date.DayOfWeek == DayOfWeek.Saturday || 
-                          e.Date.DayOfWeek == DayOfWeek.Sunday;
-        }
-
         private void StoreWeekendData(
             int week,
             DateTime dateOfWeekendMtg, 
@@ -262,7 +254,7 @@
 
             public void Add(TimeSpan timeSpan)
             {
-                _value = _value + timeSpan;
+                _value += timeSpan;
             }
 
             public DateTime Now()

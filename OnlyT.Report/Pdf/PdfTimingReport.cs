@@ -129,12 +129,11 @@
             foreach (var item in _data.Items)
             {
                 // ignore very short items that are likely mistakes
-                if ((item.End - item.Start).TotalSeconds > 20)
+                if ((item.End - item.Start).TotalSeconds > 20 && 
+                    item.Start >= _data.MeetingStart && 
+                    item.End <= _data.MeetingActualEnd)
                 {
-                    if (item.Start >= _data.MeetingStart && item.End <= _data.MeetingActualEnd)
-                    {
-                        result.Add(item);
-                    }
+                    result.Add(item);
                 }
             }
 

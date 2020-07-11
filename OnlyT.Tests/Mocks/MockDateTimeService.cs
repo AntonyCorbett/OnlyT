@@ -14,7 +14,7 @@
 
         public void Add(TimeSpan timeSpan)
         {
-            _value = _value + timeSpan;
+            _value += timeSpan;
         }
 
         public DateTime Now()

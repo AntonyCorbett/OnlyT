@@ -1,6 +1,7 @@
 ﻿namespace OnlyT.Utils
 {
 #pragma warning disable SA1121 // Use built-in type alias
+#pragma warning disable S101 // Types should be named in PascalCase
 
     // ReSharper disable BuiltInTypeReferenceStyle
     // ReSharper disable IdentifierTypo
@@ -185,5 +186,6 @@
         }
     }
 
+#pragma warning restore S101 // Types should be named in PascalCase
 #pragma warning restore SA1121 // Use built-in type alias
 }

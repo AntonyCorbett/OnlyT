@@ -30,9 +30,7 @@
 
         public Meeting GetSampleMidweekMeetingDataForTesting(DateTime theDate)
         {
-            var result = new Meeting();
-
-            result.Date = theDate;
+            var result = new Meeting { Date = theDate };
 
             result.Talks.Add(new TalkTimer
             {
