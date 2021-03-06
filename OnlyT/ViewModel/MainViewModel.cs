@@ -157,8 +157,15 @@ namespace OnlyT.ViewModel
 
         private void OnHttpServerChanged(HttpServerChangedMessage msg)
         {
-            _httpServer.Stop();
-            InitHttpServer();
+            try
+            {
+                _httpServer.Stop();
+                InitHttpServer();
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Could not reinitialise http listener");
+            }
         }
 
         private void InitHttpServer()
