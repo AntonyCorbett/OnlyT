@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ADAPTED_DURATION" xml:space="preserve">
-    <value>dostosowany czas trwania punktu = {0}</value>
+    <value>skorygowany czas trwania punktu = {0}</value>
   </data>
   <data name="COUNSEL" xml:space="preserve">
     <value>porady</value>
