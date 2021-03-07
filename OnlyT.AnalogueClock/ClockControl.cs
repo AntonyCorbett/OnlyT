@@ -297,14 +297,17 @@
                     IsLargeArc(sector.StartAngle, sector.EndAngle));
             }
 
-            c.SetShowElapsedSector(sector.ShowElapsedSector);
-            
-            // light green sector...
-            DrawSector(
-                c._sectorPath2, 
-                sector.StartAngle, 
-                sector.CurrentAngle,
-                IsLargeArc(sector.StartAngle, sector.CurrentAngle));
+            if (!sector.IsOvertime)
+            {
+                c.SetShowElapsedSector(sector.ShowElapsedSector);
+
+                // light green sector...
+                DrawSector(
+                    c._sectorPath2,
+                    sector.StartAngle,
+                    sector.CurrentAngle,
+                    IsLargeArc(sector.StartAngle, sector.CurrentAngle));
+            }
 
             if (sector.IsOvertime)
             {
