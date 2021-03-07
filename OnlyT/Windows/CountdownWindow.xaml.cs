@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
-    using GalaSoft.MvvmLight.Threading;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.CountdownTimer;
     using OnlyT.Services.Options;

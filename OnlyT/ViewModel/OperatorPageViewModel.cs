@@ -1,4 +1,7 @@
-﻿namespace OnlyT.ViewModel
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -10,9 +13,6 @@
     using System.Windows;
     using System.Windows.Media;
     using AutoUpdates;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.CommandWpf;
-    using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
     using OnlyT.Common.Services.DateTime;
@@ -31,7 +31,7 @@
     /// <summary>
     /// View model for the Operator page
     /// </summary>
-    public class OperatorPageViewModel : ViewModelBase, IPage
+    public class OperatorPageViewModel : ObservableObject, IPage
     {
         private static readonly string Arrow = "→";
         

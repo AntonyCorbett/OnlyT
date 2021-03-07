@@ -1,7 +1,6 @@
 ﻿namespace OnlyT.Services.OutputDisplays
 {
     using System.Windows;
-    using GalaSoft.MvvmLight.Messaging;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.Monitors;
     using OnlyT.Services.Options;

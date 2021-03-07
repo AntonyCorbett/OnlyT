@@ -1,11 +1,10 @@
-﻿namespace OnlyT.Services.Bell
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using NAudio.Wave;
+
+namespace OnlyT.Services.Bell
 {
     using System;
     using System.IO;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Threading;
-    using NAudio.Wave;
     using Serilog;
 
     /// <summary>

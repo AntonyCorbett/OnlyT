@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
-    using GalaSoft.MvvmLight.Messaging;
     using Models;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Utils;

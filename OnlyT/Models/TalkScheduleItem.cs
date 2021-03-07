@@ -1,8 +1,9 @@
-﻿namespace OnlyT.Models
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+
+namespace OnlyT.Models
 {
     using System;
     using System.Windows.Media;
-    using GalaSoft.MvvmLight;
     using Services.TalkSchedule;
     using Utils;
 

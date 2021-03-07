@@ -2,8 +2,6 @@
 {
     using System.Threading;
     using System.Windows;
-    using System.Windows.Forms;
-    using GalaSoft.MvvmLight.Messaging;
     using OnlyT.Models;
     using OnlyT.Services.JwLibrary;
     using OnlyT.Services.Options;

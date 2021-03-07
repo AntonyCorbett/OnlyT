@@ -1,3 +1,5 @@
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+
 namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
@@ -10,9 +12,6 @@ namespace OnlyT.ViewModel
     using System.Windows.Media;
     using System.Windows.Threading;
     using EventArgs;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Threading;
     using MaterialDesignThemes.Wpf;
     using Messages;
     using OnlyT.Common.Services.DateTime;
@@ -32,7 +31,7 @@ namespace OnlyT.ViewModel
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
     /// </summary>
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ObservableObject
     {
         private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
         private readonly IOptionsService _optionsService;

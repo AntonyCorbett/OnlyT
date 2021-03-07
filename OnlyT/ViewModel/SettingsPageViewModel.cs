@@ -1,4 +1,7 @@
-﻿namespace OnlyT.ViewModel
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
     using System;
@@ -8,9 +11,6 @@
     using System.Linq;
     using System.Windows.Media.Imaging;
     using AutoUpdates;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.CommandWpf;
-    using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using Models;
     using OnlyT.Common.Services.DateTime;
@@ -25,7 +25,7 @@
     using Utils;
 
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class SettingsPageViewModel : ViewModelBase, IPage
+    public class SettingsPageViewModel : ObservableObject, IPage
     {
         private readonly MonitorItem[] _monitors;
         private readonly LanguageItem[] _languages;

@@ -1,19 +1,19 @@
-﻿namespace OnlyT.ViewModel
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+
+namespace OnlyT.ViewModel
 {
     // ReSharper disable UnusedMember.Global
     using System;
     using System.Windows.Input;
     using System.Windows.Media;
     using AnalogueClock;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using OnlyT.Common.Services.DateTime;
     using Services.Options;
     using Utils;
 
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class TimerOutputWindowViewModel : ViewModelBase
+    public class TimerOutputWindowViewModel : ObservableObject
     {
         private static readonly int _secsPerHour = 60 * 60;
         private readonly IOptionsService _optionsService;

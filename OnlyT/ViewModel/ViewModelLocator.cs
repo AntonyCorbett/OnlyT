@@ -1,8 +1,6 @@
 namespace OnlyT.ViewModel
 {
     using System;
-    using CommonServiceLocator;
-    using GalaSoft.MvvmLight.Ioc;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.LogLevelSwitch;
     using OnlyT.Services.OutputDisplays;

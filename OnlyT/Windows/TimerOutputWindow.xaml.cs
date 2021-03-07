@@ -7,7 +7,6 @@
     using System.Windows.Media.Animation;
     using System.Windows.Threading;
     using Animations;
-    using GalaSoft.MvvmLight.Messaging;
     using OnlyT.AnalogueClock;
     using OnlyT.Common.Services.DateTime;
     using Services.Options;

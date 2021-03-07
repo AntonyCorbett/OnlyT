@@ -3,7 +3,6 @@
     using System.IO;
     using System.Threading;
     using System.Windows;
-    using GalaSoft.MvvmLight.Threading;
     using OnlyT.AutoUpdates;
     using OnlyT.Services.LogLevelSwitch;
     using OnlyT.ViewModel;
@@ -20,7 +19,6 @@
 
         public App()
         {
-            DispatcherHelper.Initialize();
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -47,7 +45,7 @@
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(LogLevelSwitchService.LevelSwitch)
-                .WriteTo.RollingFile(Path.Combine(logsDirectory, "log-{Date}.txt"), retainedFileCountLimit: 28)
+                .WriteTo.File(Path.Combine(logsDirectory, "log-{Date}.txt"), retainedFileCountLimit: 28)
 
 #if DEBUG
                 .WriteTo.Debug()

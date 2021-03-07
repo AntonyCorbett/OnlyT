@@ -1,5 +1,9 @@
 ﻿namespace OnlyT.Report.Pdf
 {
+    using PdfSharpCore.Charting;
+    using PdfSharpCore.Drawing;
+    using PdfSharpCore.Pdf;
+    using SixLabors.Fonts;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -8,9 +12,6 @@
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Report.Models;
     using OnlyT.Report.Properties;
-    using PdfSharp.Charting;
-    using PdfSharp.Drawing;
-    using PdfSharp.Pdf;
     using Serilog;
 
     public sealed class PdfTimingReport
@@ -177,7 +178,7 @@
                 c.YAxis.MajorTick = 5;
                 c.YAxis.Title.Caption = Resources.OVERTIME_MINS;
                 c.YAxis.Title.Orientation = 90;
-                c.YAxis.Title.VerticalAlignment = VerticalAlignment.Center;
+                c.YAxis.Title.VerticalAlignment = PdfSharpCore.Charting.VerticalAlignment.Center;
                 c.YAxis.HasMajorGridlines = true;
                 c.YAxis.MajorGridlines.LineFormat.Color = XColor.FromGrayScale(50);
                 c.YAxis.MajorTickMark = TickMarkType.Outside;

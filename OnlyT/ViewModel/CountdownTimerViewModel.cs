@@ -1,15 +1,15 @@
-﻿namespace OnlyT.ViewModel
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+
+namespace OnlyT.ViewModel
 {
     using System.Windows;
     using System.Windows.Input;
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Messaging;
     using Messages;
     using OnlyT.CountdownTimer;
     using OnlyT.Services.Options;
 
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class CountdownTimerViewModel : ViewModelBase
+    public class CountdownTimerViewModel : ObservableObject
     {
         private readonly IOptionsService _optionsService;
         private bool _windowedOperation;

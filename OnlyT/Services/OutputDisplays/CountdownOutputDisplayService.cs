@@ -3,8 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using System.Windows;
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Threading;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.Monitors;
     using OnlyT.Services.Options;

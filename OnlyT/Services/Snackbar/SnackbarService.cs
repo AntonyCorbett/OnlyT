@@ -2,7 +2,6 @@
 {
     using System;
     using System.Windows;
-    using GalaSoft.MvvmLight.Threading;
     using MaterialDesignThemes.Wpf;
 
     // ReSharper disable once ClassNeverInstantiated.Global

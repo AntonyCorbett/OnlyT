@@ -2,9 +2,6 @@
 {
     using System.Threading.Tasks;
     using System.Windows;
-    using CommonServiceLocator;
-    using GalaSoft.MvvmLight.Messaging;
-    using GalaSoft.MvvmLight.Threading;
     using Services.Options;
     using Utils;
     using ViewModel;

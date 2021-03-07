@@ -8,7 +8,6 @@
     using System.Windows;
     using System.Windows.Markup;
     using CommandLine;
-    using GalaSoft.MvvmLight.Messaging;
     using Newtonsoft.Json;
     using OnlyT.Common.Services.DateTime;
     using OnlyT.Services.LogLevelSwitch;

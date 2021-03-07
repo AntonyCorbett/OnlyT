@@ -1,7 +1,7 @@
 ﻿namespace OnlyT.Behaviours
 {
+    using Microsoft.Xaml.Behaviors;
     using System.Windows;
-    using System.Windows.Interactivity;
     using System.Windows.Interop;
     using OnlyT.Utils;
 
