@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.Options
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Services.Options
 {
     using System;
     using System.Globalization;
@@ -45,7 +47,7 @@
             _dateTimeService = dateTimeService;
             _queryWeekendService = queryWeekendService;
 
-            Messenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
+            WeakReferenceMessenger.Default.Register<LogLevelChangedMessage>(this, OnLogLevelChanged);
         }
 
         public Options Options
@@ -306,7 +308,7 @@
             }
         }
 
-        private void OnLogLevelChanged(LogLevelChangedMessage message)
+        private void OnLogLevelChanged(object recipient, LogLevelChangedMessage message)
         {
             _logLevelSwitchService.SetMinimumLevel(Options.LogEventLevel);
         }

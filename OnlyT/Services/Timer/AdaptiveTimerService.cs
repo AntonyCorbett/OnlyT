@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.Timer
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Services.Timer
 {
     using System;
     using System.Diagnostics;
@@ -42,7 +44,7 @@
             _scheduleService = scheduleService;
             _dateTimeService = dateTimeService;
 
-            Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
+            WeakReferenceMessenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
         }
 
         public void SetMeetingStartTimeForTesting(DateTime startTime)
@@ -292,7 +294,7 @@
             return result;
         }
 
-        private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
+        private void OnCountdownWindowStatusChanged(object recipient, CountdownWindowStatusChangedMessage message)
         {
             if (!message.Showing)
             {

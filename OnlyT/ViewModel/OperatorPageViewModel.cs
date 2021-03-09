@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel
 {
@@ -118,17 +119,12 @@ namespace OnlyT.ViewModel
             CloseCountdownCommand = new RelayCommand(CloseCountdownWindow);
 
             // subscriptions...
-            Messenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
-            Messenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
-            Messenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
-            Messenger.Default.Register<ShowCircuitVisitToggleChangedMessage>(this, OnShowCircuitVisitToggleChanged);
-            Messenger.Default.Register<AutoBellSettingChangedMessage>(this, OnAutoBellSettingChanged);
-            Messenger.Default.Register<RefreshScheduleMessage>(this, OnRefreshSchedule);
-
-            if (IsInDesignMode)
-            {
-                IsNewVersionAvailable = true;
-            }
+            WeakReferenceMessenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
+            WeakReferenceMessenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
+            WeakReferenceMessenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
+            WeakReferenceMessenger.Default.Register<ShowCircuitVisitToggleChangedMessage>(this, OnShowCircuitVisitToggleChanged);
+            WeakReferenceMessenger.Default.Register<AutoBellSettingChangedMessage>(this, OnAutoBellSettingChanged);
+            WeakReferenceMessenger.Default.Register<RefreshScheduleMessage>(this, OnRefreshSchedule);
 
             GetVersionData();
 
@@ -181,7 +177,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.IsCircuitVisit = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new AutoMeetingChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new AutoMeetingChangedMessage());
                 }
             }
         }
@@ -460,7 +456,7 @@ namespace OnlyT.ViewModel
 
             var talkId = TalkId;
 
-            Messenger.Default.Send(new TimerStartMessage(_targetSeconds, _countUp, talkId));
+            WeakReferenceMessenger.Default.Send(new TimerStartMessage(_targetSeconds, _countUp, talkId));
             StoreTimerStartData();
 
             Task.Run(() =>
@@ -656,8 +652,8 @@ namespace OnlyT.ViewModel
             TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
             _secondsElapsed = e.ElapsedSecs;
             SetSecondsRemaining(e.RemainingSecs);
-            
-            Messenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, _countUp));
+
+            WeakReferenceMessenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, _countUp));
 
             if (e.RemainingSecs == 0)
             {
@@ -721,15 +717,15 @@ namespace OnlyT.ViewModel
         private void CloseCountdownWindow()
         {
             Log.Logger.Debug("Sending StopCountDownMessage");
-            Messenger.Default.Send(new StopCountDownMessage());
+            WeakReferenceMessenger.Default.Send(new StopCountDownMessage());
         }
 
-        private void OnShowCircuitVisitToggleChanged(ShowCircuitVisitToggleChangedMessage message)
+        private void OnShowCircuitVisitToggleChanged(object recipient, ShowCircuitVisitToggleChangedMessage message)
         {
             OnPropertyChanged(nameof(ShouldShowCircuitVisitToggle));
         }
 
-        private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
+        private void OnCountdownWindowStatusChanged(object recipient, CountdownWindowStatusChangedMessage message)
         {
             if (message.Showing)
             {
@@ -770,7 +766,7 @@ namespace OnlyT.ViewModel
             return talk != null && talk.Editable;
         }
 
-        private void OnAutoMeetingChanged(AutoMeetingChangedMessage message)
+        private void OnAutoMeetingChanged(object recipient, AutoMeetingChangedMessage message)
         {
             try
             {
@@ -824,7 +820,7 @@ namespace OnlyT.ViewModel
             IncrementDecrementTimerInternal(5 * 60);
         }
 
-        private void OnOperatingModeChanged(OperatingModeChangedMessage message)
+        private void OnOperatingModeChanged(object recipient, OperatingModeChangedMessage message)
         {
             Log.Logger.Debug("Responding to change in operating mode");
 
@@ -832,7 +828,7 @@ namespace OnlyT.ViewModel
             OnPropertyChanged(nameof(ShouldShowCircuitVisitToggle));
             OnPropertyChanged(nameof(IsManualMode));
             OnPropertyChanged(nameof(IsNotManualMode));
-            Messenger.Default.Send(new AutoMeetingChangedMessage());
+            WeakReferenceMessenger.Default.Send(new AutoMeetingChangedMessage());
         }
 
         private void SelectFirstTalk()
@@ -874,7 +870,7 @@ namespace OnlyT.ViewModel
 
         private void NavigateSettings()
         {
-            Messenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
+            WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
         }
 
         private async void StopTimer()
@@ -900,7 +896,7 @@ namespace OnlyT.ViewModel
             OnPropertyChanged(nameof(IsNotRunning));
             OnPropertyChanged(nameof(SettingsHint));
 
-            Messenger.Default.Send(msg);
+            WeakReferenceMessenger.Default.Send(msg);
             RaiseCanExecuteChanged();
 
             AutoAdvance();
@@ -1090,7 +1086,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnAutoBellSettingChanged(AutoBellSettingChangedMessage message)
+        private void OnAutoBellSettingChanged(object recipient, AutoBellSettingChangedMessage message)
         {
             var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
             if (talks != null)
@@ -1119,7 +1115,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnRefreshSchedule(RefreshScheduleMessage message)
+        private void OnRefreshSchedule(object recipient, RefreshScheduleMessage message)
         {
             if (ShouldRefreshMidWeekSchedule())
             {

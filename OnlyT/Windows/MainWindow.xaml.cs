@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Windows
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Windows
 {
     using System.Threading.Tasks;
     using System.Windows;
@@ -25,8 +27,8 @@
         {
             InitializeComponent();
 
-            Messenger.Default.Register<BringMainWindowToFrontMessage>(this, BringToFront);
-            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
+            WeakReferenceMessenger.Default.Register<BringMainWindowToFrontMessage>(this, BringToFront);
+            WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
 
             MinHeight = MainWindowMinHeight;
             MinWidth = MainWindowMinWidth;
@@ -39,7 +41,7 @@
             AdjustMainWindowPositionAndSize();
         }
 
-        private void OnNavigate(NavigateMessage message)
+        private void OnNavigate(object recipient, NavigateMessage message)
         {
             if (message.OriginalPageName.Equals(OperatorPageViewModel.PageName))
             {
@@ -91,7 +93,7 @@
             }
         }
 
-        private void BringToFront(BringMainWindowToFrontMessage message)
+        private void BringToFront(object recipient, BringMainWindowToFrontMessage message)
         {
             BringMainWindowToFront();
         }

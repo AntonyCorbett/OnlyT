@@ -33,24 +33,24 @@
 
         public void Enqueue(object content)
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (Application.Current.MainWindow?.WindowState != WindowState.Minimized)
                 {
                     TheSnackbarMessageQueue.Enqueue(content);
                 }
-            });
+            }));
         }
 
         public void EnqueueWithOk(object content)
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (Application.Current.MainWindow?.WindowState != WindowState.Minimized)
                 {
                     TheSnackbarMessageQueue.Enqueue(content, Properties.Resources.OK, () => { });
                 }
-            });
+            }));
         }
 
         public void Dispose()

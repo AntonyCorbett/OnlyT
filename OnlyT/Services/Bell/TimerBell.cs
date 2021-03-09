@@ -1,4 +1,6 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using System.Windows;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 using NAudio.Wave;
 
 namespace OnlyT.Services.Bell
@@ -33,10 +35,10 @@ namespace OnlyT.Services.Bell
                     _playing = value;
                     OnPropertyChanged(nameof(IsPlaying));
 
-                    DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        Messenger.Default.Send(new BellStatusChangedMessage(value));
-                    });
+                        WeakReferenceMessenger.Default.Send(new BellStatusChangedMessage(value));
+                    }));
                 }
             }
         }

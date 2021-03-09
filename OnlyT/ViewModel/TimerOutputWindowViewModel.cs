@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel
 {
@@ -38,16 +39,16 @@ namespace OnlyT.ViewModel
             ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
 
             // subscriptions...
-            Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
-            Messenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
-            Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
-            Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
-            Messenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
-            Messenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
-            Messenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChanged);
-            Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
-            Messenger.Default.Register<TimerFrameChangedMessage>(this, OnTimerFrameChanged);
-            Messenger.Default.Register<ClockIsFlatChangedMessage>(this, OnClockIsFlatChanged);
+            WeakReferenceMessenger.Default.Register<ShutDownMessage>(this, OnShutDown);
+            WeakReferenceMessenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
+            WeakReferenceMessenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
+            WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
+            WeakReferenceMessenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
+            WeakReferenceMessenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
+            WeakReferenceMessenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChanged);
+            WeakReferenceMessenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
+            WeakReferenceMessenger.Default.Register<TimerFrameChangedMessage>(this, OnTimerFrameChanged);
+            WeakReferenceMessenger.Default.Register<ClockIsFlatChangedMessage>(this, OnClockIsFlatChanged);
         }
 
         public int BorderThickness => !WindowedOperation && _optionsService.Options.TimerFrame ? 3 : 0;
@@ -190,22 +191,22 @@ namespace OnlyT.ViewModel
             return _optionsService.Options.AnalogueClockWidthPercent == 100;
         }
 
-        private void OnShutDown(ShutDownMessage obj)
+        private void OnShutDown(object recipient, ShutDownMessage obj)
         {
             ApplicationClosing = true;
         }
 
-        private void OnShowTimeOfDayUnderTimerChanged(ShowTimeOfDayUnderTimerChangedMessage message)
+        private void OnShowTimeOfDayUnderTimerChanged(object recipient, ShowTimeOfDayUnderTimerChangedMessage message)
         {
             ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
         }
 
-        private void OnAnalogueClockWidthChanged(AnalogueClockWidthChangedMessage obj)
+        private void OnAnalogueClockWidthChanged(object recipient, AnalogueClockWidthChangedMessage obj)
         {
             AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
         }
 
-        private void OnDigitalClockFormatChanged(ClockHourFormatChangedMessage obj)
+        private void OnDigitalClockFormatChanged(object recipient, ClockHourFormatChangedMessage obj)
         {
             OnPropertyChanged(nameof(DigitalTimeFormat24Hours));
             OnPropertyChanged(nameof(DigitalTimeFormatShowLeadingZero));
@@ -213,7 +214,7 @@ namespace OnlyT.ViewModel
             OnPropertyChanged(nameof(DigitalTimeShowSeconds));
         }
 
-        private void OnTimerStopped(TimerStopMessage obj)
+        private void OnTimerStopped(object recipient, TimerStopMessage obj)
         {
             IsRunning = false;
             DurationSector = null;
@@ -221,7 +222,7 @@ namespace OnlyT.ViewModel
 
         private double CalcAngleFromTime(DateTime dt) => (dt.Minute + ((double)dt.Second / 60)) / 60 * 360;
 
-        private void OnTimerStarted(TimerStartMessage message)
+        private void OnTimerStarted(object recipient, TimerStartMessage message)
         {
             TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp 
                 ? 0
@@ -256,12 +257,12 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnMousePointerChanged(MousePointerInTimerDisplayChangedMessage message)
+        private void OnMousePointerChanged(object recipient, MousePointerInTimerDisplayChangedMessage message)
         {
             OnPropertyChanged(nameof(MousePointer));
         }
 
-        private void OnTimerChanged(TimerChangedMessage message)
+        private void OnTimerChanged(object recipient, TimerChangedMessage message)
         {
             if (message.TimerIsRunning)
             {
@@ -294,7 +295,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnTimerFrameChanged(TimerFrameChangedMessage msg)
+        private void OnTimerFrameChanged(object recipient, TimerFrameChangedMessage msg)
         {
             OnPropertyChanged(nameof(BorderThickness));
             OnPropertyChanged(nameof(TimerBorderThickness));
@@ -302,7 +303,7 @@ namespace OnlyT.ViewModel
             OnPropertyChanged(nameof(UseClockBackgroundGradient));
         }
 
-        private void OnClockIsFlatChanged(ClockIsFlatChangedMessage msg)
+        private void OnClockIsFlatChanged(object recipient, ClockIsFlatChangedMessage msg)
         {
             OnPropertyChanged(nameof(ClockIsFlat));
         }

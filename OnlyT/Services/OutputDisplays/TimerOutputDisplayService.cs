@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.OutputDisplays
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Services.OutputDisplays
 {
     using System.Windows;
     using OnlyT.Common.Services.DateTime;
@@ -59,7 +61,7 @@
 
                 ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
 
-                Messenger.Default.Send(new BringMainWindowToFrontMessage());
+                WeakReferenceMessenger.Default.Send(new BringMainWindowToFrontMessage());
             }
         }
 

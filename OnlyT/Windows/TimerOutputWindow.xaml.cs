@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Windows
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Windows
 {
     using System;
     using System.Windows;
@@ -36,9 +38,9 @@
             _optionsService = optionsService;
             _dateTimeService = dateTimeService;
 
-            Messenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
-            Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
-            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
+            WeakReferenceMessenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
+            WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
+            WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
             
             _persistTimer.Tick += HandlePersistTimerTick;
         }
@@ -78,7 +80,7 @@
             }
         }
 
-        private void OnNavigate(NavigateMessage message)
+        private void OnNavigate(object recipient, NavigateMessage message)
         {
             if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
             {
@@ -96,7 +98,7 @@
             }
         }
 
-        private void OnTimerStopped(TimerStopMessage msg)
+        private void OnTimerStopped(object recipient, TimerStopMessage msg)
         {
             if (msg.PersistFinalTimerValue)
             {
@@ -215,7 +217,7 @@
             sb.Begin();
         }
 
-        private void OnTimerStarted(TimerStartMessage msg)
+        private void OnTimerStarted(object recipient, TimerStartMessage msg)
         {
             var model = (TimerOutputWindowViewModel)DataContext;
             if (!model.SplitAndFullScreenModeIdentical() && !_persistingTalkDuration)

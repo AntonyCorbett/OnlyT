@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.OutputDisplays
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Services.OutputDisplays
 {
     using System;
     using System.Threading.Tasks;
@@ -71,9 +73,9 @@
                     {
                         ConfigureForMonitorOperation();
                         ShowWindowFullScreenOnTop(_countdownWindow, targetMonitor);
-                        
-                        Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
-                        Messenger.Default.Send(new BringMainWindowToFrontMessage());
+
+                        WeakReferenceMessenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
+                        WeakReferenceMessenger.Default.Send(new BringMainWindowToFrontMessage());
 
                         return true;
                     }
@@ -108,7 +110,7 @@
                     _countdownWindow.Show();
                     _countdownWindow.AdjustWindowPositionAndSize();
 
-                    Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
+                    WeakReferenceMessenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = true });
 
                     return true;
                 }
@@ -145,7 +147,7 @@
             IsCountdownDone = true;
             IsCountingDown = false;
 
-            Messenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = false });
+            WeakReferenceMessenger.Default.Send(new CountdownWindowStatusChangedMessage { Showing = false });
 
             if (_optionsService.CanDisplayTimerWindow)
             {
@@ -154,7 +156,7 @@
 
             Task.Delay(1000).ContinueWith(t =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(Close);
+                Application.Current.Dispatcher.BeginInvoke(new Action(Close));
             });
         }
 

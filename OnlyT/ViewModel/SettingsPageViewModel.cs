@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel
 {
@@ -56,8 +57,8 @@ namespace OnlyT.ViewModel
            IDateTimeService dateTimeService)
         {
             // subscriptions...
-            Messenger.Default.Register<ShutDownMessage>(this, OnShutDown);
-            Messenger.Default.Register<BellStatusChangedMessage>(this, OnBellChanged);
+            WeakReferenceMessenger.Default.Register<ShutDownMessage>(this, OnShutDown);
+            WeakReferenceMessenger.Default.Register<BellStatusChangedMessage>(this, OnBellChanged);
 
             _optionsService = optionsService;
             _snackbarService = snackbarService;
@@ -105,7 +106,7 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.TimerMonitorId = value;
                     OnPropertyChanged();
 
-                    Messenger.Default.Send(new TimerMonitorChangedMessage(change));
+                    WeakReferenceMessenger.Default.Send(new TimerMonitorChangedMessage(change));
                 }
             }
         }
@@ -130,7 +131,7 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.CountdownMonitorId = value;
                     OnPropertyChanged();
 
-                    Messenger.Default.Send(new CountdownMonitorChangedMessage(change));
+                    WeakReferenceMessenger.Default.Send(new CountdownMonitorChangedMessage(change));
                 }
             }
         }
@@ -162,7 +163,7 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.ClockHourFormat = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(ShouldEnableShowSeconds));
-                    Messenger.Default.Send(new ClockHourFormatChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new ClockHourFormatChangedMessage());
                 }
             }
         }
@@ -180,7 +181,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ShowDigitalSeconds = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new ClockHourFormatChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new ClockHourFormatChangedMessage());
                 }
             }
         }
@@ -196,7 +197,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.CountdownElementsToShow = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new CountdownElementsChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new CountdownElementsChangedMessage());
                 }
             }
         }
@@ -226,7 +227,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.IsCountdownWindowTransparent = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new CountdownWindowTransparencyChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new CountdownWindowTransparencyChangedMessage());
                 }
             }
         }
@@ -242,7 +243,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.CountdownScreenLocation = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
                 }
             }
         }
@@ -258,7 +259,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.OperatingMode = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new OperatingModeChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new OperatingModeChangedMessage());
                 }
             }
         }
@@ -322,7 +323,7 @@ namespace OnlyT.ViewModel
                     OnPropertyChanged(nameof(WebClockUrl));
                     OnPropertyChanged(nameof(WebClockQrCode));
 
-                    Messenger.Default.Send(new HttpServerChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
         }
@@ -351,7 +352,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.MidWeekOrWeekend = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new AutoMeetingChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new AutoMeetingChangedMessage());
                 }
             }
         }
@@ -391,7 +392,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.IsCircuitVisit = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new AutoMeetingChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new AutoMeetingChangedMessage());
                 }
             }
         }
@@ -409,7 +410,7 @@ namespace OnlyT.ViewModel
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(AllowMainMonitorSelection));
 
-                    Messenger.Default.Send(new TimerMonitorChangedMessage(change));
+                    WeakReferenceMessenger.Default.Send(new TimerMonitorChangedMessage(change));
                 }
             }
         }
@@ -427,7 +428,7 @@ namespace OnlyT.ViewModel
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(AllowCountdownMonitorSelection));
 
-                    Messenger.Default.Send(new CountdownMonitorChangedMessage(change));
+                    WeakReferenceMessenger.Default.Send(new CountdownMonitorChangedMessage(change));
                 }
             }
         }
@@ -459,7 +460,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ShowCircuitVisitToggle = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new ShowCircuitVisitToggleChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new ShowCircuitVisitToggleChangedMessage());
                 }
             }
         }
@@ -473,7 +474,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.CountdownFrame = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new CountdownFrameChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new CountdownFrameChangedMessage());
                 }
             }
         }
@@ -487,7 +488,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.TimerFrame = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
         }
@@ -501,7 +502,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ClockTimerFrame = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
         }
@@ -515,7 +516,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ClockTimerFrame = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
         }
@@ -559,7 +560,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.LogEventLevel = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new LogLevelChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new LogLevelChangedMessage());
                 }
             }
         }
@@ -573,7 +574,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.AlwaysOnTop = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new AlwaysOnTopChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new AlwaysOnTopChangedMessage());
                 }
             }
         }
@@ -600,7 +601,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ShowBackgroundOnTimer = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
         }
@@ -614,7 +615,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ShowBackgroundOnClock = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new TimerFrameChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
         }
@@ -628,7 +629,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ShowTimeOfDayUnderTimer = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new ShowTimeOfDayUnderTimerChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new ShowTimeOfDayUnderTimerChangedMessage());
                 }
             }
         }
@@ -668,7 +669,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.AnalogueClockWidthPercent = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new AnalogueClockWidthChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new AnalogueClockWidthChangedMessage());
                 }
             }
         }
@@ -682,7 +683,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.CountdownZoomPercent = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
                 }
             }
         }
@@ -709,7 +710,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.AutoBell = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new AutoBellSettingChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new AutoBellSettingChangedMessage());
                 }
             }
         }
@@ -736,7 +737,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.IsWebClockEnabled = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new HttpServerChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
         }
@@ -750,7 +751,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.IsApiEnabled = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new HttpServerChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
         }
@@ -777,7 +778,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ShowMousePointerInTimerDisplay = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new MousePointerInTimerDisplayChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new MousePointerInTimerDisplayChangedMessage());
                 }
             }
         }
@@ -791,7 +792,7 @@ namespace OnlyT.ViewModel
                 {
                     _optionsService.Options.ClockIsFlat = value;
                     OnPropertyChanged();
-                    Messenger.Default.Send(new ClockIsFlatChangedMessage());
+                    WeakReferenceMessenger.Default.Send(new ClockIsFlatChangedMessage());
                 }
             }
         }
@@ -868,7 +869,7 @@ namespace OnlyT.ViewModel
             OnPropertyChanged(nameof(IsCircuitVisit));
         }
 
-        private void OnShutDown(ShutDownMessage obj)
+        private void OnShutDown(object recipient, ShutDownMessage obj)
         {
             Save();
         }
@@ -903,7 +904,7 @@ namespace OnlyT.ViewModel
                     _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPENED);
                 }
                 
-                Messenger.Default.Send(new HttpServerChangedMessage());
+                WeakReferenceMessenger.Default.Send(new HttpServerChangedMessage());
             }
             catch (Exception ex)
             {
@@ -978,9 +979,9 @@ namespace OnlyT.ViewModel
             return result.ToArray();
         }
 
-        private void OnBellChanged(BellStatusChangedMessage message)
+        private void OnBellChanged(object recipient, BellStatusChangedMessage message)
         {
-            TestBellCommand.RaiseCanExecuteChanged();
+            TestBellCommand.NotifyCanExecuteChanged();
         }
 
         private bool IsNotPlayingBell()
@@ -1103,7 +1104,7 @@ namespace OnlyT.ViewModel
         private void NavigateOperatorPage()
         {
             Save();
-            Messenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
+            WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
         }
 
         private LoggingLevel[] GetLoggingLevels()

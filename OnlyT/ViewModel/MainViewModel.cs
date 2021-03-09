@@ -1,4 +1,5 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel
 {
@@ -76,21 +77,21 @@ namespace OnlyT.ViewModel
             _countdownTimerTriggerService = countdownTimerTriggerService;
 
             _httpServer.RequestForTimerDataEvent += OnRequestForTimerData;
-            
+
             // subscriptions...
-            Messenger.Default.Register<NavigateMessage>(this, OnNavigate);
-            Messenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
-            Messenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
-            Messenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
-            Messenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
-            Messenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
+            WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
+            WeakReferenceMessenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
+            WeakReferenceMessenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
+            WeakReferenceMessenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
+            WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
+            WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
 
             InitHttpServer();
 
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
 
-            Messenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
+            WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
             // (fire and forget)
             Task.Run(LaunchTimerWindowAsync);
@@ -127,7 +128,7 @@ namespace OnlyT.ViewModel
             e.Cancel = _timerService.IsRunning;
             if (!e.Cancel)
             {
-                Messenger.Default.Send(new ShutDownMessage(CurrentPageName));
+                WeakReferenceMessenger.Default.Send(new ShutDownMessage(CurrentPageName));
                 CloseTimerWindow();
                 CloseCountdownWindow();
             }
@@ -154,7 +155,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnHttpServerChanged(HttpServerChangedMessage msg)
+        private void OnHttpServerChanged(object recipient, HttpServerChangedMessage msg)
         {
             try
             {
@@ -203,7 +204,7 @@ namespace OnlyT.ViewModel
         /// Responds to change in the application's "Always on top" option.
         /// </summary>
         /// <param name="message">AlwaysOnTopChangedMessage message.</param>
-        private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage message)
+        private void OnAlwaysOnTopChanged(object recipient, AlwaysOnTopChangedMessage message)
         {
             OnPropertyChanged(nameof(AlwaysOnTop));
         }
@@ -212,7 +213,7 @@ namespace OnlyT.ViewModel
         /// Responds to a change in timer monitor.
         /// </summary>
         /// <param name="message">TimerMonitorChangedMessage message.</param>
-        private void OnTimerMonitorChanged(TimerMonitorChangedMessage message)
+        private void OnTimerMonitorChanged(object recipient, TimerMonitorChangedMessage message)
         {
             try
             {
@@ -265,7 +266,7 @@ namespace OnlyT.ViewModel
         /// Responds to a change in countdown monitor.
         /// </summary>
         /// <param name="message">CountdownMonitorChangedMessage message.</param>
-        private void OnCountdownMonitorChanged(CountdownMonitorChangedMessage message)
+        private void OnCountdownMonitorChanged(object recipient, CountdownMonitorChangedMessage message)
         {
             try
             {
@@ -310,27 +311,24 @@ namespace OnlyT.ViewModel
 
         private async Task LaunchTimerWindowAsync()
         {
-            if (!IsInDesignMode && _optionsService.CanDisplayTimerWindow)
+            if (_optionsService.CanDisplayTimerWindow)
             {
                 // on launch we display the timer window after a short delay (for aesthetics only)
                 await Task.Delay(1000).ConfigureAwait(true);
 
-                DispatcherHelper.CheckBeginInvokeOnUI(OpenTimerWindow);
+                await Application.Current.Dispatcher.BeginInvoke(OpenTimerWindow);
             }
         }
 
         private void InitHeartbeatTimer()
         {
-            if (!IsInDesignMode)
+            _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
             {
-                _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
-                {
-                    Interval = TimeSpan.FromSeconds(1)
-                };
+                Interval = TimeSpan.FromSeconds(1)
+            };
 
-                _heartbeatTimer.Tick += HeartbeatTimerTick;
-                _heartbeatTimer.Start();
-            }
+            _heartbeatTimer.Tick += HeartbeatTimerTick;
+            _heartbeatTimer.Start();
         }
 
         private void HeartbeatTimerTick(object sender, EventArgs e)
@@ -356,7 +354,7 @@ namespace OnlyT.ViewModel
             if ((_dateTimeService.Now() - _lastRefreshedSchedule).Seconds > 10)
             {
                 _lastRefreshedSchedule = _dateTimeService.Now();
-                Messenger.Default.Send(new RefreshScheduleMessage());
+                WeakReferenceMessenger.Default.Send(new RefreshScheduleMessage());
             }
         }
 
@@ -371,7 +369,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnStopCountdown(StopCountDownMessage message)
+        private void OnStopCountdown(object recipient, StopCountDownMessage message)
         {
             _countdownDisplayService.Stop();
         }
@@ -380,7 +378,7 @@ namespace OnlyT.ViewModel
         /// Responds to the NavigateMessage and swaps out one page for another.
         /// </summary>
         /// <param name="message">NavigateMessage message.</param>
-        private void OnNavigate(NavigateMessage message)
+        private void OnNavigate(object recipient, NavigateMessage message)
         {
             if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
             {
@@ -452,7 +450,7 @@ namespace OnlyT.ViewModel
         /// </param>
         private void StartCountdown(int offsetSeconds)
         {
-            if (!IsInDesignMode && _optionsService.CanDisplayCountdownWindow)
+            if (_optionsService.CanDisplayCountdownWindow)
             {
                 Log.Logger.Information("Launching countdown timer");
 
@@ -472,7 +470,7 @@ namespace OnlyT.ViewModel
 
                             // hide the timer window after a short delay (so that it doesn't appear 
                             // as another top-level window during alt-TAB)...
-                            DispatcherHelper.CheckBeginInvokeOnUI(_timerOutputDisplayService.HideWindow);
+                            Application.Current.Dispatcher.BeginInvoke(_timerOutputDisplayService.HideWindow);
                         }
                     });
                 }

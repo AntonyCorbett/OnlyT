@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Services.TalkSchedule
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+
+namespace OnlyT.Services.TalkSchedule
 {
     using System;
     using System.Collections.Generic;
@@ -37,7 +39,7 @@
             Reset();
 
             // subscriptions...
-            Messenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
+            WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
         }
 
         public void Reset()
@@ -103,7 +105,7 @@
             return 0;
         }
 
-        private void OnTimerStopped(TimerStopMessage message)
+        private void OnTimerStopped(object recipient, TimerStopMessage message)
         {
             var talk = GetTalkScheduleItem(message.TalkId);
             if (talk != null)

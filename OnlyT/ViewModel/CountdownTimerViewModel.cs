@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel
 {
@@ -19,11 +20,11 @@ namespace OnlyT.ViewModel
             _optionsService = optionsService;
 
             // subscriptions...
-            Messenger.Default.Register<CountdownFrameChangedMessage>(this, OnFrameChanged);
-            Messenger.Default.Register<CountdownZoomOrPositionChangedMessage>(this, OnZoomOrPositionChanged);
-            Messenger.Default.Register<CountdownElementsChangedMessage>(this, OnElementsChanged);
-            Messenger.Default.Register<CountdownWindowTransparencyChangedMessage>(this, OnWindowTransparencyChanged);
-            Messenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
+            WeakReferenceMessenger.Default.Register<CountdownFrameChangedMessage>(this, OnFrameChanged);
+            WeakReferenceMessenger.Default.Register<CountdownZoomOrPositionChangedMessage>(this, OnZoomOrPositionChanged);
+            WeakReferenceMessenger.Default.Register<CountdownElementsChangedMessage>(this, OnElementsChanged);
+            WeakReferenceMessenger.Default.Register<CountdownWindowTransparencyChangedMessage>(this, OnWindowTransparencyChanged);
+            WeakReferenceMessenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
         }
         
         public int BorderThickness => !WindowedOperation && _optionsService.Options.CountdownFrame ? 3 : 0;
@@ -105,30 +106,30 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnFrameChanged(CountdownFrameChangedMessage msg)
+        private void OnFrameChanged(object recipient, CountdownFrameChangedMessage msg)
         {
             OnPropertyChanged(nameof(BorderThickness));
             OnPropertyChanged(nameof(BackgroundOpacity));
         }
 
-        private void OnWindowTransparencyChanged(CountdownWindowTransparencyChangedMessage msg)
+        private void OnWindowTransparencyChanged(object recipient, CountdownWindowTransparencyChangedMessage msg)
         {
             OnPropertyChanged(nameof(IsWindowTransparent));
         }
 
-        private void OnMousePointerChanged(MousePointerInTimerDisplayChangedMessage message)
+        private void OnMousePointerChanged(object recipient, MousePointerInTimerDisplayChangedMessage message)
         {
             OnPropertyChanged(nameof(MousePointer));
         }
 
-        private void OnZoomOrPositionChanged(CountdownZoomOrPositionChangedMessage obj)
+        private void OnZoomOrPositionChanged(object recipient, CountdownZoomOrPositionChangedMessage obj)
         {
             OnPropertyChanged(nameof(CountdownScale));
             OnPropertyChanged(nameof(HorizontalAlignment));
             OnPropertyChanged(nameof(VerticalAlignment));
         }
 
-        private void OnElementsChanged(CountdownElementsChangedMessage obj)
+        private void OnElementsChanged(object recipient, CountdownElementsChangedMessage obj)
         {
             OnPropertyChanged(nameof(ElementsToShow));
         }
