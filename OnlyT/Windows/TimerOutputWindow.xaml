@@ -7,6 +7,7 @@
         xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         DataContext="{Binding Source={StaticResource Locator}, Path=Output}"
         mc:Ignorable="d"
         Title="OnlyT Timer Output" Height="300" Width="458" 
@@ -29,9 +30,9 @@
         <valueConverters:ColWidthPercentageToString x:Key="ColWidthConverter" />
     </Window.Resources>
 
-    <i:Interaction.Behaviors>
+    <b:Interaction.Behaviors>
         <behaviours:HideCloseButtonBehaviour />
-    </i:Interaction.Behaviors>
+    </b:Interaction.Behaviors>
 
     <Grid>
         <Grid.ColumnDefinitions>

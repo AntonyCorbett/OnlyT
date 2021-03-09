@@ -11,6 +11,7 @@
              
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:utils="clr-namespace:OnlyT.Utils"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -301,9 +302,9 @@
                 Command="{Binding StartCommand}" 
                 Height="54"
                 Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-            <i:Interaction.Behaviors>
+            <b:Interaction.Behaviors>
                 <behaviours:DoubleClickBehaviour />
-            </i:Interaction.Behaviors>
+            </b:Interaction.Behaviors>
             <materialDesign:PackIcon
                 Kind="Play"
                 Height="40"
@@ -315,9 +316,9 @@
                 Command="{Binding StopCommand}"
                 Height="54"
                 Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-            <i:Interaction.Behaviors>
+            <b:Interaction.Behaviors>
                 <behaviours:DoubleClickBehaviour />
-            </i:Interaction.Behaviors>
+            </b:Interaction.Behaviors>
             <materialDesign:PackIcon
                 Kind="Stop"
                 Height="40"

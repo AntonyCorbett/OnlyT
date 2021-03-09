@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT", "OnlyT\OnlyT.csproj", "{4A02D18A-0956-40FA-A4EC-9CB27A72B455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyT", "OnlyT\OnlyT.csproj", "{4A02D18A-0956-40FA-A4EC-9CB27A72B455}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96292806-8129-4F40-9C5C-8DB2CD3F3664} = {96292806-8129-4F40-9C5C-8DB2CD3F3664}
 	EndProjectSection
@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT.Tests", "OnlyT.Tests\OnlyT.Tests.csproj", "{F0ADD340-02C3-4C86-80A9-38F2B67EAB69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyT.Tests", "OnlyT.Tests\OnlyT.Tests.csproj", "{F0ADD340-02C3-4C86-80A9-38F2B67EAB69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyTFirewallPorts", "OnlyTFirewallPorts\OnlyTFirewallPorts.csproj", "{96292806-8129-4F40-9C5C-8DB2CD3F3664}"
 EndProject
@@ -25,8 +25,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyT.Report", "OnlyT.Report\OnlyT.Report.csproj", "{8D954290-A460-49FE-BA0A-1E35DE208172}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyT.Common", "OnlyT.Common\OnlyT.Common.csproj", "{4C312217-BCB6-4CAF-8191-F9583866F4E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{26E4A1A5-FEC1-4942-A33F-9CAFDCA5060D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +60,6 @@ Global
 		{4C312217-BCB6-4CAF-8191-F9583866F4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C312217-BCB6-4CAF-8191-F9583866F4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C312217-BCB6-4CAF-8191-F9583866F4E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26E4A1A5-FEC1-4942-A33F-9CAFDCA5060D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26E4A1A5-FEC1-4942-A33F-9CAFDCA5060D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26E4A1A5-FEC1-4942-A33F-9CAFDCA5060D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26E4A1A5-FEC1-4942-A33F-9CAFDCA5060D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

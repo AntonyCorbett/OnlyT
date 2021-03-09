@@ -108,7 +108,7 @@ namespace OnlyT.ViewModel
                 if (!ReferenceEquals(_currentPage, value))
                 {
                     _currentPage = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -205,7 +205,7 @@ namespace OnlyT.ViewModel
         /// <param name="message">AlwaysOnTopChangedMessage message.</param>
         private void OnAlwaysOnTopChanged(AlwaysOnTopChangedMessage message)
         {
-            RaisePropertyChanged(nameof(AlwaysOnTop));
+            OnPropertyChanged(nameof(AlwaysOnTop));
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace OnlyT.ViewModel
                     _countdownDisplayService.Activate();
                 }
 
-                RaisePropertyChanged(nameof(AlwaysOnTop));
+                OnPropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {
@@ -300,7 +300,7 @@ namespace OnlyT.ViewModel
                         throw new NotImplementedException();
                 }
 
-                RaisePropertyChanged(nameof(AlwaysOnTop));
+                OnPropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {
@@ -422,7 +422,7 @@ namespace OnlyT.ViewModel
                 else
                 {
                     _timerOutputDisplayService.OpenWindowInMonitor();
-                    RaisePropertyChanged(nameof(AlwaysOnTop));
+                    OnPropertyChanged(nameof(AlwaysOnTop));
                 }
             }
             catch (Exception ex)
@@ -436,7 +436,7 @@ namespace OnlyT.ViewModel
             try
             {
                 _timerOutputDisplayService.Close();
-                RaisePropertyChanged(nameof(AlwaysOnTop));
+                OnPropertyChanged(nameof(AlwaysOnTop));
             }
             catch (Exception ex)
             {

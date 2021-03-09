@@ -103,7 +103,7 @@ namespace OnlyT.ViewModel
                     var change = GetChangeInMonitor(_optionsService.Options.TimerMonitorId, value);
 
                     _optionsService.Options.TimerMonitorId = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
 
                     Messenger.Default.Send(new TimerMonitorChangedMessage(change));
                 }
@@ -128,7 +128,7 @@ namespace OnlyT.ViewModel
                     var change = GetChangeInMonitor(_optionsService.Options.CountdownMonitorId, value);
 
                     _optionsService.Options.CountdownMonitorId = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
 
                     Messenger.Default.Send(new CountdownMonitorChangedMessage(change));
                 }
@@ -145,7 +145,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.Culture != value)
                 {
                     _optionsService.Options.Culture = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -160,8 +160,8 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ClockHourFormat != value)
                 {
                     _optionsService.Options.ClockHourFormat = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(ShouldEnableShowSeconds));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ShouldEnableShowSeconds));
                     Messenger.Default.Send(new ClockHourFormatChangedMessage());
                 }
             }
@@ -179,7 +179,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowDigitalSeconds != value)
                 {
                     _optionsService.Options.ShowDigitalSeconds = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new ClockHourFormatChangedMessage());
                 }
             }
@@ -195,7 +195,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.CountdownElementsToShow != value)
                 {
                     _optionsService.Options.CountdownElementsToShow = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new CountdownElementsChangedMessage());
                 }
             }
@@ -211,7 +211,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.CountdownDurationMins != value)
                 {
                     _optionsService.Options.CountdownDurationMins = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     _countdownTimerService.UpdateTriggerPeriods();
                 }
             }
@@ -225,7 +225,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsCountdownWindowTransparent != value)
                 {
                     _optionsService.Options.IsCountdownWindowTransparent = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new CountdownWindowTransparencyChangedMessage());
                 }
             }
@@ -241,7 +241,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.CountdownScreenLocation != value)
                 {
                     _optionsService.Options.CountdownScreenLocation = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
                 }
             }
@@ -257,7 +257,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.OperatingMode != value)
                 {
                     _optionsService.Options.OperatingMode = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new OperatingModeChangedMessage());
                 }
             }
@@ -273,7 +273,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.FullScreenClockMode != value)
                 {
                     _optionsService.Options.FullScreenClockMode = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -288,7 +288,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.MidWeekAdaptiveMode != value)
                 {
                     _optionsService.Options.MidWeekAdaptiveMode = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -303,7 +303,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.PersistDurationSecs != value)
                 {
                     _optionsService.Options.PersistDurationSecs = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -318,9 +318,9 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.HttpServerPort != value)
                 {
                     _optionsService.Options.HttpServerPort = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(WebClockUrl));
-                    RaisePropertyChanged(nameof(WebClockQrCode));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(WebClockUrl));
+                    OnPropertyChanged(nameof(WebClockQrCode));
 
                     Messenger.Default.Send(new HttpServerChangedMessage());
                 }
@@ -335,7 +335,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.WeekendAdaptiveMode != value)
                 {
                     _optionsService.Options.WeekendAdaptiveMode = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -350,7 +350,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.MidWeekOrWeekend != value)
                 {
                     _optionsService.Options.MidWeekOrWeekend = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
                 }
             }
@@ -364,7 +364,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.JwLibraryCompatibilityMode != value)
                 {
                     _optionsService.Options.JwLibraryCompatibilityMode = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -377,7 +377,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.PersistStudentTime != value)
                 {
                     _optionsService.Options.PersistStudentTime = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -390,7 +390,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsCircuitVisit != value)
                 {
                     _optionsService.Options.IsCircuitVisit = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
                 }
             }
@@ -406,8 +406,8 @@ namespace OnlyT.ViewModel
                     var change = GetChangeInMonitor(_optionsService.Options.TimerMonitorId, value);
 
                     _optionsService.Options.MainMonitorIsWindowed = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(AllowMainMonitorSelection));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(AllowMainMonitorSelection));
 
                     Messenger.Default.Send(new TimerMonitorChangedMessage(change));
                 }
@@ -424,8 +424,8 @@ namespace OnlyT.ViewModel
                     var change = GetChangeInMonitor(_optionsService.Options.CountdownMonitorId, value);
 
                     _optionsService.Options.CountdownMonitorIsWindowed = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(AllowCountdownMonitorSelection));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(AllowCountdownMonitorSelection));
 
                     Messenger.Default.Send(new CountdownMonitorChangedMessage(change));
                 }
@@ -440,7 +440,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.WeekendIncludesFriday != value)
                 {
                     _optionsService.Options.WeekendIncludesFriday = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
 
                     // may need to change the talk schedule (i.e. if today is Friday)...
                     MidWeekOrWeekend = _optionsService.IsNowWeekend()
@@ -458,7 +458,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowCircuitVisitToggle != value)
                 {
                     _optionsService.Options.ShowCircuitVisitToggle = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new ShowCircuitVisitToggleChangedMessage());
                 }
             }
@@ -472,7 +472,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.CountdownFrame != value)
                 {
                     _optionsService.Options.CountdownFrame = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new CountdownFrameChangedMessage());
                 }
             }
@@ -486,7 +486,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.TimerFrame != value)
                 {
                     _optionsService.Options.TimerFrame = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
@@ -500,7 +500,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ClockTimerFrame != value)
                 {
                     _optionsService.Options.ClockTimerFrame = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
@@ -514,7 +514,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ClockTimerFrame != value)
                 {
                     _optionsService.Options.ClockTimerFrame = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
@@ -529,7 +529,7 @@ namespace OnlyT.ViewModel
                 if (!times.Equals(value))
                 {
                     _optionsService.Options.MeetingStartTimes.FromText(value);
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     _countdownTimerService.UpdateTriggerPeriods();
                 }
             }
@@ -543,7 +543,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.AllowCountUpToggle != value)
                 {
                     _optionsService.Options.AllowCountUpToggle = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -558,7 +558,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.LogEventLevel != value)
                 {
                     _optionsService.Options.LogEventLevel = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new LogLevelChangedMessage());
                 }
             }
@@ -572,7 +572,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.AlwaysOnTop != value)
                 {
                     _optionsService.Options.AlwaysOnTop = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new AlwaysOnTopChangedMessage());
                 }
             }
@@ -586,7 +586,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.GenerateTimingReports != value)
                 {
                     _optionsService.Options.GenerateTimingReports = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -599,7 +599,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowBackgroundOnTimer != value)
                 {
                     _optionsService.Options.ShowBackgroundOnTimer = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
@@ -613,7 +613,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowBackgroundOnClock != value)
                 {
                     _optionsService.Options.ShowBackgroundOnClock = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new TimerFrameChangedMessage());
                 }
             }
@@ -627,7 +627,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowTimeOfDayUnderTimer != value)
                 {
                     _optionsService.Options.ShowTimeOfDayUnderTimer = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new ShowTimeOfDayUnderTimerChangedMessage());
                 }
             }
@@ -641,7 +641,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowDurationSector != value)
                 {
                     _optionsService.Options.ShowDurationSector = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -654,7 +654,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.CountUp != value)
                 {
                     _optionsService.Options.CountUp = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -667,7 +667,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.AnalogueClockWidthPercent != value)
                 {
                     _optionsService.Options.AnalogueClockWidthPercent = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new AnalogueClockWidthChangedMessage());
                 }
             }
@@ -681,7 +681,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.CountdownZoomPercent != value)
                 {
                     _optionsService.Options.CountdownZoomPercent = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new CountdownZoomOrPositionChangedMessage());
                 }
             }
@@ -695,7 +695,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsBellEnabled != value)
                 {
                     _optionsService.Options.IsBellEnabled = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -708,7 +708,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.AutoBell != value)
                 {
                     _optionsService.Options.AutoBell = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new AutoBellSettingChangedMessage());
                 }
             }
@@ -722,7 +722,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.BellVolumePercent != value)
                 {
                     _optionsService.Options.BellVolumePercent = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -735,7 +735,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsWebClockEnabled != value)
                 {
                     _optionsService.Options.IsWebClockEnabled = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
@@ -749,7 +749,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsApiEnabled != value)
                 {
                     _optionsService.Options.IsApiEnabled = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new HttpServerChangedMessage());
                 }
             }
@@ -763,7 +763,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsApiThrottled != value)
                 {
                     _optionsService.Options.IsApiThrottled = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -776,7 +776,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ShowMousePointerInTimerDisplay != value)
                 {
                     _optionsService.Options.ShowMousePointerInTimerDisplay = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new MousePointerInTimerDisplayChangedMessage());
                 }
             }
@@ -790,7 +790,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ClockIsFlat != value)
                 {
                     _optionsService.Options.ClockIsFlat = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new ClockIsFlatChangedMessage());
                 }
             }
@@ -805,7 +805,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.ApiCode == null || !_optionsService.Options.ApiCode.Equals(val))
                 {
                     _optionsService.Options.ApiCode = val;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -865,7 +865,7 @@ namespace OnlyT.ViewModel
         public void Activated(object state)
         {
             // may be changed on operator page...
-            RaisePropertyChanged(nameof(IsCircuitVisit));
+            OnPropertyChanged(nameof(IsCircuitVisit));
         }
 
         private void OnShutDown(ShutDownMessage obj)

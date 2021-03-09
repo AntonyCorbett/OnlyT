@@ -68,7 +68,7 @@ namespace OnlyT.ViewModel
                 if (_showTimeOfDayUnderTimer != value)
                 {
                     _showTimeOfDayUnderTimer = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace OnlyT.ViewModel
                 if (_timeString != value)
                 {
                     _timeString = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace OnlyT.ViewModel
                 if (!ReferenceEquals(_durationSector, value))
                 {
                     _durationSector = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace OnlyT.ViewModel
                 if (!ReferenceEquals(_textColor, value))
                 {
                     _textColor = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -127,7 +127,7 @@ namespace OnlyT.ViewModel
                 if (_isRunning != value)
                 {
                     _isRunning = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -141,8 +141,8 @@ namespace OnlyT.ViewModel
                 {
                     _analogueClockColumnWidthPercentage = value;
                     TimerColumnWidthPercentage = 100 - _analogueClockColumnWidthPercentage;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(TimerColumnWidthPercentage));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(TimerColumnWidthPercentage));
                 }
             }
         }
@@ -175,12 +175,12 @@ namespace OnlyT.ViewModel
                 {
                     _windowedOperation = value;
 
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(UseTimerBackgroundGradient));
-                    RaisePropertyChanged(nameof(UseClockBackgroundGradient));
-                    RaisePropertyChanged(nameof(BorderThickness));
-                    RaisePropertyChanged(nameof(TimerBorderThickness));
-                    RaisePropertyChanged(nameof(ClockIsFlat));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(UseTimerBackgroundGradient));
+                    OnPropertyChanged(nameof(UseClockBackgroundGradient));
+                    OnPropertyChanged(nameof(BorderThickness));
+                    OnPropertyChanged(nameof(TimerBorderThickness));
+                    OnPropertyChanged(nameof(ClockIsFlat));
                 }
             }
         }
@@ -207,10 +207,10 @@ namespace OnlyT.ViewModel
 
         private void OnDigitalClockFormatChanged(ClockHourFormatChangedMessage obj)
         {
-            RaisePropertyChanged(nameof(DigitalTimeFormat24Hours));
-            RaisePropertyChanged(nameof(DigitalTimeFormatShowLeadingZero));
-            RaisePropertyChanged(nameof(DigitalTimeFormatAMPM));
-            RaisePropertyChanged(nameof(DigitalTimeShowSeconds));
+            OnPropertyChanged(nameof(DigitalTimeFormat24Hours));
+            OnPropertyChanged(nameof(DigitalTimeFormatShowLeadingZero));
+            OnPropertyChanged(nameof(DigitalTimeFormatAMPM));
+            OnPropertyChanged(nameof(DigitalTimeShowSeconds));
         }
 
         private void OnTimerStopped(TimerStopMessage obj)
@@ -258,7 +258,7 @@ namespace OnlyT.ViewModel
 
         private void OnMousePointerChanged(MousePointerInTimerDisplayChangedMessage message)
         {
-            RaisePropertyChanged(nameof(MousePointer));
+            OnPropertyChanged(nameof(MousePointer));
         }
 
         private void OnTimerChanged(TimerChangedMessage message)
@@ -296,15 +296,15 @@ namespace OnlyT.ViewModel
 
         private void OnTimerFrameChanged(TimerFrameChangedMessage msg)
         {
-            RaisePropertyChanged(nameof(BorderThickness));
-            RaisePropertyChanged(nameof(TimerBorderThickness));
-            RaisePropertyChanged(nameof(UseTimerBackgroundGradient));
-            RaisePropertyChanged(nameof(UseClockBackgroundGradient));
+            OnPropertyChanged(nameof(BorderThickness));
+            OnPropertyChanged(nameof(TimerBorderThickness));
+            OnPropertyChanged(nameof(UseTimerBackgroundGradient));
+            OnPropertyChanged(nameof(UseClockBackgroundGradient));
         }
 
         private void OnClockIsFlatChanged(ClockIsFlatChangedMessage msg)
         {
-            RaisePropertyChanged(nameof(ClockIsFlat));
+            OnPropertyChanged(nameof(ClockIsFlat));
         }
     }
 }

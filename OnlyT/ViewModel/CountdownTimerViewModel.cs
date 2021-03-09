@@ -52,11 +52,11 @@ namespace OnlyT.ViewModel
                 {
                     _windowedOperation = value;
 
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(BorderThickness));
-                    RaisePropertyChanged(nameof(BackgroundOpacity));
-                    RaisePropertyChanged(nameof(CountdownScale));
-                    RaisePropertyChanged(nameof(IsWindowTransparent));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(BorderThickness));
+                    OnPropertyChanged(nameof(BackgroundOpacity));
+                    OnPropertyChanged(nameof(CountdownScale));
+                    OnPropertyChanged(nameof(IsWindowTransparent));
                 }
             }
         }
@@ -107,30 +107,30 @@ namespace OnlyT.ViewModel
 
         private void OnFrameChanged(CountdownFrameChangedMessage msg)
         {
-            RaisePropertyChanged(nameof(BorderThickness));
-            RaisePropertyChanged(nameof(BackgroundOpacity));
+            OnPropertyChanged(nameof(BorderThickness));
+            OnPropertyChanged(nameof(BackgroundOpacity));
         }
 
         private void OnWindowTransparencyChanged(CountdownWindowTransparencyChangedMessage msg)
         {
-            RaisePropertyChanged(nameof(IsWindowTransparent));
+            OnPropertyChanged(nameof(IsWindowTransparent));
         }
 
         private void OnMousePointerChanged(MousePointerInTimerDisplayChangedMessage message)
         {
-            RaisePropertyChanged(nameof(MousePointer));
+            OnPropertyChanged(nameof(MousePointer));
         }
 
         private void OnZoomOrPositionChanged(CountdownZoomOrPositionChangedMessage obj)
         {
-            RaisePropertyChanged(nameof(CountdownScale));
-            RaisePropertyChanged(nameof(HorizontalAlignment));
-            RaisePropertyChanged(nameof(VerticalAlignment));
+            OnPropertyChanged(nameof(CountdownScale));
+            OnPropertyChanged(nameof(HorizontalAlignment));
+            OnPropertyChanged(nameof(VerticalAlignment));
         }
 
         private void OnElementsChanged(CountdownElementsChangedMessage obj)
         {
-            RaisePropertyChanged(nameof(ElementsToShow));
+            OnPropertyChanged(nameof(ElementsToShow));
         }
     }
 }

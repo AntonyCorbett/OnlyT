@@ -57,9 +57,9 @@ namespace OnlyT.Models
                 if (_completedSeconds != value)
                 {
                     _completedSeconds = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(OvertimeString));
-                    RaisePropertyChanged(nameof(OvertimeBrush));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(OvertimeString));
+                    OnPropertyChanged(nameof(OvertimeBrush));
                 }
             }
         }

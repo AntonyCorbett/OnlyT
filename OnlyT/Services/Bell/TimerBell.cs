@@ -31,7 +31,7 @@ namespace OnlyT.Services.Bell
                 if (_playing != value)
                 {
                     _playing = value;
-                    RaisePropertyChanged(nameof(IsPlaying));
+                    OnPropertyChanged(nameof(IsPlaying));
 
                     DispatcherHelper.CheckBeginInvokeOnUI(() =>
                     {

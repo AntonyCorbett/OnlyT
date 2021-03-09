@@ -180,7 +180,7 @@ namespace OnlyT.ViewModel
                 if (_optionsService.Options.IsCircuitVisit != value)
                 {
                     _optionsService.Options.IsCircuitVisit = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                     Messenger.Default.Send(new AutoMeetingChangedMessage());
                 }
             }
@@ -223,7 +223,7 @@ namespace OnlyT.ViewModel
                 {
                     TextColor = new SolidColorBrush(Colors.White);
                     _runFlashAnimation = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -254,7 +254,7 @@ namespace OnlyT.ViewModel
             set
             {
                 _duration1String = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -265,9 +265,9 @@ namespace OnlyT.ViewModel
             {
                 _duration2String = value;
 
-                RaisePropertyChanged();
+                OnPropertyChanged();
                 Duration1ArrowString = string.IsNullOrEmpty(_duration2String) ? string.Empty : Arrow;
-                RaisePropertyChanged(nameof(Duration1ArrowString));
+                OnPropertyChanged(nameof(Duration1ArrowString));
             }
         }
 
@@ -279,9 +279,9 @@ namespace OnlyT.ViewModel
                 if (_isOvertime != value)
                 {
                     _isOvertime = value;
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(BellColour));
-                    RaisePropertyChanged(nameof(BellTooltip));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(BellColour));
+                    OnPropertyChanged(nameof(BellTooltip));
                 }
             }
         }
@@ -292,9 +292,9 @@ namespace OnlyT.ViewModel
             set
             {
                 _duration3String = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
                 Duration2ArrowString = string.IsNullOrEmpty(_duration3String) ? string.Empty : Arrow;
-                RaisePropertyChanged(nameof(Duration2ArrowString));
+                OnPropertyChanged(nameof(Duration2ArrowString));
             }
         }
 
@@ -304,7 +304,7 @@ namespace OnlyT.ViewModel
             set
             {
                 _textColor = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -321,11 +321,11 @@ namespace OnlyT.ViewModel
                     RefreshCountUpFlag(talk);
 
                     TargetSeconds = GetPlannedSecondsFromTalkSchedule(talk);
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(IsBellVisible));
-                    RaisePropertyChanged(nameof(BellColour));
-                    RaisePropertyChanged(nameof(BellTooltip));
-                    RaisePropertyChanged(nameof(IsValidTalk));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(IsBellVisible));
+                    OnPropertyChanged(nameof(BellColour));
+                    OnPropertyChanged(nameof(BellTooltip));
+                    OnPropertyChanged(nameof(IsValidTalk));
 
                     RaiseCanExecuteIncrementDecrementChanged();
                     StartCommand?.RaiseCanExecuteChanged();
@@ -421,8 +421,8 @@ namespace OnlyT.ViewModel
                     _targetSeconds = value;
                     SetSecondsRemaining(_targetSeconds);
 
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(CurrentTimerValueString));
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CurrentTimerValueString));
                     RaiseCanExecuteIncrementDecrementChanged();
                 }
             }
@@ -436,9 +436,9 @@ namespace OnlyT.ViewModel
             var talk = GetCurrentTalk();
             RefreshCountUpFlag(talk);
 
-            RaisePropertyChanged(nameof(AllowCountUpDownToggle));
-            RaisePropertyChanged(nameof(IsBellVisible));
-            RaisePropertyChanged(nameof(IsCircuitVisit));
+            OnPropertyChanged(nameof(AllowCountUpDownToggle));
+            OnPropertyChanged(nameof(IsBellVisible));
+            OnPropertyChanged(nameof(IsCircuitVisit));
         }
 
         private void StartTimer()
@@ -451,9 +451,9 @@ namespace OnlyT.ViewModel
             RunFlashAnimation = false;
             RunFlashAnimation = true;
 
-            RaisePropertyChanged(nameof(IsRunning));
-            RaisePropertyChanged(nameof(IsNotRunning));
-            RaisePropertyChanged(nameof(SettingsHint));
+            OnPropertyChanged(nameof(IsRunning));
+            OnPropertyChanged(nameof(IsNotRunning));
+            OnPropertyChanged(nameof(SettingsHint));
 
             RaiseCanExecuteChanged();
             AdjustForAdaptiveTime();
@@ -636,9 +636,9 @@ namespace OnlyT.ViewModel
         private void RefreshCountUpFlag(TalkScheduleItem talk)
         {
             _countUp = talk?.CountUp ?? _optionsService.Options.CountUp;
-            RaisePropertyChanged(nameof(CountUpOrDownImageData));
-            RaisePropertyChanged(nameof(CountUpOrDownTooltip));
-            RaisePropertyChanged(nameof(CurrentTimerValueString));
+            OnPropertyChanged(nameof(CountUpOrDownImageData));
+            OnPropertyChanged(nameof(CountUpOrDownTooltip));
+            OnPropertyChanged(nameof(CurrentTimerValueString));
         }
 
         private TalkScheduleItem GetCurrentTalk()
@@ -687,13 +687,13 @@ namespace OnlyT.ViewModel
             Duration3Tooltip = properties.Duration3Tooltip;
             Duration3Colour = properties.Duration3Colour;
             
-            RaisePropertyChanged(nameof(Duration1Colour));
-            RaisePropertyChanged(nameof(Duration2Colour));
-            RaisePropertyChanged(nameof(Duration3Colour));
+            OnPropertyChanged(nameof(Duration1Colour));
+            OnPropertyChanged(nameof(Duration2Colour));
+            OnPropertyChanged(nameof(Duration3Colour));
 
-            RaisePropertyChanged(nameof(Duration1Tooltip));
-            RaisePropertyChanged(nameof(Duration2Tooltip));
-            RaisePropertyChanged(nameof(Duration3Tooltip));
+            OnPropertyChanged(nameof(Duration1Tooltip));
+            OnPropertyChanged(nameof(Duration2Tooltip));
+            OnPropertyChanged(nameof(Duration3Tooltip));
         }
 
         private void AdjustTalkTimeForThisSession()
@@ -726,7 +726,7 @@ namespace OnlyT.ViewModel
 
         private void OnShowCircuitVisitToggleChanged(ShowCircuitVisitToggleChangedMessage message)
         {
-            RaisePropertyChanged(nameof(ShouldShowCircuitVisitToggle));
+            OnPropertyChanged(nameof(ShouldShowCircuitVisitToggle));
         }
 
         private void OnCountdownWindowStatusChanged(CountdownWindowStatusChangedMessage message)
@@ -741,7 +741,7 @@ namespace OnlyT.ViewModel
             }
 
             IsCountdownActive = message.Showing;
-            RaisePropertyChanged(nameof(IsCountdownActive));
+            OnPropertyChanged(nameof(IsCountdownActive));
         }
 
         private bool CanIncreaseTimerValue()
@@ -828,10 +828,10 @@ namespace OnlyT.ViewModel
         {
             Log.Logger.Debug("Responding to change in operating mode");
 
-            RaisePropertyChanged(nameof(IsAutoMode));
-            RaisePropertyChanged(nameof(ShouldShowCircuitVisitToggle));
-            RaisePropertyChanged(nameof(IsManualMode));
-            RaisePropertyChanged(nameof(IsNotManualMode));
+            OnPropertyChanged(nameof(IsAutoMode));
+            OnPropertyChanged(nameof(ShouldShowCircuitVisitToggle));
+            OnPropertyChanged(nameof(IsManualMode));
+            OnPropertyChanged(nameof(IsNotManualMode));
             Messenger.Default.Send(new AutoMeetingChangedMessage());
         }
 
@@ -896,9 +896,9 @@ namespace OnlyT.ViewModel
 
             TextColor = WhiteBrush;
 
-            RaisePropertyChanged(nameof(IsRunning));
-            RaisePropertyChanged(nameof(IsNotRunning));
-            RaisePropertyChanged(nameof(SettingsHint));
+            OnPropertyChanged(nameof(IsRunning));
+            OnPropertyChanged(nameof(IsNotRunning));
+            OnPropertyChanged(nameof(SettingsHint));
 
             Messenger.Default.Send(msg);
             RaiseCanExecuteChanged();
@@ -930,7 +930,7 @@ namespace OnlyT.ViewModel
                     {
                         // there is a new version....
                         IsNewVersionAvailable = true;
-                        RaisePropertyChanged(nameof(IsNewVersionAvailable));
+                        OnPropertyChanged(nameof(IsNewVersionAvailable));
                     }
                 });
             }
@@ -973,8 +973,8 @@ namespace OnlyT.ViewModel
                 {
                     // toggle state
                     talk.AutoBell = !talk.AutoBell;
-                    RaisePropertyChanged(nameof(BellColour));
-                    RaisePropertyChanged(nameof(BellTooltip));
+                    OnPropertyChanged(nameof(BellColour));
+                    OnPropertyChanged(nameof(BellTooltip));
                 }
             }
         }
@@ -1106,8 +1106,8 @@ namespace OnlyT.ViewModel
                 }
             }
 
-            RaisePropertyChanged(nameof(BellColour));
-            RaisePropertyChanged(nameof(BellTooltip));
+            OnPropertyChanged(nameof(BellColour));
+            OnPropertyChanged(nameof(BellTooltip));
         }
 
         private void SetSecondsRemaining(int value)
@@ -1115,7 +1115,7 @@ namespace OnlyT.ViewModel
             if (_secondsRemaining != value)
             {
                 _secondsRemaining = value;
-                RaisePropertyChanged(nameof(CurrentTimerValueString));
+                OnPropertyChanged(nameof(CurrentTimerValueString));
             }
         }
 
@@ -1144,7 +1144,7 @@ namespace OnlyT.ViewModel
 
             _scheduleService.Reset();
             TalkId = 0;
-            RaisePropertyChanged(nameof(Talks));
+            OnPropertyChanged(nameof(Talks));
             SelectFirstTalk();
         }
     }
