@@ -71,7 +71,7 @@
 
             Task.Delay(1000).ContinueWith(t =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(OnTimeUpEvent);
+                Application.Current.Dispatcher.BeginInvoke(new Action(OnTimeUpEvent));
             });
         }
 

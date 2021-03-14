@@ -53,7 +53,7 @@
 
         private void AddStartTime(List<string> result, MeetingStartTime meetingStartTime)
         {
-            string startTime = meetingStartTime?.AsText();
+            string? startTime = meetingStartTime?.AsText();
             if (!string.IsNullOrWhiteSpace(startTime))
             {
                 result.Add(startTime);

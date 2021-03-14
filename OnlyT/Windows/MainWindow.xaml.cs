@@ -1,4 +1,6 @@
-﻿using Microsoft.Toolkit.Mvvm.Messaging;
+﻿using System;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.Windows
 {
@@ -62,7 +64,7 @@ namespace OnlyT.Windows
             }
             else if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
             {
-                var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+                var optionsService = Ioc.Default.GetService<IOptionsService>()!;
                 var sz = optionsService.Options.SettingsPageSize;
                 if (sz != default)
                 {
@@ -79,7 +81,7 @@ namespace OnlyT.Windows
 
         private void SetOperatorWindowSize()
         {
-            var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
             var sz = optionsService.Options.OperatorPageSize;
             if (sz != default)
             {
@@ -102,16 +104,16 @@ namespace OnlyT.Windows
         {
             Task.Delay(100).ContinueWith((t) =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     Activate();
-                });
+                }));
             });
         }
 
         private void AdjustMainWindowPositionAndSize()
         {
-            var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
             if (!string.IsNullOrEmpty(optionsService.Options.AppWindowPlacement))
             {
                 this.SetPlacement(
@@ -142,21 +144,21 @@ namespace OnlyT.Windows
 
         private void SaveWindowPos()
         {
-            var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
             optionsService.Options.AppWindowPlacement = this.GetPlacement();
             optionsService.Save();
         }
 
         private void SaveSettingsWindowSize()
         {
-            var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
             optionsService.Options.SettingsPageSize = new Size(Width, Height);
             optionsService.Save();
         }
 
         private void SaveOperatorWindowSize()
         {
-            var optionsService = ServiceLocator.Current.GetInstance<IOptionsService>();
+            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
             optionsService.Options.OperatorPageSize = new Size(Width, Height);
             optionsService.Save();
         }

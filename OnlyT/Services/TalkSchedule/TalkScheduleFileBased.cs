@@ -18,7 +18,7 @@
 
         public static IEnumerable<TalkScheduleItem> Read(bool autoBell)
         {
-            List<TalkScheduleItem> result = null;
+            List<TalkScheduleItem>? result = null;
 
             if (Exists())
             {

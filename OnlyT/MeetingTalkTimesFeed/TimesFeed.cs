@@ -96,7 +96,7 @@
 
         private IReadOnlyCollection<Meeting> LoadFileInternal(DateTime today)
         {
-            List<Meeting> result = null;
+            List<Meeting>? result = null;
 
             var needRefresh = LocalFileTooOld(today);
 

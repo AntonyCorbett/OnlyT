@@ -69,7 +69,7 @@
 
         public HistoricalMeetingTimes GetHistoricalTimingData(DateTime dt)
         {
-            HistoricalMeetingTimes result = null;
+            HistoricalMeetingTimes? result = null;
 
             var startDate = dt.AddMonths(-HistoricalMonths);
             var times = GetMeetingTimesRange(startDate, dt);

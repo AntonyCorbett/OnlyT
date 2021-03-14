@@ -16,7 +16,7 @@
         
         public static string GetLatestReleaseVersionString()
         {
-            string version = null;
+            string? version = null;
 
             try
             {

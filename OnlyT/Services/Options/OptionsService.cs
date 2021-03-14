@@ -30,7 +30,7 @@ namespace OnlyT.Services.Options
         private readonly IDateTimeService _dateTimeService;
         private readonly IQueryWeekendService _queryWeekendService;
         private readonly int _optionsVersion = 1;
-        private Options _options;
+        private Options? _options;
         private string _optionsFilePath;
         private string _originalOptionsSignature;
         
@@ -229,16 +229,18 @@ namespace OnlyT.Services.Options
                 using (var file = File.OpenText(_optionsFilePath))
                 {
                     var serializer = new JsonSerializer();
-                    _options = (Options)serializer.Deserialize(file, typeof(Options));
-                    
-                    SetMidWeekOrWeekend();
-                    ResetCircuitVisit();
-                    
-                    _options.Sanitize();
+                    _options = (Options?)serializer.Deserialize(file, typeof(Options));
+                    if (_options != null)
+                    {
+                        SetMidWeekOrWeekend();
+                        ResetCircuitVisit();
 
-                    CommandLineMonitorOverride();
+                        _options.Sanitize();
 
-                    SetCulture();
+                        CommandLineMonitorOverride();
+
+                        SetCulture();
+                    }
                 }
             }
         }

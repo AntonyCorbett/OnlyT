@@ -260,7 +260,7 @@
             {
                 var talkType = TalkTypesUtils.GetMinistryTalkType(n);
 
-                TalkTimer item;
+                TalkTimer? item;
 
                 if (meetingData == null)
                 {
@@ -356,7 +356,7 @@
             TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living1)) ??
                                    new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
 
-            TalkTimer timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
+            TalkTimer? timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
 
             result.Add(CreateLivingItem(
                 TalkTypesAutoMode.LivingPart1,

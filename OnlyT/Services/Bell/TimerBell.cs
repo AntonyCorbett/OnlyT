@@ -16,8 +16,8 @@ namespace OnlyT.Services.Bell
     {
         private static readonly string BellFileName = "bell.mp3";
         private readonly string _bellFilePath;
-        private WaveOutEvent _player;
-        private Mp3FileReader _reader;
+        private WaveOutEvent? _player;
+        private Mp3FileReader? _reader;
         private bool _playing;
 
         public TimerBell()

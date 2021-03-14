@@ -13,7 +13,7 @@
             FrameworkElement parentContainer, 
             FrameworkElement ctrl, 
             int millisecsToDisplay, 
-            EventHandler onCompleted = null)
+            EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
             storyboard.Children.Add(CreateFadeAnimation(ctrl, FadeMs, true));
@@ -24,7 +24,7 @@
             storyboard.Begin(parentContainer);
         }
 
-        public static void DropDown(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, EventHandler onCompleted = null)
+        public static void DropDown(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
             var duration = TimeSpan.FromMilliseconds(ms);
@@ -47,7 +47,7 @@
             storyboard.Begin(parentContainer);
         }
 
-        public static Storyboard Flash(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
+        public static Storyboard Flash(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler? onCompleted = null)
         {
             var anim = CreateFadeAnimation(ctrl, FadeMs, true, onCompleted);
             anim.AutoReverse = true;
@@ -60,7 +60,7 @@
             return storyboard;
         }
 
-        public static void FlashIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
+        public static void FlashIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
 
@@ -71,57 +71,57 @@
             storyboard.Begin(parentContainer);
         }
 
-        public static void SlideIn(FrameworkElement parentContainer, FrameworkElement ctrl, int ms = 500, EventHandler onCompleted = null)
+        public static void SlideIn(FrameworkElement parentContainer, FrameworkElement ctrl, int ms = 500, EventHandler? onCompleted = null)
         {
             Slide(parentContainer, ctrl, ms, true, onCompleted);
         }
 
-        public static void SlideOut(FrameworkElement parentContainer, FrameworkElement ctrl, int ms = 500, EventHandler onCompleted = null)
+        public static void SlideOut(FrameworkElement parentContainer, FrameworkElement ctrl, int ms = 500, EventHandler? onCompleted = null)
         {
             Slide(parentContainer, ctrl, ms, false, onCompleted);
         }
 
-        public static void FadeIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
+        public static void FadeIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrl, FadeMs, true, onCompleted);
         }
 
-        public static void FadeIn(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
+        public static void FadeIn(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrls, FadeMs, true, onCompleted);
         }
 
-        public static void FadeOut(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
+        public static void FadeOut(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrl, FadeMs, false, onCompleted);
         }
 
-        public static void FadeOut(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
+        public static void FadeOut(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrls, FadeMs, false, onCompleted);
         }
 
-        public static void QuickFadeIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
+        public static void QuickFadeIn(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrl, QuickFadeMs, true, onCompleted);
         }
 
-        public static void QuickFadeIn(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
+        public static void QuickFadeIn(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrls, QuickFadeMs, true, onCompleted);
         }
 
-        public static void QuickFadeOut(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler onCompleted = null)
+        public static void QuickFadeOut(FrameworkElement parentContainer, FrameworkElement ctrl, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrl, QuickFadeMs, false, onCompleted);
         }
 
-        public static void QuickFadeOut(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler onCompleted = null)
+        public static void QuickFadeOut(FrameworkElement parentContainer, FrameworkElement[] ctrls, EventHandler? onCompleted = null)
         {
             Fade(parentContainer, ctrls, QuickFadeMs, false, onCompleted);
         }
 
-        private static DoubleAnimation CreateFadeAnimation(FrameworkElement ctrl, int ms, bool fadeIn, EventHandler onCompleted = null)
+        private static DoubleAnimation CreateFadeAnimation(FrameworkElement ctrl, int ms, bool fadeIn, EventHandler? onCompleted = null)
         {
             var duration = TimeSpan.FromMilliseconds(ms);
 
@@ -143,7 +143,7 @@
             return animation;
         }
         
-        private static void Fade(FrameworkElement parentContainer, FrameworkElement[] ctrls, int ms, bool fadeIn, EventHandler onCompleted = null)
+        private static void Fade(FrameworkElement parentContainer, FrameworkElement[] ctrls, int ms, bool fadeIn, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
 
@@ -163,7 +163,7 @@
             storyboard.Begin(parentContainer);
         }
 
-        private static void Slide(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, bool slideIn, EventHandler onCompleted = null)
+        private static void Slide(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, bool slideIn, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
             var duration = TimeSpan.FromMilliseconds(ms);
@@ -198,7 +198,7 @@
             storyboard.Begin(parentContainer);
         }
 
-        private static void Fade(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, bool fadeIn, EventHandler onCompleted = null)
+        private static void Fade(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, bool fadeIn, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
             storyboard.Children.Add(CreateFadeAnimation(ctrl, ms, fadeIn, onCompleted));

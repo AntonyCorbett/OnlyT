@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,6 +7,7 @@
     <Nullable>Enable</Nullable>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>icon4.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,12 @@
     <ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj" />
     <ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj" />
     <ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon4.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

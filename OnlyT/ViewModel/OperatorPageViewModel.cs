@@ -103,7 +103,7 @@ namespace OnlyT.ViewModel
             _timerService.TimerStartStopFromApiEvent += HandleTimerStartStopFromApi;
 
             // commands...
-            StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk, true);
+            StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
             StopCommand = new RelayCommand(StopTimer, () => IsRunning);
             SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
             HelpCommand = new RelayCommand(LaunchHelp);
@@ -324,7 +324,7 @@ namespace OnlyT.ViewModel
                     OnPropertyChanged(nameof(IsValidTalk));
 
                     RaiseCanExecuteIncrementDecrementChanged();
-                    StartCommand?.RaiseCanExecuteChanged();
+                    StartCommand?.NotifyCanExecuteChanged();
                     SetDurationStringAttributes(talk);
 
                     IsOvertime = false;
@@ -622,9 +622,9 @@ namespace OnlyT.ViewModel
 
         private void RaiseCanExecuteChanged()
         {
-            StartCommand.RaiseCanExecuteChanged();
-            StopCommand.RaiseCanExecuteChanged();
-            SettingsCommand.RaiseCanExecuteChanged();
+            StartCommand.NotifyCanExecuteChanged();
+            StopCommand.NotifyCanExecuteChanged();
+            SettingsCommand.NotifyCanExecuteChanged();
 
             RaiseCanExecuteIncrementDecrementChanged();
         }
@@ -1037,13 +1037,13 @@ namespace OnlyT.ViewModel
 
         private void RaiseCanExecuteIncrementDecrementChanged()
         {
-            IncrementTimerCommand?.RaiseCanExecuteChanged();
-            IncrementTimer5Command?.RaiseCanExecuteChanged();
-            IncrementTimer15Command?.RaiseCanExecuteChanged();
+            IncrementTimerCommand?.NotifyCanExecuteChanged();
+            IncrementTimer5Command?.NotifyCanExecuteChanged();
+            IncrementTimer15Command?.NotifyCanExecuteChanged();
 
-            DecrementTimerCommand?.RaiseCanExecuteChanged();
-            DecrementTimer5Command?.RaiseCanExecuteChanged();
-            DecrementTimer15Command?.RaiseCanExecuteChanged();
+            DecrementTimerCommand?.NotifyCanExecuteChanged();
+            DecrementTimer5Command?.NotifyCanExecuteChanged();
+            DecrementTimer15Command?.NotifyCanExecuteChanged();
         }
 
         private async Task GenerateTimingReportAsync()

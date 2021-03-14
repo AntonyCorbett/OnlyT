@@ -27,7 +27,7 @@
 
         private const int DefaultCountdownDurationMins = 5;
 
-        private DispatcherTimer _timer;
+        private DispatcherTimer? _timer;
 
         private Path _donut;
         private Path _pie;
