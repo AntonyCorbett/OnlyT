@@ -15,14 +15,14 @@
         private static readonly string FeedUrl = @"https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
         private readonly string _localFeedFile;
         private readonly int _tooOldDays = 20;
-        private IEnumerable<Meeting> _meetingData;
+        private IEnumerable<Meeting>? _meetingData;
 
         public TimesFeed()
         {
             _localFeedFile = Path.Combine(FileUtils.GetAppDataFolder(), "feed.json");
         }
 
-        public Meeting GetMeetingDataForToday(IDateTimeService dateTimeService)
+        public Meeting? GetMeetingDataForToday(IDateTimeService dateTimeService)
         {
             LoadFile(dateTimeService.Now().Date);
             return GetMeetingDataForTodayInternal(_meetingData);
@@ -88,13 +88,10 @@
 
         private void LoadFile(DateTime today)
         {
-            if (_meetingData == null)
-            {
-                _meetingData = LoadFileInternal(today);
-            }
+            _meetingData ??= LoadFileInternal(today);
         }
 
-        private IReadOnlyCollection<Meeting> LoadFileInternal(DateTime today)
+        private IReadOnlyCollection<Meeting>? LoadFileInternal(DateTime today)
         {
             List<Meeting>? result = null;
 
@@ -105,7 +102,7 @@
                 try
                 {
                     result = JsonConvert.DeserializeObject<List<Meeting>>(File.ReadAllText(_localFeedFile));
-                    if (result == null || !result.Any() || GetMeetingDataForTodayInternal(result) == null)
+                    if (!result.Any() || GetMeetingDataForTodayInternal(result) == null)
                     {
                         needRefresh = true;
                     }
@@ -122,8 +119,11 @@
                 try
                 {
                     var content = WebUtils.LoadWithUserAgent(FeedUrl);
-                    result = JsonConvert.DeserializeObject<List<Meeting>>(content);
-                    File.WriteAllText(_localFeedFile, content, Encoding.UTF8);
+                    if (content != null)
+                    {
+                        result = JsonConvert.DeserializeObject<List<Meeting>>(content);
+                        File.WriteAllText(_localFeedFile, content, Encoding.UTF8);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -134,7 +134,7 @@
             return result;
         }
 
-        private Meeting GetMeetingDataForTodayInternal(IEnumerable<Meeting> meetingData)
+        private Meeting? GetMeetingDataForTodayInternal(IEnumerable<Meeting>? meetingData)
         {
             return meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
         }

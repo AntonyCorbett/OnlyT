@@ -102,15 +102,25 @@
 
         public static (int x, int y) GetDpiSettings()
         {
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
             var dpiXProperty = typeof(SystemParameters).GetProperty("DpiX", BindingFlags.NonPublic | BindingFlags.Static);
             var dpiYProperty = typeof(SystemParameters).GetProperty("Dpi", BindingFlags.NonPublic | BindingFlags.Static);
+#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
 
             if (dpiXProperty == null || dpiYProperty == null)
             {
                 return (96, 96);
             }
 
-            return ((int)dpiXProperty.GetValue(null, null), (int)dpiYProperty.GetValue(null, null));
+            var x = dpiXProperty.GetValue(null, null);
+            var y = dpiYProperty.GetValue(null, null);
+
+            if(x == null || y == null)
+            {
+                return (96, 96);
+            }
+
+            return ((int)x, (int)y);
         }
 
         private static Rect SetPlacement(IntPtr windowHandle, string placementJson, double width, double height)
@@ -121,9 +131,15 @@
                 try
                 {
                     WINDOWPLACEMENT placement;
-                    using (MemoryStream memoryStream = new MemoryStream(xmlBytes))
+                    using (MemoryStream memoryStream = new(xmlBytes))
                     {
-                        placement = (WINDOWPLACEMENT)Serializer.Deserialize(memoryStream);
+                        var p = Serializer.Deserialize(memoryStream);
+                        if (p == null)
+                        {
+                            return default;
+                        }
+
+                        placement = (WINDOWPLACEMENT)p;
                     }
 
                     var adjustedDimensions = GetAdjustedWidthAndHeight(width, height);

@@ -21,7 +21,13 @@
         private void ReportIconMouseLeftButtonDown(
             object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Process.Start(FileUtils.GetTimingReportsFolder(_commandlineService.OptionsIdentifier));
+            var psi = new ProcessStartInfo
+            {
+                FileName = FileUtils.GetTimingReportsFolder(_commandlineService.OptionsIdentifier),
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
         }
     }
 }

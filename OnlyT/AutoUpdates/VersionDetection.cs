@@ -14,25 +14,24 @@
     {
         public static string LatestReleaseUrl => "https://github.com/AntonyCorbett/OnlyT/releases/latest";
         
-        public static string GetLatestReleaseVersionString()
+        public static string? GetLatestReleaseVersionString()
         {
             string? version = null;
 
             try
             {
-                using (var client = new HttpClient())
+                using var client = new HttpClient();
+
+                var response = client.GetAsync(LatestReleaseUrl).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    var response = client.GetAsync(LatestReleaseUrl).Result;
-                    if (response.IsSuccessStatusCode)
+                    var latestVersionUri = response.RequestMessage?.RequestUri;
+                    if (latestVersionUri != null)
                     {
-                        var latestVersionUri = response.RequestMessage.RequestUri;
-                        if (latestVersionUri != null)
+                        var segments = latestVersionUri.Segments;
+                        if (segments.Any())
                         {
-                            var segments = latestVersionUri.Segments;
-                            if (segments.Any())
-                            {
-                                version = segments[segments.Length - 1];
-                            }
+                            version = segments[segments.Length - 1];
                         }
                     }
                 }
@@ -45,9 +44,9 @@
             return version;
         }
 
-        public static Version GetLatestReleaseVersion()
+        public static Version? GetLatestReleaseVersion()
         {
-            string versionString = GetLatestReleaseVersionString();
+            var versionString = GetLatestReleaseVersionString();
 
             if (string.IsNullOrEmpty(versionString))
             {
@@ -73,13 +72,13 @@
 
         public static string GetCurrentVersionString()
         {
-            var ver = GetCurrentVersion();
+            var ver = GetCurrentVersion() ?? new Version(0,0,0,0);
             return $"{ver.Major}.{ver.Minor}.{ver.Build}.{ver.Revision}";
         }
 
-        public static Version GetCurrentVersion()
+        public static Version? GetCurrentVersion()
         {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly()?.GetName().Version;
         }
     }
 }

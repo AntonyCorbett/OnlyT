@@ -14,7 +14,7 @@
 
         public TimeSpan StartTime { get; set; }
 
-        public static MeetingStartTime FromText(string text)
+        public static MeetingStartTime? FromText(string text)
         {
             var dayOfWeek = FindDayOfWeek(text);
             if (dayOfWeek != null)
@@ -117,7 +117,7 @@
                     defaultCulturePmString, StringComparison.InvariantCultureIgnoreCase));
         }
         
-        private static DayOfWeekAndUserSuppliedDayName FindDayOfWeek(string text)
+        private static DayOfWeekAndUserSuppliedDayName? FindDayOfWeek(string text)
         {
             return FindDayOfWeek(text, (dow) => CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dow)) ??
                    FindDayOfWeek(text, (dow) => CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dow)) ??
@@ -129,7 +129,7 @@
                    FindDayOfWeek(text, (dow) => CultureInfo.InvariantCulture.DateTimeFormat.GetShortestDayName(dow));
         }
         
-        private static DayOfWeekAndUserSuppliedDayName FindDayOfWeek(string text, GetDayNameFunction getDayNameFunction)
+        private static DayOfWeekAndUserSuppliedDayName? FindDayOfWeek(string text, GetDayNameFunction getDayNameFunction)
         {
             foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {

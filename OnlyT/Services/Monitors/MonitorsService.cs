@@ -37,7 +37,7 @@
                     Monitor = screen,
                     MonitorName = deviceData?.DeviceString ?? SanitizeScreenDeviceName(screen.DeviceName),
                     MonitorId = deviceData?.DeviceId ?? screen.DeviceName,
-                    FriendlyName = screen.DeviceFriendlyName()
+                    FriendlyName = screen.DeviceFriendlyName() ?? SanitizeScreenDeviceName(screen.DeviceName)
                 };
 
                 if (string.IsNullOrEmpty(monitor.FriendlyName))
@@ -62,12 +62,12 @@
             return result;
         }
 
-        public MonitorItem GetMonitorItem(string monitorId)
+        public MonitorItem? GetMonitorItem(string monitorId)
         {
             return GetSystemMonitors().SingleOrDefault(x => x.MonitorId.Equals(monitorId));
         }
 
-        private DisplayDeviceData GetDeviceMatchingScreen(DisplayDeviceData[] devices, Screen screen)
+        private DisplayDeviceData? GetDeviceMatchingScreen(DisplayDeviceData[] devices, Screen screen)
         {
             var deviceName = screen.DeviceName + "\\";
             return devices.SingleOrDefault(x => x.Name.StartsWith(deviceName));
@@ -87,13 +87,11 @@
                 Log.Logger.Verbose($"Screen: {screen.DeviceName}");
 
                 var deviceData = GetDeviceMatchingScreen(devices, screen);
-                if (deviceData == null)
+                if (deviceData != null)
                 {
-                    return null;
+                    Log.Logger.Verbose($"Matching device: {deviceData.DeviceString}, {deviceData.DeviceId}");
+                    result.Add((screen, deviceData));
                 }
-
-                Log.Logger.Verbose($"Matching device: {deviceData.DeviceString}, {deviceData.DeviceId}");
-                result.Add((screen, deviceData));
             }
 
             return result;

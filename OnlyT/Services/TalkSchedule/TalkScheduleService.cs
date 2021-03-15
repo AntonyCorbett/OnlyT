@@ -16,16 +16,16 @@ namespace OnlyT.Services.TalkSchedule
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class TalkScheduleService : ITalkScheduleService
     {
-        private static readonly DateTime _january2020Change = new DateTime(2020, 1, 6);
+        private static readonly DateTime _january2020Change = new(2020, 1, 6);
 
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
         private readonly bool _isJanuary2020OrLater;
 
         // the "talk_schedule.xml" file may exist in MyDocs\OnlyT..
-        private Lazy<IEnumerable<TalkScheduleItem>> _fileBasedSchedule;
-        private Lazy<IEnumerable<TalkScheduleItem>> _autoSchedule;
-        private Lazy<IEnumerable<TalkScheduleItem>> _manualSchedule;
+        private Lazy<IEnumerable<TalkScheduleItem>> _fileBasedSchedule = null!;
+        private Lazy<IEnumerable<TalkScheduleItem>> _autoSchedule = null!;
+        private Lazy<IEnumerable<TalkScheduleItem>> _manualSchedule = null!;
 
         public TalkScheduleService(
             IOptionsService optionsService,
@@ -71,7 +71,7 @@ namespace OnlyT.Services.TalkSchedule
             }
         }
 
-        public TalkScheduleItem GetTalkScheduleItem(int id)
+        public TalkScheduleItem? GetTalkScheduleItem(int id)
         {
             return GetTalkScheduleItems()?.SingleOrDefault(n => n.Id == id);
         }

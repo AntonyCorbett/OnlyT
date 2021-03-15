@@ -7,7 +7,7 @@
     {
         IEnumerable<TalkScheduleItem> GetTalkScheduleItems();
 
-        TalkScheduleItem GetTalkScheduleItem(int id);
+        TalkScheduleItem? GetTalkScheduleItem(int id);
 
         int GetNext(int currentTalkId);
 

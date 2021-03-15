@@ -3,7 +3,6 @@
     using PdfSharpCore.Charting;
     using PdfSharpCore.Drawing;
     using PdfSharpCore.Pdf;
-    using SixLabors.Fonts;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -26,7 +25,7 @@
         private readonly XBrush _lightGrayBrush = XBrushes.LightGray;
         private readonly XBrush _greenBrush = XBrushes.Green;
         private readonly XBrush _redBrush = XBrushes.Red;
-        private readonly HistoricalMeetingTimes _historicalASummary;
+        private readonly HistoricalMeetingTimes? _historicalASummary;
 
         private readonly IQueryWeekendService _queryWeekendService;
         private readonly bool _weekendIncludesFriday;
@@ -47,7 +46,7 @@
         
         public PdfTimingReport(
             MeetingTimes data, 
-            HistoricalMeetingTimes historicalASummary, 
+            HistoricalMeetingTimes? historicalASummary, 
             IQueryWeekendService queryWeekendService,
             bool weekendIncludesFriday,
             string outputFolder)
@@ -107,7 +106,7 @@
                         }
                     }
 
-                    if (_data.MeetingPlannedEnd != default(TimeSpan) && _data.MeetingActualEnd != default(TimeSpan))
+                    if (_data.MeetingPlannedEnd != default && _data.MeetingActualEnd != default)
                     {
                         Log.Logger.Debug("Printing summary");
                         DrawSummary(g, _data.MeetingPlannedEnd, _data.MeetingActualEnd);
@@ -126,12 +125,12 @@
         private MeetingTimedItem[] GetSanitizedItemTimings()
         {
             var result = new List<MeetingTimedItem>();
-            
+
             foreach (var item in _data.Items)
             {
                 // ignore very short items that are likely mistakes
-                if ((item.End - item.Start).TotalSeconds > 20 && 
-                    item.Start >= _data.MeetingStart && 
+                if ((item.End - item.Start).TotalSeconds > 20 &&
+                    item.Start >= _data.MeetingStart &&
                     item.End <= _data.MeetingActualEnd)
                 {
                     result.Add(item);
@@ -200,24 +199,28 @@
 
                 var currentMonth = default(DateTime);
 
-                foreach (var summary in _historicalASummary.Summaries)
+                if (_historicalASummary != null)
                 {
-                    if (UseSummary(summary, mtgType))
+                    foreach (var summary in _historicalASummary.Summaries)
                     {
-                        if (summary.MeetingDate.Year != currentMonth.Year ||
-                            summary.MeetingDate.Month != currentMonth.Month)
+                        if (UseSummary(summary, mtgType))
                         {
-                            string monthName = summary.MeetingDate.ToString("MMM", CultureInfo.CurrentUICulture);
-                            xSeries.Add(monthName);
-                            currentMonth = summary.MeetingDate;
-                        }
-                        else
-                        {
-                            xSeries.AddBlank();
-                        }
+                            if (summary.MeetingDate.Year != currentMonth.Year ||
+                                summary.MeetingDate.Month != currentMonth.Month)
+                            {
+                                string monthName = summary.MeetingDate.ToString("MMM", CultureInfo.CurrentUICulture);
+                                xSeries.Add(monthName);
+                                currentMonth = summary.MeetingDate;
+                            }
+                            else
+                            {
+                                xSeries.AddBlank();
+                            }
 
-                        var p = ySeries.Add(LimitOvertime(summary.Overtime.TotalMinutes));
-                        p.FillFormat.Color = XColor.FromKnownColor(p.Value > 0 ? XKnownColor.Red : XKnownColor.Green);
+                            var p = ySeries.Add(LimitOvertime(summary.Overtime.TotalMinutes));
+                            p.FillFormat.Color =
+                                XColor.FromKnownColor(p.Value > 0 ? XKnownColor.Red : XKnownColor.Green);
+                        }
                     }
                 }
 
@@ -237,11 +240,14 @@
         {
             int count = 0;
 
-            foreach (var s in _historicalASummary.Summaries)
+            if (_historicalASummary != null)
             {
-                if (UseSummary(s, mtgType))
+                foreach (var s in _historicalASummary.Summaries)
                 {
-                    ++count;
+                    if (UseSummary(s, mtgType))
+                    {
+                        ++count;
+                    }
                 }
             }
 

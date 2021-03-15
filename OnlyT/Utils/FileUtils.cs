@@ -70,7 +70,7 @@
         /// </summary>
         /// <param name="commandLineIdentifier">Optional command-line id</param>
         /// <returns>Folder path.</returns>
-        public static string GetTimingReportsFolder(string commandLineIdentifier)
+        public static string GetTimingReportsFolder(string? commandLineIdentifier)
         {
             var folder = Path.Combine(GetOnlyTMyDocsFolder(), @"TimingReports", commandLineIdentifier ?? string.Empty);
             Directory.CreateDirectory(folder);
@@ -82,7 +82,7 @@
         /// </summary>
         /// <param name="commandLineIdentifier">Optional command-line id</param>
         /// <returns>Folder path.</returns>
-        public static string GetTimingReportsDatabaseFolder(string commandLineIdentifier)
+        public static string GetTimingReportsDatabaseFolder(string? commandLineIdentifier)
         {
             var folder = Path.Combine(GetAppDataFolder(), @"TimingReportsDatabase", commandLineIdentifier ?? string.Empty);
             Directory.CreateDirectory(folder);

@@ -39,7 +39,7 @@
 
             while (!found)
             {
-                var mainWindow = JwLibHelperNativeMethods.FindWindowEx(desktopWindow, prevWindow, MainWindowClassName, null);
+                var mainWindow = JwLibHelperNativeMethods.FindWindowEx(desktopWindow, prevWindow, MainWindowClassName, null!);
                 if (mainWindow == IntPtr.Zero)
                 {
                     break;

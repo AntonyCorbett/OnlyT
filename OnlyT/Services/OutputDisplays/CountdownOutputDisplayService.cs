@@ -1,7 +1,6 @@
-﻿using Microsoft.Toolkit.Mvvm.Messaging;
-
-namespace OnlyT.Services.OutputDisplays
+﻿namespace OnlyT.Services.OutputDisplays
 {
+    using Microsoft.Toolkit.Mvvm.Messaging;
     using System;
     using System.Threading.Tasks;
     using System.Windows;
@@ -22,7 +21,7 @@ namespace OnlyT.Services.OutputDisplays
         private readonly IDateTimeService _dateTimeService;
         private readonly ITimerOutputDisplayService _timerOutputDisplayService;
         private readonly ISnackbarService _snackbarService;
-        private CountdownWindow _countdownWindow;
+        private CountdownWindow? _countdownWindow;
 
         public CountdownOutputDisplayService(
             IMonitorsService monitorsService,
@@ -49,14 +48,14 @@ namespace OnlyT.Services.OutputDisplays
         
         public void Activate()
         {
-            _countdownWindow.Activate();
+            _countdownWindow?.Activate();
         }
 
         public void RelocateWindow()
         {
             if (IsWindowAvailable())
             {
-                RelocateWindow(_countdownWindow, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
+                RelocateWindow(_countdownWindow!, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
             }
         }
 
@@ -97,7 +96,7 @@ namespace OnlyT.Services.OutputDisplays
             {
                 try
                 {
-                    if (_countdownWindow.AllowsTransparency)
+                    if (_countdownWindow!.AllowsTransparency)
                     {
                         // we can't convert the window to WindowStyle.SingleBorderWindow since it has
                         // "AllowsTransparency" set. Warn the user and back out.
@@ -129,7 +128,7 @@ namespace OnlyT.Services.OutputDisplays
             
             IsCountingDown = true;
 
-            _countdownWindow.Start(offsetSeconds);
+            _countdownWindow!.Start(offsetSeconds);
         }
 
         public void SaveWindowedPos()
@@ -189,7 +188,9 @@ namespace OnlyT.Services.OutputDisplays
 
         private void ConfigureForWindowedOperation()
         {
-            var dataContext = (CountdownTimerViewModel)_countdownWindow.DataContext;
+            CheckCountdownWindow();
+
+            var dataContext = (CountdownTimerViewModel)_countdownWindow!.DataContext;
             dataContext.WindowedOperation = true;
 
             _countdownWindow.WindowState = WindowState.Normal;
@@ -204,9 +205,19 @@ namespace OnlyT.Services.OutputDisplays
             _countdownWindow.Topmost = false;
         }
 
+        private void CheckCountdownWindow()
+        {
+            if (_countdownWindow == null)
+            {
+                throw new Exception("Countdown window null");
+            }
+        }
+
         private void ConfigureForMonitorOperation()
         {
-            var dataContext = (CountdownTimerViewModel)_countdownWindow.DataContext;
+            CheckCountdownWindow();
+
+            var dataContext = (CountdownTimerViewModel)_countdownWindow!.DataContext;
             dataContext.WindowedOperation = false;
 
             _countdownWindow.WindowState = WindowState.Normal;

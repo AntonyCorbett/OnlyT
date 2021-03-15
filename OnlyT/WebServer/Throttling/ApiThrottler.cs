@@ -21,11 +21,11 @@
         {
             if (_optionsService.Options.IsApiThrottled)
             {
-                _requestHistory.Add(GetClientId(request), requestType, _stopwatch.ElapsedMilliseconds);
+                _requestHistory.Add(GetClientId(request) ?? "unknown client", requestType, _stopwatch.ElapsedMilliseconds);
             }
         }
 
-        private string GetClientId(HttpListenerRequest request)
+        private string? GetClientId(HttpListenerRequest request)
         {
             return request.RemoteEndPoint?.ToString();
         }

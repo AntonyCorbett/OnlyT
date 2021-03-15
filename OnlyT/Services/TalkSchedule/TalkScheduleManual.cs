@@ -6,7 +6,7 @@
     using Options;
 
     // ReSharper disable once ClassNeverInstantiated.Global
-    internal class TalkScheduleManual
+    internal static class TalkScheduleManual
     {
         public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)
         {

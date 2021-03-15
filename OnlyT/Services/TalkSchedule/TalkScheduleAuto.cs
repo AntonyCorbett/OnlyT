@@ -89,7 +89,7 @@
                 new TimesFeed().GetSampleMidweekMeetingDataForTesting(theDate));
         }
         
-        private static Meeting GetFeedForToday(IDateTimeService dateTimeService)
+        private static Meeting? GetFeedForToday(IDateTimeService dateTimeService)
         {
             var feed = new TimesFeed().GetMeetingDataForToday(dateTimeService);
             if (feed != null)
@@ -248,7 +248,7 @@
             };
         }
 
-        private static IEnumerable<TalkScheduleItem> GetMinistrySchedule(Meeting meetingData, bool autoBell)
+        private static IEnumerable<TalkScheduleItem> GetMinistrySchedule(Meeting? meetingData, bool autoBell)
         {
             var result = new List<TalkScheduleItem>();
 
@@ -349,7 +349,7 @@
             };
         }
 
-        private static IEnumerable<TalkScheduleItem> GetLivingSchedule(bool isCircuitVisit, Meeting meetingData)
+        private static IEnumerable<TalkScheduleItem> GetLivingSchedule(bool isCircuitVisit, Meeting? meetingData)
         {
             var result = new List<TalkScheduleItem>();
 
@@ -406,7 +406,7 @@
             bool isCircuitVisit, 
             bool autoBell,
             bool isJanuary2020OrLater,
-            Meeting meetingData)
+            Meeting? meetingData)
         {
             var result = new List<TalkScheduleItem>();
 

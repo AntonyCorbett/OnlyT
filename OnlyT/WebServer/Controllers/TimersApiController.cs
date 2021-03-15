@@ -53,7 +53,7 @@
 
             _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStop, request);
 
-            if (int.TryParse(request.Url.Segments[4], out var talkId))
+            if (int.TryParse(request.Url?.Segments[4], out var talkId))
             {
                 WriteResponse(response, _timerService.StopTalkTimerFromApi(talkId));
             }
@@ -65,7 +65,7 @@
 
             _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStart, request);
 
-            if (int.TryParse(request.Url.Segments[4], out var talkId))
+            if (int.TryParse(request.Url?.Segments[4], out var talkId))
             {
                 WriteResponse(response, _timerService.StartTalkTimerFromApi(talkId));
             }
@@ -77,7 +77,7 @@
 
             _apiThrottler.CheckRateLimit(ApiRequestType.Timer, request);
 
-            switch (request.Url.Segments.Length)
+            switch (request.Url?.Segments.Length)
             {
                 case 4:
                     // segments: "/" "api/" "v1/" "timers/"

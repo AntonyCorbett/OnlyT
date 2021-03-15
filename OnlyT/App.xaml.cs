@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using OnlyT.Common.Services.DateTime;
@@ -53,6 +54,16 @@ namespace OnlyT
             {
                 ConfigureLogger();
             }
+
+            Current.DispatcherUnhandledException += CurrentDispatcherUnhandledException;
+        }
+
+        private void CurrentDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            // unhandled exceptions thrown from UI thread
+            e.Handled = true;
+            Log.Logger.Fatal(e.Exception, "Unhandled exception");
+            Current.Shutdown();
         }
 
         private void ConfigureServices()

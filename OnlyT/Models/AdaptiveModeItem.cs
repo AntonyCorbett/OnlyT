@@ -8,8 +8,14 @@
     /// </summary>
     public class AdaptiveModeItem
     {
-        public AdaptiveMode Mode { get; set; }
+        public AdaptiveModeItem(AdaptiveMode mode, string name)
+        {
+            Mode = mode;
+            Name = name;
+        }
 
-        public string Name { get; set; }
+        public AdaptiveMode Mode { get; }
+
+        public string Name { get; }
     }
 }

@@ -22,7 +22,7 @@
         private readonly IDateTimeService _dateTimeService;
         private readonly ApiThrottler _apiThrottler;
         private readonly ApiRouter _apiRouter;
-        private HttpListener _listener;
+        private HttpListener? _listener;
         private int _port;
 
         public HttpServer(
@@ -50,7 +50,7 @@
 
         public void Dispose()
         {
-            _listener.Close();
+            _listener?.Close();
             _listener = null;
         }
 
@@ -74,6 +74,11 @@
 
         private void StartListener()
         {
+            if(_listener == null)
+            {
+                throw new Exception("Listener is null");
+            }
+
             _listener.Prefixes.Clear();
             _listener.Prefixes.Add($"http://*:{_port}/index/");
             _listener.Prefixes.Add($"http://*:{_port}/timers/");
@@ -91,11 +96,17 @@
             {
                 StartListener();
 
+                if(_listener == null)
+                {
+                    Log.Logger.Warning("Could not create listener");
+                    return;
+                }
+
                 while (_listener.IsListening)
                 {
                     try
                     {
-                        IAsyncResult result = null;
+                        IAsyncResult? result = null;
 
                         if (_listener.IsListening)
                         {
@@ -119,56 +130,55 @@
 
         private void ListenerCallback(IAsyncResult result)
         {
-            if (_listener.IsListening)
+            if (_listener?.IsListening ?? false)
             {
                 // Call EndGetContext to complete the asynchronous operation...
                 var context = _listener.EndGetContext(result);
                 
                 // Obtain a response object.
-                using (var response = context.Response)
+                using var response = context.Response;
+
+                try
                 {
-                    try
+                    // Construct a response. 
+                    if (context.Request.Url?.Segments.Length > 1)
                     {
-                        // Construct a response. 
-                        if (context.Request.Url.Segments.Length > 1)
+                        // segments: "/" ...
+                        string segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+                        if (_listener.IsListening)
                         {
-                            // segments: "/" ...
-                            string segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
-                            if (_listener.IsListening)
+                            switch (segment)
                             {
-                                switch (segment)
-                                {
-                                    case "data":
-                                        HandleRequestForClockWebPageTimerData(context.Request, response);
-                                        break;
+                                case "data":
+                                    HandleRequestForClockWebPageTimerData(context.Request, response);
+                                    break;
 
-                                    case "index":
-                                        HandleRequestForClockWebPage(context.Request, response);
-                                        break;
+                                case "index":
+                                    HandleRequestForClockWebPage(context.Request, response);
+                                    break;
 
-                                    case "timers":
-                                        HandleRequestForTimersWebPage(context.Request, response);
-                                        break;
+                                case "timers":
+                                    HandleRequestForTimersWebPage(context.Request, response);
+                                    break;
 
-                                    case "api":
-                                        HandleApiRequest(context.Request, response);
-                                        break;
-                                }
+                                case "api":
+                                    HandleApiRequest(context.Request, response);
+                                    break;
                             }
                         }
                     }
-                    catch (WebServerException ex)
-                    {
-                        Log.Logger.Error(ex, "Web server error");
-                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(ex.Code);
-                        BaseApiController.WriteResponse(response, new ApiError(ex.Code));
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Logger.Error(ex, "Web server error");
-                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(WebServerErrorCode.UnknownError);
-                        BaseApiController.WriteResponse(response, new ApiError(WebServerErrorCode.UnknownError));
-                    }
+                }
+                catch (WebServerException ex)
+                {
+                    Log.Logger.Error(ex, "Web server error");
+                    response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(ex.Code);
+                    BaseApiController.WriteResponse(response, new ApiError(ex.Code));
+                }
+                catch (Exception ex)
+                {
+                    Log.Logger.Error(ex, "Web server error");
+                    response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(WebServerErrorCode.UnknownError);
+                    BaseApiController.WriteResponse(response, new ApiError(WebServerErrorCode.UnknownError));
                 }
             }
         }

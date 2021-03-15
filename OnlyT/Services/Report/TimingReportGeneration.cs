@@ -12,12 +12,12 @@
     internal static class TimingReportGeneration
     {
         // generate report and return file path (or null)
-        public static Task<string> ExecuteAsync(
+        public static Task<string?> ExecuteAsync(
             ILocalTimingDataStoreService dataService, 
             IDateTimeService dateTimeService,
             IQueryWeekendService queryWeekendService,
             bool weekendIncludesFriday,
-            string commandLineIdentifier)
+            string? commandLineIdentifier)
         {
             return Task.Run(() =>
             {

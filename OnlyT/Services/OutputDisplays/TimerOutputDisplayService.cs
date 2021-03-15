@@ -17,7 +17,7 @@ namespace OnlyT.Services.OutputDisplays
         private readonly IMonitorsService _monitorsService;
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
-        private TimerOutputWindow _timerWindow;
+        private TimerOutputWindow? _timerWindow;
 
         public TimerOutputDisplayService(
             IMonitorsService monitorsService, 
@@ -42,9 +42,11 @@ namespace OnlyT.Services.OutputDisplays
         public void RelocateWindow()
         {
             var monitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-
-            Log.Logger.Debug("Relocating timer window to: {MonitorName}", monitor.FriendlyName);
-            RelocateWindow(_timerWindow, monitor);
+            if (monitor != null)
+            {
+                Log.Logger.Debug("Relocating timer window to: {MonitorName}", monitor.FriendlyName);
+                RelocateWindow(_timerWindow, monitor);
+            }
         }
 
         public void OpenWindowInMonitor()
@@ -52,10 +54,7 @@ namespace OnlyT.Services.OutputDisplays
             var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
             if (targetMonitor != null)
             {
-                if (_timerWindow == null)
-                {
-                    _timerWindow = new TimerOutputWindow(_optionsService, _dateTimeService);
-                }
+                _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
 
                 ConfigureForMonitorOperation();
 
@@ -99,7 +98,7 @@ namespace OnlyT.Services.OutputDisplays
 
         private void ConfigureForMonitorOperation()
         {
-            var dataContext = (TimerOutputWindowViewModel)_timerWindow.DataContext;
+            var dataContext = (TimerOutputWindowViewModel)_timerWindow!.DataContext;
             dataContext.WindowedOperation = false;
 
             _timerWindow.WindowState = WindowState.Normal;
@@ -112,7 +111,7 @@ namespace OnlyT.Services.OutputDisplays
 
         private void ConfigureForWindowedOperation()
         {
-            var dataContext = (TimerOutputWindowViewModel)_timerWindow.DataContext;
+            var dataContext = (TimerOutputWindowViewModel)_timerWindow!.DataContext;
             dataContext.WindowedOperation = true;
 
             _timerWindow.WindowState = WindowState.Normal;

@@ -24,7 +24,7 @@ namespace OnlyT.ViewModel
         private string _timeString;
         private bool _isRunning;
         private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
-        private DurationSector _durationSector;
+        private DurationSector? _durationSector;
         private bool _showTimeOfDayUnderTimer;
         private bool _windowedOperation;
 
@@ -94,7 +94,7 @@ namespace OnlyT.ViewModel
             }
         }
         
-        public DurationSector DurationSector
+        public DurationSector? DurationSector
         {
             get => _durationSector;
             set

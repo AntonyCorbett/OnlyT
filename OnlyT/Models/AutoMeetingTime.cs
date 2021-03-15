@@ -8,8 +8,14 @@
     /// </summary>
     public class AutoMeetingTime
     {
-        public MidWeekOrWeekend Id { get; set; }
+        public AutoMeetingTime(MidWeekOrWeekend id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
 
-        public string Name { get; set; }
+        public MidWeekOrWeekend Id { get; }
+
+        public string Name { get; }
     }
 }

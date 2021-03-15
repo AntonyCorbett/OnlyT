@@ -15,6 +15,6 @@
         public bool Success { get; set; }
 
         [JsonProperty(PropertyName = "currentStatus")]
-        public TimerStatus CurrentStatus { get; set; }
+        public TimerStatus? CurrentStatus { get; set; }
     }
 }

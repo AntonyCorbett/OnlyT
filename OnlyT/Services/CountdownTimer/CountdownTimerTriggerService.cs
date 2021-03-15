@@ -13,7 +13,7 @@
         private readonly object _locker = new object();
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
-        private List<CountdownTriggerPeriod> _triggerPeriods;
+        private List<CountdownTriggerPeriod>? _triggerPeriods;
 
         public CountdownTimerTriggerService(
             IOptionsService optionsService,

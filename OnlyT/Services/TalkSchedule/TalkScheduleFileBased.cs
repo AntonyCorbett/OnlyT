@@ -18,7 +18,7 @@
 
         public static IEnumerable<TalkScheduleItem> Read(bool autoBell)
         {
-            List<TalkScheduleItem>? result = null;
+            var result = new List<TalkScheduleItem>();
 
             if (Exists())
             {
@@ -29,17 +29,15 @@
                     var items = x.Root?.Element("items");
                     if (items != null)
                     {
-                        result = new List<TalkScheduleItem>();
-
                         int talkId = StartId;
                         foreach (XElement elem in items.Elements("item"))
                         {
                             result.Add(new TalkScheduleItem
                             {
                                 Id = talkId++,
-                                Name = (string)elem.Attribute("name"),
-                                MeetingSectionNameInternal = (string)elem.Attribute("section"),
-                                MeetingSectionNameLocalised = (string)elem.Attribute("section"),
+                                Name = (string?)elem.Attribute("name") ?? $"Unknown name {talkId}",
+                                MeetingSectionNameInternal = (string?)elem.Attribute("section") ?? $"Unknown section {talkId}",
+                                MeetingSectionNameLocalised = (string?)elem.Attribute("section") ?? $"Unknown section {talkId}",
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
@@ -52,7 +50,7 @@
                 }
                 catch (Exception ex)
                 {
-                    result = null;
+                    result.Clear();
                     Log.Logger.Error(ex, $"Unable to read {path}");
                 }
             }
@@ -72,21 +70,21 @@
             return File.Exists(GetFullPath());
         }
 
-        private static bool? AttributeToNullableBool(XAttribute attribute, bool? defaultValue)
+        private static bool? AttributeToNullableBool(XAttribute? attribute, bool? defaultValue)
         {
             return string.IsNullOrEmpty(attribute?.Value)
                 ? defaultValue
                 : Convert.ToBoolean(attribute.Value);
         }
 
-        private static bool AttributeToBool(XAttribute attribute, bool defaultValue)
+        private static bool AttributeToBool(XAttribute? attribute, bool defaultValue)
         {
             return attribute == null
                ? defaultValue
                : Convert.ToBoolean(attribute.Value);
         }
 
-        private static TimeSpan AttributeToDuration(XAttribute attribute)
+        private static TimeSpan AttributeToDuration(XAttribute? attribute)
         {
             return attribute == null
                ? TimeSpan.Zero

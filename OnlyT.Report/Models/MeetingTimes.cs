@@ -89,7 +89,7 @@
             });
         }
 
-        public void InsertTimerStop(string partDescription, bool isStudentTalk)
+        public void InsertTimerStop(string? partDescription, bool isStudentTalk)
         {
             InitMtgDate();
 

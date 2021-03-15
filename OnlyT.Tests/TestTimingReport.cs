@@ -29,8 +29,8 @@
             const int weekCount = 20;
             var dateOfFirstMeeting = GetNearestDayOnOrAfter(DateTime.Today.AddDays(-weekCount * 7), DayOfWeek.Sunday).Date;
 
-            MeetingTimes lastMtgTimes = null;
-            for (int wk = 0; wk < weekCount; ++wk)
+            MeetingTimes? lastMtgTimes = null;
+            for (var wk = 0; wk < weekCount; ++wk)
             {
                 var dateOfWeekendMtg = dateOfFirstMeeting.AddDays(wk * 7);
                 var dateOfMidweekMtg = dateOfWeekendMtg.AddDays(4);
@@ -39,6 +39,7 @@
                 lastMtgTimes = StoreMidweekData(wk, weekCount, dateOfMidweekMtg, dateTimeService);
             }
 
+            Assert.IsNotNull(lastMtgTimes);
             WriteReport(dateTimeService, new QueryWeekendService(), lastMtgTimes);
         }
 

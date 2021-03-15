@@ -15,7 +15,7 @@
                 .Callback(s => { NoGpu = s; }).SetDefault(false);
 
             p.Setup<string>("id")
-                .Callback(s => { OptionsIdentifier = s; }).SetDefault(null);
+                .Callback(s => { OptionsIdentifier = s; }).SetDefault(null!);
 
             p.Setup<bool>("nosettings")
                 .Callback(s => { NoSettings = s; }).SetDefault(false);
@@ -44,14 +44,14 @@
                     {
                         DateTimeOnLaunch = result;
                     }
-                }).SetDefault(null);
+                }).SetDefault(DateTime.UtcNow.ToString("yyyy-MM-dd:HH:mm"));
 
             p.Parse(Environment.GetCommandLineArgs());
         }
 
         public bool NoGpu { get; set; }
 
-        public string OptionsIdentifier { get; set; }
+        public string? OptionsIdentifier { get; set; }
 
         public bool NoSettings { get; set; }
 

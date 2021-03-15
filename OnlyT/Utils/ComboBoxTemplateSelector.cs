@@ -7,15 +7,15 @@ namespace OnlyT.Utils
 
     public class ComboBoxTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate SelectedItemTemplate { get; set; }
+        public DataTemplate? SelectedItemTemplate { get; set; }
 
-        public DataTemplateSelector SelectedItemTemplateSelector { get; set; }
+        public DataTemplateSelector? SelectedItemTemplateSelector { get; set; }
 
-        public DataTemplate DropdownItemsTemplate { get; set; }
+        public DataTemplate? DropdownItemsTemplate { get; set; }
 
-        public DataTemplateSelector DropdownItemsTemplateSelector { get; set; }
+        public DataTemplateSelector? DropdownItemsTemplateSelector { get; set; }
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             var parent = container;
 

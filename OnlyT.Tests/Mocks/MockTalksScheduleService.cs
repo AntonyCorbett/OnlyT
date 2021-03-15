@@ -11,7 +11,7 @@
         private readonly int _talkIdStart;
         private readonly int _numTalks;
 
-        private List<TalkScheduleItem> _talks;
+        private List<TalkScheduleItem>? _talks;
 
         public MockTalksScheduleService(int talkIdStart, int numTalks)
         {
@@ -41,13 +41,18 @@
             return _talks;
         }
 
-        public TalkScheduleItem GetTalkScheduleItem(int id)
+        public TalkScheduleItem? GetTalkScheduleItem(int id)
         {
-            return _talks.FirstOrDefault(t => t.Id.Equals(id));
+            return _talks?.FirstOrDefault(t => t.Id.Equals(id));
         }
 
         public int GetNext(int currentTalkId)
         {
+            if (_talks == null)
+            {
+                return 0;
+            }
+
             for (int n = 0; n < _talks.Count; ++n)
             {
                 if (_talks[n].Id.Equals(currentTalkId) && n < _talks.Count - 1)

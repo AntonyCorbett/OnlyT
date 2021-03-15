@@ -15,11 +15,11 @@
     public class TestAdaptiveTimer
     {
         private readonly DateTime _theDate = new DateTime(2020, 1, 6);
-        private List<TalkScheduleItem> _items;
-        private Mock<ITalkScheduleService> _scheduleService;
-        private MockDateTimeService _dateTimeService;
+        private List<TalkScheduleItem>? _items;
+        private Mock<ITalkScheduleService>? _scheduleService;
+        private MockDateTimeService? _dateTimeService;
         private DateTime _mtgStart;
-        private AdaptiveTimerService _adaptiveTimerService;
+        private AdaptiveTimerService? _adaptiveTimerService;
 
         [TestInitialize]
         public void InitializeTests()
@@ -65,48 +65,80 @@
         [TestMethod]
         public void TestPerfectSchedule()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestPerfectSchedule(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestLateSchedule()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestLateSchedule(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestLateSchedule2()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestLateSchedule2(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestEarlySchedule()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestEarlySchedule(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestManuallyAdjustedSchedule1()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestManuallyAdjustedSchedule1(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestManuallyAdjustedSchedule2()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestManuallyAdjustedSchedule2(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestManuallyAdjustedSchedule3()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestManuallyAdjustedSchedule3(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
         [TestMethod]
         public void TestManuallyAdjustedSchedule4()
         {
+            Assert.IsNotNull(_scheduleService);
+            Assert.IsNotNull(_dateTimeService);
+            Assert.IsNotNull(_adaptiveTimerService);
+
             TestManuallyAdjustedSchedule4(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
@@ -116,19 +148,22 @@
             DateTime mtgStart, 
             AdaptiveTimerService service)
         {
-            var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            TalkScheduleItem? living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting);
 
             var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
             Assert.IsNull(adaptedDuration1);
 
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting);
 
             var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
             Assert.IsNull(adaptedDuration2);
 
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
             dateTimeService.Set(mtgStart + concluding.StartOffsetIntoMeeting);
 
             var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
@@ -143,6 +178,7 @@
         {
             // 10 mins late starting this section.
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting + TimeSpan.FromMinutes(10));
 
             var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
@@ -151,6 +187,7 @@
             living1.AdaptedDuration = adaptedDuration1;
 
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
 
             var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
@@ -159,6 +196,7 @@
             study.AdaptedDuration = adaptedDuration2;
 
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
             dateTimeService.Set(mtgStart + concluding.StartOffsetIntoMeeting + TimeSpan.FromMinutes(1));
 
             var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
@@ -174,11 +212,14 @@
             AdaptiveTimerService service)
         {
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
 
             // 10 mins late starting the "Living" section.
-            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting + TimeSpan.FromMinutes(10));
+            dateTimeService.Set(mtgStart + living1!.StartOffsetIntoMeeting + TimeSpan.FromMinutes(10));
 
             var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
             Assert.IsNotNull(adaptedDuration1);
@@ -186,11 +227,11 @@
             living1.AdaptedDuration = adaptedDuration1;
 
             // at start of study we're only 5 mins behind
-            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
+            dateTimeService.Set(mtgStart + study!.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
 
             // remove 5 mins from study and add to conclusion.
             study.ModifiedDuration = study.OriginalDuration.Add(TimeSpan.FromMinutes(-5));
-            concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
+            concluding!.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
             
             // remaining meeting duration = 28 mins shared between study of 25 mins and conc of 8 mins (total 33 mins)
             // adapted duration of study = 21 mins 12 secs, conc = 6 mins 47 secs
@@ -216,6 +257,7 @@
         {
             // 10 mins early starting this section.
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting - TimeSpan.FromMinutes(10));
 
             var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
@@ -224,6 +266,7 @@
             living1.AdaptedDuration = adaptedDuration1;
 
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting - TimeSpan.FromMinutes(5));
 
             var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
@@ -232,6 +275,7 @@
             study.AdaptedDuration = adaptedDuration2;
 
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
             dateTimeService.Set(mtgStart + concluding.StartOffsetIntoMeeting - TimeSpan.FromMinutes(1));
 
             var adaptedDuration3 = service.CalculateAdaptedDuration(concluding.Id);
@@ -247,8 +291,11 @@
             AdaptiveTimerService service)
         {
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
 
             // add 3 mins to concluding and remove 3 mins from study
             concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(3));
@@ -277,8 +324,11 @@
             AdaptiveTimerService service)
         {
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
 
             // add 5 mins to Study and remove 3 mins from Living1 and 2 minutes from concluding
             study.ModifiedDuration = study.OriginalDuration.Add(TimeSpan.FromMinutes(5));
@@ -308,8 +358,11 @@
             AdaptiveTimerService service)
         {
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
 
             // add 5 mins to concluding but don't compensate elsewhere
             concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
@@ -343,8 +396,11 @@
             AdaptiveTimerService service)
         {
             var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            Assert.IsNotNull(living1);
             var study = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.CongBibleStudy);
+            Assert.IsNotNull(study);
             var concluding = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.ConcludingComments);
+            Assert.IsNotNull(concluding);
 
             // take 5 mins from study but don't compensate elsewhere
             study.ModifiedDuration = study.OriginalDuration.Add(-TimeSpan.FromMinutes(5));
@@ -373,6 +429,8 @@
 
         private List<TalkScheduleItem> GenerateTalkItems(DateTime theDate)
         {
+            Assert.IsNotNull(_dateTimeService);
+
             bool isJanuary2020OrLater = _dateTimeService.Now().Date >= new DateTime(2020, 1, 6);
             return TalkScheduleAuto.GetMidweekScheduleForTesting(theDate, isJanuary2020OrLater).ToList();
         }

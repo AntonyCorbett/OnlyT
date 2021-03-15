@@ -74,10 +74,10 @@
 
         </Button>
 
-        <ScrollViewer Grid.Row="1" Padding="10,0,10,10" 
+        <ScrollViewer Grid.Row="1" 
                       PanningMode="VerticalOnly"
                       VerticalScrollBarVisibility="Auto">
-            <WrapPanel Orientation="Horizontal">
+            <WrapPanel Orientation="Horizontal" Margin="10,0,10,10">
                 <GroupBox Style="{StaticResource GroupBoxStyle}" Header="{x:Static resx:Resources.MAIN_SECTION}">
                     <DockPanel>
                         <StackPanel Style="{StaticResource SettingsStackPanel}" DockPanel.Dock="Top">
@@ -422,7 +422,7 @@
                                   SelectedValue="{Binding CountdownDurationMins, Mode=TwoWay}"/>
 
                         <TextBox MinLines="6"
-                                 Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                  materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING_STARTS}"
                                  TextWrapping="Wrap"
                                  AcceptsTab="False"

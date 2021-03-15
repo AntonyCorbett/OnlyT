@@ -8,8 +8,14 @@
     /// </summary>
     public class ClockHourFormatItem
     {
-        public string Name { get; set; }
+        public ClockHourFormatItem(string name, ClockHourFormat format)
+        {
+            Name = name;
+            Format = format;
+        }
 
-        public ClockHourFormat Format { get; set; }
+        public string Name { get; }
+
+        public ClockHourFormat Format { get; }
     }
 }

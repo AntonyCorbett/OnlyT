@@ -64,17 +64,17 @@
             {
                 var apiCode = _optionsService.Options.ApiCode;
 
-                if (request.Url.Segments.Length < 2)
+                if (request.Url?.Segments.Length < 2)
                 {
                     throw new WebServerException(WebServerErrorCode.UriTooFewSegments);
                 }
 
-                if (request.Url.Segments.Length == 2)
+                if (request.Url?.Segments.Length == 2)
                 {
                     // segments: "/" "api/"
                     HandleApiVersionRequest(request, response);
                 }
-                else if (request.Url.Segments.Length > 3)
+                else if (request.Url?.Segments.Length > 3)
                 {
                     // segments: "/" "api/" "v1"
                     string apiVerStr = request.Url.Segments[2].TrimEnd('/').ToLower();

@@ -55,7 +55,7 @@ namespace OnlyT.Services.Options
             get
             {
                 Init();
-                return _options;
+                return _options!;
             }
         }
 
@@ -125,7 +125,7 @@ namespace OnlyT.Services.Options
 
         public bool IsWeekend(DateTime theDate)
         {
-            return _queryWeekendService.IsWeekend(theDate, _options.WeekendIncludesFriday);
+            return _queryWeekendService.IsWeekend(theDate, _options!.WeekendIncludesFriday);
         }
 
         public bool IsNowWeekend()
@@ -140,7 +140,7 @@ namespace OnlyT.Services.Options
         {
             try
             {
-                var newSignature = GetOptionsSignature(_options);
+                var newSignature = GetOptionsSignature(_options!);
                 if (_originalOptionsSignature != newSignature)
                 {
                     // changed...
@@ -169,10 +169,7 @@ namespace OnlyT.Services.Options
                         ReadOptions();
                     }
 
-                    if (_options == null)
-                    {
-                        _options = new Options();
-                    }
+                    _options ??= new Options();
 
                     // store the original settings so that we can determine if they have changed
                     // when we come to save them
@@ -190,7 +187,7 @@ namespace OnlyT.Services.Options
 
         private void SetCulture()
         {
-            var culture = _options.Culture;
+            var culture = _options!.Culture;
 
             if (string.IsNullOrEmpty(culture))
             {
@@ -226,21 +223,20 @@ namespace OnlyT.Services.Options
             }
             else
             {
-                using (var file = File.OpenText(_optionsFilePath))
+                using var file = File.OpenText(_optionsFilePath);
+
+                var serializer = new JsonSerializer();
+                _options = (Options?)serializer.Deserialize(file, typeof(Options));
+                if (_options != null)
                 {
-                    var serializer = new JsonSerializer();
-                    _options = (Options?)serializer.Deserialize(file, typeof(Options));
-                    if (_options != null)
-                    {
-                        SetMidWeekOrWeekend();
-                        ResetCircuitVisit();
+                    SetMidWeekOrWeekend();
+                    ResetCircuitVisit();
 
-                        _options.Sanitize();
+                    _options.Sanitize();
 
-                        CommandLineMonitorOverride();
+                    CommandLineMonitorOverride();
 
-                        SetCulture();
-                    }
+                    SetCulture();
                 }
             }
         }
@@ -259,7 +255,7 @@ namespace OnlyT.Services.Options
 
                 if (IsTimerMonitorSetByCommandLine)
                 {
-                    _options.TimerMonitorId = monitors[_commandLineService.TimerMonitorIndex - 1].MonitorId;
+                    _options!.TimerMonitorId = monitors[_commandLineService.TimerMonitorIndex - 1].MonitorId;
                     _options.MainMonitorIsWindowed = false;
                 }
 
@@ -269,7 +265,7 @@ namespace OnlyT.Services.Options
 
                 if (IsCountdownMonitorSetByCommandLine)
                 {
-                    _options.CountdownMonitorId = monitors[_commandLineService.CountdownMonitorIndex - 1].MonitorId;
+                    _options!.CountdownMonitorId = monitors[_commandLineService.CountdownMonitorIndex - 1].MonitorId;
                     _options.CountdownMonitorIsWindowed = false;
                 }
             }
@@ -279,14 +275,14 @@ namespace OnlyT.Services.Options
         {
             // when the settings are read we ignore this saved setting 
             // and reset to false...
-            _options.IsCircuitVisit = false;
+            _options!.IsCircuitVisit = false;
         }
 
         private void SetMidWeekOrWeekend()
         {
             // when the settings are read we ignore this saved setting 
             // and reset according to current day of week.
-            _options.MidWeekOrWeekend = IsNowWeekend()
+            _options!.MidWeekOrWeekend = IsNowWeekend()
                ? MidWeekOrWeekend.Weekend
                : MidWeekOrWeekend.MidWeek;
         }
@@ -301,12 +297,11 @@ namespace OnlyT.Services.Options
         {
             if (_options != null)
             {
-                using (StreamWriter file = File.CreateText(_optionsFilePath))
-                {
-                    JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented };
-                    serializer.Serialize(file, _options);
-                    _originalOptionsSignature = GetOptionsSignature(_options);
-                }
+                using StreamWriter file = File.CreateText(_optionsFilePath);
+
+                JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented };
+                serializer.Serialize(file, _options);
+                _originalOptionsSignature = GetOptionsSignature(_options);
             }
         }
 

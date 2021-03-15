@@ -26,7 +26,7 @@
 
         void InsertTimerStop();
 
-        MeetingTimes GetCurrentMeetingTimes();
+        MeetingTimes? GetCurrentMeetingTimes();
 
         bool ValidCurrentMeetingTimes();
 
@@ -36,6 +36,6 @@
 
         void DeleteAllData();
 
-        HistoricalMeetingTimes GetHistoricalMeetingTimes();
+        HistoricalMeetingTimes? GetHistoricalMeetingTimes();
     }
 }

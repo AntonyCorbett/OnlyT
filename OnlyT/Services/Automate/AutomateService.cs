@@ -173,9 +173,10 @@
                     var lastMinistryItemBeforeSong = GetLastMinistryItem();
                     var item = _scheduleService.GetTalkScheduleItem((int)talkType);
                     CheckItem(item);
+                    var secs = item!.IsStudentTalk ? 80 : 20;
                     return item == lastMinistryItemBeforeSong 
                         ? now.TimeOfDay.Add(GetAboutXMinutes(4)) 
-                        : now.TimeOfDay.Add(GetAboutXSeconds(item.IsStudentTalk ? 80 : 20));
+                        : now.TimeOfDay.Add(GetAboutXSeconds(secs));
 
                 case TalkTypesAutoMode.LivingPart1:
                 case TalkTypesAutoMode.LivingPart2:
@@ -187,10 +188,10 @@
             }
         }
 
-        private TalkScheduleItem GetLastMinistryItem()
+        private TalkScheduleItem? GetLastMinistryItem()
         {
             var item = _scheduleService.GetTalkScheduleItem((int)TalkTypesAutoMode.MinistryItem2);
-            if (item.OriginalDuration == TimeSpan.Zero)
+            if (item?.OriginalDuration == TimeSpan.Zero)
             {
                 return _scheduleService.GetTalkScheduleItem((int)TalkTypesAutoMode.MinistryItem1);
             }
@@ -211,7 +212,7 @@
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private void CheckItem(TalkScheduleItem item)
+        private void CheckItem(TalkScheduleItem? item)
         {
             if (item == null)
             {

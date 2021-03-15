@@ -14,17 +14,17 @@
     {
         private const int MeetingMinsOutOfRange = 20;
 
-        private readonly ICommandLineService _commandLineService;
+        private readonly ICommandLineService? _commandLineService;
         private readonly IDateTimeService _dateTimeService;
 
         private LocalData _localData;
-        private string _currentPartDescription;
+        private string? _currentPartDescription;
         private bool _currentPartIsStudentTalk;
         private MeetingTimes _mtgTimes;
         private bool _initialised;
         
         public LocalTimingDataStoreService(
-            ICommandLineService commandLineService,
+            ICommandLineService? commandLineService,
             IDateTimeService dateTimeService)
         {
             _commandLineService = commandLineService;
@@ -157,7 +157,7 @@
             }
         }
 
-        public MeetingTimes GetCurrentMeetingTimes()
+        public MeetingTimes? GetCurrentMeetingTimes()
         {
             try
             {
@@ -226,18 +226,13 @@
             }
         }
 
-        public HistoricalMeetingTimes GetHistoricalMeetingTimes()
+        public HistoricalMeetingTimes? GetHistoricalMeetingTimes()
         {
             try
             {
                 EnsureInitialised();
 
-                var now = DateTime.Now.Date;
-
-                if (_dateTimeService != null)
-                {
-                    now = _dateTimeService.Now().Date;
-                }
+                var now = _dateTimeService.Now().Date;
 
                 return _localData?.GetHistoricalTimingData(now);
             }

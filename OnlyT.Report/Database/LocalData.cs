@@ -67,7 +67,7 @@
             }
         }
 
-        public HistoricalMeetingTimes GetHistoricalTimingData(DateTime dt)
+        public HistoricalMeetingTimes? GetHistoricalTimingData(DateTime dt)
         {
             HistoricalMeetingTimes? result = null;
 
@@ -78,10 +78,7 @@
             {
                 if (t.MeetingPlannedEnd != default(TimeSpan) && t.MeetingActualEnd != default(TimeSpan))
                 {
-                    if (result == null)
-                    {
-                        result = new HistoricalMeetingTimes();
-                    }
+                    result ??= new HistoricalMeetingTimes();
 
                     var summary = new MeetingTimeSummary
                     {

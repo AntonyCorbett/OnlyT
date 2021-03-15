@@ -8,15 +8,14 @@
         public static IEnumerable<string> SplitIntoLines(this string text, bool ignoreEmptyLines = true)
         {
             var result = new List<string>();
-            using (StringReader sr = new StringReader(text))
+            using StringReader sr = new(text);
+
+            string? line;
+            while ((line = sr.ReadLine()) != null)
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                if (ignoreEmptyLines || !string.IsNullOrWhiteSpace(line))
                 {
-                    if (ignoreEmptyLines || !string.IsNullOrWhiteSpace(line))
-                    {
-                        result.Add(line);
-                    }
+                    result.Add(line);
                 }
             }
 

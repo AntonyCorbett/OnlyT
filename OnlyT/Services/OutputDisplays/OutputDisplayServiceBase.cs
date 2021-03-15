@@ -22,7 +22,7 @@ namespace OnlyT.Services.OutputDisplays
             _systemDpi = WindowPlacement.GetDpiSettings();
         }
 
-        protected void RelocateWindow(Window window, MonitorItem monitor)
+        protected void RelocateWindow(Window? window, MonitorItem? monitor)
         {
             if (monitor != null && window != null)
             {
@@ -35,7 +35,7 @@ namespace OnlyT.Services.OutputDisplays
             }
         }
 
-        protected void ShowWindowFullScreenOnTop(Window window, MonitorItem monitor)
+        protected void ShowWindowFullScreenOnTop(Window? window, MonitorItem? monitor)
         {
             if (monitor != null && window != null)
             {

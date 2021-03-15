@@ -64,7 +64,7 @@ namespace OnlyT.Models
             }
         }
 
-        public string OvertimeString
+        public string? OvertimeString
         {
             get
             {

@@ -803,7 +803,7 @@ namespace OnlyT.ViewModel
             set
             {
                 var val = value.Trim();
-                if (_optionsService.Options.ApiCode == null || !_optionsService.Options.ApiCode.Equals(val))
+                if (!_optionsService.Options.ApiCode.Equals(val))
                 {
                     _optionsService.Options.ApiCode = val;
                     OnPropertyChanged();
@@ -811,7 +811,7 @@ namespace OnlyT.ViewModel
             }
         }
         
-        public BitmapImage WebClockQrCode
+        public BitmapImage? WebClockQrCode
         {
             get
             {
@@ -863,7 +863,7 @@ namespace OnlyT.ViewModel
 
         public RelayCommand WebClockUrlLinkCommand { get; set; }
 
-        public void Activated(object state)
+        public void Activated(object? state)
         {
             // may be changed on operator page...
             OnPropertyChanged(nameof(IsCircuitVisit));
@@ -927,9 +927,9 @@ namespace OnlyT.ViewModel
         {
             return new[]
             {
-                new AdaptiveModeItem { Mode = AdaptiveMode.None, Name = Properties.Resources.ADAPTIVE_MODE_NONE },
-                new AdaptiveModeItem { Mode = AdaptiveMode.OneWay, Name = Properties.Resources.ADAPTIVE_MODE_ONE_WAY },
-                new AdaptiveModeItem { Mode = AdaptiveMode.TwoWay, Name = Properties.Resources.ADAPTIVE_MODE_TWO_WAY }
+                new AdaptiveModeItem(AdaptiveMode.None, Properties.Resources.ADAPTIVE_MODE_NONE),
+                new AdaptiveModeItem(AdaptiveMode.OneWay, Properties.Resources.ADAPTIVE_MODE_ONE_WAY),
+                new AdaptiveModeItem(AdaptiveMode.TwoWay, Properties.Resources.ADAPTIVE_MODE_TWO_WAY)
             };
         }
 
@@ -951,30 +951,18 @@ namespace OnlyT.ViewModel
 
             var result = new List<ClockHourFormatItem>
             {
-                new ClockHourFormatItem
-                {
-                    Name = Properties.Resources.CLOCK_FORMAT_12, Format = ClockHourFormat.Format12
-                },
-                new ClockHourFormatItem
-                {
-                    Name = Properties.Resources.CLOCK_FORMAT_12Z, Format = ClockHourFormat.Format12LeadingZero
-                }
+                new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12, ClockHourFormat.Format12),
+                new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12Z, ClockHourFormat.Format12LeadingZero)
             };
             
             if (cultureUsesAmPm)
             {
-                result.Add(new ClockHourFormatItem
-                    { Name = Properties.Resources.CLOCK_FORMAT_12AMPM, Format = ClockHourFormat.Format12AMPM });
-
-                result.Add(new ClockHourFormatItem
-                    { Name = Properties.Resources.CLOCK_FORMAT_12ZAMPM, Format = ClockHourFormat.Format12LeadingZeroAMPM });
+                result.Add(new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12AMPM, ClockHourFormat.Format12AMPM));
+                result.Add(new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12ZAMPM, ClockHourFormat.Format12LeadingZeroAMPM));
             }
 
-            result.Add(new ClockHourFormatItem
-                { Name = Properties.Resources.CLOCK_FORMAT_24, Format = ClockHourFormat.Format24 });
-
-            result.Add(new ClockHourFormatItem
-                { Name = Properties.Resources.CLOCK_FORMAT_24Z, Format = ClockHourFormat.Format24LeadingZero });
+            result.Add(new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_24, ClockHourFormat.Format24));
+            result.Add(new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_24Z, ClockHourFormat.Format24LeadingZero));
 
             return result.ToArray();
         }
@@ -998,8 +986,8 @@ namespace OnlyT.ViewModel
         {
             return new[]
             {
-                new AutoMeetingTime { Name = Properties.Resources.MIDWEEK, Id = MidWeekOrWeekend.MidWeek },
-                new AutoMeetingTime { Name = Properties.Resources.WEEKEND, Id = MidWeekOrWeekend.Weekend }
+                new AutoMeetingTime(MidWeekOrWeekend.MidWeek, Properties.Resources.MIDWEEK),
+                new AutoMeetingTime(MidWeekOrWeekend.Weekend, Properties.Resources.WEEKEND)
             };
         }
 
@@ -1007,9 +995,9 @@ namespace OnlyT.ViewModel
         {
             return new[]
             {
-                new CountdownElementsToShowItem { Elements = ElementsToShow.DialAndDigital, Name = Properties.Resources.DIAL_AND_DIGITAL },
-                new CountdownElementsToShowItem { Elements = ElementsToShow.Dial, Name = Properties.Resources.DIAL },
-                new CountdownElementsToShowItem { Elements = ElementsToShow.Digital, Name = Properties.Resources.DIGITAL }
+                new CountdownElementsToShowItem(ElementsToShow.DialAndDigital, Properties.Resources.DIAL_AND_DIGITAL),
+                new CountdownElementsToShowItem(ElementsToShow.Dial, Properties.Resources.DIAL),
+                new CountdownElementsToShowItem(ElementsToShow.Digital, Properties.Resources.DIGITAL)
             };
         }
 

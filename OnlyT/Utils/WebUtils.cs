@@ -6,11 +6,11 @@
 
     internal static class WebUtils
     {
-        public static string LoadWithUserAgent(string url)
+        public static string? LoadWithUserAgent(string url)
         {
             const int attempts = 3;
 
-            string result = null;
+            string? result = null;
 
             // multiple attempts to guard against transient exceptions.
             for (var n = 0; n < attempts && result == null; ++n)

@@ -70,7 +70,7 @@
         
         private static readonly double ClockRadius = 250;
         private static readonly double SectorRadius = 230;
-        private static readonly Point ClockOrigin = new Point(ClockRadius, ClockRadius);
+        private static readonly Point ClockOrigin = new(ClockRadius, ClockRadius);
         private static readonly TimeSpan TimerInterval = TimeSpan.FromMilliseconds(100);
         private static readonly TimeSpan AnimationTimerInterval = TimeSpan.FromMilliseconds(20);
         private static readonly double AngleTolerance = 0.75;
@@ -78,8 +78,8 @@
         private readonly DispatcherTimer _timer;
         private readonly DispatcherTimer _animationTimer;
 
-        private AnglesOfHands _animationTargetAngles;
-        private AnglesOfHands _animationCurrentAngles;
+        private AnglesOfHands? _animationTargetAngles;
+        private AnglesOfHands? _animationCurrentAngles;
 
         private double _hourHandDropShadowOpacity;
         private double _minuteHandDropShadowOpacity;
@@ -87,15 +87,15 @@
 
         private bool _elementsAvailable;
         private bool _showElapsedSector;
-        private Ellipse _outerDial;
-        private Ellipse _middleDial;
-        private Ellipse _centrePointDial;
-        private Line _minuteHand;
-        private Line _hourHand;
-        private Line _secondHand;
-        private Path _sectorPath1;
-        private Path _sectorPath2;
-        private Path _sectorPath3;
+        private Ellipse _outerDial = null!;
+        private Ellipse _middleDial = null!;
+        private Ellipse _centrePointDial = null!;
+        private Line _minuteHand = null!;
+        private Line _hourHand = null!;
+        private Line _secondHand = null!;
+        private Path _sectorPath1 = null!;
+        private Path _sectorPath2 = null!;
+        private Path _sectorPath3 = null!;
         private bool _digitalFormatLeadingZero;
         private bool _digitalFormat24Hours;
         private bool _digitalFormatAMPM;
@@ -126,7 +126,7 @@
             }
         }
 
-        public event EventHandler<DateTimeQueryEventArgs> QueryDateTimeEvent;
+        public event EventHandler<DateTimeQueryEventArgs>? QueryDateTimeEvent;
 
         public bool DigitalTimeFormat24Hours
         {
@@ -248,7 +248,7 @@
 
         private static void DurationSectorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var sector = (DurationSector)e.NewValue;
+            var sector = (DurationSector?)e.NewValue;
             var c = (ClockControl)d;
 
             if (sector == null)
@@ -264,7 +264,7 @@
                 {
                     // the first time we display the sector we delay it for aesthetics
                     // (so it doesn't appear just as the clock is fading out)
-                    Task.Delay(1000).ContinueWith(t => { c.Dispatcher?.Invoke(() => { DrawSector(c, sector); }); });
+                    Task.Delay(1000).ContinueWith(_ => { c.Dispatcher?.Invoke(() => { DrawSector(c, sector); }); });
                 }
                 else
                 {
@@ -365,7 +365,7 @@
             hand.RenderTransform = new RotateTransform(angle, ClockRadius, ClockRadius);
         }
 
-        private void TimerCallback(object sender, EventArgs eventArgs)
+        private void TimerCallback(object? sender, EventArgs eventArgs)
         {
             var now = GetNow();
             
@@ -379,11 +379,13 @@
 
         private string FormatTimeOfDayHoursAndMins(DateTime dt)
         {
+            int twelveHrFormatHours = dt.Hour > 12 
+                ? dt.Hour - 12
+                : dt.Hour;
+
             int hours = _digitalFormat24Hours 
                 ? dt.Hour 
-                : dt.Hour > 12 
-                    ? dt.Hour - 12 
-                    : dt.Hour;
+                : twelveHrFormatHours;
 
             var ampm = GetAmPmPostfix(dt);
 
@@ -441,9 +443,17 @@
             };
         }
 
-        private void AnimationCallback(object sender, EventArgs eventArgs)
+        private void AnimationCallback(object? sender, EventArgs eventArgs)
         {
-            ((DispatcherTimer)sender).Stop();
+            if (sender is DispatcherTimer timer)
+            {
+                timer.Stop();
+            }
+
+            if (_animationCurrentAngles == null || _animationTargetAngles == null)
+            {
+                return;
+            }
 
             _animationCurrentAngles.SecondsAngle = AnimateHand(
                 _secondHand, 
@@ -465,7 +475,10 @@
 
             if (AnimationShouldContinue())
             {
-                ((DispatcherTimer)sender).Start();
+                if (sender is DispatcherTimer theTimer)
+                {
+                    theTimer.Start();
+                }
             }
             else
             {
@@ -488,6 +501,11 @@
 
         private bool AnimationShouldContinue()
         {
+            if (_animationCurrentAngles == null || _animationTargetAngles == null)
+            {
+                return false;
+            }
+
             return
                Math.Abs(_animationCurrentAngles.SecondsAngle - _animationTargetAngles.SecondsAngle) > AngleTolerance ||
                Math.Abs(_animationCurrentAngles.MinutesAngle - _animationTargetAngles.MinutesAngle) > AngleTolerance ||
@@ -496,7 +514,7 @@
 
         private TextBlock CreateHourNumberTextBlock(int hour)
         {
-            return new TextBlock
+            return new()
             {
                 Text = hour.ToString(),
                 FontSize = 36,
@@ -540,7 +558,8 @@
             for (var n = 0; n < 4; ++n)
             {
                 var line = CreateMajorHourMarker();
-                line.RenderTransform = new RotateTransform(angle += 90, ClockRadius, ClockRadius);
+                angle += 90;
+                line.RenderTransform = new RotateTransform(angle, ClockRadius, ClockRadius);
                 canvas.Children.Add(line);
             }
 
@@ -571,7 +590,7 @@
 
         private Line CreateMajorHourMarker()
         {
-            return new Line
+            return new()
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = 7,
@@ -584,7 +603,7 @@
 
         private Line CreateMinorHourMarker()
         {
-            return new Line
+            return new()
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = 3,
@@ -597,7 +616,7 @@
 
         private Line CreateMinuteMarker()
         {
-            return new Line
+            return new()
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = 1,
@@ -610,9 +629,12 @@
 
         private void GetElementRefs()
         {
-            _outerDial = GetTemplateChild("OuterDial") as Ellipse;
-            _middleDial = GetTemplateChild("MiddleDial") as Ellipse;
-            _centrePointDial = GetTemplateChild("CentrePointDial") as Ellipse;
+            _outerDial = GetTemplateChild("OuterDial") as Ellipse ??
+                         throw new NotSupportedException("OuterDial does not exist!");
+            _middleDial = GetTemplateChild("MiddleDial") as Ellipse ??
+                          throw new NotSupportedException("MiddleDial does not exist!");
+            _centrePointDial = GetTemplateChild("CentrePointDial") as Ellipse ??
+                               throw new NotSupportedException("CentrePointDial does not exist!");
 
             if (GetTemplateChild("MinuteHand") is Line line1)
             {
@@ -624,6 +646,10 @@
                     ShadowDepth = 3,
                     Opacity = _minuteHandDropShadowOpacity
                 };
+            }
+            else
+            {
+                throw new NotSupportedException("MinuteHand does not exist!");
             }
 
             if (GetTemplateChild("HourHand") is Line line2)
@@ -637,6 +663,10 @@
                     Opacity = _hourHandDropShadowOpacity
                 };
             }
+            else
+            {
+                throw new NotSupportedException("HourHand does not exist!");
+            }
 
             if (GetTemplateChild("SecondHand") is Line line3)
             {
@@ -649,22 +679,38 @@
                     Opacity = _secondHandDropShadowOpacity
                 };
             }
-
+            else
+            {
+                throw new NotSupportedException("SecondHand does not exist!");
+            }
+            
             if (GetTemplateChild("SectorPath1") is Path sectorPath1)
             {
                 _sectorPath1 = sectorPath1;
+            }
+            else
+            {
+                throw new NotSupportedException("SectorPath1 does not exist!");
             }
 
             if (GetTemplateChild("SectorPath2") is Path sectorPath2)
             {
                 _sectorPath2 = sectorPath2;
             }
-
+            else
+            {
+                throw new NotSupportedException("SectorPath2 does not exist!");
+            }
+            
             if (GetTemplateChild("SectorPath3") is Path sectorPath3)
             {
                 _sectorPath3 = sectorPath3;
             }
-
+            else
+            {
+                throw new NotSupportedException("SectorPath3 does not exist!");
+            }
+            
             _elementsAvailable = true;
         }
 

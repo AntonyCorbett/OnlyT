@@ -27,7 +27,7 @@
                 EnumDisplayNativeMethods.DISPLAY_DEVICE device1 = default(EnumDisplayNativeMethods.DISPLAY_DEVICE);
                 device1.cb = Marshal.SizeOf(device1);
 
-                bool rv = EnumDisplayNativeMethods.EnumDisplayDevices(null, id, ref device1, 0);
+                bool rv = EnumDisplayNativeMethods.EnumDisplayDevices(null!, id, ref device1, 0);
                 Log.Logger.Information($"EnumDisplayDevices retval = {rv}");
 
                 if (!rv)

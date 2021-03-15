@@ -9,7 +9,7 @@
         private static readonly Brush DurationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
         private static readonly Brush DurationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
 
-        public static DurationStringProperties Get(AdaptiveMode adaptiveMode, TalkScheduleItem talk)
+        public static DurationStringProperties Get(AdaptiveMode adaptiveMode, TalkScheduleItem? talk)
         {
             var result = new DurationStringProperties();
 

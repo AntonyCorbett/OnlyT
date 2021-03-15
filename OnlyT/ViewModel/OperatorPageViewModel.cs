@@ -1,10 +1,9 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
-using Microsoft.Toolkit.Mvvm.Messaging;
-
-namespace OnlyT.ViewModel
+﻿namespace OnlyT.ViewModel
 {
     // ReSharper disable CatchAllClause
+    using Microsoft.Toolkit.Mvvm.ComponentModel;
+    using Microsoft.Toolkit.Mvvm.Input;
+    using Microsoft.Toolkit.Mvvm.Messaging;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -424,7 +423,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public void Activated(object state)
+        public void Activated(object? state)
         {
             Log.Logger.Debug("Operator page activated");
 
@@ -480,9 +479,13 @@ namespace OnlyT.ViewModel
         {
             if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
             {
-                Log.Logger.Debug("Storing timer start data");
-
                 var talk = GetCurrentTalk();
+                if (talk == null)
+                {
+                    return;
+                }
+
+                Log.Logger.Debug("Storing timer start data");
 
                 if (IsFirstTalk(talk.Id))
                 {
@@ -629,7 +632,7 @@ namespace OnlyT.ViewModel
             RaiseCanExecuteIncrementDecrementChanged();
         }
         
-        private void RefreshCountUpFlag(TalkScheduleItem talk)
+        private void RefreshCountUpFlag(TalkScheduleItem? talk)
         {
             _countUp = talk?.CountUp ?? _optionsService.Options.CountUp;
             OnPropertyChanged(nameof(CountUpOrDownImageData));
@@ -637,12 +640,12 @@ namespace OnlyT.ViewModel
             OnPropertyChanged(nameof(CurrentTimerValueString));
         }
 
-        private TalkScheduleItem GetCurrentTalk()
+        private TalkScheduleItem? GetCurrentTalk()
         {
             return _scheduleService.GetTalkScheduleItem(TalkId);
         }
 
-        private int GetPlannedSecondsFromTalkSchedule(TalkScheduleItem talk)
+        private int GetPlannedSecondsFromTalkSchedule(TalkScheduleItem? talk)
         {
             return talk?.GetPlannedDurationSeconds() ?? 0;
         }
@@ -667,7 +670,7 @@ namespace OnlyT.ViewModel
             }
         }
         
-        private void SetDurationStringAttributes(TalkScheduleItem talk)
+        private void SetDurationStringAttributes(TalkScheduleItem? talk)
         {
             var properties = DurationStringGeneration.Get(_optionsService.GetAdaptiveMode(), talk);
 
@@ -846,12 +849,12 @@ namespace OnlyT.ViewModel
             return talks != null && talks.Any() && talkId == talks.First().Id;
         }
 
-        private TalkScheduleItem GetPreviousTalk(int talkId)
+        private TalkScheduleItem? GetPreviousTalk(int talkId)
         {
             var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
             if (talks != null)
             {
-                TalkScheduleItem prevTalk = null;
+                TalkScheduleItem? prevTalk = null;
                 foreach (var talk in talks)
                 {
                     if (talk.Id == talkId)
@@ -880,6 +883,12 @@ namespace OnlyT.ViewModel
             IsOvertime = false;
 
             var talk = GetCurrentTalk();
+            if (talk == null)
+            {
+                Log.Logger.Warning("Could not get current talk!");
+                return;
+            }
+
             var msg = new TimerStopMessage(
                 TalkId, 
                 _timerService.CurrentSecondsElapsed, 

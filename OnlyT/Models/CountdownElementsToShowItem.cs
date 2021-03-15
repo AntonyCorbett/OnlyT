@@ -4,8 +4,14 @@
 
     public class CountdownElementsToShowItem
     {
-        public ElementsToShow Elements { get; set; }
+        public CountdownElementsToShowItem(ElementsToShow elements, string name)
+        {
+            Elements = elements;
+            Name = name;
+        }
 
-        public string Name { get; set; }
+        public ElementsToShow Elements { get; }
+
+        public string Name { get; }
     }
 }

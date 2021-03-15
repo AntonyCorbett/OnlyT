@@ -89,7 +89,7 @@
         
         protected void CheckSegmentLength(HttpListenerRequest request, params int[] lengths)
         {
-            if (!lengths.Contains(request.Url.Segments.Length))
+            if (!lengths.Contains(request.Url?.Segments.Length ?? int.MaxValue))
             {
                 throw new WebServerException(WebServerErrorCode.UriTooManySegments);
             }

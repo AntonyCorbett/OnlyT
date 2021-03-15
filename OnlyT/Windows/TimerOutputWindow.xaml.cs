@@ -139,8 +139,8 @@ namespace OnlyT.Windows
             Storyboard.SetTargetProperty(fadeOutClock, new PropertyPath(OpacityProperty));
             fadeOutClock.BeginTime = TimeSpan.Zero;
 
-            GridLengthAnimation rowHeightAdjust1 = null;
-            GridLengthAnimation rowHeightAdjust2 = null;
+            GridLengthAnimation? rowHeightAdjust1 = null;
+            GridLengthAnimation? rowHeightAdjust2 = null;
 
             var model = (TimerOutputWindowViewModel)DataContext;
             switch (model.FullScreenClockMode)
