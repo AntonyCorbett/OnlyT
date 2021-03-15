@@ -943,7 +943,13 @@
 
         private void DisplayNewVersionPage()
         {
-            Process.Start(VersionDetection.LatestReleaseUrl);
+            var psi = new ProcessStartInfo
+            {
+                FileName = VersionDetection.LatestReleaseUrl,
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
         }
 
         private void CountUpToggle()
@@ -961,7 +967,13 @@
 
         private void LaunchHelp()
         {
-            Process.Start(@"https://github.com/AntonyCorbett/OnlyT/wiki");
+            var psi = new ProcessStartInfo
+            {
+                FileName = @"https://github.com/AntonyCorbett/OnlyT/wiki",
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
         }
 
         private void BellToggle()
@@ -1091,7 +1103,13 @@
         {
             if (File.Exists(pdf))
             {
-                Process.Start(pdf);
+                var psi = new ProcessStartInfo
+                {
+                    FileName = pdf,
+                    UseShellExecute = true
+                };
+
+                Process.Start(psi);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using System.Diagnostics;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
 
@@ -881,7 +882,13 @@ namespace OnlyT.ViewModel
 
         private void OpenWebClockLink()
         {
-            System.Diagnostics.Process.Start(WebClockUrl);
+            var psi = new ProcessStartInfo
+            {
+                FileName = WebClockUrl,
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
         }
 
         private void ReserveAndOpenPort()

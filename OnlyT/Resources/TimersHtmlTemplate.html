@@ -314,6 +314,7 @@
                     return "";
 
                 case "Timer":
+                {
                     onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
@@ -330,6 +331,7 @@
                     return currentlyCountingUp
                         ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
                         : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+                }
 
                 default:
                     //
