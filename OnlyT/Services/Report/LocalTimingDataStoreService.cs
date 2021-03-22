@@ -266,7 +266,7 @@
             try
             {
                 string folder = FileUtils.GetTimingReportsDatabaseFolder(_commandLineService?.OptionsIdentifier);
-                string dbFilePath = Path.Combine(folder, "TimingData.db");
+                string dbFilePath = Path.Combine(folder, "TimingDataV2.db");
 
                 _localData = new LocalData(dbFilePath);
                 _mtgTimes = new MeetingTimes(_dateTimeService);

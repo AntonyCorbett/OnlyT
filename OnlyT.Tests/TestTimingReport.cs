@@ -1,4 +1,6 @@
-﻿namespace OnlyT.Tests
+﻿using System.Threading.Tasks;
+
+namespace OnlyT.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -22,7 +24,7 @@
         private readonly bool _useRandomTimes = true;
 
         [TestMethod]
-        public void TestReportGeneration()
+        public async Task TestReportGeneration()
         {
             var dateTimeService = new DateTimeServiceForTests();
 
@@ -36,7 +38,7 @@
                 var dateOfMidweekMtg = dateOfWeekendMtg.AddDays(4);
 
                 StoreWeekendData(wk, dateOfWeekendMtg, dateTimeService);
-                lastMtgTimes = StoreMidweekData(wk, weekCount, dateOfMidweekMtg, dateTimeService);
+                lastMtgTimes = await StoreMidweekDataAsync(wk, weekCount, dateOfMidweekMtg, dateTimeService);
             }
 
             Assert.IsNotNull(lastMtgTimes);
@@ -102,7 +104,7 @@
             service.Save();
         }
         
-        private MeetingTimes? StoreMidweekData(
+        private async Task<MeetingTimes?> StoreMidweekDataAsync(
             int week,
             int weekCount,
             DateTime dateOfMidweekMtg,
@@ -154,12 +156,12 @@
 
             if (week == weekCount - 1)
             {
-                var file = TimingReportGeneration.ExecuteAsync(
+                var file = await TimingReportGeneration.ExecuteAsync(
                     service, 
                     dateTimeService, 
                     new QueryWeekendService(), 
                     false,
-                    null).Result;
+                    null);
 
                 Assert.IsNotNull(file);
             }
