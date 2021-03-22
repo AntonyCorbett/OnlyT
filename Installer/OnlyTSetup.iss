@@ -40,33 +40,49 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "OnlyT\bin\Release\net5.0-windows\bell.mp3"; DestDir: "{app}"; Flags: ignoreversion
-//Source: "OnlyT\bin\Release\net5.0-windows\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\FluentCommandLineParser.dll"; DestDir: "{app}"; Flags: ignoreversion
-//Source: "OnlyT\bin\Release\net5.0-windows\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
-//Source: "OnlyT\bin\Release\net5.0-windows\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
-//Source: "OnlyT\bin\Release\net5.0-windows\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\net5.0-windows\icon4.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\LiteDB.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\MaterialDesignColors.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\MaterialDesignThemes.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion   
+
+Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion   
+Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Extensions.DependencyInjection.dll"; DestDir: "{app}"; Flags: ignoreversion   
+Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Toolkit.Mvvm.dll"; DestDir: "{app}"; Flags: ignoreversion   
+Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion   
+
 Source: "OnlyT\bin\Release\net5.0-windows\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\net5.0-windows\NAudio.Lame.dll"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "OnlyT\bin\Release\net5.0-windows\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\NUglify.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.CountdownTimer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.dll.config"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.Report.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "OnlyT\bin\Release\net5.0-windows\PdfSharpCore.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\PdfSharpCore.Charting.dll"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.dll.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "OnlyT\bin\Release\net5.0-windows\QRCoder.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\ZKWeb.System.Drawing.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "OnlyT\bin\Release\net5.0-windows\SixLabors.Fonts.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "OnlyT\bin\Release\net5.0-windows\SixLabors.ImageSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "OnlyT\bin\Release\net5.0-windows\ca-ES\*.dll"; DestDir: "{app}\ca-ES"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\cs-CZ\*.dll"; DestDir: "{app}\cs-CZ"; Flags: ignoreversion
 Source: "OnlyT\bin\Release\net5.0-windows\de-DE\*.dll"; DestDir: "{app}\de-DE"; Flags: ignoreversion
