@@ -37,7 +37,7 @@ namespace OnlyT.Services.OutputDisplays
 
         protected void ShowWindowFullScreenOnTop(Window? window, MonitorItem? monitor)
         {
-            if (monitor != null && window != null)
+            if (monitor?.Monitor != null && window != null)
             {
                 LocateWindowAtOrigin(window, monitor.Monitor);
                 

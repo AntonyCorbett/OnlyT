@@ -32,7 +32,7 @@
             var hwnd = new WindowInteropHelper(AssociatedObject).Handle;
 #pragma warning restore CA1416 // Validate platform compatibility
             
-            NativeMethods.SetWindowLong(hwnd, GwlStyle, NativeMethods.GetWindowLong(hwnd, GwlStyle) & ~WsSysMenu);
+            _ = NativeMethods.SetWindowLong(hwnd, GwlStyle, NativeMethods.GetWindowLong(hwnd, GwlStyle) & ~WsSysMenu);
         }
     }
 }

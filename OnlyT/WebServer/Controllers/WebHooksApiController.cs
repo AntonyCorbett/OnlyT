@@ -4,7 +4,7 @@
 
     internal class WebHooksApiController : BaseApiController
     {
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+        public static void Handler(HttpListenerRequest request)
         {
             CheckMethodGetPostOrDelete(request);
         }

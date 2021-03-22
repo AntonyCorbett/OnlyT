@@ -146,7 +146,7 @@ namespace OnlyT.Services.Timer
             return result;
         }
 
-        private TimeSpan GetTimeForChangeover(TalkScheduleItem item1, TalkScheduleItem item2)
+        private static TimeSpan GetTimeForChangeover(TalkScheduleItem item1, TalkScheduleItem item2)
         {
             var endItem1 = item1.StartOffsetIntoMeeting.Add(item1.OriginalDuration);
             return item2.StartOffsetIntoMeeting - endItem1;
@@ -216,7 +216,7 @@ namespace OnlyT.Services.Timer
             }
         }
 
-        private bool IsDeviationSignificant(TimeSpan deviation)
+        private static bool IsDeviationSignificant(TimeSpan deviation)
         {
             return Math.Abs(deviation.TotalSeconds) > SmallestDeviationSecs
                    && Math.Abs(deviation.TotalMinutes) <= LargestDeviationMinutes;
@@ -234,12 +234,9 @@ namespace OnlyT.Services.Timer
                     started = true;
                 }
 
-                if (started)
+                if (started && item.AllowAdaptive)
                 {
-                    if (item.AllowAdaptive)
-                    {
-                        result = result.Add(item.PlannedDuration);
-                    }
+                    result = result.Add(item.PlannedDuration);
                 }
             }
 
@@ -271,7 +268,7 @@ namespace OnlyT.Services.Timer
             return result;
         }
 
-        private DateTime GetNearest15MinsBefore(DateTime dateTimeBase)
+        private static DateTime GetNearest15MinsBefore(DateTime dateTimeBase)
         {
             DateTime result = dateTimeBase.Date;
             if (dateTimeBase.Minute > 45)

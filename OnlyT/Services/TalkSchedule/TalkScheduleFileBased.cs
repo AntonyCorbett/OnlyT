@@ -30,14 +30,15 @@
                     if (items != null)
                     {
                         int talkId = StartId;
+
                         foreach (XElement elem in items.Elements("item"))
                         {
-                            result.Add(new TalkScheduleItem
+                            var name = (string?) elem.Attribute("name") ?? $"Unknown name {talkId}";
+                            var sectionNameInternal = (string?) elem.Attribute("section") ?? $"Unknown section {talkId}";
+                            var sectionNameLocalised = (string?) elem.Attribute("section") ?? $"Unknown section {talkId}";
+
+                            result.Add(new TalkScheduleItem(talkId, name, sectionNameInternal, sectionNameLocalised)
                             {
-                                Id = talkId++,
-                                Name = (string?)elem.Attribute("name") ?? $"Unknown name {talkId}",
-                                MeetingSectionNameInternal = (string?)elem.Attribute("section") ?? $"Unknown section {talkId}",
-                                MeetingSectionNameLocalised = (string?)elem.Attribute("section") ?? $"Unknown section {talkId}",
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
@@ -45,6 +46,8 @@
                                 AutoBell = autoBell,
                                 PersistFinalTimerValue = AttributeToBool(elem.Attribute("persist"), false)
                             });
+
+                            ++talkId;
                         }
                     }
                 }
@@ -93,8 +96,9 @@
 
         private static TimeSpan StringToTimeSpan(string s)
         {
-            TimeSpan.TryParse(s, out var result);
-            return result;
+            return TimeSpan.TryParse(s, out var result) 
+                ? result 
+                : default;
         }
     }
 }

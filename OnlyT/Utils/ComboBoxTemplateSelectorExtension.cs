@@ -8,17 +8,17 @@ namespace OnlyT.Utils
 
     public class ComboBoxTemplateSelectorExtension : MarkupExtension
     {
-        public DataTemplate SelectedItemTemplate { get; set; }
+        public DataTemplate? SelectedItemTemplate { get; set; }
 
-        public DataTemplateSelector SelectedItemTemplateSelector { get; set; }
+        public DataTemplateSelector? SelectedItemTemplateSelector { get; set; }
 
-        public DataTemplate DropdownItemsTemplate { get; set; }
+        public DataTemplate? DropdownItemsTemplate { get; set; }
 
-        public DataTemplateSelector DropdownItemsTemplateSelector { get; set; }
+        public DataTemplateSelector? DropdownItemsTemplateSelector { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return new ComboBoxTemplateSelector()
+            return new ComboBoxTemplateSelector
             {
                 SelectedItemTemplate = SelectedItemTemplate,
                 SelectedItemTemplateSelector = SelectedItemTemplateSelector,

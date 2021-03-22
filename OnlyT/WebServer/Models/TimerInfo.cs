@@ -16,19 +16,19 @@
         /// The talk title (as it appears in the UI).
         /// </summary>
         [JsonProperty(PropertyName = "talkTitle")]
-        public string TalkTitle { get; set; }
+        public string? TalkTitle { get; set; }
 
         /// <summary>
         /// The section of the meeting (internal name).
         /// </summary>
         [JsonProperty(PropertyName = "meetingSectionNameInternal")]
-        public string MeetingSectionNameInternal { get; set; }
+        public string? MeetingSectionNameInternal { get; set; }
 
         /// <summary>
         /// The section of the meeting (localised name).
         /// </summary>
         [JsonProperty(PropertyName = "meetingSectionNameLocalised")]
-        public string MeetingSectionNameLocalised { get; set; }
+        public string? MeetingSectionNameLocalised { get; set; }
 
         /// <summary>
         /// The original duration of the talk (before any manual or adaptive modifications).

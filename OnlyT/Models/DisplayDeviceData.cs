@@ -7,12 +7,12 @@
     /// </summary>
     public class DisplayDeviceData
     {
-        public string Name { get; set; }
+        public string Name { get; init; } = null!;
 
-        public string DeviceId { get; set; }
+        public string DeviceId { get; init; } = null!;
 
-        public string DeviceString { get; set; }
+        public string DeviceString { get; init; } = null!;
 
-        public string DeviceKey { get; set; }
+        public string DeviceKey { get; init; } = null!;
     }
 }

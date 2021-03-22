@@ -7,6 +7,6 @@
     {
         IEnumerable<MonitorItem> GetSystemMonitors();
 
-        MonitorItem? GetMonitorItem(string monitorId);
+        MonitorItem? GetMonitorItem(string? monitorId);
     }
 }

@@ -8,8 +8,12 @@
     using ErrorHandling;
     using Newtonsoft.Json;
 
-    internal class BaseApiController
+    internal abstract class BaseApiController
     {
+        protected BaseApiController()
+        {
+        }
+
         public static void WriteResponse(HttpListenerResponse response, object info)
         {
             if (info == null)
@@ -22,17 +26,15 @@
                 response.ContentType = "application/json";
                 response.ContentEncoding = Encoding.UTF8;
 
-                // allow crosss-domain access (so that clients can use JS in a browser)
+                // allow cross-domain access (so that clients can use JS in a browser)
                 response.Headers.Add("Access-Control-Allow-Origin: *");
 
                 string jsonStr = JsonConvert.SerializeObject(info);
                 byte[] buffer = Encoding.UTF8.GetBytes(jsonStr);
 
                 response.ContentLength64 = buffer.Length;
-                using (System.IO.Stream output = response.OutputStream)
-                {
-                    output.Write(buffer, 0, buffer.Length);
-                }
+                using System.IO.Stream output = response.OutputStream;
+                output.Write(buffer, 0, buffer.Length);
             }
             catch (Exception)
             {
@@ -40,22 +42,22 @@
             }
         }
 
-        protected bool IsMethodGet(HttpListenerRequest request)
+        protected static bool IsMethodGet(HttpListenerRequest request)
         {
             return IsMethod(request, "GET");
         }
 
-        protected bool IsMethodPost(HttpListenerRequest request)
+        protected static bool IsMethodPost(HttpListenerRequest request)
         {
             return IsMethod(request, "POST");
         }
 
-        protected bool IsMethodDelete(HttpListenerRequest request)
+        protected static bool IsMethodDelete(HttpListenerRequest request)
         {
             return IsMethod(request, "DELETE");
         }
 
-        protected void CheckMethodGetOrPost(HttpListenerRequest request)
+        protected static void CheckMethodGetOrPost(HttpListenerRequest request)
         {
             if (!IsMethodGet(request) && !IsMethodPost(request))
             {
@@ -63,7 +65,7 @@
             }
         }
 
-        protected void CheckMethodGetPostOrDelete(HttpListenerRequest request)
+        protected static void CheckMethodGetPostOrDelete(HttpListenerRequest request)
         {
             if (!IsMethodGet(request) && !IsMethodPost(request) && !IsMethodDelete(request))
             {
@@ -71,7 +73,7 @@
             }
         }
 
-        protected void CheckMethodGet(HttpListenerRequest request)
+        protected static void CheckMethodGet(HttpListenerRequest request)
         {
             if (!IsMethodGet(request))
             {
@@ -79,7 +81,7 @@
             }
         }
 
-        protected void CheckMethodPost(HttpListenerRequest request)
+        protected static void CheckMethodPost(HttpListenerRequest request)
         {
             if (!IsMethodPost(request))
             {
@@ -87,7 +89,7 @@
             }
         }
         
-        protected void CheckSegmentLength(HttpListenerRequest request, params int[] lengths)
+        protected static void CheckSegmentLength(HttpListenerRequest request, params int[] lengths)
         {
             if (!lengths.Contains(request.Url?.Segments.Length ?? int.MaxValue))
             {
@@ -95,7 +97,7 @@
             }
         }
 
-        private bool IsMethod(HttpListenerRequest request, string methodName)
+        private static bool IsMethod(HttpListenerRequest request, string methodName)
         {
             return request.HttpMethod.Equals(methodName, StringComparison.OrdinalIgnoreCase);
         }

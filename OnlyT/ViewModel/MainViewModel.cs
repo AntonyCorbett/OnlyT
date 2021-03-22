@@ -34,7 +34,7 @@ namespace OnlyT.ViewModel
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MainViewModel : ObservableObject
     {
-        private readonly Dictionary<string, FrameworkElement> _pages = new Dictionary<string, FrameworkElement>();
+        private readonly Dictionary<string, FrameworkElement> _pages = new();
         private readonly IOptionsService _optionsService;
         private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
         private readonly ITalkTimerService _timerService;
@@ -44,8 +44,8 @@ namespace OnlyT.ViewModel
         private readonly ICountdownOutputDisplayService _countdownDisplayService;
         private readonly IHttpServer _httpServer;
         private readonly ISnackbarService _snackbarService;
-        private DispatcherTimer _heartbeatTimer;
-        private FrameworkElement _currentPage;
+        private DispatcherTimer _heartbeatTimer = null!;
+        private FrameworkElement? _currentPage;
         private DateTime _lastRefreshedSchedule = DateTime.MinValue;
 
         public MainViewModel(
@@ -101,7 +101,7 @@ namespace OnlyT.ViewModel
 
         public ISnackbarMessageQueue TheSnackbarMessageQueue => _snackbarService.TheSnackbarMessageQueue;
 
-        public FrameworkElement CurrentPage
+        public FrameworkElement? CurrentPage
         {
             get => _currentPage;
             set
@@ -119,7 +119,7 @@ namespace OnlyT.ViewModel
             _timerOutputDisplayService.IsWindowVisible() ||
             _countdownDisplayService.IsWindowVisible();
 
-        public string CurrentPageName { get; private set; }
+        public string? CurrentPageName { get; private set; }
 
         private bool CountDownActive => _countdownDisplayService.IsCountingDown;
 
@@ -176,14 +176,14 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private void OnRequestForTimerData(object sender, TimerInfoEventArgs timerData)
+        private void OnRequestForTimerData(object? sender, TimerInfoEventArgs timerData)
         {
             // we received a web request for the timer clock info...
             var info = _timerService.GetClockRequestInfo();
 
             timerData.Use24HrFormat = _optionsService.Use24HrClockFormat();
 
-            if (info == null || !info.IsRunning)
+            if (!info.IsRunning)
             {
                 timerData.Mode = ClockServerMode.TimeOfDay;
             }
@@ -331,7 +331,7 @@ namespace OnlyT.ViewModel
             _heartbeatTimer.Start();
         }
 
-        private void HeartbeatTimerTick(object sender, EventArgs e)
+        private void HeartbeatTimerTick(object? sender, EventArgs e)
         {
             _heartbeatTimer.Stop();
             try
@@ -487,7 +487,7 @@ namespace OnlyT.ViewModel
             return _optionsService.Options.TimerMonitorId == _optionsService.Options.CountdownMonitorId;
         }
 
-        private bool ForceSoftwareRendering()
+        private static bool ForceSoftwareRendering()
         {
             // https://blogs.msdn.microsoft.com/jgoldb/2010/06/22/software-rendering-usage-in-wpf/
             // renderingTier values:

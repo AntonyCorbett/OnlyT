@@ -84,7 +84,7 @@ namespace OnlyT.Services.Bell
             return Path.Combine(folder, BellFileName);
         }
 
-        private void HandlePlaybackStopped(object sender, StoppedEventArgs e)
+        private void HandlePlaybackStopped(object? sender, StoppedEventArgs e)
         {
             ClearUp();
             IsPlaying = false;

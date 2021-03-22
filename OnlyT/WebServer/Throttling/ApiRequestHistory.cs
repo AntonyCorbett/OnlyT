@@ -34,30 +34,21 @@
             }
         }
 
-        private long GetMinCallingInterval(ApiRequestType requestType)
+        private static long GetMinCallingInterval(ApiRequestType requestType)
         {
-            switch (requestType)
+            return requestType switch
             {
-                case ApiRequestType.Timer:
-                    return 2000;
-
-                case ApiRequestType.TimerControlStart:
-                case ApiRequestType.TimerControlStop:
-                    return 500;
-
-                case ApiRequestType.ClockData:
-                    return 500;
-
-                default:
-                // ReSharper disable RedundantCaseLabel
-                case ApiRequestType.Version:
-                case ApiRequestType.ClockPage:
-                case ApiRequestType.Bell:
-                case ApiRequestType.DateTime:
-                case ApiRequestType.System:
-                // ReSharper restore RedundantCaseLabel
-                    return 1000;
-            }
+                ApiRequestType.Timer => 2000,
+                ApiRequestType.TimerControlStart => 500,
+                ApiRequestType.TimerControlStop => 500,
+                ApiRequestType.ClockData => 500,
+                ApiRequestType.Version => 1000,
+                ApiRequestType.ClockPage => 1000,
+                ApiRequestType.Bell => 1000,
+                ApiRequestType.DateTime => 1000,
+                ApiRequestType.System => 1000,
+                _ => 1000
+            };
         }
     }
 }

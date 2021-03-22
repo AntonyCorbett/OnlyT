@@ -11,30 +11,21 @@
         public void TestMondayOfWeekCalc()
         {
             var monday = new DateTime(2018, 2, 12);
-            {
-                var dt = DateUtils.GetMondayOfWeek(monday);
-                Assert.AreEqual(monday, dt);
-            }
-
-            {
-                var dt = DateUtils.GetMondayOfWeek(monday.AddDays(-1));
-                Assert.AreEqual(dt, monday.AddDays(-7));
-            }
-
-            {
-                var dt = DateUtils.GetMondayOfWeek(monday.AddDays(1));
-                Assert.AreEqual(dt, monday);
-            }
             
-            {
-                var dt = DateUtils.GetMondayOfWeek(monday.AddDays(6));
-                Assert.AreEqual(dt, monday);
-            }
-
-            {
-                var dt = DateUtils.GetMondayOfWeek(monday.AddDays(7));
-                Assert.AreEqual(dt, monday.AddDays(7));
-            }
+            var dt = DateUtils.GetMondayOfWeek(monday);
+            Assert.AreEqual(monday, dt);
+            
+            dt = DateUtils.GetMondayOfWeek(monday.AddDays(-1));
+            Assert.AreEqual(dt, monday.AddDays(-7));
+            
+            dt = DateUtils.GetMondayOfWeek(monday.AddDays(1));
+            Assert.AreEqual(dt, monday);
+            
+            dt = DateUtils.GetMondayOfWeek(monday.AddDays(6));
+            Assert.AreEqual(dt, monday);
+            
+            dt = DateUtils.GetMondayOfWeek(monday.AddDays(7));
+            Assert.AreEqual(dt, monday.AddDays(7));
         }
 
         [TestMethod]

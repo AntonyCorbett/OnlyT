@@ -24,8 +24,7 @@
         private readonly Lazy<DateTimeApiController> _dateTimeApiController;
         private readonly Lazy<BellApiController> _bellApiController;
         private readonly Lazy<SystemApiController> _systemApiController;
-        private readonly Lazy<WebHooksApiController> _webHooksApiController;
-
+        
         public ApiRouter(
             ApiThrottler apiThrottler,
             IOptionsService optionsService,
@@ -49,9 +48,6 @@
 
             _systemApiController = new Lazy<SystemApiController>(() =>
                 new SystemApiController(_optionsService, _apiThrottler));
-
-            _webHooksApiController = new Lazy<WebHooksApiController>(() =>
-                new WebHooksApiController());
         }
 
         public void HandleRequest(HttpListenerRequest request, HttpListenerResponse response)
@@ -80,7 +76,13 @@
                     string apiVerStr = request.Url.Segments[2].TrimEnd('/').ToLower();
                     string segment = request.Url.Segments[3].TrimEnd('/').ToLower();
 
-                    int apiVer = GetApiVerFromStr(apiVerStr);
+#pragma warning disable S1481 // Unused local variables should be removed
+                    // may use this at some point
+                    // ReSharper disable once UnusedVariable
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+                    var apiVer = GetApiVerFromStr(apiVerStr);
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+#pragma warning restore S1481 // Unused local variables should be removed
 
                     if (!segment.Equals("system"))
                     {
@@ -95,7 +97,7 @@
                             break;
 
                         case "webhooks":
-                            _webHooksApiController.Value.Handler(request, response);
+                            WebHooksApiController.Handler(request);
                             break;
 
                         case "bell":
@@ -120,7 +122,7 @@
             }
         }
 
-        private void DisableCache(HttpListenerResponse response)
+        private static void DisableCache(HttpListenerResponse response)
         {
             response.AddHeader("Cache-Control", "no-cache");
         }
@@ -135,7 +137,7 @@
             WriteResponse(response, v);
         }
 
-        private void HandleOptionsMethod(HttpListenerRequest request, HttpListenerResponse response)
+        private static void HandleOptionsMethod(HttpListenerRequest request, HttpListenerResponse response)
         {
             response.StatusCode = (int)HttpStatusCode.OK;
 
@@ -149,9 +151,9 @@
             }
         }
 
-        private int GetApiVerFromStr(string apiVerStr)
+        private static int GetApiVerFromStr(string apiVerStr)
         {
-            if (!int.TryParse(apiVerStr.Substring(1), out var ver) || ver < 1 || ver > CurrentApiVer)
+            if (!int.TryParse(apiVerStr[1..], out var ver) || ver < 1 || ver > CurrentApiVer)
             {
                 throw new WebServerException(WebServerErrorCode.ApiVersionNotSupported);
             }
@@ -159,7 +161,7 @@
             return ver;
         }
 
-        private void CheckApiCode(HttpListenerRequest request, string apiCode)
+        private static void CheckApiCode(HttpListenerRequest request, string? apiCode)
         {
             // use of api code is enabled... skip check if it's a GET request
             var code = request.Headers["ApiCode"] ?? request.QueryString["ApiCode"];

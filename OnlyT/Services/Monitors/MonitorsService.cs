@@ -21,7 +21,7 @@
         {
             Log.Logger.Information("Getting system monitors");
             
-            List<MonitorItem> result = new List<MonitorItem>();
+            var result = new List<MonitorItem>();
 
             var devices = DisplayDevices.ReadDisplayDevices().ToArray();
 
@@ -32,18 +32,10 @@
                 var displayScreen = displayScreens?.SingleOrDefault(x => x.Item1.Equals(screen));
                 var deviceData = displayScreen?.Item2;
 
-                var monitor = new MonitorItem
-                {
-                    Monitor = screen,
-                    MonitorName = deviceData?.DeviceString ?? SanitizeScreenDeviceName(screen.DeviceName),
-                    MonitorId = deviceData?.DeviceId ?? screen.DeviceName,
-                    FriendlyName = screen.DeviceFriendlyName() ?? SanitizeScreenDeviceName(screen.DeviceName)
-                };
+                var name = deviceData?.DeviceString ?? SanitizeScreenDeviceName(screen.DeviceName);
+                var friendlyName = screen.DeviceFriendlyName() ?? SanitizeScreenDeviceName(screen.DeviceName);
 
-                if (string.IsNullOrEmpty(monitor.FriendlyName))
-                {
-                    monitor.FriendlyName = monitor.MonitorName;
-                }
+                var monitor = new MonitorItem(screen, name, deviceData?.DeviceId ?? screen.DeviceName, friendlyName);
 
                 result.Add(monitor);
             }
@@ -62,23 +54,23 @@
             return result;
         }
 
-        public MonitorItem? GetMonitorItem(string monitorId)
+        public MonitorItem? GetMonitorItem(string? monitorId)
         {
-            return GetSystemMonitors().SingleOrDefault(x => x.MonitorId.Equals(monitorId));
+            return GetSystemMonitors().SingleOrDefault(x => x.MonitorId != null && x.MonitorId.Equals(monitorId));
         }
 
-        private DisplayDeviceData? GetDeviceMatchingScreen(DisplayDeviceData[] devices, Screen screen)
+        private static DisplayDeviceData? GetDeviceMatchingScreen(DisplayDeviceData[] devices, Screen screen)
         {
             var deviceName = screen.DeviceName + "\\";
             return devices.SingleOrDefault(x => x.Name.StartsWith(deviceName));
         }
 
-        private string SanitizeScreenDeviceName(string name)
+        private static string SanitizeScreenDeviceName(string name)
         {
             return name.Replace(@"\\.\", string.Empty);
         }
 
-        private List<(Screen, DisplayDeviceData)> GetDisplayScreens(DisplayDeviceData[] devices)
+        private static List<(Screen, DisplayDeviceData)> GetDisplayScreens(DisplayDeviceData[] devices)
         {
             var result = new List<(Screen, DisplayDeviceData)>();
 

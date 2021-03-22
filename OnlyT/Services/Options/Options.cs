@@ -50,9 +50,9 @@
             AdjustClockFormat();
         }
 
-        public string TimerMonitorId { get; set; }
+        public string? TimerMonitorId { get; set; }
 
-        public string CountdownMonitorId { get; set; }
+        public string? CountdownMonitorId { get; set; }
 
         public bool CountdownFrame { get; set; }
 
@@ -66,11 +66,11 @@
 
         public bool ClockTimerFrame { get; set; }
 
-        public string AppWindowPlacement { get; set; }
+        public string? AppWindowPlacement { get; set; }
 
-        public string TimerOutputWindowPlacement { get; set; }
+        public string? TimerOutputWindowPlacement { get; set; }
 
-        public string CountdownOutputWindowPlacement { get; set; }
+        public string? CountdownOutputWindowPlacement { get; set; }
 
         public Size SettingsPageSize { get; set; }
 
@@ -138,13 +138,13 @@
 
         public bool IsApiEnabled { get; set; }
 
-        public string ApiCode { get; set; }
+        public string? ApiCode { get; set; }
 
         public bool IsApiThrottled { get; set; }
 
         public bool ShowMousePointerInTimerDisplay { get; set; }
 
-        public string Culture { get; set; }
+        public string? Culture { get; set; }
 
         public bool GenerateTimingReports { get; set; }
 
@@ -158,7 +158,7 @@
 
         public bool CountdownMonitorIsWindowed { get; set; }
 
-        public CountdownDurationItem[] GetCountdownDurationItems()
+        public static CountdownDurationItem[] GetCountdownDurationItems()
         {
             var result = new List<CountdownDurationItem>();
 
@@ -219,7 +219,7 @@
             MeetingStartTimes.Sanitize();
         }
 
-        public PersistDurationItem[] GetPersistDurationItems()
+        public static PersistDurationItem[] GetPersistDurationItems()
         {
             var result = new List<PersistDurationItem>();
 

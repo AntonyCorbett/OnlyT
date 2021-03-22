@@ -4,8 +4,14 @@
 
     public class OnScreenLocationItem
     {
-        public string Name { get; set; }
+        public OnScreenLocationItem(string name, ScreenLocation location)
+        {
+            Name = name;
+            Location = location;
+        }
 
-        public ScreenLocation Location { get; set; }
+        public string Name { get; }
+
+        public ScreenLocation Location { get; }
     }
 }

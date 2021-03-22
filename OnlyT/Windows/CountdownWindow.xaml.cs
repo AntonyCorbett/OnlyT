@@ -32,7 +32,7 @@
             _dateTimeService = dateTimeService;
         }
 
-        public event EventHandler TimeUpEvent;
+        public event EventHandler? TimeUpEvent;
         
         public void AdjustWindowPositionAndSize()
         {

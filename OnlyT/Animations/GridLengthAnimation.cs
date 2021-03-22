@@ -10,15 +10,9 @@
     /// </summary>
     public class GridLengthAnimation : AnimationTimeline
     {
-        public static readonly DependencyProperty FromProperty;
-        public static readonly DependencyProperty ToProperty;
+        public static readonly DependencyProperty FromProperty = DependencyProperty.Register("From", typeof(GridLength), typeof(GridLengthAnimation));
+        public static readonly DependencyProperty ToProperty = DependencyProperty.Register("To", typeof(GridLength), typeof(GridLengthAnimation));
 
-        static GridLengthAnimation()
-        {
-            FromProperty = DependencyProperty.Register("From", typeof(GridLength), typeof(GridLengthAnimation));
-            ToProperty = DependencyProperty.Register("To", typeof(GridLength), typeof(GridLengthAnimation));
-        }
-        
         public override Type TargetPropertyType => typeof(GridLength);
 
         public GridLength From
@@ -40,6 +34,11 @@
             object defaultDestinationValue, 
             AnimationClock animationClock)
         {
+            if(animationClock.CurrentProgress == null)
+            {
+                return 0;
+            }
+
             // ReSharper disable once PossibleNullReferenceException
             var fromVal = ((GridLength)GetValue(FromProperty)).Value;
 

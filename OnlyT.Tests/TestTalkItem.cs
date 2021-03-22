@@ -10,7 +10,11 @@
         [TestMethod]
         public void TestOriginalBell()
         {
-            TalkScheduleItem item = new TalkScheduleItem { AutoBell = true };
+            var item = new TalkScheduleItem(10000, "A Name", string.Empty, string.Empty)
+            {
+                AutoBell = true
+            };
+
             Assert.IsTrue(item.AutoBell);
             Assert.IsTrue(item.OriginalAutoBell);
 
@@ -22,10 +26,13 @@
         [TestMethod]
         public void TestOriginalDuration()
         {
-            TimeSpan testDur = TimeSpan.FromMinutes(10);
-            TimeSpan changedDur = TimeSpan.FromMinutes(20);
+            var testDur = TimeSpan.FromMinutes(10);
+            var changedDur = TimeSpan.FromMinutes(20);
 
-            TalkScheduleItem item = new TalkScheduleItem { OriginalDuration = testDur };
+            var item = new TalkScheduleItem(10000, "A Name", string.Empty, string.Empty)
+            {
+                OriginalDuration = testDur
+            };
             Assert.AreEqual(item.OriginalDuration, testDur);
             Assert.AreEqual(item.ActualDuration, testDur);
             

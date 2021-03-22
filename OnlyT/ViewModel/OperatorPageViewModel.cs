@@ -40,11 +40,11 @@
         private static readonly int MaxTimerSecs = MaxTimerMins * 60;
 
         // ReSharper disable once PossibleNullReferenceException
-        private readonly SolidColorBrush _bellColorActive = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
+        private readonly SolidColorBrush _bellColorActive = new((Color)ColorConverter.ConvertFromString("#f3dcbc"));
 
-        private readonly SolidColorBrush _bellColorInactive = new SolidColorBrush(Colors.DarkGray);
+        private readonly SolidColorBrush _bellColorInactive = new(Colors.DarkGray);
 
-        private readonly SolidColorBrush _bellColorManual = new SolidColorBrush(Colors.Red);
+        private readonly SolidColorBrush _bellColorManual = new(Colors.Red);
 
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
@@ -64,9 +64,9 @@
         private bool _runFlashAnimation;
         private Brush _textColor = Brushes.White;
         private int _targetSeconds;
-        private string _duration1String;
-        private string _duration2String;
-        private string _duration3String;
+        private string? _duration1String;
+        private string? _duration2String;
+        private string? _duration3String;
         private int _secondsRemaining;
         private DateTime? _meetingStartTimeFromCountdown;
         private bool _isOvertime;
@@ -227,23 +227,23 @@
 
         public bool IsNewVersionAvailable { get; private set; }
 
-        public string Duration1ArrowString { get; set; }
+        public string? Duration1ArrowString { get; set; }
 
-        public string Duration2ArrowString { get; set; }
+        public string? Duration2ArrowString { get; set; }
 
-        public Brush Duration1Colour { get; set; }
+        public Brush? Duration1Colour { get; set; }
 
-        public Brush Duration2Colour { get; set; }
+        public Brush? Duration2Colour { get; set; }
 
-        public Brush Duration3Colour { get; set; }
+        public Brush? Duration3Colour { get; set; }
 
-        public string Duration1Tooltip { get; set; }
+        public string? Duration1Tooltip { get; set; }
 
-        public string Duration2Tooltip { get; set; }
+        public string? Duration2Tooltip { get; set; }
 
-        public string Duration3Tooltip { get; set; }
+        public string? Duration3Tooltip { get; set; }
 
-        public string Duration1String
+        public string? Duration1String
         {
             get => _duration1String;
             set
@@ -253,7 +253,7 @@
             }
         }
 
-        public string Duration2String
+        public string? Duration2String
         {
             get => _duration2String;
             set
@@ -263,6 +263,19 @@
                 OnPropertyChanged();
                 Duration1ArrowString = string.IsNullOrEmpty(_duration2String) ? string.Empty : Arrow;
                 OnPropertyChanged(nameof(Duration1ArrowString));
+            }
+        }
+
+        public string? Duration3String
+        {
+            get => _duration3String;
+            set
+            {
+                _duration3String = value;
+
+                OnPropertyChanged();
+                Duration2ArrowString = string.IsNullOrEmpty(_duration3String) ? string.Empty : Arrow;
+                OnPropertyChanged(nameof(Duration2ArrowString));
             }
         }
 
@@ -278,18 +291,6 @@
                     OnPropertyChanged(nameof(BellColour));
                     OnPropertyChanged(nameof(BellTooltip));
                 }
-            }
-        }
-
-        public string Duration3String
-        {
-            get => _duration3String;
-            set
-            {
-                _duration3String = value;
-                OnPropertyChanged();
-                Duration2ArrowString = string.IsNullOrEmpty(_duration3String) ? string.Empty : Arrow;
-                OnPropertyChanged(nameof(Duration2ArrowString));
             }
         }
 
@@ -521,7 +522,7 @@
                 new TimeSpan(0, 3, 20));
         }
 
-        private bool IsFirstTalkAfterInterim(int talkId)
+        private static bool IsFirstTalkAfterInterim(int talkId)
         {
             var talkType = (TalkTypesAutoMode)talkId;
 
@@ -645,12 +646,12 @@
             return _scheduleService.GetTalkScheduleItem(TalkId);
         }
 
-        private int GetPlannedSecondsFromTalkSchedule(TalkScheduleItem? talk)
+        private static int GetPlannedSecondsFromTalkSchedule(TalkScheduleItem? talk)
         {
             return talk?.GetPlannedDurationSeconds() ?? 0;
         }
         
-        private void TimerChangedHandler(object sender, OnlyT.EventArgs.TimerChangedEventArgs e)
+        private void TimerChangedHandler(object? sender, OnlyT.EventArgs.TimerChangedEventArgs e)
         {
             TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
             _secondsElapsed = e.ElapsedSecs;
@@ -876,7 +877,9 @@
             WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
         }
 
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void StopTimer()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             Log.Logger.Debug("Stopping timer");
 
@@ -996,7 +999,7 @@
             }
         }
 
-        private void HandleTimerStartStopFromApi(object sender, OnlyT.EventArgs.TimerStartStopEventArgs e)
+        private void HandleTimerStartStopFromApi(object? sender, OnlyT.EventArgs.TimerStartStopEventArgs e)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -1099,7 +1102,7 @@
             }
         }
 
-        private void LaunchPdf(string pdf)
+        private static void LaunchPdf(string pdf)
         {
             if (File.Exists(pdf))
             {

@@ -29,14 +29,14 @@
 
         private DispatcherTimer? _timer;   // must be able to set to null in dispose.
 
-        private Path _donut;
-        private Path _pie;
-        private Ellipse _secondsBall;
-        private TextBlock _time;
+        private Path? _donut;
+        private Path? _pie;
+        private Ellipse? _secondsBall;
+        private TextBlock? _time;
         private bool _registeredNames;
         private double _canvasWidth;
         private double _canvasHeight;
-        private AnnulusSize _annulusSize;
+        private AnnulusSize? _annulusSize;
         private Point _centrePointOfDial;
         private DateTime _start;
         private double _pixelsPerDip;
@@ -63,20 +63,24 @@
             RegisterToCleanupWhenParentCloses();
         }
 
-        public event EventHandler<UtcDateTimeQueryEventArgs> QueryUtcDateTimeEvent;
+        public event EventHandler<UtcDateTimeQueryEventArgs>? QueryUtcDateTimeEvent;
 
-        public event EventHandler TimeUpEvent;
+        public event EventHandler? TimeUpEvent;
 
         public int CountdownDurationMins
         {
+#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => (int)GetValue(CountdownDurationMinsProperty);
             set => SetValue(CountdownDurationMinsProperty, value);
+#pragma warning restore S4275 // Getters and setters should access the expected fields
         }
 
         public ElementsToShow ElementsToShow
         {
+#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => (ElementsToShow)GetValue(ElementsToShowProperty);
             set => SetValue(ElementsToShowProperty, value);
+#pragma warning restore S4275 // Getters and setters should access the expected fields
         }
 
         public override void OnApplyTemplate()
@@ -99,6 +103,11 @@
         {
             Dispatcher.Invoke(() =>
             {
+                if (_donut == null || _secondsBall == null || _pie == null || _time == null)
+                {
+                    return;
+                }
+
                 _timer!.Stop();
 
                 Animations.FadeOut(
@@ -139,6 +148,11 @@
 
         private void RenderPieSliceAndBall(double angle, double secondsElapsed)
         {
+            if(_pie == null || _secondsBall == null || _time == null)
+            {
+                return;
+            }
+
             if (!Dispatcher.HasShutdownStarted && IsLoaded && _annulusSize != null)
             {
                 _pie.Data = PieSlice.Get(angle, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
@@ -206,16 +220,26 @@
             }
         }
 
+        private void CheckVisualElements()
+        {
+            if (_donut == null || _pie == null || _secondsBall == null || _time == null || _annulusSize == null)
+            {
+                throw new NotSupportedException("Visual elements not instantiated!");
+            }
+        }
+
         private void RegisterNames(Canvas canvas)
         {
             if (!_registeredNames)
             {
+                CheckVisualElements();
+
                 _registeredNames = true;
 
-                RegisterName(canvas, _donut.Name, _donut);
-                RegisterName(canvas, _pie.Name, _pie);
-                RegisterName(canvas, _secondsBall.Name, _secondsBall);
-                RegisterName(canvas, _time.Name, _time);
+                RegisterName(canvas, _donut!.Name, _donut);
+                RegisterName(canvas, _pie!.Name, _pie);
+                RegisterName(canvas, _secondsBall!.Name, _secondsBall);
+                RegisterName(canvas, _time!.Name, _time);
             }
         }
 
@@ -226,9 +250,10 @@
             RegisterNames(canvas);
 
             InitLayout(canvas);
-            
+            CheckVisualElements();
+
             Visibility = Visibility.Visible;
-            Animations.FadeIn(this, new FrameworkElement[] { _donut, _secondsBall, _pie, _time });
+            Animations.FadeIn(this, new FrameworkElement[] { _donut!, _secondsBall!, _pie!, _time! });
         }
 
         private void InitLayout(Canvas canvas)
@@ -242,7 +267,9 @@
 
             _annulusSize = GetAnnulusSize();
 
-            _time.FontSize = 12;
+            CheckVisualElements();
+
+            _time!.FontSize = 12;
             _time.FontWeight = FontWeights.Bold;
 
             switch (_elementsToShow)
@@ -263,18 +290,20 @@
 
         private void InitLayoutDigitalAndDial()
         {
-            var totalWidthNeeded = 3.25 * _annulusSize.OuterDiameter;
+            CheckVisualElements();
+
+            var totalWidthNeeded = 3.25 * _annulusSize!.OuterDiameter;
 
             _centrePointOfDial = CalcCentrePointOfDIal(totalWidthNeeded);
 
-            _donut.Data = PieSlice.Get(0.1, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
+            _donut!.Data = PieSlice.Get(0.1, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 
-            _secondsBall.Width = (double)_annulusSize.InnerRadius / 6;
+            _secondsBall!.Width = (double)_annulusSize.InnerRadius / 6;
             _secondsBall.Height = (double)_annulusSize.InnerRadius / 6;
 
             SetElementsVisibility();
 
-            _time.Text = GetTimeText();
+            _time!.Text = GetTimeText();
 
             var sz = CalculateTextFontSizeWithDial();
 
@@ -287,13 +316,15 @@
 
         private void InitLayoutJustDial()
         {
-            var totalWidthNeeded = _annulusSize.OuterDiameter;
+            CheckVisualElements();
+
+            var totalWidthNeeded = _annulusSize!.OuterDiameter;
 
             _centrePointOfDial = CalcCentrePointOfDIal(totalWidthNeeded);
 
-            _donut.Data = PieSlice.Get(0.1, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
+            _donut!.Data = PieSlice.Get(0.1, _centrePointOfDial, _annulusSize.InnerRadius, _annulusSize.OuterRadius);
 
-            _secondsBall.Width = (double)_annulusSize.InnerRadius / 6;
+            _secondsBall!.Width = (double)_annulusSize.InnerRadius / 6;
             _secondsBall.Height = (double)_annulusSize.InnerRadius / 6;
 
             SetElementsVisibility();
@@ -304,8 +335,9 @@
         private void InitLayoutJustDigital()
         {
             SetElementsVisibility();
+            CheckVisualElements();
 
-            _time.Text = GetTimeText();
+            _time!.Text = GetTimeText();
 
             var sz = CalculateTextFontSizeNoDial();
 
@@ -315,7 +347,8 @@
 
         private Size CalculateTextFontSizeNoDial()
         {
-            var sz = GetTextSize(_time.Text, useExtent: false);
+            SetElementsVisibility();
+            var sz = GetTextSize(_time!.Text, useExtent: false);
 
             var szFactor = 0.95;
 
@@ -332,12 +365,13 @@
 
         private Size CalculateTextFontSizeWithDial()
         {
-            var sz = GetTextSize(_time.Text, useExtent: true);
+            SetElementsVisibility();
+            var sz = GetTextSize(_time!.Text, useExtent: true);
             double szFactor = _twoDigitMins
                     ? 0.60
                     : 0.75;
 
-            while (sz.Height < szFactor * _annulusSize.OuterDiameter)
+            while (sz.Height < szFactor * _annulusSize!.OuterDiameter)
             {
                 _time.FontSize += 0.5;
                 sz = GetTextSize(_time.Text, useExtent: true);
@@ -370,38 +404,40 @@
 
         private void SetElementsVisibility()
         {
+            SetElementsVisibility();
+
             switch (_elementsToShow)
             {
                 case ElementsToShow.DialAndDigital:
-                    _secondsBall.Visibility = Visibility.Visible;
-                    _donut.Visibility = Visibility.Visible;
-                    _time.Visibility = Visibility.Visible;
-                    _pie.Visibility = Visibility.Visible;
+                    _secondsBall!.Visibility = Visibility.Visible;
+                    _donut!.Visibility = Visibility.Visible;
+                    _time!.Visibility = Visibility.Visible;
+                    _pie!.Visibility = Visibility.Visible;
                     break;
 
                 case ElementsToShow.Dial:
-                    _secondsBall.Visibility = Visibility.Visible;
-                    _donut.Visibility = Visibility.Visible;
-                    _pie.Visibility = Visibility.Visible;
-                    _time.Visibility = Visibility.Hidden;
+                    _secondsBall!.Visibility = Visibility.Visible;
+                    _donut!.Visibility = Visibility.Visible;
+                    _pie!.Visibility = Visibility.Visible;
+                    _time!.Visibility = Visibility.Hidden;
                     break;
 
                 case ElementsToShow.Digital:
-                    _time.Visibility = Visibility.Visible;
-                    _secondsBall.Visibility = Visibility.Hidden;
-                    _donut.Visibility = Visibility.Hidden;
-                    _pie.Visibility = Visibility.Hidden;
+                    _time!.Visibility = Visibility.Visible;
+                    _secondsBall!.Visibility = Visibility.Hidden;
+                    _donut!.Visibility = Visibility.Hidden;
+                    _pie!.Visibility = Visibility.Hidden;
                     break;
             }
 
             if (_countdownDurationMins == 1)
             {
                 // gratuitous
-                _secondsBall.Visibility = Visibility.Hidden;
+                _secondsBall!.Visibility = Visibility.Hidden;
             }
         }
 
-        private Color ToColor(string htmlColor)
+        private static Color ToColor(string htmlColor)
         {
             // ReSharper disable once PossibleNullReferenceException
             return (Color)ColorConverter.ConvertFromString(htmlColor);
@@ -409,11 +445,11 @@
 
         private void AddGeometryToCanvas(Canvas canvas)
         {
-            Color revealedColor = ToColor("#c0c5c1");
-            Color externalRingColor = ToColor("#74546a");
-            Color ballColor = ToColor("#eaf0ce");
-            Color ringStrokeColor = ToColor("#473341");
-            Color innerHighlightColor = Colors.White;
+            var revealedColor = ToColor("#c0c5c1");
+            var externalRingColor = ToColor("#74546a");
+            var ballColor = ToColor("#eaf0ce");
+            var ringStrokeColor = ToColor("#473341");
+            var innerHighlightColor = Colors.White;
 
             var gs1 = new GradientStopCollection(2)
             {
@@ -445,15 +481,17 @@
             canvas.Children.Add(_pie);
             canvas.Children.Add(_secondsBall);
             
-            Color textColor = ToColor("#eaf0ce");
+            var textColor = ToColor("#eaf0ce");
             _time = new TextBlock { Foreground = new SolidColorBrush(textColor), Name = "TimeTxt" };
             canvas.Children.Add(_time);
         }
 
         private Point CalcCentrePointOfDIal(double totalWidthNeeded)
         {
+            SetElementsVisibility();
+
             var margin = (_canvasWidth - totalWidthNeeded) / 2;
-            return new Point(margin + _annulusSize.OuterRadius, _canvasHeight / 2);
+            return new Point(margin + _annulusSize!.OuterRadius, _canvasHeight / 2);
         }
 
         private string GetTimeText(int? secsLeft = null)
@@ -484,11 +522,13 @@
 
         private Size GetTextSize(string text, bool useExtent)
         {
+            CheckVisualElements();
+
             var formattedText = new FormattedText(
                 text, 
                 CultureInfo.CurrentUICulture,
                 FlowDirection.LeftToRight, 
-                new Typeface(_time.FontFamily, _time.FontStyle, _time.FontWeight, FontStretches.Normal),
+                new Typeface(_time!.FontFamily, _time.FontStyle, _time.FontWeight, FontStretches.Normal),
                 _time.FontSize,
                 Brushes.Black,
                 _pixelsPerDip);

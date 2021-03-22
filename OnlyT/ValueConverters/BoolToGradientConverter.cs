@@ -23,7 +23,7 @@
             return null;
         }
 
-        private LinearGradientBrush CreateBrush(bool useGradient)
+        private static LinearGradientBrush CreateBrush(bool useGradient)
         {
             var result = new LinearGradientBrush
             {

@@ -12,7 +12,9 @@
 
     internal class TimesFeed
     {
+#pragma warning disable S1075 // URIs should not be hardcoded
         private static readonly string FeedUrl = @"https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
+#pragma warning restore S1075 // URIs should not be hardcoded
         private readonly string _localFeedFile;
         private readonly int _tooOldDays = 20;
         private IEnumerable<Meeting>? _meetingData;
@@ -28,7 +30,7 @@
             return GetMeetingDataForTodayInternal(_meetingData);
         }
 
-        public Meeting GetSampleMidweekMeetingDataForTesting(DateTime theDate)
+        public static Meeting GetSampleMidweekMeetingDataForTesting(DateTime theDate)
         {
             var result = new Meeting { Date = theDate };
 
@@ -134,7 +136,7 @@
             return result;
         }
 
-        private Meeting? GetMeetingDataForTodayInternal(IEnumerable<Meeting>? meetingData)
+        private static Meeting? GetMeetingDataForTodayInternal(IEnumerable<Meeting>? meetingData)
         {
             return meetingData?.FirstOrDefault(x => x.Date.Date.Equals(DateUtils.GetMondayOfThisWeek()));
         }

@@ -24,7 +24,7 @@ namespace OnlyT.Windows
         private const double DefWindowWidth = 700;
         private const double DefWindowHeight = 500;
 
-        private readonly DispatcherTimer _persistTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
+        private readonly DispatcherTimer _persistTimer = new(DispatcherPriority.ApplicationIdle);
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
         private bool _persistingTalkDuration;
@@ -71,7 +71,7 @@ namespace OnlyT.Windows
             _optionsService.Save();
         }
 
-        private void HandlePersistTimerTick(object sender, EventArgs e)
+        private void HandlePersistTimerTick(object? sender, EventArgs e)
         {
             if (_persistingTalkDuration)
             {
@@ -243,7 +243,7 @@ namespace OnlyT.Windows
             fadeOutClock.BeginTime = TimeSpan.Zero;
 
             // row heights...
-            GridLengthAnimation rowHeightAdjust1 = new GridLengthAnimation
+            var rowHeightAdjust1 = new GridLengthAnimation
             {
                 From = new GridLength(75, GridUnitType.Star),
                 To = new GridLength(75, GridUnitType.Star),
@@ -253,7 +253,7 @@ namespace OnlyT.Windows
             Storyboard.SetTarget(rowHeightAdjust1, ClockGrid.RowDefinitions[0]);
             Storyboard.SetTargetProperty(rowHeightAdjust1, new PropertyPath(RowDefinition.HeightProperty));
 
-            GridLengthAnimation rowHeightAdjust2 = new GridLengthAnimation
+            var rowHeightAdjust2 = new GridLengthAnimation
             {
                 From = new GridLength(25, GridUnitType.Star),
                 To = new GridLength(25, GridUnitType.Star),

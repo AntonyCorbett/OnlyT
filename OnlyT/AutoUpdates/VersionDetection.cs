@@ -31,7 +31,7 @@
                         var segments = latestVersionUri.Segments;
                         if (segments.Any())
                         {
-                            version = segments[segments.Length - 1];
+                            version = segments[^1];
                         }
                     }
                 }

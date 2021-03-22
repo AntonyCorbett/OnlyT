@@ -21,7 +21,7 @@ namespace OnlyT.ViewModel
         private readonly IDateTimeService _dateTimeService;
 
         private int _analogueClockColumnWidthPercentage = -1;
-        private string _timeString;
+        private string? _timeString;
         private bool _isRunning;
         private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
         private DurationSector? _durationSector;
@@ -81,7 +81,7 @@ namespace OnlyT.ViewModel
                 ? Cursors.Arrow
                 : Cursors.None;
 
-        public string TimeString
+        public string? TimeString
         {
             get => _timeString;
             set
@@ -220,7 +220,7 @@ namespace OnlyT.ViewModel
             DurationSector = null;
         }
 
-        private double CalcAngleFromTime(DateTime dt) => (dt.Minute + ((double)dt.Second / 60)) / 60 * 360;
+        private static double CalcAngleFromTime(DateTime dt) => (dt.Minute + ((double)dt.Second / 60)) / 60 * 360;
 
         private void OnTimerStarted(object recipient, TimerStartMessage message)
         {
@@ -234,26 +234,26 @@ namespace OnlyT.ViewModel
 
         private void InitOverallDurationSector(int elapsedSecs, int remainingSecs)
         {
-            if (DurationSector == null && _optionsService.Options.ShowDurationSector)
+            if (DurationSector == null && 
+                _optionsService.Options.ShowDurationSector && 
+                remainingSecs < _secsPerHour)
             {
                 // can't display duration sector effectively when >= 1 hr
-                if (remainingSecs < _secsPerHour) 
+
+                var now = _dateTimeService.Now();
+                var startAngle = CalcAngleFromTime(now);
+
+                var endTime = now.AddSeconds(remainingSecs);
+                var endAngle = CalcAngleFromTime(endTime);
+
+                DurationSector = new DurationSector
                 {
-                    var now = _dateTimeService.Now();
-                    var startAngle = CalcAngleFromTime(now);
-
-                    var endTime = now.AddSeconds(remainingSecs);
-                    var endAngle = CalcAngleFromTime(endTime);
-
-                    DurationSector = new DurationSector
-                    {
-                        StartAngle = startAngle,
-                        EndAngle = endAngle,
-                        CurrentAngle = startAngle,
-                        IsOvertime = false,
-                        ShowElapsedSector = (elapsedSecs + remainingSecs) < _secsPerHour
-                    };
-                }
+                    StartAngle = startAngle,
+                    EndAngle = endAngle,
+                    CurrentAngle = startAngle,
+                    IsOvertime = false,
+                    ShowElapsedSector = (elapsedSecs + remainingSecs) < _secsPerHour
+                };
             }
         }
 

@@ -142,7 +142,14 @@
 
             return animation;
         }
-        
+
+        private static void Fade(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, bool fadeIn, EventHandler? onCompleted = null)
+        {
+            var storyboard = new Storyboard();
+            storyboard.Children.Add(CreateFadeAnimation(ctrl, ms, fadeIn, onCompleted));
+            storyboard.Begin(parentContainer);
+        }
+
         private static void Fade(FrameworkElement parentContainer, FrameworkElement[] ctrls, int ms, bool fadeIn, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
@@ -195,13 +202,6 @@
 
             storyboard.Children.Add(CreateFadeAnimation(ctrl, ms, slideIn, onCompleted));
 
-            storyboard.Begin(parentContainer);
-        }
-
-        private static void Fade(FrameworkElement parentContainer, FrameworkElement ctrl, int ms, bool fadeIn, EventHandler? onCompleted = null)
-        {
-            var storyboard = new Storyboard();
-            storyboard.Children.Add(CreateFadeAnimation(ctrl, ms, fadeIn, onCompleted));
             storyboard.Begin(parentContainer);
         }
     }

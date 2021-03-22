@@ -6,38 +6,26 @@
     {
         public static TalkTypes GetMinistryTalkType(int index)
         {
-            switch (index)
+            return index switch
             {
-                case 0:
-                    return TalkTypes.Ministry1;
-                case 1:
-                    return TalkTypes.Ministry2;
-                case 2:
-                    return TalkTypes.Ministry3;
-                case 3:
-                    return TalkTypes.Ministry4;
-
-                default:
-                    return TalkTypes.Unknown;
-            }
+                0 => TalkTypes.Ministry1,
+                1 => TalkTypes.Ministry2,
+                2 => TalkTypes.Ministry3,
+                3 => TalkTypes.Ministry4,
+                _ => TalkTypes.Unknown
+            };
         }
 
         public static TalkTypesAutoMode GetAutoModeMinistryTalkType(int index)
         {
-            switch (index)
+            return index switch
             {
-                case 0:
-                    return TalkTypesAutoMode.MinistryItem1;
-                case 1:
-                    return TalkTypesAutoMode.MinistryItem2;
-                case 2:
-                    return TalkTypesAutoMode.MinistryItem3;
-                case 3:
-                    return TalkTypesAutoMode.MinistryItem4;
-
-                default:
-                    return TalkTypesAutoMode.Unknown;
-            }
+                0 => TalkTypesAutoMode.MinistryItem1,
+                1 => TalkTypesAutoMode.MinistryItem2,
+                2 => TalkTypesAutoMode.MinistryItem3,
+                3 => TalkTypesAutoMode.MinistryItem4,
+                _ => TalkTypesAutoMode.Unknown
+            };
         }
     }
 }

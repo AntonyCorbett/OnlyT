@@ -2,16 +2,18 @@ using Microsoft.Toolkit.Mvvm.DependencyInjection;
 
 namespace OnlyT.ViewModel
 {
+#pragma warning disable S1118 // Utility classes should not have public constructors
     public class ViewModelLocator
+#pragma warning restore S1118 // Utility classes should not have public constructors
     {
-        public MainViewModel Main => Ioc.Default.GetService<MainViewModel>()!;
+        public static MainViewModel Main => Ioc.Default.GetService<MainViewModel>()!;
 
-        public OperatorPageViewModel Operator => Ioc.Default.GetService<OperatorPageViewModel>()!;
+        public static OperatorPageViewModel Operator => Ioc.Default.GetService<OperatorPageViewModel>()!;
 
-        public SettingsPageViewModel Settings => Ioc.Default.GetService<SettingsPageViewModel>()!;
+        public static SettingsPageViewModel Settings => Ioc.Default.GetService<SettingsPageViewModel>()!;
 
-        public TimerOutputWindowViewModel Output => Ioc.Default.GetService<TimerOutputWindowViewModel>()!;
+        public static TimerOutputWindowViewModel Output => Ioc.Default.GetService<TimerOutputWindowViewModel>()!;
 
-        public CountdownTimerViewModel Countdown => Ioc.Default.GetService<CountdownTimerViewModel>()!;
+        public static CountdownTimerViewModel Countdown => Ioc.Default.GetService<CountdownTimerViewModel>()!;
     }
 }

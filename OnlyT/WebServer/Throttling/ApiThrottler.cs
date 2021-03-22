@@ -25,7 +25,7 @@
             }
         }
 
-        private string? GetClientId(HttpListenerRequest request)
+        private static string? GetClientId(HttpListenerRequest request)
         {
             return request.RemoteEndPoint?.ToString();
         }

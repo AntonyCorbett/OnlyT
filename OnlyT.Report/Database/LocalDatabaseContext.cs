@@ -6,7 +6,7 @@
 
     internal sealed class LocalDatabaseContext : IDisposable
     {
-        private static readonly object Locker = new object();
+        private static readonly object Locker = new();
 
         public LocalDatabaseContext(string localDbFile)
         {

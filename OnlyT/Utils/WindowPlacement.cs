@@ -1,9 +1,6 @@
 ﻿namespace OnlyT.Utils
 {
 #pragma warning disable S101 // Types should be named in PascalCase
-#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
-#pragma warning disable SA1649 // File name must match first type name
-#pragma warning disable SA1310 // Field names must not contain underscore
 
     // ReSharper disable CommentTypo
     // ReSharper disable InconsistentNaming
@@ -79,9 +76,9 @@
         private const int SW_SHOWMINIMIZED = 2;
 
         private static readonly Encoding Encoding = new UTF8Encoding();
-        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
+        private static readonly XmlSerializer Serializer = new(typeof(WINDOWPLACEMENT));
 
-        public static Rect SetPlacement(this Window window, string placementJson, Size overrideSize = default(Size))
+        public static Rect SetPlacement(this Window window, string placementJson, Size overrideSize = default)
         {
             double width = window.Width;
             double height = window.Height;
@@ -168,10 +165,10 @@
 
         private static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
         {
-            var dpi = GetDpiSettings();
+            var (x, y) = GetDpiSettings();
 
-            var adjustedWidth = (width * dpi.x) / 96.0;
-            var adjustedHeight = (height * dpi.y) / 96.0;
+            var adjustedWidth = (width * x) / 96.0;
+            var adjustedHeight = (height * y) / 96.0;
 
             return new Tuple<double, double>(adjustedWidth, adjustedHeight);
         }
@@ -180,17 +177,12 @@
         {
             NativeMethods.GetWindowPlacement(windowHandle, out var placement);
 
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
-                Serializer.Serialize(xmlTextWriter, placement);
-                byte[] xmlBytes = memoryStream.ToArray();
-                return Encoding.GetString(xmlBytes);
-            }
+            using var memoryStream = new MemoryStream();
+            var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
+            Serializer.Serialize(xmlTextWriter, placement);
+            byte[] xmlBytes = memoryStream.ToArray();
+            return Encoding.GetString(xmlBytes);
         }
     }
-#pragma warning restore SA1310 // Field names must not contain underscore
-#pragma warning restore SA1649 // File name must match first type name
-#pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
 #pragma warning restore S101 // Types should be named in PascalCase
 }

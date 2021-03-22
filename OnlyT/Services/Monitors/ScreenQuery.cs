@@ -2,6 +2,7 @@
 {
 #pragma warning disable S101 // Types should be named in PascalCase
 #pragma warning disable S1144 
+#pragma warning disable S2344 
 
     // ReSharper disable FieldCanBeMadeReadOnly.Local
     // ReSharper disable FieldCanBeMadeReadOnly.Global
@@ -21,11 +22,6 @@
 
     public static class ScreenQuery
     {
-#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
-#pragma warning disable SX1309 // Field names must begin with underscore
-#pragma warning disable SA1202 // Elements must be ordered by access
-#pragma warning disable SA1201 // Elements must appear in the correct order
-#pragma warning disable SA1313 // Parameter names must begin with lower-case letter
 #pragma warning disable IDE0044 // Add readonly modifier
         private const int ErrorSuccess = 0;
 
@@ -55,7 +51,9 @@
             DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDTVDONGLE = 14,
             DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST = 15,
             DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL = 0x80000000,
+#pragma warning disable CA1069 // Enums values should not be duplicated
             DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32 = 0xFFFFFFFF
+#pragma warning restore CA1069 // Enums values should not be duplicated
         }
 
         public enum DISPLAYCONFIG_SCANLINE_ORDERING : uint
@@ -346,13 +344,9 @@
         }
 
 #pragma warning restore IDE0044 // Add readonly modifier
-#pragma warning restore SA1313 // Parameter names must begin with lower-case letter
-#pragma warning restore SA1201 // Elements must appear in the correct order
-#pragma warning restore SA1202 // Elements must be ordered by access
-#pragma warning restore SX1309 // Field names must begin with underscore
-#pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
     }
 
+#pragma warning restore S2344 
 #pragma warning restore S1144 
 #pragma warning restore S101 // Types should be named in PascalCase
 }

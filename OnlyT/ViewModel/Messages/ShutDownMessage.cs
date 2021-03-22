@@ -5,7 +5,7 @@
     /// </summary>
     internal class ShutDownMessage
     {
-        public ShutDownMessage(string currentPageName)
+        public ShutDownMessage(string? currentPageName)
         {
             CurrentPageName = currentPageName;
         }
@@ -15,6 +15,6 @@
         /// </summary>
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public string CurrentPageName { get; }
+        public string? CurrentPageName { get; }
     }
 }

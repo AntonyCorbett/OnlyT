@@ -66,21 +66,16 @@ namespace OnlyT.ViewModel
         {
             get
             {
-                switch (_optionsService.Options.CountdownScreenLocation)
+                return _optionsService.Options.CountdownScreenLocation switch
                 {
-                    case ScreenLocation.Left:
-                    case ScreenLocation.BottomLeft:
-                    case ScreenLocation.TopLeft:
-                        return HorizontalAlignment.Left;
-
-                    case ScreenLocation.Right:
-                    case ScreenLocation.BottomRight:
-                    case ScreenLocation.TopRight:
-                        return HorizontalAlignment.Right;
-
-                    default:
-                        return HorizontalAlignment.Center;
-                }
+                    ScreenLocation.Left => HorizontalAlignment.Left,
+                    ScreenLocation.BottomLeft => HorizontalAlignment.Left,
+                    ScreenLocation.TopLeft => HorizontalAlignment.Left,
+                    ScreenLocation.Right => HorizontalAlignment.Right,
+                    ScreenLocation.BottomRight => HorizontalAlignment.Right,
+                    ScreenLocation.TopRight => HorizontalAlignment.Right,
+                    _ => HorizontalAlignment.Center
+                };
             }
         }
 
@@ -88,21 +83,18 @@ namespace OnlyT.ViewModel
         {
             get
             {
-                switch (_optionsService.Options.CountdownScreenLocation)
+                return _optionsService.Options.CountdownScreenLocation switch
                 {
-                    case ScreenLocation.Top:
-                    case ScreenLocation.TopLeft:
-                    case ScreenLocation.TopRight:
-                        return VerticalAlignment.Top;
+                    ScreenLocation.Top or 
+                        ScreenLocation.TopLeft or 
+                        ScreenLocation.TopRight => VerticalAlignment.Top,
 
-                    case ScreenLocation.Bottom:
-                    case ScreenLocation.BottomLeft:
-                    case ScreenLocation.BottomRight:
-                        return VerticalAlignment.Bottom;
+                    ScreenLocation.Bottom or 
+                        ScreenLocation.BottomLeft or 
+                        ScreenLocation.BottomRight => VerticalAlignment.Bottom,
 
-                    default:
-                        return VerticalAlignment.Center;
-                }
+                    _ => VerticalAlignment.Center,
+                };
             }
         }
 

@@ -181,7 +181,7 @@
             }
         }
 
-        private void OnCountdownTimeUp(object sender, System.EventArgs e)
+        private void OnCountdownTimeUp(object? sender, System.EventArgs e)
         {
             Stop();
         }

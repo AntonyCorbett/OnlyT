@@ -6,7 +6,7 @@
 
     internal interface ILocalData
     {
-        void Save(MeetingTimes mtgTimes);
+        void Save(MeetingTimes? mtgTimes);
 
         MeetingTimes GetMeetingTimes(Guid session);
 

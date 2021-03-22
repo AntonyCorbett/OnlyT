@@ -4,8 +4,14 @@
 
     public class LoggingLevel
     {
-        public string Name { get; set; }
+        public LoggingLevel(string name, LogEventLevel level)
+        {
+            Name = name;
+            Level = level;
+        }
 
-        public LogEventLevel Level { get; set; }
+        public string Name { get; }
+
+        public LogEventLevel Level { get; }
     }
 }

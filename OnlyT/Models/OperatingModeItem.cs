@@ -8,6 +8,12 @@
     /// </summary>
     public class OperatingModeItem
     {
+        public OperatingModeItem(string name, OperatingMode mode)
+        {
+            Name = name;
+            Mode = mode;
+        }
+
         public string Name { get; set; }
 
         public OperatingMode Mode { get; set; }

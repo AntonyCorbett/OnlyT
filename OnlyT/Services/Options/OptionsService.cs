@@ -1,7 +1,6 @@
-﻿using Microsoft.Toolkit.Mvvm.Messaging;
-
-namespace OnlyT.Services.Options
+﻿namespace OnlyT.Services.Options
 {
+    using Microsoft.Toolkit.Mvvm.Messaging;
     using System;
     using System.Globalization;
     using System.IO;
@@ -31,8 +30,8 @@ namespace OnlyT.Services.Options
         private readonly IQueryWeekendService _queryWeekendService;
         private readonly int _optionsVersion = 1;
         private Options? _options;
-        private string _optionsFilePath;
-        private string _originalOptionsSignature;
+        private string? _optionsFilePath;
+        private string? _originalOptionsSignature;
         
         public OptionsService(
             ICommandLineService commandLineService,
@@ -93,15 +92,12 @@ namespace OnlyT.Services.Options
 
         public bool Use24HrClockFormat()
         {
-            switch (Options.ClockHourFormat)
+            return Options.ClockHourFormat switch
             {
-                case ClockHourFormat.Format24:
-                case ClockHourFormat.Format24LeadingZero:
-                    return true;
-
-                default:
-                    return false;
-            }
+                ClockHourFormat.Format24 => true,
+                ClockHourFormat.Format24LeadingZero => true,
+                _ => false
+            };
         }
 
         public AdaptiveMode GetAdaptiveMode()
@@ -160,7 +156,7 @@ namespace OnlyT.Services.Options
             {
                 try
                 {
-                    string commandLineIdentifier = _commandLineService.OptionsIdentifier;
+                    var commandLineIdentifier = _commandLineService.OptionsIdentifier;
                     _optionsFilePath = FileUtils.GetUserOptionsFilePath(commandLineIdentifier, _optionsVersion);
                     var path = Path.GetDirectoryName(_optionsFilePath);
                     if (path != null)
@@ -209,7 +205,7 @@ namespace OnlyT.Services.Options
             }
         }
     
-        private string GetOptionsSignature(Options options)
+        private static string GetOptionsSignature(Options options)
         {
             // config data is small so simple solution is best...
             return JsonConvert.SerializeObject(options);
@@ -217,27 +213,26 @@ namespace OnlyT.Services.Options
 
         private void ReadOptions()
         {
-            if (!File.Exists(_optionsFilePath))
+            if (_optionsFilePath == null || !File.Exists(_optionsFilePath))
             {
                 WriteDefaultOptions();
+                return;
             }
-            else
+
+            using var file = File.OpenText(_optionsFilePath);
+
+            var serializer = new JsonSerializer();
+            _options = (Options?)serializer.Deserialize(file, typeof(Options));
+            if (_options != null)
             {
-                using var file = File.OpenText(_optionsFilePath);
+                SetMidWeekOrWeekend();
+                ResetCircuitVisit();
 
-                var serializer = new JsonSerializer();
-                _options = (Options?)serializer.Deserialize(file, typeof(Options));
-                if (_options != null)
-                {
-                    SetMidWeekOrWeekend();
-                    ResetCircuitVisit();
+                _options.Sanitize();
 
-                    _options.Sanitize();
+                CommandLineMonitorOverride();
 
-                    CommandLineMonitorOverride();
-
-                    SetCulture();
-                }
+                SetCulture();
             }
         }
         
@@ -295,11 +290,11 @@ namespace OnlyT.Services.Options
 
         private void WriteOptions()
         {
-            if (_options != null)
+            if (_options != null && _optionsFilePath != null)
             {
                 using StreamWriter file = File.CreateText(_optionsFilePath);
 
-                JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented };
+                var serializer = new JsonSerializer { Formatting = Formatting.Indented };
                 serializer.Serialize(file, _options);
                 _originalOptionsSignature = GetOptionsSignature(_options);
             }

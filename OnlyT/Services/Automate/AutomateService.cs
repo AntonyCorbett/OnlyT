@@ -17,9 +17,9 @@
         private readonly ITalkTimerService _timerService;
         private readonly ITalkScheduleService _scheduleService;
         private readonly IDateTimeService _dateTimeService;
-        private readonly DispatcherTimer _timer = new DispatcherTimer();
-        private readonly Stopwatch _stopwatch = new Stopwatch();
-        private readonly Random _random = new Random();
+        private readonly DispatcherTimer _timer = new();
+        private readonly Stopwatch _stopwatch = new();
+        private readonly Random _random = new();
 
         private TimeSpan? _nextStartTime;
         private TimeSpan? _nextStopTime;
@@ -48,7 +48,7 @@
             _timer.Start();
         }
 
-        private void TimerTick(object sender, System.EventArgs e)
+        private void TimerTick(object? sender, System.EventArgs e)
         {
             var now = _dateTimeService.Now();
 
@@ -126,13 +126,11 @@
             _timerService.GetStatus();
             var talkType = (TalkTypesAutoMode)status.TalkId;
 
-            switch (talkType)
+            return talkType switch
             {
-                case TalkTypesAutoMode.PublicTalk:
-                    return now.TimeOfDay.Add(GetAboutXMinutes(4)); // for interim segment
-            }
-
-            return null;
+                TalkTypesAutoMode.PublicTalk => now.TimeOfDay.Add(GetAboutXMinutes(4)), // for interim segment
+                _ => null
+            };
         }
 
         private TimeSpan GetAboutXMinutes(int x)
@@ -212,7 +210,7 @@
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private void CheckItem(TalkScheduleItem? item)
+        private static void CheckItem(TalkScheduleItem? item)
         {
             if (item == null)
             {
@@ -221,7 +219,7 @@
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private void CheckIsCurrentTalk(TimerStatus status)
+        private static void CheckIsCurrentTalk(TimerStatus status)
         {
             if (status.TalkId == null)
             {
@@ -230,7 +228,7 @@
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private void CheckNotRunning(TimerStatus status)
+        private static void CheckNotRunning(TimerStatus status)
         {
             if (status.IsRunning)
             {
@@ -239,7 +237,7 @@
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private void CheckIsRunning(TimerStatus status)
+        private static void CheckIsRunning(TimerStatus status)
         {
             if (!status.IsRunning)
             {

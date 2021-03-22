@@ -30,16 +30,15 @@
         private readonly IQueryWeekendService _queryWeekendService;
         private readonly bool _weekendIncludesFriday;
 
-        private XFont _titleFont;
-        private XFont _subTitleFont;
-        private XFont _itemTitleFont;
-        private XFont _itemFont;
-        private XFont _stdTimeFont;
-        private XFont _durationFont;
-        private XFont _smallTimeFont;
+        private XFont? _titleFont;
+        private XFont? _subTitleFont;
+        private XFont? _itemTitleFont;
+        private XFont? _itemFont;
+        private XFont? _stdTimeFont;
+        private XFont? _durationFont;
+        private XFont? _smallTimeFont;
         private double _leftMargin;
         private double _leftIndent;
-        private double _topMargin;
         private double _currentY;
         private double _rightX;
         private double _rightXIndent;
@@ -71,53 +70,52 @@
 
             Log.Logger.Debug($"Executing PdfTimerReport: {fileName}");
 
-            using (var doc = new PdfDocument())
+            using var doc = new PdfDocument();
+
+            var page = doc.AddPage();
+
+            using (var g = XGraphics.FromPdfPage(page))
             {
-                var page = doc.AddPage();
+                Log.Logger.Debug("Creating fonts and page metrics");
+                CreateFonts();
+                CalcMetrics(page);
 
-                using (var g = XGraphics.FromPdfPage(page))
+                DrawTitle(g, Resources.REPORT_TITLE);
+
+                var itemArray = GetSanitizedItemTimings();
+                for (int n = 0; n < itemArray.Length; ++n)
                 {
-                    Log.Logger.Debug("Creating fonts and page metrics");
-                    CreateFonts();
-                    CalcMetrics(page);
+                    var item = itemArray[n];
 
-                    DrawTitle(g, Resources.REPORT_TITLE);
+                    Log.Logger.Debug($"Printing item: {item.Description}, {item.Start} - {item.End}");
 
-                    var itemArray = GetSanitizedItemTimings();
-                    for (int n = 0; n < itemArray.Length; ++n)
+                    DrawItem(g, item);
+                    if (item.IsStudentTalk && n != itemArray.Length - 1)
                     {
-                        var item = itemArray[n];
+                        var nextItem = itemArray[n + 1];
 
-                        Log.Logger.Debug($"Printing item: {item.Description}, {item.Start} - {item.End}");
+                        var counselDuration = nextItem.Start - item.End;
 
-                        DrawItem(g, item);
-                        if (item.IsStudentTalk && n != itemArray.Length - 1)
+                        if (counselDuration.TotalSeconds < 0.0)
                         {
-                            var nextItem = itemArray[n + 1];
-
-                            var counselDuration = nextItem.Start - item.End;
-
-                            if (counselDuration.TotalSeconds < 0.0)
-                            {
-                                counselDuration = TimeSpan.FromSeconds(0);
-                            }
-
-                            DrawCounselItem(g, counselDuration);
+                            counselDuration = TimeSpan.FromSeconds(0);
                         }
-                    }
 
-                    if (_data.MeetingPlannedEnd != default && _data.MeetingActualEnd != default)
-                    {
-                        Log.Logger.Debug("Printing summary");
-                        DrawSummary(g, _data.MeetingPlannedEnd, _data.MeetingActualEnd);
+                        DrawCounselItem(g, counselDuration);
                     }
                 }
 
-                Log.Logger.Debug("Printing historical summary");
-                DrawHistoricalSummary(doc);
-
-                doc.Save(fileName);
+                if (_data.MeetingPlannedEnd != default && _data.MeetingActualEnd != default)
+                {
+                    Log.Logger.Debug("Printing summary");
+                    DrawSummary(g, _data.MeetingPlannedEnd, _data.MeetingActualEnd);
+                }
             }
+
+            Log.Logger.Debug("Printing historical summary");
+            DrawHistoricalSummary(doc);
+
+            doc.Save(fileName);
 
             return fileName;
         }
@@ -147,14 +145,13 @@
                 var page = doc.AddPage();
                 CalcMetrics(page);
 
-                using (var g = XGraphics.FromPdfPage(page))
-                {
-                    DrawTitle(g, Resources.TIMING_SUMMARY);
+                using var g = XGraphics.FromPdfPage(page);
 
-                    DrawChart(g, page, ChartMeetingType.Midweek);
-                    DrawChart(g, page, ChartMeetingType.Weekend);
-                    DrawChart(g, page, ChartMeetingType.Both);
-                }
+                DrawTitle(g, Resources.TIMING_SUMMARY);
+
+                DrawChart(g, page, ChartMeetingType.Midweek);
+                DrawChart(g, page, ChartMeetingType.Weekend);
+                DrawChart(g, page, ChartMeetingType.Both);
             }
         }
 
@@ -162,7 +159,12 @@
         {
             if (UsableSummaryCount(mtgType) > MinChartSeries)
             {
-                Chart c = new Chart(ChartType.Column2D);
+                if (_itemFont == null)
+                {
+                    throw new InvalidOperationException(nameof(_itemFont));
+                }
+
+                var c = new Chart(ChartType.Column2D);
                 c.Font.Name = "Verdana";
                 
                 var xSeries = c.XValues.AddXSeries();
@@ -269,7 +271,7 @@
             return false;
         }
 
-        private double LimitOvertime(double totalMinutes)
+        private static double LimitOvertime(double totalMinutes)
         {
             if (totalMinutes >= 0)
             {
@@ -281,6 +283,16 @@
 
         private void DrawCounselItem(XGraphics g, TimeSpan counselDuration)
         {
+            if (_itemFont == null)
+            {
+                throw new InvalidOperationException(nameof(_itemFont));
+            }
+
+            if (_itemTitleFont == null)
+            {
+                throw new InvalidOperationException(nameof(_itemTitleFont));
+            }
+
             _currentY -= 2 * (double)_itemFont.Height / 5;
 
             string title = Resources.COUNSEL;
@@ -296,7 +308,7 @@
             _currentY += (3 * (double)_itemTitleFont.Height) / 2;
         }
 
-        private TimeSpan NormaliseCounselDuration(TimeSpan counselDuration)
+        private static TimeSpan NormaliseCounselDuration(TimeSpan counselDuration)
         {
             TimeSpan result = counselDuration - TimeSpan.FromSeconds(20);
             if (result.TotalSeconds <= 5)
@@ -314,9 +326,24 @@
 
         private void DrawSummary(XGraphics g, TimeSpan plannedEnd, TimeSpan actualEnd)
         {
+            if (_subTitleFont == null)
+            {
+                throw new InvalidOperationException(nameof(_titleFont));
+            }
+
+            if (_itemFont == null)
+            {
+                throw new InvalidOperationException(nameof(_itemFont));
+            }
+
+            if (_itemTitleFont == null)
+            {
+                throw new InvalidOperationException(nameof(_itemTitleFont));
+            }
+
             _currentY += 2 * _itemTitleFont.Height;
 
-            XPen linePen = new XPen(XColors.Gray);
+            var linePen = new XPen(XColors.Gray);
             g.DrawLine(linePen, _leftMargin, _currentY, _rightX, _currentY);
 
             _currentY += _subTitleFont.Height;
@@ -327,7 +354,7 @@
             var minsOvertime = (actualEnd - plannedEnd).TotalMinutes;
             if (minsOvertime > 1)
             {
-                int mins = (int)Math.Round(minsOvertime);
+                var mins = (int)Math.Round(minsOvertime);
 
                 string msg = mins == 1
                    ? Resources.OVERTIME_BY_1
@@ -337,7 +364,7 @@
             }
             else if (minsOvertime < -1)
             {
-                int mins = Math.Abs((int)Math.Round(minsOvertime));
+                var mins = Math.Abs((int)Math.Round(minsOvertime));
                 string msg = mins == 1
                    ? Resources.UNDERTIME_BY_1
                    : string.Format(Resources.UNDERTIME_BY, mins);
@@ -355,6 +382,11 @@
 
         private void DrawItem(XGraphics g, MeetingTimedItem item)
         {
+            if (_itemTitleFont == null)
+            {
+                throw new InvalidOperationException(nameof(_itemTitleFont));
+            }
+
             var curX = _leftIndent;
             var desc = item.Description;
 
@@ -384,7 +416,7 @@
             // start/end times
             curX = DrawTimesString(g, item, curX, textBrush);
             
-            var ts = item.AdaptedDuration == default(TimeSpan) ? item.PlannedDuration : item.AdaptedDuration;
+            var ts = item.AdaptedDuration == default ? item.PlannedDuration : item.AdaptedDuration;
             DrawItemOvertime(g, curX, duration, ts);
 
             _currentY += (3 * (double)_itemTitleFont.Height) / 2;
@@ -392,6 +424,11 @@
 
         private double DrawTimesString(XGraphics g, MeetingTimedItem item, double curX, XBrush textBrush)
         {
+            if (_stdTimeFont == null)
+            {
+                throw new InvalidOperationException(nameof(_stdTimeFont));
+            }
+
             var timesStr1 = $"  ({item.Start.Hours:D2}:{item.Start.Minutes:D2}";
             var timesStr2 = $":{item.Start.Seconds:D2}";
             var hyphenStr = " - ";
@@ -400,8 +437,12 @@
             var sz2 = g.MeasureString(timesStr2, _itemFont);
 
             g.DrawString(timesStr1, _stdTimeFont, textBrush, new XPoint(curX, _currentY));
-            g.DrawString(timesStr2, _smallTimeFont, textBrush, new XPoint(curX += sz1.Width, _currentY));
-            g.DrawString(hyphenStr, _stdTimeFont, textBrush, new XPoint(curX += sz2.Width, _currentY));
+
+            curX += sz1.Width;
+            g.DrawString(timesStr2, _smallTimeFont, textBrush, new XPoint(curX, _currentY));
+
+            curX += sz2.Width;
+            g.DrawString(hyphenStr, _stdTimeFont, textBrush, new XPoint(curX, _currentY));
 
             var timesStr3 = $"{item.End.Hours:D2}:{item.End.Minutes:D2}";
             var timesStr4 = $":{item.End.Seconds:D2}";
@@ -415,11 +456,15 @@
 
             var sz3 = g.MeasureString(timesStr3, _stdTimeFont);
             var sz4 = g.MeasureString(timesStr4, _smallTimeFont);
-            
-            g.DrawString(timesStr3, _stdTimeFont, textBrush, new XPoint(curX += widthHyphenStr, _currentY));
-            g.DrawString(timesStr4, _smallTimeFont, textBrush, new XPoint(curX += sz3.Width, _currentY));
 
-            g.DrawString(")", _stdTimeFont, textBrush, new XPoint(curX += sz4.Width, _currentY));
+            curX += widthHyphenStr;
+            g.DrawString(timesStr3, _stdTimeFont, textBrush, new XPoint(curX, _currentY));
+
+            curX += sz3.Width;
+            g.DrawString(timesStr4, _smallTimeFont, textBrush, new XPoint(curX, _currentY));
+
+            curX += sz4.Width;
+            g.DrawString(")", _stdTimeFont, textBrush, new XPoint(curX, _currentY));
 
             if (item.AdaptedDuration != item.PlannedDuration)
             {
@@ -429,7 +474,8 @@
                 var adaptedStr = $" {string.Format(Resources.ADAPTED_DURATION, adaptedTimeStr)}";
                 var sz = g.MeasureString(adaptedStr, _smallTimeFont);
 
-                g.DrawString(adaptedStr, _smallTimeFont, _lightGrayBrush, new XPoint(curX += widthHyphenStr, _currentY));
+                curX += widthHyphenStr;
+                g.DrawString(adaptedStr, _smallTimeFont, _lightGrayBrush, new XPoint(curX, _currentY));
 
                 curX += sz.Width;
             }
@@ -447,6 +493,11 @@
 
         private void DrawItemOvertime(XGraphics g, double curX, TimeSpan duration, TimeSpan allowedDuration)
         {
+            if (_stdTimeFont == null)
+            {
+                throw new InvalidOperationException(nameof(_stdTimeFont));
+            }
+
             var overtime = allowedDuration - duration;
             var inTheRed = (int)overtime.TotalSeconds < 0;
             var inTheGreen = (int)overtime.TotalSeconds >= 0;
@@ -472,36 +523,48 @@
             var dotsSz = g.MeasureString(sb.ToString(), _smallTimeFont);
             while (dotsSz.Width < dotsLength)
             {
-                sb.Append(".");
+                sb.Append('.');
                 dotsSz = g.MeasureString(sb.ToString(), _smallTimeFont);
             }
 
             dotsStartX = startX - _stdTimeFont.Height - dotsSz.Width;
             g.DrawString(sb.ToString(), _smallTimeFont, XBrushes.LightGray, new XPoint(dotsStartX, _currentY));
 
+            var inTheRedBrush = inTheRed
+                ? _redBrush
+                : _blackBrush;
+
             var brush = inTheGreen
                 ? _greenBrush
-                : inTheRed
-                    ? _redBrush
-                    : _blackBrush;
+                : inTheRedBrush;
 
             g.DrawString(s, _durationFont, brush, new XPoint(startX, _currentY));
         }
 
         private void CalcMetrics(PdfPage page)
         {
+            if (_titleFont == null)
+            {
+                throw new InvalidOperationException(nameof(_titleFont));
+            }
+
             var indentDelta = (double)_titleFont.Height / 3;
 
             _leftMargin = 2 * _titleFont.Height;
             _leftIndent = _leftMargin + indentDelta;
-            _topMargin = 2 * _titleFont.Height;
-            _currentY = _topMargin;
+            var topMargin = 2 * _titleFont.Height;
+            _currentY = topMargin;
             _rightX = page.Width - _leftMargin;
             _rightXIndent = _rightX - indentDelta;
         }
 
         private void DrawTitle(XGraphics g, string title)
         {
+            if (_titleFont == null)
+            {
+                throw new InvalidOperationException(nameof(_titleFont));
+            }
+
             g.DrawString(title, _titleFont, _blackBrush, new XPoint(_leftMargin, _currentY));
 
             _currentY += (5 * (double)_titleFont.Height) / 6;
@@ -523,10 +586,10 @@
 
         private string GetOutputFileName()
         {
-            DateTime today = DateTime.Today;
+            var today = DateTime.Today;
             var result = Path.Combine(_outputFolder, $"{today.Year}-{today.Month:D2}-{today.Day:D2}.pdf");
 
-            int counter = 1;
+            var counter = 1;
             while (File.Exists(result))
             {
                 result = Path.Combine(_outputFolder, $"{today.Year}-{today.Month:D2}-{today.Day:D2} ({counter}).pdf");

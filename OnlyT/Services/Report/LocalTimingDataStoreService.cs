@@ -17,10 +17,10 @@
         private readonly ICommandLineService? _commandLineService;
         private readonly IDateTimeService _dateTimeService;
 
-        private LocalData _localData;
+        private LocalData? _localData;
         private string? _currentPartDescription;
         private bool _currentPartIsStudentTalk;
-        private MeetingTimes _mtgTimes;
+        private MeetingTimes? _mtgTimes;
         private bool _initialised;
         
         public LocalTimingDataStoreService(
@@ -31,14 +31,14 @@
             _dateTimeService = dateTimeService;
         }
 
-        public MeetingTimes MeetingTimes => _mtgTimes;
+        public MeetingTimes? MeetingTimes => _mtgTimes;
 
         public DateTime LastTimerStop
         {
             get
             {
                 EnsureInitialised();
-                return _mtgTimes.LastTimerStop;
+                return _mtgTimes?.LastTimerStop ?? DateTime.MinValue;
             }
         }
 
@@ -47,7 +47,7 @@
             try
             {
                 EnsureInitialised();
-                _localData.DeleteAllMeetingTimesData();
+                _localData?.DeleteAllMeetingTimesData();
             }
             catch (Exception ex)
             {
@@ -162,7 +162,10 @@
             try
             {
                 EnsureInitialised();
-                return _localData?.GetMeetingTimes(_mtgTimes.Session);
+
+                return _mtgTimes == null 
+                    ? null 
+                    : _localData?.GetMeetingTimes(_mtgTimes.Session);
             }
             catch (Exception ex)
             {
@@ -176,19 +179,24 @@
         {
             EnsureInitialised();
 
+            if (_mtgTimes == null)
+            {
+                return false;
+            }
+
             bool valid =
-               _mtgTimes.MeetingStart != default(TimeSpan) &&
-               _mtgTimes.MeetingActualEnd != default(TimeSpan) &&
+               _mtgTimes.MeetingStart != default &&
+               _mtgTimes.MeetingActualEnd != default &&
                Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes) < MeetingMinsOutOfRange;
 
             if (!valid)
             {
-                if (_mtgTimes.MeetingStart == default(TimeSpan))
+                if (_mtgTimes.MeetingStart == default)
                 {
                     Log.Logger.Warning("Meeting Start not set");
                 }
 
-                if (_mtgTimes.MeetingActualEnd == default(TimeSpan))
+                if (_mtgTimes.MeetingActualEnd == default)
                 {
                     Log.Logger.Warning("Meeting End not set");
                 }
@@ -210,7 +218,7 @@
         public void PurgeCurrentMeetingTimes()
         {
             EnsureInitialised();
-            _mtgTimes.Purge();
+            _mtgTimes?.Purge();
         }
 
         public void Save()
@@ -218,7 +226,7 @@
             try
             {
                 EnsureInitialised();
-                _localData.Save(_mtgTimes);
+                _localData?.Save(_mtgTimes);
             }
             catch (Exception ex)
             {

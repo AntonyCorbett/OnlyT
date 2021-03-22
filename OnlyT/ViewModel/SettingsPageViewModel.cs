@@ -79,7 +79,7 @@ namespace OnlyT.ViewModel
             _adaptiveModes = GetAdaptiveModes();
             _timeOfDayModes = GetTimeOfDayModes();
             _ports = GetPorts().ToArray();
-            _persistDurationItems = optionsService.Options.GetPersistDurationItems();
+            _persistDurationItems = Options.GetPersistDurationItems();
             _loggingLevels = GetLoggingLevels();
 
             // commands...
@@ -91,11 +91,11 @@ namespace OnlyT.ViewModel
 
         public static string PageName => "SettingsPage";
 
-        public BitmapSource ElevatedShield => NativeMethods.GetElevatedShieldBitmap();
+        public static BitmapSource ElevatedShield => NativeMethods.GetElevatedShieldBitmap();
 
         public IEnumerable<MonitorItem> Monitors => _monitors;
 
-        public string MonitorId
+        public string? MonitorId
         {
             get => _optionsService.Options.TimerMonitorId;
             set
@@ -120,7 +120,7 @@ namespace OnlyT.ViewModel
         
         public bool AllowCountdownMonitorSelection => !IsCountdownMonitorViaCommandLine && !CountdownMonitorIsWindowed;
         
-        public string CountdownMonitorId
+        public string? CountdownMonitorId
         {
             get => _optionsService.Options.CountdownMonitorId;
             set
@@ -139,7 +139,7 @@ namespace OnlyT.ViewModel
 
         public IEnumerable<LanguageItem> Languages => _languages;
 
-        public string LanguageId
+        public string? LanguageId
         {
             get => _optionsService.Options.Culture;
             set
@@ -798,13 +798,13 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public string ApiCode
+        public string? ApiCode
         {
             get => _optionsService.Options.ApiCode;
             set
             {
-                var val = value.Trim();
-                if (!_optionsService.Options.ApiCode.Equals(val))
+                var val = value?.Trim();
+                if (_optionsService.Options.ApiCode != val)
                 {
                     _optionsService.Options.ApiCode = val;
                     OnPropertyChanged();
@@ -840,7 +840,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public string MobileIpAddress
+        public static string MobileIpAddress
         {
             get
             {
@@ -854,7 +854,7 @@ namespace OnlyT.ViewModel
             }
         }
 
-        public string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersionString());
+        public static string AppVersionStr => string.Format(Properties.Resources.APP_VER, VersionDetection.GetCurrentVersionString());
 
         public RelayCommand NavigateOperatorCommand { get; set; }
 
@@ -920,17 +920,17 @@ namespace OnlyT.ViewModel
             }
         }
 
-        private FullScreenClockModeItem[] GetTimeOfDayModes()
+        private static FullScreenClockModeItem[] GetTimeOfDayModes()
         {
             return new[]
             {
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.Analogue, Name = Properties.Resources.FULL_SCREEN_ANALOGUE },
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.Digital, Name = Properties.Resources.FULL_SCREEN_DIGITAL },
-                new FullScreenClockModeItem { Mode = FullScreenClockMode.AnalogueAndDigital, Name = Properties.Resources.FULL_SCREEN_BOTH }
+                new FullScreenClockModeItem(FullScreenClockMode.Analogue, Properties.Resources.FULL_SCREEN_ANALOGUE),
+                new FullScreenClockModeItem(FullScreenClockMode.Digital, Properties.Resources.FULL_SCREEN_DIGITAL),
+                new FullScreenClockModeItem(FullScreenClockMode.AnalogueAndDigital, Properties.Resources.FULL_SCREEN_BOTH)
             };
         }
 
-        private AdaptiveModeItem[] GetAdaptiveModes()
+        private static AdaptiveModeItem[] GetAdaptiveModes()
         {
             return new[]
             {
@@ -940,7 +940,7 @@ namespace OnlyT.ViewModel
             };
         }
 
-        private IEnumerable<WebClockPortItem> GetPorts()
+        private static IEnumerable<WebClockPortItem> GetPorts()
         {
             var result = new List<WebClockPortItem>();
 
@@ -989,7 +989,7 @@ namespace OnlyT.ViewModel
             _bellService.Play(_optionsService.Options.BellVolumePercent);
         }
 
-        private AutoMeetingTime[] GetAutoMeetingTimes()
+        private static AutoMeetingTime[] GetAutoMeetingTimes()
         {
             return new[]
             {
@@ -998,7 +998,7 @@ namespace OnlyT.ViewModel
             };
         }
 
-        private CountdownElementsToShowItem[] GetCountdownElementsToShowItems()
+        private static CountdownElementsToShowItem[] GetCountdownElementsToShowItems()
         {
             return new[]
             {
@@ -1008,38 +1008,38 @@ namespace OnlyT.ViewModel
             };
         }
 
-        private CountdownDurationItem[] GetCountdownDurationItems()
+        private static CountdownDurationItem[] GetCountdownDurationItems()
         {
-            return _optionsService.Options.GetCountdownDurationItems();
+            return Options.GetCountdownDurationItems();
         }
 
-        private OnScreenLocationItem[] GetScreenLocationItems()
-        {
-            return new[]
-            {
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_CENTRE, Location = ScreenLocation.Centre },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_LEFT, Location = ScreenLocation.Left },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_TOP, Location = ScreenLocation.Top },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_RIGHT, Location = ScreenLocation.Right },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_BOTTOM, Location = ScreenLocation.Bottom },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_TOP_LEFT, Location = ScreenLocation.TopLeft },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_TOP_RIGHT, Location = ScreenLocation.TopRight },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_BOTTOM_LEFT, Location = ScreenLocation.BottomLeft },
-                new OnScreenLocationItem { Name = Properties.Resources.SCREEN_LOCATION_BOTTOM_RIGHT, Location = ScreenLocation.BottomRight },
-            };
-        }
-
-        private OperatingModeItem[] GetOperatingModes()
+        private static OnScreenLocationItem[] GetScreenLocationItems()
         {
             return new[]
             {
-                new OperatingModeItem { Name = Properties.Resources.OP_MODE_MANUAL, Mode = OperatingMode.Manual },
-                new OperatingModeItem { Name = Properties.Resources.OP_MODE_FILE, Mode = OperatingMode.ScheduleFile },
-                new OperatingModeItem { Name = Properties.Resources.OP_MODE_AUTO, Mode = OperatingMode.Automatic }
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_CENTRE, ScreenLocation.Centre),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_LEFT, ScreenLocation.Left),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_TOP, ScreenLocation.Top),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_RIGHT, ScreenLocation.Right),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_BOTTOM, ScreenLocation.Bottom),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_TOP_LEFT, ScreenLocation.TopLeft),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_TOP_RIGHT, ScreenLocation.TopRight),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_BOTTOM_LEFT, ScreenLocation.BottomLeft),
+                new OnScreenLocationItem(Properties.Resources.SCREEN_LOCATION_BOTTOM_RIGHT, ScreenLocation.BottomRight),
             };
         }
 
-        private LanguageItem[] GetSupportedLanguages()
+        private static OperatingModeItem[] GetOperatingModes()
+        {
+            return new[]
+            {
+                new OperatingModeItem(Properties.Resources.OP_MODE_MANUAL, OperatingMode.Manual),
+                new OperatingModeItem(Properties.Resources.OP_MODE_FILE, OperatingMode.ScheduleFile),
+                new OperatingModeItem(Properties.Resources.OP_MODE_AUTO, OperatingMode.Automatic)
+            };
+        }
+
+        private static LanguageItem[] GetSupportedLanguages()
         {
             var result = new List<LanguageItem>();
 
@@ -1052,11 +1052,7 @@ namespace OnlyT.ViewModel
                     try
                     {
                         var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
-                        result.Add(new LanguageItem
-                        {
-                            LanguageId = c.Name,
-                            LanguageName = c.EnglishName
-                        });
+                        result.Add(new LanguageItem(c.Name, c.EnglishName));
                     }
                     catch (CultureNotFoundException)
                     {
@@ -1066,15 +1062,9 @@ namespace OnlyT.ViewModel
             }
 
             // the native language
-            {
-                var c = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
-                result.Add(new LanguageItem
-                {
-                    LanguageId = c.Name,
-                    LanguageName = c.EnglishName
-                });
-            }
-
+            var cNative = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
+            result.Add(new LanguageItem(cNative.Name, cNative.EnglishName));
+            
             result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
 
             return result.ToArray();
@@ -1085,11 +1075,7 @@ namespace OnlyT.ViewModel
             var result = new List<MonitorItem>
             {
                 // empty (i.e. no timer monitor)
-                new MonitorItem
-                {
-                    MonitorName = Properties.Resources.MONITOR_NONE,
-                    FriendlyName = Properties.Resources.MONITOR_NONE
-                } 
+                new MonitorItem(null, Properties.Resources.MONITOR_NONE, null, Properties.Resources.MONITOR_NONE)
             };  
 
             result.AddRange(_monitorsService.GetSystemMonitors());
@@ -1102,23 +1088,19 @@ namespace OnlyT.ViewModel
             WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
         }
 
-        private LoggingLevel[] GetLoggingLevels()
+        private static LoggingLevel[] GetLoggingLevels()
         {
             var result = new List<LoggingLevel>();
 
             foreach (LogEventLevel v in Enum.GetValues(typeof(LogEventLevel)))
             {
-                result.Add(new LoggingLevel
-                {
-                    Level = v,
-                    Name = v.GetDescriptiveName()
-                });
+                result.Add(new LoggingLevel(v.GetDescriptiveName(), v));
             }
 
             return result.ToArray();
         }
 
-        private MonitorChangeDescription GetChangeInMonitor(string monitorId, bool newWindowedMode)
+        private static MonitorChangeDescription GetChangeInMonitor(string? monitorId, bool newWindowedMode)
         {
             if (newWindowedMode)
             {
@@ -1132,7 +1114,7 @@ namespace OnlyT.ViewModel
                 : MonitorChangeDescription.WindowToMonitor;
         }
 
-        private MonitorChangeDescription GetChangeInMonitor(string origMonitorId, string newMonitorId)
+        private static MonitorChangeDescription GetChangeInMonitor(string? origMonitorId, string? newMonitorId)
         {
             if (string.IsNullOrEmpty(origMonitorId))
             {

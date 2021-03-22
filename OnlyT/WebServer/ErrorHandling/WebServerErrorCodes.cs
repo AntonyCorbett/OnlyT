@@ -6,84 +6,50 @@
     {
         public static string GetDescription(WebServerErrorCode code)
         {
-            switch (code)
+            return code switch
             {
-                case WebServerErrorCode.Success:
-                    return "Success";
-
-                case WebServerErrorCode.TimerDoesNotExist:
-                    return "Timer does not exist";
-
-                case WebServerErrorCode.UriTooManySegments:
-                case WebServerErrorCode.UriTooFewSegments:
-                case WebServerErrorCode.BadPrefix:
-                    return "Malformed URI";
-
-                case WebServerErrorCode.BadHttpVerb:
-                    return "Wrong http method used";
-
-                case WebServerErrorCode.ApiVersionNotSupported:
-                    return "API version not supported";
-
-                case WebServerErrorCode.NotAvailableInApiVersion:
-                    return "Not available in selected API version";
-
-                case WebServerErrorCode.BadApiCode:
-                    return "Invalid API code";
-
-                case WebServerErrorCode.ApiNotEnabled:
-                    return "API is not enabled";
-
-                case WebServerErrorCode.SubscriptionAddressNotFound:
-                    return "Subscription address not found";
-
-                case WebServerErrorCode.SubscriptionPortNotSpecified:
-                    return "Subscription port not found";
-
-                case WebServerErrorCode.Throttled:
-                    return "Client throttled";
-
+                WebServerErrorCode.Success => "Success",
+                WebServerErrorCode.TimerDoesNotExist => "Timer does not exist",
+                WebServerErrorCode.UriTooManySegments => "Malformed URI",
+                WebServerErrorCode.UriTooFewSegments => "Malformed URI",
+                WebServerErrorCode.BadPrefix => "Malformed URI",
+                WebServerErrorCode.BadHttpVerb => "Wrong http method used",
+                WebServerErrorCode.ApiVersionNotSupported => "API version not supported",
+                WebServerErrorCode.NotAvailableInApiVersion => "Not available in selected API version",
+                WebServerErrorCode.BadApiCode => "Invalid API code",
+                WebServerErrorCode.ApiNotEnabled => "API is not enabled",
+                WebServerErrorCode.SubscriptionAddressNotFound => "Subscription address not found",
+                WebServerErrorCode.SubscriptionPortNotSpecified => "Subscription port not found",
+                WebServerErrorCode.Throttled => "Client throttled",
                 // ReSharper disable once RedundantCaseLabel
-                case WebServerErrorCode.UnknownError:
-                default:
-                    return "Unknown error";
-            }
+                WebServerErrorCode.UnknownError => "Unknown error",
+                _ => "Unknown error"
+            };
         }
 
         public static HttpStatusCode GetHttpErrorCode(WebServerErrorCode code)
         {
-            switch (code)
+            return code switch
             {
-                case WebServerErrorCode.TimerDoesNotExist:
-                    return HttpStatusCode.NotFound;
+                WebServerErrorCode.TimerDoesNotExist => HttpStatusCode.NotFound,
+                WebServerErrorCode.UriTooManySegments => HttpStatusCode.BadRequest,
+                WebServerErrorCode.UriTooFewSegments => HttpStatusCode.BadRequest,
+                WebServerErrorCode.BadPrefix => HttpStatusCode.BadRequest,
+                WebServerErrorCode.ApiVersionNotSupported => HttpStatusCode.BadRequest,
+                WebServerErrorCode.NotAvailableInApiVersion => HttpStatusCode.BadRequest,
+                WebServerErrorCode.SubscriptionAddressNotFound => HttpStatusCode.BadRequest,
+                WebServerErrorCode.SubscriptionPortNotSpecified => HttpStatusCode.BadRequest,
 
-                case WebServerErrorCode.UriTooManySegments:
-                case WebServerErrorCode.UriTooFewSegments:
-                case WebServerErrorCode.BadPrefix:
-                case WebServerErrorCode.ApiVersionNotSupported:
-                case WebServerErrorCode.NotAvailableInApiVersion:
-                case WebServerErrorCode.SubscriptionAddressNotFound:
-                case WebServerErrorCode.SubscriptionPortNotSpecified:
-                    return HttpStatusCode.BadRequest;
-
-                case WebServerErrorCode.Throttled: // should be 429 but not yet available in HttpStatusCode
-                    return HttpStatusCode.ServiceUnavailable;
-
-                case WebServerErrorCode.UnknownError:
-                    return HttpStatusCode.InternalServerError;
-
-                case WebServerErrorCode.BadHttpVerb:
-                    return HttpStatusCode.MethodNotAllowed;
-
-                case WebServerErrorCode.BadApiCode:
-                case WebServerErrorCode.ApiNotEnabled:
-                    return HttpStatusCode.Unauthorized;
-
+                // should be 429 but not yet available in HttpStatusCode
+                WebServerErrorCode.Throttled => HttpStatusCode.ServiceUnavailable,
+                WebServerErrorCode.UnknownError => HttpStatusCode.InternalServerError,
+                WebServerErrorCode.BadHttpVerb => HttpStatusCode.MethodNotAllowed,
+                WebServerErrorCode.BadApiCode => HttpStatusCode.Unauthorized,
+                WebServerErrorCode.ApiNotEnabled => HttpStatusCode.Unauthorized,
                 // ReSharper disable once RedundantCaseLabel
-                case WebServerErrorCode.Success:
-                default:
-                    return HttpStatusCode.OK;
-            }
+                WebServerErrorCode.Success => HttpStatusCode.OK,
+                _ => HttpStatusCode.OK
+            };
         }
     }
 }

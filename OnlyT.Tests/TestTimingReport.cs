@@ -15,9 +15,9 @@
         private const int TotalMtgLengthMins = 105;
 
         // 3 mins 20 secs for interim song
-        private readonly TimeSpan _interimDuration = new TimeSpan(0, 3, 20);
+        private readonly TimeSpan _interimDuration = new(0, 3, 20);
 
-        private readonly Random _random = new Random();
+        private readonly Random _random = new();
 
         private readonly bool _useRandomTimes = true;
 
@@ -43,7 +43,7 @@
             WriteReport(dateTimeService, new QueryWeekendService(), lastMtgTimes);
         }
 
-        private void WriteReport(
+        private static void WriteReport(
             DateTimeServiceForTests dateTimeService, 
             IQueryWeekendService queryWeekendService,
             MeetingTimes lastMtgTimes)
@@ -101,9 +101,8 @@
 
             service.Save();
         }
-
-        [SuppressMessage("ReSharper", "ParameterOnlyUsedForPreconditionCheck.Local", Justification = "false positive")]
-        private MeetingTimes StoreMidweekData(
+        
+        private MeetingTimes? StoreMidweekData(
             int week,
             int weekCount,
             DateTime dateOfMidweekMtg,
@@ -198,6 +197,18 @@
             }
         }
 
+        private void InsertTimer(
+            LocalTimingDataStoreService service,
+            DateTimeServiceForTests dateTimeService,
+            string talkDescription,
+            bool isSongSegment,
+            bool isStudentTalk,
+            int targetMins,
+            bool addChangeoverTime = true)
+        {
+            InsertTimer(service, dateTimeService, talkDescription, isSongSegment, isStudentTalk, TimeSpan.FromMinutes(targetMins), addChangeoverTime);
+        }
+
         private void AddSpeakerChangeoverTime(DateTimeServiceForTests dateTimeService, bool isStudentTalk)
         {
             if (_useRandomTimes)
@@ -213,19 +224,7 @@
             }
         }
 
-        private void InsertTimer(
-            LocalTimingDataStoreService service,
-            DateTimeServiceForTests dateTimeService,
-            string talkDescription,
-            bool isSongSegment,
-            bool isStudentTalk,
-            int targetMins,
-            bool addChangeoverTime = true)
-        {
-            InsertTimer(service, dateTimeService, talkDescription, isSongSegment, isStudentTalk, TimeSpan.FromMinutes(targetMins), addChangeoverTime);
-        }
-
-        private DateTime GetNearestDayOnOrAfter(DateTime dt, DayOfWeek dayOfWeek)
+        private static DateTime GetNearestDayOnOrAfter(DateTime dt, DayOfWeek dayOfWeek)
         {
             return dt.AddDays(((int)dayOfWeek - (int)dt.DayOfWeek + 7) % 7);
         }
@@ -260,9 +259,9 @@
 
             public DateTime Now()
             {
-                if (_value == default(DateTime))
+                if (_value == default)
                 {
-                    throw new ArgumentException();
+                    throw new NotSupportedException("date was not set");
                 }
 
                 return _value;

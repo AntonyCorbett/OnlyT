@@ -33,8 +33,7 @@ namespace OnlyT
     {
         private readonly string _appString = "OnlyTMeetingTimer";
         private Mutex? _appMutex;
-        private static readonly Lazy<CommandLineService> CommandLineServiceInstance =
-            new Lazy<CommandLineService>();
+        private static readonly Lazy<CommandLineService> CommandLineServiceInstance = new();
 
         protected override void OnExit(ExitEventArgs e)
         {
@@ -108,7 +107,7 @@ namespace OnlyT
             return new DateTimeService(CommandLineServiceInstance.Value.DateTimeOnLaunch);
         }
 
-        private void ConfigureLogger()
+        private static void ConfigureLogger()
         {
             string logsDirectory = FileUtils.GetLogFolder();
 

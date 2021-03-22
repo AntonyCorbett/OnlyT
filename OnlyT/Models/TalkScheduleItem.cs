@@ -20,13 +20,17 @@ namespace OnlyT.Models
         private bool _autoBell;
         private bool? _originalAutoBell;
 
-        public TalkScheduleItem()
+        public TalkScheduleItem(TalkTypesAutoMode tt, string name, string meetingSectionNameInternal, string meetingSectionNameLocalised)
+            : this((int)tt, name, meetingSectionNameInternal, meetingSectionNameLocalised)
         {
         }
 
-        public TalkScheduleItem(TalkTypesAutoMode tt)
+        public TalkScheduleItem(int talkId, string name, string meetingSectionNameInternal, string meetingSectionNameLocalised)
         {
-            Id = (int)tt;
+            Id = talkId;
+            Name = name;
+            MeetingSectionNameInternal = meetingSectionNameInternal;
+            MeetingSectionNameLocalised = meetingSectionNameLocalised;
         }
 
         public int Id { get; set; }

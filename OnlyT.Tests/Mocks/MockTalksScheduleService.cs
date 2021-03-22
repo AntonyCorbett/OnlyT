@@ -29,10 +29,8 @@
 
                 for (int n = 0; n < _numTalks; ++n)
                 {
-                    _talks.Add(new TalkScheduleItem
+                    _talks.Add(new TalkScheduleItem(talkId + n, $"Talk {n + 1}", string.Empty, string.Empty)
                     {
-                        Id = talkId + n, 
-                        Name = $"Talk {n + 1}", 
                         OriginalDuration = TimeSpan.FromMinutes(n + 1) 
                     });
                 }

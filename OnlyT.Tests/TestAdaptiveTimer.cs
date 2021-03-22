@@ -14,7 +14,7 @@
     [TestClass]
     public class TestAdaptiveTimer
     {
-        private readonly DateTime _theDate = new DateTime(2020, 1, 6);
+        private readonly DateTime _theDate = new(2020, 1, 6);
         private List<TalkScheduleItem>? _items;
         private Mock<ITalkScheduleService>? _scheduleService;
         private MockDateTimeService? _dateTimeService;
@@ -142,7 +142,7 @@
             TestManuallyAdjustedSchedule4(_scheduleService, _dateTimeService, _mtgStart, _adaptiveTimerService);
         }
 
-        private void TestPerfectSchedule(
+        private static void TestPerfectSchedule(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService, 
             DateTime mtgStart, 
@@ -170,7 +170,7 @@
             Assert.IsNull(adaptedDuration3);
         }
 
-        private void TestLateSchedule(
+        private static void TestLateSchedule(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -205,7 +205,7 @@
             concluding.AdaptedDuration = adaptedDuration3;
         }
 
-        private void TestLateSchedule2(
+        private static void TestLateSchedule2(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -249,7 +249,7 @@
             concluding.AdaptedDuration = adaptedDuration3;
         }
 
-        private void TestEarlySchedule(
+        private static void TestEarlySchedule(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -284,7 +284,7 @@
             concluding.AdaptedDuration = adaptedDuration3;
         }
 
-        private void TestManuallyAdjustedSchedule1(
+        private static void TestManuallyAdjustedSchedule1(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -317,7 +317,7 @@
             Assert.IsNull(adaptedDuration3);
         }
 
-        private void TestManuallyAdjustedSchedule2(
+        private static void TestManuallyAdjustedSchedule2(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -351,7 +351,7 @@
             Assert.IsNull(adaptedDuration3);
         }
 
-        private void TestManuallyAdjustedSchedule3(
+        private static void TestManuallyAdjustedSchedule3(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -389,7 +389,7 @@
             concluding.AdaptedDuration = adaptedDuration3;
         }
 
-        private void TestManuallyAdjustedSchedule4(
+        private static void TestManuallyAdjustedSchedule4(
             Mock<ITalkScheduleService> scheduleService,
             MockDateTimeService dateTimeService,
             DateTime mtgStart,
@@ -435,7 +435,7 @@
             return TalkScheduleAuto.GetMidweekScheduleForTesting(theDate, isJanuary2020OrLater).ToList();
         }
 
-        private void AssertTimeSpansAboutEqual(TimeSpan ts1, TimeSpan ts2)
+        private static void AssertTimeSpansAboutEqual(TimeSpan ts1, TimeSpan ts2)
         {
             Assert.IsTrue(Math.Abs(ts1.TotalSeconds - ts2.TotalSeconds) < 2);
         }

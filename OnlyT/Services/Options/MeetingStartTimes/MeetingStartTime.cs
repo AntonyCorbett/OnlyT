@@ -136,11 +136,7 @@
                 var dayName = getDayNameFunction(dayOfWeek);
                 if (text.IndexOf(dayName, StringComparison.OrdinalIgnoreCase) > -1)
                 {
-                    return new DayOfWeekAndUserSuppliedDayName
-                    {
-                        DayOfWeek = dayOfWeek,
-                        UserSuppliedDayName = dayName
-                    };
+                    return new DayOfWeekAndUserSuppliedDayName(dayOfWeek, dayName);
                 }
             }
 

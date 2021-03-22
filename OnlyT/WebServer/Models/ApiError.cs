@@ -19,6 +19,6 @@
         public int ErrorCode { get; set; }
 
         [JsonProperty(PropertyName = "errorMessage")]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 }

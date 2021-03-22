@@ -6,28 +6,17 @@
     {
         public static string GetDescriptiveName(this LogEventLevel level)
         {
-            switch (level)
+            return level switch
             {
-                case LogEventLevel.Debug:
-                    return Properties.Resources.LOG_LEVEL_DEBUG;
-
-                case LogEventLevel.Error:
-                    return Properties.Resources.LOG_LEVEL_ERROR;
-
-                case LogEventLevel.Fatal:
-                    return Properties.Resources.LOG_LEVEL_FATAL;
-
-                case LogEventLevel.Verbose:
-                    return Properties.Resources.LOG_LEVEL_VERBOSE;
-
-                case LogEventLevel.Warning:
-                    return Properties.Resources.LOG_LEVEL_WARNING;
-
-                default:
+                LogEventLevel.Debug => Properties.Resources.LOG_LEVEL_DEBUG,
+                LogEventLevel.Error => Properties.Resources.LOG_LEVEL_ERROR,
+                LogEventLevel.Fatal => Properties.Resources.LOG_LEVEL_FATAL,
+                LogEventLevel.Verbose => Properties.Resources.LOG_LEVEL_VERBOSE,
+                LogEventLevel.Warning => Properties.Resources.LOG_LEVEL_WARNING,
                 // ReSharper disable once RedundantCaseLabel
-                case LogEventLevel.Information:
-                    return Properties.Resources.LOG_LEVEL_INFORMATION;
-            }
+                LogEventLevel.Information => Properties.Resources.LOG_LEVEL_INFORMATION,
+                _ => Properties.Resources.LOG_LEVEL_INFORMATION
+            };
         }
     }
 }

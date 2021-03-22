@@ -339,12 +339,12 @@
             return new Point(x, y);
         }
 
-        private double CalculateAngleSeconds(DateTime dt)
+        private static double CalculateAngleSeconds(DateTime dt)
         {
             return dt.Second * 6;
         }
 
-        private double CalculateAngleMinutes(DateTime dt)
+        private static double CalculateAngleMinutes(DateTime dt)
         {
             return 
                 (dt.Minute * 6) + 
@@ -352,13 +352,13 @@
                 (dt.Millisecond * 0.0001);
         }
 
-        private double CalculateAngleHours(DateTime dt)
+        private static double CalculateAngleHours(DateTime dt)
         {
             var hr = dt.Hour >= 12 ? dt.Hour - 12 : dt.Hour;
             return (hr * 30) + (((double)dt.Minute / 60) * 30);
         }
 
-        private void PositionClockHand(Line hand, double angle, double shadowOpacity)
+        private static void PositionClockHand(Line hand, double angle, double shadowOpacity)
         {
             ((DropShadowEffect)hand.Effect).Opacity = shadowOpacity;
             ((DropShadowEffect)hand.Effect).Direction = angle;
@@ -486,7 +486,7 @@
             }
         }
 
-        private double AnimateHand(Line hand, double currentAngle, double targetAngle, double shadowOpacity)
+        private static double AnimateHand(Line hand, double currentAngle, double targetAngle, double shadowOpacity)
         {
             if (Math.Abs(currentAngle - targetAngle) > AngleTolerance)
             {
@@ -512,7 +512,7 @@
                Math.Abs(_animationCurrentAngles.HoursAngle - _animationTargetAngles.HoursAngle) > AngleTolerance;
         }
 
-        private TextBlock CreateHourNumberTextBlock(int hour)
+        private static TextBlock CreateHourNumberTextBlock(int hour)
         {
             return new()
             {
@@ -525,7 +525,7 @@
             };
         }
 
-        private void GenerateHourNumbers(Canvas canvas)
+        private static void GenerateHourNumbers(Canvas canvas)
         {
             double clockRadius = canvas.Width / 2;
             double centrePointRadius = clockRadius - 50;
@@ -552,7 +552,7 @@
             }
         }
 
-        private void GenerateHourMarkers(Canvas canvas)
+        private static void GenerateHourMarkers(Canvas canvas)
         {
             var angle = 0;
             for (var n = 0; n < 4; ++n)
@@ -588,7 +588,7 @@
             }
         }
 
-        private Line CreateMajorHourMarker()
+        private static Line CreateMajorHourMarker()
         {
             return new()
             {
@@ -601,7 +601,7 @@
             };
         }
 
-        private Line CreateMinorHourMarker()
+        private static Line CreateMinorHourMarker()
         {
             return new()
             {
@@ -614,7 +614,7 @@
             };
         }
 
-        private Line CreateMinuteMarker()
+        private static Line CreateMinuteMarker()
         {
             return new()
             {

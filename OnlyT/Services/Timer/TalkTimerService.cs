@@ -12,8 +12,8 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class TalkTimerService : ITalkTimerService
     {
-        private readonly Stopwatch _stopWatch = new Stopwatch();
-        private readonly DispatcherTimer _timer = new DispatcherTimer(DispatcherPriority.Render);
+        private readonly Stopwatch _stopWatch = new();
+        private readonly DispatcherTimer _timer = new(DispatcherPriority.Render);
         private readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
         private int _targetSecs = 600;
         private int? _talkId;
@@ -27,9 +27,9 @@
             _timer.Tick += TimerElapsedHandler;
         }
 
-        public event EventHandler<TimerChangedEventArgs> TimerChangedEvent;
+        public event EventHandler<TimerChangedEventArgs>? TimerChangedEvent;
 
-        public event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
+        public event EventHandler<TimerStartStopEventArgs>? TimerStartStopFromApiEvent;
 
         /// <summary>
         /// Gets a value indicating whether the timer is running
@@ -158,7 +158,7 @@
             TimerChangedEvent?.Invoke(this, e);
         }
 
-        private void TimerElapsedHandler(object sender, EventArgs e)
+        private void TimerElapsedHandler(object? sender, EventArgs e)
         {
             _timer.Stop();
             UpdateTimerValue();

@@ -6,6 +6,8 @@
 
     internal static class WebUtils
     {
+        const string UserAgentString = @"OnlyT (+https://soundboxsoftware.com)";
+
         public static string? LoadWithUserAgent(string url)
         {
             const int attempts = 3;
@@ -36,17 +38,10 @@
 
         private static string InternalLoadWithUserAgent(string url)
         {
-            using (var wc = new WebClient())
-            {
-                wc.Encoding = Encoding.UTF8;
-                wc.Headers.Add("user-agent", GetUserAgentString());
-                return wc.DownloadString(url);
-            }
-        }
-
-        private static string GetUserAgentString()
-        {
-            return "OnlyT (+https://soundboxsoftware.com)";
+            using var wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            wc.Headers.Add("user-agent", UserAgentString);
+            return wc.DownloadString(url);
         }
     }
 }

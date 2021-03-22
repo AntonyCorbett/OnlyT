@@ -4,7 +4,7 @@
 
     public class MeetingTimedItem
     {
-        public string Description { get; set; }
+        public string Description { get; init; } = null!;
         
         public TimeSpan Start { get; set; }
 

@@ -130,13 +130,16 @@ namespace OnlyT.Windows
             
             var m = (MainViewModel)DataContext;
 
-            if (m.CurrentPageName.Equals(OperatorPageViewModel.PageName))
+            if (m.CurrentPageName != null)
             {
-                SaveOperatorWindowSize();
-            }
-            else if (m.CurrentPageName.Equals(SettingsPageViewModel.PageName))
-            {
-                SaveSettingsWindowSize();
+                if (m.CurrentPageName.Equals(OperatorPageViewModel.PageName))
+                {
+                    SaveOperatorWindowSize();
+                }
+                else if (m.CurrentPageName.Equals(SettingsPageViewModel.PageName))
+                {
+                    SaveSettingsWindowSize();
+                }
             }
 
             m.Closing(e);

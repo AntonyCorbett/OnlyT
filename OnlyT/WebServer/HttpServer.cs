@@ -46,7 +46,7 @@
                 dateTimeService);
         }
 
-        public event EventHandler<TimerInfoEventArgs> RequestForTimerDataEvent;
+        public event EventHandler<TimerInfoEventArgs>? RequestForTimerDataEvent;
 
         public void Dispose()
         {
@@ -197,7 +197,7 @@
             {
                 _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
 
-                WebPageController controller = new WebPageController(WebPageTypes.Clock);
+                var controller = new WebPageController(WebPageTypes.Clock);
                 controller.HandleRequestForWebPage(response);
             }
         }
@@ -208,7 +208,7 @@
             {
                 _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
 
-                WebPageController controller = new WebPageController(WebPageTypes.Timers);
+                var controller = new WebPageController(WebPageTypes.Timers);
                 controller.HandleRequestForWebPage(response);
             }
         }
@@ -223,9 +223,8 @@
 
                 var timerInfo = new TimerInfoEventArgs();
                 OnRequestForTimerDataEvent(timerInfo);
-
-                WebPageController controller = new WebPageController(WebPageTypes.Clock);
-                controller.HandleRequestForTimerData(response, timerInfo, _dateTimeService.Now());
+                
+                WebPageController.HandleRequestForTimerData(response, timerInfo, _dateTimeService.Now());
             }
         }
 

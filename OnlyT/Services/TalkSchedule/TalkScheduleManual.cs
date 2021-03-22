@@ -12,14 +12,12 @@
         {
             return new List<TalkScheduleItem>
             {
-                new TalkScheduleItem
+                new TalkScheduleItem(10000, "Manual", string.Empty, string.Empty)
                 {
-                    Id = 10000,
                     OriginalDuration = TimeSpan.FromMinutes(30),
                     Editable = true,
                     BellApplicable = optionsService.Options.IsBellEnabled,
                     AutoBell = optionsService.Options.AutoBell,
-                    Name = "Manual"
                 }
             };
         }

@@ -11,7 +11,7 @@
 
     internal class WebPageController
     {
-        private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = new Dictionary<WebPageTypes, Lazy<byte[]>>();
+        private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = new();
         private readonly WebPageTypes _webPageType;
 
         public WebPageController(WebPageTypes webPageType)
@@ -37,7 +37,7 @@
             }
         }
 
-        public void HandleRequestForTimerData(
+        public static void HandleRequestForTimerData(
             HttpListenerResponse response, 
             TimerInfoEventArgs timerInfo,
             DateTime now)
@@ -49,10 +49,8 @@
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
 
             response.ContentLength64 = buffer.Length;
-            using (System.IO.Stream output = response.OutputStream)
-            {
-                output.Write(buffer, 0, buffer.Length);
-            }
+            using System.IO.Stream output = response.OutputStream;
+            output.Write(buffer, 0, buffer.Length);
         }
 
         public void HandleRequestForWebPage(
@@ -62,10 +60,8 @@
             response.ContentEncoding = Encoding.UTF8;
             
             response.ContentLength64 = WebPageHtml[_webPageType].Value.Length;
-            using (System.IO.Stream output = response.OutputStream)
-            {
-                output.Write(WebPageHtml[_webPageType].Value, 0, WebPageHtml[_webPageType].Value.Length);
-            }
+            using System.IO.Stream output = response.OutputStream;
+            output.Write(WebPageHtml[_webPageType].Value, 0, WebPageHtml[_webPageType].Value.Length);
         }
 
         private static byte[] GenerateWebPageHtml(string content)
@@ -76,7 +72,7 @@
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }
 
-        private string CreateXml(TimerInfoEventArgs timerInfo, DateTime now)
+        private static string CreateXml(TimerInfoEventArgs timerInfo, DateTime now)
         {
             var sb = new StringBuilder();
            

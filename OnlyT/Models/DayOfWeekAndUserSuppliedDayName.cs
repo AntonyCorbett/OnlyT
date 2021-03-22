@@ -4,8 +4,14 @@
 
     internal class DayOfWeekAndUserSuppliedDayName
     {
-        public DayOfWeek? DayOfWeek { get; set; }
+        public DayOfWeekAndUserSuppliedDayName(DayOfWeek dayOfWeek, string userSuppliedDayName)
+        {
+            DayOfWeek = dayOfWeek;
+            UserSuppliedDayName = userSuppliedDayName;
+        }
 
-        public string UserSuppliedDayName { get; set; }
+        public DayOfWeek? DayOfWeek { get; }
+
+        public string UserSuppliedDayName { get; }
     }
 }

@@ -17,54 +17,51 @@
             _localDbFilePath = localDbFilePath;
         }
 
-        public void Save(MeetingTimes mtgTimes)
+        public void Save(MeetingTimes? mtgTimes)
         {
-            using (var ctx = new LocalDatabaseContext(_localDbFilePath))
+            if (mtgTimes == null)
             {
-                var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
-                timings.Insert(mtgTimes);
+                return;
             }
+
+            using var ctx = new LocalDatabaseContext(_localDbFilePath);
+            var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
+            timings.Insert(mtgTimes);
         }
 
         public MeetingTimes GetMeetingTimes(Guid session)
         {
-            using (var ctx = new LocalDatabaseContext(_localDbFilePath))
-            {
-                var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
-                timings.EnsureIndex(x => x.Session);
-                return timings.FindOne(x => x.Session.Equals(session));
-            }
+            using var ctx = new LocalDatabaseContext(_localDbFilePath);
+            var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
+            timings.EnsureIndex(x => x.Session);
+            return timings.FindOne(x => x.Session.Equals(session));
         }
 
         public IReadOnlyCollection<MeetingTimes> GetMeetingTimes(DateTime theDate)
         {
-            using (var ctx = new LocalDatabaseContext(_localDbFilePath))
-            {
-                var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
-                timings.EnsureIndex(x => x.MeetingDate);
+            using var ctx = new LocalDatabaseContext(_localDbFilePath);
+            var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
+            timings.EnsureIndex(x => x.MeetingDate);
 
-                var minDate = theDate.Date;
-                var maxDate = theDate.Date.AddDays(1);
-                return timings.Find(
+            var minDate = theDate.Date;
+            var maxDate = theDate.Date.AddDays(1);
+            return timings.Find(
                     x => x.MeetingDate >= minDate && x.MeetingDate < maxDate)
-                    .OrderBy(x => x.MeetingTimesId).ToArray();
-            }
+                .OrderBy(x => x.MeetingTimesId).ToArray();
         }
 
         public IReadOnlyCollection<MeetingTimes> GetMeetingTimesRange(DateTime startDate, DateTime endDate)
         {
-            using (var ctx = new LocalDatabaseContext(_localDbFilePath))
-            {
-                var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
-                timings.EnsureIndex(x => x.MeetingDate);
+            using var ctx = new LocalDatabaseContext(_localDbFilePath);
+            var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
+            timings.EnsureIndex(x => x.MeetingDate);
 
-                var minDate = startDate.Date;
-                var maxDate = endDate.Date.AddDays(1);
+            var minDate = startDate.Date;
+            var maxDate = endDate.Date.AddDays(1);
 
-                return timings.Find(
+            return timings.Find(
                     x => x.MeetingDate >= minDate && x.MeetingDate < maxDate)
-                    .OrderBy(x => x.MeetingTimesId).ToArray();
-            }
+                .OrderBy(x => x.MeetingTimesId).ToArray();
         }
 
         public HistoricalMeetingTimes? GetHistoricalTimingData(DateTime dt)
@@ -76,7 +73,7 @@
 
             foreach (var t in times)
             {
-                if (t.MeetingPlannedEnd != default(TimeSpan) && t.MeetingActualEnd != default(TimeSpan))
+                if (t.MeetingPlannedEnd != default && t.MeetingActualEnd != default)
                 {
                     result ??= new HistoricalMeetingTimes();
 
@@ -97,10 +94,8 @@
 
         public void DeleteAllMeetingTimesData()
         {
-            using (var ctx = new LocalDatabaseContext(_localDbFilePath))
-            {
-                ctx.Db.DropCollection(CollectionNameMtgTimes);
-            }
+            using var ctx = new LocalDatabaseContext(_localDbFilePath);
+            ctx.Db.DropCollection(CollectionNameMtgTimes);
         }
     }
 }

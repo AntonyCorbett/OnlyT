@@ -8,12 +8,20 @@
     /// </summary>
     public class MonitorItem
     {
-        public Screen Monitor { get; set; }
+        public MonitorItem(Screen? monitor, string monitorName, string? monitorId, string friendlyName)
+        {
+            Monitor = monitor;
+            MonitorName = monitorName;
+            MonitorId = monitorId;
+            FriendlyName = friendlyName;
+        }
 
-        public string MonitorName { get; set; }
+        public Screen? Monitor { get; }
 
-        public string MonitorId { get; set; }
+        public string MonitorName { get; }
 
-        public string FriendlyName { get; set; }
+        public string? MonitorId { get; }
+
+        public string FriendlyName { get; }
     }
 }

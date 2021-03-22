@@ -19,9 +19,9 @@
 
         public DateTime Now()
         {
-            if (_value == default(DateTime))
+            if (_value == default)
             {
-                throw new ArgumentException();
+                throw new NotSupportedException("date is not set");
             }
 
             return _value;

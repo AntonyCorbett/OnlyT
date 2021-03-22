@@ -56,19 +56,14 @@ namespace OnlyT.Services.TalkSchedule
 
         public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
         {
-            switch (_optionsService.Options.OperatingMode)
+            return _optionsService.Options.OperatingMode switch
             {
-                case OperatingMode.ScheduleFile:
-                    return _fileBasedSchedule.Value;
-
-                case OperatingMode.Automatic:
-                    return _autoSchedule.Value;
-
-                default:
+                OperatingMode.ScheduleFile => _fileBasedSchedule.Value,
+                OperatingMode.Automatic => _autoSchedule.Value,
                 // ReSharper disable once RedundantCaseLabel
-                case OperatingMode.Manual:
-                    return _manualSchedule.Value;
-            }
+                OperatingMode.Manual => _manualSchedule.Value,
+                _ => _manualSchedule.Value
+            };
         }
 
         public TalkScheduleItem? GetTalkScheduleItem(int id)

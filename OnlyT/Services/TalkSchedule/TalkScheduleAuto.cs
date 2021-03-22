@@ -86,7 +86,7 @@
                 false,
                 false,
                 isJanuary2020OrLater,
-                new TimesFeed().GetSampleMidweekMeetingDataForTesting(theDate));
+                TimesFeed.GetSampleMidweekMeetingDataForTesting(theDate));
         }
         
         private static Meeting? GetFeedForToday(IDateTimeService dateTimeService)
@@ -110,11 +110,8 @@
             bool autoBell,
             bool persistFinalTimerValue)
         {
-            return new TalkScheduleItem(talkType)
+            return new TalkScheduleItem(talkType, talkName, SectionTreasures, Properties.Resources.SECTION_TREASURES)
             {
-                Name = talkName,
-                MeetingSectionNameLocalised = Properties.Resources.SECTION_TREASURES,
-                MeetingSectionNameInternal = SectionTreasures,
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
                 BellApplicable = useBell,
@@ -233,11 +230,8 @@
             bool persistFinalTimerValue,
             bool editableTime)
         {
-            return new TalkScheduleItem(talkType)
+            return new TalkScheduleItem(talkType, talkName, SectionMinistry, Properties.Resources.SECTION_MINISTRY)
             {
-                Name = talkName,
-                MeetingSectionNameLocalised = Properties.Resources.SECTION_MINISTRY,
-                MeetingSectionNameInternal = SectionMinistry,
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
                 BellApplicable = useBell,
@@ -316,19 +310,14 @@
 
         private static string GetMinistryItemTitle(int item)
         {
-            switch (item)
+            return item switch
             {
-                case 1:
-                    return Properties.Resources.MINISTRY1;
-                case 2:
-                    return Properties.Resources.MINISTRY2;
-                case 3:
-                    return Properties.Resources.MINISTRY3;
-                case 4:
-                    return Properties.Resources.MINISTRY4;
-            }
-
-            throw new ArgumentException(@"Unknown item", nameof(item));
+                1 => Properties.Resources.MINISTRY1,
+                2 => Properties.Resources.MINISTRY2,
+                3 => Properties.Resources.MINISTRY3,
+                4 => Properties.Resources.MINISTRY4,
+                _ => throw new ArgumentException(@"Unknown item", nameof(item))
+            };
         }
 
         private static TalkScheduleItem CreateLivingItem(
@@ -337,11 +326,8 @@
             TimeSpan startOffset,
             TimeSpan duration)
         {
-            return new TalkScheduleItem(talkType)
+            return new TalkScheduleItem(talkType, talkName, SectionLiving, Properties.Resources.SECTION_LIVING)
             {
-                Name = talkName,
-                MeetingSectionNameLocalised = Properties.Resources.SECTION_LIVING,
-                MeetingSectionNameInternal = SectionLiving,
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
                 Editable = true,
@@ -429,11 +415,8 @@
             TimeSpan duration,
             bool allowAdaptive)
         {
-            return new TalkScheduleItem(talkType)
+            return new TalkScheduleItem(talkType, talkName, SectionWeekend, Properties.Resources.SECTION_WEEKEND)
             {
-                Name = talkName,
-                MeetingSectionNameLocalised = Properties.Resources.SECTION_WEEKEND,
-                MeetingSectionNameInternal = SectionWeekend,
                 StartOffsetIntoMeeting = startOffset,
                 OriginalDuration = duration,
                 Editable = true,

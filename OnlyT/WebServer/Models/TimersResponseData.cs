@@ -51,7 +51,7 @@
         [JsonProperty(PropertyName = "timerInfo")]
         public List<TimerInfo> TimerInfo { get; }
 
-        private TimerInfo CreateTimerInfo(TalkScheduleItem talk, bool countUpByDefault)
+        private static TimerInfo CreateTimerInfo(TalkScheduleItem talk, bool countUpByDefault)
         {
             return new TimerInfo
             {

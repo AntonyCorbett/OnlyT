@@ -29,7 +29,7 @@
 
                     if (showAdaptedDuration)
                     {
-                        result.Duration3String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration.Value.TotalSeconds);
+                        result.Duration3String = TimeFormatter.FormatTimerDisplayString((int)talk.AdaptedDuration!.Value.TotalSeconds);
                         result.Duration3Tooltip = Properties.Resources.DURATION_ADAPTED;
                     }
                     else

@@ -8,7 +8,7 @@
     {
         public static Geometry Get(double angle, Point centrePt, int innerRadius, int outerRadius)
         {
-            PathSegmentCollection segs = new PathSegmentCollection
+            PathSegmentCollection segments = new()
             {
                 CreateLine1(angle, centrePt, outerRadius),
                 CreateArc1(angle, centrePt, outerRadius),
@@ -17,7 +17,7 @@
             };
 
             Point start = GetStartPoint(angle, centrePt, innerRadius);
-            PathFigure pf = new PathFigure(start, segs, true);
+            PathFigure pf = new(start, segments, true);
 
             return new PathGeometry(new[] { pf }, FillRule.EvenOdd, null);
         }
@@ -34,8 +34,8 @@
         {
             var endX = centrePt.X;
             var endY = centrePt.Y - outerRadius;
-            Point endPt = new Point(endX, endY);
-            Size sz = new Size
+            var endPt = new Point(endX, endY);
+            var sz = new Size
             {
                 Height = outerRadius,
                 Width = outerRadius
@@ -47,8 +47,8 @@
 
         private static ArcSegment CreateArc2(double angle, Point centrePt, int innerRadius)
         {
-            Point endPt = GetStartPoint(angle, centrePt, innerRadius);
-            Size sz = new Size
+            var endPt = GetStartPoint(angle, centrePt, innerRadius);
+            var sz = new Size
             {
                 Height = innerRadius,
                 Width = innerRadius

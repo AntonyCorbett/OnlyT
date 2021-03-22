@@ -34,14 +34,14 @@
             optionsService.Setup(o => o.Options).Returns(options);
             optionsService.Setup(x => x.GetAdaptiveMode()).Returns(options.MidWeekAdaptiveMode);
 
-            Mock<ITalkTimerService> timerService = new Mock<ITalkTimerService>();
-            Mock<IAdaptiveTimerService> adaptiveTimerService = new Mock<IAdaptiveTimerService>();
+            Mock<ITalkTimerService> timerService = new();
+            Mock<IAdaptiveTimerService> adaptiveTimerService = new();
             ITalkScheduleService scheduleService = new MockTalksScheduleService(TalkIdStart, NumTalks);
-            Mock<IBellService> bellService = new Mock<IBellService>();
-            Mock<ICommandLineService> commandLineService = new Mock<ICommandLineService>();
-            Mock<ILocalTimingDataStoreService> timingDataService = new Mock<ILocalTimingDataStoreService>();
-            Mock<ISnackbarService> snackbarService = new Mock<ISnackbarService>();
-            MockDateTimeService dateTimeService = new MockDateTimeService();
+            Mock<IBellService> bellService = new();
+            Mock<ICommandLineService> commandLineService = new();
+            Mock<ILocalTimingDataStoreService> timingDataService = new();
+            Mock<ISnackbarService> snackbarService = new();
+            MockDateTimeService dateTimeService = new();
             IQueryWeekendService queryWeekendService = new QueryWeekendService();
             
             dateTimeService.Set(new DateTime(2019, 11, 28) + TimeSpan.FromHours(19));

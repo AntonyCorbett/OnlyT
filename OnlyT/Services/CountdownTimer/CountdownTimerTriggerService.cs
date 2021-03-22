@@ -10,7 +10,7 @@
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class CountdownTimerTriggerService : ICountdownTimerTriggerService
     {
-        private readonly object _locker = new object();
+        private readonly object _locker = new();
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
         private List<CountdownTriggerPeriod>? _triggerPeriods;

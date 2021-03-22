@@ -7,7 +7,7 @@
 
     public class MeetingTimes
     {
-        private readonly IDateTimeService _dateTimeService;
+        private readonly IDateTimeService? _dateTimeService;
 
         public MeetingTimes(IDateTimeService dateTimeService)
             : this()
@@ -96,7 +96,7 @@
             var item = Items.FirstOrDefault(
                x => x.Description.Equals(partDescription) &&
                     x.IsStudentTalk == isStudentTalk &&
-                    x.End.Equals(default(TimeSpan)));
+                    x.End.Equals(default));
 
             if (item != null)
             {
@@ -113,11 +113,11 @@
 
         public void Purge()
         {
-            MeetingDate = default(DateTime);
+            MeetingDate = default;
             InitMtgDate();
-            MeetingStart = default(TimeSpan);
-            MeetingActualEnd = default(TimeSpan);
-            MeetingPlannedEnd = default(TimeSpan);
+            MeetingStart = default;
+            MeetingActualEnd = default;
+            MeetingPlannedEnd = default;
             Items.Clear();
         }
 
@@ -128,7 +128,7 @@
 
         private void InitMtgDate()
         {
-            if (MeetingDate == default(DateTime))
+            if (MeetingDate == default)
             {
                 MeetingDate = Now().Date;
             }
@@ -164,7 +164,7 @@
             var item = Items.FirstOrDefault(
                 x => x.Description.Equals(partDescription) &&
                      x.IsStudentTalk == isStudentTalk &&
-                     x.End.Equals(default(TimeSpan)));
+                     x.End.Equals(default));
 
             if (item != null)
             {

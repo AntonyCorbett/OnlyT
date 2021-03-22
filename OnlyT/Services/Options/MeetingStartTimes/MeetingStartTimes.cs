@@ -51,7 +51,7 @@
             return string.Join(Environment.NewLine, result);
         }
 
-        private void AddStartTime(List<string> result, MeetingStartTime meetingStartTime)
+        private static void AddStartTime(List<string> result, MeetingStartTime meetingStartTime)
         {
             string? startTime = meetingStartTime?.AsText();
             if (!string.IsNullOrWhiteSpace(startTime))

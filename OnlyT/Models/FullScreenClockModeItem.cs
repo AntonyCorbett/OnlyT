@@ -5,8 +5,14 @@
 
     public class FullScreenClockModeItem
     {
-        public FullScreenClockMode Mode { get; set; }
+        public FullScreenClockModeItem(FullScreenClockMode mode, string name)
+        {
+            Mode = mode;
+            Name = name;
+        }
 
-        public string Name { get; set; }
+        public FullScreenClockMode Mode { get; }
+
+        public string Name { get; }
     }
 }

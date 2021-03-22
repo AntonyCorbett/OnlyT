@@ -1,7 +1,7 @@
 ﻿namespace OnlyT.Utils
 {
-#pragma warning disable SA1121 // Use built-in type alias
 #pragma warning disable S101 // Types should be named in PascalCase
+#pragma warning disable S2346 // Flags enumerations zero-value members should be named "None"
 
     // ReSharper disable BuiltInTypeReferenceStyle
     // ReSharper disable IdentifierTypo
@@ -129,7 +129,9 @@
             SHGSI_SYSICONINDEX = 0x000004000,
             SHGSI_LINKOVERLAY = 0x000008000,
             SHGSI_SELECTED = 0x000010000,
+#pragma warning disable CA1069 // Enums values should not be duplicated
             SHGSI_LARGEICON = 0x000000000,
+#pragma warning restore CA1069 // Enums values should not be duplicated
             SHGSI_SMALLICON = 0x000000001,
             SHGSI_SHELLICONSIZE = 0x000000004
         }
@@ -186,6 +188,6 @@
         }
     }
 
+#pragma warning restore S2346 // Flags enumerations zero-value members should be named "None"
 #pragma warning restore S101 // Types should be named in PascalCase
-#pragma warning restore SA1121 // Use built-in type alias
 }
