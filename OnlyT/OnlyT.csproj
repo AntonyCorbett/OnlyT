@@ -43,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="bell.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="icon4.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
