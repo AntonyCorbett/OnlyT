@@ -26,7 +26,7 @@ See the [FAQ](https://github.com/AntonyCorbett/OnlyT/wiki/FAQ) for frequently as
 
 ### License, etc
 
-OnlyT is Copyright &copy; 2018 Antony Corbett and other contributors under the [MIT license](LICENSE).
+OnlyT is Copyright &copy; 2018, 2021 Antony Corbett and other contributors under the [MIT license](LICENSE).
 
 NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). MaterialDesign themes (James Willock, Mulholland Software and Contributors) is used under the MIT license. NUglify, Copyright (c) 2016, Alexandre Mutel. QRCode (Raffael Herrmann) is used under MIT. Serilog is used under the Apache License Version 2.0, January 2004. LiteDB (Mauricio David) is used under the MIT License. PDFSharp is used under the MIT License.
 
