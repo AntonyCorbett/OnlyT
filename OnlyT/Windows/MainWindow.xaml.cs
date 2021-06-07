@@ -128,9 +128,9 @@ namespace OnlyT.Windows
         {
             SaveWindowPos();
             
-            var m = (MainViewModel)DataContext;
+            var m = (MainViewModel?)DataContext;
 
-            if (m.CurrentPageName != null)
+            if (m?.CurrentPageName != null)
             {
                 if (m.CurrentPageName.Equals(OperatorPageViewModel.PageName))
                 {
@@ -142,7 +142,7 @@ namespace OnlyT.Windows
                 }
             }
 
-            m.Closing(e);
+            m?.Closing(e);
         }
 
         private void SaveWindowPos()

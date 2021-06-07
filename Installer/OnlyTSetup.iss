@@ -7,7 +7,7 @@
 #define MyAppExeName "OnlyT.exe"
 #define MySource "d:\ProjectsPersonal\OnlyT"
 
-#define MyAppVersion GetFileVersion(MySource + '\OnlyT\bin\Release\net5.0-windows\OnlyT.exe');
+#define MyAppVersion GetFileVersion(MySource + '\OnlyT\bin\Release\net5.0-windows\publish\OnlyT.exe');
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -35,85 +35,22 @@ RestartApplications=False
 CloseApplications=False
 AppMutex=OnlyTMeetingTimer
 
+[InstallDelete]
+; files from pre-net-5 edition
+Type: files; Name: "{app}\OnlyT.exe.config"
+Type: files; Name: "{app}\OnlyTFirewallPorts.exe.config"
+Type: files; Name: "{app}\Serilog.Settings.AppSettings.dll"
+Type: files; Name: "{app}\System.Windows.Interactivity.dll"
+Type: files; Name: "{app}\GalaSoft.MvvmLight.dll"
+Type: files; Name: "{app}\GalaSoft.MvvmLight.Extras.dll"
+Type: files; Name: "{app}\GalaSoft.MvvmLight.Platform.dll"
+Type: files; Name: "{app}\CommonServiceLocator.dll"
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: "OnlyT\bin\Release\net5.0-windows\bell.mp3"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\FluentCommandLineParser.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\icon4.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\LiteDB.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\MaterialDesignColors.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\MaterialDesignThemes.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion   
-
-Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion   
-Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Extensions.DependencyInjection.dll"; DestDir: "{app}"; Flags: ignoreversion   
-Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Toolkit.Mvvm.dll"; DestDir: "{app}"; Flags: ignoreversion   
-Source: "OnlyT\bin\Release\net5.0-windows\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion   
-
-Source: "OnlyT\bin\Release\net5.0-windows\NAudio.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\NAudio.Lame.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\NUglify.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.AnalogueClock.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.CountdownTimer.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.Report.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\OnlyT.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\PdfSharpCore.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\PdfSharpCore.Charting.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.dll.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyTFirewallPorts\bin\Release\net5.0\OnlyTFirewallPorts.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\QRCoder.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\SixLabors.Fonts.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\SixLabors.ImageSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-Source: "OnlyT\bin\Release\net5.0-windows\ca-ES\*.dll"; DestDir: "{app}\ca-ES"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\cs-CZ\*.dll"; DestDir: "{app}\cs-CZ"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\de-DE\*.dll"; DestDir: "{app}\de-DE"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\el-GR\*.dll"; DestDir: "{app}\el-GR"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\en-US\*.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\es-ES\*.dll"; DestDir: "{app}\es-ES"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\es-MX\*.dll"; DestDir: "{app}\es-MX"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\fi-FI\*.dll"; DestDir: "{app}\fi-FI"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\fr-FR\*.dll"; DestDir: "{app}\fr-FR"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\hr-HR\*.dll"; DestDir: "{app}\hr-HR"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\hu-HU\*.dll"; DestDir: "{app}\hu-HU"; Flags: ignoreversion
-;Source: "OnlyT\bin\Release\id-ID\*.dll"; DestDir: "{app}\id-ID"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\it-IT\*.dll"; DestDir: "{app}\it-IT"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\jv-Latn-ID\*.dll"; DestDir: "{app}\jv-Latn-ID"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\ka-GE\*.dll"; DestDir: "{app}\ka-GE"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\ko-KR\*.dll"; DestDir: "{app}\ko-KR"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\lv-LV\*.dll"; DestDir: "{app}\lv-LV"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\nl-NL\*.dll"; DestDir: "{app}\nl-NL"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\no\*.dll"; DestDir: "{app}\no"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\pap\*.dll"; DestDir: "{app}\pap"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\pl-PL\*.dll"; DestDir: "{app}\pl-PL"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\pt-BR\*.dll"; DestDir: "{app}\pt-BR"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\pt-PT\*.dll"; DestDir: "{app}\pt-PT"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\ro-RO\*.dll"; DestDir: "{app}\ro-RO"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\ru-RU\*.dll"; DestDir: "{app}\ru-RU"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\sk-SK\*.dll"; DestDir: "{app}\sk-SK"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\sv-SE\*.dll"; DestDir: "{app}\sv-SE"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\tr-TR\*.dll"; DestDir: "{app}\tr-TR"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\uk-UA\*.dll"; DestDir: "{app}\uk-UA"; Flags: ignoreversion
-Source: "OnlyT\bin\Release\net5.0-windows\vi-VN\*.dll"; DestDir: "{app}\vi-VN"; Flags: ignoreversion
-
+Source: "OnlyT\bin\Release\net5.0-windows\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "talk_schedule.xml"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

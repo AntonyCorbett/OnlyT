@@ -9,4 +9,4 @@ using System.Resources;
 
 [assembly: NeutralResourcesLanguage("en-GB")]
 
-[assembly: AssemblyVersion("1.5.0.1")]
+[assembly: AssemblyVersion("2.0.0.3")]

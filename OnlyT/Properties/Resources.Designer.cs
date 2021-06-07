@@ -294,6 +294,7 @@ namespace OnlyT.Properties {
         ///		&lt;style type=&quot;text/css&quot;&gt;			
         ///			html 
         ///			{
+        ///				font-family: sans-serif;
         ///				background: #000000;
         ///			}
         ///			.clockstyle 
@@ -307,9 +308,7 @@ namespace OnlyT.Properties {
         ///				font-family: sans-serif;
         ///				font-weight: bold;
         ///				color: #FFFF66;
-        ///			}
-        ///			.clockstyle_green
-        ///			{ [rest of string was truncated]&quot;;.
+        ///		 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ClockHtmlTemplate {
             get {
@@ -1455,10 +1454,12 @@ namespace OnlyT.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
         ///    &lt;title&gt;OnlyT Timers&lt;/title&gt;
         ///    &lt;style type=&quot;text/css&quot;&gt;
         ///        html {
+        ///            font-family: sans-serif;
         ///            background: #000000;
         ///            display: block;
         ///            height: 100%;
@@ -1468,13 +1469,7 @@ namespace OnlyT.Properties {
         ///
         ///        body {
         ///            display: table;
-        ///            width: 100%;
-        ///            height: 100%;
-        ///            margin: 0;
-        ///            padding: 0;
-        ///        }
-        ///
-        ///        .main  [rest of string was truncated]&quot;;.
+        ///            width [rest of string was truncated]&quot;;.
         /// </summary>
         public static string TimersHtmlTemplate {
             get {
