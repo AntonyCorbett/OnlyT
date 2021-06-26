@@ -8,15 +8,15 @@ Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed 
 
 ### System Requirements
 
-* Windows 7, 8 or 10
-* .NET Framework 4.7 or later
+* Windows 10
+* .NET 5 x86 or later
 * 2GB RAM
 * 20MB Hard disk space
 * Internet connection (for "Automatic" Operating Mode only)
 
 ### Download
 
-If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file.
+If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file (there is also a portable version if you'd prefer to just copy a folder).
 
 ### Help
 
@@ -26,9 +26,9 @@ See the [FAQ](https://github.com/AntonyCorbett/OnlyT/wiki/FAQ) for frequently as
 
 ### License, etc
 
-OnlyT is Copyright &copy; 2018 Antony Corbett and other contributors under the [MIT license](LICENSE).
+OnlyT is Copyright &copy; 2018, 2021 Antony Corbett and other contributors under the [MIT license](LICENSE).
 
-NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). GalaSoft MVVM Light (Laurent Bugnion et al). MaterialDesign themes (James Willock, Mulholland Software and Contributors) is used under the MIT license. NUglify, Copyright (c) 2016, Alexandre Mutel. QRCode (Raffael Herrmann) is used under MIT. Serilog is used under the Apache License Version 2.0, January 2004. LiteDB (Mauricio David) is used under the MIT License. PDFSharp is used under the MIT License.
+NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). MaterialDesign themes (James Willock, Mulholland Software and Contributors) is used under the MIT license. NUglify, Copyright (c) 2016, Alexandre Mutel. QRCode (Raffael Herrmann) is used under MIT. Serilog is used under the Apache License Version 2.0, January 2004. LiteDB (Mauricio David) is used under the MIT License. PDFSharp is used under the MIT License.
 
 With thanks to:
 * Crowdin.com for localisation tools
