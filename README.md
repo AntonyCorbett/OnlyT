@@ -16,7 +16,7 @@ Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed 
 
 ### Download
 
-If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file (there is also a portable version if you'd prefer to just copy a folder). You may also need to download and install the Microsoft .NET 5.0 Desktop runtime (x86) from [here](https://dotnet.microsoft.com/download/dotnet/5.0/runtime)
+If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file (there is also a portable version if you'd prefer to just copy a folder). You may also need to download and install the Microsoft .NET 5.0 Desktop runtime (x86) from [here](https://dotnet.microsoft.com/download/dotnet/5.0/runtime).
 
 ### Help
 
