@@ -838,7 +838,7 @@
         private void SelectFirstTalk()
         {
             var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
-            if (talks != null && talks.Any())
+            if (talks != null && talks.Length > 0)
             {
                 TalkId = talks.First().Id;
             }
@@ -847,7 +847,7 @@
         private bool IsFirstTalk(int talkId)
         {
             var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
-            return talks != null && talks.Any() && talkId == talks.First().Id;
+            return talks != null && talks.Length > 0 && talkId == talks.First().Id;
         }
 
         private TalkScheduleItem? GetPreviousTalk(int talkId)

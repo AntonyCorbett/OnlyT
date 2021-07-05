@@ -104,7 +104,7 @@
                 try
                 {
                     result = JsonConvert.DeserializeObject<List<Meeting>>(File.ReadAllText(_localFeedFile));
-                    if (!result.Any() || GetMeetingDataForTodayInternal(result) == null)
+                    if (result == null || result.Count == 0 || GetMeetingDataForTodayInternal(result) == null)
                     {
                         needRefresh = true;
                     }

@@ -102,7 +102,7 @@
 
         public AdaptiveMode GetAdaptiveMode()
         {
-            AdaptiveMode result = AdaptiveMode.None;
+            const AdaptiveMode result = AdaptiveMode.None;
 
             if (Options.OperatingMode == OperatingMode.Automatic)
             {

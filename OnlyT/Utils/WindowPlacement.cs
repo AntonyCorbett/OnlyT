@@ -1,6 +1,7 @@
 ﻿namespace OnlyT.Utils
 {
 #pragma warning disable S101 // Types should be named in PascalCase
+#pragma warning disable U2U1004 // Public value types should implement equality
 
     // ReSharper disable CommentTypo
     // ReSharper disable InconsistentNaming
@@ -25,7 +26,6 @@
     // RECT structure required by WINDOWPLACEMENT structure
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-
     public struct RECT
     {
         public int Left;
@@ -184,5 +184,6 @@
             return Encoding.GetString(xmlBytes);
         }
     }
+#pragma warning restore U2U1004 // Public value types should implement equality
 #pragma warning restore S101 // Types should be named in PascalCase
 }

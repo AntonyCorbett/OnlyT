@@ -431,7 +431,7 @@
 
             var timesStr1 = $"  ({item.Start.Hours:D2}:{item.Start.Minutes:D2}";
             var timesStr2 = $":{item.Start.Seconds:D2}";
-            var hyphenStr = " - ";
+            const string hyphenStr = " - ";
 
             var sz1 = g.MeasureString(timesStr1, _itemFont);
             var sz2 = g.MeasureString(timesStr2, _itemFont);

@@ -350,7 +350,7 @@
             SetElementsVisibility();
             var sz = GetTextSize(_time!.Text, useExtent: false);
 
-            var szFactor = 0.95;
+            const double szFactor = 0.95;
 
             while (sz.Width < szFactor * _canvasWidth)
             {

@@ -2,7 +2,7 @@
 {
     // ReSharper disable MemberCanBePrivate.Global
     // ReSharper disable UnusedAutoPropertyAccessor.Global
-    internal struct ApiClientIdAndRequestType
+    internal readonly struct ApiClientIdAndRequestType
     {
         public ApiClientIdAndRequestType(string clientId, ApiRequestType requestType)
         {

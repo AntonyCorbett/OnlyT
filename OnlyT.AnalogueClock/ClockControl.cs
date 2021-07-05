@@ -529,7 +529,7 @@
         {
             double clockRadius = canvas.Width / 2;
             double centrePointRadius = clockRadius - 50;
-            double borderSize = 80;
+            const double borderSize = 80;
 
             for (int n = 0; n < 12; ++n)
             {

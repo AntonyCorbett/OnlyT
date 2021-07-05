@@ -36,7 +36,9 @@
                 using System.IO.Stream output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
             }
+#pragma warning disable RCS1075 // Avoid empty catch clause that catches System.Exception.
             catch (Exception)
+#pragma warning restore RCS1075 // Avoid empty catch clause that catches System.Exception.
             {
                 // ignore
             }

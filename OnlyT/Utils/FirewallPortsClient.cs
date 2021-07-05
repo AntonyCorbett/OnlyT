@@ -27,9 +27,9 @@
         private static int LaunchFirewallPortsTool(string args)
         {
 #if DEBUG
-            var file = @"..\..\..\OnlyTFirewallPorts\bin\Debug\OnlyTFirewallPorts.exe";
+            const string file = @"..\..\..\OnlyTFirewallPorts\bin\Debug\OnlyTFirewallPorts.exe";
 #else
-            var file = @"OnlyTFirewallPorts.exe";
+            const string file = @"OnlyTFirewallPorts.exe";
 #endif
 
             var psi = new ProcessStartInfo(file, args)

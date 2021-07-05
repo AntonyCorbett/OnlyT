@@ -1,0 +1,8 @@
+﻿[*.cs]
+
+dotnet_diagnostic.RCS1194.severity = silent
+dotnet_diagnostic.S112.severity=silent
+dotnet_diagnostic.U2U1009.severity = silent
+dotnet_diagnostic.U2U1015.severity = suggestion
+dotnet_diagnostic.U2U1108.severity = silent
+dotnet_diagnostic.U2U1103.severity = suggestion
