@@ -32,7 +32,7 @@
             p.Setup<bool>("automate")
                 .Callback(s => { Automate = s; }).SetDefault(false);
 
-            p.Setup<string>("datetime")
+            p.Setup<string?>("datetime")
                 .Callback(s =>
                 {
                     if (DateTime.TryParseExact(
@@ -44,7 +44,7 @@
                     {
                         DateTimeOnLaunch = result;
                     }
-                }).SetDefault(DateTime.UtcNow.ToString("yyyy-MM-dd:HH:mm"));
+                });
 
             p.Parse(Environment.GetCommandLineArgs());
         }
@@ -63,7 +63,7 @@
 
         public bool Automate { get; set; }
 
-        public DateTime DateTimeOnLaunch { get; set; }
+        public DateTime? DateTimeOnLaunch { get; set; }
 
         public bool IsTimerMonitorSpecified => TimerMonitorIndex > 0;
 

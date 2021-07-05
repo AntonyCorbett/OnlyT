@@ -12,11 +12,14 @@ dotnet publish OnlyTFirewallPorts\OnlyTFirewallPorts.csproj -p:PublishProfile=Fo
 REM copy items into delivery
 xcopy OnlyTFirewallPorts\bin\Release\net5.0\publish\*.* OnlyT\bin\Release\net5.0-windows\publish /q /s /y /d
 
-REM Create installer
-"C:\Program Files (x86)\Inno Setup 6\iscc" Installer\onlytsetup.iss
+REM delete unwanted NAudio x64
+del OnlyT\OnlyT\bin\Release\net5.0-windows\publish\libmp3lame.64.dll
 
 REM delete unwanted translations
-rd OnlyT\bin\Release\publish\id-ID /q /s
+rd OnlyT\OnlyT\bin\Release\net5.0-windows\publish\id-ID /q /s
+
+REM Create installer
+"C:\Program Files (x86)\Inno Setup 6\iscc" Installer\onlytsetup.iss
 
 REM create portable zip
 powershell Compress-Archive -Path OnlyT\bin\Release\net5.0-windows\publish\* -DestinationPath Installer\Output\OnlyTPortable.zip 

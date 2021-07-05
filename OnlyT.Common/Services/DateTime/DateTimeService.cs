@@ -6,23 +6,20 @@
     public class DateTimeService : IDateTimeService
     {
         private readonly DateTime _localDateTimeAtStart;
-        private readonly DateTime _forcedDateTimeAtStart;
-        private readonly bool _useForcedDateTime;
-
-        public DateTimeService(DateTime forceDateTimeAtStart)
+        private readonly DateTime? _forcedDateTimeAtStart;
+        
+        public DateTimeService(DateTime? forceDateTimeAtStart)
         {
             _forcedDateTimeAtStart = forceDateTimeAtStart;
             _localDateTimeAtStart = DateTime.Now;
-            
-            _useForcedDateTime = forceDateTimeAtStart != DateTime.MinValue;
         }
 
         public DateTime Now()
         {
-            if (_useForcedDateTime)
+            if (_forcedDateTimeAtStart != null)
             {
                 var interval = DateTime.Now - _localDateTimeAtStart;
-                return _forcedDateTimeAtStart + interval;
+                return _forcedDateTimeAtStart.Value + interval;
             }
 
             return DateTime.Now;
@@ -30,7 +27,7 @@
 
         public DateTime UtcNow()
         {
-            if (_useForcedDateTime)
+            if (_forcedDateTimeAtStart != null)
             {
                 return Now().ToUniversalTime();
             }
@@ -40,7 +37,7 @@
 
         public DateTime Today()
         {
-            if (_useForcedDateTime)
+            if (_forcedDateTimeAtStart != null)
             {
                 return Now().Date;
             }
