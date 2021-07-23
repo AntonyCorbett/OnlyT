@@ -222,7 +222,7 @@
 
         private void CheckVisualElements()
         {
-            if (_donut == null || _pie == null || _secondsBall == null || _time == null || _annulusSize == null)
+            if (_donut == null || _pie == null || _secondsBall == null || _time == null)
             {
                 throw new NotSupportedException("Visual elements not instantiated!");
             }
@@ -404,7 +404,7 @@
 
         private void SetElementsVisibility()
         {
-            SetElementsVisibility();
+            CheckVisualElements();
 
             switch (_elementsToShow)
             {
