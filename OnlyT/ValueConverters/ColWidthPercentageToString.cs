@@ -10,7 +10,7 @@
         {
             if (value != null)
             {
-                int percentage = (int)value;
+                var percentage = (int)value;
                 return $"{percentage}*";
             }
 

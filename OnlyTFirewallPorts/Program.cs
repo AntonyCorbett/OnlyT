@@ -20,7 +20,7 @@
 
         private static int Execute(string[] args)
         {
-            int result = -10;
+            var result = -10;
             
             if (args.Length == 2)
             {

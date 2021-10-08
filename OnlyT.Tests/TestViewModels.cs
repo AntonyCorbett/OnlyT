@@ -34,14 +34,14 @@
             optionsService.Setup(o => o.Options).Returns(options);
             optionsService.Setup(x => x.GetAdaptiveMode()).Returns(options.MidWeekAdaptiveMode);
 
-            Mock<ITalkTimerService> timerService = new();
-            Mock<IAdaptiveTimerService> adaptiveTimerService = new();
+            var timerService = new Mock<ITalkTimerService>();
+            var adaptiveTimerService = new Mock<IAdaptiveTimerService>();
             ITalkScheduleService scheduleService = new MockTalksScheduleService(TalkIdStart, NumTalks);
-            Mock<IBellService> bellService = new();
-            Mock<ICommandLineService> commandLineService = new();
-            Mock<ILocalTimingDataStoreService> timingDataService = new();
-            Mock<ISnackbarService> snackbarService = new();
-            MockDateTimeService dateTimeService = new();
+            var bellService = new Mock<IBellService>();
+            var commandLineService = new Mock<ICommandLineService>();
+            var timingDataService = new Mock<ILocalTimingDataStoreService>();
+            var snackbarService = new Mock<ISnackbarService>();
+            var dateTimeService = new MockDateTimeService();
             IQueryWeekendService queryWeekendService = new QueryWeekendService();
             
             dateTimeService.Set(new DateTime(2019, 11, 28) + TimeSpan.FromHours(19));
@@ -61,9 +61,9 @@
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);
 
-            for (int n = 0; n < NumTalks; ++n)
+            for (var n = 0; n < NumTalks; ++n)
             {
-                int talkId = TalkIdStart + n;
+                var talkId = TalkIdStart + n;
                 Assert.IsTrue(vm.TalkId == talkId);
 
                 var talk = scheduleService.GetTalkScheduleItem(talkId);

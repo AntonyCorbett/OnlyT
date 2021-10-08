@@ -144,7 +144,7 @@
                     if (context.Request.Url?.Segments.Length > 1)
                     {
                         // segments: "/" ...
-                        string segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+                        var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
                         if (_listener.IsListening)
                         {
                             switch (segment)
@@ -163,6 +163,9 @@
 
                                 case "api":
                                     HandleApiRequest(context.Request, response);
+                                    break;
+
+                                default:
                                     break;
                             }
                         }

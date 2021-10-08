@@ -29,19 +29,21 @@
                 // allow cross-domain access (so that clients can use JS in a browser)
                 response.Headers.Add("Access-Control-Allow-Origin: *");
 
-                string jsonStr = JsonConvert.SerializeObject(info);
-                byte[] buffer = Encoding.UTF8.GetBytes(jsonStr);
+                var jsonStr = JsonConvert.SerializeObject(info);
+                var buffer = Encoding.UTF8.GetBytes(jsonStr);
 
                 response.ContentLength64 = buffer.Length;
-                using System.IO.Stream output = response.OutputStream;
+                using var output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
             }
 #pragma warning disable RCS1075 // Avoid empty catch clause that catches System.Exception.
+#pragma warning disable CC0004 // Catch block cannot be empty
             catch (Exception)
-#pragma warning restore RCS1075 // Avoid empty catch clause that catches System.Exception.
             {
                 // ignore
             }
+#pragma warning restore CC0004 // Catch block cannot be empty
+#pragma warning restore RCS1075 // Avoid empty catch clause that catches System.Exception.
         }
 
         protected static bool IsMethodGet(HttpListenerRequest request)

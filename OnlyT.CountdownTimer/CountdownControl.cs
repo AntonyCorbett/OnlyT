@@ -245,7 +245,7 @@
 
         private void OnCanvasLoaded(object sender, RoutedEventArgs e)
         {
-            Canvas canvas = (Canvas)sender;
+            var canvas = (Canvas)sender;
             
             RegisterNames(canvas);
 
@@ -285,6 +285,9 @@
                 case ElementsToShow.DialAndDigital:
                     InitLayoutDigitalAndDial();
                     break;
+
+                default:
+                    throw new NotSupportedException();
             }
         }
 
@@ -367,7 +370,7 @@
         {
             SetElementsVisibility();
             var sz = GetTextSize(_time!.Text, useExtent: true);
-            double szFactor = _twoDigitMins
+            var szFactor = _twoDigitMins
                     ? 0.60
                     : 0.75;
 
@@ -392,6 +395,10 @@
                 case ElementsToShow.Dial:
                     outerRadiusFactor *= 1.75;
                     innerRadiusFactor *= 1.75;
+                    break;
+
+                default:
+                    // no adjustment needed
                     break;
             }
 
@@ -428,6 +435,9 @@
                     _donut!.Visibility = Visibility.Hidden;
                     _pie!.Visibility = Visibility.Hidden;
                     break;
+
+                default:
+                    throw new NotSupportedException();
             }
 
             if (_countdownDurationMins == 1)
@@ -512,8 +522,8 @@
                 }
             }
 
-            int mins = (int)secondsLeft / 60;
-            int secs = (int)(secondsLeft % 60);
+            var mins = (int)secondsLeft / 60;
+            var secs = (int)(secondsLeft % 60);
 
             return _twoDigitMins
                 ? $"{mins:D2}:{secs:D2}"

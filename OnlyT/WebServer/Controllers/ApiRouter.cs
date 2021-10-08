@@ -73,16 +73,11 @@
                 else if (request.Url?.Segments.Length > 3)
                 {
                     // segments: "/" "api/" "v1"
-                    string apiVerStr = request.Url.Segments[2].TrimEnd('/').ToLower();
-                    string segment = request.Url.Segments[3].TrimEnd('/').ToLower();
+                    var apiVerStr = request.Url.Segments[2].TrimEnd('/').ToLower();
+                    var segment = request.Url.Segments[3].TrimEnd('/').ToLower();
 
-#pragma warning disable S1481 // Unused local variables should be removed
                     // may use this at some point
-                    // ReSharper disable once UnusedVariable
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-                    var apiVer = GetApiVerFromStr(apiVerStr);
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-#pragma warning restore S1481 // Unused local variables should be removed
+                    _ = GetApiVerFromStr(apiVerStr);
 
                     if (!segment.Equals("system"))
                     {

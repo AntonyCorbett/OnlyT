@@ -94,8 +94,10 @@ namespace OnlyT.ViewModel
             WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
             // (fire and forget)
+#pragma warning disable PH_S007 // Thread Start in Constructor
             Task.Run(LaunchTimerWindowAsync);
-            
+#pragma warning restore PH_S007 // Thread Start in Constructor
+
             InitHeartbeatTimer();
         }
 
@@ -456,7 +458,7 @@ namespace OnlyT.ViewModel
 
                 _countdownDisplayService.Start(offsetSeconds);
 
-                bool launched = _optionsService.Options.CountdownMonitorIsWindowed 
+                var launched = _optionsService.Options.CountdownMonitorIsWindowed 
                     ? _countdownDisplayService.OpenWindowWindowed() 
                     : _countdownDisplayService.OpenWindowInMonitor();
 
@@ -500,7 +502,7 @@ namespace OnlyT.ViewModel
             //      should use hardware acceleration provided the necessary system resources have 
             //      not been exhausted. This corresponds to a DirectX version that is greater 
             //      than or equal to 9.0.
-            int renderingTier = RenderCapability.Tier >> 16;
+            var renderingTier = RenderCapability.Tier >> 16;
             return renderingTier == 0;
         }
     }

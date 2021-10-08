@@ -97,7 +97,7 @@
         {
             // NB - user-specific folder
             // e.g. C:\Users\Antony\AppData\Roaming\OnlyT
-            string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppNamePathSegment);
+            var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppNamePathSegment);
             Directory.CreateDirectory(folder);
             return folder;
         }

@@ -11,7 +11,7 @@
 
         public static DateTime GetMondayOfWeek(DateTime theDate)
         {
-            int daysToDeduct = (7 + (theDate.DayOfWeek - DayOfWeek.Monday)) % 7;
+            var daysToDeduct = (7 + (theDate.DayOfWeek - DayOfWeek.Monday)) % 7;
             return theDate.AddDays(-daysToDeduct).Date;
         }
 
@@ -22,10 +22,10 @@
 
         public static DateTime GetNearestQuarterOfAnHour(DateTime value)
         {
-            int mins = value.Minute;
+            var mins = value.Minute;
             int minsAdjust;
 
-            int minsLong = mins % 15;
+            var minsLong = mins % 15;
             if (minsLong <= 10)
             {
                 minsAdjust = -minsLong;

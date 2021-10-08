@@ -6,3 +6,18 @@ dotnet_diagnostic.U2U1009.severity = silent
 dotnet_diagnostic.U2U1015.severity = suggestion
 dotnet_diagnostic.U2U1108.severity = silent
 dotnet_diagnostic.U2U1103.severity = suggestion
+
+# CC0022: Should dispose object
+dotnet_diagnostic.CC0022.severity = silent
+
+# CC0021: Use nameof
+dotnet_diagnostic.CC0021.severity = silent
+
+# CC0091: Use static method
+dotnet_diagnostic.CC0091.severity = silent
+
+# CC0097: You have missing/unexistent parameters in Xml Docs
+dotnet_diagnostic.CC0097.severity = silent
+
+# CC0031: Check for null before calling a delegate
+dotnet_diagnostic.CC0031.severity = silent

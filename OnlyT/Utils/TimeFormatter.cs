@@ -16,8 +16,8 @@
         /// <returns>Formatted time (mins and secs)</returns>
         public static string FormatTimerDisplayString(int totalSeconds)
         {
-            int mins = Math.Abs(totalSeconds) / SecsPerMinute;
-            int secs = Math.Abs(totalSeconds) % SecsPerMinute;
+            var mins = Math.Abs(totalSeconds) / SecsPerMinute;
+            var secs = Math.Abs(totalSeconds) % SecsPerMinute;
 
             return $"{mins:D2}:{secs:D2}";
         }

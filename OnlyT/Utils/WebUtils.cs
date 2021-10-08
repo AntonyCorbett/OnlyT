@@ -38,8 +38,7 @@
 
         private static string InternalLoadWithUserAgent(string url)
         {
-            using var wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
+            using var wc = new WebClient { Encoding = Encoding.UTF8 };
             wc.Headers.Add("user-agent", UserAgentString);
             return wc.DownloadString(url);
         }

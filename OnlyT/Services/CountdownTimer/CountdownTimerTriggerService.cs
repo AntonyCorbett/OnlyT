@@ -64,8 +64,8 @@
         {
             var triggerPeriods = new List<CountdownTriggerPeriod>();
 
-            DateTime today = _dateTimeService.Today(); // local time
-            int countdownDurationMins = _optionsService.Options.CountdownDurationMins;
+            var today = _dateTimeService.Today(); // local time
+            var countdownDurationMins = _optionsService.Options.CountdownDurationMins;
 
             foreach (var time in meetingStartTimes)
             {

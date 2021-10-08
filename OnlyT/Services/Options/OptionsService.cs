@@ -113,6 +113,9 @@
 
                     case MidWeekOrWeekend.Weekend:
                         return Options.WeekendAdaptiveMode;
+
+                    default:
+                        break;
                 }
             }
 
@@ -292,7 +295,7 @@
         {
             if (_options != null && _optionsFilePath != null)
             {
-                using StreamWriter file = File.CreateText(_optionsFilePath);
+                using var file = File.CreateText(_optionsFilePath);
 
                 var serializer = new JsonSerializer { Formatting = Formatting.Indented };
                 serializer.Serialize(file, _options);

@@ -184,7 +184,7 @@
                 return false;
             }
 
-            bool valid =
+            var valid =
                _mtgTimes.MeetingStart != default &&
                _mtgTimes.MeetingActualEnd != default &&
                Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes) < MeetingMinsOutOfRange;
@@ -202,7 +202,7 @@
                 }
 
                 var minsOvertime = _mtgTimes.GetMeetingOvertime().TotalMinutes;
-                double mins = Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes);
+                var mins = Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes);
 
                 if (mins >= MeetingMinsOutOfRange)
                 {
@@ -265,8 +265,8 @@
         {
             try
             {
-                string folder = FileUtils.GetTimingReportsDatabaseFolder(_commandLineService?.OptionsIdentifier);
-                string dbFilePath = Path.Combine(folder, "TimingDataV2.db");
+                var folder = FileUtils.GetTimingReportsDatabaseFolder(_commandLineService?.OptionsIdentifier);
+                var dbFilePath = Path.Combine(folder, "TimingDataV2.db");
 
                 _localData = new LocalData(dbFilePath);
                 _mtgTimes = new MeetingTimes(_dateTimeService);

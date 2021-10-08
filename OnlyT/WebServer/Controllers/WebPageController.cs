@@ -21,15 +21,20 @@
             {
                 if (!WebPageHtml.ContainsKey(_webPageType))
                 {
-                    string webPageTemplate = string.Empty;
+                    string webPageTemplate;
+
                     switch (_webPageType)
                     {
                         case WebPageTypes.Clock:
                             webPageTemplate = Properties.Resources.ClockHtmlTemplate;
                             break;
+
                         case WebPageTypes.Timers:
                             webPageTemplate = Properties.Resources.TimersHtmlTemplate;
                             break;
+
+                        default:
+                            throw new NotSupportedException();
                     }
 
                     WebPageHtml.Add(_webPageType, new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate)));
@@ -45,11 +50,11 @@
             response.ContentType = "text/xml";
             response.ContentEncoding = Encoding.UTF8;
 
-            string responseString = CreateXml(timerInfo, now);
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+            var responseString = CreateXml(timerInfo, now);
+            var buffer = Encoding.UTF8.GetBytes(responseString);
 
             response.ContentLength64 = buffer.Length;
-            using System.IO.Stream output = response.OutputStream;
+            using var output = response.OutputStream;
             output.Write(buffer, 0, buffer.Length);
         }
 
@@ -60,7 +65,7 @@
             response.ContentEncoding = Encoding.UTF8;
             
             response.ContentLength64 = WebPageHtml[_webPageType].Value.Length;
-            using System.IO.Stream output = response.OutputStream;
+            using var output = response.OutputStream;
             output.Write(WebPageHtml[_webPageType].Value, 0, WebPageHtml[_webPageType].Value.Length);
         }
 
@@ -91,16 +96,19 @@
 
                 case ClockServerMode.TimeOfDay:
                     // in this mode mins and secs hold the total offset time into the day
-                    int use24Hrs = timerInfo.Use24HrFormat ? 1 : 0;
+                    var use24Hrs = timerInfo.Use24HrFormat ? 1 : 0;
                     sb.AppendLine(
                         $" <clock mode=\"TimeOfDay\" mins=\"{(now.Hour * 60) + now.Minute}\" secs=\"{now.Second}\" ms=\"{now.Millisecond}\" targetSecs=\"0\" use24Hr=\"{use24Hrs}\"/>");
                     break;
 
                 case ClockServerMode.Timer:
-                    int countingUp = timerInfo.IsCountingUp ? 1 : 0;
+                    var countingUp = timerInfo.IsCountingUp ? 1 : 0;
                     sb.AppendLine(
                         $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" countUp=\"{countingUp}\"/>");
                     break;
+
+                default:
+                    throw new NotSupportedException();
             }
 
             sb.AppendLine("</root>");

@@ -1,4 +1,6 @@
-﻿namespace OnlyT.WebServer.Controllers
+﻿using System;
+
+namespace OnlyT.WebServer.Controllers
 {
     using System.Net;
     using Models;
@@ -94,6 +96,9 @@
                     }
 
                     break;
+
+                default:
+                    throw new NotSupportedException();
             }
         }
 

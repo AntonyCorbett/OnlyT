@@ -184,6 +184,9 @@ namespace OnlyT.Windows
                     Storyboard.SetTarget(rowHeightAdjust2, ClockGrid.RowDefinitions[1]);
                     Storyboard.SetTargetProperty(rowHeightAdjust2, new PropertyPath(RowDefinition.HeightProperty));
                     break;
+
+                default:
+                    break;
             }
 
             // change clock panel to use colspan 2...
@@ -310,6 +313,9 @@ namespace OnlyT.Windows
                     ClockGrid.RowDefinitions[0].Height = new GridLength(75, GridUnitType.Star);
                     ClockGrid.RowDefinitions[1].Height = new GridLength(25, GridUnitType.Star);
                     break;
+
+                default:
+                    throw new NotSupportedException();
             }
         }
 

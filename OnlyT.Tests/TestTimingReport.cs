@@ -235,7 +235,7 @@ namespace OnlyT.Tests
         {
             if (_useRandomTimes)
             {
-                int variationSecs = (int)((targetMinutes / 20.0) * 60);
+                var variationSecs = (int)((targetMinutes / 20.0) * 60);
                 var secsToAdd = _random.Next(-variationSecs, variationSecs);
 
                 var result = targetMinutes + (secsToAdd / 60.0);

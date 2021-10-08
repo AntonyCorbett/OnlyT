@@ -109,7 +109,7 @@ namespace OnlyT
 
         private static void ConfigureLogger()
         {
-            string logsDirectory = FileUtils.GetLogFolder();
+            var logsDirectory = FileUtils.GetLogFolder();
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(LogLevelSwitchService.LevelSwitch)

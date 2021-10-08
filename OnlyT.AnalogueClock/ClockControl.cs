@@ -324,7 +324,7 @@
         {
             var startPoint = PointOnCircle(SectorRadius, startAngle, ClockOrigin);
             var endPoint = PointOnCircle(SectorRadius, endAngle, ClockOrigin);
-            string largeArc = isLargeArc ? "1" : "0";
+            var largeArc = isLargeArc ? "1" : "0";
 
             // use InvariantCulture to ensure that decimal separator is '.'
             sectorPath.Data = Geometry.Parse($"M{ClockRadius.ToString(CultureInfo.InvariantCulture)},{ClockRadius.ToString(CultureInfo.InvariantCulture)} L{startPoint.X.ToString(CultureInfo.InvariantCulture)},{startPoint.Y.ToString(CultureInfo.InvariantCulture)} A{SectorRadius.ToString(CultureInfo.InvariantCulture)},{SectorRadius.ToString(CultureInfo.InvariantCulture)} 0 {largeArc} 1 {endPoint.X.ToString(CultureInfo.InvariantCulture)},{endPoint.Y.ToString(CultureInfo.InvariantCulture)} z");
@@ -379,11 +379,11 @@
 
         private string FormatTimeOfDayHoursAndMins(DateTime dt)
         {
-            int twelveHrFormatHours = dt.Hour > 12 
+            var twelveHrFormatHours = dt.Hour > 12 
                 ? dt.Hour - 12
                 : dt.Hour;
 
-            int hours = _digitalFormat24Hours 
+            var hours = _digitalFormat24Hours 
                 ? dt.Hour 
                 : twelveHrFormatHours;
 
@@ -490,7 +490,7 @@
         {
             if (Math.Abs(currentAngle - targetAngle) > AngleTolerance)
             {
-                double delta = (targetAngle - currentAngle) / 5;
+                var delta = (targetAngle - currentAngle) / 5;
                 currentAngle += delta;
                 
                 PositionClockHand(hand, currentAngle, shadowOpacity);
@@ -527,8 +527,8 @@
 
         private static void GenerateHourNumbers(Canvas canvas)
         {
-            double clockRadius = canvas.Width / 2;
-            double centrePointRadius = clockRadius - 50;
+            var clockRadius = canvas.Width / 2;
+            var centrePointRadius = clockRadius - 50;
             const double borderSize = 80;
 
             for (int n = 0; n < 12; ++n)

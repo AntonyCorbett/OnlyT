@@ -148,7 +148,7 @@
             DateTime mtgStart, 
             AdaptiveTimerService service)
         {
-            TalkScheduleItem? living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
+            var living1 = scheduleService.Object.GetTalkScheduleItem((int)TalkTypesAutoMode.LivingPart1);
             Assert.IsNotNull(living1);
             dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting);
 
@@ -431,7 +431,7 @@
         {
             Assert.IsNotNull(_dateTimeService);
 
-            bool isJanuary2020OrLater = _dateTimeService.Now().Date >= new DateTime(2020, 1, 6);
+            var isJanuary2020OrLater = _dateTimeService.Now().Date >= new DateTime(2020, 1, 6);
             return TalkScheduleAuto.GetMidweekScheduleForTesting(theDate, isJanuary2020OrLater).ToList();
         }
 

@@ -461,7 +461,7 @@
 
             Task.Run(() =>
             {
-                int ms = _dateTimeService.Now().Millisecond;
+                var ms = _dateTimeService.Now().Millisecond;
                 if (ms > 100)
                 {
                     // sync to the second (so that the timer window clock and countdown
@@ -1008,7 +1008,7 @@
 
                 CheckTalkExists(e.TalkId);
 
-                bool success = TalkId == e.TalkId || IsNotRunning;
+                var success = TalkId == e.TalkId || IsNotRunning;
                 
                 if (success)
                 {
@@ -1032,9 +1032,15 @@
                                 success = IsRunning;
                                 if (success)
                                 {
+                                    // fire and forget
+#pragma warning disable PH_S030 // Async Void Method Invocation
                                     StopTimer();
+#pragma warning restore PH_S030 // Async Void Method Invocation
                                 }
 
+                                break;
+
+                            default:
                                 break;
                         }
                     }

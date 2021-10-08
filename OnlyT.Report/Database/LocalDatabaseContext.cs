@@ -10,7 +10,9 @@
 
         public LocalDatabaseContext(string localDbFile)
         {
+#pragma warning disable PH_P006 // Discouraged Monitor Method
             Monitor.Enter(Locker);
+#pragma warning restore PH_P006 // Discouraged Monitor Method
             Db = new LiteDatabase(localDbFile);
         }
 

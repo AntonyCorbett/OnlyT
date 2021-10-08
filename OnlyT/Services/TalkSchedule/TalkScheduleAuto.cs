@@ -339,10 +339,10 @@
         {
             var result = new List<TalkScheduleItem>();
 
-            TalkTimer timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living1)) ??
-                                   new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
+            var timerPart1 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living1)) ??
+                             new TalkTimer { Minutes = 15, TalkType = TalkTypes.Living1 };
 
-            TalkTimer? timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
+            var timerPart2 = meetingData?.Talks.FirstOrDefault(x => x.TalkType.Equals(TalkTypes.Living2));
 
             result.Add(CreateLivingItem(
                 TalkTypesAutoMode.LivingPart1,

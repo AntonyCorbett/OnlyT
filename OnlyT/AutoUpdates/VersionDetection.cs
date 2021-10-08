@@ -55,7 +55,7 @@
                 return null;
             }
 
-            string[] tokens = versionString.Split('.');
+            var tokens = versionString.Split('.');
             if (tokens.Length != 4)
             {
                 return null;

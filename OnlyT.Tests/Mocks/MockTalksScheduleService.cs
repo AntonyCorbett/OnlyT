@@ -25,7 +25,7 @@
             {
                 _talks = new List<TalkScheduleItem>();
 
-                int talkId = _talkIdStart;
+                var talkId = _talkIdStart;
 
                 for (int n = 0; n < _numTalks; ++n)
                 {

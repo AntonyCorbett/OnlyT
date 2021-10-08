@@ -830,7 +830,7 @@ namespace OnlyT.ViewModel
         {
             get
             {
-                string ipAddress = LocalIpAddress.GetLocalIp4Address();
+                var ipAddress = LocalIpAddress.GetLocalIp4Address();
                 if (!string.IsNullOrEmpty(ipAddress))
                 {
                     return $"http://{ipAddress}:{Port}/index";
@@ -844,7 +844,7 @@ namespace OnlyT.ViewModel
         {
             get
             {
-                string ipAddress = LocalIpAddress.GetLocalIp4Address();
+                var ipAddress = LocalIpAddress.GetLocalIp4Address();
                 if (!string.IsNullOrEmpty(ipAddress))
                 {
                     return ipAddress;
@@ -897,7 +897,7 @@ namespace OnlyT.ViewModel
             {
                 Log.Logger.Information($"Attempting to reserve and open port: {Port}");
                 
-                int rv = FirewallPortsClient.ReserveAndOpenPort(Port);
+                var rv = FirewallPortsClient.ReserveAndOpenPort(Port);
                 if (rv != 0)
                 {
                     Log.Logger.Warning($"Return value from reserve and open port = {rv}");
@@ -1054,10 +1054,12 @@ namespace OnlyT.ViewModel
                         var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
                         result.Add(new LanguageItem(c.Name, c.EnglishName));
                     }
+#pragma warning disable CC0004 // Catch block cannot be empty
                     catch (CultureNotFoundException)
                     {
                         // expected
                     }
+#pragma warning restore CC0004 // Catch block cannot be empty
                 }
             }
 

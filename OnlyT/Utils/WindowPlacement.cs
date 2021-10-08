@@ -80,8 +80,8 @@
 
         public static Rect SetPlacement(this Window window, string placementJson, Size overrideSize = default)
         {
-            double width = window.Width;
-            double height = window.Height;
+            var width = window.Width;
+            var height = window.Height;
 
             if (overrideSize != default)
             {
@@ -124,7 +124,7 @@
         {
             if (!string.IsNullOrEmpty(placementJson))
             {
-                byte[] xmlBytes = Encoding.GetBytes(placementJson);
+                var xmlBytes = Encoding.GetBytes(placementJson);
                 try
                 {
                     WINDOWPLACEMENT placement;
@@ -154,10 +154,12 @@
                         (int)adjustedDimensions.Item1,
                         (int)adjustedDimensions.Item2);
                 }
+#pragma warning disable CC0004 // Catch block cannot be empty
                 catch (InvalidOperationException)
                 {
                     // Parsing placement XML failed. Fail silently.
                 }
+#pragma warning restore CC0004 // Catch block cannot be empty
             }
 
             return default;
@@ -180,7 +182,7 @@
             using var memoryStream = new MemoryStream();
             var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
             Serializer.Serialize(xmlTextWriter, placement);
-            byte[] xmlBytes = memoryStream.ToArray();
+            var xmlBytes = memoryStream.ToArray();
             return Encoding.GetString(xmlBytes);
         }
     }

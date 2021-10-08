@@ -58,10 +58,10 @@
 
         private static TimeSpan? GetTimeOfDay(string text)
         {
-            bool hasPm = HasPm(text);
+            var hasPm = HasPm(text);
             
-            int hour = -1;
-            int mins = -1;
+            var hour = -1;
+            var mins = -1;
 
             var digits = text.Where(char.IsDigit).ToArray();
             if (digits.Length > 0 && digits.Length < 5)
@@ -87,6 +87,9 @@
                         hour = int.Parse($"{digits[0]}{digits[1]}");
                         mins = int.Parse($"{digits[2]}{digits[3]}");
                         break;
+
+                    default:
+                        throw new NotSupportedException();
                 }
             }
 

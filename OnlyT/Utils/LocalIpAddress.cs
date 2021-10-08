@@ -16,10 +16,10 @@
 
         private static string IpAddressFactory()
         {
-            string result = string.Empty;
+            var result = string.Empty;
             try
             {
-                using Socket socket = new(AddressFamily.InterNetwork, SocketType.Dgram, 0);
+                using var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0);
                 socket.Connect("10.0.2.4", 65530); // address doesn't need to exist!
                 if (socket.LocalEndPoint is IPEndPoint endPoint)
                 {

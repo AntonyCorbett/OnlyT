@@ -8,7 +8,7 @@
         public static IEnumerable<string> SplitIntoLines(this string text, bool ignoreEmptyLines = true)
         {
             var result = new List<string>();
-            using StringReader sr = new(text);
+            using var sr = new StringReader(text);
 
             string? line;
             while ((line = sr.ReadLine()) != null)

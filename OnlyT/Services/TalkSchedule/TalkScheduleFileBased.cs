@@ -25,11 +25,11 @@
                 var path = GetFullPath();
                 try
                 {
-                    XDocument x = XDocument.Load(path);
+                    var x = XDocument.Load(path);
                     var items = x.Root?.Element("items");
                     if (items != null)
                     {
-                        int talkId = StartId;
+                        var talkId = StartId;
 
                         foreach (XElement elem in items.Elements("item"))
                         {
@@ -63,7 +63,7 @@
 
         private static string GetFullPath()
         {
-            string path = FileUtils.GetOnlyTMyDocsFolder();
+            var path = FileUtils.GetOnlyTMyDocsFolder();
             FileUtils.CreateDirectory(path);
             return Path.Combine(path, FileName);
         }

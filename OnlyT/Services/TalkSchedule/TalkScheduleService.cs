@@ -81,7 +81,7 @@ namespace OnlyT.Services.TalkSchedule
                     return talks.First().Id;
                 }
 
-                bool foundCurrent = false;
+                var foundCurrent = false;
                 for (int n = 0; n < talks.Length; ++n)
                 {
                     var thisTalk = talks[n];

@@ -31,8 +31,8 @@
         [TestMethod]
         public void TestNearest15Mins()
         {
-            DateTime tenAm = DateTime.Today + TimeSpan.FromHours(10);
-            DateTime tenFifteenAm = DateTime.Today + TimeSpan.FromHours(10) + TimeSpan.FromMinutes(15);
+            var tenAm = DateTime.Today + TimeSpan.FromHours(10);
+            var tenFifteenAm = DateTime.Today + TimeSpan.FromHours(10) + TimeSpan.FromMinutes(15);
 
             var result = DateUtils.GetNearestQuarterOfAnHour(tenAm);
             Assert.AreEqual(result, tenAm);

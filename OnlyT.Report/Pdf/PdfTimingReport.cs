@@ -197,6 +197,8 @@
                     case ChartMeetingType.Both:
                         c.XAxis.Title.Caption = Resources.MIDWEEK_AND_WEEKEND_MTGS;
                         break;
+                    default:
+                        throw new NotSupportedException();
                 }
 
                 var currentMonth = default(DateTime);
@@ -210,7 +212,7 @@
                             if (summary.MeetingDate.Year != currentMonth.Year ||
                                 summary.MeetingDate.Month != currentMonth.Month)
                             {
-                                string monthName = summary.MeetingDate.ToString("MMM", CultureInfo.CurrentUICulture);
+                                var monthName = summary.MeetingDate.ToString("MMM", CultureInfo.CurrentUICulture);
                                 xSeries.Add(monthName);
                                 currentMonth = summary.MeetingDate;
                             }
@@ -240,7 +242,7 @@
 
         private int UsableSummaryCount(ChartMeetingType mtgType)
         {
-            int count = 0;
+            var count = 0;
 
             if (_historicalASummary != null)
             {
@@ -295,7 +297,7 @@
 
             _currentY -= 2 * (double)_itemFont.Height / 5;
 
-            string title = Resources.COUNSEL;
+            var title = Resources.COUNSEL;
             var sz = g.MeasureString(title, _itemFont);
 
             var x = _leftIndent + (2 * _itemTitleFont.Height);
@@ -310,7 +312,7 @@
 
         private static TimeSpan NormaliseCounselDuration(TimeSpan counselDuration)
         {
-            TimeSpan result = counselDuration - TimeSpan.FromSeconds(20);
+            var result = counselDuration - TimeSpan.FromSeconds(20);
             if (result.TotalSeconds <= 5)
             {
                 result = counselDuration;
@@ -356,7 +358,7 @@
             {
                 var mins = (int)Math.Round(minsOvertime);
 
-                string msg = mins == 1
+                var msg = mins == 1
                    ? Resources.OVERTIME_BY_1
                    : string.Format(Resources.OVERTIME_BY, mins);
 
@@ -365,7 +367,7 @@
             else if (minsOvertime < -1)
             {
                 var mins = Math.Abs((int)Math.Round(minsOvertime));
-                string msg = mins == 1
+                var msg = mins == 1
                    ? Resources.UNDERTIME_BY_1
                    : string.Format(Resources.UNDERTIME_BY, mins);
 
@@ -485,7 +487,7 @@
 
         private XSize DrawDurationString(XGraphics g, TimeSpan duration, double curX, XBrush textBrush)
         {
-            string durStr = $"{(int)duration.TotalMinutes:D2}:{duration.Seconds:D2}";
+            var durStr = $"{(int)duration.TotalMinutes:D2}:{duration.Seconds:D2}";
             var szDur = g.MeasureString(durStr, _durationFont);
             g.DrawString(durStr, _durationFont, textBrush, new XPoint(curX, _currentY));
             return szDur;

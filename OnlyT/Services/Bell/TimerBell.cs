@@ -80,7 +80,7 @@ namespace OnlyT.Services.Bell
 
         private static string GetBellFilePath()
         {
-            string folder = AppDomain.CurrentDomain.BaseDirectory;
+            var folder = AppDomain.CurrentDomain.BaseDirectory;
             return Path.Combine(folder, BellFileName);
         }
 

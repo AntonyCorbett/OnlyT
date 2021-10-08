@@ -177,6 +177,10 @@ namespace OnlyT.Services.Timer
                     case MidWeekOrWeekend.MidWeek:
                         start = CalculateMidWeekStartTime(talk);
                         break;
+
+                    default:
+                        // leave start = null
+                        break;
                 }
 
                 if (start == null)
@@ -256,21 +260,20 @@ namespace OnlyT.Services.Timer
 
         private DateTime? CalculateMidWeekStartTime(TalkScheduleItem talk)
         {
-            DateTime? result = null;
             switch (talk.Id)
             {
                 case (int)TalkTypesAutoMode.OpeningComments:
                 case (int)TalkTypesAutoMode.TreasuresTalk:
-                    result = GetNearest15MinsBefore(_dateTimeService.UtcNow());
-                    break;
+                    return GetNearest15MinsBefore(_dateTimeService.UtcNow());
+                    
+                default:
+                    return null;
             }
-
-            return result;
         }
 
         private static DateTime GetNearest15MinsBefore(DateTime dateTimeBase)
         {
-            DateTime result = dateTimeBase.Date;
+            var result = dateTimeBase.Date;
             if (dateTimeBase.Minute > 45)
             {
                 result = result.AddHours(dateTimeBase.Hour).AddMinutes(45);

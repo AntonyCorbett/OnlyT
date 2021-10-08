@@ -226,9 +226,9 @@
             const int numItems = 11;
             const int secsIncrement = 15;
 
-            int secs = secsIncrement;
+            var secs = secsIncrement;
 
-            for (int n = 0; n < numItems; ++n)
+            for (var n = 0; n < numItems; ++n)
             {
                 result.Add(new PersistDurationItem(secs));
                 secs += secsIncrement;
@@ -241,9 +241,9 @@
         {
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
 
-            bool clock24 = dateFormat.Contains("H");
-            bool leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
-            bool ampm = dateFormat.Contains("tt");
+            var clock24 = dateFormat.Contains("H");
+            var leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
+            var ampm = dateFormat.Contains("tt");
 
             if (clock24)
             {
