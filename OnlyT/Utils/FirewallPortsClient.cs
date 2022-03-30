@@ -27,7 +27,7 @@
         private static int LaunchFirewallPortsTool(string args)
         {
 #if DEBUG
-            const string file = @"..\..\..\OnlyTFirewallPorts\bin\Debug\OnlyTFirewallPorts.exe";
+            const string file = @"..\..\..\..\OnlyTFirewallPorts\bin\Debug\net5.0\OnlyTFirewallPorts.exe";
 #else
             const string file = @"OnlyTFirewallPorts.exe";
 #endif
