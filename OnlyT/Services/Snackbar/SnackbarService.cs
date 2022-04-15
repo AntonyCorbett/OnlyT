@@ -55,7 +55,7 @@
 
         public void Dispose()
         {
-            ((SnackbarMessageQueue)TheSnackbarMessageQueue)?.Dispose();
+            ((SnackbarMessageQueue)TheSnackbarMessageQueue).Dispose();
         }
     }
 }

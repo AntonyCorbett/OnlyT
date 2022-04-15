@@ -1,31 +1,30 @@
-﻿using System.Diagnostics;
+﻿// ReSharper disable CatchAllClause
+using System.Diagnostics;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using OnlyT.AutoUpdates;
+using OnlyT.Models;
+using OnlyT.Services.Bell;
+using OnlyT.Services.CountdownTimer;
+using OnlyT.Services.Monitors;
+using OnlyT.Services.Options;
+using OnlyT.Utils;
+using OnlyT.ViewModel.Messages;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows.Media.Imaging;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.CountdownTimer;
+using OnlyT.Services.Snackbar;
+using Serilog;
+using Serilog.Events;
 
 namespace OnlyT.ViewModel
 {
-    // ReSharper disable CatchAllClause
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Windows.Media.Imaging;
-    using AutoUpdates;
-    using Messages;
-    using Models;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.CountdownTimer;
-    using OnlyT.Services.Snackbar;
-    using Serilog;
-    using Serilog.Events;
-    using Services.Bell;
-    using Services.CountdownTimer;
-    using Services.Monitors;
-    using Services.Options;
-    using Utils;
-
     // ReSharper disable once ClassNeverInstantiated.Global
     public class SettingsPageViewModel : ObservableObject, IPage
     {
@@ -958,8 +957,8 @@ namespace OnlyT.ViewModel
 
             var result = new List<ClockHourFormatItem>
             {
-                new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12, ClockHourFormat.Format12),
-                new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12Z, ClockHourFormat.Format12LeadingZero)
+                new(Properties.Resources.CLOCK_FORMAT_12, ClockHourFormat.Format12),
+                new(Properties.Resources.CLOCK_FORMAT_12Z, ClockHourFormat.Format12LeadingZero)
             };
             
             if (cultureUsesAmPm)
@@ -1054,12 +1053,10 @@ namespace OnlyT.ViewModel
                         var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
                         result.Add(new LanguageItem(c.Name, c.EnglishName));
                     }
-#pragma warning disable CC0004 // Catch block cannot be empty
                     catch (CultureNotFoundException)
                     {
                         // expected
                     }
-#pragma warning restore CC0004 // Catch block cannot be empty
                 }
             }
 
@@ -1077,7 +1074,7 @@ namespace OnlyT.ViewModel
             var result = new List<MonitorItem>
             {
                 // empty (i.e. no timer monitor)
-                new MonitorItem(null, Properties.Resources.MONITOR_NONE, null, Properties.Resources.MONITOR_NONE)
+                new(null, Properties.Resources.MONITOR_NONE, null, Properties.Resources.MONITOR_NONE)
             };  
 
             result.AddRange(_monitorsService.GetSystemMonitors());

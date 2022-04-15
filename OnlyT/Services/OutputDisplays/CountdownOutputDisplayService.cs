@@ -1,18 +1,18 @@
-﻿namespace OnlyT.Services.OutputDisplays
-{
-    using Microsoft.Toolkit.Mvvm.Messaging;
-    using System;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Services.Monitors;
-    using OnlyT.Services.Options;
-    using OnlyT.Services.Snackbar;
-    using OnlyT.ViewModel;
-    using OnlyT.ViewModel.Messages;
-    using OnlyT.Windows;
-    using Serilog;
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.Monitors;
+using OnlyT.Services.Options;
+using OnlyT.Services.Snackbar;
+using OnlyT.ViewModel;
+using OnlyT.ViewModel.Messages;
+using OnlyT.Windows;
+using Serilog;
 
+namespace OnlyT.Services.OutputDisplays
+{
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class CountdownOutputDisplayService : OutputDisplayServiceBase, ICountdownOutputDisplayService
     {

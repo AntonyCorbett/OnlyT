@@ -1,20 +1,20 @@
-﻿namespace OnlyT.Tests
-{
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Mocks;
-    using Moq;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Services.CommandLine;
-    using OnlyT.Services.Report;
-    using OnlyT.Services.Snackbar;
-    using Services.Bell;
-    using Services.Options;
-    using Services.TalkSchedule;
-    using Services.Timer;
-    using Utils;
-    using ViewModel;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OnlyT.Tests.Mocks;
+using Moq;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.CommandLine;
+using OnlyT.Services.Report;
+using OnlyT.Services.Snackbar;
+using OnlyT.Services.Bell;
+using OnlyT.Services.Options;
+using OnlyT.Services.TalkSchedule;
+using OnlyT.Services.Timer;
+using OnlyT.Utils;
+using OnlyT.ViewModel;
 
+namespace OnlyT.Tests
+{
     [TestClass]
     public class TestViewModels
     {

@@ -1,9 +1,9 @@
-﻿namespace OnlyT.Report.Database
-{
-    using System;
-    using System.Collections.Generic;
-    using OnlyT.Report.Models;
+﻿using System;
+using System.Collections.Generic;
+using OnlyT.Report.Models;
 
+namespace OnlyT.Report.Database
+{
     internal interface ILocalData
     {
         void Save(MeetingTimes? mtgTimes);

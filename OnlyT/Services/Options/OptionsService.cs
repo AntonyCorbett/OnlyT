@@ -1,22 +1,22 @@
-﻿namespace OnlyT.Services.Options
-{
-    using Microsoft.Toolkit.Mvvm.Messaging;
-    using System;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
-    using System.Windows;
-    using System.Windows.Markup;
-    using CommandLine;
-    using Newtonsoft.Json;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Services.LogLevelSwitch;
-    using OnlyT.Services.Monitors;
-    using OnlyT.ViewModel.Messages;
-    using Serilog;
-    using Utils;
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Markup;
+using Newtonsoft.Json;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.CommandLine;
+using OnlyT.Services.LogLevelSwitch;
+using OnlyT.Services.Monitors;
+using OnlyT.Utils;
+using OnlyT.ViewModel.Messages;
+using Serilog;
 
+namespace OnlyT.Services.Options
+{
     /// <summary>
     /// Service to deal with program settings
     /// </summary>

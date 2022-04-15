@@ -1,32 +1,31 @@
+// ReSharper disable CatchAllClause
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Threading;
+using OnlyT.EventArgs;
+using MaterialDesignThemes.Wpf;
+using OnlyT.ViewModel.Messages;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Models;
+using OnlyT.Services.OutputDisplays;
+using OnlyT.Services.Snackbar;
+using Serilog;
+using OnlyT.Services.CommandLine;
+using OnlyT.Services.CountdownTimer;
+using OnlyT.Services.Options;
+using OnlyT.Services.Timer;
+using OnlyT.WebServer;
+using OnlyT.Windows;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel
 {
-    // ReSharper disable CatchAllClause
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Interop;
-    using System.Windows.Media;
-    using System.Windows.Threading;
-    using EventArgs;
-    using MaterialDesignThemes.Wpf;
-    using Messages;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Models;
-    using OnlyT.Services.OutputDisplays;
-    using OnlyT.Services.Snackbar;
-    using Serilog;
-    using Services.CommandLine;
-    using Services.CountdownTimer;
-    using Services.Options;
-    using Services.Timer;
-    using WebServer;
-    using Windows;
-
     /// <inheritdoc />
     /// <summary>
     /// View model for the main page (which is a placeholder for the Operator or Settings page)
@@ -94,9 +93,7 @@ namespace OnlyT.ViewModel
             WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
             // (fire and forget)
-#pragma warning disable PH_S007 // Thread Start in Constructor
             Task.Run(LaunchTimerWindowAsync);
-#pragma warning restore PH_S007 // Thread Start in Constructor
 
             InitHeartbeatTimer();
         }
@@ -333,7 +330,7 @@ namespace OnlyT.ViewModel
             _heartbeatTimer.Start();
         }
 
-        private void HeartbeatTimerTick(object? sender, EventArgs e)
+        private void HeartbeatTimerTick(object? sender, System.EventArgs e)
         {
             _heartbeatTimer.Stop();
             try

@@ -1,16 +1,15 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using System.Threading;
+using System.Windows;
+using System.Windows.Forms;
+using OnlyT.Models;
+using OnlyT.Services.JwLibrary;
+using OnlyT.Services.Options;
+using OnlyT.Utils;
+using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.Services.OutputDisplays
 {
-    using System.Threading;
-    using System.Windows;
-    using System.Windows.Forms;
-    using OnlyT.Models;
-    using OnlyT.Services.JwLibrary;
-    using OnlyT.Services.Options;
-    using OnlyT.Utils;
-    using OnlyT.ViewModel.Messages;
-
     internal class OutputDisplayServiceBase
     {
         private readonly (int dpiX, int dpiY) _systemDpi;

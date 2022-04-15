@@ -21,7 +21,7 @@
 
             var key = new ApiClientIdAndRequestType(clientId, requestType);
             var found = _clientHistory.TryGetValue(key, out var stamp);
-            _clientHistory.AddOrUpdate(key, currentStamp, (keyType, stampType) => currentStamp);
+            _clientHistory.AddOrUpdate(key, currentStamp, (_, _) => currentStamp);
 
             if (found)
             {

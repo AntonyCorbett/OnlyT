@@ -32,10 +32,7 @@
             lock (_locker)
             {
                 _triggerPeriods = null;
-                if (times != null)
-                {
-                    CalculateTriggerPeriods(times);
-                }
+                CalculateTriggerPeriods(times);
             }
         }
 

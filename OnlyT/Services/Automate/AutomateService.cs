@@ -1,14 +1,14 @@
-﻿namespace OnlyT.Services.Automate
-{
-    using System;
-    using System.Diagnostics;
-    using System.Windows.Threading;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Models;
-    using OnlyT.Services.Options;
-    using OnlyT.Services.TalkSchedule;
-    using OnlyT.Services.Timer;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Threading;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Models;
+using OnlyT.Services.Options;
+using OnlyT.Services.TalkSchedule;
+using OnlyT.Services.Timer;
 
+namespace OnlyT.Services.Automate
+{
     internal class AutomateService : IAutomateService
     {
         private const int TimerIntervalSeconds = 3;

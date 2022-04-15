@@ -1,18 +1,18 @@
-﻿namespace OnlyT.Report.Pdf
-{
-    using PdfSharpCore.Charting;
-    using PdfSharpCore.Drawing;
-    using PdfSharpCore.Pdf;
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Report.Models;
-    using OnlyT.Report.Properties;
-    using Serilog;
+﻿using PdfSharpCore.Charting;
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Report.Models;
+using OnlyT.Report.Properties;
+using Serilog;
 
+namespace OnlyT.Report.Pdf
+{
     public sealed class PdfTimingReport
     {
         private const int LargestDeviationMins = 10;
@@ -179,27 +179,20 @@
                 c.YAxis.MajorTick = 5;
                 c.YAxis.Title.Caption = Resources.OVERTIME_MINS;
                 c.YAxis.Title.Orientation = 90;
-                c.YAxis.Title.VerticalAlignment = PdfSharpCore.Charting.VerticalAlignment.Center;
+                c.YAxis.Title.VerticalAlignment = VerticalAlignment.Center;
                 c.YAxis.HasMajorGridlines = true;
                 c.YAxis.MajorGridlines.LineFormat.Color = XColor.FromGrayScale(50);
                 c.YAxis.MajorTickMark = TickMarkType.Outside;
 
                 c.XAxis.MajorTickMark = TickMarkType.None;
 
-                switch (mtgType)
+                c.XAxis.Title.Caption = mtgType switch
                 {
-                    case ChartMeetingType.Midweek:
-                        c.XAxis.Title.Caption = Resources.MIDWEEK_MTGS;
-                        break;
-                    case ChartMeetingType.Weekend:
-                        c.XAxis.Title.Caption = Resources.WEEKEND_MTGS;
-                        break;
-                    case ChartMeetingType.Both:
-                        c.XAxis.Title.Caption = Resources.MIDWEEK_AND_WEEKEND_MTGS;
-                        break;
-                    default:
-                        throw new NotSupportedException();
-                }
+                    ChartMeetingType.Midweek => Resources.MIDWEEK_MTGS,
+                    ChartMeetingType.Weekend => Resources.WEEKEND_MTGS,
+                    ChartMeetingType.Both => Resources.MIDWEEK_AND_WEEKEND_MTGS,
+                    _ => throw new NotSupportedException()
+                };
 
                 var currentMonth = default(DateTime);
 

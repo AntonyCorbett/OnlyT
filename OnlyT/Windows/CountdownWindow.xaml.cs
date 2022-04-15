@@ -1,16 +1,16 @@
-﻿namespace OnlyT.Windows
-{
-    using System;
-    using System.ComponentModel;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Input;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.CountdownTimer;
-    using OnlyT.Services.Options;
-    using OnlyT.Utils;
-    using OnlyT.ViewModel;
+﻿using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.CountdownTimer;
+using OnlyT.Services.Options;
+using OnlyT.Utils;
+using OnlyT.ViewModel;
 
+namespace OnlyT.Windows
+{
     /// <summary>
     /// Interaction logic for CountdownWindow.xaml
     /// </summary>
@@ -65,7 +65,7 @@
             CountDown.Start(offsetSeconds);
         }
 
-        private void OnCountDownTimeUp(object sender, EventArgs e)
+        private void OnCountDownTimeUp(object sender, System.EventArgs e)
         {
             CountDown.Stop();
 
@@ -77,7 +77,7 @@
 
         private void OnTimeUpEvent()
         {
-            TimeUpEvent?.Invoke(this, EventArgs.Empty);
+            TimeUpEvent?.Invoke(this, System.EventArgs.Empty);
         }
 
         private void CountDownQueryUtcDateTime(object sender, UtcDateTimeQueryEventArgs e)

@@ -1,7 +1,6 @@
 ﻿namespace OnlyT.Utils
 {
 #pragma warning disable S101 // Types should be named in PascalCase
-#pragma warning disable U2U1004 // Public value types should implement equality
 
     // ReSharper disable CommentTypo
     // ReSharper disable InconsistentNaming
@@ -154,12 +153,10 @@
                         (int)adjustedDimensions.Item1,
                         (int)adjustedDimensions.Item2);
                 }
-#pragma warning disable CC0004 // Catch block cannot be empty
                 catch (InvalidOperationException)
                 {
                     // Parsing placement XML failed. Fail silently.
                 }
-#pragma warning restore CC0004 // Catch block cannot be empty
             }
 
             return default;
@@ -186,6 +183,5 @@
             return Encoding.GetString(xmlBytes);
         }
     }
-#pragma warning restore U2U1004 // Public value types should implement equality
 #pragma warning restore S101 // Types should be named in PascalCase
 }

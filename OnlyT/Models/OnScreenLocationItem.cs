@@ -1,7 +1,7 @@
-﻿namespace OnlyT.Models
-{
-    using OnlyT.Services.Options;
+﻿using OnlyT.Services.Options;
 
+namespace OnlyT.Models
+{
     public class OnScreenLocationItem
     {
         public OnScreenLocationItem(string name, ScreenLocation location)

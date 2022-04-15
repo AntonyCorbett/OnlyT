@@ -1,10 +1,10 @@
-﻿namespace OnlyT.Report.Models
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using OnlyT.Common.Services.DateTime;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using OnlyT.Common.Services.DateTime;
 
+namespace OnlyT.Report.Models
+{
     public class MeetingTimes
     {
         private readonly IDateTimeService? _dateTimeService;

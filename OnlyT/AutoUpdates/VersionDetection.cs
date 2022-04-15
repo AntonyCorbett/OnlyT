@@ -1,7 +1,6 @@
 ﻿namespace OnlyT.AutoUpdates
 {
     using System;
-    using System.Linq;
     using System.Net.Http;
     using System.Reflection;
     using Serilog;
@@ -20,10 +19,8 @@
 
             try
             {
-#pragma warning disable U2U1025 // Avoid instantiating HttpClient
                 using var client = new HttpClient();
-#pragma warning restore U2U1025 // Avoid instantiating HttpClient
-
+    
                 var response = client.GetAsync(LatestReleaseUrl).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -80,7 +77,7 @@
 
         public static Version? GetCurrentVersion()
         {
-            return Assembly.GetExecutingAssembly()?.GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName().Version;
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace OnlyT.Report.Database
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using OnlyT.Report.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using OnlyT.Report.Models;
 
+namespace OnlyT.Report.Database
+{
     public class LocalData : ILocalData
     {
         private const string CollectionNameMtgTimes = "meeting_times";

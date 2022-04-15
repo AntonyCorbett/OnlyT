@@ -1,16 +1,14 @@
 ﻿using System.Threading.Tasks;
+using System;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Report.Models;
+using OnlyT.Report.Pdf;
+using OnlyT.Services.Report;
 
 namespace OnlyT.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Report.Models;
-    using OnlyT.Report.Pdf;
-    using OnlyT.Services.Report;
-
     [TestClass]
     public class TestTimingReport
     {

@@ -1,14 +1,13 @@
-﻿namespace OnlyT.Services.Report
-{
-    using System;
-    using System.IO;
-    using System.Threading.Tasks;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Report.Models;
-    using OnlyT.Report.Pdf;
-    using OnlyT.Utils;
-    using Serilog;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Report.Pdf;
+using OnlyT.Utils;
+using Serilog;
 
+namespace OnlyT.Services.Report
+{
     internal static class TimingReportGeneration
     {
         // generate report and return file path (or null)

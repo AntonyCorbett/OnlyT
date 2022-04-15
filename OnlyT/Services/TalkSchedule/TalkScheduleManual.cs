@@ -12,7 +12,7 @@
         {
             return new List<TalkScheduleItem>
             {
-                new TalkScheduleItem(10000, "Manual", string.Empty, string.Empty)
+                new(10000, "Manual", string.Empty, string.Empty)
                 {
                     OriginalDuration = TimeSpan.FromMinutes(30),
                     Editable = true,

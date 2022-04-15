@@ -14,18 +14,17 @@ using OnlyT.Services.Snackbar;
 using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
 using OnlyT.WebServer;
+using System.IO;
+using System.Threading;
+using System.Windows;
+using OnlyT.AutoUpdates;
+using OnlyT.Services.LogLevelSwitch;
+using OnlyT.ViewModel;
+using Serilog;
+using OnlyT.Utils;
 
 namespace OnlyT
 {
-    using System.IO;
-    using System.Threading;
-    using System.Windows;
-    using OnlyT.AutoUpdates;
-    using OnlyT.Services.LogLevelSwitch;
-    using OnlyT.ViewModel;
-    using Serilog;
-    using Utils;
-
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

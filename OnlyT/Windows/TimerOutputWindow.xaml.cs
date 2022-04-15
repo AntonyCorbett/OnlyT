@@ -1,21 +1,20 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
+using OnlyT.Animations;
+using OnlyT.AnalogueClock;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.Options;
+using OnlyT.Utils;
+using OnlyT.ViewModel;
+using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.Windows
 {
-    using System;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
-    using System.Windows.Media.Animation;
-    using System.Windows.Threading;
-    using Animations;
-    using OnlyT.AnalogueClock;
-    using OnlyT.Common.Services.DateTime;
-    using Services.Options;
-    using Utils;
-    using ViewModel;
-    using ViewModel.Messages;
-
     /// <summary>
     /// Interaction logic for TimerOutputWindow.xaml
     /// </summary>
@@ -71,7 +70,7 @@ namespace OnlyT.Windows
             _optionsService.Save();
         }
 
-        private void HandlePersistTimerTick(object? sender, EventArgs e)
+        private void HandlePersistTimerTick(object? sender, System.EventArgs e)
         {
             if (_persistingTalkDuration)
             {

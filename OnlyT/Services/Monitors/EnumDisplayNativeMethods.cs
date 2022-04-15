@@ -1,7 +1,6 @@
 ﻿namespace OnlyT.Services.Monitors
 {
 #pragma warning disable S101 // Types should be named in PascalCase
-#pragma warning disable U2U1004 // Public value types should implement equality
 
     // ReSharper disable StyleCop.SA1602
     // ReSharper disable UnusedMember.Global
@@ -71,6 +70,5 @@
         }
     }
 
-#pragma warning restore U2U1004 // Public value types should implement equality
 #pragma warning restore S101 // Types should be named in PascalCase
 }

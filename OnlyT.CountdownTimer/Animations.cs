@@ -150,7 +150,7 @@
             storyboard.Begin(parentContainer);
         }
 
-        private static void Fade(FrameworkElement parentContainer, FrameworkElement[] ctrls, int ms, bool fadeIn, EventHandler? onCompleted = null)
+        private static void Fade(FrameworkElement parentContainer, FrameworkElement?[] ctrls, int ms, bool fadeIn, EventHandler? onCompleted = null)
         {
             var storyboard = new Storyboard();
 

@@ -1,11 +1,11 @@
-﻿namespace OnlyT.Tests.Mocks
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using OnlyT.Models;
-    using OnlyT.Services.TalkSchedule;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using OnlyT.Models;
+using OnlyT.Services.TalkSchedule;
 
+namespace OnlyT.Tests.Mocks
+{
     internal class MockTalksScheduleService : ITalkScheduleService
     {
         private readonly int _talkIdStart;

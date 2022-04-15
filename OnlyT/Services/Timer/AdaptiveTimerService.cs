@@ -1,18 +1,17 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using OnlyT.Models;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Utils;
+using OnlyT.ViewModel.Messages;
+using OnlyT.Services.Options;
+using Serilog;
+using OnlyT.Services.TalkSchedule;
 
 namespace OnlyT.Services.Timer
 {
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-    using Models;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Utils;
-    using OnlyT.ViewModel.Messages;
-    using Options;
-    using Serilog;
-    using TalkSchedule;
-
     /// <summary>
     /// Used in Automatic mode to automatically adapt talk timings according to
     /// the start time of the meeting and the start time of the talk. See also
@@ -198,14 +197,10 @@ namespace OnlyT.Services.Timer
                     var toleranceSeconds = TimeSpan.FromMinutes(10).TotalSeconds;
 
                     var diff = _meetingStartTimeUtcFromCountdown - start;
-                    if (diff != null && Math.Abs(diff.Value.TotalSeconds) < toleranceSeconds)
-                    {
-                        _meetingStartTimeUtc = _meetingStartTimeUtcFromCountdown;
-                    }
-                    else
-                    {
-                        _meetingStartTimeUtc = start;
-                    }
+
+                    _meetingStartTimeUtc = Math.Abs(diff.Value.TotalSeconds) < toleranceSeconds 
+                        ? _meetingStartTimeUtcFromCountdown 
+                        : start;
                 }
 
                 Log.Logger.Debug($"Meeting start time UTC = {_meetingStartTimeUtc}");
@@ -260,15 +255,12 @@ namespace OnlyT.Services.Timer
 
         private DateTime? CalculateMidWeekStartTime(TalkScheduleItem talk)
         {
-            switch (talk.Id)
+            return talk.Id switch
             {
-                case (int)TalkTypesAutoMode.OpeningComments:
-                case (int)TalkTypesAutoMode.TreasuresTalk:
-                    return GetNearest15MinsBefore(_dateTimeService.UtcNow());
-                    
-                default:
-                    return null;
-            }
+                (int) TalkTypesAutoMode.OpeningComments => GetNearest15MinsBefore(_dateTimeService.UtcNow()),
+                (int) TalkTypesAutoMode.TreasuresTalk => GetNearest15MinsBefore(_dateTimeService.UtcNow()),
+                _ => null
+            };
         }
 
         private static DateTime GetNearest15MinsBefore(DateTime dateTimeBase)

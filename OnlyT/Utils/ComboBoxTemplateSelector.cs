@@ -21,7 +21,7 @@ namespace OnlyT.Utils
 
             // Search up the visual tree, stopping at either a ComboBox or
             // a ComboBoxItem (or null). This will determine which template to use
-            while (parent != null && !(parent is ComboBoxItem) && !(parent is ComboBox))
+            while (parent != null && parent is not ComboBoxItem && parent is not ComboBox)
             {
                 parent = VisualTreeHelper.GetParent(parent);
             }

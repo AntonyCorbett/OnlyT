@@ -1,27 +1,29 @@
-﻿<Window x:Class="OnlyT.Windows.CountdownWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:countdownTimer="clr-namespace:OnlyT.CountdownTimer;assembly=OnlyT.CountdownTimer"
-        xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        DataContext="{Binding Source={StaticResource Locator}, Path=Countdown}"
-        mc:Ignorable="d"
-        WindowStyle="None" Background="{Binding Path=IsWindowTransparent, Converter={StaticResource ToBackgroundConverter}}" 
-        ShowInTaskbar="False" 
-        ResizeMode="NoResize"
-        Closing="WindowClosing"
-        MouseDown="Window_MouseDown"
-        Title="OnlyT Countdown Output" Height="305.825" Width="469.418" 
-        Cursor="{Binding MousePointer}">
+﻿<Window
+    x:Class="OnlyT.Windows.CountdownWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
+    xmlns:countdownTimer="clr-namespace:OnlyT.CountdownTimer;assembly=OnlyT.CountdownTimer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+    Title="OnlyT Countdown Output"
+    Width="469.418"
+    Height="305.825"
+    Background="{Binding Path=IsWindowTransparent, Converter={StaticResource ToBackgroundConverter}}"
+    Closing="WindowClosing"
+    Cursor="{Binding MousePointer}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Countdown}"
+    MouseDown="Window_MouseDown"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    WindowStyle="None"
+    mc:Ignorable="d">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome 
-            CaptionHeight="0"
-            ResizeBorderThickness="5" />
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
     <b:Interaction.Behaviors>
@@ -29,33 +31,36 @@
     </b:Interaction.Behaviors>
 
     <Grid>
-        <Border Name="ClockPanel" 
-                HorizontalAlignment="{Binding HorizontalAlignment}"
-                VerticalAlignment="{Binding VerticalAlignment}"
-                CornerRadius="20" Grid.Column="0" 
-                BorderBrush="Beige" 
-                BorderThickness="{Binding BorderThickness}" 
-                Width="{Binding Parent.ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-                Height="{Binding Parent.ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-                Padding="10">
-            
+        <Border
+            Name="ClockPanel"
+            Grid.Column="0"
+            Width="{Binding Parent.ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+            Height="{Binding Parent.ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+            Padding="10"
+            HorizontalAlignment="{Binding HorizontalAlignment}"
+            VerticalAlignment="{Binding VerticalAlignment}"
+            BorderBrush="Beige"
+            BorderThickness="{Binding BorderThickness}"
+            CornerRadius="20">
+
             <Border.LayoutTransform>
-                <ScaleTransform CenterX="0" CenterY="0" ScaleX="{Binding CountdownScale}" ScaleY="{Binding CountdownScale}"/>
+                <ScaleTransform CenterX="0" CenterY="0" ScaleX="{Binding CountdownScale}" ScaleY="{Binding CountdownScale}" />
             </Border.LayoutTransform>
 
             <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="{Binding BackgroundOpacity}">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="#FF5D4343"/>
+                <LinearGradientBrush Opacity="{Binding BackgroundOpacity}" StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="Black" />
+                    <GradientStop Color="#FF5D4343" />
                 </LinearGradientBrush>
             </Border.Background>
 
-            <countdownTimer:CountdownControl 
-                x:Name="CountDown" 
-                QueryUtcDateTimeEvent="CountDownQueryUtcDateTime"
+            <countdownTimer:CountdownControl
+                x:Name="CountDown"
+                Margin="10"
                 CountdownDurationMins="{Binding CountdownDurationMins}"
                 ElementsToShow="{Binding ElementsToShow}"
-                Margin="10" TimeUpEvent="OnCountDownTimeUp"/>
+                QueryUtcDateTimeEvent="CountDownQueryUtcDateTime"
+                TimeUpEvent="OnCountDownTimeUp" />
 
         </Border>
     </Grid>

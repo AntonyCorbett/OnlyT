@@ -1,14 +1,14 @@
-﻿namespace OnlyT.Services.Report
-{
-    using System;
-    using System.IO;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Report.Database;
-    using OnlyT.Report.Models;
-    using OnlyT.Services.CommandLine;
-    using OnlyT.Utils;
-    using Serilog;
+﻿using System;
+using System.IO;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Report.Database;
+using OnlyT.Report.Models;
+using OnlyT.Services.CommandLine;
+using OnlyT.Utils;
+using Serilog;
 
+namespace OnlyT.Services.Report
+{
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class LocalTimingDataStoreService : ILocalTimingDataStoreService
     {

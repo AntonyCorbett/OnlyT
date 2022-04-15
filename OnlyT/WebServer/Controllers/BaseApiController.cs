@@ -36,14 +36,10 @@
                 using var output = response.OutputStream;
                 output.Write(buffer, 0, buffer.Length);
             }
-#pragma warning disable RCS1075 // Avoid empty catch clause that catches System.Exception.
-#pragma warning disable CC0004 // Catch block cannot be empty
             catch (Exception)
             {
                 // ignore
             }
-#pragma warning restore CC0004 // Catch block cannot be empty
-#pragma warning restore RCS1075 // Avoid empty catch clause that catches System.Exception.
         }
 
         protected static bool IsMethodGet(HttpListenerRequest request)

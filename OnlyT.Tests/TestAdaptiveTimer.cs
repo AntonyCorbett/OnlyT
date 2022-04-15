@@ -1,16 +1,16 @@
-﻿namespace OnlyT.Tests
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
-    using Moq;
-    using OnlyT.Services.Options;
-    using OnlyT.Services.TalkSchedule;
-    using OnlyT.Services.Timer;
-    using OnlyT.Tests.Mocks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using OnlyT.Models;
+using OnlyT.Services.Options;
+using OnlyT.Services.TalkSchedule;
+using OnlyT.Services.Timer;
+using OnlyT.Tests.Mocks;
 
+namespace OnlyT.Tests
+{
     [TestClass]
     public class TestAdaptiveTimer
     {
@@ -219,7 +219,7 @@
             Assert.IsNotNull(study);
 
             // 10 mins late starting the "Living" section.
-            dateTimeService.Set(mtgStart + living1!.StartOffsetIntoMeeting + TimeSpan.FromMinutes(10));
+            dateTimeService.Set(mtgStart + living1.StartOffsetIntoMeeting + TimeSpan.FromMinutes(10));
 
             var adaptedDuration1 = service.CalculateAdaptedDuration(living1.Id);
             Assert.IsNotNull(adaptedDuration1);
@@ -227,14 +227,14 @@
             living1.AdaptedDuration = adaptedDuration1;
 
             // at start of study we're only 5 mins behind
-            dateTimeService.Set(mtgStart + study!.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
+            dateTimeService.Set(mtgStart + study.StartOffsetIntoMeeting + TimeSpan.FromMinutes(5));
 
             // remove 5 mins from study and add to conclusion.
             study.ModifiedDuration = study.OriginalDuration.Add(TimeSpan.FromMinutes(-5));
-            concluding!.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
-            
-            // remaining meeting duration = 28 mins shared between study of 25 mins and conc of 8 mins (total 33 mins)
-            // adapted duration of study = 21 mins 12 secs, conc = 6 mins 47 secs
+            concluding.ModifiedDuration = concluding.OriginalDuration.Add(TimeSpan.FromMinutes(5));
+
+            // remaining meeting duration = 28 mins shared between study of 25 mins and conclusion of 8 mins (total 33 mins)
+            // adapted duration of study = 21 mins 12 secs, conclusion = 6 mins 47 secs
 
             var adaptedDuration2 = service.CalculateAdaptedDuration(study.Id);
             Assert.IsNotNull(adaptedDuration2);

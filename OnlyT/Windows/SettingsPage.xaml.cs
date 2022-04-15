@@ -1,10 +1,10 @@
-﻿namespace OnlyT.Windows
-{
-    using System.Diagnostics;
-    using System.Windows.Controls;
-    using OnlyT.Services.CommandLine;
-    using OnlyT.Utils;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
+using OnlyT.Services.CommandLine;
+using OnlyT.Utils;
 
+namespace OnlyT.Windows
+{
     /// <summary>
     /// Interaction logic for SettingsPage.xaml
     /// </summary>

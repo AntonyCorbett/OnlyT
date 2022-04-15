@@ -15,6 +15,7 @@
 #pragma warning disable S1075 // URIs should not be hardcoded
         private static readonly string FeedUrl = @"https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
 #pragma warning restore S1075 // URIs should not be hardcoded
+
         private readonly string _localFeedFile;
         private readonly int _tooOldDays = 20;
         private IEnumerable<Meeting>? _meetingData;

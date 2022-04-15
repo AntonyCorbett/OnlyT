@@ -1,10 +1,10 @@
-﻿namespace OnlyT.Behaviours
-{
-    using Microsoft.Xaml.Behaviors;
-    using System.Windows;
-    using System.Windows.Interop;
-    using OnlyT.Utils;
+﻿using Microsoft.Xaml.Behaviors;
+using System.Windows;
+using System.Windows.Interop;
+using OnlyT.Utils;
 
+namespace OnlyT.Behaviours
+{
     public class HideCloseButtonBehaviour : Behavior<Window>
     {
         private const int GwlStyle = -16;

@@ -69,18 +69,14 @@
 
         public int CountdownDurationMins
         {
-#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => (int)GetValue(CountdownDurationMinsProperty);
             set => SetValue(CountdownDurationMinsProperty, value);
-#pragma warning restore S4275 // Getters and setters should access the expected fields
         }
 
         public ElementsToShow ElementsToShow
         {
-#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => (ElementsToShow)GetValue(ElementsToShowProperty);
             set => SetValue(ElementsToShowProperty, value);
-#pragma warning restore S4275 // Getters and setters should access the expected fields
         }
 
         public override void OnApplyTemplate()
@@ -113,7 +109,7 @@
                 Animations.FadeOut(
                     this, 
                     new FrameworkElement[] { _donut, _secondsBall, _pie, _time },
-                    (sender, args) =>
+                    (_, _) =>
                     {
                         Visibility = Visibility.Hidden;
                     });
@@ -463,8 +459,8 @@
 
             var gs1 = new GradientStopCollection(2)
             {
-                new GradientStop(innerHighlightColor, 0.7),
-                new GradientStop(revealedColor, 1)
+                new(innerHighlightColor, 0.7),
+                new(revealedColor, 1)
             };
 
             _donut = new Path
@@ -567,12 +563,12 @@
         {
             // get opportunity to clear the timer event handler
             // when the parent window closes.
-            Loaded += (s, e) =>
+            Loaded += (_, _) =>
             {
                 var parent = Window.GetWindow(this);
                 if (parent != null)
                 {
-                    parent.Closing += (s1, e1) => DisposeLogic();
+                    parent.Closing += (_, _) => DisposeLogic();
                 }
             };
         }

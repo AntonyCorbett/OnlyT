@@ -1,7 +1,7 @@
-﻿namespace OnlyT.Common.Services.DateTime
-{
-    using System;
+﻿using System;
 
+namespace OnlyT.Common.Services.DateTime
+{
     public class QueryWeekendService : IQueryWeekendService
     {
         public bool IsWeekend(System.DateTime theDate, bool weekendIncludesFriday)

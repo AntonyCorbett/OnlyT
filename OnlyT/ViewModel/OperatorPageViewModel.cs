@@ -1,33 +1,33 @@
-﻿namespace OnlyT.ViewModel
-{
-    // ReSharper disable CatchAllClause
-    using Microsoft.Toolkit.Mvvm.ComponentModel;
-    using Microsoft.Toolkit.Mvvm.Input;
-    using Microsoft.Toolkit.Mvvm.Messaging;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Media;
-    using AutoUpdates;
-    using Messages;
-    using Models;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Services.Automate;
-    using OnlyT.Services.Report;
-    using OnlyT.Services.Snackbar;
-    using Serilog;
-    using Services.Bell;
-    using Services.CommandLine;
-    using Services.Options;
-    using Services.TalkSchedule;
-    using Services.Timer;
-    using Utils;
-    using WebServer.ErrorHandling;
+﻿// ReSharper disable CatchAllClause
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using OnlyT.AutoUpdates;
+using OnlyT.ViewModel.Messages;
+using OnlyT.Models;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.Automate;
+using OnlyT.Services.Report;
+using OnlyT.Services.Snackbar;
+using Serilog;
+using OnlyT.Services.Bell;
+using OnlyT.Services.CommandLine;
+using OnlyT.Services.Options;
+using OnlyT.Services.TalkSchedule;
+using OnlyT.Services.Timer;
+using OnlyT.Utils;
+using OnlyT.WebServer.ErrorHandling;
 
+namespace OnlyT.ViewModel
+{
     /// <summary>
     /// View model for the Operator page
     /// </summary>
@@ -181,33 +181,33 @@
             }
         }
 
-        public RelayCommand StartCommand { get; set; }
+        public RelayCommand StartCommand { get; }
 
-        public RelayCommand StopCommand { get; set; }
+        public RelayCommand StopCommand { get; }
 
-        public RelayCommand SettingsCommand { get; set; }
+        public RelayCommand SettingsCommand { get; }
 
-        public RelayCommand HelpCommand { get; set; }
+        public RelayCommand HelpCommand { get; }
 
-        public RelayCommand NewVersionCommand { get; set; }
+        public RelayCommand NewVersionCommand { get; }
 
-        public RelayCommand IncrementTimerCommand { get; set; }
+        public RelayCommand IncrementTimerCommand { get; }
 
-        public RelayCommand IncrementTimer15Command { get; set; }
+        public RelayCommand IncrementTimer15Command { get; }
 
-        public RelayCommand IncrementTimer5Command { get; set; }
+        public RelayCommand IncrementTimer5Command { get; }
 
-        public RelayCommand DecrementTimerCommand { get; set; }
+        public RelayCommand DecrementTimerCommand { get; }
 
-        public RelayCommand DecrementTimer15Command { get; set; }
+        public RelayCommand DecrementTimer15Command { get; }
 
-        public RelayCommand DecrementTimer5Command { get; set; }
+        public RelayCommand DecrementTimer5Command { get; }
 
-        public RelayCommand BellToggleCommand { get; set; }
+        public RelayCommand BellToggleCommand { get; }
 
-        public RelayCommand CountUpToggleCommand { get; set; }
+        public RelayCommand CountUpToggleCommand { get; }
 
-        public RelayCommand CloseCountdownCommand { get; set; }
+        public RelayCommand CloseCountdownCommand { get; }
 
         public bool RunFlashAnimation
         {
@@ -837,8 +837,8 @@
 
         private void SelectFirstTalk()
         {
-            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
-            if (talks != null && talks.Length > 0)
+            var talks = _scheduleService.GetTalkScheduleItems().ToArray();
+            if (talks.Length > 0)
             {
                 TalkId = talks.First().Id;
             }
@@ -846,30 +846,26 @@
 
         private bool IsFirstTalk(int talkId)
         {
-            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
-            return talks != null && talks.Length > 0 && talkId == talks.First().Id;
+            var talks = _scheduleService.GetTalkScheduleItems().ToArray();
+            return talks.Length > 0 && talkId == talks.First().Id;
         }
 
         private TalkScheduleItem? GetPreviousTalk(int talkId)
         {
-            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
-            if (talks != null)
+            var talks = _scheduleService.GetTalkScheduleItems().ToArray();
+            
+            TalkScheduleItem? prevTalk = null;
+            foreach (var talk in talks)
             {
-                TalkScheduleItem? prevTalk = null;
-                foreach (var talk in talks)
+                if (talk.Id == talkId)
                 {
-                    if (talk.Id == talkId)
-                    {
-                        break;
-                    }
-
-                    prevTalk = talk;
+                    break;
                 }
 
-                return prevTalk;
+                prevTalk = talk;
             }
 
-            return null;
+            return prevTalk;
         }
 
         private void NavigateSettings()
@@ -1033,9 +1029,7 @@
                                 if (success)
                                 {
                                     // fire and forget
-#pragma warning disable PH_S030 // Async Void Method Invocation
                                     StopTimer();
-#pragma warning restore PH_S030 // Async Void Method Invocation
                                 }
 
                                 break;
@@ -1124,17 +1118,14 @@
 
         private void OnAutoBellSettingChanged(object recipient, AutoBellSettingChangedMessage message)
         {
-            var talks = _scheduleService.GetTalkScheduleItems()?.ToArray();
-            if (talks != null)
-            {
-                var autoBell = _optionsService.Options.AutoBell;
+            var talks = _scheduleService.GetTalkScheduleItems().ToArray();
+            var autoBell = _optionsService.Options.AutoBell;
 
-                foreach (var talk in talks)
+            foreach (var talk in talks)
+            {
+                if (talk.AutoBell != autoBell)
                 {
-                    if (talk.AutoBell != autoBell)
-                    {
-                        talk.AutoBell = autoBell;
-                    }
+                    talk.AutoBell = autoBell;
                 }
             }
 

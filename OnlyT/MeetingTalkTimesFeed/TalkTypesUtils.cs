@@ -1,7 +1,7 @@
-﻿namespace OnlyT.MeetingTalkTimesFeed
-{
-    using OnlyT.Services.TalkSchedule;
+﻿using OnlyT.Services.TalkSchedule;
 
+namespace OnlyT.MeetingTalkTimesFeed
+{
     internal static class TalkTypesUtils
     {
         public static TalkTypes GetMinistryTalkType(int index)

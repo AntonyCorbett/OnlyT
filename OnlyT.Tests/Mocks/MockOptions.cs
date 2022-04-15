@@ -1,7 +1,7 @@
-﻿namespace OnlyT.Tests.Mocks
-{
-    using OnlyT.Services.Options;
+﻿using OnlyT.Services.Options;
 
+namespace OnlyT.Tests.Mocks
+{
     public static class MockOptions
     {
         public static Options Create()

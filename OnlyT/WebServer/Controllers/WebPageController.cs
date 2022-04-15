@@ -21,21 +21,12 @@
             {
                 if (!WebPageHtml.ContainsKey(_webPageType))
                 {
-                    string webPageTemplate;
-
-                    switch (_webPageType)
+                    string webPageTemplate = _webPageType switch
                     {
-                        case WebPageTypes.Clock:
-                            webPageTemplate = Properties.Resources.ClockHtmlTemplate;
-                            break;
-
-                        case WebPageTypes.Timers:
-                            webPageTemplate = Properties.Resources.TimersHtmlTemplate;
-                            break;
-
-                        default:
-                            throw new NotSupportedException();
-                    }
+                        WebPageTypes.Clock => Properties.Resources.ClockHtmlTemplate,
+                        WebPageTypes.Timers => Properties.Resources.TimersHtmlTemplate,
+                        _ => throw new NotSupportedException()
+                    };
 
                     WebPageHtml.Add(_webPageType, new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate)));
                 }
@@ -74,9 +65,7 @@
             var resourceKeys = new[] { "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
             var resourceMan = new ResourceManager(typeof(Properties.Resources));
 
-#pragma warning disable U2U1210 // Do not materialize an IEnumerable<T> unnecessarily
             resourceKeys.ToList().ForEach(k => content = content.Replace($"{{{k}}}", resourceMan.GetString(k)));
-#pragma warning restore U2U1210 // Do not materialize an IEnumerable<T> unnecessarily
 
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }

@@ -1,7 +1,7 @@
-﻿namespace OnlyT.ViewModel.Messages
-{
-    using OnlyT.Models;
+﻿using OnlyT.Models;
 
+namespace OnlyT.ViewModel.Messages
+{
     /// <summary>
     /// When the countdown monitor is changed in the Settings page
     /// </summary>

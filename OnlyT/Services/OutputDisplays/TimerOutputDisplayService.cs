@@ -1,16 +1,15 @@
 ﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using System.Windows;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.Monitors;
+using OnlyT.Services.Options;
+using OnlyT.ViewModel;
+using OnlyT.ViewModel.Messages;
+using OnlyT.Windows;
+using Serilog;
 
 namespace OnlyT.Services.OutputDisplays
 {
-    using System.Windows;
-    using OnlyT.Common.Services.DateTime;
-    using OnlyT.Services.Monitors;
-    using OnlyT.Services.Options;
-    using OnlyT.ViewModel;
-    using OnlyT.ViewModel.Messages;
-    using OnlyT.Windows;
-    using Serilog;
-
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class TimerOutputDisplayService : OutputDisplayServiceBase, ITimerOutputDisplayService
     {
@@ -71,10 +70,7 @@ namespace OnlyT.Services.OutputDisplays
 
         public void OpenWindowWindowed()
         {
-            if (_timerWindow == null)
-            {
-                _timerWindow = new TimerOutputWindow(_optionsService, _dateTimeService);
-            }
+            _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
 
             ConfigureForWindowedOperation();
 

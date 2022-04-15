@@ -68,32 +68,29 @@ namespace OnlyT.Services.TalkSchedule
 
         public TalkScheduleItem? GetTalkScheduleItem(int id)
         {
-            return GetTalkScheduleItems()?.SingleOrDefault(n => n.Id == id);
+            return GetTalkScheduleItems().SingleOrDefault(n => n.Id == id);
         }
 
         public int GetNext(int currentTalkId)
         {
-            var talks = GetTalkScheduleItems()?.ToArray();
-            if (talks != null)
+            var talks = GetTalkScheduleItems().ToArray();
+            if (_optionsService.Options.OperatingMode == OperatingMode.Manual)
             {
-                if (_optionsService.Options.OperatingMode == OperatingMode.Manual)
+                return talks.First().Id;
+            }
+
+            var foundCurrent = false;
+            for (var n = 0; n < talks.Length; ++n)
+            {
+                var thisTalk = talks[n];
+                if (thisTalk.Id.Equals(currentTalkId))
                 {
-                    return talks.First().Id;
+                    foundCurrent = true;
                 }
 
-                var foundCurrent = false;
-                for (int n = 0; n < talks.Length; ++n)
+                if (n != talks.Length - 1 && foundCurrent && talks[n + 1].ActualDuration != TimeSpan.Zero)
                 {
-                    var thisTalk = talks[n];
-                    if (thisTalk.Id.Equals(currentTalkId))
-                    {
-                        foundCurrent = true;
-                    }
-
-                    if (n != talks.Length - 1 && foundCurrent && talks[n + 1].ActualDuration != TimeSpan.Zero)
-                    {
-                        return talks[n + 1].Id;
-                    }
+                    return talks[n + 1].Id;
                 }
             }
 

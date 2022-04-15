@@ -1,7 +1,7 @@
-﻿namespace OnlyT.Models
-{
-    using OnlyT.CountdownTimer;
+﻿using OnlyT.CountdownTimer;
 
+namespace OnlyT.Models
+{
     public class CountdownElementsToShowItem
     {
         public CountdownElementsToShowItem(ElementsToShow elements, string name)

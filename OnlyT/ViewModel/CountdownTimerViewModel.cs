@@ -1,14 +1,13 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Messaging;
+using System.Windows;
+using System.Windows.Input;
+using OnlyT.ViewModel.Messages;
+using OnlyT.CountdownTimer;
+using OnlyT.Services.Options;
 
 namespace OnlyT.ViewModel
 {
-    using System.Windows;
-    using System.Windows.Input;
-    using Messages;
-    using OnlyT.CountdownTimer;
-    using OnlyT.Services.Options;
-
     // ReSharper disable once ClassNeverInstantiated.Global
     public class CountdownTimerViewModel : ObservableObject
     {

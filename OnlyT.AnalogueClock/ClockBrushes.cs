@@ -11,9 +11,9 @@
             var result = new LinearGradientBrush(
                 new GradientStopCollection
                 {
-                    new GradientStop((Color)ColorConverter.ConvertFromString("#FFB1B2AA"), 0),
-                    new GradientStop((Color)ColorConverter.ConvertFromString("#FFACACA2"), 1),
-                    new GradientStop((Color)ColorConverter.ConvertFromString("#FFD1D1D1"), 0.673),
+                    new((Color)ColorConverter.ConvertFromString("#FFB1B2AA"), 0),
+                    new((Color)ColorConverter.ConvertFromString("#FFACACA2"), 1),
+                    new((Color)ColorConverter.ConvertFromString("#FFD1D1D1"), 0.673),
                 },
                 new Point(0.5, 0.0),
                 new Point(0.0, 0.5))
@@ -34,9 +34,9 @@
             var result = new LinearGradientBrush(
                 new GradientStopCollection
                 {
-                    new GradientStop((Color)ColorConverter.ConvertFromString("#FF151515"), 0),
-                    new GradientStop((Color)ColorConverter.ConvertFromString("#FF130101"), 1),
-                    new GradientStop((Color)ColorConverter.ConvertFromString("#FFD1D1D1"), 0.673),
+                    new((Color)ColorConverter.ConvertFromString("#FF151515"), 0),
+                    new((Color)ColorConverter.ConvertFromString("#FF130101"), 1),
+                    new((Color)ColorConverter.ConvertFromString("#FFD1D1D1"), 0.673),
                 },
                 new Point(0.5, 0.0),
                 new Point(0.0, 0.5))

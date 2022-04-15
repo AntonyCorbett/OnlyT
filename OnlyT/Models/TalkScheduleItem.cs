@@ -77,7 +77,7 @@ namespace OnlyT.Models
                     return null;
                 }
 
-                var overtimeSecs = (int)(ActualDuration.TotalSeconds - CompletedTimeSecs ?? 0);
+                var overtimeSecs = (int)(ActualDuration.TotalSeconds - CompletedTimeSecs);
                 var timeString = TimeFormatter.FormatTimerDisplayString(Math.Abs(overtimeSecs));
                 return overtimeSecs >= 0
                     ? $"-{timeString}"
@@ -175,13 +175,7 @@ namespace OnlyT.Models
         public bool OriginalAutoBell
         {
             get => _originalAutoBell ?? false;
-            private set
-            {
-                if (_originalAutoBell == null)
-                {
-                    _originalAutoBell = value;
-                }
-            }
+            private set => _originalAutoBell ??= value;
         }
 
         public bool IsStudentTalk { get; set; }

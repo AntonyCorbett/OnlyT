@@ -1,11 +1,11 @@
-﻿namespace OnlyT.WebServer.Controllers
-{
-    using System.Net;
-    using Models;
-    using OnlyT.WebServer.Throttling;
-    using Services.Bell;
-    using Services.Options;
+﻿using System.Net;
+using OnlyT.WebServer.Models;
+using OnlyT.WebServer.Throttling;
+using OnlyT.Services.Bell;
+using OnlyT.Services.Options;
 
+namespace OnlyT.WebServer.Controllers
+{
     internal class BellApiController : BaseApiController
     {
         private readonly IOptionsService _optionsService;
