@@ -272,8 +272,8 @@ namespace OnlyT.Services.Options
         private void ResetCircuitVisit()
         {
             // when the settings are read we ignore this saved setting 
-            // and reset to false...
-            _options!.IsCircuitVisit = false;
+            // and reset to command line value, if any (defaults to false)...
+            _options!.IsCircuitVisit = _commandLineService.IsCircuitVisit;
         }
 
         private void SetMidWeekOrWeekend()
