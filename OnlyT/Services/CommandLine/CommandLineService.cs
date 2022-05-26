@@ -46,6 +46,9 @@
                     }
                 });
 
+            p.Setup<bool>("covisit")
+                .Callback(s => { IsCircuitVisit = s; }).SetDefault(false);
+
             p.Parse(Environment.GetCommandLineArgs());
         }
 
@@ -64,6 +67,8 @@
         public bool Automate { get; set; }
 
         public DateTime? DateTimeOnLaunch { get; set; }
+
+        public bool IsCircuitVisit { get; set; }
 
         public bool IsTimerMonitorSpecified => TimerMonitorIndex > 0;
 

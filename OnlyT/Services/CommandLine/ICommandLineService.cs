@@ -15,6 +15,8 @@
         int TimerMonitorIndex { get; set; }
 
         int CountdownMonitorIndex { get; set; }
+        
+        bool IsCircuitVisit { get; set; }
 
         bool IsTimerMonitorSpecified { get; }
 
