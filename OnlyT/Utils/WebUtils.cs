@@ -1,7 +1,7 @@
 ﻿namespace OnlyT.Utils
 {
     using System.Net;
-    using System.Text;
+    using System.Net.Http;
     using System.Threading;
 
     internal static class WebUtils
@@ -38,9 +38,14 @@
 
         private static string InternalLoadWithUserAgent(string url)
         {
-            using var wc = new WebClient { Encoding = Encoding.UTF8 };
-            wc.Headers.Add("user-agent", UserAgentString);
-            return wc.DownloadString(url);
+            using var handler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate };
+            using var request = new HttpRequestMessage { RequestUri = new(url), Method = HttpMethod.Get };
+            using var client = new HttpClient(handler);
+            client.DefaultRequestHeaders.Add("user-agent", UserAgentString);
+
+            var response = client.Send(request);
+            response.EnsureSuccessStatusCode();
+            return response.Content.ReadAsStringAsync().Result;
         }
     }
 }

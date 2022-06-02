@@ -7,7 +7,8 @@
     internal static class QRCodeGeneration
     {
         private static readonly ConcurrentDictionary<string, BitmapImage> Cache = new();
-        
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
         public static BitmapImage CreateQRCode(string url)
         {
             if (!Cache.TryGetValue(url, out var result))

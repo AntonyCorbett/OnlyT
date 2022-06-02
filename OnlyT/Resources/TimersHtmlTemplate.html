@@ -314,7 +314,6 @@
                     return "";
 
                 case "Timer":
-                {
                     onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
@@ -331,10 +330,8 @@
                     return currentlyCountingUp
                         ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
                         : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
-                }
 
                 default:
-                    //
                     if (!timersLoaded || (timersLoaded && onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT)) {
                         onlineToOfflineCount++;
                         offlineTextElem.style.display = "";
@@ -389,7 +386,7 @@
                 }
             }
 
-            setTimeout(updateTimer, 100);	// every 1/100 sec
+            setTimeout(updateTimer, 100); // every 1/100 sec
         }
 
         getOnlyTJson();

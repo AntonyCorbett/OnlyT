@@ -23,17 +23,17 @@ IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Copying items into delivery
-xcopy OnlyTFirewallPorts\bin\Release\net5.0\publish\*.* OnlyT\bin\Release\net5.0-windows\publish /q /s /y /d
+xcopy OnlyTFirewallPorts\bin\Release\net6.0\publish\*.* OnlyT\bin\Release\net6.0-windows\publish /q /s /y /d
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Removing unwanted x64 DLLs
-del OnlyT\bin\Release\net5.0-windows\publish\libmp3lame.64.dll
+del OnlyT\bin\Release\net6.0-windows\publish\libmp3lame.64.dll
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Removing unwanted translations
-rd OnlyT\bin\Release\net5.0-windows\publish\id-ID /q /s
+rd OnlyT\bin\Release\net6.0-windows\publish\id-ID /q /s
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
@@ -43,7 +43,7 @@ IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Create portable zip
-powershell Compress-Archive -Path OnlyT\bin\Release\net5.0-windows\publish\* -DestinationPath Installer\Output\OnlyTPortable.zip 
+powershell Compress-Archive -Path OnlyT\bin\Release\net6.0-windows\publish\* -DestinationPath Installer\Output\OnlyTPortable.zip 
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 goto SUCCESS
