@@ -6,6 +6,7 @@
 
     internal static class BitmapConverter
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
         public static BitmapImage Convert(Bitmap src)
         {
             var ms = new MemoryStream();
