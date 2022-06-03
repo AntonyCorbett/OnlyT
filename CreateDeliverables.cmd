@@ -7,9 +7,9 @@ VERIFY ON
 D:
 cd \ProjectsPersonal\OnlyT
 rd OnlyT\bin /q /s
+rd OnlyTFirewallPorts\bin /q /s
 rd Installer\Output /q /s
-
-REM build
+rd Installer\Staging /q /s
 
 ECHO.
 ECHO Publishing OnlyT
@@ -21,29 +21,36 @@ ECHO Publishing OnlyTFirewallPorts
 dotnet publish OnlyTFirewallPorts\OnlyTFirewallPorts.csproj -p:PublishProfile=FolderProfile -c:Release
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
+md Installer\Staging
+
 ECHO.
-ECHO Copying items into delivery
-xcopy OnlyTFirewallPorts\bin\Release\net6.0\publish\*.* OnlyT\bin\Release\net6.0-windows\publish /q /s /y /d
+ECHO Copying OnlyTFirewallPorts items into staging area
+xcopy OnlyTFirewallPorts\bin\Release\net6.0\publish\*.* Installer\Staging /q /s /y /d
+IF %ERRORLEVEL% NEQ 0 goto ERROR
+
+ECHO.
+ECHO Copying OnlyT items into staging area
+xcopy OnlyT\bin\Release\net6.0-windows\publish\*.* Installer\Staging /q /s /y /d
+IF %ERRORLEVEL% NEQ 0 goto ERROR
+
+ECHO.
+ECHO Copying Sample task_schedule file into staging area
+xcopy talk_schedule.xml Installer\Staging /q /y
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Removing unwanted x64 DLLs
-del OnlyT\bin\Release\net6.0-windows\publish\libmp3lame.64.dll
+del Installer\Staging\libmp3lame.64.dll
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
-ECHO Removing unwanted translations
-rd OnlyT\bin\Release\net6.0-windows\publish\id-ID /q /s
-IF %ERRORLEVEL% NEQ 0 goto ERROR
-
-ECHO.
-ECHO Create installer
+ECHO Creating installer
 "D:\Program Files (x86)\Inno Setup 6\iscc" Installer\onlytsetup.iss
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
-ECHO Create portable zip
-powershell Compress-Archive -Path OnlyT\bin\Release\net6.0-windows\publish\* -DestinationPath Installer\Output\OnlyTPortable.zip 
+ECHO Creating portable zip
+powershell Compress-Archive -Path Installer\Staging\* -DestinationPath Installer\Output\OnlyTPortable.zip
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 goto SUCCESS

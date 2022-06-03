@@ -16,9 +16,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Windows.Media.Imaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.CountdownTimer;
+using OnlyT.Properties;
 using OnlyT.Services.Snackbar;
 using Serilog;
 using Serilog.Events;
@@ -1042,28 +1044,30 @@ namespace OnlyT.ViewModel
         {
             var result = new List<LanguageItem>();
 
-            var subFolders = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+            var rm = new ResourceManager(typeof(Resources));
 
-            foreach (var folder in subFolders)
+            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+            foreach (var culture in cultures)
             {
-                if (!string.IsNullOrEmpty(folder))
+                try
                 {
-                    try
+                    if (culture.Equals(CultureInfo.InvariantCulture)) 
                     {
-                        var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
-                        result.Add(new LanguageItem(c.Name, c.EnglishName));
+                        continue; 
                     }
-                    catch (CultureNotFoundException)
+
+                    using var rs = rm.GetResourceSet(culture, true, false);
+                    if (rs != null)
                     {
-                        // expected
+                        result.Add(new LanguageItem(culture.Name, culture.EnglishName));
                     }
+                }
+                catch (CultureNotFoundException)
+                {
+                    // ignore
                 }
             }
 
-            // the native language
-            var cNative = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
-            result.Add(new LanguageItem(cNative.Name, cNative.EnglishName));
-            
             result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
 
             return result.ToArray();
