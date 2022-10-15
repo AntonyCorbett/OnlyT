@@ -166,7 +166,7 @@
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Prispôsobená dĺžka</value>
+    <value>Upravená dĺžka</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
@@ -370,7 +370,7 @@
     <value>Začiatky zhromaždení (1 na riadok)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
-    <value>ĎALŠIE</value>
+    <value>RÔZNE</value>
     <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
   </data>
   <data name="MONITOR" xml:space="preserve">
@@ -396,7 +396,7 @@
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
-    <value>Časy programov</value>
+    <value>Režim</value>
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
@@ -420,7 +420,7 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Šírka na obrazovke</value>
+    <value>Pomer rozdelenia obrazovky</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>TEST</value>
@@ -483,7 +483,7 @@
     <value>Povoliť</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
-    <value>Zapnuté</value>
+    <value>Povoliť</value>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
     <value>Zobraz sekundy</value>
@@ -606,7 +606,7 @@
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
-    <value>Analýza časových údajov zhromaždenia</value>
+    <value>Analýza časových údajov</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
