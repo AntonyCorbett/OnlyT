@@ -76,6 +76,7 @@ namespace OnlyT.Windows
             {
                 _persistingTalkDuration = false;
                 AdjustDisplayOnTimerStop();
+                _persistTimer.Stop();
             }
         }
 
