@@ -14,7 +14,6 @@ using OnlyT.ViewModel.Messages;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Media.Imaging;
@@ -118,9 +117,9 @@ namespace OnlyT.ViewModel
         public bool AllowMainMonitorSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
 
         public bool IsCountdownMonitorViaCommandLine => _optionsService.IsCountdownMonitorSetByCommandLine;
-        
+
         public bool AllowCountdownMonitorSelection => !IsCountdownMonitorViaCommandLine && !CountdownMonitorIsWindowed;
-        
+
         public string? CountdownMonitorId
         {
             get => _optionsService.Options.CountdownMonitorId;
@@ -812,7 +811,7 @@ namespace OnlyT.ViewModel
                 }
             }
         }
-        
+
         public BitmapImage? WebClockQrCode
         {
             get
@@ -897,7 +896,7 @@ namespace OnlyT.ViewModel
             try
             {
                 Log.Logger.Information($"Attempting to reserve and open port: {Port}");
-                
+
                 var rv = FirewallPortsClient.ReserveAndOpenPort(Port);
                 if (rv != 0)
                 {
@@ -911,7 +910,7 @@ namespace OnlyT.ViewModel
 
                     _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPENED);
                 }
-                
+
                 WeakReferenceMessenger.Default.Send(new HttpServerChangedMessage());
             }
             catch (Exception ex)
@@ -962,7 +961,7 @@ namespace OnlyT.ViewModel
                 new(Properties.Resources.CLOCK_FORMAT_12, ClockHourFormat.Format12),
                 new(Properties.Resources.CLOCK_FORMAT_12Z, ClockHourFormat.Format12LeadingZero)
             };
-            
+
             if (cultureUsesAmPm)
             {
                 result.Add(new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_12AMPM, ClockHourFormat.Format12AMPM));
@@ -1051,9 +1050,9 @@ namespace OnlyT.ViewModel
             {
                 try
                 {
-                    if (culture.Equals(CultureInfo.InvariantCulture)) 
+                    if (culture.Equals(CultureInfo.InvariantCulture))
                     {
-                        continue; 
+                        continue;
                     }
 
                     using var rs = rm.GetResourceSet(culture, true, false);
@@ -1079,7 +1078,7 @@ namespace OnlyT.ViewModel
             {
                 // empty (i.e. no timer monitor)
                 new(null, Properties.Resources.MONITOR_NONE, null, Properties.Resources.MONITOR_NONE)
-            };  
+            };
 
             result.AddRange(_monitorsService.GetSystemMonitors());
             return result.ToArray();

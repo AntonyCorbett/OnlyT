@@ -461,7 +461,7 @@ namespace OnlyT.ViewModel
 
                 if (launched)
                 {
-                    Task.Delay(1000).ContinueWith(t =>
+                    Task.Delay(1000).ContinueWith(_ =>
                     {
                         if (CountdownAndTimerShareSameMonitor())
                         {

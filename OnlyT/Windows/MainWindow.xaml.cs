@@ -19,7 +19,7 @@ namespace OnlyT.Windows
         private const double MainWindowMinWidth = 296;
         private const double MainWindowMinHeight = 270;
 
-        private const double OperatorWindowDefWidth = 395; 
+        private const double OperatorWindowDefWidth = 395;
         private const double OperatorWindowDefHeight = 350;
 
         private const double SettingsWindowDefWidth = 535;
@@ -102,13 +102,8 @@ namespace OnlyT.Windows
 
         private void BringMainWindowToFront()
         {
-            Task.Delay(100).ContinueWith((t) =>
-            {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    Activate();
-                }));
-            });
+            Task.Delay(100).ContinueWith((_) =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(() => Activate())));
         }
 
         private void AdjustMainWindowPositionAndSize()
@@ -117,7 +112,7 @@ namespace OnlyT.Windows
             if (!string.IsNullOrEmpty(optionsService.Options.AppWindowPlacement))
             {
                 this.SetPlacement(
-                    optionsService.Options.AppWindowPlacement, 
+                    optionsService.Options.AppWindowPlacement,
                     new Size(OperatorWindowDefWidth, OperatorWindowDefHeight));
 
                 SetOperatorWindowSize();
@@ -127,7 +122,7 @@ namespace OnlyT.Windows
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveWindowPos();
-            
+
             var m = (MainViewModel?)DataContext;
 
             if (m?.CurrentPageName != null)
