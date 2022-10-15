@@ -10,6 +10,7 @@ using OnlyT.ViewModel;
 using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using Serilog;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace OnlyT.Services.OutputDisplays
 {
@@ -106,6 +107,7 @@ namespace OnlyT.Services.OutputDisplays
 
                     ConfigureForWindowedOperation();
 
+                    _countdownWindow.Topmost = true;
                     _countdownWindow.Show();
                     _countdownWindow.AdjustWindowPositionAndSize();
 
