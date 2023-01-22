@@ -44,6 +44,11 @@ del Installer\Staging\libmp3lame.64.dll
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
+ECHO Removing unwanted language files
+rd OnlyT\bin\Release\net6.0-windows\publish\no-NO /q /s
+rd OnlyT\bin\Release\net6.0-windows\publish\pap-PAP /q /s
+
+ECHO.
 ECHO Creating installer
 "D:\Program Files (x86)\Inno Setup 6\iscc" Installer\onlytsetup.iss
 IF %ERRORLEVEL% NEQ 0 goto ERROR

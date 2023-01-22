@@ -1071,44 +1071,6 @@ namespace OnlyT.ViewModel
             return result.ToArray();
         }
 
-        private static LanguageItem[] GetSupportedLanguagesOrig()
-        {
-            var result = new List<LanguageItem>();
-
-            var rm = new ResourceManager(typeof(Resources));
-
-            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
-            foreach (var culture in cultures)
-            {
-                try
-                {
-                    if (culture.Equals(CultureInfo.InvariantCulture))
-                    {
-                        continue;
-                    }
-
-                    if (culture.EnglishName.StartsWith("Norw"))
-                    {
-                        Debugger.Break();
-                    }
-
-                    using var rs = rm.GetResourceSet(culture, true, false);
-                    if (rs != null)
-                    {
-                        result.Add(new LanguageItem(culture.Name, culture.EnglishName));
-                    }
-                }
-                catch (CultureNotFoundException)
-                {
-                    // ignore
-                }
-            }
-
-            result.Sort((x, y) => string.Compare(x.LanguageName, y.LanguageName, StringComparison.Ordinal));
-
-            return result.ToArray();
-        }
-
         private MonitorItem[] GetSystemMonitors()
         {
             var result = new List<MonitorItem>
