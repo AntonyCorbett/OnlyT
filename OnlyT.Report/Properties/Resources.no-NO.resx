@@ -161,11 +161,11 @@
     <comment>Timing report title page 2</comment>
   </data>
   <data name="UNDERTIME_BY" xml:space="preserve">
-    <value>Møtet er ~{0} minutter før tiden</value>
+    <value>Møtet var ~{0} minutter før tiden</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by more than 1 minute</comment>
   </data>
   <data name="UNDERTIME_BY_1" xml:space="preserve">
-    <value>Møtet er 1 minutt før tiden</value>
+    <value>Møtet var 1 minutt før tiden</value>
     <comment>Summary text in the Timing Report when the meeting was undertime by 1 minute</comment>
   </data>
   <data name="WEEKEND_MTGS" xml:space="preserve">
