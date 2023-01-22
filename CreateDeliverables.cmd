@@ -45,8 +45,8 @@ IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Removing unwanted language files
-rd OnlyT\bin\Release\net6.0-windows\publish\no-NO /q /s
-rd OnlyT\bin\Release\net6.0-windows\publish\pap-PAP /q /s
+rd Installer\Staging\no-NO /q /s
+rd Installer\Staging\pap-PAP /q /s
 
 ECHO.
 ECHO Creating installer

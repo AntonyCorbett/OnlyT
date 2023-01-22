@@ -322,7 +322,7 @@
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
-    <value>Alltid fremste vindu</value>
+    <value>Vindu alltid fremst</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
@@ -346,7 +346,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Kretstilsynsmannens besøk</value>
+    <value>Bryter for kretstilsynsmannens besøk</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Digitalt klokkeformat</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Visingstid tidtakerresultat</value>
+    <value>Visningstid tidtakerresultat</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -420,14 +420,14 @@
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
-    <value>Delt skjermbredde:</value>
+    <value>Fordeling av skjermbredde (analog/digital):</value>
   </data>
   <data name="TEST" xml:space="preserve">
     <value>TEST</value>
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Begrenset</value>
+    <value>Ressursbegrenset</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
@@ -574,7 +574,7 @@
     <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTRO_SEGMENT" xml:space="preserve">
-    <value>Introduksjon</value>
+    <value>Innledende del</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
@@ -658,11 +658,11 @@
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
   <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
-    <value>Bakgrunnsgradient tidtaker</value>
+    <value>Fargeendring tidtakerbakgrunn</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
-    <value>Bakgrunnsgradient klokke</value>
+    <value>Fargeendring klokkebakgrunn</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
