@@ -23,6 +23,7 @@ using OnlyT.Properties;
 using OnlyT.Services.Snackbar;
 using Serilog;
 using Serilog.Events;
+using System.IO;
 
 namespace OnlyT.ViewModel
 {
@@ -1043,6 +1044,37 @@ namespace OnlyT.ViewModel
         {
             var result = new List<LanguageItem>();
 
+            var subFolders = Directory.GetDirectories(AppContext.BaseDirectory);
+
+            foreach (var folder in subFolders)
+            {
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    try
+                    {
+                        var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
+                        result.Add(new LanguageItem(c.Name, c.EnglishName));
+                    }
+                    catch (CultureNotFoundException)
+                    {
+                        // expected
+                    }
+                }
+            }
+
+            // the native language
+            var cNative = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
+            result.Add(new LanguageItem(cNative.Name, cNative.EnglishName));
+        
+            result.Sort((x, y) => string.CompareOrdinal(x.LanguageName, y.LanguageName));
+
+            return result.ToArray();
+        }
+
+        private static LanguageItem[] GetSupportedLanguagesOrig()
+        {
+            var result = new List<LanguageItem>();
+
             var rm = new ResourceManager(typeof(Resources));
 
             var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
@@ -1053,6 +1085,11 @@ namespace OnlyT.ViewModel
                     if (culture.Equals(CultureInfo.InvariantCulture))
                     {
                         continue;
+                    }
+
+                    if (culture.EnglishName.StartsWith("Norw"))
+                    {
+                        Debugger.Break();
                     }
 
                     using var rs = rm.GetResourceSet(culture, true, false);
