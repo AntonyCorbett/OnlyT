@@ -36,7 +36,7 @@ Type: filesandordirs; Name: "{app}\*.*"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: "Staging\*"; DestDir: "{app}"; Flags: ignoreversion; Excludes: "*.pdb"
+Source: "Staging\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs; Excludes: "*.pdb"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
