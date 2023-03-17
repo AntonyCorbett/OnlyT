@@ -1,8 +1,10 @@
 ﻿namespace OnlyT.Services.Monitors
 {
 #pragma warning disable S101 // Types should be named in PascalCase
-#pragma warning disable S1144 
-#pragma warning disable S2344 
+#pragma warning disable S1144
+#pragma warning disable S2344
+#pragma warning disable U2U1004 // Should implement IEquatable
+#pragma warning disable RCS1169 // Make field read-only
 
     // ReSharper disable FieldCanBeMadeReadOnly.Local
     // ReSharper disable FieldCanBeMadeReadOnly.Global
@@ -346,6 +348,8 @@
 #pragma warning restore IDE0044 // Add readonly modifier
     }
 
+#pragma warning restore RCS1169 // Make field read-only
+#pragma warning restore U2U1004 // Should implement IEquatable
 #pragma warning restore S2344 
 #pragma warning restore S1144 
 #pragma warning restore S101 // Types should be named in PascalCase

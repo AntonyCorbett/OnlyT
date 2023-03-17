@@ -65,7 +65,9 @@
             var resourceKeys = new[] { "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
             var resourceMan = new ResourceManager(typeof(Properties.Resources));
 
+#pragma warning disable U2U1210 // Do not materialize an IEnumerable<T> unnecessarily
             resourceKeys.ToList().ForEach(k => content = content.Replace($"{{{k}}}", resourceMan.GetString(k)));
+#pragma warning restore U2U1210 // Do not materialize an IEnumerable<T> unnecessarily
 
             return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
         }

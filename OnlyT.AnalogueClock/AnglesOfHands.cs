@@ -1,11 +1,10 @@
-﻿namespace OnlyT.AnalogueClock
+﻿namespace OnlyT.AnalogueClock;
+
+internal sealed class AnglesOfHands
 {
-    internal class AnglesOfHands
-    {
-        public double SecondsAngle { get; set; }
+    public double SecondsAngle { get; set; }
 
-        public double MinutesAngle { get; set; }
+    public double MinutesAngle { get; set; }
 
-        public double HoursAngle { get; set; }
-    }
+    public double HoursAngle { get; set; }
 }

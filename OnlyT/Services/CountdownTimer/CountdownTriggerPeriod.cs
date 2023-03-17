@@ -1,11 +1,10 @@
-﻿namespace OnlyT.Services.CountdownTimer
+﻿using System;
+
+namespace OnlyT.Services.CountdownTimer;
+
+internal sealed class CountdownTriggerPeriod
 {
-    using System;
+    public DateTime Start { get; set; }
 
-    internal class CountdownTriggerPeriod
-    {
-        public DateTime Start { get; set; }
-
-        public DateTime End { get; set; }
-    }
+    public DateTime End { get; set; }
 }

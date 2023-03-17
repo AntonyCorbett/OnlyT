@@ -1,6 +1,7 @@
 ﻿namespace OnlyT.Utils
 {
 #pragma warning disable S101 // Types should be named in PascalCase
+#pragma warning disable U2U1004 // Should implement IEquatable
 
     // ReSharper disable CommentTypo
     // ReSharper disable InconsistentNaming
@@ -183,5 +184,7 @@
             return Encoding.GetString(xmlBytes);
         }
     }
+
+#pragma warning restore U2U1004 // Should implement IEquatable
 #pragma warning restore S101 // Types should be named in PascalCase
 }

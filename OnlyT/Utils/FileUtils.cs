@@ -72,7 +72,7 @@
         /// <returns>Folder path.</returns>
         public static string GetTimingReportsFolder(string? commandLineIdentifier)
         {
-            var folder = Path.Combine(GetOnlyTMyDocsFolder(), @"TimingReports", commandLineIdentifier ?? string.Empty);
+            var folder = Path.Combine(GetOnlyTMyDocsFolder(), "TimingReports", commandLineIdentifier ?? string.Empty);
             Directory.CreateDirectory(folder);
             return folder;
         }
@@ -84,7 +84,7 @@
         /// <returns>Folder path.</returns>
         public static string GetTimingReportsDatabaseFolder(string? commandLineIdentifier)
         {
-            var folder = Path.Combine(GetAppDataFolder(), @"TimingReportsDatabase", commandLineIdentifier ?? string.Empty);
+            var folder = Path.Combine(GetAppDataFolder(), "TimingReportsDatabase", commandLineIdentifier ?? string.Empty);
             Directory.CreateDirectory(folder);
             return folder;
         }

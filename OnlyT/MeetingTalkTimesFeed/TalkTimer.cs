@@ -1,22 +1,21 @@
-﻿namespace OnlyT.MeetingTalkTimesFeed
+﻿using Newtonsoft.Json;
+
+namespace OnlyT.MeetingTalkTimesFeed;
+
+internal sealed class TalkTimer
 {
-    using Newtonsoft.Json;
+    [JsonProperty]
+    public TalkTypes TalkType { get; set; }
 
-    internal class TalkTimer
+    [JsonProperty]
+    public int Minutes { get; set; }
+
+    [JsonProperty]
+    public bool IsStudentTalk { get; set; }
+
+    public override string ToString()
     {
-        [JsonProperty]
-        public TalkTypes TalkType { get; set; }
-
-        [JsonProperty]
-        public int Minutes { get; set; }
-
-        [JsonProperty]
-        public bool IsStudentTalk { get; set; }
-
-        public override string ToString()
-        {
-            var studentTalkStr = IsStudentTalk ? " (student)" : string.Empty;
-            return $"{TalkType}, {Minutes} mins{studentTalkStr}";
-        }
+        var studentTalkStr = IsStudentTalk ? " (student)" : string.Empty;
+        return $"{TalkType}, {Minutes} mins{studentTalkStr}";
     }
 }

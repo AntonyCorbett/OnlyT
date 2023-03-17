@@ -33,12 +33,11 @@ namespace OnlyT.Services.Bell
                 if (_playing != value)
                 {
                     _playing = value;
-                    OnPropertyChanged(nameof(IsPlaying));
+                    OnPropertyChanged();
 
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        WeakReferenceMessenger.Default.Send(new BellStatusChangedMessage(value));
-                    }));
+                    Application.Current.Dispatcher.BeginInvoke(
+                        new Action(() => WeakReferenceMessenger.Default.Send(
+                            new BellStatusChangedMessage(value))));
                 }
             }
         }

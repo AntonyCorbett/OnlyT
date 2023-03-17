@@ -109,10 +109,7 @@
                 Animations.FadeOut(
                     this, 
                     new FrameworkElement[] { _donut, _secondsBall, _pie, _time },
-                    (_, _) =>
-                    {
-                        Visibility = Visibility.Hidden;
-                    });
+                    (_, _) => Visibility = Visibility.Hidden);
             });
         }
 
@@ -357,9 +354,7 @@
                 sz = GetTextSize(_time.Text, useExtent: false);
             }
 
-            sz = GetTextSize(_time.Text, useExtent: false);
-
-            return sz;
+            return GetTextSize(_time.Text, useExtent: false);
         }
 
         private Size CalculateTextFontSizeWithDial()
@@ -376,9 +371,7 @@
                 sz = GetTextSize(_time.Text, useExtent: true);
             }
 
-            sz = GetTextSize(_time.Text, useExtent: true);
-
-            return sz;
+            return GetTextSize(_time.Text, useExtent: true);
         }
 
         private AnnulusSize GetAnnulusSize()

@@ -19,10 +19,7 @@
 
         public void Play(int volumePercent)
         {
-            Task.Run(() =>
-            {
-                _bell.Play(volumePercent);
-            });
+            Task.Run(() => _bell.Play(volumePercent));
         }
     }
 }

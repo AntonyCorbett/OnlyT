@@ -852,7 +852,7 @@ namespace OnlyT.ViewModel
 
         private TalkScheduleItem? GetPreviousTalk(int talkId)
         {
-            var talks = _scheduleService.GetTalkScheduleItems().ToArray();
+            var talks = _scheduleService.GetTalkScheduleItems();
             
             TalkScheduleItem? prevTalk = null;
             foreach (var talk in talks)
@@ -968,7 +968,7 @@ namespace OnlyT.ViewModel
         {
             var psi = new ProcessStartInfo
             {
-                FileName = @"https://github.com/AntonyCorbett/OnlyT/wiki",
+                FileName = "https://github.com/AntonyCorbett/OnlyT/wiki",
                 UseShellExecute = true
             };
 
@@ -1118,7 +1118,7 @@ namespace OnlyT.ViewModel
 
         private void OnAutoBellSettingChanged(object recipient, AutoBellSettingChangedMessage message)
         {
-            var talks = _scheduleService.GetTalkScheduleItems().ToArray();
+            var talks = _scheduleService.GetTalkScheduleItems();
             var autoBell = _optionsService.Options.AutoBell;
 
             foreach (var talk in talks)

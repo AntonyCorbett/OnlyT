@@ -1,11 +1,10 @@
-﻿namespace OnlyT.CountdownTimer
+﻿namespace OnlyT.CountdownTimer;
+
+internal sealed class AnnulusSize
 {
-    internal class AnnulusSize
-    {
-        public int InnerRadius { get; set; }
+    public int InnerRadius { get; set; }
 
-        public int OuterRadius { get; set; }
+    public int OuterRadius { get; set; }
 
-        public int OuterDiameter => OuterRadius * 2;
-    }
+    public int OuterDiameter => OuterRadius * 2;
 }

@@ -241,7 +241,7 @@
         {
             var dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
 
-            var clock24 = dateFormat.Contains("H");
+            var clock24 = dateFormat.Contains('H');
             var leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
             var ampm = dateFormat.Contains("tt");
 

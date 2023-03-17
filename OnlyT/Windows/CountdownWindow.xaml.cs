@@ -69,10 +69,7 @@ namespace OnlyT.Windows
         {
             CountDown.Stop();
 
-            Task.Delay(1000).ContinueWith(t =>
-            {
-                Application.Current.Dispatcher.BeginInvoke(new Action(OnTimeUpEvent));
-            });
+            Task.Delay(1000).ContinueWith(_ => Application.Current.Dispatcher.BeginInvoke(new Action(OnTimeUpEvent)));
         }
 
         private void OnTimeUpEvent()

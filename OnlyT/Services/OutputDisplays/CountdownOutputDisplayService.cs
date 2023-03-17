@@ -56,7 +56,7 @@ namespace OnlyT.Services.OutputDisplays
         {
             if (IsWindowAvailable())
             {
-                RelocateWindow(_countdownWindow!, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
+                RelocateWindow(_countdownWindow, _monitorsService.GetMonitorItem(_optionsService.Options.CountdownMonitorId));
             }
         }
 
@@ -155,10 +155,7 @@ namespace OnlyT.Services.OutputDisplays
                 _timerOutputDisplayService.ShowWindow();
             }
 
-            Task.Delay(1000).ContinueWith(t =>
-            {
-                Application.Current.Dispatcher.BeginInvoke(new Action(Close));
-            });
+            Task.Delay(1000).ContinueWith(_ => Application.Current.Dispatcher.BeginInvoke(new Action(Close)));
         }
 
         public void Close()

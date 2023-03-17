@@ -316,7 +316,9 @@
                 2 => Properties.Resources.MINISTRY2,
                 3 => Properties.Resources.MINISTRY3,
                 4 => Properties.Resources.MINISTRY4,
-                _ => throw new ArgumentException(@"Unknown item", nameof(item))
+                
+                // ReSharper disable once LocalizableElement
+                _ => throw new ArgumentException("Unknown item", nameof(item))
             };
         }
 

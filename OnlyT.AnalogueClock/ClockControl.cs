@@ -264,7 +264,7 @@
                 {
                     // the first time we display the sector we delay it for aesthetics
                     // (so it doesn't appear just as the clock is fading out)
-                    Task.Delay(1000).ContinueWith(_ => { c.Dispatcher?.Invoke(() => { DrawSector(c, sector); }); });
+                    Task.Delay(1000).ContinueWith(_ => c.Dispatcher?.Invoke(() => DrawSector(c, sector)));
                 }
                 else
                 {

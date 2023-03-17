@@ -1,6 +1,8 @@
 ﻿[*.cs]
 
 dotnet_diagnostic.RCS1194.severity = silent
+dotnet_diagnostic.RCS1075.severity = silent
+dotnet_diagnostic.RCS1037.severity = silent
 dotnet_diagnostic.S112.severity=silent
 dotnet_diagnostic.U2U1009.severity = silent
 dotnet_diagnostic.U2U1015.severity = suggestion
@@ -27,3 +29,4 @@ dotnet_diagnostic.S1172.severity = none
 
 # S3267: Loops should be simplified with "LINQ" expressions
 dotnet_diagnostic.S3267.severity = none
+

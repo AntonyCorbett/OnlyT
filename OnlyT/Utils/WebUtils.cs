@@ -6,7 +6,7 @@
 
     internal static class WebUtils
     {
-        const string UserAgentString = @"OnlyT (+https://soundboxsoftware.com)";
+        const string UserAgentString = "OnlyT (+https://soundboxsoftware.com)";
 
         public static string? LoadWithUserAgent(string url)
         {
@@ -40,7 +40,9 @@
         {
             using var handler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate };
             using var request = new HttpRequestMessage { RequestUri = new(url), Method = HttpMethod.Get };
+#pragma warning disable U2U1025 // Avoid instantiating HttpClient
             using var client = new HttpClient(handler);
+#pragma warning restore U2U1025 // Avoid instantiating HttpClient
             client.DefaultRequestHeaders.Add("user-agent", UserAgentString);
 
             var response = client.Send(request);
