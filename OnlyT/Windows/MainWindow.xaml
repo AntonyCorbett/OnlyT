@@ -14,6 +14,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        MouseDown="WindowMouseDown"
 
         DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
         Topmost="{Binding AlwaysOnTop, Mode=OneWay}"

@@ -1,29 +1,30 @@
-﻿<Window x:Class="OnlyT.Windows.TimerOutputWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
-        xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        DataContext="{Binding Source={StaticResource Locator}, Path=Output}"
-        mc:Ignorable="d"
-        Title="OnlyT Timer Output" Height="300" Width="458" 
-        Loaded="WindowLoaded" 
-        WindowStyle="None" 
-        Background="Black" 
-        ShowInTaskbar="False" 
-        ResizeMode="NoResize" 
-        Closing="WindowClosing" 
-        MouseDown="Window_MouseDown"
-        Cursor="{Binding MousePointer}">
+﻿<Window
+    x:Class="OnlyT.Windows.TimerOutputWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
+    xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+    Title="OnlyT Timer Output"
+    Width="458"
+    Height="300"
+    Background="Black"
+    Closing="WindowClosing"
+    Cursor="{Binding MousePointer}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Output}"
+    Loaded="WindowLoaded"
+    MouseDown="Window_MouseDown"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    WindowStyle="None"
+    mc:Ignorable="d">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome 
-            CaptionHeight="0"
-            ResizeBorderThickness="5" />
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
@@ -39,12 +40,16 @@
             <ColumnDefinition Width="{Binding AnalogueClockColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
             <ColumnDefinition Width="{Binding TimerColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
         </Grid.ColumnDefinitions>
-        <Border Name="ClockPanel" 
-                Margin="0,0,5,0"
-                CornerRadius="20" Grid.Column="0" Grid.ColumnSpan="2" 
-                BorderBrush="Beige" BorderThickness="{Binding BorderThickness}" 
-                Padding="10" 
-                Background="{Binding Path=UseClockBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}">
+        <Border
+            Name="ClockPanel"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,0,5,0"
+            Padding="10"
+            Background="{Binding Path=UseClockBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
+            BorderBrush="Beige"
+            BorderThickness="{Binding BorderThickness}"
+            CornerRadius="20">
 
             <Grid Name="ClockGrid">
                 <Grid.RowDefinitions>
@@ -52,59 +57,75 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <clock:ClockControl x:Name="TheClock" Grid.Row="0" 
-                             Margin="15" 
-                             QueryDateTimeEvent="ClockQueryDateTimeEvent"
-                             IsFlat="{Binding ClockIsFlat}"
-                             DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
-                             DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
-                             DigitalTimeFormatAMPM="{Binding DigitalTimeFormatAMPM}"
-                             DurationSector="{Binding DurationSector, Mode=OneWay}" />
+                <clock:ClockControl
+                    x:Name="TheClock"
+                    Grid.Row="0"
+                    Margin="15"
+                    DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
+                    DigitalTimeFormatAMPM="{Binding DigitalTimeFormatAMPM}"
+                    DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
+                    DurationSector="{Binding DurationSector, Mode=OneWay}"
+                    IsFlat="{Binding ClockIsFlat}"
+                    QueryDateTimeEvent="ClockQueryDateTimeEvent" />
 
-                <Viewbox Grid.Row="1" >
-                    <TextBlock VerticalAlignment="Bottom" Margin="5,0,5,0">
-                        <TextBlock Foreground="White" FontSize="24" FontWeight="Bold" 
-                                   Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
-                        <TextBlock Foreground="#FFCBABAB" FontSize="13"
-                                   Margin="-2,-8,0,0"
-                                   Visibility="{Binding Path=DigitalTimeShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                   Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"/>
+                <Viewbox Grid.Row="1">
+                    <TextBlock Margin="5,0,5,0" VerticalAlignment="Bottom">
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
+                        <TextBlock
+                            Margin="-2,-8,0,0"
+                            FontSize="13"
+                            Foreground="#FFCBABAB"
+                            Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"
+                            Visibility="{Binding Path=DigitalTimeShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     </TextBlock>
                 </Viewbox>
             </Grid>
 
         </Border>
 
-        <Border Name="TimerPanel" 
-                Margin="5,0,0,0"
-                Grid.Column="1"
-                CornerRadius="20" 
-                BorderBrush="Beige" BorderThickness="{Binding TimerBorderThickness}" 
-                Padding="10" 
-                Opacity="0"
-                Background="{Binding Path=UseTimerBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}">
+        <Border
+            Name="TimerPanel"
+            Grid.Column="1"
+            Margin="5,0,0,0"
+            Padding="10"
+            Background="{Binding Path=UseTimerBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
+            BorderBrush="Beige"
+            BorderThickness="{Binding TimerBorderThickness}"
+            CornerRadius="20"
+            Opacity="0">
 
             <Viewbox VerticalAlignment="Top">
                 <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="2*" />
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0"
-                           HorizontalAlignment="Center"
-                           Foreground="{Binding TextColor}" 
-                           Text="{Binding TimeString}"
-                           FontSize="40"
-                           FontWeight="Bold"/>
+                    <TextBlock
+                        Grid.Row="0"
+                        HorizontalAlignment="Center"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Foreground="{Binding TextColor}"
+                        Text="{Binding TimeString}" />
 
-                <TextBlock Grid.Row="1" HorizontalAlignment="Center"
-                           Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Run Foreground="White" FontSize="28" FontWeight="Bold" Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}"/>
-                </TextBlock>
+                    <TextBlock
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Run
+                            FontSize="28"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
+                    </TextBlock>
                 </Grid>
-        </Viewbox>
-            </Border>
+            </Viewbox>
+        </Border>
     </Grid>
 
 </Window>

@@ -6,6 +6,7 @@ namespace OnlyT.Windows
 {
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Input;
     using Services.Options;
     using Utils;
     using ViewModel;
@@ -16,8 +17,14 @@ namespace OnlyT.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const double MainWindowMinWidth = 296;
-        private const double MainWindowMinHeight = 270;
+        private const double MainWindowDefaultWidth = 395;
+        private const double MainWindowDefaultHeight = 350;
+
+        private const double MainWindowMinNormalWidth = 250;
+        private const double MainWindowMinNormalHeight = 200;
+            
+        private const double MainWindowMinWidthAbsolute = 100;
+        private const double MainWindowMinHeightAbsolute = 85;
 
         private const double OperatorWindowDefWidth = 395;
         private const double OperatorWindowDefHeight = 350;
@@ -29,11 +36,17 @@ namespace OnlyT.Windows
         {
             InitializeComponent();
 
+            Height = MainWindowDefaultHeight;
+            Width = MainWindowDefaultWidth;
+
             WeakReferenceMessenger.Default.Register<BringMainWindowToFrontMessage>(this, BringToFront);
             WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
+            WeakReferenceMessenger.Default.Register<ExpandFromShrinkMessage>(this, OnExpandFromShrink);
 
-            MinHeight = MainWindowMinHeight;
-            MinWidth = MainWindowMinWidth;
+            MinHeight = MainWindowMinHeightAbsolute;
+            MinWidth = MainWindowMinWidthAbsolute;
+
+            SizeChanged += MainWindow_SizeChanged;
         }
 
         protected override void OnSourceInitialized(System.EventArgs e)
@@ -159,6 +172,30 @@ namespace OnlyT.Windows
             var optionsService = Ioc.Default.GetService<IOptionsService>()!;
             optionsService.Options.OperatorPageSize = new Size(Width, Height);
             optionsService.Save();
+        }
+
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var isShrunk = e.NewSize.Height < MainWindowMinNormalHeight || e.NewSize.Width < MainWindowMinNormalWidth;
+            WeakReferenceMessenger.Default.Send(new MainWindowSizeChangedMessage(e.PreviousSize, e.NewSize, isShrunk));
+
+            // no caption bar when shrunk
+            WindowStyle = isShrunk ? WindowStyle.None : WindowStyle.SingleBorderWindow;
+        }
+
+        private void WindowMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // allow drag when no title bar is shown
+            if (e.ChangedButton == MouseButton.Left && WindowStyle == WindowStyle.None)
+            {
+                DragMove();
+            }
+        }
+
+        private void OnExpandFromShrink(object recipient, ExpandFromShrinkMessage message)
+        {
+            Width = MainWindowDefaultWidth;
+            Height = MainWindowDefaultHeight;
         }
     }
 }

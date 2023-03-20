@@ -1,81 +1,90 @@
-﻿<UserControl x:Class="OnlyT.Windows.OperatorPage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        DataContext="{Binding Operator, Mode=OneWay, Source={StaticResource Locator}}"             
-        xmlns:resx="clr-namespace:OnlyT.Properties"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
-        xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
-             
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:utils="clr-namespace:OnlyT.Utils"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
-
-        mc:Ignorable="d" 
-        d:DesignHeight="300" d:DesignWidth="395">
+﻿<UserControl
+    x:Class="OnlyT.Windows.OperatorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resx="clr-namespace:OnlyT.Properties"
+    xmlns:utils="clr-namespace:OnlyT.Utils"
+    xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+    d:DesignHeight="300"
+    d:DesignWidth="395"
+    Background="{DynamicResource MaterialDesignPaper}"
+    DataContext="{Binding Operator, Mode=OneWay, Source={StaticResource Locator}}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
 
     <UserControl.Resources>
         <valueConverters:BoolToCursorConverter x:Key="ToCursorConverter" />
+        <valueConverters:ButtonGlyphSizeConverter x:Key="ButtonGlyphSizeConverter" />
 
         <DataTemplate x:Key="SelectedTalkTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="45"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="45" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" 
-                           Text="{Binding OriginalDurationAsString, Mode=OneWay}" 
-                           Foreground="{StaticResource MaterialDesignBodyLight}"/>
-                <TextBlock Grid.Column="1" 
-                           TextTrimming="CharacterEllipsis"
-                           Text="{Binding Name, Mode=OneWay}" />
+                <TextBlock
+                    Grid.Column="0"
+                    Foreground="{StaticResource MaterialDesignBodyLight}"
+                    Text="{Binding OriginalDurationAsString, Mode=OneWay}" />
+                <TextBlock
+                    Grid.Column="1"
+                    Text="{Binding Name, Mode=OneWay}"
+                    TextTrimming="CharacterEllipsis" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="DropDownTalkTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="45"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" 
-                           Text="{Binding OriginalDurationAsString, Mode=OneWay}" 
-                           Foreground="{StaticResource MaterialDesignBodyLight}"/>
-                <TextBlock Grid.Column="1" 
-                           TextTrimming="CharacterEllipsis"
-                           Text="{Binding Name, Mode=OneWay}" />
-                <TextBlock Grid.Column="2" 
-                           Text="{Binding OvertimeString, Mode=OneWay}" 
-                           Foreground="{Binding OvertimeBrush}"/>
+                <TextBlock
+                    Grid.Column="0"
+                    Foreground="{StaticResource MaterialDesignBodyLight}"
+                    Text="{Binding OriginalDurationAsString, Mode=OneWay}" />
+                <TextBlock
+                    Grid.Column="1"
+                    Text="{Binding Name, Mode=OneWay}"
+                    TextTrimming="CharacterEllipsis" />
+                <TextBlock
+                    Grid.Column="2"
+                    Foreground="{Binding OvertimeBrush}"
+                    Text="{Binding OvertimeString, Mode=OneWay}" />
             </Grid>
         </DataTemplate>
 
-        <Style x:Key="DownloadButtonStyle" BasedOn="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" TargetType="{x:Type Button}">
-            <Setter Property="Visibility" Value="Hidden"/>
+        <Style
+            x:Key="DownloadButtonStyle"
+            BasedOn="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+            TargetType="{x:Type Button}">
+            <Setter Property="Visibility" Value="Hidden" />
             <Style.Triggers>
                 <Trigger Property="Visibility" Value="Visible">
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
-                                    <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1"/>
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="1" />
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                         </BeginStoryboard>
@@ -90,7 +99,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border BorderThickness="0">
-                            <ContentPresenter/>
+                            <ContentPresenter />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -102,299 +111,405 @@
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="UserControl.Loaded">
             <BeginStoryboard>
-                <Storyboard >
-                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.5" />
+                <Storyboard>
+                    <DoubleAnimation
+                        Storyboard.TargetProperty="Opacity"
+                        From="0.0"
+                        To="1.0"
+                        Duration="0:0:0.5" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-    
-<Viewbox>
-    <Grid Margin="10" Width="379" Height="311">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="31*" />
-            <RowDefinition Height="130*"/>
-            <RowDefinition Height="73*"/>
-            <RowDefinition Height="62*"/>
-        </Grid.RowDefinitions>
 
-        <Grid>
-            <ComboBox ItemsSource="{Binding Talks, Mode=OneWay}" 
-                      Style="{StaticResource MaterialDesignComboBox}"
-                      IsEnabled="{Binding IsNotRunning}"
-                      materialDesign:ComboBoxAssist.ClassicMode="true"
-                      FontSize="14"
-                      MaxDropDownHeight="600"
-                      SelectedValuePath="Id"
-                      Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                      SelectedValue="{Binding TalkId, Mode=TwoWay}"
-                      ItemTemplateSelector="{utils:ComboBoxTemplateSelector
-                        SelectedItemTemplate={StaticResource SelectedTalkTemplate},
-                        DropdownItemsTemplate={StaticResource DropDownTalkTemplate}}" >
-            </ComboBox>
+    <Viewbox>
+        <Grid
+            Width="379"
+            Height="311"
+            Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31*" />
+                <RowDefinition Height="130*" />
+                <RowDefinition Height="73*" />
+                <RowDefinition Height="62*" />
+            </Grid.RowDefinitions>
 
-            <TextBlock Text="{x:Static resx:Resources.MANUAL_MODE}" 
-                       VerticalAlignment="Center"
-                       FontSize="14" 
-                       Visibility="{Binding Path=IsManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Margin="0,-7,0,7"/>
-        </Grid>
+            <Grid Grid.Row="0" Visibility="{Binding Path=InShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" Margin="0,10,0,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="227*"/>
-                <ColumnDefinition Width="35*"/>
-            </Grid.ColumnDefinitions>
-            <Border Background="Black" CornerRadius="10" Padding="10" Grid.Column="0">
+                <Button
+                    Grid.Column="1"
+                    Margin="0,-12,0,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SettingsCommand}"
+                    Style="{StaticResource ChromelessBtn}">
+                    <materialDesign:PackIcon
+                        Width="42"
+                        Height="42"
+                        Background="Transparent"
+                        Foreground="DimGray"
+                        Kind="CogOutline" />
+                </Button>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15"/>
-                        <ColumnDefinition Width="284*"/>
-                    </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="2"
+                    Margin="0,-12,0,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding ExpandFromShrinkCommand}"
+                    Style="{StaticResource ChromelessBtn}">
+                    <materialDesign:PackIcon
+                        Width="42"
+                        Height="42"
+                        Background="Transparent"
+                        Foreground="DimGray"
+                        Kind="ArrowExpand" />
+                </Button>
 
-                    <!-- Bell icon -->
-                    <Button Grid.Column="0" Command="{Binding BellToggleCommand}" Style="{StaticResource ChromelessBtn}">
-                        <Path  
-                            Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                            Data="M11.945504,0.99398804C10.951509,0.99398804,10.156516,1.8880005,10.156516,2.9809875L10.156516,3.2799988 10.156516,3.3789978 10.45451,3.3789978C10.85251,3.3789978 11.24951,3.2799988 11.647502,3.2799988 12.243499,3.2799988 12.740497,3.2799988 13.237495,3.3789978L13.535489,3.3789978 13.535489,3.2799988 13.535489,2.9809875C13.734485,1.8880005,12.939492,0.99398804,11.945504,0.99398804z M11.945504,0C13.436491,0,14.628484,1.2919922,14.628484,2.9809875L14.628484,3.5780029 14.42948,3.5780029 14.628484,3.677002C17.80846,4.5709839 20.193438,6.8569946 20.193438,9.7389832 20.193438,10.634003 19.995442,11.428986 19.597449,12.123993 19.398445,14.807007 19.398445,18.881989 21.485436,20.869995 24.765412,23.850983 23.870413,26.036987 23.473414,26.733002L13.237495,26.733002 12.343496,26.733002 12.343496,29.117981 12.442495,29.117981C12.939492,29.316986 13.336493,29.813995 13.336493,30.509003 13.336493,31.303986 12.641499,32 11.846506,32 11.051506,32 10.355512,31.303986 10.355512,30.509003 10.355512,29.912994 10.752512,29.415985 11.24951,29.117981L11.349508,29.117981 11.349508,26.733002 10.45451,26.733002 0.41758832,26.733002C0.020587989,26.036987 -0.87440217,23.751984 2.4055731,20.869995 4.7905499,18.78299 4.5915539,13.912994 4.2935597,11.328979 4.094556,10.733002 3.9955575,10.136993 3.9955575,9.6399841 3.9955575,6.8569946 5.9825427,4.4719849 9.0635216,3.5780029L9.3615238,3.4779968 9.3615238,3.3789978 9.3615238,2.9809875C9.3615238,1.2919922,10.554508,0,11.945504,0z"
+
+                <Button
+                    Grid.Column="3"
+                    Margin="0,-12,0,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CloseAppCommand}"
+                    Style="{StaticResource ChromelessBtn}">
+                    <materialDesign:PackIcon
+                        Width="42"
+                        Height="42"
+                        Background="Transparent"
+                        Foreground="DimGray"
+                        Kind="CloseBoxOutline" />
+                </Button>
+
+            </Grid>
+
+            <Grid Grid.Row="0" Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ComboBox
+                    FontSize="14"
+                    IsEnabled="{Binding IsNotRunning}"
+                    ItemTemplateSelector="{utils:ComboBoxTemplateSelector SelectedItemTemplate={StaticResource SelectedTalkTemplate},
+                                                                          DropdownItemsTemplate={StaticResource DropDownTalkTemplate}}"
+                    ItemsSource="{Binding Talks, Mode=OneWay}"
+                    MaxDropDownHeight="600"
+                    SelectedValue="{Binding TalkId, Mode=TwoWay}"
+                    SelectedValuePath="Id"
+                    Style="{StaticResource MaterialDesignComboBox}"
+                    Visibility="{Binding Path=IsNotManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+
+                <TextBlock
+                    Margin="0,-7,0,7"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{x:Static resx:Resources.MANUAL_MODE}"
+                    Visibility="{Binding Path=IsManualMode, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="227*" />
+                    <ColumnDefinition Width="35*" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="0"
+                    Grid.ColumnSpan="{Binding TimeDisplayColumnSpan}"
+                    Padding="10"
+                    Background="Black"
+                    CornerRadius="10">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15" />
+                            <ColumnDefinition Width="284*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Bell icon  -->
+                        <Button
+                            Grid.Column="0"
+                            Command="{Binding BellToggleCommand}"
+                            Style="{StaticResource ChromelessBtn}"
+                            Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Path
+                                VerticalAlignment="Top"
+                                Cursor="Hand"
+                                Data="M11.945504,0.99398804C10.951509,0.99398804,10.156516,1.8880005,10.156516,2.9809875L10.156516,3.2799988 10.156516,3.3789978 10.45451,3.3789978C10.85251,3.3789978 11.24951,3.2799988 11.647502,3.2799988 12.243499,3.2799988 12.740497,3.2799988 13.237495,3.3789978L13.535489,3.3789978 13.535489,3.2799988 13.535489,2.9809875C13.734485,1.8880005,12.939492,0.99398804,11.945504,0.99398804z M11.945504,0C13.436491,0,14.628484,1.2919922,14.628484,2.9809875L14.628484,3.5780029 14.42948,3.5780029 14.628484,3.677002C17.80846,4.5709839 20.193438,6.8569946 20.193438,9.7389832 20.193438,10.634003 19.995442,11.428986 19.597449,12.123993 19.398445,14.807007 19.398445,18.881989 21.485436,20.869995 24.765412,23.850983 23.870413,26.036987 23.473414,26.733002L13.237495,26.733002 12.343496,26.733002 12.343496,29.117981 12.442495,29.117981C12.939492,29.316986 13.336493,29.813995 13.336493,30.509003 13.336493,31.303986 12.641499,32 11.846506,32 11.051506,32 10.355512,31.303986 10.355512,30.509003 10.355512,29.912994 10.752512,29.415985 11.24951,29.117981L11.349508,29.117981 11.349508,26.733002 10.45451,26.733002 0.41758832,26.733002C0.020587989,26.036987 -0.87440217,23.751984 2.4055731,20.869995 4.7905499,18.78299 4.5915539,13.912994 4.2935597,11.328979 4.094556,10.733002 3.9955575,10.136993 3.9955575,9.6399841 3.9955575,6.8569946 5.9825427,4.4719849 9.0635216,3.5780029L9.3615238,3.4779968 9.3615238,3.3789978 9.3615238,2.9809875C9.3615238,1.2919922,10.554508,0,11.945504,0z"
+                                Fill="{Binding BellColour}"
+                                Stretch="Uniform"
+                                ToolTip="{Binding BellTooltip, Mode=OneWay}"
+                                Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+                        </Button>
+
+                        <TextBlock
+                            Grid.Column="1"
+                            Margin="0,-5,0,0"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Stretch="Uniform"
-                            ToolTip="{Binding BellTooltip, Mode=OneWay}"
-                            Fill="{Binding BellColour}" Cursor="Hand">
-                        </Path>
-                    </Button>
+                            Foreground="#f3dcbc"
+                            Text="{x:Static resx:Resources.CIRCUIT_VISIT_BRACKETS}"
+                            Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
 
-                    <TextBlock Grid.Column="1" 
-                               Margin="0,-5,0,0"
-                               Text="{x:Static resx:Resources.CIRCUIT_VISIT_BRACKETS}" 
-                               Visibility="{Binding Path=IsCircuitVisit, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                               VerticalAlignment="Top" Foreground="#f3dcbc" HorizontalAlignment="Right"/>
+                        <TextBlock
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Stretch"
+                            FontSize="80"
+                            FontWeight="Bold"
+                            Foreground="{Binding TextColor}"
+                            Text="{Binding CurrentTimerValueString}"
+                            TextWrapping="NoWrap">
 
-                    <TextBlock TextWrapping="NoWrap" 
-                           FontSize="80" 
-                           VerticalAlignment="Stretch"
-                           HorizontalAlignment="Center"
-                           FontWeight="Bold" 
-                           Foreground ="{Binding TextColor}"
-                           Text="{Binding CurrentTimerValueString}" Grid.ColumnSpan="2" Grid.Column="0" >
+                            <TextBlock.Style>
+                                <Style>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RunFlashAnimation}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ThicknessAnimation
+                                                            AutoReverse="True"
+                                                            RepeatBehavior="1x"
+                                                            Storyboard.TargetProperty="Margin"
+                                                            From="0,0,0,0"
+                                                            To="0,100,0,0"
+                                                            Duration="0:0:0.4">
+                                                            <ThicknessAnimation.EasingFunction>
+                                                                <CircleEase EasingMode="EaseIn" />
+                                                            </ThicknessAnimation.EasingFunction>
+                                                        </ThicknessAnimation>
 
-                        <TextBlock.Style>
-                            <Style>
-                                <Style.Triggers>
-                                    <DataTrigger
-                                Binding="{Binding RunFlashAnimation}" Value="True">
-                                        <DataTrigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ThicknessAnimation
-                                                    Storyboard.TargetProperty="Margin"
-                                                    From="0,0,0,0"
-                                                    To="0,100,0,0"
-                                                    Duration="0:0:0.4"
-                                                    RepeatBehavior="1x"
-                                                    AutoReverse="True">
-                                                        <ThicknessAnimation.EasingFunction>
-                                                            <CircleEase EasingMode="EaseIn" />
-                                                        </ThicknessAnimation.EasingFunction>
-                                                    </ThicknessAnimation>
+                                                        <ColorAnimation
+                                                            Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                            From="White"
+                                                            To="Chartreuse"
+                                                            Duration="0:0:0.4" />
 
-                                                    <ColorAnimation 
-                                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
-                                                    From="White" To="Chartreuse"
-                                                    Duration="0:0:0.4"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </DataTrigger.EnterActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </DataTrigger.EnterActions>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-
-                    <StackPanel Orientation="Horizontal"
-                                Margin="0,0,0,-5"
-                                VerticalAlignment="Bottom"
-                                Grid.Column="0" Grid.ColumnSpan="2" >
-
-                        <TextBlock ToolTip="{Binding Duration1Tooltip}" 
-                             Foreground="{Binding Duration1Colour}" 
-                             Text="{Binding Duration1String}"/>
-
-                        <TextBlock Foreground="#bba991" 
-                                   Margin="5,0,5,0"
-                                   Text="{Binding Duration1ArrowString}" />
-
-                        <TextBlock ToolTip="{Binding Duration2Tooltip}" 
-                             Foreground="{Binding Duration2Colour}" 
-                             Text="{Binding Duration2String}"/>
-
-                        <TextBlock Foreground="#bba991" 
-                                   Margin="5,0,5,0"
-                                   Text="{Binding Duration2ArrowString}" />
-
-                        <TextBlock ToolTip="{Binding Duration3Tooltip}" 
-                             Foreground="{Binding Duration3Colour}" 
-                             Text="{Binding Duration3String}"/>
-
-                    </StackPanel>
-
-                    <Button Grid.Column="1" 
+                        <StackPanel
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             Margin="0,0,0,-5"
-                            Command="{Binding CountUpToggleCommand}" 
-                            IsEnabled="{Binding IsNotRunning}"
-                            Visibility="{Binding Path=IsValidTalk, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            VerticalAlignment="Bottom"
+                            Orientation="Horizontal"
+                            Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                            <TextBlock
+                                Foreground="{Binding Duration1Colour}"
+                                Text="{Binding Duration1String}"
+                                ToolTip="{Binding Duration1Tooltip}" />
+
+                            <TextBlock
+                                Margin="5,0,5,0"
+                                Foreground="#bba991"
+                                Text="{Binding Duration1ArrowString}" />
+
+                            <TextBlock
+                                Foreground="{Binding Duration2Colour}"
+                                Text="{Binding Duration2String}"
+                                ToolTip="{Binding Duration2Tooltip}" />
+
+                            <TextBlock
+                                Margin="5,0,5,0"
+                                Foreground="#bba991"
+                                Text="{Binding Duration2ArrowString}" />
+
+                            <TextBlock
+                                Foreground="{Binding Duration3Colour}"
+                                Text="{Binding Duration3String}"
+                                ToolTip="{Binding Duration3Tooltip}" />
+
+                        </StackPanel>
+
+                        <Button
+                            Grid.Column="1"
+                            Width="22"
+                            Margin="0,0,0,-5"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
-                            Width="22"
+                            Command="{Binding CountUpToggleCommand}"
+                            Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
+                            IsEnabled="{Binding IsNotRunning}"
+                            Style="{StaticResource ChromelessBtn}"
                             ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
                             ToolTipService.ShowOnDisabled="True"
-                            Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
-                            Style="{StaticResource ChromelessBtn}">
-                        <Path  
-                            Data="{Binding CountUpOrDownImageData}"
-                            Stretch="Uniform"
-                            Fill="#f3dcbc">
-                        </Path>
-                    </Button>
+                            Visibility="{Binding Path=ShowUpDownButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Path
+                                Data="{Binding CountUpOrDownImageData}"
+                                Fill="#f3dcbc"
+                                Stretch="Uniform" />
+                        </Button>
 
-                </Grid>
-            </Border>
+                    </Grid>
+                </Border>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="10,5,0,5">
-                <Button Height="35" VerticalAlignment="Top" 
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        ToolTip="{x:Static resx:Resources.TIME_INCREASE}"
-                        Padding="0"
-                        Margin="0,0,0,2" Command="{Binding IncrementTimerCommand}">
-                    <Button.InputBindings>
-                        <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding IncrementTimer15Command}"/>
-                        <MouseBinding Gesture="Ctrl+LeftDoubleClick" Command="{Binding IncrementTimer15Command}"/>
-                        <MouseBinding Gesture="Shift+LeftClick" Command="{Binding IncrementTimer5Command}"/>
-                        <MouseBinding Gesture="Shift+LeftDoubleClick" Command="{Binding IncrementTimer5Command}"/>
-                    </Button.InputBindings>
-                    <materialDesign:PackIcon
-                        Kind="Plus"
-                        Height="24"
-                        Width="24" />
-                </Button>
-                <Button Height="35" VerticalAlignment="Bottom" 
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        ToolTip="{x:Static resx:Resources.TIME_DECREASE}"
-                        Padding="0"
-                        Margin="0,2,0,0" Command="{Binding DecrementTimerCommand}">
-                    <Button.InputBindings>
-                        <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding DecrementTimer15Command}"/>
-                        <MouseBinding Gesture="Ctrl+LeftDoubleClick" Command="{Binding DecrementTimer15Command}"/>
-                        <MouseBinding Gesture="Shift+LeftClick" Command="{Binding DecrementTimer5Command}"/>
-                        <MouseBinding Gesture="Shift+LeftDoubleClick" Command="{Binding DecrementTimer5Command}"/>
-                    </Button.InputBindings>
-                    <materialDesign:PackIcon
-                        Kind="Minus"
-                        Height="24"
-                        Width="24" />
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Button Grid.Row="2" 
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                Command="{Binding StartCommand}" 
-                Height="54"
-                Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-            <b:Interaction.Behaviors>
-                <behaviours:DoubleClickBehaviour />
-            </b:Interaction.Behaviors>
-            <materialDesign:PackIcon
-                Kind="Play"
-                Height="40"
-                Width="40" />
-        </Button>
-
-        <Button Grid.Row="2" 
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Command="{Binding StopCommand}"
-                Height="54"
-                Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-            <b:Interaction.Behaviors>
-                <behaviours:DoubleClickBehaviour />
-            </b:Interaction.Behaviors>
-            <materialDesign:PackIcon
-                Kind="Stop"
-                Height="40"
-                Width="40" />
-        </Button>
-
-        <Grid Grid.Row="3" Margin="0,10,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="52" />
-                <ColumnDefinition Width="52" />
-                <ColumnDefinition Width="52" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel 
-                IsEnabled="{Binding IsNotRunning}"
-                Visibility="{Binding Path=ShouldShowCircuitVisitToggle, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Grid.Column="0" 
-                Orientation="Horizontal">
-
-                <ToggleButton
-                    Margin="5,0,0,0"
-                    IsChecked="{Binding IsCircuitVisit}"
-                    Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left" />
-
-                <Label Content="{x:Static resx:Resources.CIRCUIT_VISIT}" 
-                       VerticalAlignment="Center"/>
-
-            </StackPanel>
-
-            <Button Style="{StaticResource MaterialDesignRaisedButton}"
-                    Margin="0,0,10,0"
-                    ToolTip="{x:Static resx:Resources.CLOSE_COUNTDOWN_TOOLTIP}" 
-                    Grid.Column="0"
-                    FontSize="14"
-                    Content="{x:Static resx:Resources.CLOSE_COUNTDOWN}" 
-                    Visibility="{Binding Path=IsCountdownActive, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                    Command="{Binding CloseCountdownCommand}"/>
-
-            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                    ToolTip="{Binding SettingsHint, Mode=OneWay}"
-                    ToolTipService.ShowOnDisabled="True"
-                    Grid.Column="3"
-                    Command="{Binding SettingsCommand}">
-                <materialDesign:PackIcon
-                    Kind="Settings"
-                    Height="24"
-                    Width="24" />
-            </Button>
-
-            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                    ToolTip="{x:Static resx:Resources.HELP}" 
-                    Grid.Column="2"
-                    ToolTipService.ShowOnDisabled="True"
-                    Command="{Binding HelpCommand}">
-                <materialDesign:PackIcon
-                    Kind="Help"
-                    Height="24"
-                    Width="24" />
-            </Button>
-
-            <Button Style="{StaticResource DownloadButtonStyle}" 
-                    ToolTip="{x:Static resx:Resources.NEW_VERSION}" 
+                <StackPanel
                     Grid.Column="1"
-                    Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                    Command="{Binding NewVersionCommand}">
-                <materialDesign:PackIcon
-                    Kind="Download"
-                    Height="24"
-                    Width="24" />
-            </Button>
-        </Grid>
+                    Margin="10,5,0,5"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Button
+                        Height="35"
+                        Margin="0,0,0,2"
+                        Padding="0"
+                        VerticalAlignment="Top"
+                        Command="{Binding IncrementTimerCommand}"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        ToolTip="{x:Static resx:Resources.TIME_INCREASE}">
+                        <Button.InputBindings>
+                            <MouseBinding Command="{Binding IncrementTimer15Command}" Gesture="Ctrl+LeftClick" />
+                            <MouseBinding Command="{Binding IncrementTimer15Command}" Gesture="Ctrl+LeftDoubleClick" />
+                            <MouseBinding Command="{Binding IncrementTimer5Command}" Gesture="Shift+LeftClick" />
+                            <MouseBinding Command="{Binding IncrementTimer5Command}" Gesture="Shift+LeftDoubleClick" />
+                        </Button.InputBindings>
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            Kind="Plus" />
+                    </Button>
+                    <Button
+                        Height="35"
+                        Margin="0,2,0,0"
+                        Padding="0"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding DecrementTimerCommand}"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        ToolTip="{x:Static resx:Resources.TIME_DECREASE}">
+                        <Button.InputBindings>
+                            <MouseBinding Command="{Binding DecrementTimer15Command}" Gesture="Ctrl+LeftClick" />
+                            <MouseBinding Command="{Binding DecrementTimer15Command}" Gesture="Ctrl+LeftDoubleClick" />
+                            <MouseBinding Command="{Binding DecrementTimer5Command}" Gesture="Shift+LeftClick" />
+                            <MouseBinding Command="{Binding DecrementTimer5Command}" Gesture="Shift+LeftDoubleClick" />
+                        </Button.InputBindings>
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            Kind="Minus" />
+                    </Button>
+                </StackPanel>
+            </Grid>
 
-    </Grid>
-</Viewbox>
+            <Button
+                Name="StartBtn"
+                Grid.Row="2"
+                Grid.RowSpan="{Binding StartStopButtonRowSpan}"
+                Height="{Binding StartStopButtonHeight}"
+                Command="{Binding StartCommand}"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                <b:Interaction.Behaviors>
+                    <behaviours:DoubleClickBehaviour />
+                </b:Interaction.Behaviors>
+                <materialDesign:PackIcon
+                    Width="{Binding ActualHeight, ElementName=StartBtn, Mode=OneWay, Converter={StaticResource ButtonGlyphSizeConverter}}"
+                    Height="{Binding ActualHeight, ElementName=StartBtn, Mode=OneWay, Converter={StaticResource ButtonGlyphSizeConverter}}"
+                    Kind="Play" />
+            </Button>
+
+            <Button
+                Name="StopBtn"
+                Grid.Row="2"
+                Grid.RowSpan="{Binding StartStopButtonRowSpan}"
+                Height="{Binding StartStopButtonHeight}"
+                Command="{Binding StopCommand}"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                <b:Interaction.Behaviors>
+                    <behaviours:DoubleClickBehaviour />
+                </b:Interaction.Behaviors>
+                <materialDesign:PackIcon
+                    Width="{Binding ActualHeight, ElementName=StopBtn, Mode=OneWay, Converter={StaticResource ButtonGlyphSizeConverter}}"
+                    Height="{Binding ActualHeight, ElementName=StopBtn, Mode=OneWay, Converter={StaticResource ButtonGlyphSizeConverter}}"
+                    Kind="Stop" />
+            </Button>
+
+            <Grid
+                Grid.Row="3"
+                Margin="0,10,0,0"
+                Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="52" />
+                    <ColumnDefinition Width="52" />
+                    <ColumnDefinition Width="52" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    IsEnabled="{Binding IsNotRunning}"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Path=ShouldShowCircuitVisitToggle, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                    <ToggleButton
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        IsChecked="{Binding IsCircuitVisit}"
+                        Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" />
+
+                    <Label VerticalAlignment="Center" Content="{x:Static resx:Resources.CIRCUIT_VISIT}" />
+
+                </StackPanel>
+
+                <Button
+                    Grid.Column="0"
+                    Margin="0,0,10,0"
+                    Command="{Binding CloseCountdownCommand}"
+                    Content="{x:Static resx:Resources.CLOSE_COUNTDOWN}"
+                    FontSize="14"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    ToolTip="{x:Static resx:Resources.CLOSE_COUNTDOWN_TOOLTIP}"
+                    Visibility="{Binding Path=IsCountdownActive, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+
+                <Button
+                    Grid.Column="3"
+                    Command="{Binding SettingsCommand}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                    ToolTip="{Binding SettingsHint, Mode=OneWay}"
+                    ToolTipService.ShowOnDisabled="True">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="Settings" />
+                </Button>
+
+                <Button
+                    Grid.Column="2"
+                    Command="{Binding HelpCommand}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                    ToolTip="{x:Static resx:Resources.HELP}"
+                    ToolTipService.ShowOnDisabled="True">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="Help" />
+                </Button>
+
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding NewVersionCommand}"
+                    Style="{StaticResource DownloadButtonStyle}"
+                    ToolTip="{x:Static resx:Resources.NEW_VERSION}"
+                    Visibility="{Binding Path=IsNewVersionAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="Download" />
+                </Button>
+            </Grid>
+
+        </Grid>
+    </Viewbox>
 </UserControl>
- 
+

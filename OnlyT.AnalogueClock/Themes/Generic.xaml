@@ -8,35 +8,87 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ClockControl}">
                     <Viewbox>
-                        <Border Background="{TemplateBinding Background}"
+                        <Border
+                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
 
-                            <Canvas Width="500" Height="500" x:Name="ClockCanvas">
-                                <Ellipse x:Name="OuterDial" Width="500" Height="500" />
-                                <Ellipse x:Name="MiddleDial" Width="480" Height="480" Margin="10,10,0,0"/>
-                                <Ellipse x:Name="InnerDial" Width="466" Height="466" Fill="White" Margin="17,17,0,0"/>
+                            <Canvas
+                                x:Name="ClockCanvas"
+                                Width="500"
+                                Height="500">
+                                <Ellipse
+                                    x:Name="OuterDial"
+                                    Width="500"
+                                    Height="500" />
+                                <Ellipse
+                                    x:Name="MiddleDial"
+                                    Width="480"
+                                    Height="480"
+                                    Margin="10,10,0,0" />
+                                <Ellipse
+                                    x:Name="InnerDial"
+                                    Width="466"
+                                    Height="466"
+                                    Margin="17,17,0,0"
+                                    Fill="White" />
 
-                                <Path x:Name="SectorPath1" Data="" Fill="#99FF99" Stroke="#dddddd" StrokeThickness="1"/>
-                                <Path x:Name="SectorPath2" Data="" Fill="#E6FFE6" Stroke="#dddddd" StrokeThickness="1"/>
-                                <Path x:Name="SectorPath3" Data="" Fill="#FFB399" Stroke="#dddddd" StrokeThickness="1"/>
-                                
-                                <Line x:Name="HourHand" X1="250" Y1="250" X2="250" Y2="130" 
-                                      StrokeEndLineCap="Triangle"
-                                      Stroke="Black" StrokeThickness="18" >
-                                </Line>
+                                <Path
+                                    x:Name="SectorPath1"
+                                    Data=""
+                                    Fill="#99FF99"
+                                    Stroke="#dddddd"
+                                    StrokeThickness="1" />
+                                <Path
+                                    x:Name="SectorPath2"
+                                    Data=""
+                                    Fill="#E6FFE6"
+                                    Stroke="#dddddd"
+                                    StrokeThickness="1" />
+                                <Path
+                                    x:Name="SectorPath3"
+                                    Data=""
+                                    Fill="#FFB399"
+                                    Stroke="#dddddd"
+                                    StrokeThickness="1" />
 
-                                <Line x:Name="MinuteHand" X1="250" Y1="250" X2="250" Y2="90" 
-                                      StrokeEndLineCap="Triangle"
-                                      Stroke="Black" StrokeThickness="12">
-                                </Line>
+                                <Line
+                                    x:Name="HourHand"
+                                    Stroke="Black"
+                                    StrokeEndLineCap="Triangle"
+                                    StrokeThickness="18"
+                                    X1="250"
+                                    X2="250"
+                                    Y1="250"
+                                    Y2="130" />
 
-                                <Line x:Name="SecondHand" X1="250" Y1="290" X2="250" Y2="100" 
-                                      Stroke="Firebrick" StrokeThickness="2" >
-                                </Line>
+                                <Line
+                                    x:Name="MinuteHand"
+                                    Stroke="Black"
+                                    StrokeEndLineCap="Triangle"
+                                    StrokeThickness="12"
+                                    X1="250"
+                                    X2="250"
+                                    Y1="250"
+                                    Y2="90" />
 
-                                <Ellipse x:Name="CentrePointDial" Width="30" Height="30" Stroke="Black" StrokeThickness="3" 
-                                         Fill="#FFD1D1D1" Margin="235,235,0,0"/>
+                                <Line
+                                    x:Name="SecondHand"
+                                    Stroke="Firebrick"
+                                    StrokeThickness="2"
+                                    X1="250"
+                                    X2="250"
+                                    Y1="290"
+                                    Y2="100" />
+
+                                <Ellipse
+                                    x:Name="CentrePointDial"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="235,235,0,0"
+                                    Fill="#FFD1D1D1"
+                                    Stroke="Black"
+                                    StrokeThickness="3" />
                             </Canvas>
                         </Border>
                     </Viewbox>
@@ -45,4 +97,4 @@
         </Setter>
     </Style>
 </ResourceDictionary>
-  
+
