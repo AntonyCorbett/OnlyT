@@ -459,6 +459,10 @@
                                   Style="{StaticResource SettingsCheckBox}"
                                   Content="{x:Static resx:Resources.ALWAYS_ON_TOP}" />
 
+                        <CheckBox IsChecked="{Binding ShrinkOnMinimise, Mode=TwoWay}" 
+                                  Style="{StaticResource SettingsCheckBox}"
+                                  Content="{x:Static resx:Resources.SHRINK_ON_MINIMISE}" />
+
                         <ComboBox ItemsSource="{Binding LoggingLevels}"
                                   Style="{StaticResource SettingsComboStyle}" 
                                   materialDesign:HintAssist.IsFloating="True"

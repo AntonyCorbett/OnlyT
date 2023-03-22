@@ -15,11 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Resources;
 using System.Windows.Media.Imaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.CountdownTimer;
-using OnlyT.Properties;
 using OnlyT.Services.Snackbar;
 using Serilog;
 using Serilog.Events;
@@ -49,7 +47,7 @@ namespace OnlyT.ViewModel
         private readonly WebClockPortItem[] _ports;
         private readonly PersistDurationItem[] _persistDurationItems;
         private readonly LoggingLevel[] _loggingLevels;
-
+        
         public SettingsPageViewModel(
            IMonitorsService monitorsService,
            IBellService bellService,
@@ -577,6 +575,19 @@ namespace OnlyT.ViewModel
                     _optionsService.Options.AlwaysOnTop = value;
                     OnPropertyChanged();
                     WeakReferenceMessenger.Default.Send(new AlwaysOnTopChangedMessage());
+                }
+            }
+        }
+
+        public bool ShrinkOnMinimise
+        {
+            get => _optionsService.Options.ShrinkOnMinimise;
+            set
+            {
+                if (_optionsService.Options.ShrinkOnMinimise != value)
+                {
+                    _optionsService.Options.ShrinkOnMinimise = value;
+                    OnPropertyChanged();
                 }
             }
         }

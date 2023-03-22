@@ -46,6 +46,7 @@
             TimerFrame = true;
             LogEventLevel = LogEventLevel.Information;
             ShowBackgroundOnClock = true;
+            ShrinkOnMinimise = true;
 
             AdjustClockFormat();
         }
@@ -97,6 +98,8 @@
         public bool JwLibraryCompatibilityMode { get; set; }
 
         public bool AlwaysOnTop { get; set; }
+
+        public bool ShrinkOnMinimise { get; set; }
 
         public bool IsBellEnabled { get; set; }
 

@@ -1244,6 +1244,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shrink on minimise.
+        /// </summary>
+        public static string SHRINK_ON_MINIMISE {
+            get {
+                return ResourceManager.GetString("SHRINK_ON_MINIMISE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sound the bell.
         /// </summary>
         public static string SOUND_BELL {

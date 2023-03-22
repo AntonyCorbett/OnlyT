@@ -23,17 +23,17 @@ public partial class MainWindow : Window
     private const double MainWindowMinNormalWidth = 250;
     private const double MainWindowMinNormalHeight = 200;
             
-    private const double MainWindowMinWidthAbsolute = 100;
-    private const double MainWindowMinHeightAbsolute = 85;
+    private const double MainWindowMinWidthAbsolute = 143;
+    private const double MainWindowMinHeightAbsolute = 118;
 
     private const double MainWindowDefaultShrunkWidth = 143;
     private const double MainWindowDefaultShrunkHeight = 118;
 
-    //private const double OperatorWindowDefWidth = 395;
-    //private const double OperatorWindowDefHeight = 350;
-
     private const double SettingsWindowDefWidth = 535;
     private const double SettingsWindowDefHeight = 525;
+
+    private const double SettingsWindowMinWidth = 400;
+    private const double SettingsWindowMinHeight = 360;
 
     public bool _isShrunk;
 
@@ -83,6 +83,9 @@ public partial class MainWindow : Window
     {
         if (message.TargetPageName.Equals(OperatorPageViewModel.PageName))
         {
+            MinHeight = MainWindowMinHeightAbsolute;
+            MinWidth = MainWindowMinWidthAbsolute;
+
             WindowState = WindowState.Normal;
             AdjustMainWindowNormalPositionAndSize();
         }
@@ -90,6 +93,10 @@ public partial class MainWindow : Window
         {
             WindowState = WindowState.Normal;
             AdjustMainWindowSettingsPositionAndSize();
+
+            // restrict the min size of the window when on the Settings page
+            MinWidth = SettingsWindowMinWidth;
+            MinHeight = SettingsWindowMinHeight;
         }
     }
 
@@ -164,7 +171,6 @@ public partial class MainWindow : Window
 
     private void SaveWindowPos()
     {
-        var optionsService = Ioc.Default.GetService<IOptionsService>()!;
         var placement = this.GetPlacement();
 
         if (string.IsNullOrEmpty(placement))
@@ -177,6 +183,8 @@ public partial class MainWindow : Window
         {
             return;
         }
+
+        var optionsService = Ioc.Default.GetService<IOptionsService>()!;
 
         if (m.CurrentPageName.Equals(OperatorPageViewModel.PageName))
         {
@@ -198,20 +206,6 @@ public partial class MainWindow : Window
 
         optionsService.Save();
     }
-
-    //private void SaveSettingsWindowSize()
-    //{
-    //    var optionsService = Ioc.Default.GetService<IOptionsService>()!;
-    //    optionsService.Options.SettingsPageSize = new Size(Width, Height);
-    //    optionsService.Save();
-    //}
-
-    //private void SaveOperatorWindowSize()
-    //{
-    //    var optionsService = Ioc.Default.GetService<IOptionsService>()!;
-    //    optionsService.Options.OperatorPageSize = new Size(Width, Height);
-    //    optionsService.Save();
-    //}
 
     private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
     {
@@ -245,16 +239,33 @@ public partial class MainWindow : Window
             ((int)wParam & 0xFFF0) == 0xF020)
         {
             // Handle minimize...
-            if (_isShrunk)
+
+            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
+            if (!optionsService.Options.ShrinkOnMinimise)
+            {
+                handled = false;
+            }
+            else if (_isShrunk)
             {
                 // can't minimize a shrunk window
                 handled = true;
             }
             else
             {
-                SaveWindowPos();
-                AdjustMainWindowShrunkPositionAndSize();
-                handled = true;
+                var m = (MainViewModel?) DataContext;
+
+                if (m?.CurrentPageName?.Equals(SettingsPageViewModel.PageName) == true)
+                {
+                    // we can minimise the window if we are on the Settings page
+                    handled = false;
+                }
+                else
+                {
+                    // on the Operator page
+                    SaveWindowPos();
+                    AdjustMainWindowShrunkPositionAndSize();
+                    handled = true;
+                }
             }
         }
 
