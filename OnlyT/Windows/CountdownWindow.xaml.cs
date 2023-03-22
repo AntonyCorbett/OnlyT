@@ -38,10 +38,7 @@ namespace OnlyT.Windows
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.CountdownOutputWindowPlacement))
             {
-                this.SetPlacement(
-                    _optionsService.Options.CountdownOutputWindowPlacement, 
-                    new Size(DefWindowWidth, DefWindowHeight));
-
+                this.SetPlacement(_optionsService.Options.CountdownOutputWindowPlacement);
                 SetWindowSize();
             }
             else

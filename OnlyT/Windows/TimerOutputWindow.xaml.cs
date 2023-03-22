@@ -48,10 +48,7 @@ namespace OnlyT.Windows
         {
             if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
             {
-                this.SetPlacement(
-                    _optionsService.Options.TimerOutputWindowPlacement,
-                    new Size(DefWindowWidth, DefWindowHeight));
-
+                this.SetPlacement(_optionsService.Options.TimerOutputWindowPlacement);
                 SetWindowSize();
             }
             else

@@ -78,18 +78,9 @@
         private static readonly Encoding Encoding = new UTF8Encoding();
         private static readonly XmlSerializer Serializer = new(typeof(WINDOWPLACEMENT));
 
-        public static Rect SetPlacement(this Window window, string placementJson, Size overrideSize = default)
+        public static Rect SetPlacement(this Window window, string placementJson)
         {
-            var width = window.Width;
-            var height = window.Height;
-
-            if (overrideSize != default)
-            {
-                width = overrideSize.Width;
-                height = overrideSize.Height;
-            }
-
-            return SetPlacement(new WindowInteropHelper(window).Handle, placementJson, width, height);
+            return SetPlacement(new WindowInteropHelper(window).Handle, placementJson);
         }
 
         public static string GetPlacement(this Window window)
@@ -120,7 +111,7 @@
             return ((int)x, (int)y);
         }
 
-        private static Rect SetPlacement(IntPtr windowHandle, string placementJson, double width, double height)
+        private static Rect SetPlacement(IntPtr windowHandle, string placementJson)
         {
             if (!string.IsNullOrEmpty(placementJson))
             {
@@ -139,20 +130,16 @@
                         placement = (WINDOWPLACEMENT)p;
                     }
 
-                    var adjustedDimensions = GetAdjustedWidthAndHeight(width, height);
-
                     placement.length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
                     placement.flags = 0;
                     placement.showCmd = placement.showCmd == SW_SHOWMINIMIZED ? SW_SHOWNORMAL : placement.showCmd;
-                    placement.normalPosition.Right = placement.normalPosition.Left + (int)adjustedDimensions.Item1;
-                    placement.normalPosition.Bottom = placement.normalPosition.Top + (int)adjustedDimensions.Item2;
                     NativeMethods.SetWindowPlacement(windowHandle, ref placement);
 
                     return new Rect(
                         placement.normalPosition.Left,
                         placement.normalPosition.Top,
-                        (int)adjustedDimensions.Item1,
-                        (int)adjustedDimensions.Item2);
+                        placement.normalPosition.Right - placement.normalPosition.Left,
+                        placement.normalPosition.Bottom - placement.normalPosition.Top);
                 }
                 catch (InvalidOperationException)
                 {
@@ -161,16 +148,6 @@
             }
 
             return default;
-        }
-
-        private static Tuple<double, double> GetAdjustedWidthAndHeight(double width, double height)
-        {
-            var (x, y) = GetDpiSettings();
-
-            var adjustedWidth = (width * x) / 96.0;
-            var adjustedHeight = (height * y) / 96.0;
-
-            return new Tuple<double, double>(adjustedWidth, adjustedHeight);
         }
 
         private static string GetPlacement(IntPtr windowHandle)

@@ -90,6 +90,7 @@ namespace OnlyT.ViewModel
             // should really create a "page service" rather than create views in the main view model!
             _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
 
+            WeakReferenceMessenger.Default.Send(new BeforeNavigateMessage(null, OperatorPageViewModel.PageName, null));
             WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
             // (fire and forget)

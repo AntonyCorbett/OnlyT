@@ -891,6 +891,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void NavigateSettings()
     {
+        WeakReferenceMessenger.Default.Send(new BeforeNavigateMessage(PageName, SettingsPageViewModel.PageName, null));
         WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
     }
 
@@ -1098,7 +1099,10 @@ public class OperatorPageViewModel : ObservableObject, IPage
         {
             Log.Logger.Debug("Generating timer report");
 
-            _snackbarService.EnqueueWithOk(Properties.Resources.ANALYSING_REPORT_DATA);
+            if (!InShrinkMode)
+            {
+                _snackbarService.EnqueueWithOk(Properties.Resources.ANALYSING_REPORT_DATA);
+            }
 
             _timingDataService.Save();
 
@@ -1109,16 +1113,19 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 _optionsService.Options.WeekendIncludesFriday,
                 _commandLineService.OptionsIdentifier).ConfigureAwait(false);
 
-            if (string.IsNullOrEmpty(reportPath))
+            if (!InShrinkMode)
             {
-                _snackbarService.EnqueueWithOk(Properties.Resources.NO_REPORT);
-            }
-            else
-            {
-                _snackbarService.Enqueue(
-                    Properties.Resources.GENERATING_REPORT,
-                    Properties.Resources.VIEW_REPORT,
-                    () => LaunchPdf(reportPath));
+                if (string.IsNullOrEmpty(reportPath))
+                {
+                    _snackbarService.EnqueueWithOk(Properties.Resources.NO_REPORT);
+                }
+                else
+                {
+                    _snackbarService.Enqueue(
+                        Properties.Resources.GENERATING_REPORT,
+                        Properties.Resources.VIEW_REPORT,
+                        () => LaunchPdf(reportPath));
+                }
             }
         }
     }

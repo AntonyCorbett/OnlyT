@@ -1086,6 +1086,8 @@ namespace OnlyT.ViewModel
         private void NavigateOperatorPage()
         {
             Save();
+
+            WeakReferenceMessenger.Default.Send(new BeforeNavigateMessage(PageName, OperatorPageViewModel.PageName, null));
             WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, OperatorPageViewModel.PageName, null));
         }
 

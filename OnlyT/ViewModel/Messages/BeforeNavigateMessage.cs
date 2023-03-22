@@ -1,11 +1,12 @@
 ﻿namespace OnlyT.ViewModel.Messages;
 
 /// <summary>
-/// When we navigate between pages (e.g. from Operator page to Settings page)
+/// Before we navigate between pages (e.g. from Operator page to Settings page)
 /// </summary>
-internal class NavigateMessage
+
+internal class BeforeNavigateMessage
 {
-    public NavigateMessage(string? originalPageName, string targetPageName, object? state)
+    public BeforeNavigateMessage(string? originalPageName, string targetPageName, object? state)
     {
         OriginalPageName = originalPageName ?? string.Empty;
         TargetPageName = targetPageName;
@@ -23,4 +24,5 @@ internal class NavigateMessage
     /// Optional context-specific state
     /// </summary>
     public object? State { get; }
+
 }

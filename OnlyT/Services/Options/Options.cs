@@ -66,15 +66,17 @@
 
         public bool ClockTimerFrame { get; set; }
 
-        public string? AppWindowPlacement { get; set; }
+        public string? AppWindowPlacementNormal { get; set; }
+
+        public string? AppWindowPlacementShrunk { get; set; }
+
+        public string? AppWindowPlacementSettings { get; set; }
 
         public string? TimerOutputWindowPlacement { get; set; }
 
         public string? CountdownOutputWindowPlacement { get; set; }
 
-        public Size SettingsPageSize { get; set; }
-
-        public Size OperatorPageSize { get; set; }
+        public bool AppWindowUseShrunkPlacementAtStart { get; set; }
 
         public Size CountdownWindowSize { get; set; }
 
