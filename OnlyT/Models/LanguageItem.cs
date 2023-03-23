@@ -1,15 +1,14 @@
-﻿namespace OnlyT.Models
+﻿namespace OnlyT.Models;
+
+public class LanguageItem
 {
-    public class LanguageItem
+    public LanguageItem(string languageId, string languageName)
     {
-        public LanguageItem(string languageId, string languageName)
-        {
-            LanguageId = languageId;
-            LanguageName = languageName;
-        }
-
-        public string LanguageId { get; }
-
-        public string LanguageName { get; }
+        LanguageId = languageId;
+        LanguageName = languageName;
     }
+
+    public string LanguageId { get; }
+
+    public string LanguageName { get; }
 }

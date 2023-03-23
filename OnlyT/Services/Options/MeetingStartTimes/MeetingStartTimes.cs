@@ -1,63 +1,62 @@
-﻿namespace OnlyT.Services.Options.MeetingStartTimes
+﻿using System;
+using System.Collections.Generic;
+using OnlyT.Utils;
+
+namespace OnlyT.Services.Options.MeetingStartTimes;
+
+public class MeetingStartTimes
 {
-    using System;
-    using System.Collections.Generic;
-    using Utils;
-
-    public class MeetingStartTimes
+    public MeetingStartTimes()
     {
-        public MeetingStartTimes()
+        Times = new List<MeetingStartTime>();
+    }
+
+    public List<MeetingStartTime> Times { get; }
+
+    public void Sanitize()
+    {
+        foreach (var startTime in Times)
         {
-            Times = new List<MeetingStartTime>();
+            startTime.Sanitize();
         }
+    }
 
-        public List<MeetingStartTime> Times { get; }
+    public void FromText(string value)
+    {
+        Times.Clear();
 
-        public void Sanitize()
+        if (!string.IsNullOrWhiteSpace(value))
         {
-            foreach (var startTime in Times)
+            var lines = value.SplitIntoLines();
+            foreach (var line in lines)
             {
-                startTime.Sanitize();
-            }
-        }
-
-        public void FromText(string value)
-        {
-            Times.Clear();
-
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                var lines = value.SplitIntoLines();
-                foreach (var line in lines)
+                var startTime = MeetingStartTime.FromText(line);
+                if (startTime != null)
                 {
-                    var startTime = MeetingStartTime.FromText(line);
-                    if (startTime != null)
-                    {
-                        Times.Add(startTime);
-                    }
+                    Times.Add(startTime);
                 }
             }
         }
+    }
 
-        public string AsText()
+    public string AsText()
+    {
+        var result = new List<string>();
+
+        foreach (var startTime in Times)
         {
-            var result = new List<string>();
-
-            foreach (var startTime in Times)
-            {
-                AddStartTime(result, startTime);
-            }
-
-            return string.Join(Environment.NewLine, result);
+            AddStartTime(result, startTime);
         }
 
-        private static void AddStartTime(List<string> result, MeetingStartTime? meetingStartTime)
+        return string.Join(Environment.NewLine, result);
+    }
+
+    private static void AddStartTime(List<string> result, MeetingStartTime? meetingStartTime)
+    {
+        var startTime = meetingStartTime?.AsText();
+        if (!string.IsNullOrWhiteSpace(startTime))
         {
-            var startTime = meetingStartTime?.AsText();
-            if (!string.IsNullOrWhiteSpace(startTime))
-            {
-                result.Add(startTime);
-            }
+            result.Add(startTime);
         }
     }
 }

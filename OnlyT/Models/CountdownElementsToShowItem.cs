@@ -1,17 +1,16 @@
 ﻿using OnlyT.CountdownTimer;
 
-namespace OnlyT.Models
+namespace OnlyT.Models;
+
+public class CountdownElementsToShowItem
 {
-    public class CountdownElementsToShowItem
+    public CountdownElementsToShowItem(ElementsToShow elements, string name)
     {
-        public CountdownElementsToShowItem(ElementsToShow elements, string name)
-        {
-            Elements = elements;
-            Name = name;
-        }
-
-        public ElementsToShow Elements { get; }
-
-        public string Name { get; }
+        Elements = elements;
+        Name = name;
     }
+
+    public ElementsToShow Elements { get; }
+
+    public string Name { get; }
 }

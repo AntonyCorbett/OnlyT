@@ -1,5 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.Messaging;
-using System.Windows;
+﻿using System.Windows;
+using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;

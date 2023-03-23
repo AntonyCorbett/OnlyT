@@ -1,25 +1,24 @@
-﻿namespace OnlyT.Services.Bell
+﻿using System.Threading.Tasks;
+
+namespace OnlyT.Services.Bell;
+
+/// <summary>
+/// Manages the bell
+/// </summary>
+// ReSharper disable once ClassNeverInstantiated.Global
+public class BellService : IBellService
 {
-    using System.Threading.Tasks;
+    private readonly TimerBell _bell;
 
-    /// <summary>
-    /// Manages the bell
-    /// </summary>
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class BellService : IBellService
+    public BellService()
     {
-        private readonly TimerBell _bell;
+        _bell = new TimerBell();
+    }
 
-        public BellService()
-        {
-            _bell = new TimerBell();
-        }
+    public bool IsPlaying => _bell.IsPlaying;
 
-        public bool IsPlaying => _bell.IsPlaying;
-
-        public void Play(int volumePercent)
-        {
-            Task.Run(() => _bell.Play(volumePercent));
-        }
+    public void Play(int volumePercent)
+    {
+        Task.Run(() => _bell.Play(volumePercent));
     }
 }

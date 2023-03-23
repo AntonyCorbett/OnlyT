@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.EventArgs;
 using MaterialDesignThemes.Wpf;
 using OnlyT.ViewModel.Messages;
@@ -21,487 +23,484 @@ using OnlyT.Services.Options;
 using OnlyT.Services.Timer;
 using OnlyT.WebServer;
 using OnlyT.Windows;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Messaging;
 
-namespace OnlyT.ViewModel
+namespace OnlyT.ViewModel;
+
+/// <inheritdoc />
+/// <summary>
+/// View model for the main page (which is a placeholder for the Operator or Settings page)
+/// </summary>
+// ReSharper disable once ClassNeverInstantiated.Global
+public class MainViewModel : ObservableObject
 {
-    /// <inheritdoc />
-    /// <summary>
-    /// View model for the main page (which is a placeholder for the Operator or Settings page)
-    /// </summary>
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class MainViewModel : ObservableObject
+    private readonly Dictionary<string, FrameworkElement> _pages = new();
+    private readonly IOptionsService _optionsService;
+    private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
+    private readonly ITalkTimerService _timerService;
+    private readonly ICommandLineService _commandLineService;
+    private readonly IDateTimeService _dateTimeService;
+    private readonly ITimerOutputDisplayService _timerOutputDisplayService;
+    private readonly ICountdownOutputDisplayService _countdownDisplayService;
+    private readonly IHttpServer _httpServer;
+    private readonly ISnackbarService _snackbarService;
+    private DispatcherTimer _heartbeatTimer = null!;
+    private FrameworkElement? _currentPage;
+    private DateTime _lastRefreshedSchedule = DateTime.MinValue;
+
+    public MainViewModel(
+        IOptionsService optionsService,
+        ITalkTimerService timerService,
+        ISnackbarService snackbarService,
+        IHttpServer httpServer,
+        ICommandLineService commandLineService,
+        ICountdownTimerTriggerService countdownTimerTriggerService,
+        IDateTimeService dateTimeService,
+        ITimerOutputDisplayService timerOutputDisplayService,
+        ICountdownOutputDisplayService countdownDisplayService)
     {
-        private readonly Dictionary<string, FrameworkElement> _pages = new();
-        private readonly IOptionsService _optionsService;
-        private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
-        private readonly ITalkTimerService _timerService;
-        private readonly ICommandLineService _commandLineService;
-        private readonly IDateTimeService _dateTimeService;
-        private readonly ITimerOutputDisplayService _timerOutputDisplayService;
-        private readonly ICountdownOutputDisplayService _countdownDisplayService;
-        private readonly IHttpServer _httpServer;
-        private readonly ISnackbarService _snackbarService;
-        private DispatcherTimer _heartbeatTimer = null!;
-        private FrameworkElement? _currentPage;
-        private DateTime _lastRefreshedSchedule = DateTime.MinValue;
+        _commandLineService = commandLineService;
+        _dateTimeService = dateTimeService;
+        _timerOutputDisplayService = timerOutputDisplayService;
+        _countdownDisplayService = countdownDisplayService;
 
-        public MainViewModel(
-           IOptionsService optionsService,
-           ITalkTimerService timerService,
-           ISnackbarService snackbarService,
-           IHttpServer httpServer,
-           ICommandLineService commandLineService,
-           ICountdownTimerTriggerService countdownTimerTriggerService,
-           IDateTimeService dateTimeService,
-           ITimerOutputDisplayService timerOutputDisplayService,
-           ICountdownOutputDisplayService countdownDisplayService)
+        if (commandLineService.NoGpu || ForceSoftwareRendering())
         {
-            _commandLineService = commandLineService;
-            _dateTimeService = dateTimeService;
-            _timerOutputDisplayService = timerOutputDisplayService;
-            _countdownDisplayService = countdownDisplayService;
+            // disable hardware (GPU) rendering so that it's all done by the CPU...
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+        }
 
-            if (commandLineService.NoGpu || ForceSoftwareRendering())
+        _snackbarService = snackbarService;
+        _optionsService = optionsService;
+        _httpServer = httpServer;
+        _timerService = timerService;
+        _countdownTimerTriggerService = countdownTimerTriggerService;
+
+        _httpServer.RequestForTimerDataEvent += OnRequestForTimerData;
+
+        // subscriptions...
+        WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
+        WeakReferenceMessenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
+        WeakReferenceMessenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
+        WeakReferenceMessenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
+        WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
+        WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
+
+        InitHttpServer();
+
+        // should really create a "page service" rather than create views in the main view model!
+        _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
+
+        WeakReferenceMessenger.Default.Send(new BeforeNavigateMessage(null, OperatorPageViewModel.PageName, null));
+        WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
+
+        // (fire and forget)
+        Task.Run(LaunchTimerWindowAsync);
+
+        InitHeartbeatTimer();
+    }
+
+    public ISnackbarMessageQueue TheSnackbarMessageQueue => _snackbarService.TheSnackbarMessageQueue;
+
+    public FrameworkElement? CurrentPage
+    {
+        get => _currentPage;
+        set
+        {
+            if (!ReferenceEquals(_currentPage, value))
             {
-                // disable hardware (GPU) rendering so that it's all done by the CPU...
-                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                _currentPage = value;
+                OnPropertyChanged();
             }
+        }
+    }
 
-            _snackbarService = snackbarService;
-            _optionsService = optionsService;
-            _httpServer = httpServer;
-            _timerService = timerService;
-            _countdownTimerTriggerService = countdownTimerTriggerService;
+    public bool AlwaysOnTop =>
+        _optionsService.Options.AlwaysOnTop ||
+        _timerOutputDisplayService.IsWindowVisible() ||
+        _countdownDisplayService.IsWindowVisible();
 
-            _httpServer.RequestForTimerDataEvent += OnRequestForTimerData;
+    public string? CurrentPageName { get; private set; }
 
-            // subscriptions...
-            WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
-            WeakReferenceMessenger.Default.Register<TimerMonitorChangedMessage>(this, OnTimerMonitorChanged);
-            WeakReferenceMessenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
-            WeakReferenceMessenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
-            WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
-            WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
+    private bool CountDownActive => _countdownDisplayService.IsCountingDown;
 
+    public void Closing(CancelEventArgs e)
+    {
+        e.Cancel = _timerService.IsRunning;
+        if (!e.Cancel)
+        {
+            WeakReferenceMessenger.Default.Send(new ShutDownMessage(CurrentPageName));
+            CloseTimerWindow();
+            CloseCountdownWindow();
+        }
+    }
+
+    private void CloseCountdownWindow()
+    {
+        try
+        {
+            _countdownDisplayService.Close();
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error(ex, "Could not close countdown window");
+        }
+    }
+
+    private void InitSettingsPage()
+    {
+        // we only init the settings page when first used.
+        if (!_pages.ContainsKey(SettingsPageViewModel.PageName))
+        {
+            _pages.Add(SettingsPageViewModel.PageName, new SettingsPage(_commandLineService));
+        }
+    }
+
+    private void OnHttpServerChanged(object recipient, HttpServerChangedMessage msg)
+    {
+        try
+        {
+            _httpServer.Stop();
             InitHttpServer();
-
-            // should really create a "page service" rather than create views in the main view model!
-            _pages.Add(OperatorPageViewModel.PageName, new OperatorPage());
-
-            WeakReferenceMessenger.Default.Send(new BeforeNavigateMessage(null, OperatorPageViewModel.PageName, null));
-            WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
-
-            // (fire and forget)
-            Task.Run(LaunchTimerWindowAsync);
-
-            InitHeartbeatTimer();
         }
-
-        public ISnackbarMessageQueue TheSnackbarMessageQueue => _snackbarService.TheSnackbarMessageQueue;
-
-        public FrameworkElement? CurrentPage
+        catch (Exception ex)
         {
-            get => _currentPage;
-            set
-            {
-                if (!ReferenceEquals(_currentPage, value))
-                {
-                    _currentPage = value;
-                    OnPropertyChanged();
-                }
-            }
+            Log.Logger.Error(ex, "Could not reinitialise http listener");
         }
+    }
 
-        public bool AlwaysOnTop =>
-            _optionsService.Options.AlwaysOnTop ||
-            _timerOutputDisplayService.IsWindowVisible() ||
-            _countdownDisplayService.IsWindowVisible();
-
-        public string? CurrentPageName { get; private set; }
-
-        private bool CountDownActive => _countdownDisplayService.IsCountingDown;
-
-        public void Closing(CancelEventArgs e)
+    private void InitHttpServer()
+    {
+        if (_optionsService.Options.IsWebClockEnabled || _optionsService.Options.IsApiEnabled)
         {
-            e.Cancel = _timerService.IsRunning;
-            if (!e.Cancel)
-            {
-                WeakReferenceMessenger.Default.Send(new ShutDownMessage(CurrentPageName));
-                CloseTimerWindow();
-                CloseCountdownWindow();
-            }
+            _httpServer.Start(_optionsService.Options.HttpServerPort);
         }
+    }
 
-        private void CloseCountdownWindow()
+    private void OnRequestForTimerData(object? sender, TimerInfoEventArgs timerData)
+    {
+        // we received a web request for the timer clock info...
+        var info = _timerService.GetClockRequestInfo();
+
+        timerData.Use24HrFormat = _optionsService.Use24HrClockFormat();
+
+        if (!info.IsRunning)
         {
-            try
-            {
-                _countdownDisplayService.Close();
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not close countdown window");
-            }
+            timerData.Mode = ClockServerMode.TimeOfDay;
         }
-
-        private void InitSettingsPage()
+        else
         {
-            // we only init the settings page when first used.
-            if (!_pages.ContainsKey(SettingsPageViewModel.PageName))
-            {
-                _pages.Add(SettingsPageViewModel.PageName, new SettingsPage(_commandLineService));
-            }
+            timerData.Mode = ClockServerMode.Timer;
+
+            timerData.TargetSecs = info.TargetSeconds;
+            timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
+            timerData.Secs = info.ElapsedTime.Seconds;
+            timerData.Millisecs = info.ElapsedTime.Milliseconds;
+
+            timerData.IsCountingUp = info.IsCountingUp;
         }
+    }
 
-        private void OnHttpServerChanged(object recipient, HttpServerChangedMessage msg)
+    /// <summary>
+    /// Responds to change in the application's "Always on top" option.
+    /// </summary>
+    /// <param name="message">AlwaysOnTopChangedMessage message.</param>
+    private void OnAlwaysOnTopChanged(object recipient, AlwaysOnTopChangedMessage message)
+    {
+        OnPropertyChanged(nameof(AlwaysOnTop));
+    }
+
+    /// <summary>
+    /// Responds to a change in timer monitor.
+    /// </summary>
+    /// <param name="message">TimerMonitorChangedMessage message.</param>
+    private void OnTimerMonitorChanged(object recipient, TimerMonitorChangedMessage message)
+    {
+        try
         {
-            try
+            if (message.Change == MonitorChangeDescription.WindowToNone ||
+                message.Change == MonitorChangeDescription.WindowToMonitor)
             {
-                _httpServer.Stop();
-                InitHttpServer();
+                _timerOutputDisplayService.SaveWindowedPos();
             }
-            catch (Exception ex)
+
+            switch (message.Change)
             {
-                Log.Logger.Error(ex, "Could not reinitialise http listener");
-            }
-        }
+                case MonitorChangeDescription.MonitorToMonitor:
+                    RelocateTimerWindow();
+                    break;
 
-        private void InitHttpServer()
-        {
-            if (_optionsService.Options.IsWebClockEnabled || _optionsService.Options.IsApiEnabled)
+                case MonitorChangeDescription.WindowToMonitor:
+                case MonitorChangeDescription.NoneToMonitor:
+                    _timerOutputDisplayService.OpenWindowInMonitor();
+                    break;
+
+                case MonitorChangeDescription.MonitorToWindow:
+                case MonitorChangeDescription.NoneToWindow:
+                    _timerOutputDisplayService.OpenWindowWindowed();
+                    break;
+
+                case MonitorChangeDescription.WindowToNone:
+                case MonitorChangeDescription.MonitorToNone:
+                    _timerOutputDisplayService.HideWindow();
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            if (CountDownActive)
             {
-                _httpServer.Start(_optionsService.Options.HttpServerPort);
+                // ensure countdown remains topmost if running
+                _countdownDisplayService.Activate();
             }
-        }
 
-        private void OnRequestForTimerData(object? sender, TimerInfoEventArgs timerData)
-        {
-            // we received a web request for the timer clock info...
-            var info = _timerService.GetClockRequestInfo();
-
-            timerData.Use24HrFormat = _optionsService.Use24HrClockFormat();
-
-            if (!info.IsRunning)
-            {
-                timerData.Mode = ClockServerMode.TimeOfDay;
-            }
-            else
-            {
-                timerData.Mode = ClockServerMode.Timer;
-
-                timerData.TargetSecs = info.TargetSeconds;
-                timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
-                timerData.Secs = info.ElapsedTime.Seconds;
-                timerData.Millisecs = info.ElapsedTime.Milliseconds;
-
-                timerData.IsCountingUp = info.IsCountingUp;
-            }
-        }
-
-        /// <summary>
-        /// Responds to change in the application's "Always on top" option.
-        /// </summary>
-        /// <param name="message">AlwaysOnTopChangedMessage message.</param>
-        private void OnAlwaysOnTopChanged(object recipient, AlwaysOnTopChangedMessage message)
-        {
             OnPropertyChanged(nameof(AlwaysOnTop));
         }
-
-        /// <summary>
-        /// Responds to a change in timer monitor.
-        /// </summary>
-        /// <param name="message">TimerMonitorChangedMessage message.</param>
-        private void OnTimerMonitorChanged(object recipient, TimerMonitorChangedMessage message)
+        catch (Exception ex)
         {
-            try
-            {
-                if (message.Change == MonitorChangeDescription.WindowToNone ||
-                    message.Change == MonitorChangeDescription.WindowToMonitor)
-                {
-                    _timerOutputDisplayService.SaveWindowedPos();
-                }
-
-                switch (message.Change)
-                {
-                    case MonitorChangeDescription.MonitorToMonitor:
-                        RelocateTimerWindow();
-                        break;
-
-                    case MonitorChangeDescription.WindowToMonitor:
-                    case MonitorChangeDescription.NoneToMonitor:
-                        _timerOutputDisplayService.OpenWindowInMonitor();
-                        break;
-
-                    case MonitorChangeDescription.MonitorToWindow:
-                    case MonitorChangeDescription.NoneToWindow:
-                        _timerOutputDisplayService.OpenWindowWindowed();
-                        break;
-
-                    case MonitorChangeDescription.WindowToNone:
-                    case MonitorChangeDescription.MonitorToNone:
-                        _timerOutputDisplayService.HideWindow();
-                        break;
-
-                    default:
-                        throw new NotImplementedException();
-                }
-
-                if (CountDownActive)
-                {
-                    // ensure countdown remains topmost if running
-                    _countdownDisplayService.Activate();
-                }
-
-                OnPropertyChanged(nameof(AlwaysOnTop));
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not change monitor");
-            }
+            Log.Logger.Error(ex, "Could not change monitor");
         }
+    }
 
-        /// <summary>
-        /// Responds to a change in countdown monitor.
-        /// </summary>
-        /// <param name="message">CountdownMonitorChangedMessage message.</param>
-        private void OnCountdownMonitorChanged(object recipient, CountdownMonitorChangedMessage message)
+    /// <summary>
+    /// Responds to a change in countdown monitor.
+    /// </summary>
+    /// <param name="message">CountdownMonitorChangedMessage message.</param>
+    private void OnCountdownMonitorChanged(object recipient, CountdownMonitorChangedMessage message)
+    {
+        try
         {
-            try
+            if (message.Change == MonitorChangeDescription.WindowToNone ||
+                message.Change == MonitorChangeDescription.WindowToMonitor)
             {
-                if (message.Change == MonitorChangeDescription.WindowToNone ||
-                    message.Change == MonitorChangeDescription.WindowToMonitor)
-                {
-                    _countdownDisplayService.SaveWindowedPos();
-                }
-
-                switch (message.Change)
-                {
-                    case MonitorChangeDescription.MonitorToMonitor:
-                        _countdownDisplayService.RelocateWindow();
-                        break;
-
-                    case MonitorChangeDescription.WindowToMonitor:
-                    case MonitorChangeDescription.NoneToMonitor:
-                        _countdownDisplayService.OpenWindowInMonitor();
-                        break;
-
-                    case MonitorChangeDescription.MonitorToWindow:
-                    case MonitorChangeDescription.NoneToWindow:
-                        _countdownDisplayService.OpenWindowWindowed();
-                        break;
-
-                    case MonitorChangeDescription.WindowToNone:
-                    case MonitorChangeDescription.MonitorToNone:
-                        _countdownDisplayService.Hide();
-                        break;
-
-                    default:
-                        throw new NotImplementedException();
-                }
-
-                OnPropertyChanged(nameof(AlwaysOnTop));
+                _countdownDisplayService.SaveWindowedPos();
             }
-            catch (Exception ex)
+
+            switch (message.Change)
             {
-                Log.Logger.Error(ex, "Could not change monitor");
+                case MonitorChangeDescription.MonitorToMonitor:
+                    _countdownDisplayService.RelocateWindow();
+                    break;
+
+                case MonitorChangeDescription.WindowToMonitor:
+                case MonitorChangeDescription.NoneToMonitor:
+                    _countdownDisplayService.OpenWindowInMonitor();
+                    break;
+
+                case MonitorChangeDescription.MonitorToWindow:
+                case MonitorChangeDescription.NoneToWindow:
+                    _countdownDisplayService.OpenWindowWindowed();
+                    break;
+
+                case MonitorChangeDescription.WindowToNone:
+                case MonitorChangeDescription.MonitorToNone:
+                    _countdownDisplayService.Hide();
+                    break;
+
+                default:
+                    throw new NotImplementedException();
             }
+
+            OnPropertyChanged(nameof(AlwaysOnTop));
         }
-
-        private async Task LaunchTimerWindowAsync()
+        catch (Exception ex)
         {
-            if (_optionsService.CanDisplayTimerWindow)
-            {
-                // on launch we display the timer window after a short delay (for aesthetics only)
-                await Task.Delay(1000).ConfigureAwait(true);
-
-                await Application.Current.Dispatcher.BeginInvoke(OpenTimerWindow);
-            }
+            Log.Logger.Error(ex, "Could not change monitor");
         }
+    }
 
-        private void InitHeartbeatTimer()
+    private async Task LaunchTimerWindowAsync()
+    {
+        if (_optionsService.CanDisplayTimerWindow)
         {
-            _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
+            // on launch we display the timer window after a short delay (for aesthetics only)
+            await Task.Delay(1000).ConfigureAwait(true);
 
-            _heartbeatTimer.Tick += HeartbeatTimerTick;
+            await Application.Current.Dispatcher.BeginInvoke(OpenTimerWindow);
+        }
+    }
+
+    private void InitHeartbeatTimer()
+    {
+        _heartbeatTimer = new DispatcherTimer(DispatcherPriority.ApplicationIdle)
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+
+        _heartbeatTimer.Tick += HeartbeatTimerTick;
+        _heartbeatTimer.Start();
+    }
+
+    private void HeartbeatTimerTick(object? sender, System.EventArgs e)
+    {
+        _heartbeatTimer.Stop();
+        try
+        {
+            ManageCountdownOnHeartbeat();
+            ManageScheduleOnHeartbeat();
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error(ex, "Error during heartbeat");
+        }
+        finally
+        {
             _heartbeatTimer.Start();
         }
+    }
 
-        private void HeartbeatTimerTick(object? sender, System.EventArgs e)
+    private void ManageScheduleOnHeartbeat()
+    {
+        if ((_dateTimeService.Now() - _lastRefreshedSchedule).Seconds > 10)
         {
-            _heartbeatTimer.Stop();
-            try
-            {
-                ManageCountdownOnHeartbeat();
-                ManageScheduleOnHeartbeat();
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Error during heartbeat");
-            }
-            finally
-            {
-                _heartbeatTimer.Start();
-            }
+            _lastRefreshedSchedule = _dateTimeService.Now();
+            WeakReferenceMessenger.Default.Send(new RefreshScheduleMessage());
         }
+    }
 
-        private void ManageScheduleOnHeartbeat()
+    private void ManageCountdownOnHeartbeat()
+    {
+        if (_optionsService.CanDisplayCountdownWindow && 
+            !CountDownActive && 
+            !_countdownDisplayService.IsCountdownDone && 
+            _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
         {
-            if ((_dateTimeService.Now() - _lastRefreshedSchedule).Seconds > 10)
-            {
-                _lastRefreshedSchedule = _dateTimeService.Now();
-                WeakReferenceMessenger.Default.Send(new RefreshScheduleMessage());
-            }
+            StartCountdown(secondsOffset);
         }
+    }
 
-        private void ManageCountdownOnHeartbeat()
-        {
-            if (_optionsService.CanDisplayCountdownWindow && 
-                !CountDownActive && 
-                !_countdownDisplayService.IsCountdownDone && 
-                _countdownTimerTriggerService.IsInCountdownPeriod(out var secondsOffset))
-            {
-                StartCountdown(secondsOffset);
-            }
-        }
-
-        private void OnStopCountdown(object recipient, StopCountDownMessage message)
-        {
-            _countdownDisplayService.Stop();
-        }
+    private void OnStopCountdown(object recipient, StopCountDownMessage message)
+    {
+        _countdownDisplayService.Stop();
+    }
         
-        /// <summary>
-        /// Responds to the NavigateMessage and swaps out one page for another.
-        /// </summary>
-        /// <param name="message">NavigateMessage message.</param>
-        private void OnNavigate(object recipient, NavigateMessage message)
+    /// <summary>
+    /// Responds to the NavigateMessage and swaps out one page for another.
+    /// </summary>
+    /// <param name="message">NavigateMessage message.</param>
+    private void OnNavigate(object recipient, NavigateMessage message)
+    {
+        if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
         {
-            if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
-            {
-                // we only init the settings page when first used...
-                InitSettingsPage();
-            }
-
-            CurrentPage = _pages[message.TargetPageName];
-            CurrentPageName = message.TargetPageName;
-
-            var page = (IPage)CurrentPage.DataContext;
-            page.Activated(message.State);
+            // we only init the settings page when first used...
+            InitSettingsPage();
         }
 
-        /// <summary>
-        /// If the timer window is open when we change the timer display then relocate it;
-        /// otherwise open it
-        /// </summary>
-        private void RelocateTimerWindow()
+        CurrentPage = _pages[message.TargetPageName];
+        CurrentPageName = message.TargetPageName;
+
+        var page = (IPage)CurrentPage.DataContext;
+        page.Activated(message.State);
+    }
+
+    /// <summary>
+    /// If the timer window is open when we change the timer display then relocate it;
+    /// otherwise open it
+    /// </summary>
+    private void RelocateTimerWindow()
+    {
+        if (_timerOutputDisplayService.IsWindowAvailable())
         {
-            if (_timerOutputDisplayService.IsWindowAvailable())
+            _timerOutputDisplayService.RelocateWindow();
+        }
+        else
+        {
+            OpenTimerWindow();
+        }
+    }
+
+    private void OpenTimerWindow()
+    {
+        try
+        {
+            if (_optionsService.Options.MainMonitorIsWindowed)
             {
-                _timerOutputDisplayService.RelocateWindow();
+                _timerOutputDisplayService.OpenWindowWindowed();                    
             }
             else
             {
-                OpenTimerWindow();
-            }
-        }
-
-        private void OpenTimerWindow()
-        {
-            try
-            {
-                if (_optionsService.Options.MainMonitorIsWindowed)
-                {
-                    _timerOutputDisplayService.OpenWindowWindowed();                    
-                }
-                else
-                {
-                    _timerOutputDisplayService.OpenWindowInMonitor();
-                    OnPropertyChanged(nameof(AlwaysOnTop));
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not open timer window");
-            }
-        }
-
-        private void CloseTimerWindow()
-        {
-            try
-            {
-                _timerOutputDisplayService.Close();
+                _timerOutputDisplayService.OpenWindowInMonitor();
                 OnPropertyChanged(nameof(AlwaysOnTop));
             }
-            catch (Exception ex)
-            {
-                Log.Logger.Error(ex, "Could not close timer window");
-            }
         }
-
-        /// <summary>
-        /// Starts the countdown (pre-meeting) timer
-        /// </summary>
-        /// <param name="offsetSeconds">
-        /// The offset in seconds (the timer already started offsetSeconds ago).
-        /// </param>
-        private void StartCountdown(int offsetSeconds)
+        catch (Exception ex)
         {
-            if (_optionsService.CanDisplayCountdownWindow)
+            Log.Logger.Error(ex, "Could not open timer window");
+        }
+    }
+
+    private void CloseTimerWindow()
+    {
+        try
+        {
+            _timerOutputDisplayService.Close();
+            OnPropertyChanged(nameof(AlwaysOnTop));
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error(ex, "Could not close timer window");
+        }
+    }
+
+    /// <summary>
+    /// Starts the countdown (pre-meeting) timer
+    /// </summary>
+    /// <param name="offsetSeconds">
+    /// The offset in seconds (the timer already started offsetSeconds ago).
+    /// </param>
+    private void StartCountdown(int offsetSeconds)
+    {
+        if (_optionsService.CanDisplayCountdownWindow)
+        {
+            Log.Logger.Information("Launching countdown timer");
+
+            _countdownDisplayService.Start(offsetSeconds);
+
+            var launched = _optionsService.Options.CountdownMonitorIsWindowed 
+                ? _countdownDisplayService.OpenWindowWindowed() 
+                : _countdownDisplayService.OpenWindowInMonitor();
+
+            if (launched)
             {
-                Log.Logger.Information("Launching countdown timer");
-
-                _countdownDisplayService.Start(offsetSeconds);
-
-                var launched = _optionsService.Options.CountdownMonitorIsWindowed 
-                    ? _countdownDisplayService.OpenWindowWindowed() 
-                    : _countdownDisplayService.OpenWindowInMonitor();
-
-                if (launched)
+                Task.Delay(1000).ContinueWith(_ =>
                 {
-                    Task.Delay(1000).ContinueWith(_ =>
+                    if (CountdownAndTimerShareSameMonitor())
                     {
-                        if (CountdownAndTimerShareSameMonitor())
-                        {
-                            // timer monitor and countdown monitor are the same.
+                        // timer monitor and countdown monitor are the same.
 
-                            // hide the timer window after a short delay (so that it doesn't appear 
-                            // as another top-level window during alt-TAB)...
-                            Application.Current.Dispatcher.BeginInvoke(_timerOutputDisplayService.HideWindow);
-                        }
-                    });
-                }
+                        // hide the timer window after a short delay (so that it doesn't appear 
+                        // as another top-level window during alt-TAB)...
+                        Application.Current.Dispatcher.BeginInvoke(_timerOutputDisplayService.HideWindow);
+                    }
+                });
             }
         }
+    }
 
-        private bool CountdownAndTimerShareSameMonitor()
+    private bool CountdownAndTimerShareSameMonitor()
+    {
+        if (_optionsService.Options.MainMonitorIsWindowed || _optionsService.Options.CountdownMonitorIsWindowed)
         {
-            if (_optionsService.Options.MainMonitorIsWindowed || _optionsService.Options.CountdownMonitorIsWindowed)
-            {
-                return false;
-            }
-
-            return _optionsService.Options.TimerMonitorId == _optionsService.Options.CountdownMonitorId;
+            return false;
         }
 
-        private static bool ForceSoftwareRendering()
-        {
-            // https://blogs.msdn.microsoft.com/jgoldb/2010/06/22/software-rendering-usage-in-wpf/
-            // renderingTier values:
-            // 0 => No graphics hardware acceleration available for the application on the device
-            //      and DirectX version level is less than version 7.0
-            // 1 => Partial graphics hardware acceleration available on the video card. This 
-            //      corresponds to a DirectX version that is greater than or equal to 7.0 and 
-            //      less than 9.0.
-            // 2 => A rendering tier value of 2 means that most of the graphics features of WPF 
-            //      should use hardware acceleration provided the necessary system resources have 
-            //      not been exhausted. This corresponds to a DirectX version that is greater 
-            //      than or equal to 9.0.
-            var renderingTier = RenderCapability.Tier >> 16;
-            return renderingTier == 0;
-        }
+        return _optionsService.Options.TimerMonitorId == _optionsService.Options.CountdownMonitorId;
+    }
+
+    private static bool ForceSoftwareRendering()
+    {
+        // https://blogs.msdn.microsoft.com/jgoldb/2010/06/22/software-rendering-usage-in-wpf/
+        // renderingTier values:
+        // 0 => No graphics hardware acceleration available for the application on the device
+        //      and DirectX version level is less than version 7.0
+        // 1 => Partial graphics hardware acceleration available on the video card. This 
+        //      corresponds to a DirectX version that is greater than or equal to 7.0 and 
+        //      less than 9.0.
+        // 2 => A rendering tier value of 2 means that most of the graphics features of WPF 
+        //      should use hardware acceleration provided the necessary system resources have 
+        //      not been exhausted. This corresponds to a DirectX version that is greater 
+        //      than or equal to 9.0.
+        var renderingTier = RenderCapability.Tier >> 16;
+        return renderingTier == 0;
     }
 }

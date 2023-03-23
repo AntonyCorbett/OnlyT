@@ -1,9 +1,8 @@
-﻿namespace OnlyT.Services.CountdownTimer
-{
-    public interface ICountdownTimerTriggerService
-    {
-        bool IsInCountdownPeriod(out int secondsOffset);
+﻿namespace OnlyT.Services.CountdownTimer;
 
-        void UpdateTriggerPeriods();
-    }
+public interface ICountdownTimerTriggerService
+{
+    bool IsInCountdownPeriod(out int secondsOffset);
+
+    void UpdateTriggerPeriods();
 }

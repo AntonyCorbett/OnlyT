@@ -1,9 +1,8 @@
-﻿namespace OnlyT.Services.Bell
-{
-    public interface IBellService
-    {
-        bool IsPlaying { get; }
+﻿namespace OnlyT.Services.Bell;
 
-        void Play(int volumePercent);
-    }
+public interface IBellService
+{
+    bool IsPlaying { get; }
+
+    void Play(int volumePercent);
 }

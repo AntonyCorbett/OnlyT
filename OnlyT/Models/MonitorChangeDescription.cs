@@ -1,13 +1,12 @@
-﻿namespace OnlyT.Models
+﻿namespace OnlyT.Models;
+
+internal enum MonitorChangeDescription
 {
-    internal enum MonitorChangeDescription
-    {
-        NoneToMonitor,
-        NoneToWindow,
-        MonitorToMonitor,
-        MonitorToWindow,
-        WindowToMonitor,
-        WindowToNone,
-        MonitorToNone
-    }
+    NoneToMonitor,
+    NoneToWindow,
+    MonitorToMonitor,
+    MonitorToWindow,
+    WindowToMonitor,
+    WindowToNone,
+    MonitorToNone
 }

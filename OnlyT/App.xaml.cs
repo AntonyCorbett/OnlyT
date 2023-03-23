@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.Services.Bell;
 using OnlyT.Services.CommandLine;
@@ -17,6 +16,7 @@ using OnlyT.WebServer;
 using System.IO;
 using System.Threading;
 using System.Windows;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using OnlyT.AutoUpdates;
 using OnlyT.Services.LogLevelSwitch;
 using OnlyT.ViewModel;

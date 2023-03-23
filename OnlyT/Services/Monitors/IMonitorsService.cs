@@ -1,12 +1,11 @@
-﻿namespace OnlyT.Services.Monitors
+﻿using System.Collections.Generic;
+using OnlyT.Models;
+
+namespace OnlyT.Services.Monitors;
+
+public interface IMonitorsService
 {
-    using System.Collections.Generic;
-    using Models;
+    IEnumerable<MonitorItem> GetSystemMonitors();
 
-    public interface IMonitorsService
-    {
-        IEnumerable<MonitorItem> GetSystemMonitors();
-
-        MonitorItem? GetMonitorItem(string? monitorId);
-    }
+    MonitorItem? GetMonitorItem(string? monitorId);
 }

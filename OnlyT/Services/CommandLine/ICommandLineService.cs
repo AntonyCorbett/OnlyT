@@ -1,25 +1,24 @@
-﻿namespace OnlyT.Services.CommandLine
+﻿namespace OnlyT.Services.CommandLine;
+
+public interface ICommandLineService
 {
-    public interface ICommandLineService
-    {
-        bool NoGpu { get; set; }
+    bool NoGpu { get; set; }
 
-        string? OptionsIdentifier { get; set; }
+    string? OptionsIdentifier { get; set; }
 
-        bool NoSettings { get; set; }
+    bool NoSettings { get; set; }
 
-        bool IgnoreMutex { get; set; }
+    bool IgnoreMutex { get; set; }
 
-        bool Automate { get; set; }
+    bool Automate { get; set; }
 
-        int TimerMonitorIndex { get; set; }
+    int TimerMonitorIndex { get; set; }
 
-        int CountdownMonitorIndex { get; set; }
+    int CountdownMonitorIndex { get; set; }
         
-        bool IsCircuitVisit { get; set; }
+    bool IsCircuitVisit { get; set; }
 
-        bool IsTimerMonitorSpecified { get; }
+    bool IsTimerMonitorSpecified { get; }
 
-        bool IsCountdownMonitorSpecified { get; }
-    }
+    bool IsCountdownMonitorSpecified { get; }
 }

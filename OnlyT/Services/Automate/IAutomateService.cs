@@ -1,7 +1,6 @@
-﻿namespace OnlyT.Services.Automate
+﻿namespace OnlyT.Services.Automate;
+
+internal interface IAutomateService
 {
-    internal interface IAutomateService
-    {
-        void Execute();
-    }
+    void Execute();
 }

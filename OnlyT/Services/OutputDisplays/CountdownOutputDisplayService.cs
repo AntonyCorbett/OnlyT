@@ -1,7 +1,7 @@
-﻿using Microsoft.Toolkit.Mvvm.Messaging;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;

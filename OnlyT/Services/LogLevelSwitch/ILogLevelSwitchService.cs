@@ -1,9 +1,8 @@
-﻿namespace OnlyT.Services.LogLevelSwitch
-{
-    using Serilog.Events;
+﻿using Serilog.Events;
 
-    public interface ILogLevelSwitchService
-    {
-        void SetMinimumLevel(LogEventLevel level);
-    }
+namespace OnlyT.Services.LogLevelSwitch;
+
+public interface ILogLevelSwitchService
+{
+    void SetMinimumLevel(LogEventLevel level);
 }

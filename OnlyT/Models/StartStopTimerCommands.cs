@@ -1,20 +1,19 @@
-﻿namespace OnlyT.Models
+﻿namespace OnlyT.Models;
+
+public enum StartStopTimerCommands
 {
-    public enum StartStopTimerCommands
-    {
-        /// <summary>
-        /// Unknown command.
-        /// </summary>
-        Unknown,
+    /// <summary>
+    /// Unknown command.
+    /// </summary>
+    Unknown,
 
-        /// <summary>
-        /// Start timer command.
-        /// </summary>
-        Start,
+    /// <summary>
+    /// Start timer command.
+    /// </summary>
+    Start,
 
-        /// <summary>
-        /// Stop timer command.
-        /// </summary>
-        Stop
-    }
+    /// <summary>
+    /// Stop timer command.
+    /// </summary>
+    Stop
 }

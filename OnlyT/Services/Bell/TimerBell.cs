@@ -1,107 +1,105 @@
 ﻿using System.Windows;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using NAudio.Wave;
+using System;
+using System.IO;
+using Serilog;
 
-namespace OnlyT.Services.Bell
+namespace OnlyT.Services.Bell;
+
+/// <summary>
+/// Manages the playing of the timer bell. See also IBellService
+/// </summary>
+internal sealed class TimerBell : ObservableObject, IDisposable
 {
-    using System;
-    using System.IO;
-    using Serilog;
+    private static readonly string BellFileName = "bell.mp3";
+    private readonly string _bellFilePath;
+    private WaveOutEvent? _player;
+    private Mp3FileReader? _reader;
+    private bool _playing;
 
-    /// <summary>
-    /// Manages the playing of the timer bell. See also IBellService
-    /// </summary>
-    internal sealed class TimerBell : ObservableObject, IDisposable
+    public TimerBell()
     {
-        private static readonly string BellFileName = "bell.mp3";
-        private readonly string _bellFilePath;
-        private WaveOutEvent? _player;
-        private Mp3FileReader? _reader;
-        private bool _playing;
+        _bellFilePath = GetBellFilePath();
+    }
 
-        public TimerBell()
+    public bool IsPlaying
+    {
+        get => _playing;
+        private set
         {
-            _bellFilePath = GetBellFilePath();
-        }
-
-        public bool IsPlaying
-        {
-            get => _playing;
-            private set
+            if (_playing != value)
             {
-                if (_playing != value)
-                {
-                    _playing = value;
-                    OnPropertyChanged();
+                _playing = value;
+                OnPropertyChanged();
 
-                    Application.Current.Dispatcher.BeginInvoke(
-                        new Action(() => WeakReferenceMessenger.Default.Send(
-                            new BellStatusChangedMessage(value))));
-                }
+                Application.Current.Dispatcher.BeginInvoke(
+                    new Action(() => WeakReferenceMessenger.Default.Send(
+                        new BellStatusChangedMessage(value))));
             }
         }
+    }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
-        public void Play(int volumePercent)
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
+    public void Play(int volumePercent)
+    {
+        if (!IsPlaying)
         {
-            if (!IsPlaying)
+            try
             {
-                try
+                if (File.Exists(_bellFilePath))
                 {
-                    if (File.Exists(_bellFilePath))
-                    {
-                        IsPlaying = true;
+                    IsPlaying = true;
 
-                        _player = new WaveOutEvent();
-                        _reader = new Mp3FileReader(_bellFilePath);
-                        _player.Init(_reader);
-                        _player.PlaybackStopped += HandlePlaybackStopped;
-                        _player.Volume = (float)volumePercent / 100;
-                        _player.Play();
-                    }
-                    else
-                    {
-                        Log.Logger.Error($"Could not find bell file {_bellFilePath}");
-                    }
+                    _player = new WaveOutEvent();
+                    _reader = new Mp3FileReader(_bellFilePath);
+                    _player.Init(_reader);
+                    _player.PlaybackStopped += HandlePlaybackStopped;
+                    _player.Volume = (float)volumePercent / 100;
+                    _player.Play();
                 }
-                catch (Exception ex)
+                else
                 {
-                    IsPlaying = false;
-                    Log.Logger.Error(ex, "Could not play bell");
+                    Log.Logger.Error($"Could not find bell file {_bellFilePath}");
                 }
             }
-        }
-
-        public void Dispose()
-        {
-            ClearUp();
-        }
-
-        private static string GetBellFilePath()
-        {
-            var folder = AppDomain.CurrentDomain.BaseDirectory;
-            return Path.Combine(folder, BellFileName);
-        }
-
-        private void HandlePlaybackStopped(object? sender, StoppedEventArgs e)
-        {
-            ClearUp();
-            IsPlaying = false;
-        }
-
-        private void ClearUp()
-        {
-            if (_player != null)
+            catch (Exception ex)
             {
-                _player.PlaybackStopped -= HandlePlaybackStopped;
+                IsPlaying = false;
+                Log.Logger.Error(ex, "Could not play bell");
             }
-
-            _player?.Dispose();
-            _reader?.Dispose();
-
-            _player = null;
-            _reader = null;
         }
+    }
+
+    public void Dispose()
+    {
+        ClearUp();
+    }
+
+    private static string GetBellFilePath()
+    {
+        var folder = AppDomain.CurrentDomain.BaseDirectory;
+        return Path.Combine(folder, BellFileName);
+    }
+
+    private void HandlePlaybackStopped(object? sender, StoppedEventArgs e)
+    {
+        ClearUp();
+        IsPlaying = false;
+    }
+
+    private void ClearUp()
+    {
+        if (_player != null)
+        {
+            _player.PlaybackStopped -= HandlePlaybackStopped;
+        }
+
+        _player?.Dispose();
+        _reader?.Dispose();
+
+        _player = null;
+        _reader = null;
     }
 }

@@ -1,18 +1,16 @@
-﻿namespace OnlyT.Models
+﻿using OnlyT.Services.Options;
+
+namespace OnlyT.Models;
+
+public class FullScreenClockModeItem
 {
-    // ReSharper disable UnusedAutoPropertyAccessor.Global
-    using Services.Options;
-
-    public class FullScreenClockModeItem
+    public FullScreenClockModeItem(FullScreenClockMode mode, string name)
     {
-        public FullScreenClockModeItem(FullScreenClockMode mode, string name)
-        {
-            Mode = mode;
-            Name = name;
-        }
-
-        public FullScreenClockMode Mode { get; }
-
-        public string Name { get; }
+        Mode = mode;
+        Name = name;
     }
+
+    public FullScreenClockMode Mode { get; }
+
+    public string Name { get; }
 }

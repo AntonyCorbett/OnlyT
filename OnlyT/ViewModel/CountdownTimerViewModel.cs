@@ -1,7 +1,7 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Messaging;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.ViewModel.Messages;
 using OnlyT.CountdownTimer;
 using OnlyT.Services.Options;
