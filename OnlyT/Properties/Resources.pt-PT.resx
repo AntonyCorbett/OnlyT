@@ -713,7 +713,7 @@
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>principal</value>
+    <value>Monitor Principal</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
 </root>
