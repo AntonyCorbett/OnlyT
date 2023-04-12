@@ -161,6 +161,8 @@
 
         public bool MainMonitorIsWindowed { get; set; }
 
+        public bool ShouldSendNdi { get; set; }
+
         public bool CountdownMonitorIsWindowed { get; set; }
 
         public static CountdownDurationItem[] GetCountdownDurationItems()

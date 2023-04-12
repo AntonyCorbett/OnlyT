@@ -1,40 +1,39 @@
-﻿namespace OnlyT.Tests.Mocks
-{
-    using System;
-    using OnlyT.Common.Services.DateTime;
+﻿namespace OnlyT.Tests.Mocks;
+
+using System;
+using OnlyT.Common.Services.DateTime;
     
-    internal class MockDateTimeService : IDateTimeService
+internal sealed class MockDateTimeService : IDateTimeService
+{
+    private DateTime _value;
+
+    public void Set(DateTime dt)
     {
-        private DateTime _value;
+        _value = dt;
+    }
 
-        public void Set(DateTime dt)
+    public void Add(TimeSpan timeSpan)
+    {
+        _value += timeSpan;
+    }
+
+    public DateTime Now()
+    {
+        if (_value == default)
         {
-            _value = dt;
+            throw new NotSupportedException("date is not set");
         }
 
-        public void Add(TimeSpan timeSpan)
-        {
-            _value += timeSpan;
-        }
+        return _value;
+    }
 
-        public DateTime Now()
-        {
-            if (_value == default)
-            {
-                throw new NotSupportedException("date is not set");
-            }
+    public DateTime UtcNow()
+    {
+        return Now();
+    }
 
-            return _value;
-        }
-
-        public DateTime UtcNow()
-        {
-            return Now();
-        }
-
-        public DateTime Today()
-        {
-            return Now().Date;
-        }
+    public DateTime Today()
+    {
+        return Now().Date;
     }
 }

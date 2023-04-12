@@ -112,7 +112,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
 
     public bool IsTimerMonitorViaCommandLine => _optionsService.IsTimerMonitorSetByCommandLine;
 
-    public bool AllowMainMonitorSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
+    public bool AllowMainMonitorSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed && !ShouldSendNdi;
 
     public bool IsCountdownMonitorViaCommandLine => _optionsService.IsCountdownMonitorSetByCommandLine;
 
@@ -392,6 +392,24 @@ public class SettingsPageViewModel : ObservableObject, IPage
                 _optionsService.Options.IsCircuitVisit = value;
                 OnPropertyChanged();
                 WeakReferenceMessenger.Default.Send(new AutoMeetingChangedMessage());
+            }
+        }
+    }
+
+    public bool ShouldSendNdi
+    {
+        get => _optionsService.Options.ShouldSendNdi;
+        set
+        {
+            if (_optionsService.Options.ShouldSendNdi != value)
+            {
+                var change = GetChangeInMonitor(_optionsService.Options.TimerMonitorId, value);
+
+                _optionsService.Options.ShouldSendNdi = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(AllowMainMonitorSelection));
+
+                WeakReferenceMessenger.Default.Send(new TimerMonitorChangedMessage(change));
             }
         }
     }

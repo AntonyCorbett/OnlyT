@@ -9,6 +9,8 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+    xmlns:wpf="clr-namespace:NewTek.NDI.WPF;assembly=NDILibDotNetCoreWpf"
+    x:Name="window"
     Title="OnlyT Timer Output"
     Width="458"
     Height="300"
@@ -35,98 +37,114 @@
         <behaviours:HideCloseButtonBehaviour />
     </b:Interaction.Behaviors>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding AnalogueClockColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
-            <ColumnDefinition Width="{Binding TimerColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
-        </Grid.ColumnDefinitions>
-        <Border
-            Name="ClockPanel"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Margin="0,0,5,0"
-            Padding="10"
-            Background="{Binding Path=UseClockBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
-            BorderBrush="Beige"
-            BorderThickness="{Binding BorderThickness}"
-            CornerRadius="20">
 
-            <Grid Name="ClockGrid">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
+    <wpf:NdiSendContainer
+        Name="NdiSender"
+        Margin="0"
+        Padding="0"
+        NdiHeight="{Binding NdiPixelHeight}"
+        NdiName="OnlyT"
+        NdiWidth="{Binding NdiPixelWidth}"
+        SendSystemAudio="False">
 
-                <clock:ClockControl
-                    x:Name="TheClock"
-                    Grid.Row="0"
-                    Margin="15"
-                    DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
-                    DigitalTimeFormatAMPM="{Binding DigitalTimeFormatAMPM}"
-                    DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
-                    DurationSector="{Binding DurationSector, Mode=OneWay}"
-                    IsFlat="{Binding ClockIsFlat}"
-                    QueryDateTimeEvent="ClockQueryDateTimeEvent" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding AnalogueClockColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
+                <ColumnDefinition Width="{Binding TimerColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
+            </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Row="1">
-                    <TextBlock Margin="5,0,5,0" VerticalAlignment="Bottom">
-                        <TextBlock
-                            FontSize="24"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
-                        <TextBlock
-                            Margin="-2,-8,0,0"
-                            FontSize="13"
-                            Foreground="#FFCBABAB"
-                            Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"
-                            Visibility="{Binding Path=DigitalTimeShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    </TextBlock>
-                </Viewbox>
-            </Grid>
+            <Border
+                Name="ClockPanel"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,0,5,0"
+                Padding="10"
+                Background="{Binding Path=UseClockBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
+                BorderBrush="Beige"
+                BorderThickness="{Binding BorderThickness}"
+                CornerRadius="20">
 
-        </Border>
-
-        <Border
-            Name="TimerPanel"
-            Grid.Column="1"
-            Margin="5,0,0,0"
-            Padding="10"
-            Background="{Binding Path=UseTimerBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
-            BorderBrush="Beige"
-            BorderThickness="{Binding TimerBorderThickness}"
-            CornerRadius="20"
-            Opacity="0">
-
-            <Viewbox VerticalAlignment="Top">
-                <Grid>
+                <Grid Name="ClockGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*" />
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock
+                    <clock:ClockControl
+                        x:Name="TheClock"
                         Grid.Row="0"
-                        HorizontalAlignment="Center"
-                        FontSize="40"
-                        FontWeight="Bold"
-                        Foreground="{Binding TextColor}"
-                        Text="{Binding TimeString}" />
+                        Margin="15"
+                        DigitalTimeFormat24Hours="{Binding DigitalTimeFormat24Hours}"
+                        DigitalTimeFormatAMPM="{Binding DigitalTimeFormatAMPM}"
+                        DigitalTimeFormatShowLeadingZero="{Binding DigitalTimeFormatShowLeadingZero}"
+                        DurationSector="{Binding DurationSector, Mode=OneWay}"
+                        IsFlat="{Binding ClockIsFlat}"
+                        QueryDateTimeEvent="ClockQueryDateTimeEvent" />
 
-                    <TextBlock
-                        Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Run
-                            FontSize="28"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
-                    </TextBlock>
+                    <Viewbox Grid.Row="1">
+                        <TextBlock Margin="5,0,5,0" VerticalAlignment="Bottom">
+                            <TextBlock
+                                FontSize="24"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
+                            <TextBlock
+                                Margin="-2,-8,0,0"
+                                FontSize="13"
+                                Foreground="#FFCBABAB"
+                                Text="{Binding CurrentTimeSec, ElementName=TheClock, Mode=OneWay}"
+                                Visibility="{Binding Path=DigitalTimeShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </TextBlock>
+                    </Viewbox>
                 </Grid>
-            </Viewbox>
-        </Border>
-    </Grid>
+
+            </Border>
+
+            <Border
+                Name="TimerPanel"
+                Grid.Column="1"
+                Margin="5,0,0,0"
+                Padding="10"
+                Background="{Binding Path=UseTimerBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
+                BorderBrush="Beige"
+                BorderThickness="{Binding TimerBorderThickness}"
+                CornerRadius="20"
+                Opacity="0">
+
+                <Viewbox VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="2*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            FontSize="40"
+                            FontWeight="Bold"
+                            Foreground="{Binding TextColor}"
+                            Text="{Binding TimeString}" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Run
+                                FontSize="28"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
+                        </TextBlock>
+                    </Grid>
+                </Viewbox>
+
+            </Border>
+
+        </Grid>
+
+    </wpf:NdiSendContainer>
+
 
 </Window>
 

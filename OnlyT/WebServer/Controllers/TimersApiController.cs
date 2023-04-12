@@ -1,115 +1,114 @@
 ﻿using System;
 
-namespace OnlyT.WebServer.Controllers
+namespace OnlyT.WebServer.Controllers;
+
+using System.Net;
+using Models;
+using Services.Options;
+using Services.TalkSchedule;
+using Services.Timer;
+using Throttling;
+
+internal sealed class TimersApiController : BaseApiController
 {
-    using System.Net;
-    using Models;
-    using Services.Options;
-    using Services.TalkSchedule;
-    using Services.Timer;
-    using Throttling;
+    private readonly ITalkTimerService _timerService;
+    private readonly ITalkScheduleService _talkScheduleService;
+    private readonly IOptionsService _optionsService;
+    private readonly ApiThrottler _apiThrottler;
 
-    internal class TimersApiController : BaseApiController
+    public TimersApiController(
+        ITalkTimerService timerService, 
+        ITalkScheduleService talkScheduleService,
+        IOptionsService optionsService,
+        ApiThrottler apiThrottler)
     {
-        private readonly ITalkTimerService _timerService;
-        private readonly ITalkScheduleService _talkScheduleService;
-        private readonly IOptionsService _optionsService;
-        private readonly ApiThrottler _apiThrottler;
+        _timerService = timerService;
+        _talkScheduleService = talkScheduleService;
+        _optionsService = optionsService;
+        _apiThrottler = apiThrottler;
+    }
 
-        public TimersApiController(
-            ITalkTimerService timerService, 
-            ITalkScheduleService talkScheduleService,
-            IOptionsService optionsService,
-            ApiThrottler apiThrottler)
+    public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        CheckMethodGetPostOrDelete(request);
+
+        if (IsMethodGet(request))
         {
-            _timerService = timerService;
-            _talkScheduleService = talkScheduleService;
-            _optionsService = optionsService;
-            _apiThrottler = apiThrottler;
+            // get timer info
+            HandleGetTimersApi(request, response);
         }
-
-        public void Handler(HttpListenerRequest request, HttpListenerResponse response)
+        else if (IsMethodPost(request))
         {
-            CheckMethodGetPostOrDelete(request);
-
-            if (IsMethodGet(request))
-            {
-                // get timer info
-                HandleGetTimersApi(request, response);
-            }
-            else if (IsMethodPost(request))
-            {
-                // start a timer
-                HandlePostTimersApi(request, response);
-            }
-            else if (IsMethodDelete(request))
-            {
-                // stop a timer
-                HandleDeleteTimersApi(request, response);
-            }
+            // start a timer
+            HandlePostTimersApi(request, response);
         }
-
-        private void HandleDeleteTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+        else if (IsMethodDelete(request))
         {
-            CheckSegmentLength(request, 5);
-
-            _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStop, request);
-
-            if (int.TryParse(request.Url?.Segments[4], out var talkId))
-            {
-                WriteResponse(response, _timerService.StopTalkTimerFromApi(talkId));
-            }
+            // stop a timer
+            HandleDeleteTimersApi(request, response);
         }
+    }
 
-        private void HandlePostTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+    private void HandleDeleteTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        CheckSegmentLength(request, 5);
+
+        _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStop, request);
+
+        if (int.TryParse(request.Url?.Segments[4], out var talkId))
         {
-            CheckSegmentLength(request, 5);
-
-            _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStart, request);
-
-            if (int.TryParse(request.Url?.Segments[4], out var talkId))
-            {
-                WriteResponse(response, _timerService.StartTalkTimerFromApi(talkId));
-            }
+            WriteResponse(response, _timerService.StopTalkTimerFromApi(talkId));
         }
+    }
 
-        private void HandleGetTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+    private void HandlePostTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        CheckSegmentLength(request, 5);
+
+        _apiThrottler.CheckRateLimit(ApiRequestType.TimerControlStart, request);
+
+        if (int.TryParse(request.Url?.Segments[4], out var talkId))
         {
-            CheckSegmentLength(request, 4, 5);
-
-            _apiThrottler.CheckRateLimit(ApiRequestType.Timer, request);
-
-            switch (request.Url?.Segments.Length)
-            {
-                case 4:
-                    // segments: "/" "api/" "v1/" "timers/"
-                    // request for _all_ timer info...
-                    WriteResponse(response, GetTimersInfo());
-                    break;
-
-                case 5:
-                    // segments: "/" "api/" "v1/" "timers/" "0/"
-                    // gets info for a single timer...
-                    if (int.TryParse(request.Url.Segments[4], out var talkId))
-                    {
-                        WriteResponse(response, GetTimerInfo(talkId));
-                    }
-
-                    break;
-
-                default:
-                    throw new NotSupportedException();
-            }
+            WriteResponse(response, _timerService.StartTalkTimerFromApi(talkId));
         }
+    }
 
-        private TimersResponseData GetTimerInfo(int talkId)
+    private void HandleGetTimersApi(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        CheckSegmentLength(request, 4, 5);
+
+        _apiThrottler.CheckRateLimit(ApiRequestType.Timer, request);
+
+        switch (request.Url?.Segments.Length)
         {
-            return new TimersResponseData(_talkScheduleService, _timerService, _optionsService, talkId);
-        }
+            case 4:
+                // segments: "/" "api/" "v1/" "timers/"
+                // request for _all_ timer info...
+                WriteResponse(response, GetTimersInfo());
+                break;
 
-        private TimersResponseData GetTimersInfo()
-        {
-            return new TimersResponseData(_talkScheduleService, _timerService, _optionsService);
+            case 5:
+                // segments: "/" "api/" "v1/" "timers/" "0/"
+                // gets info for a single timer...
+                if (int.TryParse(request.Url.Segments[4], out var talkId))
+                {
+                    WriteResponse(response, GetTimerInfo(talkId));
+                }
+
+                break;
+
+            default:
+                throw new NotSupportedException();
         }
+    }
+
+    private TimersResponseData GetTimerInfo(int talkId)
+    {
+        return new TimersResponseData(_talkScheduleService, _timerService, _optionsService, talkId);
+    }
+
+    private TimersResponseData GetTimersInfo()
+    {
+        return new TimersResponseData(_talkScheduleService, _timerService, _optionsService);
     }
 }

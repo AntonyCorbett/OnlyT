@@ -716,4 +716,8 @@
     <value>primary</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
+  <data name="NDI_SEND" xml:space="preserve">
+    <value>NDI Send</value>
+    <comment>Output timer graphics as an NDI source</comment>
+  </data>
 </root>

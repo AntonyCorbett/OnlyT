@@ -4,7 +4,7 @@
 /// Before we navigate between pages (e.g. from Operator page to Settings page)
 /// </summary>
 
-internal class BeforeNavigateMessage
+internal sealed class BeforeNavigateMessage
 {
     public BeforeNavigateMessage(string? originalPageName, string targetPageName, object? state)
     {

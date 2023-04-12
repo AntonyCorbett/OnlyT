@@ -43,10 +43,18 @@ namespace OnlyT.Windows
             
             _persistTimer.Tick += HandlePersistTimerTick;
         }
-        
+
+        public bool ShouldOutputNdi => true;
+
         public void AdjustWindowPositionAndSize()
         {
-            if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
+            if (ShouldOutputNdi)
+            {
+                var model = (TimerOutputWindowViewModel)DataContext;
+                Height = model.NdiPixelHeight;
+                Width = model.NdiPixelWidth;
+            }
+            else if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
             {
                 this.SetPlacement(_optionsService.Options.TimerOutputWindowPlacement);
                 SetWindowSize();
@@ -62,9 +70,12 @@ namespace OnlyT.Windows
 
         public void SaveWindowPos()
         {
-            _optionsService.Options.TimerOutputWindowPlacement = this.GetPlacement();
-            _optionsService.Options.TimerWindowSize = new Size(Width, Height);
-            _optionsService.Save();
+            if (!ShouldOutputNdi)
+            {
+                _optionsService.Options.TimerOutputWindowPlacement = this.GetPlacement();
+                _optionsService.Options.TimerWindowSize = new Size(Width, Height);
+                _optionsService.Save();
+            }
         }
 
         private void HandlePersistTimerTick(object? sender, System.EventArgs e)

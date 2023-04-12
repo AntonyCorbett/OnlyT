@@ -8,118 +8,118 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using Serilog;
 
-namespace OnlyT.Services.OutputDisplays
+namespace OnlyT.Services.OutputDisplays;
+
+// ReSharper disable once ClassNeverInstantiated.Global
+internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITimerOutputDisplayService
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
-    internal class TimerOutputDisplayService : OutputDisplayServiceBase, ITimerOutputDisplayService
+    private readonly IMonitorsService _monitorsService;
+    private readonly IOptionsService _optionsService;
+    private readonly IDateTimeService _dateTimeService;
+    private TimerOutputWindow? _timerWindow;
+
+    public TimerOutputDisplayService(
+        IMonitorsService monitorsService, 
+        IOptionsService optionsService,
+        IDateTimeService dateTimeService)
+        : base(optionsService)
     {
-        private readonly IMonitorsService _monitorsService;
-        private readonly IOptionsService _optionsService;
-        private readonly IDateTimeService _dateTimeService;
-        private TimerOutputWindow? _timerWindow;
+        _monitorsService = monitorsService;
+        _optionsService = optionsService;
+        _dateTimeService = dateTimeService;
+    }
 
-        public TimerOutputDisplayService(
-            IMonitorsService monitorsService, 
-            IOptionsService optionsService,
-            IDateTimeService dateTimeService)
-            : base(optionsService)
-        {
-            _monitorsService = monitorsService;
-            _optionsService = optionsService;
-            _dateTimeService = dateTimeService;
-        }
-
-        public bool IsWindowAvailable() => _timerWindow != null;
+    public bool IsWindowAvailable() => _timerWindow != null;
         
-        public bool IsWindowVisible() => _timerWindow != null && _timerWindow.IsVisible;
+    public bool IsWindowVisible() => _timerWindow != null && _timerWindow.IsVisible;
 
-        public void ShowWindow()
+    public void ShowWindow()
+    {
+        _timerWindow?.Show();
+    }
+
+    public void RelocateWindow()
+    {
+        var monitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+        if (monitor != null)
         {
-            _timerWindow?.Show();
+            Log.Logger.Debug("Relocating timer window to: {MonitorName}", monitor.FriendlyName);
+            RelocateWindow(_timerWindow, monitor);
         }
+    }
 
-        public void RelocateWindow()
-        {
-            var monitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-            if (monitor != null)
-            {
-                Log.Logger.Debug("Relocating timer window to: {MonitorName}", monitor.FriendlyName);
-                RelocateWindow(_timerWindow, monitor);
-            }
-        }
-
-        public void OpenWindowInMonitor()
-        {
-            var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
-            if (targetMonitor != null)
-            {
-                _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
-
-                ConfigureForMonitorOperation();
-
-                ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
-
-                WeakReferenceMessenger.Default.Send(new BringMainWindowToFrontMessage());
-            }
-        }
-
-        public void SaveWindowedPos()
-        {
-            _timerWindow?.SaveWindowPos();
-        }
-
-        public void OpenWindowWindowed()
+    public void OpenWindowInMonitor()
+    {
+        var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
+        if (targetMonitor != null)
         {
             _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
 
-            ConfigureForWindowedOperation();
+            ConfigureForMonitorOperation();
 
-            _timerWindow.Show();
+            ShowWindowFullScreenOnTop(_timerWindow, targetMonitor);
 
-            _timerWindow.AdjustWindowPositionAndSize();
+            WeakReferenceMessenger.Default.Send(new BringMainWindowToFrontMessage());
         }
+    }
 
-        public void HideWindow()
-        {
-            _timerWindow?.Hide();
-        }
+    public void SaveWindowedPos()
+    {
+        _timerWindow?.SaveWindowPos();
+    }
 
-        public void Close()
-        {
-            Log.Logger.Debug("Closing timer window");
+    public void OpenWindowWindowed()
+    {
+        _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
 
-            _timerWindow?.Close();
-            _timerWindow = null;
-        }
+        ConfigureForWindowedOperation();
 
-        private void ConfigureForMonitorOperation()
-        {
-            var dataContext = (TimerOutputWindowViewModel)_timerWindow!.DataContext;
-            dataContext.WindowedOperation = false;
+        _timerWindow.Show();
+        
+        _timerWindow.AdjustWindowPositionAndSize();
 
-            _timerWindow.WindowState = WindowState.Normal;
-            _timerWindow.ResizeMode = ResizeMode.NoResize;
-            _timerWindow.ShowInTaskbar = false;
-            _timerWindow.WindowStyle = WindowStyle.None;
+        
+        //_timerWindow.Hide();
+    }
 
-            _timerWindow.Topmost = true;
-        }
+    public void HideWindow()
+    {
+        _timerWindow?.Hide();
+    }
 
-        private void ConfigureForWindowedOperation()
-        {
-            var dataContext = (TimerOutputWindowViewModel)_timerWindow!.DataContext;
-            dataContext.WindowedOperation = true;
+    public void Close()
+    {
+        Log.Logger.Debug("Closing timer window");
 
-            _timerWindow.WindowState = WindowState.Normal;
+        _timerWindow?.Close();
+        _timerWindow = null;
+    }
 
-            _timerWindow.MinHeight = 300;
-            _timerWindow.MinWidth = 400;
+    private void ConfigureForMonitorOperation()
+    {
+        var dataContext = (TimerOutputWindowViewModel)_timerWindow!.DataContext;
+        dataContext.WindowedOperation = false;
+
+        _timerWindow.WindowState = WindowState.Normal;
+        _timerWindow.ResizeMode = ResizeMode.NoResize;
+        _timerWindow.ShowInTaskbar = false;
+        _timerWindow.WindowStyle = WindowStyle.None;
+
+        _timerWindow.Topmost = true;
+    }
+
+    private void ConfigureForWindowedOperation()
+    {
+        var dataContext = (TimerOutputWindowViewModel)_timerWindow!.DataContext;
+        dataContext.WindowedOperation = true;
+
+        _timerWindow.WindowState = WindowState.Normal;
+
+        _timerWindow.MinHeight = 300;
+        _timerWindow.MinWidth = 400;
             
-            _timerWindow.ResizeMode = ResizeMode.CanResize;
-            _timerWindow.ShowInTaskbar = true;
-            _timerWindow.WindowStyle = WindowStyle.None;
-
-            _timerWindow.Topmost = false;
-        }
+        _timerWindow.ResizeMode = ResizeMode.CanResize;
+        _timerWindow.ShowInTaskbar = true;
+        _timerWindow.WindowStyle = WindowStyle.None;
     }
 }

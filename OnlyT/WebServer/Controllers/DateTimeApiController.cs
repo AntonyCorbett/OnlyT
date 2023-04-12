@@ -1,42 +1,41 @@
-﻿namespace OnlyT.WebServer.Controllers
+﻿namespace OnlyT.WebServer.Controllers;
+
+using System;
+using System.Net;
+using Models;
+using Throttling;
+
+internal sealed class DateTimeApiController : BaseApiController
 {
-    using System;
-    using System.Net;
-    using Models;
-    using Throttling;
+    private readonly ApiThrottler _apiThrottler;
 
-    internal class DateTimeApiController : BaseApiController
+    public DateTimeApiController(ApiThrottler apiThrottler)
     {
-        private readonly ApiThrottler _apiThrottler;
+        _apiThrottler = apiThrottler;
+    }
 
-        public DateTimeApiController(ApiThrottler apiThrottler)
+    public void Handler(
+        HttpListenerRequest request, 
+        HttpListenerResponse response,
+        DateTime now)
+    {
+        CheckMethodGet(request);
+        CheckSegmentLength(request, 4);
+
+        _apiThrottler.CheckRateLimit(ApiRequestType.DateTime, request);
+
+        // segments: "/" "api/" "v1/" "datetime/"
+        // system clock
+        var lt = new LocalTime
         {
-            _apiThrottler = apiThrottler;
-        }
+            Year = now.Year,
+            Month = now.Month,
+            Day = now.Day,
+            Hour = now.Hour,
+            Min = now.Minute,
+            Second = now.Second
+        };
 
-        public void Handler(
-            HttpListenerRequest request, 
-            HttpListenerResponse response,
-            DateTime now)
-        {
-            CheckMethodGet(request);
-            CheckSegmentLength(request, 4);
-
-            _apiThrottler.CheckRateLimit(ApiRequestType.DateTime, request);
-
-            // segments: "/" "api/" "v1/" "datetime/"
-            // system clock
-            var lt = new LocalTime
-            {
-                Year = now.Year,
-                Month = now.Month,
-                Day = now.Day,
-                Hour = now.Hour,
-                Min = now.Minute,
-                Second = now.Second
-            };
-
-            WriteResponse(response, lt);
-        }
+        WriteResponse(response, lt);
     }
 }

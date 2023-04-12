@@ -1,6 +1,5 @@
-﻿namespace OnlyT.ViewModel.Messages
+﻿namespace OnlyT.ViewModel.Messages;
+
+internal sealed class ClockIsFlatChangedMessage
 {
-    internal class ClockIsFlatChangedMessage
-    {
-    }
 }

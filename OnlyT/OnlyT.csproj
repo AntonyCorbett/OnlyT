@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Nullable>Enable</Nullable>
     <UseWPF>true</UseWPF>
@@ -38,6 +38,15 @@
     <ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj" />
     <ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj" />
     <ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NDILibDotNetCore">
+      <HintPath>..\NDILibDotNetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="NDILibDotNetCoreWpf">
+      <HintPath>..\NDILibDotNetCoreWpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

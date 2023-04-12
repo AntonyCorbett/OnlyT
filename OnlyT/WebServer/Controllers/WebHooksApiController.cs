@@ -1,12 +1,11 @@
-﻿namespace OnlyT.WebServer.Controllers
-{
-    using System.Net;
+﻿namespace OnlyT.WebServer.Controllers;
 
-    internal class WebHooksApiController : BaseApiController
+using System.Net;
+
+internal sealed class WebHooksApiController : BaseApiController
+{
+    public static void Handler(HttpListenerRequest request)
     {
-        public static void Handler(HttpListenerRequest request)
-        {
-            CheckMethodGetPostOrDelete(request);
-        }
+        CheckMethodGetPostOrDelete(request);
     }
 }

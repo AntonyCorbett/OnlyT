@@ -902,6 +902,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NDI Send.
+        /// </summary>
+        public static string NDI_SEND {
+            get {
+                return ResourceManager.GetString("NDI_SEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New version available!.
         /// </summary>
         public static string NEW_VERSION {

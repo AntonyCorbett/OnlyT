@@ -133,6 +133,12 @@ public class TimerOutputWindowViewModel : ObservableObject
         }
     }
 
+    public bool ShouldNotOutputNdi => false;
+
+    public int NdiPixelHeight => 1080;
+
+    public int NdiPixelWidth => 1920;
+
     public int AnalogueClockColumnWidthPercentage
     {
         get => _analogueClockColumnWidthPercentage;
