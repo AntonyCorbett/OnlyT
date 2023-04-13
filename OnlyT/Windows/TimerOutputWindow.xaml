@@ -42,9 +42,10 @@
         Name="NdiSender"
         Margin="0"
         Padding="0"
-        NdiHeight="{Binding NdiPixelHeight}"
-        NdiName="OnlyT"
-        NdiWidth="{Binding NdiPixelWidth}"
+        IsSendPaused="true"
+        NdiHeight="{Binding NdiPixelHeightValue}"
+        NdiName="OnlyT Inactive"
+        NdiWidth="{Binding NdiPixelWidthValue}"
         SendSystemAudio="False">
 
         <Grid>

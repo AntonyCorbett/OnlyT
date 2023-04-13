@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.CommandLine;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.ViewModel;
@@ -16,26 +17,32 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
     private readonly IMonitorsService _monitorsService;
     private readonly IOptionsService _optionsService;
     private readonly IDateTimeService _dateTimeService;
+    private readonly ICommandLineService _commandLineService;
     private TimerOutputWindow? _timerWindow;
 
     public TimerOutputDisplayService(
         IMonitorsService monitorsService, 
         IOptionsService optionsService,
-        IDateTimeService dateTimeService)
+        IDateTimeService dateTimeService,
+        ICommandLineService commandLineService)
         : base(optionsService)
     {
         _monitorsService = monitorsService;
         _optionsService = optionsService;
         _dateTimeService = dateTimeService;
+        _commandLineService = commandLineService;
     }
 
     public bool IsWindowAvailable() => _timerWindow != null;
         
-    public bool IsWindowVisible() => _timerWindow != null && _timerWindow.IsVisible;
+    public bool IsWindowVisible() => _timerWindow is {IsVisible: true};
 
     public void ShowWindow()
     {
-        _timerWindow?.Show();
+        if (!_commandLineService.IsTimerNdi)
+        {
+            _timerWindow?.Show();
+        }
     }
 
     public void RelocateWindow()
@@ -53,7 +60,7 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
         var targetMonitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
         if (targetMonitor != null)
         {
-            _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
+            _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService, _commandLineService);
 
             ConfigureForMonitorOperation();
 
@@ -70,7 +77,7 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
 
     public void OpenWindowWindowed()
     {
-        _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService);
+        _timerWindow ??= new TimerOutputWindow(_optionsService, _dateTimeService, _commandLineService);
 
         ConfigureForWindowedOperation();
 
@@ -78,8 +85,10 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
         
         _timerWindow.AdjustWindowPositionAndSize();
 
-        
-        //_timerWindow.Hide();
+        if (_commandLineService.IsTimerNdi)
+        {
+            _timerWindow.Hide();
+        }
     }
 
     public void HideWindow()
@@ -115,11 +124,14 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
 
         _timerWindow.WindowState = WindowState.Normal;
 
-        _timerWindow.MinHeight = 300;
-        _timerWindow.MinWidth = 400;
-            
-        _timerWindow.ResizeMode = ResizeMode.CanResize;
-        _timerWindow.ShowInTaskbar = true;
-        _timerWindow.WindowStyle = WindowStyle.None;
+        if (!_commandLineService.IsTimerNdi)
+        {
+            _timerWindow.MinHeight = 300;
+            _timerWindow.MinWidth = 400;
+
+            _timerWindow.ResizeMode = ResizeMode.CanResize;
+            _timerWindow.ShowInTaskbar = true;
+            _timerWindow.WindowStyle = WindowStyle.None;
+        }
     }
 }

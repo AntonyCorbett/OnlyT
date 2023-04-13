@@ -123,11 +123,6 @@
                                 IsChecked="{Binding MainMonitorIsWindowed, Mode=TwoWay}"
                                 Style="{StaticResource SettingsCheckBox}" />
 
-                            <CheckBox
-                                Content="{x:Static resx:Resources.NDI_SEND}"
-                                IsChecked="{Binding ShouldSendNdi, Mode=TwoWay}"
-                                Style="{StaticResource SettingsCheckBox}" />
-
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.OP_MODE}"
                                 DisplayMemberPath="Name"

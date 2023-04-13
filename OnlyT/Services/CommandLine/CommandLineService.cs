@@ -49,6 +49,12 @@ internal sealed class CommandLineService : ICommandLineService
         p.Setup<bool>("covisit")
             .Callback(s => IsCircuitVisit = s).SetDefault(false);
 
+        p.Setup<bool>("ndi")
+            .Callback(s => IsTimerNdi = s).SetDefault(false);
+
+        p.Setup<bool>("cndi")
+            .Callback(s => IsCountdownNdi = s).SetDefault(false);
+
         p.Parse(Environment.GetCommandLineArgs());
     }
 
@@ -73,4 +79,8 @@ internal sealed class CommandLineService : ICommandLineService
     public bool IsTimerMonitorSpecified => TimerMonitorIndex > 0;
 
     public bool IsCountdownMonitorSpecified => CountdownMonitorIndex > 0;
+
+    public bool IsTimerNdi { get; set; }
+
+    public bool IsCountdownNdi { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using OnlyT.Services.CommandLine;
 
 namespace OnlyT.ViewModel;
 
@@ -19,7 +20,7 @@ public class TimerOutputWindowViewModel : ObservableObject
     private static readonly int _secsPerHour = 60 * 60;
     private readonly IOptionsService _optionsService;
     private readonly IDateTimeService _dateTimeService;
-
+    
     private int _analogueClockColumnWidthPercentage = -1;
     private string? _timeString;
     private bool _isRunning;
@@ -34,7 +35,7 @@ public class TimerOutputWindowViewModel : ObservableObject
     {
         _optionsService = optionsService;
         _dateTimeService = dateTimeService;
-
+        
         AnalogueClockColumnWidthPercentage = _optionsService.Options.AnalogueClockWidthPercent;
         ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
 
@@ -135,9 +136,13 @@ public class TimerOutputWindowViewModel : ObservableObject
 
     public bool ShouldNotOutputNdi => false;
 
-    public int NdiPixelHeight => 1080;
+    public const int NdiPixelHeight = 1080;
 
-    public int NdiPixelWidth => 1920;
+    public const int NdiPixelWidth = 1920;
+    
+    public int NdiPixelHeightValue => NdiPixelHeight;
+
+    public int NdiPixelWidthValue => NdiPixelWidth;
 
     public int AnalogueClockColumnWidthPercentage
     {

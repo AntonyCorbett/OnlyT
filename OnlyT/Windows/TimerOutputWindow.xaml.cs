@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Animations;
 using OnlyT.AnalogueClock;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.Services.CommandLine;
 using OnlyT.Services.Options;
 using OnlyT.Utils;
 using OnlyT.ViewModel;
@@ -26,16 +27,27 @@ namespace OnlyT.Windows
         private readonly DispatcherTimer _persistTimer = new(DispatcherPriority.ApplicationIdle);
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly ICommandLineService _commandLineService;
         private bool _persistingTalkDuration;
 
         public TimerOutputWindow(
             IOptionsService optionsService, 
-            IDateTimeService dateTimeService)
+            IDateTimeService dateTimeService,
+            ICommandLineService commandLineService)
         {
             InitializeComponent();
 
+#pragma warning disable CA1416
+            if (commandLineService.IsTimerNdi)
+            {
+                NdiSender.IsSendPaused = false;
+                NdiSender.NdiName = "OnlyT"; // required to trigger initilisation of NDI
+            }
+#pragma warning restore CA1416
+
             _optionsService = optionsService;
             _dateTimeService = dateTimeService;
+            _commandLineService = commandLineService;
 
             WeakReferenceMessenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
             WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
@@ -44,15 +56,12 @@ namespace OnlyT.Windows
             _persistTimer.Tick += HandlePersistTimerTick;
         }
 
-        public bool ShouldOutputNdi => true;
-
         public void AdjustWindowPositionAndSize()
         {
-            if (ShouldOutputNdi)
+            if (_commandLineService.IsTimerNdi)
             {
-                var model = (TimerOutputWindowViewModel)DataContext;
-                Height = model.NdiPixelHeight;
-                Width = model.NdiPixelWidth;
+                Height = TimerOutputWindowViewModel.NdiPixelHeight;
+                Width = TimerOutputWindowViewModel.NdiPixelWidth;
             }
             else if (!string.IsNullOrEmpty(_optionsService.Options.TimerOutputWindowPlacement))
             {
@@ -70,7 +79,7 @@ namespace OnlyT.Windows
 
         public void SaveWindowPos()
         {
-            if (!ShouldOutputNdi)
+            if (!_commandLineService.IsTimerNdi)
             {
                 _optionsService.Options.TimerOutputWindowPlacement = this.GetPlacement();
                 _optionsService.Options.TimerWindowSize = new Size(Width, Height);

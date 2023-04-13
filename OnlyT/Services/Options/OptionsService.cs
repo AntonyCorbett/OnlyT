@@ -12,6 +12,7 @@ using OnlyT.Services.CommandLine;
 using OnlyT.Services.LogLevelSwitch;
 using OnlyT.Services.Monitors;
 using OnlyT.Utils;
+using OnlyT.ViewModel;
 using OnlyT.ViewModel.Messages;
 using Serilog;
 
@@ -234,11 +235,47 @@ internal sealed class OptionsService : IOptionsService
             _options.Sanitize();
 
             CommandLineMonitorOverride();
+            CommandLineNdiOverride(_options);
 
             SetCulture();
         }
     }
-        
+
+    private void CommandLineNdiOverride(Options options)
+    {
+        if (_commandLineService.IsTimerNdi)
+        {
+            // the main timer is to be an NDI source (rather than a physical window)
+
+            // override any ambiguous commandline
+            _commandLineService.TimerMonitorIndex = 0;
+
+            // then force the timer window to show in windowed mode at the
+            // required size of the NDI output
+            options.TimerMonitorId = null;
+            options.MainMonitorIsWindowed = true;
+            options.TimerWindowSize = new Size(
+                TimerOutputWindowViewModel.NdiPixelWidth, TimerOutputWindowViewModel.NdiPixelHeight);
+        }
+
+        if (_commandLineService.IsCountdownNdi)
+        {
+            // the countdown timer is to be an NDI source (rather than a physical window)
+
+            // override any ambiguous commandline
+            _commandLineService.CountdownMonitorIndex = 0;
+
+            // then force the countdown window to show in windowed mode at the
+            // required size of the NDI output
+            options.CountdownMonitorId = null;
+            options.CountdownMonitorIsWindowed = true;
+
+            // todo: use _countdown_ window Ndi size
+            options.CountdownWindowSize = new Size(
+                TimerOutputWindowViewModel.NdiPixelWidth, TimerOutputWindowViewModel.NdiPixelHeight);
+        }
+    }
+
     private void CommandLineMonitorOverride()
     {
         // if the monitors are specified on the command-line then override those
