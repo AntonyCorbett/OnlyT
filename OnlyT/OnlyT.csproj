@@ -71,10 +71,20 @@
     <None Update="icon4.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Processing.NDI.Lib.Licenses.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Processing.NDI.Lib.x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="copy &quot;$(ProjectDir)Properties\Resources.jv-ID.resx&quot; &quot;$(ProjectDir)Properties\Resources.jv-Latn-ID.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.no-NO.resx&quot; &quot;$(ProjectDir)Properties\Resources.no.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.pap-PAP.resx&quot; &quot;$(ProjectDir)Properties\Resources.pap.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.tl-PH.resx&quot; &quot;$(ProjectDir)Properties\Resources.fil-PH.resx&quot;&#xD;&#xA;&#xD;&#xA;" />
   </Target>
+
+  <ItemGroup>
+    <NativeLibs Remove="Processing.NDI.Lib.x64.dll" />
+  </ItemGroup>
 
 </Project>
