@@ -1460,6 +1460,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note that output is set to NDI via a command-line setting..
+        /// </summary>
+        public static string TIMER_ON_NDI {
+            get {
+                return ResourceManager.GetString("TIMER_ON_NDI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TIMER WINDOW.
         /// </summary>
         public static string TIMER_WIN_SECTION {

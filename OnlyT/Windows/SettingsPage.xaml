@@ -107,7 +107,16 @@
                                 Style="{StaticResource MiscNotesStyle}"
                                 Text="{x:Static resx:Resources.CONTROLLED_BY_CMD_LINE}"
                                 TextWrapping="Wrap"
-                                Visibility="{Binding Path=IsTimerMonitorViaCommandLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                Visibility="{Binding Path=ShouldShowTimerMonitorCommandLineNote, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                            <TextBlock
+                                Width="305"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource MiscNotesStyle}"
+                                Text="{x:Static resx:Resources.TIMER_ON_NDI}"
+                                TextWrapping="Wrap"
+                                Visibility="{Binding Path=IsTimerMonitorOnNDI, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
@@ -121,6 +130,7 @@
                             <CheckBox
                                 Content="{x:Static resx:Resources.MONITOR_IS_WINDOWED}"
                                 IsChecked="{Binding MainMonitorIsWindowed, Mode=TwoWay}"
+                                IsEnabled="{Binding AllowWindowedModeSelection}"
                                 Style="{StaticResource SettingsCheckBox}" />
 
                             <ComboBox
