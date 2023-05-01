@@ -6,7 +6,6 @@
     xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
     xmlns:clock="clr-namespace:OnlyT.AnalogueClock;assembly=OnlyT.AnalogueClock"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
     xmlns:wpf="clr-namespace:NewTek.NDI.WPF;assembly=NDILibDotNetCoreWpf"
@@ -48,7 +47,7 @@
         NdiWidth="{Binding NdiPixelWidthValue}"
         SendSystemAudio="False">
 
-        <Grid>
+        <Grid Background="Black">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding AnalogueClockColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
                 <ColumnDefinition Width="{Binding TimerColumnWidthPercentage, Converter={StaticResource ColWidthConverter}, Mode=OneWay}" />
@@ -105,7 +104,7 @@
                 Name="TimerPanel"
                 Grid.Column="1"
                 Margin="5,0,0,0"
-                Padding="10"
+                Padding="10,10,20,10"
                 Background="{Binding Path=UseTimerBackgroundGradient, Converter={StaticResource ToBackgroundGradientConverter}}"
                 BorderBrush="Beige"
                 BorderThickness="{Binding TimerBorderThickness}"
