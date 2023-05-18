@@ -211,10 +211,10 @@
     <value>Καταληκτική ομιλία</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Σχόλια</value>
+    <value>Τελικά Σχόλια</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Εκκλ/ μελέτη Βίβλων</value>
+    <value>Εκκλησιαστική Γραφική Μελέτη</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>Πνευματικά Πετράδια</value>
@@ -226,7 +226,7 @@
     <value>Ομιλία 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Εναρκτήρια σχόλια</value>
+    <value>Εισαγωγικά Σχόλια</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>Παρουσιάσεις μήνα</value>
@@ -235,7 +235,7 @@
     <value>Δημόσια ομιλία</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Ανάγνωση Γραφής</value>
+    <value>Ανάγνωση της Αγίας Γραφής</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Υπηρεσιακη ομιλία</value>
