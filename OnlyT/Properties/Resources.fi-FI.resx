@@ -211,13 +211,13 @@
     <value>Loppupuhe</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Kokouksen kertaus</value>
+    <value>Loppusanat</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Seurakunnan raamatuntutkistelu</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Hengellisten helmien etsintää</value>
+    <value>Hengellisiä helmiä</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Elämä kristittynä - osa 1</value>
