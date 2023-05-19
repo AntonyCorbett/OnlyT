@@ -211,13 +211,13 @@
     <value>Concluding Talk</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Concluding Comments</value>
+    <value>Konklushon</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Congregation Bible Study</value>
+    <value>Estudio di Beibel di Kongregashon</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Digging for Spiritual Gems</value>
+    <value>Hoya Spiritual</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Living - Part 1</value>
@@ -226,7 +226,7 @@
     <value>Living - Part 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Opening Comments</value>
+    <value>Introdukshon</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>This Month's Presentations</value>
@@ -235,7 +235,7 @@
     <value>Public Talk</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Bible Reading</value>
+    <value>Lesamentu di Beibel</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Service Talk</value>
