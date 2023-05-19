@@ -211,13 +211,13 @@
     <value>Discurso Final</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Comentários Finais</value>
+    <value>Comentários finais</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>Estudo Bíblico de Congregação</value>
+    <value>Estudo bíblico de congregação</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Em Busca de Pérolas Espirituais</value>
+    <value>Pérolas espirituais</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Viver - Parte 1</value>
@@ -226,7 +226,7 @@
     <value>Viver - Parte 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Comentários Introdutórios</value>
+    <value>Comentários iniciais</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>Apresentações do mês</value>
