@@ -211,13 +211,13 @@
     <value>Discours de fin</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Révision</value>
+    <value>Paroles de conclusion</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Étude biblique de l’assemblée</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Recherchons des perles spirituelles</value>
+    <value>Perles spirituelles</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Vie chrétienne - 1</value>
@@ -226,7 +226,7 @@
     <value>Vie chrétienne - 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Introduction</value>
+    <value>Paroles d’introduction</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>Présentations du mois</value>
