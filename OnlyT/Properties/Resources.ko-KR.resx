@@ -211,13 +211,13 @@
     <value>봉사 강연</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>복습 및 다음주 소개</value>
+    <value>맺음말</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>회중 성서 연구</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>성경에 담긴 보물</value>
+    <value>영적 보물 찾기</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>그리스도인 생활 - 첫번째</value>
