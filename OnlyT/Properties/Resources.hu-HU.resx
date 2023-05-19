@@ -211,13 +211,13 @@
     <value>Záró előadás</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Ismétlés és a jövő heti program...</value>
+    <value>Befejezés</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Gyülekezeti bibliatanulmányozás</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Kutassunk szellemi kincsek után</value>
+    <value>Szellemi kincsek</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Életünk - 1. program</value>
