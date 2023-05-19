@@ -211,7 +211,7 @@
     <value>Završni govor</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Završni komentar</value>
+    <value>Završna riječ</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Skupštinsko razmatranje Biblije</value>
@@ -226,7 +226,7 @@
     <value>Živimo - Točka 2</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
-    <value>Uvodni komentar</value>
+    <value>Uvodna riječ</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
     <value>Snimljena prezentacija</value>
