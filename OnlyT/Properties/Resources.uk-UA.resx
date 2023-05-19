@@ -211,13 +211,13 @@
     <value>Завершальні слова</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>Повторення і анонс наступного зібрання</value>
+    <value>Кінцеві слова</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>Вивчення Біблії у зборі</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Розшукуймо духовні перлини</value>
+    <value>Духовні перлини</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Християнське життя – Пункт 1</value>
