@@ -1307,7 +1307,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Digging for Spiritual Gems.
+        ///   Looks up a localized string similar to Spiritual Gems.
         /// </summary>
         public static string TALK_DIGGING {
             get {
