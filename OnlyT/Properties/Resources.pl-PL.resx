@@ -146,7 +146,7 @@
     <comment>The 12-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
-    <value>12-godzinny (od zera)</value>
+    <value>12-godzinny (z zerem)</value>
     <comment>The 12-hour clock format with a leading zero where appropriate</comment>
   </data>
   <data name="CLOCK_FORMAT_24" xml:space="preserve">
@@ -154,7 +154,7 @@
     <comment>The 24-hour clock format</comment>
   </data>
   <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
-    <value>24-godzinny (od zera)</value>
+    <value>24-godzinny (z zerem)</value>
     <comment>The 24-hour clock format with leading zero where appropriate</comment>
   </data>
   <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
@@ -217,7 +217,7 @@
     <value>Zborowe studium Biblii</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Wyszukiwanie duchowych skarbów</value>
+    <value>Spiritual Gems</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Chrześcijański tryb życia, cz. 1</value>
@@ -709,7 +709,7 @@
     <comment>Text displayed in web interface</comment>
   </data>
   <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
-    <value>Zmniejsz się do minimum</value>
+    <value>Zmniejsz do minimum</value>
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
