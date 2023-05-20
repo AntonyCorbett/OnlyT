@@ -709,11 +709,11 @@
     <comment>Text displayed in web interface</comment>
   </data>
   <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
-    <value>Shrink on minimise</value>
+    <value>Při minimalizaci zmenšit</value>
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>primary</value>
+    <value>primární</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
 </root>
