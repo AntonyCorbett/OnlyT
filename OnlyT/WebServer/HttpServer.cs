@@ -132,14 +132,14 @@
         {
             if (_listener?.IsListening ?? false)
             {
-                // Call EndGetContext to complete the asynchronous operation...
-                var context = _listener.EndGetContext(result);
-                
-                // Obtain a response object.
-                using var response = context.Response;
-
                 try
                 {
+                    // Call EndGetContext to complete the asynchronous operation...
+                    var context = _listener.EndGetContext(result);
+
+                    // Obtain a response object.
+                    using var response = context.Response;
+
                     // Construct a response. 
                     if (context.Request.Url?.Segments.Length > 1)
                     {
