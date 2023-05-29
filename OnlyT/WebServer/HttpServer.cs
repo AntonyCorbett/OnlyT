@@ -132,41 +132,43 @@
         {
             if (_listener?.IsListening ?? false)
             {
+                HttpListenerResponse? response = null;
                 try
                 {
                     // Call EndGetContext to complete the asynchronous operation...
                     var context = _listener.EndGetContext(result);
 
                     // Obtain a response object.
-                    using var response = context.Response;
-
-                    // Construct a response. 
-                    if (context.Request.Url?.Segments.Length > 1)
+                    using (response = context.Response)
                     {
-                        // segments: "/" ...
-                        var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
-                        if (_listener.IsListening)
+                        // Construct a response. 
+                        if (context.Request.Url?.Segments.Length > 1)
                         {
-                            switch (segment)
+                            // segments: "/" ...
+                            var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+                            if (_listener.IsListening)
                             {
-                                case "data":
-                                    HandleRequestForClockWebPageTimerData(context.Request, response);
-                                    break;
+                                switch (segment)
+                                {
+                                    case "data":
+                                        HandleRequestForClockWebPageTimerData(context.Request, response);
+                                        break;
 
-                                case "index":
-                                    HandleRequestForClockWebPage(context.Request, response);
-                                    break;
+                                    case "index":
+                                        HandleRequestForClockWebPage(context.Request, response);
+                                        break;
 
-                                case "timers":
-                                    HandleRequestForTimersWebPage(context.Request, response);
-                                    break;
+                                    case "timers":
+                                        HandleRequestForTimersWebPage(context.Request, response);
+                                        break;
 
-                                case "api":
-                                    HandleApiRequest(context.Request, response);
-                                    break;
+                                    case "api":
+                                        HandleApiRequest(context.Request, response);
+                                        break;
 
-                                default:
-                                    break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
                     }
@@ -174,14 +176,20 @@
                 catch (WebServerException ex)
                 {
                     Log.Logger.Error(ex, "Web server error");
-                    response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(ex.Code);
-                    BaseApiController.WriteResponse(response, new ApiError(ex.Code));
+                    if (response != null)
+                    {
+                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(ex.Code);
+                        BaseApiController.WriteResponse(response, new ApiError(ex.Code));
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Log.Logger.Error(ex, "Web server error");
-                    response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(WebServerErrorCode.UnknownError);
-                    BaseApiController.WriteResponse(response, new ApiError(WebServerErrorCode.UnknownError));
+                    if (response != null)
+                    {
+                        Log.Logger.Error(ex, "Web server error");
+                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(WebServerErrorCode.UnknownError);
+                        BaseApiController.WriteResponse(response, new ApiError(WebServerErrorCode.UnknownError));
+                    }
                 }
             }
         }
