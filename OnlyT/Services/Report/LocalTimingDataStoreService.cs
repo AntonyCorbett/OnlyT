@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Documents;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.EventTracking;
 using OnlyT.Report.Database;
 using OnlyT.Report.Models;
 using OnlyT.Services.CommandLine;
 using OnlyT.Utils;
 using Serilog;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace OnlyT.Services.Report;
 
@@ -51,7 +54,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not delete data");
+            const string errMsg = "Could not delete data";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -62,9 +68,12 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
             EnsureInitialised();
             _mtgTimes?.InsertSongSegment(startTime, description, plannedDuration);
         }
-        catch (Exception ex)
+        catch (Exception ex)        
         {
-            Log.Logger.Error(ex, "Could not insert meeting planned end");
+            const string errMsg = "Could not insert song segment";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -75,9 +84,12 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
             EnsureInitialised();
             _mtgTimes?.InsertConcludingSongSegment(startTime, endTime, description, plannedDuration);
         }
-        catch (Exception ex)
+        catch (Exception ex)        
         {
-            Log.Logger.Error(ex, "Could not insert meeting planned end");
+            const string errMsg = "Could not insert concluding song segment";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -90,7 +102,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not insert meeting planned end");
+            const string errMsg = "Could not insert meeting planned end";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -103,7 +118,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not insert meeting start");
+            const string errMsg = "Could not insert meeting start";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -116,7 +134,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not insert meeting end");
+            const string errMsg = "Could not insert meeting end";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -138,7 +159,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not insert timer start");
+            const string errMsg = "Could not insert timer start";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
         
@@ -153,7 +177,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not insert timer stop");
+            const string errMsg = "Could not insert timer stop";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -169,7 +196,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not retrieve meeting times data");
+            const string errMsg = "Could not retrieve meeting times data";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
 
         return null;
@@ -230,7 +260,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not save timing data");
+            const string errMsg = "Could not save timing data";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -246,7 +279,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not retrieve historical meeting data");
+            const string errMsg = "Could not retrieve historical meeting data";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
 
         return null;
@@ -273,7 +309,10 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not initialise store");
+            const string errMsg = "Could not initialise store";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 }

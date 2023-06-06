@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if !DEBUG
+#define USE_APP_CENTER
+#endif
+
+using System;
 using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using OnlyT.Common.Services.DateTime;
@@ -22,6 +26,8 @@ using OnlyT.Services.LogLevelSwitch;
 using OnlyT.ViewModel;
 using Serilog;
 using OnlyT.Utils;
+using System.Diagnostics;
+using OnlyT.EventTracking;
 
 namespace OnlyT
 {
@@ -42,6 +48,8 @@ namespace OnlyT
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            ConfigureAppCenter();
+
             ConfigureServices();
 
             if (AnotherInstanceRunning())
@@ -56,9 +64,17 @@ namespace OnlyT
             Current.DispatcherUnhandledException += CurrentDispatcherUnhandledException;
         }
 
+        [Conditional("USE_APP_CENTER")]
+        private static void ConfigureAppCenter()
+        {
+            AppCenterInit.Execute();
+        }
+
         private void CurrentDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // unhandled exceptions thrown from UI thread
+            EventTracker.Error(e.Exception, "Unhandled exception");
+
             e.Handled = true;
             Log.Logger.Fatal(e.Exception, "Unhandled exception");
             Current.Shutdown();
@@ -110,13 +126,24 @@ namespace OnlyT
         {
             var logsDirectory = FileUtils.GetLogFolder();
 
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.ControlledBy(LogLevelSwitchService.LevelSwitch)
-                .WriteTo.File(Path.Combine(logsDirectory, "log-.txt"), retainedFileCountLimit: 28, rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+            try
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.ControlledBy(LogLevelSwitchService.LevelSwitch)
+                    .WriteTo.File(Path.Combine(logsDirectory, "log-.txt"), retainedFileCountLimit: 28, rollingInterval: RollingInterval.Day)
+                    .CreateLogger();
 
-            Log.Logger.Information("==== Launched ====");
-            Log.Logger.Information($"Version {VersionDetection.GetCurrentVersion()}");
+                Log.Logger.Information("==== Launched ====");
+                Log.Logger.Information($"Version {VersionDetection.GetCurrentVersion()}");
+            }
+            catch (Exception ex)
+            {
+                // logging won't work but silently fails
+                EventTracker.Error(ex, "Logging cannot be configured");
+
+                // "no-op" logger
+                Log.Logger = new LoggerConfiguration().CreateLogger();
+            }
         }
 
         private bool AnotherInstanceRunning()

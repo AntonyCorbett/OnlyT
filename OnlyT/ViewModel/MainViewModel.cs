@@ -1,4 +1,7 @@
 // ReSharper disable CatchAllClause
+
+// Ignore Spelling: Snackbar
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +26,7 @@ using OnlyT.Services.Options;
 using OnlyT.Services.Timer;
 using OnlyT.WebServer;
 using OnlyT.Windows;
+using OnlyT.EventTracking;
 
 namespace OnlyT.ViewModel;
 
@@ -66,6 +70,7 @@ public class MainViewModel : ObservableObject
         if (commandLineService.NoGpu || ForceSoftwareRendering())
         {
             // disable hardware (GPU) rendering so that it's all done by the CPU...
+            EventTracker.Track(EventName.DisableGPU);
             RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
         }
 
@@ -164,7 +169,10 @@ public class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not reinitialise http listener");
+            const string errMsg = "Could not reinitialise http listener";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -172,6 +180,7 @@ public class MainViewModel : ObservableObject
     {
         if (_optionsService.Options.IsWebClockEnabled || _optionsService.Options.IsApiEnabled)
         {
+            EventTracker.Track(EventName.InitHttpServer);
             _httpServer.Start(_optionsService.Options.HttpServerPort);
         }
     }
@@ -258,7 +267,10 @@ public class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not change monitor");
+            const string errMsg = "Could not change monitor";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -305,7 +317,10 @@ public class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not change monitor");
+            const string errMsg = "Could not change monitor";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -425,7 +440,10 @@ public class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not open timer window");
+            const string errMsg = "Could not open timer window";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -438,7 +456,10 @@ public class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not close timer window");
+            const string errMsg = "Could not close timer window";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -453,6 +474,7 @@ public class MainViewModel : ObservableObject
         if (_optionsService.CanDisplayCountdownWindow)
         {
             Log.Logger.Information("Launching countdown timer");
+            EventTracker.Track(EventName.CountdownTimer);
 
             _countdownDisplayService.Start(offsetSeconds);
 

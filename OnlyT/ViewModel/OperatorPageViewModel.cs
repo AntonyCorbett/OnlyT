@@ -1,4 +1,7 @@
 ﻿// ReSharper disable CatchAllClause
+
+// Ignore Spelling: snackbar
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,6 +28,7 @@ using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
 using OnlyT.Utils;
 using OnlyT.WebServer.ErrorHandling;
+using OnlyT.EventTracking;
 
 namespace OnlyT.ViewModel;
 
@@ -461,6 +465,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private void StartTimer()
     {
         Log.Logger.Debug("Starting timer");
+        EventTracker.Track(EventName.StartingTimer);
 
         _isStarting = true;
         _secondsElapsed = 0;
@@ -641,7 +646,10 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not adjust for adaptive time");
+            const string errMsg = "Could not adjust for adaptive time";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -801,7 +809,10 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not handle change of meeting schedule");
+            const string errMsg = "Could not handle change of meeting schedule";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -817,31 +828,37 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void DecrementTimer()
     {
+        EventTracker.TrackDecrement(60);
         IncrementDecrementTimerInternal(-60);
     }
 
     private void DecrementTimer15Secs()
     {
+        EventTracker.TrackDecrement(15);
         IncrementDecrementTimerInternal(-15);
     }
 
     private void DecrementTimer5Mins()
     {
+        EventTracker.TrackDecrement(5 * 60);
         IncrementDecrementTimerInternal(-5 * 60);
     }
 
     private void IncrementTimer()
     {
+        EventTracker.TrackIncrement(60);
         IncrementDecrementTimerInternal(60);
     }
 
     private void IncrementTimer15Secs()
     {
+        EventTracker.TrackIncrement(15);
         IncrementDecrementTimerInternal(15);
     }
 
     private void IncrementTimer5Mins()
     {
+        EventTracker.TrackIncrement(5 * 60);
         IncrementDecrementTimerInternal(5 * 60);
     }
 
@@ -900,6 +917,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 #pragma warning restore S3168 // "async" methods should not return "void"
     {
         Log.Logger.Debug("Stopping timer");
+        EventTracker.Track(EventName.StoppingTimer);
 
         IsOvertime = false;
 
@@ -988,6 +1006,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void LaunchHelp()
     {
+        EventTracker.Track(EventName.LaunchHelp);
+
         var psi = new ProcessStartInfo
         {
             FileName = "https://github.com/AntonyCorbett/OnlyT/wiki",

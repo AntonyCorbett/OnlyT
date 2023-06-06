@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.EventTracking;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.Snackbar;
@@ -81,7 +82,10 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
             }
             catch (Exception ex)
             {
-                Log.Logger.Error(ex, "Could not open countdown window");
+                const string errMsg = "Could not open countdown window";
+                EventTracker.Error(ex, errMsg);
+
+                Log.Logger.Error(ex, errMsg);
             }
         }
 
@@ -116,7 +120,10 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
             }
             catch (Exception ex)
             {
-                Log.Logger.Error(ex, "Could not open countdown window");
+                const string errMsg = "Could not open countdown window";
+                EventTracker.Error(ex, errMsg);
+
+                Log.Logger.Error(ex, errMsg);
             }
         }
 
@@ -175,7 +182,10 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not close countdown window");
+            const string errMsg = "Could not close countdown window";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 

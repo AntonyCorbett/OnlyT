@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using OnlyT.Common.Services.DateTime;
 using Serilog;
 using OnlyT.Utils;
+using OnlyT.EventTracking;
 
 namespace OnlyT.MeetingTalkTimesFeed;
 
@@ -112,7 +113,7 @@ internal sealed class TimesFeed
             }
             catch (Exception ex)
             {
-                needRefresh = true;
+                needRefresh = true;                
                 Log.Logger.Error(ex, "Getting meeting feed");
             }
         }

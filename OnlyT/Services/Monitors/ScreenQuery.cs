@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using OnlyT.EventTracking;
 using Serilog;
 
 namespace OnlyT.Services.Monitors;
@@ -339,7 +340,10 @@ public static class ScreenQuery
         }
         catch (Exception ex)
         {
-            Log.Logger.Warning(ex, "Could not get monitor friendly names");
+            const string errMsg = "Could not get monitor friendly names";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Warning(ex, errMsg);
         }
 
         return null;

@@ -5,6 +5,7 @@ using NAudio.Wave;
 using System;
 using System.IO;
 using Serilog;
+using OnlyT.EventTracking;
 
 namespace OnlyT.Services.Bell;
 
@@ -67,7 +68,10 @@ internal sealed class TimerBell : ObservableObject, IDisposable
             catch (Exception ex)
             {
                 IsPlaying = false;
-                Log.Logger.Error(ex, "Could not play bell");
+
+                const string errMsg = "Could not play bell";
+                EventTracker.Error(ex, errMsg);
+                Log.Logger.Error(ex, errMsg);
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Windows.Markup;
 using CommunityToolkit.Mvvm.Messaging;
 using Newtonsoft.Json;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.EventTracking;
 using OnlyT.Services.CommandLine;
 using OnlyT.Services.LogLevelSwitch;
 using OnlyT.Services.Monitors;
@@ -150,7 +151,10 @@ internal sealed class OptionsService : IOptionsService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not save settings");
+            const string errMsg = "Could not save settings";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
 
@@ -176,13 +180,32 @@ internal sealed class OptionsService : IOptionsService
                 _originalOptionsSignature = GetOptionsSignature(_options);
 
                 _logLevelSwitchService.SetMinimumLevel(Options.LogEventLevel);
+
+                TrackSomeOptions();
             }
             catch (Exception ex)
             {
-                Log.Logger.Error(ex, "Could not read options file");
+                const string errMsg = "Could not read options file";
+                EventTracker.Error(ex, errMsg);
+
+                Log.Logger.Error(ex, errMsg);
                 _options = new Options();
             }
         }
+    }
+
+    private void TrackSomeOptions()
+    {
+        if (Options.MidWeekAdaptiveMode == AdaptiveMode.None) 
+        {
+            EventTracker.Track(EventName.NotAdaptive);
+        }
+        else
+        {
+            EventTracker.Track(EventName.Adaptive);
+        }
+
+        EventTracker.TrackCountdownMins(Options.CountdownDurationMins);
     }
 
     private void SetCulture()
@@ -205,7 +228,10 @@ internal sealed class OptionsService : IOptionsService
         }
         catch (Exception ex)
         {
-            Log.Logger.Error(ex, "Could not set culture");
+            const string errMsg = "Could not set culture";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
         }
     }
     

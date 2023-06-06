@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
+using OnlyT.EventTracking;
 using Serilog;
 
 namespace OnlyT.AutoUpdates;

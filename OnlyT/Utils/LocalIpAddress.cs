@@ -3,6 +3,8 @@
     using System;
     using System.Net;
     using System.Net.Sockets;
+    using System.Windows.Documents;
+    using OnlyT.EventTracking;
     using Serilog;
 
     internal static class LocalIpAddress
@@ -28,7 +30,10 @@
             }
             catch (Exception ex)
             {
-                Log.Logger.Warning(ex, "Could not get local IP Address");
+                const string errMsg = "Could not get local IP Address";
+                EventTracker.Error(ex, errMsg);
+
+                Log.Logger.Warning(ex, errMsg);
             }
             
             return result;
