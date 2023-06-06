@@ -217,7 +217,7 @@
     <value>Studiul Bibliei în congregație</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Spiritual Gems</value>
+    <value>Nestemate spirituale</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
     <value>Viața de creștin - Tema 1</value>
@@ -713,7 +713,7 @@
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>în primul rând</value>
+    <value>primul</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
 </root>
