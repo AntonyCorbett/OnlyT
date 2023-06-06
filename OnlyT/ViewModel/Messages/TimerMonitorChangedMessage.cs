@@ -1,17 +1,16 @@
 ﻿using OnlyT.Models;
 
-namespace OnlyT.ViewModel.Messages
-{
-    /// <summary>
-    /// When the timer monitor is changed in the Settings page
-    /// </summary>
-    internal class TimerMonitorChangedMessage
-    {
-        public TimerMonitorChangedMessage(MonitorChangeDescription change)
-        {
-            Change = change;
-        }
+namespace OnlyT.ViewModel.Messages;
 
-        public MonitorChangeDescription Change { get; }
+/// <summary>
+/// When the timer monitor is changed in the Settings page
+/// </summary>
+internal sealed class TimerMonitorChangedMessage
+{
+    public TimerMonitorChangedMessage(MonitorChangeDescription change)
+    {
+        Change = change;
     }
+
+    public MonitorChangeDescription Change { get; }
 }

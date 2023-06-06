@@ -21,4 +21,8 @@ public interface ICommandLineService
     bool IsTimerMonitorSpecified { get; }
 
     bool IsCountdownMonitorSpecified { get; }
+
+    bool IsTimerNdi { get; }
+
+    bool IsCountdownNdi { get; }
 }

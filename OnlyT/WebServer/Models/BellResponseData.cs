@@ -1,10 +1,9 @@
-﻿namespace OnlyT.WebServer.Models
-{
-    using Newtonsoft.Json;
+﻿namespace OnlyT.WebServer.Models;
 
-    internal class BellResponseData
-    {
-        [JsonProperty(PropertyName = "success")]
-        public bool Success { get; set; }
-    }
+using Newtonsoft.Json;
+
+internal sealed class BellResponseData
+{
+    [JsonProperty(PropertyName = "success")]
+    public bool Success { get; set; }
 }

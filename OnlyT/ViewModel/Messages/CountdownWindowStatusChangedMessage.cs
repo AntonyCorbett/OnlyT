@@ -1,7 +1,6 @@
-﻿namespace OnlyT.ViewModel.Messages
+﻿namespace OnlyT.ViewModel.Messages;
+
+internal sealed class CountdownWindowStatusChangedMessage
 {
-    internal class CountdownWindowStatusChangedMessage
-    {
-        public bool Showing { get; set; }
-    }
+    public bool Showing { get; set; }
 }

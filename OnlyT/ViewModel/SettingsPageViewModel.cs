@@ -22,6 +22,7 @@ using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using OnlyT.Services.CommandLine;
 
 namespace OnlyT.ViewModel;
 
@@ -38,6 +39,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
     private readonly ISnackbarService _snackbarService;
     private readonly IMonitorsService _monitorsService;
     private readonly IBellService _bellService;
+    private readonly ICommandLineService _commandLineService;
     private readonly ICountdownTimerTriggerService _countdownTimerService;
     private readonly IDateTimeService _dateTimeService;
     private readonly ClockHourFormatItem[] _clockHourFormats;
@@ -53,7 +55,8 @@ public class SettingsPageViewModel : ObservableObject, IPage
         IOptionsService optionsService,
         ISnackbarService snackbarService,
         ICountdownTimerTriggerService countdownTimerService,
-        IDateTimeService dateTimeService)
+        IDateTimeService dateTimeService,
+        ICommandLineService commandLineService)
     {
         // subscriptions...
         WeakReferenceMessenger.Default.Register<ShutDownMessage>(this, OnShutDown);
@@ -65,6 +68,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
         _bellService = bellService;
         _countdownTimerService = countdownTimerService;
         _dateTimeService = dateTimeService;
+        _commandLineService = commandLineService;
 
         _monitors = GetSystemMonitors();
         _languages = GetSupportedLanguages();
@@ -110,9 +114,15 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool IsTimerMonitorOnNDI => _commandLineService.IsTimerNdi;
+
     public bool IsTimerMonitorViaCommandLine => _optionsService.IsTimerMonitorSetByCommandLine;
 
+    public bool ShouldShowTimerMonitorCommandLineNote => IsTimerMonitorViaCommandLine && !IsTimerMonitorOnNDI;
+
     public bool AllowMainMonitorSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
+
+    public bool AllowWindowedModeSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
 
     public bool IsCountdownMonitorViaCommandLine => _optionsService.IsCountdownMonitorSetByCommandLine;
 

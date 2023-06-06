@@ -3,7 +3,7 @@
 /// <summary>
 /// When we navigate between pages (e.g. from Operator page to Settings page)
 /// </summary>
-internal class NavigateMessage
+internal sealed class NavigateMessage
 {
     public NavigateMessage(string? originalPageName, string targetPageName, object? state)
     {

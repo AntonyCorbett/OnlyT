@@ -4,72 +4,71 @@ using System.Linq;
 using OnlyT.Models;
 using OnlyT.Services.TalkSchedule;
 
-namespace OnlyT.Tests.Mocks
+namespace OnlyT.Tests.Mocks;
+
+internal sealed class MockTalksScheduleService : ITalkScheduleService
 {
-    internal class MockTalksScheduleService : ITalkScheduleService
+    private readonly int _talkIdStart;
+    private readonly int _numTalks;
+
+    private List<TalkScheduleItem>? _talks;
+
+    public MockTalksScheduleService(int talkIdStart, int numTalks)
     {
-        private readonly int _talkIdStart;
-        private readonly int _numTalks;
+        _talkIdStart = talkIdStart;
+        _numTalks = numTalks;
+    }
 
-        private List<TalkScheduleItem>? _talks;
-
-        public MockTalksScheduleService(int talkIdStart, int numTalks)
+    public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
+    {
+        if (_talks == null)
         {
-            _talkIdStart = talkIdStart;
-            _numTalks = numTalks;
-        }
+            _talks = new List<TalkScheduleItem>();
 
-        public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
-        {
-            if (_talks == null)
+            var talkId = _talkIdStart;
+
+            for (int n = 0; n < _numTalks; ++n)
             {
-                _talks = new List<TalkScheduleItem>();
-
-                var talkId = _talkIdStart;
-
-                for (int n = 0; n < _numTalks; ++n)
+                _talks.Add(new TalkScheduleItem(talkId + n, $"Talk {n + 1}", string.Empty, string.Empty)
                 {
-                    _talks.Add(new TalkScheduleItem(talkId + n, $"Talk {n + 1}", string.Empty, string.Empty)
-                    {
-                        OriginalDuration = TimeSpan.FromMinutes(n + 1) 
-                    });
-                }
+                    OriginalDuration = TimeSpan.FromMinutes(n + 1) 
+                });
             }
-
-            return _talks;
         }
 
-        public TalkScheduleItem? GetTalkScheduleItem(int id)
+        return _talks;
+    }
+
+    public TalkScheduleItem? GetTalkScheduleItem(int id)
+    {
+        return _talks?.FirstOrDefault(t => t.Id.Equals(id));
+    }
+
+    public int GetNext(int currentTalkId)
+    {
+        if (_talks == null)
         {
-            return _talks?.FirstOrDefault(t => t.Id.Equals(id));
-        }
-
-        public int GetNext(int currentTalkId)
-        {
-            if (_talks == null)
-            {
-                return 0;
-            }
-
-            for (int n = 0; n < _talks.Count; ++n)
-            {
-                if (_talks[n].Id.Equals(currentTalkId) && n < _talks.Count - 1)
-                {
-                    return _talks[n + 1].Id;
-                }
-            }
-
             return 0;
         }
 
-        public void Reset()
+        for (int n = 0; n < _talks.Count; ++n)
         {
-            _talks = null;
+            if (_talks[n].Id.Equals(currentTalkId) && n < _talks.Count - 1)
+            {
+                return _talks[n + 1].Id;
+            }
         }
 
-        public bool SuccessGettingAutoFeedForMidWeekMtg()
-        {
-            return true;
-        }
+        return 0;
+    }
+
+    public void Reset()
+    {
+        _talks = null;
+    }
+
+    public bool SuccessGettingAutoFeedForMidWeekMtg()
+    {
+        return true;
     }
 }

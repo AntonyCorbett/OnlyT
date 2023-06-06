@@ -1,76 +1,75 @@
-﻿namespace OnlyT.WebServer.Models
+﻿namespace OnlyT.WebServer.Models;
+
+using System.Collections.Generic;
+using System.Linq;
+using ErrorHandling;
+using Newtonsoft.Json;
+using OnlyT.Models;
+using Services.Options;
+using Services.TalkSchedule;
+using Services.Timer;
+
+internal sealed class TimersResponseData
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using ErrorHandling;
-    using Newtonsoft.Json;
-    using OnlyT.Models;
-    using Services.Options;
-    using Services.TalkSchedule;
-    using Services.Timer;
-
-    internal class TimersResponseData
+    public TimersResponseData(
+        ITalkScheduleService talkService, 
+        ITalkTimerService timerService,
+        IOptionsService optionsService)
     {
-        public TimersResponseData(
-            ITalkScheduleService talkService, 
-            ITalkTimerService timerService,
-            IOptionsService optionsService)
+        var talks = talkService.GetTalkScheduleItems();
+        Status = timerService.GetStatus();
+
+        TimerInfo = new List<TimerInfo>();
+
+        var countUpByDefault = optionsService.Options.CountUp;
+        foreach (var talk in talks)
         {
-            var talks = talkService.GetTalkScheduleItems();
-            Status = timerService.GetStatus();
+            TimerInfo.Add(CreateTimerInfo(talk, countUpByDefault));
+        }
+    }
 
-            TimerInfo = new List<TimerInfo>();
-
-            var countUpByDefault = optionsService.Options.CountUp;
-            foreach (var talk in talks)
-            {
-                TimerInfo.Add(CreateTimerInfo(talk, countUpByDefault));
-            }
+    public TimersResponseData(
+        ITalkScheduleService talkService, 
+        ITalkTimerService timerService, 
+        IOptionsService optionsService,
+        int talkId)
+    {
+        var talks = talkService.GetTalkScheduleItems();
+        var talk = talks.SingleOrDefault(x => x.Id == talkId);
+        if (talk == null)
+        {
+            throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
         }
 
-        public TimersResponseData(
-            ITalkScheduleService talkService, 
-            ITalkTimerService timerService, 
-            IOptionsService optionsService,
-            int talkId)
+        Status = timerService.GetStatus();
+        TimerInfo = new List<TimerInfo> { CreateTimerInfo(talk, optionsService.Options.CountUp) };
+    }
+
+    [JsonProperty(PropertyName = "status")]
+    public TimerStatus Status { get; }
+
+    [JsonProperty(PropertyName = "timerInfo")]
+    public List<TimerInfo> TimerInfo { get; }
+
+    private static TimerInfo CreateTimerInfo(TalkScheduleItem talk, bool countUpByDefault)
+    {
+        return new TimerInfo
         {
-            var talks = talkService.GetTalkScheduleItems();
-            var talk = talks.SingleOrDefault(x => x.Id == talkId);
-            if (talk == null)
-            {
-                throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
-            }
-
-            Status = timerService.GetStatus();
-            TimerInfo = new List<TimerInfo> { CreateTimerInfo(talk, optionsService.Options.CountUp) };
-        }
-
-        [JsonProperty(PropertyName = "status")]
-        public TimerStatus Status { get; }
-
-        [JsonProperty(PropertyName = "timerInfo")]
-        public List<TimerInfo> TimerInfo { get; }
-
-        private static TimerInfo CreateTimerInfo(TalkScheduleItem talk, bool countUpByDefault)
-        {
-            return new TimerInfo
-            {
-                TalkId = talk.Id,
-                TalkTitle = talk.Name,
-                MeetingSectionNameInternal = talk.MeetingSectionNameInternal,
-                MeetingSectionNameLocalised = talk.MeetingSectionNameLocalised,
-                OriginalDurationSecs = (int)talk.OriginalDuration.TotalSeconds,
-                ModifiedDurationSecs = talk.ModifiedDuration == null
-                    ? null
-                    : (int?)talk.ModifiedDuration.Value.TotalSeconds,
-                AdaptedDurationSecs = talk.AdaptedDuration == null
-                    ? null
-                    : (int?)talk.AdaptedDuration.Value.TotalSeconds,
-                ActualDurationSecs = (int)talk.ActualDuration.TotalSeconds,
-                UsesBell = talk.BellApplicable,
-                CompletedTimeSecs = talk.CompletedTimeSecs,
-                CountUp = talk.CountUp ?? countUpByDefault
-            };
-        }
+            TalkId = talk.Id,
+            TalkTitle = talk.Name,
+            MeetingSectionNameInternal = talk.MeetingSectionNameInternal,
+            MeetingSectionNameLocalised = talk.MeetingSectionNameLocalised,
+            OriginalDurationSecs = (int)talk.OriginalDuration.TotalSeconds,
+            ModifiedDurationSecs = talk.ModifiedDuration == null
+                ? null
+                : (int?)talk.ModifiedDuration.Value.TotalSeconds,
+            AdaptedDurationSecs = talk.AdaptedDuration == null
+                ? null
+                : (int?)talk.AdaptedDuration.Value.TotalSeconds,
+            ActualDurationSecs = (int)talk.ActualDuration.TotalSeconds,
+            UsesBell = talk.BellApplicable,
+            CompletedTimeSecs = talk.CompletedTimeSecs,
+            CountUp = talk.CountUp ?? countUpByDefault
+        };
     }
 }

@@ -6,14 +6,14 @@
 #define MyAppVersion GetFileVersion('Staging\OnlyT.exe');
 
 [Setup]
-AppId={{42BA2BBE-E9BB-4F67-9307-7F98FB73C6FF}
+AppId={{166D3D5A-4945-4A94-BF5A-D3F0E582C3BC}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={commonpf}\OnlyT
+DefaultDirName={commonpf64}\OnlyT
 DefaultGroupName={#MyAppName}
 OutputDir="Output"
 OutputBaseFilename=OnlyTSetup

@@ -1,6 +1,5 @@
-﻿namespace OnlyT.ViewModel.Messages
+﻿namespace OnlyT.ViewModel.Messages;
+
+internal sealed class LogLevelChangedMessage
 {
-    internal class LogLevelChangedMessage
-    {
-    }
 }

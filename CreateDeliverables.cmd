@@ -25,12 +25,12 @@ md Installer\Staging
 
 ECHO.
 ECHO Copying OnlyTFirewallPorts items into staging area
-xcopy OnlyTFirewallPorts\bin\Release\net6.0\publish\*.* Installer\Staging /q /s /y /d
+xcopy OnlyTFirewallPorts\bin\Release\net7.0\publish\*.* Installer\Staging /q /s /y /d
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
 ECHO Copying OnlyT items into staging area
-xcopy OnlyT\bin\Release\net6.0-windows\publish\*.* Installer\Staging /q /s /y /d
+xcopy OnlyT\bin\Release\net7.0-windows\publish\*.* Installer\Staging /q /s /y /d
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
@@ -39,8 +39,8 @@ xcopy talk_schedule.xml Installer\Staging /q /y
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
-ECHO Removing unwanted x64 DLLs
-del Installer\Staging\libmp3lame.64.dll
+ECHO Removing unwanted x32 DLLs
+del Installer\Staging\libmp3lame.32.dll
 IF %ERRORLEVEL% NEQ 0 goto ERROR
 
 ECHO.
