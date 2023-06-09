@@ -122,7 +122,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
 
     public bool AllowMainMonitorSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
 
-    public bool AllowWindowedModeSelection => !IsTimerMonitorViaCommandLine && !MainMonitorIsWindowed;
+    public bool AllowWindowedModeSelection => !IsTimerMonitorViaCommandLine;
 
     public bool IsCountdownMonitorViaCommandLine => _optionsService.IsCountdownMonitorSetByCommandLine;
 
