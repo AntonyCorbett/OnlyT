@@ -716,4 +716,8 @@
     <value>primārais</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
+  <data name="TIMER_ON_NDI" xml:space="preserve">
+    <value>Note that output is set to NDI via a command-line setting.</value>
+    <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
 </root>

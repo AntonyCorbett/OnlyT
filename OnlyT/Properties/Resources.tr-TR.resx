@@ -716,4 +716,8 @@
     <value>birincil</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
+  <data name="TIMER_ON_NDI" xml:space="preserve">
+    <value>Çıktının bir komut satırı ayarı aracılığıyla NDI olarak ayarlandığını unutmayın.</value>
+    <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
 </root>
