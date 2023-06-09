@@ -697,27 +697,27 @@
     <value>..\resources\timershtmltemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="WEB_LINK_CLOCK" xml:space="preserve">
-    <value>Clock</value>
+    <value>Годинник</value>
     <comment>Link to clock on web interface</comment>
   </data>
   <data name="WEB_LINK_TIMERS" xml:space="preserve">
-    <value>Timers</value>
+    <value>Таймери</value>
     <comment>Link to timers on web interface</comment>
   </data>
   <data name="WEB_OFFLINE" xml:space="preserve">
-    <value>offline...</value>
+    <value>поза мережею...</value>
     <comment>Text displayed in web interface</comment>
   </data>
   <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
-    <value>Shrink on minimise</value>
+    <value>Стискати при згортанні</value>
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>primary</value>
+    <value>основний</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>Зверніть увагу, вихідний сигнал спрямований на NDI через налаштування командного рядка.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
 </root>
