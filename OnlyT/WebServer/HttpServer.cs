@@ -176,21 +176,31 @@
                 catch (WebServerException ex)
                 {
                     Log.Logger.Error(ex, "Web server error");
-                    if (response != null)
-                    {
-                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(ex.Code);
-                        BaseApiController.WriteResponse(response, new ApiError(ex.Code));
-                    }
+                    WriteApiErrorResponse(response, ex.Code);
                 }
                 catch (Exception ex)
                 {
-                    if (response != null)
-                    {
-                        Log.Logger.Error(ex, "Web server error");
-                        response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(WebServerErrorCode.UnknownError);
-                        BaseApiController.WriteResponse(response, new ApiError(WebServerErrorCode.UnknownError));
-                    }
+                    Log.Logger.Error(ex, "Web server error");
+                    WriteApiErrorResponse(response, WebServerErrorCode.UnknownError);                   
                 }
+            }
+        }
+
+        private static void WriteApiErrorResponse(HttpListenerResponse? response, WebServerErrorCode code)
+        {
+            if (response == null)
+            {
+                return;
+            }
+
+            try
+            {
+                response.StatusCode = (int)WebServerErrorCodes.GetHttpErrorCode(code);
+                BaseApiController.WriteResponse(response, new ApiError(code));
+            }
+            catch (ObjectDisposedException)
+            {
+                // ignore as this is expected when we meet some API errors.
             }
         }
 
