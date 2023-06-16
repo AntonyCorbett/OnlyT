@@ -33,4 +33,5 @@ NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). Material
 With thanks to:
 * Crowdin.com for localisation tools
 * GitHub for project management tools
+* [JetBrains](https://jb.gg/OpenSourceSupport) for Resharper tools
 * A team of over 20 translators who have helped localise OnlyT
