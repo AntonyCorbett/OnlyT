@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Documents;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.EventTracking;
 using OnlyT.Report.Database;
@@ -8,7 +7,6 @@ using OnlyT.Report.Models;
 using OnlyT.Services.CommandLine;
 using OnlyT.Utils;
 using Serilog;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace OnlyT.Services.Report;
 
