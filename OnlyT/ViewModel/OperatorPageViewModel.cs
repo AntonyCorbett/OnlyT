@@ -728,7 +728,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private void AdjustTalkTimeForThisSession()
     {
         var talk = GetCurrentTalk();
-        if (talk != null && talk.Editable)
+        if (talk?.Editable == true)
         {
             var modifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
 
@@ -795,8 +795,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private bool CurrentTalkTimerIsEditable()
     {
-        var talk = GetCurrentTalk();
-        return talk != null && talk.Editable;
+        return GetCurrentTalk()?.Editable == true;
     }
 
     private void OnAutoMeetingChanged(object recipient, AutoMeetingChangedMessage message)

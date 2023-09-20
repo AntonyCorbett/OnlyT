@@ -117,7 +117,8 @@
                 BellApplicable = useBell,
                 AutoBell = autoBell,
                 IsStudentTalk = isStudentTalk,
-                PersistFinalTimerValue = persistFinalTimerValue
+                PersistFinalTimerValue = persistFinalTimerValue,
+                Editable = true
             };
         }
 
