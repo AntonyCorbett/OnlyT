@@ -817,8 +817,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void IncrementDecrementTimerInternal(int mins)
     {
-        var newSecs = TargetSeconds + mins;
-        if (newSecs >= 0 && newSecs <= MaxTimerSecs)
+        var newSecs = Math.Max(TargetSeconds + mins, 0);
+        if (newSecs <= MaxTimerSecs)
         {
             TargetSeconds = newSecs;
             AdjustTalkTimeForThisSession();

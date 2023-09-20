@@ -1415,7 +1415,9 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrease.
+        ///   Looks up a localized string similar to Decrease 1m
+        ///Ctrl - Decrease 15s
+        ///Shift - Decrease 5m.
         /// </summary>
         public static string TIME_DECREASE {
             get {
@@ -1424,7 +1426,9 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Increase.
+        ///   Looks up a localized string similar to Increase 1m
+        ///Ctrl - Increase 15s
+        ///Shift - Increase 5m.
         /// </summary>
         public static string TIME_INCREASE {
             get {
