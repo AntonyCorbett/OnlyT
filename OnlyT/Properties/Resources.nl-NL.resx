@@ -453,15 +453,15 @@
     <value>Start OnlyT opnieuw na het wijzigen van de taal.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease 1m
-Ctrl - Decrease 15s
-Shift - Decrease 5m</value>
+    <value>Verhoog 1m
+Ctrl - Verhoog 15s
+Shift - Verhoog 5 m</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase 1m
-Ctrl - Increase 15s
-Shift - Increase 5m</value>
+    <value>Verhoog 1m
+Ctrl - Verhoog 15s
+Shift - Verhoog 5 m</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -721,7 +721,7 @@ Shift - Increase 5m</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>Merk op dat uitvoer naar NDI ingesteld wordt via een command-line instelling.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
 </root>
