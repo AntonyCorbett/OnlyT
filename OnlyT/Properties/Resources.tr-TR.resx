@@ -453,15 +453,15 @@
     <value>OnlyT'yi sadece dili değiştirdikten sonra yeniden başlatın.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease 1m
-Ctrl - Decrease 15s
-Shift - Decrease 5m</value>
+    <value>1dk Azalt
+Ctrl - 15sn Azalt
+Shift - 5dk Azalt</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase 1m
-Ctrl - Increase 15s
-Shift - Increase 5m</value>
+    <value>1dk Artır
+Ctrl - 15sn Artır 
+Shift - 5dk Artır</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
