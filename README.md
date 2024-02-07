@@ -2,7 +2,7 @@
 
 Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed for use in Kingdom Halls where the meeting format is predefined, but has a "manual" and "file-based" mode that can be used to configure the timers as required (and so can be used in other settings too).
 
-** 7th Feb 2024 - I've just fixed an issue with the times used by the automatic mode. You may have to delete the locally cached data in order for OnlyT to pick up the fresh feed. To do this, open Windows File Explorer and enter "%AppData%\OnlyT" into the address bar. Delete the "feed.json" file.**
+**7th Feb 2024 - I've just fixed an issue with the times used by the automatic mode. You may have to delete the locally cached data in order for OnlyT to pick up the fresh feed. To do this, open Windows File Explorer and enter "%AppData%\OnlyT" into the address bar. Delete the "feed.json" file.**
 
 ![Main Window](http://cv8.org.uk/soundbox/OnlyT/Images/MainWindow2.png)
 
