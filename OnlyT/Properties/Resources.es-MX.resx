@@ -453,11 +453,15 @@
     <value>Por favor reinicie OnlyT después de cambiar el idioma.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Disminución</value>
+    <value>Disminuir 1m
+Ctrl - Disminuir 15s
+Mayús - Disminuir 5m</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Aumento</value>
+    <value>Aumentar 1m
+Ctrl - Aumentar 15s
+Mayús - Aumentar 5m</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">

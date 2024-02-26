@@ -453,11 +453,15 @@
     <value>Vă rugăm să reporniţi OnlyT după schimbarea limbii.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Scade</value>
+    <value>Scade 1min
+Ctrl - Scade 15sec
+Shift - Scade 5min</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Creşte</value>
+    <value>Crește 1 min
+Ctrl - Mărește cu 15 sec
+Shift - Crește cu 5 min</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
