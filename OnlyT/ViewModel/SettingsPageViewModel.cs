@@ -1062,33 +1062,58 @@ public class SettingsPageViewModel : ObservableObject, IPage
 
     private static LanguageItem[] GetSupportedLanguages()
     {
-        var result = new List<LanguageItem>();
-
-        var subFolders = Directory.GetDirectories(AppContext.BaseDirectory);
-
-        foreach (var folder in subFolders)
+        var result = new[]
         {
-            if (!string.IsNullOrEmpty(folder))
-            {
-                try
-                {
-                    var c = new CultureInfo(Path.GetFileNameWithoutExtension(folder));
-                    result.Add(new LanguageItem(c.Name, c.EnglishName));
-                }
-                catch (CultureNotFoundException)
-                {
-                    // expected
-                }
-            }
-        }
+            // the native language
+            CreateLanguageItem("en-GB"),
 
-        // the native language
-        var cNative = new CultureInfo(Path.GetFileNameWithoutExtension("en-GB"));
-        result.Add(new LanguageItem(cNative.Name, cNative.EnglishName));
+            // other supported languages
+            CreateLanguageItem("ca-ES"),
+            CreateLanguageItem("cs-CZ"),
+            CreateLanguageItem("de-DE"),
+            CreateLanguageItem("el-GR"),
+            CreateLanguageItem("en-US"),
+            CreateLanguageItem("es-ES"),
+            CreateLanguageItem("es-MX"),
+            CreateLanguageItem("fi-FI"),
+            CreateLanguageItem("fil-PH"),
+            CreateLanguageItem("fr-FR"),
+            CreateLanguageItem("hr-HR"),
+            CreateLanguageItem("hu-HU"),
+            CreateLanguageItem("id-ID"),
+            CreateLanguageItem("it-IT"),
+            CreateLanguageItem("jv-ID"),
+            CreateLanguageItem("jv-Latn-ID"),
+            CreateLanguageItem("ka-GE"),
+            CreateLanguageItem("ko-KR"),
+            CreateLanguageItem("lv-LV"),
+            CreateLanguageItem("nl-NL"),
+            CreateLanguageItem("no"),
+            CreateLanguageItem("pap"),
+            CreateLanguageItem("pl-PL"),
+            CreateLanguageItem("pt-BR"),
+            CreateLanguageItem("pt-PT"),
+            CreateLanguageItem("ro-RO"),
+            CreateLanguageItem("ru-RU"),
+            CreateLanguageItem("sk-SK"),
+            CreateLanguageItem("sv-SE"),
+            CreateLanguageItem("tl-PH"),
+            CreateLanguageItem("tr-TR"),
+            CreateLanguageItem("uk-UA"),
+            CreateLanguageItem("vi-VN"),
+        };
+
+        Array.Sort(result, (x, y) => string.CompareOrdinal(x.LanguageName, y.LanguageName));
         
-        result.Sort((x, y) => string.CompareOrdinal(x.LanguageName, y.LanguageName));
+        //result.Sort((x, y) => string.CompareOrdinal(x.LanguageName, y.LanguageName));
 
-        return result.ToArray();
+        return result;
+    }
+
+    private static LanguageItem CreateLanguageItem(string name)
+    {
+        var ci = new CultureInfo(name);
+        return new LanguageItem(ci.Name, ci.EnglishName);
     }
 
     private MonitorItem[] GetSystemMonitors()
