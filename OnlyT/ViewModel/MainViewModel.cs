@@ -27,6 +27,7 @@ using OnlyT.Services.Timer;
 using OnlyT.WebServer;
 using OnlyT.Windows;
 using OnlyT.EventTracking;
+using OnlyT.Services.Reminders;
 
 namespace OnlyT.ViewModel;
 
@@ -38,6 +39,7 @@ namespace OnlyT.ViewModel;
 public class MainViewModel : ObservableObject
 {
     private readonly Dictionary<string, FrameworkElement> _pages = new();
+    private readonly IReminderService _reminderService;
     private readonly IOptionsService _optionsService;
     private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
     private readonly ITalkTimerService _timerService;
@@ -52,6 +54,7 @@ public class MainViewModel : ObservableObject
     private DateTime _lastRefreshedSchedule = DateTime.MinValue;
 
     public MainViewModel(
+        IReminderService reminderService,
         IOptionsService optionsService,
         ITalkTimerService timerService,
         ISnackbarService snackbarService,
@@ -62,6 +65,7 @@ public class MainViewModel : ObservableObject
         ITimerOutputDisplayService timerOutputDisplayService,
         ICountdownOutputDisplayService countdownDisplayService)
     {
+        _reminderService = reminderService;
         _commandLineService = commandLineService;
         _dateTimeService = dateTimeService;
         _timerOutputDisplayService = timerOutputDisplayService;
@@ -136,6 +140,8 @@ public class MainViewModel : ObservableObject
             WeakReferenceMessenger.Default.Send(new ShutDownMessage(CurrentPageName));
             CloseTimerWindow();
             CloseCountdownWindow();
+
+            _reminderService.Shutdown();
         }
     }
 

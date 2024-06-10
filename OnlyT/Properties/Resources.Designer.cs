@@ -1473,6 +1473,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Should you have started the timer?.
+        /// </summary>
+        public static string TIMER_REMINDER_MSG {
+            get {
+                return ResourceManager.GetString("TIMER_REMINDER_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TIMER WINDOW.
         /// </summary>
         public static string TIMER_WIN_SECTION {

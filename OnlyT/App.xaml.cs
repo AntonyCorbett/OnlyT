@@ -28,6 +28,7 @@ using Serilog;
 using OnlyT.Utils;
 using System.Diagnostics;
 using OnlyT.EventTracking;
+using OnlyT.Services.Reminders;
 
 namespace OnlyT
 {
@@ -100,6 +101,7 @@ namespace OnlyT
             serviceCollection.AddSingleton<IQueryWeekendService, QueryWeekendService>();
             serviceCollection.AddSingleton<ITimerOutputDisplayService, TimerOutputDisplayService>();
             serviceCollection.AddSingleton<ICountdownOutputDisplayService, CountdownOutputDisplayService>();
+            serviceCollection.AddSingleton<IReminderService, ReminderService>();
             serviceCollection.AddSingleton(CommandLineServiceFactory);
 
             serviceCollection.AddSingleton<MainViewModel>();

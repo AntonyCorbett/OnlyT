@@ -74,8 +74,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private int _secondsRemaining;
     private DateTime? _meetingStartTimeFromCountdown;
     private bool _isOvertime;
-    public bool _isShrunk;
-    
+    private bool _isShrunk;
+
     public OperatorPageViewModel(
         ITalkTimerService timerService,
         ITalkScheduleService scheduleService,
@@ -1232,7 +1232,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void CloseApp()
     {
-        // used in "shrink" mode
+        // used only in "shrink" mode
         Application.Current.Shutdown();
     }
 
