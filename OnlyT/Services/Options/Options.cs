@@ -47,6 +47,7 @@
             LogEventLevel = LogEventLevel.Information;
             ShowBackgroundOnClock = true;
             ShrinkOnMinimise = true;
+            TimerReminder = true;
 
             AdjustClockFormat();
         }
@@ -100,6 +101,8 @@
         public bool AlwaysOnTop { get; set; }
 
         public bool ShrinkOnMinimise { get; set; }
+
+        public bool TimerReminder { get; set; }
 
         public bool IsBellEnabled { get; set; }
 

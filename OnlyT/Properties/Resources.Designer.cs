@@ -1473,6 +1473,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pop-up reminders.
+        /// </summary>
+        public static string TIMER_REMINDER {
+            get {
+                return ResourceManager.GetString("TIMER_REMINDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Should you have started the timer?.
         /// </summary>
         public static string TIMER_REMINDER_MSG {

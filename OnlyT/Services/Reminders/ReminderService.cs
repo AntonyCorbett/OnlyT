@@ -68,19 +68,23 @@ internal class ReminderService : IReminderService
 
         WeakReferenceMessenger.Default.Register<TimerStartMessage>(this, OnTalkTimerStart);
         WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTalkTimerStop);
-        WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
+        WeakReferenceMessenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownStatusChanged);
     }
 
     public void Send(string msg)
     {
         _lastReminderShown = _dateTimeService.Now();
-        _notifier.ShowWarning(msg, new MessageOptions
+
+        if (_optionsService.Options.TimerReminder)
         {
-            ShowCloseButton = true,
-            FreezeOnMouseEnter = false,
-            FontSize = 14,
-            CloseClickAction = OnReminderClosed,
-        });
+            _notifier.ShowWarning(msg, new MessageOptions
+            {
+                ShowCloseButton = true,
+                FreezeOnMouseEnter = false,
+                FontSize = 14,
+                CloseClickAction = OnReminderClosed,
+            });
+        }
     }
 
     public void Shutdown()
@@ -162,8 +166,9 @@ internal class ReminderService : IReminderService
         {
             Debug.Assert(_nextTalkIdToStart != null);
 
-            // must be after the countdown ends. Allow time for intro, song and prayer
-            return (_dateTimeService.Now() - _lastReminderShown).TotalSeconds > 360;
+            // this must be after the countdown ends and before the start of the
+            // first talk timer . Allow time for intro, song and prayer
+            return (_dateTimeService.Now() - _lastTalkTimeStopped).TotalSeconds > 360;
         }
 
         if (!Enum.IsDefined(typeof(TalkTypesAutoMode), _lastTalkStopped.Id) || 
@@ -174,6 +179,8 @@ internal class ReminderService : IReminderService
         }
 
         var triggerSeconds = 60;
+        const int itemWithCounselSeconds = 100;
+        const int itemWithoutCounselSeconds = 45;
 
         switch ((TalkTypesAutoMode)_lastTalkStopped.Id)
         {
@@ -185,29 +192,38 @@ internal class ReminderService : IReminderService
             case TalkTypesAutoMode.OpeningComments:
             case TalkTypesAutoMode.TreasuresTalk:
             case TalkTypesAutoMode.DiggingTalk:
-                triggerSeconds = 20;
+                triggerSeconds = itemWithoutCounselSeconds;
                 break;
 
             case TalkTypesAutoMode.Reading:
+                triggerSeconds = itemWithCounselSeconds; // allow for counsel
+                break;
+
             case TalkTypesAutoMode.MinistryItem1:
             case TalkTypesAutoMode.MinistryItem2:
             case TalkTypesAutoMode.MinistryItem3:
             case TalkTypesAutoMode.MinistryItem4:
-                triggerSeconds = 80; // allow for counsel
+                triggerSeconds = _lastTalkStopped.IsStudentTalk
+                    ? itemWithCounselSeconds
+                    : itemWithoutCounselSeconds;
                 break;
 
             case TalkTypesAutoMode.LivingPart1:
             case TalkTypesAutoMode.LivingPart2:
             case TalkTypesAutoMode.CongBibleStudy:
-                triggerSeconds = 20;
+                triggerSeconds = itemWithoutCounselSeconds;
                 break;
 
             case TalkTypesAutoMode.PublicTalk:
-                triggerSeconds = 300;
+                triggerSeconds = 300; // to include song
+                break;
+
+            default:
+                // a talk we don't know about!
                 break;
         }
 
-        return (_dateTimeService.Now() - _lastReminderShown).TotalSeconds > triggerSeconds;
+        return (_dateTimeService.Now() - _lastTalkTimeStopped).TotalSeconds > triggerSeconds;
     }
 
     private bool IsIntervalTooLong()
@@ -223,14 +239,17 @@ internal class ReminderService : IReminderService
         _secondsBetweenRepeatedReminders = LongIntervalBetweenRepeatedRemindersSeconds;
     }
 
-    private void OnStopCountdown(object recipient, StopCountDownMessage message)
+    private void OnCountdownStatusChanged(object recipient, CountdownWindowStatusChangedMessage message)
     {
-        _lastTalkTimeStopped = _dateTimeService.Now();
-        _lastTalkStopped = null;
-        _nextTalkIdToStart = _talkScheduleService.GetTalkScheduleItems().First().Id;
+        if (!message.Showing)
+        {
+            _lastTalkTimeStopped = _dateTimeService.Now();
+            _lastTalkStopped = null;
+            _nextTalkIdToStart = _talkScheduleService.GetTalkScheduleItems().First().Id;
 
-        _reminderTimer.Stop();
-        _reminderTimer.Start();
-        _secondsBetweenRepeatedReminders = DefaultIntervalBetweenRepeatedRemindersSeconds;
+            _reminderTimer.Stop();
+            _reminderTimer.Start();
+            _secondsBetweenRepeatedReminders = DefaultIntervalBetweenRepeatedRemindersSeconds;
+        }
     }
 }

@@ -392,7 +392,7 @@ public class MainViewModel : ObservableObject
 
     private void OnStopCountdown(object recipient, StopCountDownMessage message)
     {
-        _countdownDisplayService.Stop();
+        _countdownDisplayService.Stop(true);
     }
         
     /// <summary>

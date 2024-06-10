@@ -149,7 +149,7 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
         _countdownWindow?.Hide();
     }
 
-    public void Stop()
+    public void Stop(bool manuallyStopped)
     {
         IsCountdownDone = true;
         IsCountingDown = false;
@@ -191,7 +191,7 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
 
     private void OnCountdownTimeUp(object? sender, System.EventArgs e)
     {
-        Stop();
+        Stop(manuallyStopped: false);
     }
 
     private void ConfigureForWindowedOperation()

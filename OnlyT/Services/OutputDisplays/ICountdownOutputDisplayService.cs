@@ -20,7 +20,7 @@
 
         void Start(int offsetSeconds);
 
-        void Stop();
+        void Stop(bool manuallyStopped);
 
         void Hide();
 

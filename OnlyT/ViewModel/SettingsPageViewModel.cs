@@ -601,6 +601,19 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool TimerReminders
+    {
+        get => _optionsService.Options.TimerReminder;
+        set
+        {
+            if (_optionsService.Options.TimerReminder != value)
+            {
+                _optionsService.Options.TimerReminder = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool ShouldGenerateReports
     {
         get => _optionsService.Options.GenerateTimingReports;
