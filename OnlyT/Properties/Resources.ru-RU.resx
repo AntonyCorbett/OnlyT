@@ -724,4 +724,12 @@ Shift - Increase 5m</value>
     <value>Обратите внимание, что для вывода задается значение NDI с помощью параметра командной строки.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>Should you have started the timer?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Pop-up reminders</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
+  </data>
 </root>
