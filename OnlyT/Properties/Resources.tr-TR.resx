@@ -453,11 +453,15 @@
     <value>OnlyT'yi sadece dili değiştirdikten sonra yeniden başlatın.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Azalt</value>
+    <value>1dk Azalt
+Ctrl - 15sn Azalt
+Shift - 5dk Azalt</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Arttır</value>
+    <value>1dk Artır
+Ctrl - 15sn Artır 
+Shift - 5dk Artır</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -719,5 +723,13 @@
   <data name="TIMER_ON_NDI" xml:space="preserve">
     <value>Çıktının bir komut satırı ayarı aracılığıyla NDI olarak ayarlandığını unutmayın.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>Should you have started the timer?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Pop-up reminders</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
 </root>

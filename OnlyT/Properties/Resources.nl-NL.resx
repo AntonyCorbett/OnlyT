@@ -453,11 +453,15 @@
     <value>Start OnlyT opnieuw na het wijzigen van de taal.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Verlagen</value>
+    <value>Verhoog 1m
+Ctrl - Verhoog 15s
+Shift - Verhoog 5 m</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Verhogen</value>
+    <value>Verhoog 1m
+Ctrl - Verhoog 15s
+Shift - Verhoog 5 m</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -717,7 +721,15 @@
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>Merk op dat uitvoer naar NDI ingesteld wordt via een command-line instelling.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>Should you have started the timer?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Pop-up reminders</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
 </root>
