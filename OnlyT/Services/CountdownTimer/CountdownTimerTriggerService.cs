@@ -48,7 +48,8 @@ internal sealed class CountdownTimerTriggerService : ICountdownTimerTriggerServi
                 if (trigger != null)
                 {
                     secondsOffset = (int)(now - trigger.Start).TotalSeconds;
-                    return secondsOffset >= 5;
+                    var secondsToEndOfPeriod = (trigger.End - now).TotalSeconds;
+                    return secondsToEndOfPeriod >= 10;
                 }
             }
         }
