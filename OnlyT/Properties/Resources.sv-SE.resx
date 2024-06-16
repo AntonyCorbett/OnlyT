@@ -453,11 +453,15 @@
     <value>Vänligen starta om OnlyT efter byte av språk.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Minska</value>
+    <value>Minska 1m
+Ctrl - Minska 15s
+Shift - Minska 5m</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Öka</value>
+    <value>Öka 1m
+Ctrl - Öka 15s
+Shift - Öka 5m</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -719,5 +723,13 @@
   <data name="TIMER_ON_NDI" xml:space="preserve">
     <value>Observera att utdata är inställd på NDI via en kommandoradsinställning.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>Should you have started the timer?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Pop-up reminders</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
 </root>
