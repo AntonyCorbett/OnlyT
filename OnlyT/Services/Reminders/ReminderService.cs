@@ -208,14 +208,14 @@ internal class ReminderService : IReminderService
                     : itemWithoutCounselSeconds;
                 break;
 
-            case TalkTypesAutoMode.LivingPart1:
             case TalkTypesAutoMode.LivingPart2:
             case TalkTypesAutoMode.CongBibleStudy:
                 triggerSeconds = itemWithoutCounselSeconds;
                 break;
 
             case TalkTypesAutoMode.PublicTalk:
-                triggerSeconds = 300; // to include song
+            case TalkTypesAutoMode.LivingPart1:
+                triggerSeconds = 300; // to include middle song
                 break;
 
             default:
