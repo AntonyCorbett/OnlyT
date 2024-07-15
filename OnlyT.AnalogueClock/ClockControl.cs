@@ -16,54 +16,54 @@
     {
         public static readonly DependencyProperty IsFlatProperty =
             DependencyProperty.Register(
-                "IsFlat",
+                nameof(IsFlat),
                 typeof(bool),
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(IsFlatPropertyChanged));
 
         public static readonly DependencyProperty DigitalTimeFormatShowLeadingZeroProperty =
             DependencyProperty.Register(
-                "DigitalTimeFormatShowLeadingZero", 
+                nameof(DigitalTimeFormatShowLeadingZero), 
                 typeof(bool), 
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(DigitalTimeFormatShowLeadingZeroPropertyChanged));
 
         public static readonly DependencyProperty DigitalTimeFormat24HoursProperty =
             DependencyProperty.Register(
-                "DigitalTimeFormat24Hours", 
+                nameof(DigitalTimeFormat24Hours), 
                 typeof(bool), 
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(DigitalTimeFormat24HoursPropertyChanged));
 
         public static readonly DependencyProperty DigitalTimeFormatAMPMProperty =
             DependencyProperty.Register(
-                "DigitalTimeFormatAMPM", 
+                nameof(DigitalTimeFormatAMPM), 
                 typeof(bool), 
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(DigitalTimeFormatAMPMPropertyChanged));
 
         public static readonly DependencyProperty IsRunningProperty =
             DependencyProperty.Register(
-                "IsRunning", 
+                nameof(IsRunning), 
                 typeof(bool), 
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(IsRunningPropertyChanged));
 
         public static readonly DependencyProperty CurrentTimeHrMinProperty =
             DependencyProperty.Register(
-                "CurrentTimeHrMin", 
+                nameof(CurrentTimeHrMin), 
                 typeof(string), 
                 typeof(ClockControl));
 
         public static readonly DependencyProperty CurrentTimeSecProperty =
             DependencyProperty.Register(
-                "CurrentTimeSec", 
+                nameof(CurrentTimeSec), 
                 typeof(string), 
                 typeof(ClockControl));
 
         public static readonly DependencyProperty DurationSectorProperty =
             DependencyProperty.Register(
-                "DurationSector", 
+                nameof(DurationSector), 
                 typeof(DurationSector), 
                 typeof(ClockControl),
                 new FrameworkPropertyMetadata(DurationSectorPropertyChanged));

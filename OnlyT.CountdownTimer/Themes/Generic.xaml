@@ -7,13 +7,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CountdownControl}">
                     <Viewbox>
-                        <Border Background="{TemplateBinding Background}"
+                        <Border
+                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
 
-                            <Canvas Width="500" Height="300" x:Name="CountdownCanvas">
-                                
-                            </Canvas>
+                            <Canvas
+                                x:Name="CountdownCanvas"
+                                Width="500"
+                                Height="300" />
                         </Border>
                     </Viewbox>
                 </ControlTemplate>

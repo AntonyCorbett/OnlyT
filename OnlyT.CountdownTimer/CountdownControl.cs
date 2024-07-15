@@ -13,14 +13,14 @@
     {
         public static readonly DependencyProperty CountdownDurationMinsProperty =
             DependencyProperty.Register(
-                "CountdownDurationMins",
+                nameof(CountdownDurationMins),
                 typeof(int),
                 typeof(CountdownControl),
                 new FrameworkPropertyMetadata(CountdownDurationMinsPropertyChanged));
 
         public static readonly DependencyProperty ElementsToShowProperty =
             DependencyProperty.Register(
-                "ElementsToShow",
+                nameof(ElementsToShow),
                 typeof(ElementsToShow),
                 typeof(CountdownControl),
                 new FrameworkPropertyMetadata(ElementsToShowPropertyChanged));
@@ -107,8 +107,8 @@
                 _timer!.Stop();
 
                 Animations.FadeOut(
-                    this, 
-                    new FrameworkElement[] { _donut, _secondsBall, _pie, _time },
+                    this,
+                    [_donut, _secondsBall, _pie, _time],
                     (_, _) => Visibility = Visibility.Hidden);
             });
         }
@@ -246,7 +246,7 @@
             CheckVisualElements();
 
             Visibility = Visibility.Visible;
-            Animations.FadeIn(this, new FrameworkElement[] { _donut!, _secondsBall!, _pie!, _time! });
+            Animations.FadeIn(this, [_donut!, _secondsBall!, _pie!, _time!]);
         }
 
         private void InitLayout(Canvas canvas)
