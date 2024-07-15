@@ -1,5 +1,6 @@
 ﻿namespace OnlyT.Services.TalkSchedule
 {
+    using System;
     using System.Collections.Generic;
     using Models;
 
@@ -14,5 +15,7 @@
         void Reset();
 
         bool SuccessGettingAutoFeedForMidWeekMtg();
+
+        void SetModifiedDuration(int talkId, TimeSpan? modifiedDuration);
     }
 }

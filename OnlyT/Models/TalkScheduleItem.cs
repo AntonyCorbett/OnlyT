@@ -47,6 +47,11 @@ public class TalkScheduleItem : ObservableObject
     public string OriginalDurationAsString =>
         TimeFormatter.FormatTimerDisplayString((int)OriginalDuration.TotalSeconds);
 
+    public string OriginalOrModifiedDurationAsString =>
+        TimeFormatter.FormatTimerDisplayString(ModifiedDuration == null 
+            ? (int)OriginalDuration.TotalSeconds
+            : (int)ModifiedDuration.Value.TotalSeconds);
+
     public bool? CountUp { get; set; }
 
     /// <summary>
@@ -111,6 +116,8 @@ public class TalkScheduleItem : ObservableObject
             if (_modifiedDuration != value)
             {
                 _modifiedDuration = value != null && value == OriginalDuration ? null : value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(OriginalOrModifiedDurationAsString));
             }
         }
     }

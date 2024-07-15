@@ -37,7 +37,7 @@
                 <TextBlock
                     Grid.Column="0"
                     Foreground="{StaticResource MaterialDesignBodyLight}"
-                    Text="{Binding OriginalDurationAsString, Mode=OneWay}" />
+                    Text="{Binding OriginalOrModifiedDurationAsString, Mode=OneWay}" />
                 <TextBlock
                     Grid.Column="1"
                     Text="{Binding Name, Mode=OneWay}"
@@ -56,7 +56,7 @@
                 <TextBlock
                     Grid.Column="0"
                     Foreground="{StaticResource MaterialDesignBodyLight}"
-                    Text="{Binding OriginalDurationAsString, Mode=OneWay}" />
+                    Text="{Binding OriginalOrModifiedDurationAsString, Mode=OneWay}" />
                 <TextBlock
                     Grid.Column="1"
                     Text="{Binding Name, Mode=OneWay}"

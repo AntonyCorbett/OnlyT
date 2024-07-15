@@ -54,6 +54,15 @@ namespace OnlyT.Services.TalkSchedule
             return TalkScheduleAuto.SuccessGettingAutoFeedForMidWeekMtg;
         }
 
+        public void SetModifiedDuration(int talkId, TimeSpan? modifiedDuration)
+        {
+            var t = GetTalkScheduleItem(talkId);
+            if (t != null)
+            {
+                t.ModifiedDuration = modifiedDuration;
+            }
+        }
+
         public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
         {
             return _optionsService.Options.OperatingMode switch

@@ -71,4 +71,13 @@ internal sealed class MockTalksScheduleService : ITalkScheduleService
     {
         return true;
     }
+
+    public void SetModifiedDuration(int talkId, TimeSpan? modifiedDuration)
+    {
+        var t = GetTalkScheduleItem(talkId);
+        if (t != null)
+        {
+            t.ModifiedDuration = modifiedDuration;
+        }
+    }
 }

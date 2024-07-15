@@ -744,6 +744,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
             }
                 
             SetDurationStringAttributes(talk);
+
+            _scheduleService.SetModifiedDuration(talk.Id, talk.ModifiedDuration);
         }
     }
 
