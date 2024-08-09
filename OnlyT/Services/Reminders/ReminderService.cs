@@ -179,7 +179,7 @@ internal class ReminderService : IReminderService
         }
 
         var triggerSeconds = 60;
-        const int itemWithCounselSeconds = 100;
+        const int itemWithCounselSeconds = 110;
         const int itemWithoutCounselSeconds = 45;
 
         switch ((TalkTypesAutoMode)_lastTalkStopped.Id)
@@ -203,18 +203,25 @@ internal class ReminderService : IReminderService
             case TalkTypesAutoMode.MinistryItem2:
             case TalkTypesAutoMode.MinistryItem3:
             case TalkTypesAutoMode.MinistryItem4:
-                triggerSeconds = _lastTalkStopped.IsStudentTalk
-                    ? itemWithCounselSeconds
-                    : itemWithoutCounselSeconds;
+                if ((TalkTypesAutoMode)_nextTalkIdToStart == TalkTypesAutoMode.LivingPart1)
+                {
+                    triggerSeconds = 300; // to include middle song
+                }
+                else
+                {
+                    triggerSeconds = _lastTalkStopped.IsStudentTalk
+                        ? itemWithCounselSeconds
+                        : itemWithoutCounselSeconds;
+                }
                 break;
 
+            case TalkTypesAutoMode.LivingPart1:
             case TalkTypesAutoMode.LivingPart2:
             case TalkTypesAutoMode.CongBibleStudy:
                 triggerSeconds = itemWithoutCounselSeconds;
                 break;
 
             case TalkTypesAutoMode.PublicTalk:
-            case TalkTypesAutoMode.LivingPart1:
                 triggerSeconds = 300; // to include middle song
                 break;
 
