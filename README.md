@@ -9,14 +9,13 @@ Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed 
 ### System Requirements
 
 * Windows 10
-* .NET 5 x86 or later
 * 2GB RAM
 * 20MB Hard disk space
 * Internet connection (for "Automatic" Operating Mode only)
 
 ### Download
 
-If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file (there is also a portable version if you'd prefer to just copy a folder). If you choose the portable option, you may also need to download and install the Microsoft .NET 5.0 Desktop runtime (x86) from [here](https://dotnet.microsoft.com/download/dotnet/5.0/runtime).
+If you just want to install the application, please download the [OnlyTSetup.exe](https://github.com/AntonyCorbett/OnlyT/releases/latest) file (there is also a portable version if you'd prefer to just copy a folder).
 
 ### Help
 
@@ -26,7 +25,7 @@ See the [FAQ](https://github.com/AntonyCorbett/OnlyT/wiki/FAQ) for frequently as
 
 ### License, etc
 
-OnlyT is Copyright &copy; 2018, 2021 Antony Corbett and other contributors under the [MIT license](LICENSE).
+OnlyT is Copyright &copy; 2018, 2024 Antony Corbett and other contributors under the [MIT license](LICENSE).
 
 NAudio (Mark Heath) is used under the Microsoft Public License (Ms-PL). MaterialDesign themes (James Willock, Mulholland Software and Contributors) is used under the MIT license. NUglify, Copyright (c) 2016, Alexandre Mutel. QRCode (Raffael Herrmann) is used under MIT. Serilog is used under the Apache License Version 2.0, January 2004. LiteDB (Mauricio David) is used under the MIT License. PDFSharp is used under the MIT License.
 
