@@ -33,9 +33,9 @@
 
                         foreach (XElement elem in items.Elements("item"))
                         {
-                            var name = (string?) elem.Attribute("name") ?? $"Unknown name {talkId}";
-                            var sectionNameInternal = (string?) elem.Attribute("section") ?? $"Unknown section {talkId}";
-                            var sectionNameLocalised = (string?) elem.Attribute("section") ?? $"Unknown section {talkId}";
+                            var name = (string?)elem.Attribute("name") ?? $"Unknown name {talkId}";
+                            var sectionNameInternal = (string?)elem.Attribute("section") ?? $"Unknown section {talkId}";
+                            var sectionNameLocalised = (string?)elem.Attribute("section") ?? $"Unknown section {talkId}";
 
                             result.Add(new TalkScheduleItem(talkId, name, sectionNameInternal, sectionNameLocalised)
                             {
@@ -44,7 +44,8 @@
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
                                 BellApplicable = AttributeToBool(elem.Attribute("bell"), false),
                                 AutoBell = autoBell,
-                                PersistFinalTimerValue = AttributeToBool(elem.Attribute("persist"), false)
+                                PersistFinalTimerValue = AttributeToBool(elem.Attribute("persist"), false),
+                                AllowAdaptive = AttributeToBool(elem.Attribute("adaptive"), false)
                             });
 
                             ++talkId;
@@ -96,8 +97,8 @@
 
         private static TimeSpan StringToTimeSpan(string s)
         {
-            return TimeSpan.TryParse(s, out var result) 
-                ? result 
+            return TimeSpan.TryParse(s, out var result)
+                ? result
                 : default;
         }
     }
