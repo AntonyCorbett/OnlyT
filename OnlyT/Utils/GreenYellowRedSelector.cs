@@ -24,7 +24,7 @@
                 return RedBrush;
             }
 
-            if (secsRemaining <= 30)
+            if (secsRemaining <= 60)
             {
                 return YellowBrush;
             }
