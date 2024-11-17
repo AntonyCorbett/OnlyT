@@ -54,6 +54,8 @@ public class TalkScheduleItem : ObservableObject
 
     public bool? CountUp { get; set; }
 
+    public int ClosingSecs { get; set; } = 30;
+
     /// <summary>
     /// Gets or sets the duration for which the timer ran (or null if not run yet)
     /// </summary>

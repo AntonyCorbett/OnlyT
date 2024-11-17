@@ -40,6 +40,7 @@
                             result.Add(new TalkScheduleItem(talkId, name, sectionNameInternal, sectionNameLocalised)
                             {
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
+                                ClosingSecs = AttributeToInt(elem.Attribute("closingSecs"), 30),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
                                 BellApplicable = AttributeToBool(elem.Attribute("bell"), false),
@@ -78,6 +79,13 @@
             return string.IsNullOrEmpty(attribute?.Value)
                 ? defaultValue
                 : Convert.ToBoolean(attribute.Value);
+        }
+
+        private static int AttributeToInt(XAttribute? attribute, int defaultValue)
+        {
+            return string.IsNullOrEmpty(attribute?.Value)
+                ? defaultValue
+                : Convert.ToInt32(attribute.Value);
         }
 
         private static bool AttributeToBool(XAttribute? attribute, bool defaultValue)

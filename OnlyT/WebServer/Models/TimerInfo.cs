@@ -67,4 +67,7 @@ internal sealed class TimerInfo
 
     [JsonProperty(PropertyName = "countUp")]
     public bool CountUp { get; set; }
+
+    [JsonProperty(PropertyName = "closingSecs")]
+    public int ClosingSecs { get; set; }
 }

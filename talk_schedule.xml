@@ -21,9 +21,13 @@
   <!--Use the optional "persist" attribute to specify that a timer value should remain on-screen after 
   the timer has stopped (useful for a chairman to note the speaker's time)-->
 
+  <!--Use the optional "closing" attribute to specify the duration of the closing phase of an item. At 
+  this point, the colour of text changes from green to yellow to indicate that the speaker should plan 
+  finish. Default is 30 seconds-->
+
   <items>
     <item name="Welcome" duration="00:03:00" editable="true" countup="true" />
-    <item name="Keynote" duration="01:00:00" editable="true" bell="true" countup="false" persist="true" />    
+    <item name="Keynote" duration="01:00:00" editable="true" bell="true" countup="false" persist="true" closing="60" />    
     <item name="Concluding Comments" duration="00:03:00" editable="true" />
   </items>  
   

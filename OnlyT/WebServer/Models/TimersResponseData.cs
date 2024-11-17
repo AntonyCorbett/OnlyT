@@ -69,7 +69,8 @@ internal sealed class TimersResponseData
             ActualDurationSecs = (int)talk.ActualDuration.TotalSeconds,
             UsesBell = talk.BellApplicable,
             CompletedTimeSecs = talk.CompletedTimeSecs,
-            CountUp = talk.CountUp ?? countUpByDefault
+            CountUp = talk.CountUp ?? countUpByDefault,
+            ClosingSecs = talk.ClosingSecs
         };
     }
 }
