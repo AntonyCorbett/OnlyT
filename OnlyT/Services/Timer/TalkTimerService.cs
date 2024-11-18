@@ -141,7 +141,8 @@
                 TalkId = _talkId,
                 TargetSeconds = _targetSecs,
                 IsRunning = IsRunning,
-                TimeElapsed = CurrentTimeElapsed
+                TimeElapsed = CurrentTimeElapsed,
+                ClosingSecs = _closingSecs
             };
         }
         

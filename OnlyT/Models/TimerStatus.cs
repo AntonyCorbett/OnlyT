@@ -16,4 +16,7 @@ public class TimerStatus
 
     [JsonProperty(PropertyName = "timeElapsed")]
     public TimeSpan TimeElapsed { get; set; }
+
+    [JsonProperty(PropertyName = "closingSecs")]
+    public int ClosingSecs { get; set; }
 }

@@ -163,6 +163,7 @@
         let currentMode = "Nameplate";
         let currentDisplayMode = "Nameplate";
         let currentTargetSecs = 0;
+        let closingSecs = 30;
         let currentlyCountingUp = false;
         let timerStartDateTime = new Date();
         let modeTransition = false;
@@ -205,8 +206,8 @@
 
                                 currPart = currPart.replace('{timer}', timerText);
                                 if (!!timerInfo.completedTimeSecs) {
-                                    const talkRow = {className: null};
-                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, talkRow);
+                                    const talkRow = { className: null };
+                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, talkRow);
                                     currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
                                     currPart = currPart.replace('"talk_info"', '"talk_info completed"');
                                 } else {
@@ -234,6 +235,7 @@
                             const currentTimerMins = parseInt(timeElapsedParts[1]) + (currentTimerHours * 60);
                             const currentTimerSecs = parseFloat(timeElapsedParts[2]);
                             currentTargetSecs = parseInt(jsondata.status.targetSeconds);
+                            closingSecs = parseInt(jsondata.status.closingSecs);
                             currentlyCountingUp = currentTalkData.countUp;
 
                             const serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000);
@@ -258,7 +260,7 @@
                                     talkRow.className = "talk_info completed";
                                     const timerCell = talkRow.getElementsByTagName('td')[1];
                                     timerCell.innerHTML = timerText;
-                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerCell);
+                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, timerCell);
                                 }
                             }
                         }
@@ -291,11 +293,11 @@
             return `${("0" + major).slice(-2)}:${("0" + minor).slice(-2)}`;
         }
 
-        function setClockColour(remainingSecs, targetElem) {
+        function setClockColour(remainingSecs, closingSecs, targetElem) {
             if (remainingSecs <= 0) {
                 targetElem.className = "clockstyle_red";
             }
-            else if (remainingSecs <= 30) {
+            else if (remainingSecs <= closingSecs) {
                 targetElem.className = "clockstyle_yellow";
             }
             else {
@@ -322,8 +324,8 @@
 
                     let timerCell = null;
                     if (!!currentTalk && !!(timerCell = currentTalk.getElementsByTagName('td')[1])) {
-                        currentTalk.className = 'talk_info';
-                        setClockColour(remainingSecs, timerCell);
+                        currentTalk.className = 'talk_info';                        
+                        setClockColour(remainingSecs, closingSecs, timerCell);
                     }
                     currentDisplayMode = currentMode;
 

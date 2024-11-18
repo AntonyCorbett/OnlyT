@@ -14,7 +14,7 @@ using Throttling;
 internal sealed class ApiRouter : BaseApiController
 {
     private const int OldestSupportedApiVer = 1;
-    private const int CurrentApiVer = 3;
+    private const int CurrentApiVer = 4;
 
     private readonly ApiThrottler _apiThrottler;
     private readonly IOptionsService _optionsService;
