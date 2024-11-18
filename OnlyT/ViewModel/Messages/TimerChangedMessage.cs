@@ -5,11 +5,12 @@
 /// </summary>
 internal sealed class TimerChangedMessage
 {
-    public TimerChangedMessage(int remainingSecs, int elapsedSecs, bool timerIsRunning, bool countUp)
+    public TimerChangedMessage(int remainingSecs, int elapsedSecs, bool timerIsRunning, int closingSecs, bool countUp)
     {
         RemainingSecs = remainingSecs;
         ElapsedSecs = elapsedSecs;
         TimerIsRunning = timerIsRunning;
+        ClosingSecs = closingSecs;
         CountUp = countUp;
     }
 
@@ -18,6 +19,8 @@ internal sealed class TimerChangedMessage
     public int ElapsedSecs { get; }
 
     public bool TimerIsRunning { get; }
+
+    public int ClosingSecs { get; }
 
     public bool CountUp { get; }
 }

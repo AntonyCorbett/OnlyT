@@ -16,6 +16,7 @@
         private readonly DispatcherTimer _timer = new(DispatcherPriority.Render);
         private readonly TimeSpan _timerInterval = TimeSpan.FromMilliseconds(100);
         private int _targetSecs = 600;
+        private int _closingSecs = TalkScheduleItem.DefaultClosingSecs;
         private int? _talkId;
         private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
         private int _currentSecondsElapsed;
@@ -51,7 +52,8 @@
                     {
                         TargetSecs = _targetSecs,
                         ElapsedSecs = _currentSecondsElapsed,
-                        IsRunning = IsRunning
+                        IsRunning = IsRunning,
+                        ClosingSecs = _closingSecs,
                     });
                 }
             }
@@ -73,10 +75,11 @@
             }
         }
 
-        public void SetupTalk(int talkId, int targetSeconds)
+        public void SetupTalk(int talkId, int targetSeconds, int closingSecs)
         {
             _talkId = talkId;
             _targetSecs = targetSeconds;
+            _closingSecs = closingSecs;
         }
 
         public TimerStartStopEventArgs StartTalkTimerFromApi(int talkId)
@@ -149,7 +152,8 @@
                 TargetSeconds = _targetSecs,
                 ElapsedTime = _currentTimeElapsed,
                 IsRunning = IsRunning,
-                IsCountingUp = _isCountingUp
+                IsCountingUp = _isCountingUp,
+                ClosingSecs = _closingSecs,
             };
         }
 

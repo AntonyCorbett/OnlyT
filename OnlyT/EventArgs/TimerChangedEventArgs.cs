@@ -12,5 +12,7 @@ public class TimerChangedEventArgs : System.EventArgs
 
     public bool IsRunning { get; set; }
 
+    public int ClosingSecs { get; set; }
+
     public int RemainingSecs => TargetSecs - ElapsedSecs;
 }

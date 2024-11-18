@@ -95,7 +95,7 @@ internal sealed class WebPageController
             case ClockServerMode.Timer:
                 var countingUp = timerInfo.IsCountingUp ? 1 : 0;
                 sb.AppendLine(
-                    $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" countUp=\"{countingUp}\"/>");
+                    $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" countUp=\"{countingUp}\" closingSecs=\"{timerInfo.ClosingSecs}\"/>");
                 break;
 
             default:

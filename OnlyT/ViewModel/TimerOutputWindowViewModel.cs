@@ -277,7 +277,7 @@ public class TimerOutputWindowViewModel : ObservableObject
     {
         if (message.TimerIsRunning)
         {
-            TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs);
+            TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(message.RemainingSecs, message.ClosingSecs);
                 
             TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp
                 ? message.ElapsedSecs

@@ -11,6 +11,8 @@ namespace OnlyT.Models;
 /// </summary>
 public class TalkScheduleItem : ObservableObject
 {
+    public const int DefaultClosingSecs = 30;
+
     /// <summary>
     /// Manually modified duration (after user modification)
     /// </summary>
@@ -54,7 +56,7 @@ public class TalkScheduleItem : ObservableObject
 
     public bool? CountUp { get; set; }
 
-    public int ClosingSecs { get; set; } = 30;
+    public int ClosingSecs { get; set; } = DefaultClosingSecs;
 
     /// <summary>
     /// Gets or sets the duration for which the timer ran (or null if not run yet)

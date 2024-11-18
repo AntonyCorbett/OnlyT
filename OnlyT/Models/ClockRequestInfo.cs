@@ -11,4 +11,6 @@ public class ClockRequestInfo
     public bool IsRunning { get; set; }
 
     public bool IsCountingUp { get; set; }
+
+    public int ClosingSecs { get; set; }
 }

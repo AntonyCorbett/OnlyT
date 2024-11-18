@@ -22,7 +22,7 @@
 
         TimerStatus GetStatus();
 
-        void SetupTalk(int talkId, int targetSeconds);
+        void SetupTalk(int talkId, int targetSeconds, int closingSecs);
 
         TimerStartStopEventArgs StartTalkTimerFromApi(int talkId);
 

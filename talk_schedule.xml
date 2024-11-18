@@ -22,8 +22,8 @@
   the timer has stopped (useful for a chairman to note the speaker's time)-->
 
   <!--Use the optional "closing" attribute to specify the duration of the closing phase of an item. At 
-  this point, the colour of text changes from green to yellow to indicate that the speaker should plan 
-  finish. Default is 30 seconds-->
+  this point, the timer's text colour changes from green to yellow, indicating that the speaker should 
+  begin to wind up! Default is 30 seconds. Set to 0 to turn off the feature-->
 
   <items>
     <item name="Welcome" duration="00:03:00" editable="true" countup="true" />

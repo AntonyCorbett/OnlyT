@@ -348,7 +348,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
                 IsOvertime = false;
 
-                _timerService.SetupTalk(_talkId, TargetSeconds);
+                _timerService.SetupTalk(_talkId, TargetSeconds, talk?.ClosingSecs ?? TalkScheduleItem.DefaultClosingSecs);
             }
         }
     }
@@ -682,11 +682,11 @@ public class OperatorPageViewModel : ObservableObject, IPage
         
     private void TimerChangedHandler(object? sender, OnlyT.EventArgs.TimerChangedEventArgs e)
     {
-        TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs);
+        TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs, e.ClosingSecs);
         _secondsElapsed = e.ElapsedSecs;
         SetSecondsRemaining(e.RemainingSecs);
 
-        WeakReferenceMessenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, _countUp));
+        WeakReferenceMessenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, e.ClosingSecs, _countUp));
 
         if (e.RemainingSecs == 0)
         {

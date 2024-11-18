@@ -82,6 +82,7 @@
 			var currentMode = "Nameplate";
 			var currentDisplayMode = "Nameplate";
 			var currentTargetSecs = 0;
+			var closingSecs = 30;
 			var currentTimerMins = 0;
 			var currentTimerSecs = 0;
 			var currentTimerMillisecs = 0;
@@ -127,6 +128,7 @@
 										currentTimerSecs=parseInt(entry.getAttribute("secs"));
 										currentTimerMillisecs=parseInt(entry.getAttribute("ms"));
 										currentTargetSecs=parseInt(entry.getAttribute("targetSecs"));
+										closingSecs=parseInt(entry.getAttribute("closingSecs"));
 										currentlyCountingUp=parseInt(entry.getAttribute("countUp")) == 1;
 										
 										var serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000) + currentTimerMillisecs;
@@ -197,14 +199,14 @@
 				}
 			}
 
-			function setClockColour(remainingSecs)
+			function setClockColour(remainingSecs, closingSecs)
 			{
 				if(remainingSecs <= 0)
 				{
 					textElem.className = "clockstyle_red";					
 				}
 
-				else if(remainingSecs <= 30)
+				else if(remainingSecs <= closingSecs)
 				{
 					textElem.className = "clockstyle_yellow";					
 				}
@@ -249,7 +251,7 @@
 						var targetSecs = currentTargetSecs;
 						var remainingSecs = targetSecs - clientTimerTotalElapsedSecs;
 						
-						setClockColour(remainingSecs);
+						setClockColour(remainingSecs, closingSecs);
 						
 						currentDisplayMode = currentMode;
 

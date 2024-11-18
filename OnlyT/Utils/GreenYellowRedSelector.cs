@@ -16,15 +16,16 @@
         /// Gets a brush (red, yellow or green)
         /// </summary>
         /// <param name="secsRemaining">Seconds remaining in the talk (can be negative)</param>
+        /// <param name="closingSecs">Closing secs duration (default 30)</param>
         /// <returns>A brush to use when drawing time values etc.</returns>
-        public static Brush GetBrushForTimeRemaining(int secsRemaining)
+        public static Brush GetBrushForTimeRemaining(int secsRemaining, int closingSecs)
         {
             if (secsRemaining <= 0)
             {
                 return RedBrush;
             }
 
-            if (secsRemaining <= 30)
+            if (secsRemaining <= closingSecs)
             {
                 return YellowBrush;
             }

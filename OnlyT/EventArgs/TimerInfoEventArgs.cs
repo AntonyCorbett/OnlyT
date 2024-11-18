@@ -17,4 +17,6 @@ public class TimerInfoEventArgs : System.EventArgs
     public bool Use24HrFormat { get; set; }
 
     public bool IsCountingUp { get; set; }
+
+    public int ClosingSecs { get; set; }
 }

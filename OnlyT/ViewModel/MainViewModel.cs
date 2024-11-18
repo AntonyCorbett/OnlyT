@@ -210,6 +210,7 @@ public class MainViewModel : ObservableObject
             timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
             timerData.Secs = info.ElapsedTime.Seconds;
             timerData.Millisecs = info.ElapsedTime.Milliseconds;
+            timerData.ClosingSecs = info.ClosingSecs;
 
             timerData.IsCountingUp = info.IsCountingUp;
         }

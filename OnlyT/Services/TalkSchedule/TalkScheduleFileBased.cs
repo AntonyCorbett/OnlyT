@@ -40,7 +40,7 @@
                             result.Add(new TalkScheduleItem(talkId, name, sectionNameInternal, sectionNameLocalised)
                             {
                                 CountUp = AttributeToNullableBool(elem.Attribute("countup"), null),
-                                ClosingSecs = AttributeToInt(elem.Attribute("closingSecs"), 30),
+                                ClosingSecs = AttributeToInt(elem.Attribute("closingSecs"), TalkScheduleItem.DefaultClosingSecs),
                                 OriginalDuration = AttributeToDuration(elem.Attribute("duration")),
                                 Editable = AttributeToBool(elem.Attribute("editable"), false),
                                 BellApplicable = AttributeToBool(elem.Attribute("bell"), false),
