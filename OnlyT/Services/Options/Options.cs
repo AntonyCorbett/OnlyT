@@ -41,7 +41,6 @@
             PersistStudentTime = true;
             MeetingStartTimes = new MeetingStartTimes.MeetingStartTimes();
             ShowDigitalSeconds = true;
-            JwLibraryCompatibilityMode = true;
             CountdownFrame = true;
             TimerFrame = true;
             LogEventLevel = LogEventLevel.Information;
@@ -95,8 +94,6 @@
         public bool ShowCircuitVisitToggle { get; set; }
 
         public bool PersistStudentTime { get; set; }
-
-        public bool JwLibraryCompatibilityMode { get; set; }
 
         public bool AlwaysOnTop { get; set; }
 

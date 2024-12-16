@@ -366,19 +366,6 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
-    public bool JwLibraryCompatibilityMode
-    {
-        get => _optionsService.Options.JwLibraryCompatibilityMode;
-        set
-        {
-            if (_optionsService.Options.JwLibraryCompatibilityMode != value)
-            {
-                _optionsService.Options.JwLibraryCompatibilityMode = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
     public bool PersistStudentTime
     {
         get => _optionsService.Options.PersistStudentTime;

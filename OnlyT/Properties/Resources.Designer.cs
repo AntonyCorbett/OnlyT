@@ -650,24 +650,6 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JW Library® compatibility mode.
-        /// </summary>
-        public static string JW_COMPAT_MODE {
-            get {
-                return ResourceManager.GetString("JW_COMPAT_MODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;JW Library&quot; is a registered trademark of Watch Tower Bible and Tract Society of Pennsylvania.
-        /// </summary>
-        public static string JWL_TRADEMARK {
-            get {
-                return ResourceManager.GetString("JWL_TRADEMARK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string LANGUAGE {

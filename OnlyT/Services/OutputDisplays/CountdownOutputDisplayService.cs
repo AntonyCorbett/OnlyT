@@ -177,8 +177,6 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
 
             _countdownWindow?.Close();
             _countdownWindow = null;
-
-            BringJwlToFront();
         }
         catch (Exception ex)
         {

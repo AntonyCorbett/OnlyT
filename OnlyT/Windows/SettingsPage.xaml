@@ -211,11 +211,6 @@
                             IsChecked="{Binding PersistStudentTime, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
-                        <CheckBox
-                            Content="{x:Static resx:Resources.JW_COMPAT_MODE}"
-                            IsChecked="{Binding JwLibraryCompatibilityMode, Mode=TwoWay}"
-                            Style="{StaticResource SettingsCheckBox}" />
-
                         <StackPanel Orientation="Horizontal">
                             <CheckBox
                                 Content="{x:Static resx:Resources.SHOULD_GENERATE_REPORTS}"
@@ -231,13 +226,6 @@
                                 Kind="FolderOpen"
                                 MouseLeftButtonDown="ReportIconMouseLeftButtonDown" />
                         </StackPanel>
-
-                        <TextBlock
-                            Width="305"
-                            HorizontalAlignment="Left"
-                            Style="{StaticResource MiscNotesStyle}"
-                            Text="{x:Static resx:Resources.JWL_TRADEMARK}"
-                            TextWrapping="Wrap" />
 
                     </StackPanel>
                 </GroupBox>

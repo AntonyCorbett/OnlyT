@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Forms;
 using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Models;
-using OnlyT.Services.JwLibrary;
 using OnlyT.Services.Options;
 using OnlyT.Utils;
 using OnlyT.ViewModel.Messages;
@@ -43,15 +42,6 @@ internal class OutputDisplayServiceBase
             window.Show();
 
             window.WindowState = WindowState.Maximized;
-        }
-    }
-
-    protected void BringJwlToFront()
-    {
-        if (_optionsService.Options.JwLibraryCompatibilityMode)
-        {
-            JwLibHelper.BringToFront();
-            Thread.Sleep(100);
         }
     }
 
