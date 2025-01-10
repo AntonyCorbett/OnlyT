@@ -18,7 +18,7 @@ using ToastNotifications.Position;
 
 namespace OnlyT.Services.Reminders;
 
-internal class ReminderService : IReminderService
+public class ReminderService : IReminderService
 {
     private const int DefaultIntervalBetweenRepeatedRemindersSeconds = 30;
     private const int LongIntervalBetweenRepeatedRemindersSeconds = 60;

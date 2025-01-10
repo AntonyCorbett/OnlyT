@@ -28,6 +28,7 @@ using Serilog;
 using OnlyT.Utils;
 using System.Diagnostics;
 using OnlyT.EventTracking;
+using OnlyT.Services.OverrunNotificationService;
 using OnlyT.Services.Reminders;
 
 namespace OnlyT
@@ -102,6 +103,7 @@ namespace OnlyT
             serviceCollection.AddSingleton<ITimerOutputDisplayService, TimerOutputDisplayService>();
             serviceCollection.AddSingleton<ICountdownOutputDisplayService, CountdownOutputDisplayService>();
             serviceCollection.AddSingleton<IReminderService, ReminderService>();
+            serviceCollection.AddSingleton<IOverrunService, OverrunService>();
             serviceCollection.AddSingleton(CommandLineServiceFactory);
 
             serviceCollection.AddSingleton<MainViewModel>();

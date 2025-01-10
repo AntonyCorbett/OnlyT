@@ -9,6 +9,7 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Services.Options;
 using Serilog;
 using OnlyT.Services.TalkSchedule;
+using System.Threading.Tasks;
 
 namespace OnlyT.Services.Timer;
 
@@ -112,6 +113,51 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
         Log.Logger.Debug($"Seconds to add = {secondsToApply:F1}");
             
         return talk.ActualDuration.Add(TimeSpan.FromSeconds(secondsToApply));
+    }
+
+    public TimeSpan? CalculateMeetingOverrun(int talkId)
+    {
+        var talk = _scheduleService.GetTalkScheduleItem(talkId);
+        if (talk == null)
+        {
+            return null;
+        }
+
+        Log.Logger.Debug($"Calculating meeting overrun");
+
+        EnsureMeetingStartTimeIsSet(talk);
+
+        if (_meetingStartTimeUtc == null)
+        {
+            return null;
+        }
+
+        var adaptiveMode = _optionsService.GetAdaptiveMode();
+
+        Log.Logger.Debug($"Adaptive mode = {adaptiveMode}");
+        if (adaptiveMode == AdaptiveMode.None)
+        {
+            return null;
+        }
+
+        var mtgEnd = GetPlannedMeetingEnd();
+        var totalTimeRemaining = mtgEnd - _dateTimeService.UtcNow();
+        var remainingProgramTimeRequired = GetRemainingProgramTimeRequired(talk);
+
+        var deviation = totalTimeRemaining - remainingProgramTimeRequired;
+
+        if (!IsDeviationSignificant(deviation))
+        {
+            return null;
+        }
+
+        if (adaptiveMode != AdaptiveMode.TwoWay && totalTimeRemaining >= remainingProgramTimeRequired)
+        {
+            // there is time in hand and we don't want to adaptively increase talk durations.
+            return null;
+        }
+
+        return deviation;
     }
 
     private TimeSpan GetRemainingProgramTimeRequired(TalkScheduleItem talk)

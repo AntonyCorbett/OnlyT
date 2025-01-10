@@ -8,6 +8,7 @@ using OnlyT.Services.Report;
 using OnlyT.Services.Snackbar;
 using OnlyT.Services.Bell;
 using OnlyT.Services.Options;
+using OnlyT.Services.OverrunNotificationService;
 using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
 using OnlyT.Utils;
@@ -43,7 +44,8 @@ namespace OnlyT.Tests
             var snackbarService = new Mock<ISnackbarService>();
             var dateTimeService = new MockDateTimeService();
             IQueryWeekendService queryWeekendService = new QueryWeekendService();
-            
+            var overrunService = new Mock<IOverrunService>();
+
             dateTimeService.Set(new DateTime(2019, 11, 28) + TimeSpan.FromHours(19));
 
             var vm = new OperatorPageViewModel(
@@ -56,7 +58,8 @@ namespace OnlyT.Tests
                 timingDataService.Object,
                 snackbarService.Object,
                 dateTimeService,
-                queryWeekendService);
+                queryWeekendService,
+                overrunService.Object);
 
             Assert.IsFalse(vm.IsRunning);
             Assert.IsFalse(vm.IsManualMode);

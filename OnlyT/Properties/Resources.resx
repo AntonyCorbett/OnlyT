@@ -724,4 +724,12 @@ Shift - Increase 5m</value>
     <value>Pop-up reminders</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
+  <data name="OVERRUN_MSG" xml:space="preserve">
+    <value>The meeting is running {0} minutes overtime</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="UNDERRUN_MSG" xml:space="preserve">
+    <value>The meeting is running {0} minutes undertime</value>
+    <comment>Notification message</comment>
+  </data>
 </root>

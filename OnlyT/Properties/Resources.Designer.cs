@@ -983,6 +983,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The meeting is running {0} minutes overtime.
+        /// </summary>
+        public static string OVERRUN_MSG {
+            get {
+                return ResourceManager.GetString("OVERRUN_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Persist student time.
         /// </summary>
         public static string PERSIST_STUDENT_TIME {
@@ -1505,6 +1514,15 @@ namespace OnlyT.Properties {
         public static string TimersHtmlTemplate {
             get {
                 return ResourceManager.GetString("TimersHtmlTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The meeting is running {0} minutes undertime.
+        /// </summary>
+        public static string UNDERRUN_MSG {
+            get {
+                return ResourceManager.GetString("UNDERRUN_MSG", resourceCulture);
             }
         }
         

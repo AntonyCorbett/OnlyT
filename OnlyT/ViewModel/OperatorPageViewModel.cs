@@ -29,6 +29,7 @@ using OnlyT.Services.Timer;
 using OnlyT.Utils;
 using OnlyT.WebServer.ErrorHandling;
 using OnlyT.EventTracking;
+using OnlyT.Services.OverrunNotificationService;
 
 namespace OnlyT.ViewModel;
 
@@ -60,6 +61,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private readonly IDateTimeService _dateTimeService;
     private readonly ISnackbarService _snackbarService;
     private readonly IQueryWeekendService _queryWeekendService;
+    private readonly IOverrunService _overrunService;
 
     private int _secondsElapsed;
     private bool _countUp;
@@ -86,7 +88,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
         ILocalTimingDataStoreService timingDataService,
         ISnackbarService snackbarService,
         IDateTimeService dateTimeService,
-        IQueryWeekendService queryWeekendService)
+        IQueryWeekendService queryWeekendService,
+        IOverrunService overrunService)
     {
         _scheduleService = scheduleService;
         _optionsService = optionsService;
@@ -98,6 +101,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         _timingDataService = timingDataService;
         _dateTimeService = dateTimeService;
         _queryWeekendService = queryWeekendService;
+        _overrunService = overrunService;
 
         _timerService.TimerChangedEvent += TimerChangedHandler;
         _countUp = _optionsService.Options.CountUp;
@@ -955,6 +959,22 @@ public class OperatorPageViewModel : ObservableObject, IPage
             // end of the meeting.
             StoreEndOfMeetingData();
             await GenerateTimingReportAsync().ConfigureAwait(false);
+        }
+        else
+        {
+            NotifyOfBadTiming();
+        }
+    }
+
+    private void NotifyOfBadTiming()
+    {
+        if (IsAutoMode)
+        {
+            var overrun = _adaptiveTimerService.CalculateMeetingOverrun(TalkId);
+            if (overrun != null && Math.Abs(overrun.Value.TotalMinutes) > 2)
+            {
+                _overrunService.NotifyOfBadTiming(overrun.Value);
+            }
         }
     }
 
