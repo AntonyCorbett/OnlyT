@@ -123,7 +123,7 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
             return null;
         }
 
-        Log.Logger.Debug($"Calculating meeting overrun");
+        Log.Logger.Debug("Calculating meeting overrun");
 
         EnsureMeetingStartTimeIsSet(talk);
 
