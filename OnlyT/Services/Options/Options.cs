@@ -47,6 +47,7 @@
             ShowBackgroundOnClock = true;
             ShrinkOnMinimise = true;
             TimerReminder = true;
+            OverrunNotifications = true;
 
             AdjustClockFormat();
         }
@@ -100,6 +101,8 @@
         public bool ShrinkOnMinimise { get; set; }
 
         public bool TimerReminder { get; set; }
+
+        public bool OverrunNotifications { get; set; }
 
         public bool IsBellEnabled { get; set; }
 

@@ -992,6 +992,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overrun/Underrun notifications.
+        /// </summary>
+        public static string OVERRUN_NOTIFICATIONS {
+            get {
+                return ResourceManager.GetString("OVERRUN_NOTIFICATIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Persist student time.
         /// </summary>
         public static string PERSIST_STUDENT_TIME {

@@ -601,6 +601,19 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool OverrunNotifications
+    {
+        get => _optionsService.Options.OverrunNotifications;
+        set
+        {
+            if (_optionsService.Options.OverrunNotifications != value)
+            {
+                _optionsService.Options.OverrunNotifications = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool ShouldGenerateReports
     {
         get => _optionsService.Options.GenerateTimingReports;

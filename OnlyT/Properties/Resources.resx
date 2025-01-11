@@ -732,4 +732,8 @@ Shift - Increase 5m</value>
     <value>The meeting is running {0} minutes undertime</value>
     <comment>Notification message</comment>
   </data>
+  <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
+    <value>Overrun/Underrun notifications</value>
+    <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
+  </data>
 </root>

@@ -13,6 +13,6 @@ public class OverrunService(IReminderService reminderService) : IOverrunService
             ? string.Format(Properties.Resources.OVERRUN_MSG, absMins)
             : string.Format(Properties.Resources.UNDERRUN_MSG, absMins);
 
-        reminderService.Send(msg);
+        reminderService.SendBadTimingNotification(msg);
     }
 }

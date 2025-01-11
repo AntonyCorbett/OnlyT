@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
@@ -71,11 +72,9 @@ public class ReminderService : IReminderService
         WeakReferenceMessenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownStatusChanged);
     }
 
-    public void Send(string msg)
+    public void SendBadTimingNotification(string msg)
     {
-        _lastReminderShown = _dateTimeService.Now();
-
-        if (_optionsService.Options.TimerReminder)
+        if (_optionsService.Options.OverrunNotifications)
         {
             _notifier.ShowWarning(msg, new MessageOptions
             {
@@ -101,7 +100,18 @@ public class ReminderService : IReminderService
 
     private void SendTalkTimerReminder()
     {
-        Send(Properties.Resources.TIMER_REMINDER_MSG);
+        _lastReminderShown = _dateTimeService.Now();
+
+        if (_optionsService.Options.TimerReminder)
+        {
+            _notifier.ShowWarning(Properties.Resources.TIMER_REMINDER_MSG, new MessageOptions
+            {
+                ShowCloseButton = true,
+                FreezeOnMouseEnter = false,
+                FontSize = 14,
+                CloseClickAction = OnReminderClosed,
+            });
+        }
     }
 
     private void OnTalkTimerStop(object recipient, TimerStopMessage message)
