@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:overrunNotificationService="clr-namespace:OnlyT.Services.OverrunNotificationService"
     xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
     d1p1:Ignorable="d"
     StartupUri="Windows/MainWindow.xaml">
@@ -11,6 +12,7 @@
         <ResourceDictionary>
             <valueConverters:BoolToBackgroundConverter x:Key="ToBackgroundConverter" />
             <valueConverters:BoolToGradientConverter x:Key="ToBackgroundGradientConverter" />
+            <overrunNotificationService:IsOverrunToBackgroundConverter x:Key="OverrunToBackgroundConverter" />
             <vm:ViewModelLocator
                 xmlns:vm="clr-namespace:OnlyT.ViewModel"
                 x:Key="Locator"

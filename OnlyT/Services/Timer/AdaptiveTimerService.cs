@@ -146,18 +146,21 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
 
         var deviation = totalTimeRemaining - remainingProgramTimeRequired;
 
-        if (!IsDeviationSignificant(deviation))
+        if (!IsOverrunSignificant(deviation))
         {
-            return null;
-        }
-
-        if (adaptiveMode != AdaptiveMode.TwoWay && totalTimeRemaining >= remainingProgramTimeRequired)
-        {
-            // there is time in hand and we don't want to adaptively increase talk durations.
             return null;
         }
 
         return deviation;
+    }
+
+    private static bool IsOverrunSignificant(TimeSpan deviation)
+    {
+        var mins = Math.Abs(deviation.TotalMinutes);
+
+        // only report over/underrun if between 2 and 20 mins (anything above 20 mins
+        // is likely an error).
+        return mins >= 2 && mins <= 20;
     }
 
     private TimeSpan GetRemainingProgramTimeRequired(TalkScheduleItem talk)

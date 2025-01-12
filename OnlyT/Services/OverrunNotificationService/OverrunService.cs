@@ -28,8 +28,8 @@ public class OverrunService : IOverrunService
                 notificationLifetime: TimeSpan.FromSeconds(10),
                 maximumNotificationCount: MaximumNotificationCount.FromCount(2));
 
-            cfg.DisplayOptions.Width = 300;
-
+            cfg.DisplayOptions.Width = 200;
+            
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
             
@@ -42,21 +42,22 @@ public class OverrunService : IOverrunService
         {
             var absMins = Math.Abs(Math.Round(overrun.TotalMinutes));
 
-            var msg = overrun < TimeSpan.Zero
-                ? string.Format(Properties.Resources.OVERRUN_MSG, absMins)
-                : string.Format(Properties.Resources.UNDERRUN_MSG, absMins);
+            var isOverrun = overrun < TimeSpan.Zero;
 
-            SendBadTimingNotification(msg);
+            var msg = isOverrun
+                ? string.Format(Properties.Resources.OVERRUN_MSG, (int)absMins)
+                : string.Format(Properties.Resources.UNDERRUN_MSG, (int)absMins);
+
+            SendBadTimingNotification(msg, isOverrun, (int)absMins);
         }
     }
 
-    private void SendBadTimingNotification(string msg)
+    private void SendBadTimingNotification(string msg, bool isOverrun, int mins)
     {
-        _notifier.ShowWarning(msg, new MessageOptions
+        _notifier.ShowCustomOverrunMessage(msg, isOverrun, mins, new MessageOptions
         {
-            ShowCloseButton = true,
-            FreezeOnMouseEnter = false,
-            FontSize = 14,
+            FreezeOnMouseEnter = true,
+            UnfreezeOnMouseLeave = true
         });
     }
 

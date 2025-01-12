@@ -962,16 +962,16 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
         else
         {
-            NotifyOfBadTiming();
+            NotifyOfBadTimingIfRequired();
         }
     }
 
-    private void NotifyOfBadTiming()
+    private void NotifyOfBadTimingIfRequired()
     {
         if (IsAutoMode)
         {
             var overrun = _adaptiveTimerService.CalculateMeetingOverrun(TalkId);
-            if (overrun != null && Math.Abs(overrun.Value.TotalMinutes) > 2)
+            if (overrun != null)
             {
                 _overrunService.NotifyOfBadTiming(overrun.Value);
             }

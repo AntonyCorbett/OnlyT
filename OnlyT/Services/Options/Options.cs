@@ -47,7 +47,7 @@
             ShowBackgroundOnClock = true;
             ShrinkOnMinimise = true;
             TimerReminder = true;
-            OverrunNotifications = true;
+            OverrunNotifications = false;
 
             AdjustClockFormat();
         }
