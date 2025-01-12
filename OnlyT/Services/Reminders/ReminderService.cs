@@ -71,20 +71,6 @@ public class ReminderService : IReminderService
         WeakReferenceMessenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownStatusChanged);
     }
 
-    public void SendBadTimingNotification(string msg)
-    {
-        if (_optionsService.Options.OverrunNotifications)
-        {
-            _notifier.ShowWarning(msg, new MessageOptions
-            {
-                ShowCloseButton = true,
-                FreezeOnMouseEnter = false,
-                FontSize = 14,
-                CloseClickAction = OnReminderClosed,
-            });
-        }
-    }
-
     public void Shutdown()
     {
         _reminderTimer.Stop();

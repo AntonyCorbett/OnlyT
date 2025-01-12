@@ -3,6 +3,4 @@
 public interface IReminderService
 {
     void Shutdown();
-
-    void SendBadTimingNotification(string msg);
 }

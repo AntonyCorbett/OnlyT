@@ -27,6 +27,7 @@ using OnlyT.Services.Timer;
 using OnlyT.WebServer;
 using OnlyT.Windows;
 using OnlyT.EventTracking;
+using OnlyT.Services.OverrunNotificationService;
 using OnlyT.Services.Reminders;
 
 namespace OnlyT.ViewModel;
@@ -40,6 +41,7 @@ public class MainViewModel : ObservableObject
 {
     private readonly Dictionary<string, FrameworkElement> _pages = new();
     private readonly IReminderService _reminderService;
+    private readonly IOverrunService _overrunService;
     private readonly IOptionsService _optionsService;
     private readonly ICountdownTimerTriggerService _countdownTimerTriggerService;
     private readonly ITalkTimerService _timerService;
@@ -55,6 +57,7 @@ public class MainViewModel : ObservableObject
 
     public MainViewModel(
         IReminderService reminderService,
+        IOverrunService overrunService,
         IOptionsService optionsService,
         ITalkTimerService timerService,
         ISnackbarService snackbarService,
@@ -66,6 +69,7 @@ public class MainViewModel : ObservableObject
         ICountdownOutputDisplayService countdownDisplayService)
     {
         _reminderService = reminderService;
+        _overrunService = overrunService;
         _commandLineService = commandLineService;
         _dateTimeService = dateTimeService;
         _timerOutputDisplayService = timerOutputDisplayService;
@@ -142,6 +146,7 @@ public class MainViewModel : ObservableObject
             CloseCountdownWindow();
 
             _reminderService.Shutdown();
+            _overrunService.Shutdown();
         }
     }
 
