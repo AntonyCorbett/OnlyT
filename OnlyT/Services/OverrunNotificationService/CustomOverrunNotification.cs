@@ -46,7 +46,7 @@ public sealed class CustomOverrunNotification : NotificationBase, INotifyPropert
         }
     }
     
-    public new string Body
+    public string Body
     {
         get => _body ?? string.Empty;
         set
