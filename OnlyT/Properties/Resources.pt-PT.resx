@@ -717,11 +717,11 @@ Shift - Adicionar 5m</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
   <data name="TIMER_REMINDER_MSG" xml:space="preserve">
-    <value>Should you have started the timer?</value>
+    <value>Deveria ter iniciado o cronómetro?</value>
     <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
   </data>
   <data name="TIMER_REMINDER" xml:space="preserve">
-    <value>Pop-up reminders</value>
+    <value>Avisos pop-up</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
 </root>
