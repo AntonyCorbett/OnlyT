@@ -3,11 +3,8 @@ using System.Windows;
 using OnlyT.Services.Options;
 using ToastNotifications.Core;
 using ToastNotifications;
-using ToastNotifications.Messages;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Position;
-using CommunityToolkit.Mvvm.Messaging;
-using OnlyT.ViewModel.Messages;
 
 namespace OnlyT.Services.OverrunNotificationService;
 
