@@ -725,15 +725,15 @@ Maiusc - Aggiungi 5m</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
   <data name="OVERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes overtime</value>
+    <value>L'adunanza è in ritardo di {0} minuti</value>
     <comment>Notification message</comment>
   </data>
   <data name="UNDERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes undertime</value>
+    <value>L'adunanza è in anticipo di {0} minuti</value>
     <comment>Notification message</comment>
   </data>
   <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
-    <value>Overrun/Underrun notifications</value>
+    <value>Notifiche di ritardo/anticipo</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
 </root>
