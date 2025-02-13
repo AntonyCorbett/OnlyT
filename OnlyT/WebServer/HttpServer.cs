@@ -8,6 +8,7 @@
     using EventArgs;
     using Models;
     using OnlyT.Common.Services.DateTime;
+    using OnlyT.Services.CommandLine;
     using Serilog;
     using Services.Bell;
     using Services.Options;
@@ -21,6 +22,7 @@
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
         private readonly ApiThrottler _apiThrottler;
+        private readonly ICommandLineService _commandLineService;
         private readonly ApiRouter _apiRouter;
         private HttpListener? _listener;
         private int _port;
@@ -29,11 +31,13 @@
             IOptionsService optionsService, 
             IBellService bellService,
             ITalkTimerService timerService,
+            ICommandLineService commandLineService,
             ITalkScheduleService talksService,
             IDateTimeService dateTimeService)
         {
             _optionsService = optionsService;
             _dateTimeService = dateTimeService;
+            _commandLineService = commandLineService;
 
             _apiThrottler = new ApiThrottler(optionsService);
 
@@ -59,6 +63,13 @@
             if (port > 0)
             {
                 _listener = new HttpListener();
+
+                var ipAddress = _commandLineService.RemoteIpAddress;
+                if (!string.IsNullOrWhiteSpace(ipAddress))
+                {
+                    _listener.Prefixes.Add($"http://{ipAddress}:{port}/index/");
+                }
+                
                 _port = port;
                 Task.Factory.StartNew(StartListening);
             }

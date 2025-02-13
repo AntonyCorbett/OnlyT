@@ -25,4 +25,6 @@ public interface ICommandLineService
     bool IsTimerNdi { get; }
 
     bool IsCountdownNdi { get; }
+
+    string? RemoteIpAddress { get; set; }
 }

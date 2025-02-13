@@ -864,7 +864,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
     {
         get
         {
-            var ipAddress = LocalIpAddress.GetLocalIp4Address();
+            var ipAddress = GetLocalIpAddress();
             if (!string.IsNullOrEmpty(ipAddress))
             {
                 return $"http://{ipAddress}:{Port}/index";
@@ -874,11 +874,11 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
-    public static string MobileIpAddress
+    public string MobileIpAddress
     {
         get
         {
-            var ipAddress = LocalIpAddress.GetLocalIp4Address();
+            var ipAddress = GetLocalIpAddress();
             if (!string.IsNullOrEmpty(ipAddress))
             {
                 return ipAddress;
@@ -1188,5 +1188,16 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
 
         return MonitorChangeDescription.MonitorToMonitor;
+    }
+
+    private string GetLocalIpAddress()
+    {
+        var manuallySpecifiedAddress = _commandLineService.RemoteIpAddress;
+        if (!string.IsNullOrWhiteSpace(manuallySpecifiedAddress))
+        {
+            return manuallySpecifiedAddress;
+        }
+
+        return LocalIpAddress.GetLocalIp4Address();
     }
 }

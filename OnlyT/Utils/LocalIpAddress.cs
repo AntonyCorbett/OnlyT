@@ -3,7 +3,6 @@
     using System;
     using System.Net;
     using System.Net.Sockets;
-    using System.Windows.Documents;
     using OnlyT.EventTracking;
     using Serilog;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Net;
 using Fclp;
 
 namespace OnlyT.Services.CommandLine;
@@ -55,7 +56,24 @@ internal sealed class CommandLineService : ICommandLineService
         p.Setup<bool>("cndi")
             .Callback(s => IsCountdownNdi = s).SetDefault(false);
 
+        p.Setup<string>("ip")
+            .Callback(SafeSetRemoteIpAddress).SetDefault(null!);
+
         p.Parse(Environment.GetCommandLineArgs());
+    }
+
+    private void SafeSetRemoteIpAddress(string ipAddress)
+    {
+        if (string.IsNullOrWhiteSpace(ipAddress))
+        {
+            RemoteIpAddress = null;
+        }
+        else
+        {
+            RemoteIpAddress = IPAddress.TryParse(ipAddress, out var result) 
+                ? result.ToString() 
+                : null;
+        }
     }
 
     public bool NoGpu { get; set; }
@@ -83,4 +101,6 @@ internal sealed class CommandLineService : ICommandLineService
     public bool IsTimerNdi { get; set; }
 
     public bool IsCountdownNdi { get; set; }
+
+    public string? RemoteIpAddress { get; set; }
 }
