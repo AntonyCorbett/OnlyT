@@ -523,7 +523,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 StoreTimerDataForStartOfMeeting();
             }
 
-            if (IsFirstTalkAfterInterim(talk.Id))
+            if (IsFirstTalkAfterInterval(talk.Id))
             {
                 var prevTalk = GetPreviousTalk(talk.Id);
                 StoreTimerDataForInterim(prevTalk?.IsStudentTalk ?? false);
@@ -552,7 +552,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
             new TimeSpan(0, 3, 20));
     }
 
-    private static bool IsFirstTalkAfterInterim(int talkId)
+    private static bool IsFirstTalkAfterInterval(int talkId)
     {
         var talkType = (TalkTypesAutoMode)talkId;
 

@@ -9,7 +9,6 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Services.Options;
 using Serilog;
 using OnlyT.Services.TalkSchedule;
-using System.Threading.Tasks;
 
 namespace OnlyT.Services.Timer;
 
@@ -143,6 +142,21 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
         var mtgEnd = GetPlannedMeetingEnd();
         var totalTimeRemaining = mtgEnd - _dateTimeService.UtcNow();
         var remainingProgramTimeRequired = GetRemainingProgramTimeRequired(talk);
+
+        var talkType = (TalkTypesAutoMode)talkId;
+
+        switch (talkType)
+        {
+            case TalkTypesAutoMode.LivingPart1:
+                // skip 3.5 mins for "interval" song
+                remainingProgramTimeRequired += TimeSpan.FromMinutes(3.5);
+                break;
+
+            case TalkTypesAutoMode.Watchtower:
+                // skip 5 mins for "interval" song
+                remainingProgramTimeRequired += TimeSpan.FromMinutes(5);
+                break;
+        }
 
         var deviation = totalTimeRemaining - remainingProgramTimeRequired;
 
