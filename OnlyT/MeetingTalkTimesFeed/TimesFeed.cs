@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using OnlyT.Common.Services.DateTime;
 using Serilog;
 using OnlyT.Utils;
-using OnlyT.EventTracking;
 
 namespace OnlyT.MeetingTalkTimesFeed;
 
@@ -23,7 +22,7 @@ internal sealed class TimesFeed
 
     public TimesFeed()
     {
-        _localFeedFile = Path.Combine(FileUtils.GetAppDataFolder(), "feed.json");
+        _localFeedFile = FileUtils.GetTimesFeedPath();
     }
 
     public Meeting? GetMeetingDataForToday(IDateTimeService dateTimeService)

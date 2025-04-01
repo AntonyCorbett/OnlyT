@@ -56,13 +56,21 @@ internal sealed class CommandLineService : ICommandLineService
         p.Setup<bool>("cndi")
             .Callback(s => IsCountdownNdi = s).SetDefault(false);
 
-        p.Setup<string>("ip")
-            .Callback(SafeSetRemoteIpAddress).SetDefault(null!);
+        p.Setup<string?>("ip")
+            .Callback(SafeSetRemoteIpAddress).SetDefault(null);
+
+        p.Setup<string?>("docs")
+            .Callback(SafeSetDocsFolder).SetDefault(null);
 
         p.Parse(Environment.GetCommandLineArgs());
     }
 
-    private void SafeSetRemoteIpAddress(string ipAddress)
+    private void SafeSetDocsFolder(string? folder)
+    {
+        OnlyTDocsFolder = string.IsNullOrWhiteSpace(folder) ? null : folder;
+    }
+
+    private void SafeSetRemoteIpAddress(string? ipAddress)
     {
         if (string.IsNullOrWhiteSpace(ipAddress))
         {
@@ -103,4 +111,6 @@ internal sealed class CommandLineService : ICommandLineService
     public bool IsCountdownNdi { get; set; }
 
     public string? RemoteIpAddress { get; set; }
+
+    public string? OnlyTDocsFolder { get; set; }
 }

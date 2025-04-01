@@ -27,4 +27,6 @@ public interface ICommandLineService
     bool IsCountdownNdi { get; }
 
     string? RemoteIpAddress { get; set; }
+
+    string? OnlyTDocsFolder { get; set; }
 }

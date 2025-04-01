@@ -114,6 +114,10 @@ namespace OnlyT
             
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Ioc.Default.ConfigureServices(serviceProvider);
+
+            // possibly override docs folder from commandline
+            var commandLineService = serviceProvider.GetService<ICommandLineService>()!;
+            FileUtils.OverrideDocumentFolder(commandLineService.OnlyTDocsFolder);
         }
 
         private CommandLineService CommandLineServiceFactory(IServiceProvider arg)

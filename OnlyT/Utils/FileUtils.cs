@@ -10,7 +10,14 @@
     {
         private static readonly string AppNamePathSegment = "OnlyT";
         private static readonly string OptionsFileName = "options.json";
+        private static readonly string LogsFolderName = "Logs";
+        private static readonly string TimingReportsFolderName = "TimingReports";
+        private static readonly string TimingReportsDatabaseFolderName = "TimingReportsDatabase";
+        private static readonly string CachedFeedFileName = "feed.json";
+        private static readonly string TalkScheduleFileName = "talk_schedule.xml";
 
+        private static string? _documentFolderOverride = null;
+        
         /// <summary>
         /// Creates directory if it doesn't exist. Throws if cannot be created
         /// </summary>
@@ -34,19 +41,7 @@
         /// <returns>Log folder</returns>
         public static string GetLogFolder()
         {
-            return Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                AppNamePathSegment,
-                "Logs");
-        }
-
-        /// <summary>
-        /// Gets the application's MyDocs folder, e.g. "...MyDocuments\OnlyT"
-        /// </summary>
-        /// <returns>Folder path</returns>
-        public static string GetOnlyTMyDocsFolder()
-        {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), AppNamePathSegment);
+            return Path.Combine(GetOnlyTMyDocsFolder(), LogsFolderName);
         }
 
         /// <summary>
@@ -58,8 +53,7 @@
         public static string GetUserOptionsFilePath(string? commandLineIdentifier, int optionsVersion)
         {
             return Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                AppNamePathSegment,
+                GetAppDataFolder(),
                 commandLineIdentifier ?? string.Empty,
                 optionsVersion.ToString(),
                 OptionsFileName);
@@ -72,7 +66,7 @@
         /// <returns>Folder path.</returns>
         public static string GetTimingReportsFolder(string? commandLineIdentifier)
         {
-            var folder = Path.Combine(GetOnlyTMyDocsFolder(), "TimingReports", commandLineIdentifier ?? string.Empty);
+            var folder = Path.Combine(GetOnlyTMyDocsFolder(), TimingReportsFolderName, commandLineIdentifier ?? string.Empty);
             Directory.CreateDirectory(folder);
             return folder;
         }
@@ -84,20 +78,70 @@
         /// <returns>Folder path.</returns>
         public static string GetTimingReportsDatabaseFolder(string? commandLineIdentifier)
         {
-            var folder = Path.Combine(GetAppDataFolder(), "TimingReportsDatabase", commandLineIdentifier ?? string.Empty);
+            var folder = Path.Combine(GetAppDataFolder(), TimingReportsDatabaseFolderName, commandLineIdentifier ?? string.Empty);
             Directory.CreateDirectory(folder);
             return folder;
+        }
+
+        /// <summary>
+        /// Gets teh full path to the cached timer feed.
+        /// </summary>
+        /// <returns>Full path.</returns>
+        public static string GetTimesFeedPath()
+        {
+            return Path.Combine(GetAppDataFolder(), CachedFeedFileName);
+        }
+
+        /// <summary>
+        /// Gets the full path to any manual schedule file.
+        /// </summary>
+        /// <returns>Full path.</returns>
+        public static string GetTalkSchedulePath()
+        {
+            return Path.Combine(GetOnlyTMyDocsFolder(), TalkScheduleFileName);
+        }
+
+        public static void OverrideDocumentFolder(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                _documentFolderOverride = null;
+                return;
+            }
+            
+            try
+            {
+                CreateDirectory(value);
+                _documentFolderOverride = value;
+            }
+            catch (Exception)
+            {
+                // ignore exceptions
+            }
         }
 
         /// <summary>
         /// Gets the OnlyT application data folder.
         /// </summary>
         /// <returns>AppData folder.</returns>
-        public static string GetAppDataFolder()
+        private static string GetAppDataFolder()
         {
             // NB - user-specific folder
             // e.g. C:\Users\Antony\AppData\Roaming\OnlyT
             var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppNamePathSegment);
+            Directory.CreateDirectory(folder);
+            return folder;
+        }
+
+        /// <summary>
+        /// Gets the application's MyDocs folder, e.g. "...MyDocuments\OnlyT"
+        /// </summary>
+        /// <returns>Folder path</returns>
+        private static string GetOnlyTMyDocsFolder()
+        {
+            var folder = _documentFolderOverride ??
+                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), AppNamePathSegment);
+
             Directory.CreateDirectory(folder);
             return folder;
         }

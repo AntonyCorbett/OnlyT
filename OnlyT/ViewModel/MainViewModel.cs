@@ -29,6 +29,7 @@ using OnlyT.Windows;
 using OnlyT.EventTracking;
 using OnlyT.Services.OverrunNotificationService;
 using OnlyT.Services.Reminders;
+using OnlyT.Utils;
 
 namespace OnlyT.ViewModel;
 
@@ -108,7 +109,7 @@ public class MainViewModel : ObservableObject
 
         // (fire and forget)
         Task.Run(LaunchTimerWindowAsync);
-
+        
         InitHeartbeatTimer();
     }
 
