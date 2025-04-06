@@ -352,12 +352,15 @@
                 Properties.Resources.TALK_LIVING1,
                 new TimeSpan(0, 51, 40),
                 TimeSpan.FromMinutes(timerPart1.Minutes)));
-
-            result.Add(CreateLivingItem(
-                TalkTypesAutoMode.LivingPart2,
-                Properties.Resources.TALK_LIVING2,
-                new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1.Minutes)),
-                TimeSpan.FromMinutes(timerPart2?.Minutes ?? 0)));
+            
+            if (timerPart2 != null)
+            {
+                result.Add(CreateLivingItem(
+                    TalkTypesAutoMode.LivingPart2,
+                    Properties.Resources.TALK_LIVING2,
+                    new TimeSpan(0, 51, 40).Add(TimeSpan.FromMinutes(timerPart1.Minutes)),
+                    TimeSpan.FromMinutes(timerPart2?.Minutes ?? 0)));
+            }
 
             if (isCircuitVisit)
             {
