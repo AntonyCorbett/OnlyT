@@ -83,7 +83,7 @@
             return SetPlacement(new WindowInteropHelper(window).Handle, placementJson);
         }
 
-        public static string GetPlacement(this Window window)
+        public static string? GetPlacement(this Window window)
         {
             return GetPlacement(new WindowInteropHelper(window).Handle);
         }
@@ -150,9 +150,12 @@
             return default;
         }
 
-        private static string GetPlacement(IntPtr windowHandle)
+        private static string? GetPlacement(IntPtr windowHandle)
         {
-            NativeMethods.GetWindowPlacement(windowHandle, out var placement);
+            if (!NativeMethods.GetWindowPlacement(windowHandle, out var placement))
+            {
+                return null;
+            }
 
             using var memoryStream = new MemoryStream();
             var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);

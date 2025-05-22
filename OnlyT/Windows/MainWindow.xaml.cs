@@ -35,7 +35,7 @@ public partial class MainWindow : Window
     private const double SettingsWindowMinWidth = 400;
     private const double SettingsWindowMinHeight = 360;
 
-    public bool _isShrunk;
+    private bool _isShrunk;
 
     public MainWindow()
     {
