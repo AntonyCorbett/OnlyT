@@ -493,6 +493,7 @@
                             AcceptsReturn="True"
                             AcceptsTab="False"
                             HorizontalScrollBarVisibility="Disabled"
+                            VerticalContentAlignment="Top"
                             MinLines="6"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             Text="{Binding MeetingStartTimesAsText, Mode=TwoWay}"
