@@ -63,12 +63,6 @@
             if (port > 0)
             {
                 _listener = new HttpListener();
-
-                var ipAddress = _commandLineService.RemoteIpAddress;
-                if (!string.IsNullOrWhiteSpace(ipAddress))
-                {
-                    _listener.Prefixes.Add($"http://{ipAddress}:{port}/index/");
-                }
                 
                 _port = port;
                 Task.Factory.StartNew(StartListening);
@@ -85,20 +79,37 @@
 
         private void StartListener()
         {
-            if(_listener == null)
+            if (_listener == null)
+            {
+                throw new Exception("Listener is null");
+            }
+
+            SetPrefixes();
+
+            _listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
+            _listener.IgnoreWriteExceptions = true;
+            _listener.Start();
+        }
+
+        private void SetPrefixes()
+        {
+            if (_listener == null)
             {
                 throw new Exception("Listener is null");
             }
 
             _listener.Prefixes.Clear();
-            _listener.Prefixes.Add($"http://*:{_port}/index/");
-            _listener.Prefixes.Add($"http://*:{_port}/timers/");
-            _listener.Prefixes.Add($"http://*:{_port}/data/");
-            _listener.Prefixes.Add($"http://*:{_port}/api/");
 
-            _listener.AuthenticationSchemes = AuthenticationSchemes.Anonymous;
-            _listener.IgnoreWriteExceptions = true;
-            _listener.Start();
+            var ipAddress = _commandLineService.RemoteIpAddress;
+            if (string.IsNullOrWhiteSpace(ipAddress))
+            {
+                ipAddress = "*"; // Listen on all IP addresses
+            }
+
+            _listener.Prefixes.Add($"http://{ipAddress}:{_port}/index/");
+            _listener.Prefixes.Add($"http://{ipAddress}:{_port}/timers/");
+            _listener.Prefixes.Add($"http://{ipAddress}:{_port}/data/");
+            _listener.Prefixes.Add($"http://{ipAddress}:{_port}/api/");
         }
 
         private void StartListening()
