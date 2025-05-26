@@ -8,6 +8,9 @@ namespace OnlyT.Services.CommandLine;
 // ReSharper disable once ClassNeverInstantiated.Global
 internal sealed class CommandLineService : ICommandLineService
 {
+    // DefaultFeedUri refers to the json feed that provides information on meeting agenda items
+    // for the automatic mode. If the default feed becomes unavailable or is no longer maintained
+    // you can specify it on the command line, or you can modify the source here:
 #pragma warning disable S1075 // URIs should not be hardcoded
     private static readonly string DefaultFeedUri = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
 #pragma warning restore S1075 // URIs should not be hardcoded
