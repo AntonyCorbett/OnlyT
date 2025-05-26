@@ -60,11 +60,13 @@
         /// </summary>
         /// <param name="optionsService">Options service.</param>
         /// <param name="dateTimeService">DateTime service.</param>
+        /// <param name="feedUri">The Uri of the json feed containing meeting schedule data.</param>
         /// <param name="isJanuary2020OrLater">True if current date is greater than 5 Jan 2020.</param>
         /// <returns>A collection of TalkScheduleItem.</returns>
         public static IEnumerable<TalkScheduleItem> Read(
             IOptionsService optionsService,
             IDateTimeService dateTimeService,
+            string feedUri,
             bool isJanuary2020OrLater)
         {
             var isCircuitVisit = optionsService.Options.IsCircuitVisit;
@@ -75,7 +77,7 @@
                     isCircuitVisit, 
                     optionsService.Options.IsBellEnabled && optionsService.Options.AutoBell,
                     isJanuary2020OrLater,
-                    GetFeedForToday(dateTimeService));
+                    GetFeedForToday(dateTimeService, feedUri));
         }
 
         public static IEnumerable<TalkScheduleItem> GetMidweekScheduleForTesting(
@@ -89,9 +91,9 @@
                 TimesFeed.GetSampleMidweekMeetingDataForTesting(theDate));
         }
         
-        private static Meeting? GetFeedForToday(IDateTimeService dateTimeService)
+        private static Meeting? GetFeedForToday(IDateTimeService dateTimeService, string feedUri)
         {
-            var feed = new TimesFeed().GetMeetingDataForToday(dateTimeService);
+            var feed = new TimesFeed(feedUri).GetMeetingDataForToday(dateTimeService);
             if (feed != null)
             {
                 SuccessGettingAutoFeedForMidWeekMtg = true;

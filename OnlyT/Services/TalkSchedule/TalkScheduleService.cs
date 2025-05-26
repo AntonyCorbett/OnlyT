@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using OnlyT.Services.CommandLine;
 
 namespace OnlyT.Services.TalkSchedule
 {
@@ -16,10 +17,11 @@ namespace OnlyT.Services.TalkSchedule
     // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class TalkScheduleService : ITalkScheduleService
     {
-        private static readonly DateTime _january2020Change = new(2020, 1, 6);
+        private static readonly DateTime January2020Change = new(2020, 1, 6);
 
         private readonly IOptionsService _optionsService;
         private readonly IDateTimeService _dateTimeService;
+        private readonly ICommandLineService _commandLineService;
         private readonly bool _isJanuary2020OrLater;
 
         // the "talk_schedule.xml" file may exist in MyDocs\OnlyT..
@@ -29,12 +31,14 @@ namespace OnlyT.Services.TalkSchedule
 
         public TalkScheduleService(
             IOptionsService optionsService,
-            IDateTimeService dateTimeService)
+            IDateTimeService dateTimeService,
+            ICommandLineService commandLineService)
         {
             _optionsService = optionsService;
             _dateTimeService = dateTimeService;
+            _commandLineService = commandLineService;
 
-            _isJanuary2020OrLater = dateTimeService.Now().Date >= _january2020Change;
+            _isJanuary2020OrLater = dateTimeService.Now().Date >= January2020Change;
 
             Reset();
 
@@ -44,8 +48,10 @@ namespace OnlyT.Services.TalkSchedule
 
         public void Reset()
         {
+            var feedUri = _commandLineService.FeedUri;
+
             _fileBasedSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleFileBased.Read(_optionsService.Options.AutoBell));
-            _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService, _dateTimeService, _isJanuary2020OrLater));
+            _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService, _dateTimeService, feedUri, _isJanuary2020OrLater));
             _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
 

@@ -8,6 +8,10 @@ namespace OnlyT.Services.CommandLine;
 // ReSharper disable once ClassNeverInstantiated.Global
 internal sealed class CommandLineService : ICommandLineService
 {
+#pragma warning disable S1075 // URIs should not be hardcoded
+    private static readonly string DefaultFeedUri = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
+#pragma warning restore S1075 // URIs should not be hardcoded
+
     public CommandLineService()
     {
         var p = new FluentCommandLineParser();
@@ -59,6 +63,9 @@ internal sealed class CommandLineService : ICommandLineService
         p.Setup<string?>("ip")
             .Callback(SafeSetRemoteIpAddress).SetDefault(null);
 
+        p.Setup<string?>("feed")
+            .Callback(SafeSetFeedUri).SetDefault(DefaultFeedUri);
+
         p.Setup<string?>("docs")
             .Callback(SafeSetDocsFolder).SetDefault(null);
 
@@ -82,6 +89,14 @@ internal sealed class CommandLineService : ICommandLineService
                 ? result.ToString() 
                 : null;
         }
+    }
+
+    private void SafeSetFeedUri(string? feedUri)
+    {
+        FeedUri = string.IsNullOrWhiteSpace(feedUri) ||
+                  !Uri.IsWellFormedUriString(feedUri, UriKind.Absolute)
+            ? DefaultFeedUri
+            : feedUri;
     }
 
     public bool NoGpu { get; set; }
@@ -111,6 +126,8 @@ internal sealed class CommandLineService : ICommandLineService
     public bool IsCountdownNdi { get; set; }
 
     public string? RemoteIpAddress { get; set; }
+
+    public string FeedUri { get; set; } = DefaultFeedUri;
 
     public string? OnlyTDocsFolder { get; set; }
 }

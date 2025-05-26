@@ -28,5 +28,7 @@ public interface ICommandLineService
 
     string? RemoteIpAddress { get; set; }
 
+    string FeedUri { get; set; }
+
     string? OnlyTDocsFolder { get; set; }
 }

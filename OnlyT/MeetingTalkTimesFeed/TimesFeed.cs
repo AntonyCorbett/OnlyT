@@ -12,16 +12,14 @@ namespace OnlyT.MeetingTalkTimesFeed;
 
 internal sealed class TimesFeed
 {
-#pragma warning disable S1075 // URIs should not be hardcoded
-    private static readonly string FeedUrl = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json";
-#pragma warning restore S1075 // URIs should not be hardcoded
-
+    private readonly string _feedUri;
     private readonly string _localFeedFile;
     private readonly int _tooOldDays = 20;
     private IEnumerable<Meeting>? _meetingData;
 
-    public TimesFeed()
+    public TimesFeed(string feedUri)
     {
+        _feedUri = feedUri;
         _localFeedFile = FileUtils.GetTimesFeedPath();
     }
 
@@ -121,7 +119,7 @@ internal sealed class TimesFeed
         {
             try
             {
-                var content = WebUtils.LoadWithUserAgent(FeedUrl);
+                var content = WebUtils.LoadWithUserAgent(_feedUri);
                 if (content != null)
                 {
                     result = JsonConvert.DeserializeObject<List<Meeting>>(content);
