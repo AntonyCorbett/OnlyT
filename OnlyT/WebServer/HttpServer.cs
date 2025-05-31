@@ -63,9 +63,9 @@
             if (port > 0)
             {
                 _listener = new HttpListener();
-                
+               
                 _port = port;
-                Task.Factory.StartNew(StartListening);
+                Task.Factory.StartNew((_) => StartListening(), TaskCreationOptions.LongRunning);
             }
         }
 
@@ -194,6 +194,12 @@
                             }
                         }
                     }
+                }
+                catch (HttpListenerException ex) when (ex.ErrorCode == 995)
+                {
+                    // Listener was stopped, e.g. during shutdown or
+                    // when manually reconfiguring the listener.
+                    // Ignore this exception.
                 }
                 catch (WebServerException ex)
                 {
