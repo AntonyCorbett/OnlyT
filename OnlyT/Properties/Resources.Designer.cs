@@ -452,6 +452,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dark mode.
+        /// </summary>
+        public static string DARK_MODE {
+            get {
+                return ResourceManager.GetString("DARK_MODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dial.
         /// </summary>
         public static string DIAL {

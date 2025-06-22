@@ -168,6 +168,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool DarkModeToggle => _optionsService.Options.DarkModeToggle;
+
     public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
 
     public string CountUpOrDownTooltip => _countUp

@@ -34,13 +34,13 @@
             <Setter Property="Padding" Value="5" />
         </Style>
         <Style x:Key="SampleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="10,0,0,4" />
         </Style>
         <Style x:Key="MiscNotesStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
             <Setter Property="FontSize" Value="11" />
         </Style>
         <Style
@@ -161,7 +161,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             FontSize="11"
-                            Foreground="{StaticResource PrimaryHueDarkBrush}"
+                            Foreground="{DynamicResource PrimaryHueMidBrush}"
                             Text="{Binding AppVersionStr}" />
                     </DockPanel>
                 </GroupBox>
@@ -356,7 +356,9 @@
                             Style="{StaticResource MaterialDesignRaisedLightButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Height="16" Source="{Binding ElevatedShield}" />
-                                <Label Content="{x:Static resx:Resources.OPEN_PORT}" />
+                                <Label
+                                    Content="{x:Static resx:Resources.OPEN_PORT}"
+                                    Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
                             </StackPanel>
                         </Button>
 
@@ -371,12 +373,13 @@
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <TextBlock>
-                            <Hyperlink Command="{Binding WebClockUrlLinkCommand}">
+                            <Hyperlink
+                                Command="{Binding WebClockUrlLinkCommand}" >
                                 <TextBlock Text="{Binding WebClockUrl, Mode=OneWay}" />
                             </Hyperlink>
                         </TextBlock>
 
-                        <Image Width="200" Source="{Binding WebClockQrCode}" />
+                        <Image Margin="0,10,0,0" Width="200" Source="{Binding WebClockQrCode}" />
 
                     </StackPanel>
                 </GroupBox>
@@ -535,6 +538,12 @@
 
                 <GroupBox Header="{x:Static resx:Resources.MISC_SECTION}" Style="{StaticResource GroupBoxStyle}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
+
+                        <CheckBox
+                            Content="{x:Static resx:Resources.DARK_MODE}"
+                            IsChecked="{Binding DarkModeToggle, Mode=TwoWay}"
+                            Style="{StaticResource SettingsCheckBox}" />
+
 
                         <CheckBox
                             Content="{x:Static resx:Resources.ALLOW_COUNT_UP_TOGGLE}"

@@ -36,7 +36,7 @@
 
                 <TextBlock
                     Grid.Column="0"
-                    Foreground="{StaticResource MaterialDesignBodyLight}"
+                    Foreground="{DynamicResource MaterialDesignBodyLight}"
                     Text="{Binding OriginalOrModifiedDurationAsString, Mode=OneWay}" />
                 <TextBlock
                     Grid.Column="1"
@@ -55,7 +55,7 @@
 
                 <TextBlock
                     Grid.Column="0"
-                    Foreground="{StaticResource MaterialDesignBodyLight}"
+                    Foreground="{DynamicResource MaterialDesignBodyLight}"
                     Text="{Binding OriginalOrModifiedDurationAsString, Mode=OneWay}" />
                 <TextBlock
                     Grid.Column="1"

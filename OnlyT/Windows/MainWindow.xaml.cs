@@ -59,6 +59,9 @@ public partial class MainWindow : Window
     {
         base.OnSourceInitialized(e);
 
+        // Trigger in OnSourceInitialized to ensure the window is available for the win32 API
+        WeakReferenceMessenger.Default.Send(new DarkModeChangedMessage());
+
         var source = (HwndSource?)PresentationSource.FromVisual(this);
         source?.AddHook(HandleMessages);
 

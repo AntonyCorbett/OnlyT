@@ -532,6 +532,20 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool DarkModeToggle
+    {
+        get => _optionsService.Options.DarkModeToggle;
+        set
+        {
+            if (_optionsService.Options.DarkModeToggle != value)
+            {
+                _optionsService.Options.DarkModeToggle = value;
+                OnPropertyChanged();
+                WeakReferenceMessenger.Default.Send(new DarkModeChangedMessage());
+            }
+        }
+    }
+
     public bool AllowCountUpToggle
     {
         get => _optionsService.Options.AllowCountUpToggle;
