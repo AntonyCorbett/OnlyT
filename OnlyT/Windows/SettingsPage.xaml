@@ -373,8 +373,7 @@
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <TextBlock>
-                            <Hyperlink
-                                Command="{Binding WebClockUrlLinkCommand}" >
+                            <Hyperlink Command="{Binding WebClockUrlLinkCommand}" >
                                 <TextBlock Text="{Binding WebClockUrl, Mode=OneWay}" />
                             </Hyperlink>
                         </TextBlock>
@@ -543,7 +542,6 @@
                             Content="{x:Static resx:Resources.DARK_MODE}"
                             IsChecked="{Binding DarkModeToggle, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
-
 
                         <CheckBox
                             Content="{x:Static resx:Resources.ALLOW_COUNT_UP_TOGGLE}"

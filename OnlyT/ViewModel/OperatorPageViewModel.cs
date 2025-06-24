@@ -166,9 +166,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
             var talk = GetCurrentTalk();
             return talk != null && talk.BellApplicable && _optionsService.Options.IsBellEnabled;
         }
-    }
-
-    public bool DarkModeToggle => _optionsService.Options.DarkModeToggle;
+    }   
 
     public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
 

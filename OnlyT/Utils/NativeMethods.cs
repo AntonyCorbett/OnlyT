@@ -14,6 +14,7 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Windows;
+    using System.Windows.Interop;
     using System.Windows.Media.Imaging;
 
     /// <summary>
@@ -22,6 +23,7 @@
     internal static class NativeMethods
     {
         private const int MAX_PATH = 260;
+        public const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
 
         public enum SHSTOCKICONID : uint
         {
@@ -135,6 +137,9 @@
             SHGSI_SMALLICON = 0x000000001,
             SHGSI_SHELLICONSIZE = 0x000000004
         }
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);               
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern int GetWindowLong(IntPtr hWnd, int nIndex);

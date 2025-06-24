@@ -9,6 +9,7 @@ using OnlyT.Services.Options;
 using OnlyT.Utils;
 using OnlyT.ViewModel;
 using OnlyT.ViewModel.Messages;
+using MaterialDesignThemes.Wpf;
 
 namespace OnlyT.Windows;
 
@@ -48,6 +49,7 @@ public partial class MainWindow : Window
         WeakReferenceMessenger.Default.Register<BeforeNavigateMessage>(this, OnBeforeNavigate);
         WeakReferenceMessenger.Default.Register<NavigateMessage>(this, OnNavigate);
         WeakReferenceMessenger.Default.Register<ExpandFromShrinkMessage>(this, OnExpandFromShrink);
+        WeakReferenceMessenger.Default.Register<DarkModeChangedMessage>(this, OnDarkModeChanged);
 
         MinHeight = MainWindowMinHeightAbsolute;
         MinWidth = MainWindowMinWidthAbsolute;
@@ -75,7 +77,7 @@ public partial class MainWindow : Window
         {
             AdjustMainWindowNormalPositionAndSize();
         }
-    }
+    }    
 
     private void OnBeforeNavigate(object recipient, BeforeNavigateMessage message)
     {
@@ -163,6 +165,26 @@ public partial class MainWindow : Window
             SaveWindowPos();
         }
     }
+
+    private void OnDarkModeChanged(object recipient, DarkModeChangedMessage message)
+    {        
+        var optionsService = Ioc.Default.GetService<IOptionsService>()!;
+        bool isDarkMode = optionsService.Options.DarkModeToggle;
+
+        PaletteHelper paletteHelper = new();
+        ITheme theme = paletteHelper.GetTheme();
+
+        theme.SetBaseTheme(isDarkMode ? Theme.Dark : Theme.Light);
+        paletteHelper.SetTheme(theme);
+        
+        int darkModeInt = isDarkMode ? 1 : 0;
+        
+        NativeMethods.DwmSetWindowAttribute(
+            new WindowInteropHelper(this).Handle,
+            NativeMethods.DWMWA_USE_IMMERSIVE_DARK_MODE,
+            ref darkModeInt,
+            sizeof(int));
+    }    
 
     private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
     {

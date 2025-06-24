@@ -30,7 +30,6 @@ using OnlyT.EventTracking;
 using OnlyT.Services.OverrunNotificationService;
 using OnlyT.Services.Reminders;
 using OnlyT.Utils;
-using System.Runtime.InteropServices;
 
 namespace OnlyT.ViewModel;
 
@@ -98,8 +97,7 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
         WeakReferenceMessenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
         WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
-        WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
-        WeakReferenceMessenger.Default.Register<DarkModeChangedMessage>(this, OnDarkModeChanged);        
+        WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);        
 
         InitHttpServer();
 
@@ -112,7 +110,7 @@ public class MainViewModel : ObservableObject
         // (fire and forget)
         Task.Run(LaunchTimerWindowAsync);
         
-        InitHeartbeatTimer();        
+        InitHeartbeatTimer();
     }
 
     public ISnackbarMessageQueue TheSnackbarMessageQueue => _snackbarService.TheSnackbarMessageQueue;
@@ -172,33 +170,7 @@ public class MainViewModel : ObservableObject
         {
             _pages.Add(SettingsPageViewModel.PageName, new SettingsPage(_commandLineService));
         }
-    }
-
-    [DllImport("dwmapi.dll")]
-    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
-    const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
-
-    public void SetWindowTheme()
-    {
-        int useDarkMode = _optionsService.Options.DarkModeToggle ? 1 : 0;
-        Window window = Application.Current.MainWindow;
-
-        DwmSetWindowAttribute(
-            new WindowInteropHelper(window).Handle,
-            DWMWA_USE_IMMERSIVE_DARK_MODE,
-            ref useDarkMode,
-            sizeof(int));        
-    }
-
-    private void OnDarkModeChanged(object recipient, DarkModeChangedMessage message)
-    {
-        PaletteHelper paletteHelper = new PaletteHelper();
-        ITheme theme = paletteHelper.GetTheme();
-
-        theme.SetBaseTheme(_optionsService.Options.DarkModeToggle ? Theme.Dark : Theme.Light);
-        paletteHelper.SetTheme(theme);
-        SetWindowTheme();
-    }
+    }   
 
     private void OnHttpServerChanged(object recipient, HttpServerChangedMessage msg)
     {
