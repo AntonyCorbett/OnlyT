@@ -13,7 +13,7 @@
     // ReSharper disable UnusedMember.Global
     using System;
     using System.Runtime.InteropServices;
-    using System.Windows;    
+    using System.Windows;
     using System.Windows.Media.Imaging;
 
     /// <summary>

@@ -77,7 +77,7 @@ public partial class MainWindow : Window
         {
             AdjustMainWindowNormalPositionAndSize();
         }
-    }    
+    }
 
     private void OnBeforeNavigate(object recipient, BeforeNavigateMessage message)
     {
