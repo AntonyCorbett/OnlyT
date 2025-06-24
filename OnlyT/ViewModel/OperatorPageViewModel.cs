@@ -166,7 +166,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
             var talk = GetCurrentTalk();
             return talk != null && talk.BellApplicable && _optionsService.Options.IsBellEnabled;
         }
-    }   
+    }
 
     public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
 

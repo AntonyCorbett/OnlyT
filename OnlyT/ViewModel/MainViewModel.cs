@@ -97,7 +97,7 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<CountdownMonitorChangedMessage>(this, OnCountdownMonitorChanged);
         WeakReferenceMessenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
         WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
-        WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);        
+        WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
 
         InitHttpServer();
 
@@ -170,7 +170,7 @@ public class MainViewModel : ObservableObject
         {
             _pages.Add(SettingsPageViewModel.PageName, new SettingsPage(_commandLineService));
         }
-    }   
+    }
 
     private void OnHttpServerChanged(object recipient, HttpServerChangedMessage msg)
     {
