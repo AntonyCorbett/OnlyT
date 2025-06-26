@@ -737,7 +737,7 @@ Shift - dodaj 5 minut</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
   <data name="DARK_MODE" xml:space="preserve">
-    <value>Dark mode</value>
+    <value>Tryb ciemny</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
