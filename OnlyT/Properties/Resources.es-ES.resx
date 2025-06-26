@@ -736,4 +736,8 @@ Mayús - Aumentar 5m</value>
     <value>Notificaciones de atraso/adelantamiento</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
+  <data name="DARK_MODE" xml:space="preserve">
+    <value>Dark mode</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
 </root>
