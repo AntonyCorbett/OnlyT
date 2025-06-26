@@ -736,4 +736,8 @@ Shift - Adicionar 5m</value>
     <value>Notificações de Excesso/Abaixo de Tempo</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
+  <data name="DARK_MODE" xml:space="preserve">
+    <value>Modo Escuro</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
 </root>
