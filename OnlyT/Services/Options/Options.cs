@@ -140,6 +140,8 @@
 
         public bool IsWebClockEnabled { get; set; }
 
+        public bool DarkModeToggle { get; set; }
+        
         public bool AllowCountUpToggle { get; set; }
 
         public MeetingStartTimes.MeetingStartTimes MeetingStartTimes { get; set; }
