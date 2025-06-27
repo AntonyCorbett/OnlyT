@@ -58,7 +58,7 @@ internal sealed class CountdownTimerTriggerService : ICountdownTimerTriggerServi
         return false;
     }
 
-    private void CalculateTriggerPeriods(IEnumerable<MeetingStartTime> meetingStartTimes)
+    private void CalculateTriggerPeriods(List<MeetingStartTime> meetingStartTimes)
     {
         var triggerPeriods = new List<CountdownTriggerPeriod>();
 

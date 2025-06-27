@@ -228,12 +228,13 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
             {
                 Log.Logger.Warning("Meeting End not set");
             }
-
-            var minsOvertime = _mtgTimes.GetMeetingOvertime().TotalMinutes;
+            
             var mins = Math.Abs(_mtgTimes.GetMeetingOvertime().TotalMinutes);
 
             if (mins >= MeetingMinsOutOfRange)
             {
+                var minsOvertime = _mtgTimes.GetMeetingOvertime().TotalMinutes;
+
                 var t = TimeSpan.FromMinutes(mins);
                 var overOrUnderStr = minsOvertime > 0 ? "overtime" : "undertime";
                 Log.Logger.Warning($"Meeting duration is out of range ({t:g} {overOrUnderStr})");

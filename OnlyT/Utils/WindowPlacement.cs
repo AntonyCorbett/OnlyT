@@ -74,8 +74,7 @@
     {
         private const int SW_SHOWNORMAL = 1;
         private const int SW_SHOWMINIMIZED = 2;
-
-        private static readonly Encoding Encoding = new UTF8Encoding();
+        
         private static readonly XmlSerializer Serializer = new(typeof(WINDOWPLACEMENT));
 
         public static Rect SetPlacement(this Window window, string placementJson)
@@ -115,7 +114,7 @@
         {
             if (!string.IsNullOrEmpty(placementJson))
             {
-                var xmlBytes = Encoding.GetBytes(placementJson);
+                var xmlBytes = Encoding.UTF8.GetBytes(placementJson);
                 try
                 {
                     WINDOWPLACEMENT placement;
@@ -161,7 +160,7 @@
             var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
             Serializer.Serialize(xmlTextWriter, placement);
             var xmlBytes = memoryStream.ToArray();
-            return Encoding.GetString(xmlBytes);
+            return Encoding.UTF8.GetString(xmlBytes);
         }
     }
 

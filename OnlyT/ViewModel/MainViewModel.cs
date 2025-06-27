@@ -29,7 +29,6 @@ using OnlyT.Windows;
 using OnlyT.EventTracking;
 using OnlyT.Services.OverrunNotificationService;
 using OnlyT.Services.Reminders;
-using OnlyT.Utils;
 
 namespace OnlyT.ViewModel;
 
@@ -40,7 +39,7 @@ namespace OnlyT.ViewModel;
 // ReSharper disable once ClassNeverInstantiated.Global
 public class MainViewModel : ObservableObject
 {
-    private readonly Dictionary<string, FrameworkElement> _pages = new();
+    private readonly Dictionary<string, FrameworkElement> _pages = [];
     private readonly IReminderService _reminderService;
     private readonly IOverrunService _overrunService;
     private readonly IOptionsService _optionsService;

@@ -58,8 +58,6 @@ internal sealed class ApiRouter : BaseApiController
         }
         else
         {
-            var apiCode = _optionsService.Options.ApiCode;
-
             if (request.Url?.Segments.Length < 2)
             {
                 throw new WebServerException(WebServerErrorCode.UriTooFewSegments);
@@ -82,6 +80,7 @@ internal sealed class ApiRouter : BaseApiController
                 if (!segment.Equals("system"))
                 {
                     // we don't check the api code for calls to the "system" API
+                    var apiCode = _optionsService.Options.ApiCode;
                     CheckApiCode(request, apiCode);
                 }
                     

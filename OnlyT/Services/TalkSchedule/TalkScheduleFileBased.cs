@@ -15,7 +15,7 @@ internal static class TalkScheduleFileBased
 {
     private static readonly int StartId = 5000;
 
-    public static IEnumerable<TalkScheduleItem> Read(bool autoBell)
+    public static List<TalkScheduleItem> Read(bool autoBell)
     {
         var result = new List<TalkScheduleItem>();
 

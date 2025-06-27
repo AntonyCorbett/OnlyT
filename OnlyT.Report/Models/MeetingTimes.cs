@@ -19,7 +19,7 @@ namespace OnlyT.Report.Models
         // ReSharper disable once MemberCanBePrivate.Global
         public MeetingTimes()
         {
-            Items = new List<MeetingTimedItem>();
+            Items = [];
         }
 
         public DateTime LastTimerStop { get; private set; }

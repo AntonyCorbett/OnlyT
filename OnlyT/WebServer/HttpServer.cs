@@ -167,9 +167,10 @@
                         if (context.Request.Url?.Segments.Length > 1)
                         {
                             // segments: "/" ...
-                            var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
                             if (_listener.IsListening)
                             {
+                                var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+
                                 switch (segment)
                                 {
                                     case "data":

@@ -41,8 +41,7 @@ internal sealed class TimerBell : ObservableObject, IDisposable
             }
         }
     }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
+    
     public void Play(int volumePercent)
     {
         if (!IsPlaying)

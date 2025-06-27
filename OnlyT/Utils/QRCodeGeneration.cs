@@ -4,11 +4,13 @@ using QRCoder;
 
 namespace OnlyT.Utils;
 
+// ReSharper disable once InconsistentNaming
 internal static class QRCodeGeneration
 {
     private static readonly ConcurrentDictionary<string, BitmapImage> Cache = new();
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
+    // ReSharper disable once InconsistentNaming
     public static BitmapImage CreateQRCode(string url)
     {
         if (!Cache.TryGetValue(url, out var result))

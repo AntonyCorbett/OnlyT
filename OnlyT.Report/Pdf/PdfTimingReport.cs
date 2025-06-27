@@ -20,11 +20,11 @@ namespace OnlyT.Report.Pdf
 
         private readonly MeetingTimes _data;
         private readonly string _outputFolder;
-        private readonly XBrush _blackBrush = XBrushes.Black;
-        private readonly XBrush _grayBrush = XBrushes.Gray;
-        private readonly XBrush _lightGrayBrush = XBrushes.LightGray;
-        private readonly XBrush _greenBrush = XBrushes.Green;
-        private readonly XBrush _redBrush = XBrushes.Red;
+        private readonly XSolidBrush _blackBrush = XBrushes.Black;
+        private readonly XSolidBrush _grayBrush = XBrushes.Gray;
+        private readonly XSolidBrush _lightGrayBrush = XBrushes.LightGray;
+        private readonly XSolidBrush _greenBrush = XBrushes.Green;
+        private readonly XSolidBrush _redBrush = XBrushes.Red;
         private readonly HistoricalMeetingTimes? _historicalASummary;
 
         private readonly IQueryWeekendService _queryWeekendService;
@@ -166,9 +166,11 @@ namespace OnlyT.Report.Pdf
 
                 var c = new Chart(ChartType.Column2D);
                 c.Font.Name = "Verdana";
-                
+
+#pragma warning disable U2U1017                
                 var xSeries = c.XValues.AddXSeries();
                 var ySeries = c.SeriesCollection.AddSeries();
+#pragma warning restore U2U1017
 
                 c.YAxis.MaximumScale = LargestDeviationMins;
                 c.YAxis.MinimumScale = -LargestDeviationMins;
@@ -193,11 +195,11 @@ namespace OnlyT.Report.Pdf
                     ChartMeetingType.Both => Resources.MIDWEEK_AND_WEEKEND_MTGS,
                     _ => throw new NotSupportedException()
                 };
-
-                var currentMonth = default(DateTime);
-
+                
                 if (_historicalASummary != null)
                 {
+                    var currentMonth = DateTime.MinValue;
+
                     foreach (var summary in _historicalASummary.Summaries)
                     {
                         if (UseSummary(summary, mtgType))
@@ -417,7 +419,7 @@ namespace OnlyT.Report.Pdf
             _currentY += (3 * (double)_itemTitleFont.Height) / 2;
         }
 
-        private double DrawTimesString(XGraphics g, MeetingTimedItem item, double curX, XBrush textBrush)
+        private double DrawTimesString(XGraphics g, MeetingTimedItem item, double curX, XSolidBrush textBrush)
         {
             if (_stdTimeFont == null)
             {
@@ -478,7 +480,7 @@ namespace OnlyT.Report.Pdf
             return curX;
         }
 
-        private XSize DrawDurationString(XGraphics g, TimeSpan duration, double curX, XBrush textBrush)
+        private XSize DrawDurationString(XGraphics g, TimeSpan duration, double curX, XSolidBrush textBrush)
         {
             var durStr = $"{(int)duration.TotalMinutes:D2}:{duration.Seconds:D2}";
             var szDur = g.MeasureString(durStr, _durationFont);

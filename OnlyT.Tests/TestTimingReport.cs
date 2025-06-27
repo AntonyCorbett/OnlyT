@@ -233,7 +233,7 @@ public class TestTimingReport
     {
         if (_useRandomTimes)
         {
-            var variationSecs = (int)((targetMinutes / 20.0) * 60);
+            var variationSecs = (int)(targetMinutes * 3.0);
             var secsToAdd = _random.Next(-variationSecs, variationSecs);
 
             var result = targetMinutes + (secsToAdd / 60.0);

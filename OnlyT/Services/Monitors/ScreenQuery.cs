@@ -317,9 +317,10 @@ public static class ScreenQuery
 
         for (var i = 0; i < modeCount; i++)
         {
-            if (displayModes[i].infoType == DISPLAYCONFIG_MODE_INFO_TYPE.DISPLAYCONFIG_MODE_INFO_TYPE_TARGET)
+            var dm = displayModes[i];
+            if (dm.infoType == DISPLAYCONFIG_MODE_INFO_TYPE.DISPLAYCONFIG_MODE_INFO_TYPE_TARGET)
             {
-                yield return MonitorFriendlyName(displayModes[i].adapterId, displayModes[i].id);
+                yield return MonitorFriendlyName(dm.adapterId, dm.id);
             }
         }
     }

@@ -4,12 +4,7 @@
 
     public class HistoricalMeetingTimes
     {
-        private readonly List<MeetingTimeSummary> _mtgTimeSummaries;
-
-        public HistoricalMeetingTimes()
-        {
-            _mtgTimeSummaries = new List<MeetingTimeSummary>();
-        }
+        private readonly List<MeetingTimeSummary> _mtgTimeSummaries = [];
 
         public IEnumerable<MeetingTimeSummary> Summaries => _mtgTimeSummaries;
 

@@ -333,8 +333,8 @@
         private static Point PointOnCircle(double radius, double angleInDegrees, Point origin)
         {
             // NB - angleInDegrees is from 12 o'clock rather than from 3 o'clock
-            var x = (radius * Math.Cos((angleInDegrees - 90) * Math.PI / 180F)) + origin.X;
-            var y = (radius * Math.Sin((angleInDegrees - 90) * Math.PI / 180F)) + origin.Y;
+            var x = (radius * Math.Cos((angleInDegrees - 90) * (Math.PI / 180F))) + origin.X;
+            var y = (radius * Math.Sin((angleInDegrees - 90) * (Math.PI / 180F))) + origin.Y;
 
             return new Point(x, y);
         }
@@ -355,7 +355,10 @@
         private static double CalculateAngleHours(DateTime dt)
         {
             var hr = dt.Hour >= 12 ? dt.Hour - 12 : dt.Hour;
-            return (hr * 30) + (((double)dt.Minute / 60) * 30);
+            return (hr * 30)
+                   + (dt.Minute * 0.5)
+                   + (dt.Second * (0.5 / 60))
+                   + (dt.Millisecond * (0.5 / 60_000));
         }
 
         private static void PositionClockHand(Line hand, double angle, double shadowOpacity)

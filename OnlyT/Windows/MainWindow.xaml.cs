@@ -169,17 +169,24 @@ public partial class MainWindow : Window
     private void OnDarkModeChanged(object recipient, DarkModeChangedMessage message)
     {        
         var optionsService = Ioc.Default.GetService<IOptionsService>()!;
-        bool isDarkMode = optionsService.Options.DarkModeToggle;
+        var isDarkMode = optionsService.Options.DarkModeToggle;
 
         PaletteHelper paletteHelper = new();
         ITheme theme = paletteHelper.GetTheme();
 
         theme.SetBaseTheme(isDarkMode ? Theme.Dark : Theme.Light);
         paletteHelper.SetTheme(theme);
+
+        // Update custom colours dictionary
+        var app = (App)Application.Current;
+        app.Resources.MergedDictionaries.RemoveAt(app.Resources.MergedDictionaries.Count - 1); // Remove old custom colours
+        app.Resources.MergedDictionaries.Add(
+            new ResourceDictionary { Source = new Uri(isDarkMode ? 
+                "Themes/CustomColoursDark.xaml" : "Themes/CustomColours.xaml", UriKind.Relative) });
+
+        var darkModeInt = isDarkMode ? 1 : 0;
         
-        int darkModeInt = isDarkMode ? 1 : 0;
-        
-        NativeMethods.DwmSetWindowAttribute(
+        _ = NativeMethods.DwmSetWindowAttribute(
             new WindowInteropHelper(this).Handle,
             NativeMethods.DWMWA_USE_IMMERSIVE_DARK_MODE,
             ref darkModeInt,
@@ -260,37 +267,40 @@ public partial class MainWindow : Window
     {
         // 0x0112 == WM_SYSCOMMAND, 'Window' command message.
         // 0xF020 == SC_MINIMIZE, command to minimize the window.
-        if (msg == 0x0112 && 
-            ((int)wParam & 0xFFF0) == 0xF020)
+#pragma warning disable CA2020
+        if (msg != 0x0112 || ((int) wParam & 0xFFF0) != 0xF020)
+#pragma warning restore CA2020
         {
-            // Handle minimize...
+            return IntPtr.Zero;
+        }
 
-            var optionsService = Ioc.Default.GetService<IOptionsService>()!;
-            if (!optionsService.Options.ShrinkOnMinimise)
+        // Handle minimize...
+
+        var optionsService = Ioc.Default.GetService<IOptionsService>()!;
+        if (!optionsService.Options.ShrinkOnMinimise)
+        {
+            handled = false;
+        }
+        else if (_isShrunk)
+        {
+            // can't minimize a shrunk window
+            handled = true;
+        }
+        else
+        {
+            var m = (MainViewModel?) DataContext;
+
+            if (m?.CurrentPageName?.Equals(SettingsPageViewModel.PageName) == true)
             {
+                // we can minimise the window if we are on the Settings page
                 handled = false;
-            }
-            else if (_isShrunk)
-            {
-                // can't minimize a shrunk window
-                handled = true;
             }
             else
             {
-                var m = (MainViewModel?) DataContext;
-
-                if (m?.CurrentPageName?.Equals(SettingsPageViewModel.PageName) == true)
-                {
-                    // we can minimise the window if we are on the Settings page
-                    handled = false;
-                }
-                else
-                {
-                    // on the Operator page
-                    SaveWindowPos();
-                    AdjustMainWindowShrunkPositionAndSize();
-                    handled = true;
-                }
+                // on the Operator page
+                SaveWindowPos();
+                AdjustMainWindowShrunkPositionAndSize();
+                handled = true;
             }
         }
 

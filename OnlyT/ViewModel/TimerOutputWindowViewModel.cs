@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
-using OnlyT.Services.CommandLine;
 
 namespace OnlyT.ViewModel;
 
@@ -133,16 +132,16 @@ public class TimerOutputWindowViewModel : ObservableObject
             }
         }
     }
-
-    public bool ShouldNotOutputNdi => false;
-
+    
     public const int NdiPixelHeight = 1080;
 
     public const int NdiPixelWidth = 1920;
     
+    // don't make these static without altering the binding in xaml
+#pragma warning disable CA1822
     public int NdiPixelHeightValue => NdiPixelHeight;
-
     public int NdiPixelWidthValue => NdiPixelWidth;
+#pragma warning restore CA1822
 
     public int AnalogueClockColumnWidthPercentage
     {
@@ -230,9 +229,12 @@ public class TimerOutputWindowViewModel : ObservableObject
         IsRunning = false;
         DurationSector = null;
     }
-
-    private static double CalcAngleFromTime(DateTime dt) => (dt.Minute + ((double)dt.Second / 60)) / 60 * 360;
-
+    
+    private static double CalcAngleFromTime(DateTime dt) =>
+        (dt.Minute * 6.0) +
+        (dt.Second * 0.1) +
+        (dt.Millisecond * (0.1 / 1000));
+    
     private void OnTimerStarted(object recipient, TimerStartMessage message)
     {
         TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp 

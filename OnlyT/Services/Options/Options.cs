@@ -253,14 +253,15 @@
 
             var clock24 = dateFormat.Contains('H');
             var leadingZero = dateFormat.Contains("HH") || dateFormat.Contains("hh");
-            var ampm = dateFormat.Contains("tt");
-
+            
             if (clock24)
             {
                 ClockHourFormat = leadingZero ? ClockHourFormat.Format24LeadingZero : ClockHourFormat.Format24;
             }
             else
             {
+                var ampm = dateFormat.Contains("tt");
+
                 if (leadingZero)
                 {
                     ClockHourFormat = ampm

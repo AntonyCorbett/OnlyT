@@ -15,7 +15,7 @@ internal sealed class TimesFeed
     private readonly string _feedUri;
     private readonly string _localFeedFile;
     private readonly int _tooOldDays = 20;
-    private IEnumerable<Meeting>? _meetingData;
+    private List<Meeting>? _meetingData;
 
     public TimesFeed(string feedUri)
     {
@@ -92,7 +92,7 @@ internal sealed class TimesFeed
         _meetingData ??= LoadFileInternal(today);
     }
 
-    private IReadOnlyCollection<Meeting>? LoadFileInternal(DateTime today)
+    private List<Meeting>? LoadFileInternal(DateTime today)
     {
         List<Meeting>? result = null;
 
@@ -135,7 +135,7 @@ internal sealed class TimesFeed
         return result;
     }
 
-    private static Meeting? GetMeetingDataForTodayInternal(IEnumerable<Meeting>? meetingData)
+    private static Meeting? GetMeetingDataForTodayInternal(List<Meeting>? meetingData)
     {
         var monday = DateUtils.GetMondayOfThisWeek();
         return meetingData?.FirstOrDefault(x => x.Date.Date.Equals(monday));

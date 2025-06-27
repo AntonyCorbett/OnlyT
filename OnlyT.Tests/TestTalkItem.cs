@@ -39,13 +39,13 @@ namespace OnlyT.Tests
             Assert.IsNull(item.ModifiedDuration);
             Assert.IsNull(item.AdaptedDuration);
             
-            Assert.IsTrue(item.GetPlannedDurationSeconds() == (int)testDur.TotalSeconds);
+            Assert.AreEqual(item.GetPlannedDurationSeconds(), (int)testDur.TotalSeconds);
 
             item.ModifiedDuration = changedDur;
             Assert.AreEqual(item.OriginalDuration, testDur);
             Assert.AreEqual(item.ModifiedDuration, changedDur);
             
-            Assert.IsTrue(item.GetPlannedDurationSeconds() == (int)changedDur.TotalSeconds);
+            Assert.AreEqual(item.GetPlannedDurationSeconds(), (int)changedDur.TotalSeconds);
         }
     }
 }

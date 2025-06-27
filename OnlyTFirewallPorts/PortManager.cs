@@ -16,10 +16,8 @@
 
         public static int ReservePort(int port)
         {
-#pragma warning disable CA1416 // Validate platform compatibility
             var everyone = new System.Security.Principal.SecurityIdentifier(
                 "S-1-1-0").Translate(typeof(System.Security.Principal.NTAccount)).ToString();
-#pragma warning restore CA1416 // Validate platform compatibility
 
             var parameter = $"http add urlacl url=http://*:{port}/ user=\"{everyone}\"";
             return LaunchNetworkShell(parameter);

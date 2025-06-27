@@ -34,13 +34,13 @@
             <Setter Property="Padding" Value="5" />
         </Style>
         <Style x:Key="SampleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource MiscNotesForegroundBrush}" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="10,0,0,4" />
         </Style>
         <Style x:Key="MiscNotesStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource MiscNotesForegroundBrush}" />
             <Setter Property="FontSize" Value="11" />
         </Style>
         <Style
@@ -161,7 +161,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             FontSize="11"
-                            Foreground="{DynamicResource PrimaryHueMidBrush}"
+                            Foreground="{DynamicResource MiscNotesForegroundBrush}"
                             Text="{Binding AppVersionStr}" />
                     </DockPanel>
                 </GroupBox>
@@ -356,9 +356,7 @@
                             Style="{StaticResource MaterialDesignRaisedLightButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Height="16" Source="{Binding ElevatedShield}" />
-                                <Label
-                                    Content="{x:Static resx:Resources.OPEN_PORT}"
-                                    Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
+                                <Label Content="{x:Static resx:Resources.OPEN_PORT}" Foreground="{StaticResource PrimaryHueLightForegroundBrush}" />
                             </StackPanel>
                         </Button>
 
@@ -373,12 +371,15 @@
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <TextBlock>
-                            <Hyperlink Command="{Binding WebClockUrlLinkCommand}" >
+                            <Hyperlink Command="{Binding WebClockUrlLinkCommand}" Foreground="{DynamicResource HyperlinkForegroundBrush}">
                                 <TextBlock Text="{Binding WebClockUrl, Mode=OneWay}" />
                             </Hyperlink>
                         </TextBlock>
 
-                        <Image Margin="0,10,0,0" Width="200" Source="{Binding WebClockQrCode}" />
+                        <Image
+                            Width="200"
+                            Margin="0,10,0,0"
+                            Source="{Binding WebClockQrCode}" />
 
                     </StackPanel>
                 </GroupBox>
@@ -491,11 +492,11 @@
 
                         <TextBox
                             Height="120"
+                            VerticalContentAlignment="Top"
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING_STARTS}"
                             AcceptsReturn="True"
                             AcceptsTab="False"
                             HorizontalScrollBarVisibility="Disabled"
-                            VerticalContentAlignment="Top"
                             MinLines="6"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             Text="{Binding MeetingStartTimesAsText, Mode=TwoWay}"

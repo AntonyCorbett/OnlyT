@@ -7,16 +7,11 @@ namespace OnlyT.MeetingTalkTimesFeed;
 
 internal sealed class Meeting
 {
-    public Meeting()
-    {
-        Talks = new List<TalkTimer>();
-    }
-
     [JsonProperty]
     public DateTime Date { get; set; }
 
     [JsonProperty]
-    public List<TalkTimer> Talks { get; }
+    public List<TalkTimer> Talks { get; } = [];
 
     public override string ToString()
     {

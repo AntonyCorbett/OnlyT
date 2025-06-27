@@ -125,7 +125,9 @@ namespace OnlyT
             return CommandLineServiceInstance.Value;
         }
 
+#pragma warning disable U2U1011 // Return types should be specific
         private IDateTimeService DateTimeServiceFactory(IServiceProvider arg)
+#pragma warning restore U2U1011 // Return types should be specific
         {
             return new DateTimeService(CommandLineServiceInstance.Value.DateTimeOnLaunch);
         }

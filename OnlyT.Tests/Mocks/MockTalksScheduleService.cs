@@ -23,11 +23,11 @@ internal sealed class MockTalksScheduleService : ITalkScheduleService
     {
         if (_talks == null)
         {
-            _talks = new List<TalkScheduleItem>();
+            _talks = [];
 
             var talkId = _talkIdStart;
 
-            for (int n = 0; n < _numTalks; ++n)
+            for (var n = 0; n < _numTalks; ++n)
             {
                 _talks.Add(new TalkScheduleItem(talkId + n, $"Talk {n + 1}", string.Empty, string.Empty)
                 {

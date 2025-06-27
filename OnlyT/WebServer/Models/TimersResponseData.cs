@@ -19,7 +19,7 @@ internal sealed class TimersResponseData
         var talks = talkService.GetTalkScheduleItems();
         Status = timerService.GetStatus();
 
-        TimerInfo = new List<TimerInfo>();
+        TimerInfo = [];
 
         var countUpByDefault = optionsService.Options.CountUp;
         foreach (var talk in talks)
@@ -35,14 +35,10 @@ internal sealed class TimersResponseData
         int talkId)
     {
         var talks = talkService.GetTalkScheduleItems();
-        var talk = talks.SingleOrDefault(x => x.Id == talkId);
-        if (talk == null)
-        {
-            throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
-        }
+        var talk = talks.SingleOrDefault(x => x.Id == talkId) ?? throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
 
         Status = timerService.GetStatus();
-        TimerInfo = new List<TimerInfo> { CreateTimerInfo(talk, optionsService.Options.CountUp) };
+        TimerInfo = [CreateTimerInfo(talk, optionsService.Options.CountUp)];
     }
 
     [JsonProperty(PropertyName = "status")]

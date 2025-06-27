@@ -11,7 +11,7 @@ using NUglify;
 
 internal sealed class WebPageController
 {
-    private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = new();
+    private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = [];
     private readonly WebPageTypes _webPageType;
 
     public WebPageController(WebPageTypes webPageType)

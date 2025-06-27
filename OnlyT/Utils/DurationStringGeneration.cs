@@ -6,8 +6,8 @@
 
     internal static class DurationStringGeneration
     {
-        private static readonly Brush DurationBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f3dcbc"));
-        private static readonly Brush DurationDimBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#bba991"));
+        private static readonly SolidColorBrush DurationBrush = new((Color)ColorConverter.ConvertFromString("#f3dcbc"));
+        private static readonly SolidColorBrush DurationDimBrush = new((Color)ColorConverter.ConvertFromString("#bba991"));
 
         public static DurationStringProperties Get(AdaptiveMode adaptiveMode, TalkScheduleItem? talk)
         {

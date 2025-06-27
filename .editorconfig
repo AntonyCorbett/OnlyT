@@ -9,6 +9,21 @@ dotnet_diagnostic.U2U1015.severity = suggestion
 dotnet_diagnostic.U2U1108.severity = silent
 dotnet_diagnostic.U2U1103.severity = suggestion
 
+# U2U1201: "Use LibraryImport instead of DllImport"
+dotnet_diagnostic.SYSLIB1054.severity = none
+
+# U2U1201: "Set initial capacity"
+dotnet_diagnostic.U2U1201.severity = none
+
+# IDE0079: "Remove unnecessary suppresion"
+dotnet_diagnostic.IDE0079.severity = none
+
+# IDE0290: "Use primary constructor"
+dotnet_diagnostic.IDE0290.severity = none
+
+# IDE0055: Collection init can be simplified (ToArray)
+dotnet_diagnostic.IDE0305.severity = none
+
 # CC0022: Should dispose object
 dotnet_diagnostic.CC0022.severity = silent
 
@@ -49,6 +64,7 @@ csharp_style_expression_bodied_accessors = true:silent
 csharp_style_expression_bodied_lambdas = true:silent
 csharp_style_expression_bodied_local_functions = false:silent
 csharp_indent_labels = one_less_than_current
+csharp_prefer_system_threading_lock = true:suggestion
 
 [*.{cs,vb}]
 #### Naming styles ####
@@ -104,3 +120,7 @@ dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
 indent_size = 4
 end_of_line = crlf
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion

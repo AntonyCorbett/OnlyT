@@ -40,7 +40,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 {
     private static readonly string Arrow = "→";
         
-    private static readonly Brush WhiteBrush = Brushes.White;
+    private static readonly SolidColorBrush WhiteBrush = Brushes.White;
     private static readonly int MaxTimerMins = 99;
     private static readonly int MaxTimerSecs = MaxTimerMins * 60;
 
@@ -1115,11 +1115,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void CheckTalkExists(int talkId)
     {
-        var talk = _scheduleService.GetTalkScheduleItem(talkId);
-        if (talk == null)
-        {
-            throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
-        }
+        _ = _scheduleService.GetTalkScheduleItem(talkId) 
+            ?? throw new WebServerException(WebServerErrorCode.TimerDoesNotExist);
     }
 
     private void RaiseCanExecuteIncrementDecrementChanged()

@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 
 namespace OnlyT.Services.Monitors;
 
-#pragma warning disable S101 // Types should be named in PascalCase
 #pragma warning disable U2U1004 // Should implement IEquatable
 
 /// <summary>
@@ -17,9 +16,7 @@ namespace OnlyT.Services.Monitors;
 public static class EnumDisplayNativeMethods
 {
     [Flags]
-#pragma warning disable S2344 // Enumeration type names should not have "Flags" or "Enum" suffixes
     public enum DisplayDeviceStateFlags
-#pragma warning restore S2344 // Enumeration type names should not have "Flags" or "Enum" suffixes
     {
         /// <summary>The device is part of the desktop.</summary>
         AttachedToDesktop = 0x1,
@@ -46,12 +43,17 @@ public static class EnumDisplayNativeMethods
         Disconnect = 0x2000000
     }
 
+#pragma warning disable SYSLIB1054
+    // we can't use [LibraryImport] yet as it does not support ref parameters for blittable structs
+    // that contain non-blittable fields (such as strings). The DISPLAY_DEVICE struct contains string
+    // fields, which are not blittable.
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     internal static extern bool EnumDisplayDevices(
-        string lpDevice, 
-        uint iDevNum, 
-        ref DISPLAY_DEVICE lpDisplayDevice, 
+        string lpDevice,
+        uint iDevNum,
+        ref DISPLAY_DEVICE lpDisplayDevice,
         uint dwFlags);
+#pragma warning restore SYSLIB1054
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct DISPLAY_DEVICE
@@ -70,6 +72,3 @@ public static class EnumDisplayNativeMethods
         public string DeviceKey;
     }
 }
-
-#pragma warning restore U2U1004 // Should implement IEquatable
-#pragma warning restore S101 // Types should be named in PascalCase

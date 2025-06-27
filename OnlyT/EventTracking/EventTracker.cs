@@ -6,8 +6,6 @@ using System.Globalization;
 
 namespace OnlyT.EventTracking;
 
-#pragma warning disable CA1416 // Validate platform compatibility
-
 internal static class EventTracker
 {
     public static void Track(EventName eventName, Dictionary<string, string>? properties = null)
@@ -52,5 +50,3 @@ internal static class EventTracker
         });
     }
 }
-
-#pragma warning restore CA1416 // Validate platform compatibility

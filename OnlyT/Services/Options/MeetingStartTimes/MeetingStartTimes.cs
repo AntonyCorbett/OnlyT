@@ -6,12 +6,7 @@ namespace OnlyT.Services.Options.MeetingStartTimes;
 
 public class MeetingStartTimes
 {
-    public MeetingStartTimes()
-    {
-        Times = new List<MeetingStartTime>();
-    }
-
-    public List<MeetingStartTime> Times { get; }
+    public List<MeetingStartTime> Times { get; } = [];
 
     public void Sanitize()
     {

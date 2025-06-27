@@ -1,25 +1,23 @@
-﻿namespace OnlyT.Services.TalkSchedule
-{
-    using System;
-    using System.Collections.Generic;
-    using Models;
-    using Options;
+﻿namespace OnlyT.Services.TalkSchedule;
 
-    // ReSharper disable once ClassNeverInstantiated.Global
-    internal static class TalkScheduleManual
+using System;
+using System.Collections.Generic;
+using Models;
+using Options;
+    
+internal static class TalkScheduleManual
+{
+    public static List<TalkScheduleItem> Read(IOptionsService optionsService)
     {
-        public static IEnumerable<TalkScheduleItem> Read(IOptionsService optionsService)
-        {
-            return new List<TalkScheduleItem>
+        return
+        [
+            new TalkScheduleItem(10000, "Manual", string.Empty, string.Empty)
             {
-                new(10000, "Manual", string.Empty, string.Empty)
-                {
-                    OriginalDuration = TimeSpan.FromMinutes(30),
-                    Editable = true,
-                    BellApplicable = optionsService.Options.IsBellEnabled,
-                    AutoBell = optionsService.Options.AutoBell,
-                }
-            };
-        }
+                OriginalDuration = TimeSpan.FromMinutes(30),
+                Editable = true,
+                BellApplicable = optionsService.Options.IsBellEnabled,
+                AutoBell = optionsService.Options.AutoBell,
+            }
+        ];
     }
 }
