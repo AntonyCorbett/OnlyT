@@ -208,10 +208,10 @@
     <value>수동</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>봉사 강연</value>
+    <value/>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
-    <value>복습 및 다음주 소개</value>
+    <value>맺음말</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
     <value>회중 성서 연구</value>
@@ -326,7 +326,7 @@
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="APPS_SECTION" xml:space="preserve">
-    <value>원격 제어 어플리케이션</value>
+    <value>원격제어 앱</value>
     <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
   </data>
   <data name="AUTO_SECTION" xml:space="preserve">
@@ -678,11 +678,11 @@
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
-    <value>카운트다운 툴팁 숨기기</value>
+    <value/>
     <comment>Tooltip for main window button</comment>
   </data>
   <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
-    <value>Cannot open transparent "windowed" countdown</value>
+    <value>카운트다운 스타일 적용안됨</value>
     <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
   </data>
   <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -705,7 +705,7 @@
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>primary</value>
+    <value>주 모니터</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
