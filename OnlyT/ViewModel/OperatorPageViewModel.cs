@@ -149,6 +149,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 dateTimeService);
 
             automationService.Execute();
+
+            _snackbarService.Enqueue("Automate starts on the nearest 1/4 hr");
 #endif
         }
     }
