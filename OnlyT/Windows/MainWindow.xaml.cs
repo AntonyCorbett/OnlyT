@@ -82,27 +82,38 @@ public partial class MainWindow : Window
     private void OnBeforeNavigate(object recipient, BeforeNavigateMessage message)
     {
         SaveWindowPos();
+        var m = (MainViewModel?)DataContext;
+        if (m?.CurrentPage != null)
+        {
+            m.CurrentPage = null;
+
+            // Force UI to update before proceeding
+            Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Background);
+        }
     }
 
     private void OnNavigate(object recipient, NavigateMessage message)
     {
-        if (message.TargetPageName.Equals(OperatorPageViewModel.PageName))
+        Dispatcher.BeginInvoke(new Action(() =>
         {
-            MinHeight = MainWindowMinHeightAbsolute;
-            MinWidth = MainWindowMinWidthAbsolute;
+            if (message.TargetPageName.Equals(OperatorPageViewModel.PageName))
+            {
+                MinHeight = MainWindowMinHeightAbsolute;
+                MinWidth = MainWindowMinWidthAbsolute;
 
-            WindowState = WindowState.Normal;
-            AdjustMainWindowNormalPositionAndSize();
-        }
-        else if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
-        {
-            WindowState = WindowState.Normal;
-            AdjustMainWindowSettingsPositionAndSize();
+                WindowState = WindowState.Normal;
+                AdjustMainWindowNormalPositionAndSize();
+            }
+            else if (message.TargetPageName.Equals(SettingsPageViewModel.PageName))
+            {
+                WindowState = WindowState.Normal;
+                AdjustMainWindowSettingsPositionAndSize();
 
-            // restrict the min size of the window when on the Settings page
-            MinWidth = SettingsWindowMinWidth;
-            MinHeight = SettingsWindowMinHeight;
-        }
+                // restrict the min size of the window when on the Settings page
+                MinWidth = SettingsWindowMinWidth;
+                MinHeight = SettingsWindowMinHeight;
+            }
+        }), System.Windows.Threading.DispatcherPriority.Background);
     }
 
     private void BringToFront(object recipient, BringMainWindowToFrontMessage message)

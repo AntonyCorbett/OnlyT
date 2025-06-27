@@ -1,29 +1,30 @@
-﻿<Window x:Class="OnlyT.Windows.MainWindow"
-        
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
-        MouseDown="WindowMouseDown"
+﻿<Window
+    x:Class="OnlyT.Windows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="S o u n d B o x - O N L Y T"
+    Width="395"
+    Height="350"
+    Background="{DynamicResource MaterialDesignPaper}"
+    Closing="WindowClosing"
+    DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    MouseDown="WindowMouseDown"
+    ResizeMode="CanResize"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    Topmost="{Binding AlwaysOnTop, Mode=OneWay}"
+    mc:Ignorable="d">
 
-        DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
-        Topmost="{Binding AlwaysOnTop, Mode=OneWay}"
-        Title="S o u n d B o x - O N L Y T" Height="350" Width="395" 
-        Closing="WindowClosing" ResizeMode="CanResize" >
-    
     <Grid>
-        <ContentControl Content="{Binding CurrentPage}" />
-        <materialDesign:Snackbar MessageQueue="{Binding TheSnackbarMessageQueue}" HorizontalAlignment="Stretch"/>
+        <materialDesign:TransitioningContent Content="{Binding CurrentPage}" OpeningEffect="{materialDesign:TransitionEffect FadeIn}" />
+        <materialDesign:Snackbar HorizontalAlignment="Stretch" MessageQueue="{Binding TheSnackbarMessageQueue}" />
     </Grid>
 
 </Window>

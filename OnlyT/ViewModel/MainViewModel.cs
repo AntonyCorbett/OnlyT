@@ -132,7 +132,7 @@ public class MainViewModel : ObservableObject
         _timerOutputDisplayService.IsWindowVisible() ||
         _countdownDisplayService.IsWindowVisible();
 
-    public string? CurrentPageName { get; private set; }
+    public string? CurrentPageName { get; set; }
 
     private bool CountDownActive => _countdownDisplayService.IsCountingDown;
 
@@ -416,7 +416,7 @@ public class MainViewModel : ObservableObject
         CurrentPage = _pages[message.TargetPageName];
         CurrentPageName = message.TargetPageName;
 
-        var page = (IPage)CurrentPage.DataContext;
+        var page = (IPage) CurrentPage.DataContext;
         page.Activated(message.State);
     }
 
