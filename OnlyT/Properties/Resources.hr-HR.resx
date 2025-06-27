@@ -737,7 +737,7 @@ Shift - Increase 5m</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
   <data name="DARK_MODE" xml:space="preserve">
-    <value>Dark mode</value>
+    <value>Tamni način rada</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
