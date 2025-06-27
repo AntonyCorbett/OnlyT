@@ -121,15 +121,15 @@
     <value>adapted duration = {0}</value>
   </data>
   <data name="COUNSEL" xml:space="preserve">
-    <value>조언</value>
+    <value>칭찬과 조언</value>
     <comment>Printed below student talks in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_AND_WEEKEND_MTGS" xml:space="preserve">
-    <value>주중 및 주말 집회</value>
+    <value>평일 및 주말 집회</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="MIDWEEK_MTGS" xml:space="preserve">
-    <value>주중 집회</value>
+    <value>평일 집회</value>
     <comment>Chart title in the Timing Report</comment>
   </data>
   <data name="ON_TIME" xml:space="preserve">
@@ -145,7 +145,7 @@
     <comment>Summary text in the Timing Report when the meeting was overtime by more than 1 minute</comment>
   </data>
   <data name="OVERTIME_BY_1" xml:space="preserve">
-    <value>집회시간이 1분 초과 되었습니다.</value>
+    <value>집회가 1 분 늦게 끝났습니다</value>
     <comment>Summary text in the Timing Report when the meeting was overtime by 1 minute</comment>
   </data>
   <data name="OVERTIME_MINS" xml:space="preserve">
