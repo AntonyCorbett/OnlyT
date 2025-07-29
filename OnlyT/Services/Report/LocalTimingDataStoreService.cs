@@ -237,7 +237,7 @@ internal sealed class LocalTimingDataStoreService : ILocalTimingDataStoreService
 
                 var t = TimeSpan.FromMinutes(mins);
                 var overOrUnderStr = minsOvertime > 0 ? "overtime" : "undertime";
-                Log.Logger.Warning($"Meeting duration is out of range ({t:g} {overOrUnderStr})");
+                Log.Logger.Warning("Meeting duration is out of range ({Duration} {Status})", t, overOrUnderStr);
             }
         }
 

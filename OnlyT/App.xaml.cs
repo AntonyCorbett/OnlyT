@@ -2,34 +2,35 @@
 #define USE_APP_CENTER
 #endif
 
-using System;
-using System.Windows.Threading;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using OnlyT.AutoUpdates;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.EventTracking;
 using OnlyT.Services.Bell;
 using OnlyT.Services.CommandLine;
 using OnlyT.Services.CountdownTimer;
+using OnlyT.Services.LogLevelSwitch;
 using OnlyT.Services.Monitors;
 using OnlyT.Services.Options;
 using OnlyT.Services.OutputDisplays;
+using OnlyT.Services.OverrunNotificationService;
+using OnlyT.Services.Reminders;
 using OnlyT.Services.Report;
 using OnlyT.Services.Snackbar;
 using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
+using OnlyT.Utils;
+using OnlyT.ViewModel;
 using OnlyT.WebServer;
+using Serilog;
+using Serilog.Events;
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows;
-using CommunityToolkit.Mvvm.DependencyInjection;
-using OnlyT.AutoUpdates;
-using OnlyT.Services.LogLevelSwitch;
-using OnlyT.ViewModel;
-using Serilog;
-using OnlyT.Utils;
-using System.Diagnostics;
-using OnlyT.EventTracking;
-using OnlyT.Services.OverrunNotificationService;
-using OnlyT.Services.Reminders;
+using System.Windows.Threading;
 
 namespace OnlyT
 {
@@ -45,7 +46,11 @@ namespace OnlyT
         protected override void OnExit(ExitEventArgs e)
         {
             _appMutex?.Dispose();
-            Log.Logger.Information("==== Exit ====");
+
+            if (Log.IsEnabled(LogEventLevel.Information))
+            {
+                Log.Logger.Information("==== Exit ====");
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -143,8 +148,11 @@ namespace OnlyT
                     .WriteTo.File(Path.Combine(logsDirectory, "log-.txt"), retainedFileCountLimit: 28, rollingInterval: RollingInterval.Day)
                     .CreateLogger();
 
-                Log.Logger.Information("==== Launched ====");
-                Log.Logger.Information($"Version {VersionDetection.GetCurrentVersion()}");
+                if (Log.IsEnabled(LogEventLevel.Information))
+                {
+                    Log.Logger.Information("==== Launched ====");
+                    Log.Logger.Information("Version {Version}", VersionDetection.GetCurrentVersion());
+                }
             }
             catch (Exception ex)
             {

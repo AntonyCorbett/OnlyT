@@ -61,7 +61,7 @@ internal sealed class TimerBell : ObservableObject, IDisposable
                 }
                 else
                 {
-                    Log.Logger.Error($"Could not find bell file {_bellFilePath}");
+                    Log.Logger.Error("Could not find bell file {BellFilePath}", _bellFilePath);
                 }
             }
             catch (Exception ex)

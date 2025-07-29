@@ -1,15 +1,16 @@
-﻿using PdfSharpCore.Charting;
+﻿using OnlyT.Common.Services.DateTime;
+using OnlyT.Report.Models;
+using OnlyT.Report.Properties;
+using PdfSharpCore.Charting;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using OnlyT.Common.Services.DateTime;
-using OnlyT.Report.Models;
-using OnlyT.Report.Properties;
-using Serilog;
 
 namespace OnlyT.Report.Pdf
 {
@@ -68,7 +69,10 @@ namespace OnlyT.Report.Pdf
         {
             var fileName = GetOutputFileName();
 
-            Log.Logger.Debug($"Executing PdfTimerReport: {fileName}");
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Executing PdfTimerReport: {FileName}", fileName);
+            }
 
             using var doc = new PdfDocument();
 
@@ -76,7 +80,11 @@ namespace OnlyT.Report.Pdf
 
             using (var g = XGraphics.FromPdfPage(page))
             {
-                Log.Logger.Debug("Creating fonts and page metrics");
+                if (Log.IsEnabled(LogEventLevel.Debug))
+                {
+                    Log.Logger.Debug("Creating fonts and page metrics");
+                }
+
                 CreateFonts();
                 CalcMetrics(page);
 
@@ -87,7 +95,10 @@ namespace OnlyT.Report.Pdf
                 {
                     var item = itemArray[n];
 
-                    Log.Logger.Debug($"Printing item: {item.Description}, {item.Start} - {item.End}");
+                    if (Log.IsEnabled(LogEventLevel.Debug))
+                    {
+                        Log.Logger.Debug("Printing item: {Description}, {Start} - {End}", item.Description, item.Start, item.End);
+                    }
 
                     DrawItem(g, item);
                     if (item.IsStudentTalk && n != itemArray.Length - 1)
@@ -107,12 +118,20 @@ namespace OnlyT.Report.Pdf
 
                 if (_data.MeetingPlannedEnd != default && _data.MeetingActualEnd != default)
                 {
-                    Log.Logger.Debug("Printing summary");
+                    if (Log.IsEnabled(LogEventLevel.Debug))
+                    {
+                        Log.Logger.Debug("Printing summary");
+                    }
+
                     DrawSummary(g, _data.MeetingPlannedEnd, _data.MeetingActualEnd);
                 }
             }
 
-            Log.Logger.Debug("Printing historical summary");
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Printing historical summary");
+            }
+            
             DrawHistoricalSummary(doc);
 
             doc.Save(fileName);

@@ -943,18 +943,24 @@ public class SettingsPageViewModel : ObservableObject, IPage
     {
         try
         {
-            Log.Logger.Information($"Attempting to reserve and open port: {Port}");
+            if (Log.IsEnabled(LogEventLevel.Information))
+            {
+                Log.Logger.Information("Attempting to reserve and open port: {Port}", Port);
+            }
 
             var rv = FirewallPortsClient.ReserveAndOpenPort(Port);
             if (rv != 0)
             {
-                Log.Logger.Warning($"Return value from reserve and open port = {rv}");
+                Log.Logger.Warning("Return value from reserve and open port = {ReturnValue}", rv);
 
                 _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPEN_FAILED);
             }
             else
             {
-                Log.Logger.Information($"Success reserving and opening port: {Port}");
+                if (Log.IsEnabled(LogEventLevel.Information))
+                {
+                    Log.Logger.Information("Success reserving and opening port: {Port}", Port);
+                }
 
                 _snackbarService.EnqueueWithOk(Properties.Resources.PORT_OPENED);
             }

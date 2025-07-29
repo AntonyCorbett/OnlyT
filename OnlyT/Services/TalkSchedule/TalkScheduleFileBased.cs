@@ -54,7 +54,7 @@ internal static class TalkScheduleFileBased
             catch (Exception ex)
             {
                 result.Clear();
-                Log.Logger.Error(ex, $"Unable to read {path}");
+                Log.Logger.Error(ex, "Unable to read {Path}", path);
             }
         }
 

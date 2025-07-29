@@ -2,6 +2,26 @@
 
 // Ignore Spelling: Snackbar
 
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using MaterialDesignThemes.Wpf;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.EventArgs;
+using OnlyT.EventTracking;
+using OnlyT.Models;
+using OnlyT.Services.CommandLine;
+using OnlyT.Services.CountdownTimer;
+using OnlyT.Services.Options;
+using OnlyT.Services.OutputDisplays;
+using OnlyT.Services.OverrunNotificationService;
+using OnlyT.Services.Reminders;
+using OnlyT.Services.Snackbar;
+using OnlyT.Services.Timer;
+using OnlyT.ViewModel.Messages;
+using OnlyT.WebServer;
+using OnlyT.Windows;
+using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,25 +30,6 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
-using OnlyT.EventArgs;
-using MaterialDesignThemes.Wpf;
-using OnlyT.ViewModel.Messages;
-using OnlyT.Common.Services.DateTime;
-using OnlyT.Models;
-using OnlyT.Services.OutputDisplays;
-using OnlyT.Services.Snackbar;
-using Serilog;
-using OnlyT.Services.CommandLine;
-using OnlyT.Services.CountdownTimer;
-using OnlyT.Services.Options;
-using OnlyT.Services.Timer;
-using OnlyT.WebServer;
-using OnlyT.Windows;
-using OnlyT.EventTracking;
-using OnlyT.Services.OverrunNotificationService;
-using OnlyT.Services.Reminders;
 
 namespace OnlyT.ViewModel;
 
@@ -485,7 +486,11 @@ public class MainViewModel : ObservableObject
     {
         if (_optionsService.CanDisplayCountdownWindow)
         {
-            Log.Logger.Information("Launching countdown timer");
+            if (Log.IsEnabled(LogEventLevel.Information))
+            {
+                Log.Logger.Information("Launching countdown timer");
+            }
+
             EventTracker.Track(EventName.CountdownTimer);
 
             _countdownDisplayService.Start(offsetSeconds);

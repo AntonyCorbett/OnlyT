@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.EventTracking;
 using OnlyT.Services.Monitors;
@@ -11,6 +8,10 @@ using OnlyT.ViewModel;
 using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using Serilog;
+using Serilog.Events;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace OnlyT.Services.OutputDisplays;
 
@@ -173,7 +174,10 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
                 _countdownWindow.TimeUpEvent -= OnCountdownTimeUp;
             }
 
-            Log.Logger.Debug("Closing countdown window");
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Closing countdown window");
+            }
 
             _countdownWindow?.Close();
             _countdownWindow = null;

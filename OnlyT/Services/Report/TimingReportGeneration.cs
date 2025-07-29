@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using OnlyT.Common.Services.DateTime;
+﻿using OnlyT.Common.Services.DateTime;
 using OnlyT.Report.Pdf;
 using OnlyT.Utils;
 using Serilog;
+using Serilog.Events;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace OnlyT.Services.Report
 {
@@ -28,7 +29,11 @@ namespace OnlyT.Services.Report
                 }
 
                 var outputFolder = FileUtils.GetTimingReportsFolder(commandLineIdentifier);
-                Log.Logger.Debug($"Timer report output folder = {outputFolder}");
+
+                if (Log.IsEnabled(LogEventLevel.Debug))
+                {
+                    Log.Logger.Debug("Timer report output folder = {OutputFolder}", outputFolder);
+                }
 
                 if (string.IsNullOrEmpty(outputFolder) || !Directory.Exists(outputFolder))
                 {

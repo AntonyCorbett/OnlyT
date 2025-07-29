@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.Services.CommandLine;
 using OnlyT.Services.Monitors;
@@ -8,6 +7,8 @@ using OnlyT.ViewModel;
 using OnlyT.ViewModel.Messages;
 using OnlyT.Windows;
 using Serilog;
+using Serilog.Events;
+using System.Windows;
 
 namespace OnlyT.Services.OutputDisplays;
 
@@ -50,7 +51,11 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
         var monitor = _monitorsService.GetMonitorItem(_optionsService.Options.TimerMonitorId);
         if (monitor != null)
         {
-            Log.Logger.Debug("Relocating timer window to: {MonitorName}", monitor.FriendlyName);
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Relocating timer window to: {MonitorName}", monitor.FriendlyName);
+            }
+
             RelocateWindow(_timerWindow, monitor);
         }
     }
@@ -98,7 +103,10 @@ internal sealed class TimerOutputDisplayService : OutputDisplayServiceBase, ITim
 
     public void Close()
     {
-        Log.Logger.Debug("Closing timer window");
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Closing timer window");
+        }
 
         _timerWindow?.Close();
         _timerWindow = null;

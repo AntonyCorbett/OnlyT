@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using OnlyT.Models;
 using Serilog;
+using Serilog.Events;
 
 namespace OnlyT.Services.Monitors;
 
@@ -19,8 +20,11 @@ public sealed class MonitorsService : IMonitorsService
     /// <returns>Collection of MonitorItem</returns>
     public IEnumerable<MonitorItem> GetSystemMonitors()
     {
-        Log.Logger.Information("Getting system monitors");
-            
+        if (Log.IsEnabled(LogEventLevel.Information))
+        {
+            Log.Logger.Information("Getting system monitors");
+        }
+
         var result = new List<MonitorItem>();
 
         var devices = DisplayDevices.ReadDisplayDevices().ToArray();
@@ -76,12 +80,19 @@ public sealed class MonitorsService : IMonitorsService
 
         foreach (var screen in Screen.AllScreens)
         {
-            Log.Logger.Verbose($"Screen: {screen.DeviceName}");
+            if (Log.IsEnabled(LogEventLevel.Verbose))
+            {
+                Log.Logger.Verbose("Screen: {DeviceName}", screen.DeviceName);
+            }
 
             var deviceData = GetDeviceMatchingScreen(devices, screen);
             if (deviceData != null)
             {
-                Log.Logger.Verbose($"Matching device: {deviceData.DeviceString}, {deviceData.DeviceId}");
+                if (Log.IsEnabled(LogEventLevel.Verbose))
+                {
+                    Log.Logger.Verbose("Matching device: {DeviceString}, {DeviceId}", deviceData.DeviceString, deviceData.DeviceId);
+                }
+
                 result.Add((screen, deviceData));
             }
         }

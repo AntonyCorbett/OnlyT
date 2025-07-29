@@ -9,6 +9,7 @@ using OnlyT.ViewModel.Messages;
 using OnlyT.Services.Options;
 using Serilog;
 using OnlyT.Services.TalkSchedule;
+using Serilog.Events;
 
 namespace OnlyT.Services.Timer;
 
@@ -63,8 +64,11 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
         {
             return null;
         }
-            
-        Log.Logger.Debug($"Calculating adapted talk duration for item {talk.Name}");
+
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Calculating adapted talk duration for item {TalkName}", talk.Name);
+        }
 
         EnsureMeetingStartTimeIsSet(talk);
 
@@ -75,7 +79,11 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
 
         var adaptiveMode = _optionsService.GetAdaptiveMode();
 
-        Log.Logger.Debug($"Adaptive mode = {adaptiveMode}");
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Adaptive mode = {AdaptiveMode}", adaptiveMode);
+        }
+        
         if (adaptiveMode == AdaptiveMode.None || !talk.AllowAdaptive)
         {
             return null;
@@ -100,20 +108,29 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
 
         var remainingAdaptiveTime = CalculateRemainingAdaptiveTimerValues(talk);
 
-        Log.Logger.Debug($"Remaining time = {remainingAdaptiveTime}");
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Remaining time = {RemainingTime}", remainingAdaptiveTime);
+        }
 
         var fractionToApplyToThisTalk =
             talk.GetPlannedDurationSeconds() / remainingAdaptiveTime.TotalSeconds;
 
-        Log.Logger.Debug($"Fraction to apply = {fractionToApplyToThisTalk:F2}");
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Fraction to apply = {FractionToApply:F2}", fractionToApplyToThisTalk);
+        }
 
         var secondsToApply = deviation.TotalSeconds * fractionToApplyToThisTalk;
 
-        Log.Logger.Debug($"Seconds to add = {secondsToApply:F1}");
-            
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Seconds to add = {SecondsToAdd}", secondsToApply);
+        }
+
         return talk.ActualDuration.Add(TimeSpan.FromSeconds(secondsToApply));
     }
-
+    
     public TimeSpan? CalculateMeetingOverrun(int talkId)
     {
         var talk = _scheduleService.GetTalkScheduleItem(talkId);
@@ -122,7 +139,10 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
             return null;
         }
 
-        Log.Logger.Debug("Calculating meeting overrun");
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Calculating meeting overrun");
+        }
 
         EnsureMeetingStartTimeIsSet(talk);
 
@@ -133,7 +153,11 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
 
         var adaptiveMode = _optionsService.GetAdaptiveMode();
 
-        Log.Logger.Debug($"Adaptive mode = {adaptiveMode}");
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Adaptive mode = {AdaptiveMode}", adaptiveMode);
+        }
+
         if (adaptiveMode == AdaptiveMode.None)
         {
             return null;
@@ -226,7 +250,10 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
     {
         if (_optionsService.Options.OperatingMode == OperatingMode.Automatic)
         {
-            Log.Logger.Debug("Setting meeting start time UTC for adaptive timer service");
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Setting meeting start time UTC for adaptive timer service");
+            }
 
             DateTime? start = null;
 
@@ -266,7 +293,10 @@ internal sealed class AdaptiveTimerService : IAdaptiveTimerService
                     : start;
             }
 
-            Log.Logger.Debug($"Meeting start time UTC = {_meetingStartTimeUtc}");
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Meeting start time UTC = {MeetingStartTimeUtc}", _meetingStartTimeUtc);
+            }
         }
     }
 
