@@ -6,14 +6,6 @@ internal enum EventName
     DisableGpu,
     InitHttpServer,
     CountdownTimer,
-    CountUp,
-    CountDown,
     StartingTimer,
     StoppingTimer,
-    LaunchHelp,
-    Increment,
-    Decrement,
-    Adaptive,
-    NotAdaptive,
-    CountDownMins
 }

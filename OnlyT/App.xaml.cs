@@ -148,7 +148,7 @@ namespace OnlyT
                     Log.Logger.Information("Version {Version}", VersionDetection.GetCurrentVersion());
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // logging won't work but silently fails
                 // "no-op" logger

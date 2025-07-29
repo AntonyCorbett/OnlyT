@@ -6,13 +6,13 @@
 /// </summary>
 public class TimerChangedEventArgs : System.EventArgs
 {
-    public int TargetSecs { get; set; }
+    public int TargetSecs { get; init; }
 
-    public int ElapsedSecs { get; set; }
+    public int ElapsedSecs { get; init; }
 
-    public bool IsRunning { get; set; }
+    public bool IsRunning { get; init; }
 
-    public int ClosingSecs { get; set; }
+    public int ClosingSecs { get; init; }
 
     public int RemainingSecs => TargetSecs - ElapsedSecs;
 }
