@@ -1,52 +1,44 @@
-﻿using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
+﻿using Sentry;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace OnlyT.EventTracking;
 
 internal static class EventTracker
 {
-    public static void Track(EventName eventName, Dictionary<string, string>? properties = null)
+    // https://soundbox.sentry.io/
+    // https://docs.sentry.io/platforms/dotnet/guides/wpf/
+
+    public static void AddBreadcrumb(
+        EventName eventName, string category, Dictionary<string, string>? properties = null)
     {
-        Analytics.TrackEvent(eventName.ToString(), properties);
+        SentrySdk.AddBreadcrumb(
+            message: eventName.ToString(),
+            category: category,
+            data: properties);
     }
 
     public static void Error(Exception ex, string? context = null)
     {
         if (string.IsNullOrEmpty(context))
         {
-            Crashes.TrackError(ex);
+            SentrySdk.CaptureException(ex);
         }
         else
         {
-            var properties = new Dictionary<string, string> { { "context", context } };
-            Crashes.TrackError(ex, properties);
+            SentrySdk.CaptureException(ex, scope => { scope.SetTag("context", context); });
         }
     }
 
-    public static void TrackIncrement(int seconds)
+    public static void Error(string message, string? context = null)
     {
-        Track(EventName.Increment, new Dictionary<string, string>
+        if (string.IsNullOrEmpty(context))
         {
-            { "seconds", seconds.ToString(CultureInfo.InvariantCulture) },
-        });
-    }
-
-    public static void TrackDecrement(int seconds)
-    {
-        Track(EventName.Decrement, new Dictionary<string, string>
+            SentrySdk.CaptureMessage(message, SentryLevel.Error);
+        }
+        else
         {
-            { "seconds", seconds.ToString(CultureInfo.InvariantCulture) },
-        });
-    }
-
-    public static void TrackCountdownMins(int minutes)
-    {
-        Track(EventName.CountDownMins, new Dictionary<string, string>
-        {
-            { "minutes", minutes.ToString(CultureInfo.InvariantCulture) },
-        });
+            SentrySdk.CaptureMessage(message, scope => { scope.SetTag("context", context); }, SentryLevel.Error);
+        }
     }
 }

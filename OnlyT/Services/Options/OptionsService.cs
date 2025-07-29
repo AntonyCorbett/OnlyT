@@ -184,8 +184,6 @@ internal sealed class OptionsService : IOptionsService
                 _originalOptionsSignature = GetOptionsSignature(_options);
 
                 _logLevelSwitchService.SetMinimumLevel(Options.LogEventLevel);
-
-                TrackSomeOptions();
             }
             catch (Exception ex)
             {
@@ -196,20 +194,6 @@ internal sealed class OptionsService : IOptionsService
                 _options = new Options();
             }
         }
-    }
-
-    private void TrackSomeOptions()
-    {
-        if (Options.MidWeekAdaptiveMode == AdaptiveMode.None) 
-        {
-            EventTracker.Track(EventName.NotAdaptive);
-        }
-        else
-        {
-            EventTracker.Track(EventName.Adaptive);
-        }
-
-        EventTracker.TrackCountdownMins(Options.CountdownDurationMins);
     }
 
     private void SetCulture()

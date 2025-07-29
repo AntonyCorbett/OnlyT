@@ -478,8 +478,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
         {
             Log.Logger.Debug("Starting timer");
         }
-        
-        EventTracker.Track(EventName.StartingTimer);
+
+        EventTracker.AddBreadcrumb(EventName.StartingTimer, "timer:starting");
 
         _isStarting = true;
         _secondsElapsed = 0;
@@ -877,37 +877,31 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void DecrementTimer()
     {
-        EventTracker.TrackDecrement(60);
         IncrementDecrementTimerInternal(-60);
     }
 
     private void DecrementTimer15Secs()
     {
-        EventTracker.TrackDecrement(15);
         IncrementDecrementTimerInternal(-15);
     }
 
     private void DecrementTimer5Mins()
     {
-        EventTracker.TrackDecrement(5 * 60);
         IncrementDecrementTimerInternal(-5 * 60);
     }
 
     private void IncrementTimer()
     {
-        EventTracker.TrackIncrement(60);
         IncrementDecrementTimerInternal(60);
     }
 
     private void IncrementTimer15Secs()
     {
-        EventTracker.TrackIncrement(15);
         IncrementDecrementTimerInternal(15);
     }
 
     private void IncrementTimer5Mins()
     {
-        EventTracker.TrackIncrement(5 * 60);
         IncrementDecrementTimerInternal(5 * 60);
     }
 
@@ -973,7 +967,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
             Log.Logger.Debug("Stopping timer");
         }
 
-        EventTracker.Track(EventName.StoppingTimer);
+        EventTracker.AddBreadcrumb(EventName.StoppingTimer, "timer:stopping");
 
         IsOvertime = false;
 
@@ -1078,8 +1072,6 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void LaunchHelp()
     {
-        EventTracker.Track(EventName.LaunchHelp);
-
         var psi = new ProcessStartInfo
         {
             FileName = "https://github.com/AntonyCorbett/OnlyT/wiki",

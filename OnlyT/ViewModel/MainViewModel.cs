@@ -79,7 +79,7 @@ public class MainViewModel : ObservableObject
         if (commandLineService.NoGpu || ForceSoftwareRendering())
         {
             // disable hardware (GPU) rendering so that it's all done by the CPU...
-            EventTracker.Track(EventName.DisableGPU);
+            EventTracker.AddBreadcrumb(EventName.DisableGpu, "rendering:software");
             RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
         }
 
@@ -192,7 +192,7 @@ public class MainViewModel : ObservableObject
     {
         if (_optionsService.Options.IsWebClockEnabled || _optionsService.Options.IsApiEnabled)
         {
-            EventTracker.Track(EventName.InitHttpServer);
+            EventTracker.AddBreadcrumb(EventName.InitHttpServer, $"http-server-port:{_optionsService.Options.HttpServerPort}");
             _httpServer.Start(_optionsService.Options.HttpServerPort);
         }
     }
@@ -491,7 +491,7 @@ public class MainViewModel : ObservableObject
                 Log.Logger.Information("Launching countdown timer");
             }
 
-            EventTracker.Track(EventName.CountdownTimer);
+            EventTracker.AddBreadcrumb(EventName.CountdownTimer, $"countdown-offset:{offsetSeconds}");
 
             _countdownDisplayService.Start(offsetSeconds);
 

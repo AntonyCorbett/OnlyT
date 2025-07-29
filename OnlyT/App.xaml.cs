@@ -1,12 +1,8 @@
-﻿#if !DEBUG
-#define USE_APP_CENTER
-#endif
-
-using CommunityToolkit.Mvvm.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using OnlyT.EventTracking;
 using OnlyT.AutoUpdates;
 using OnlyT.Common.Services.DateTime;
-using OnlyT.EventTracking;
 using OnlyT.Services.Bell;
 using OnlyT.Services.CommandLine;
 using OnlyT.Services.CountdownTimer;
@@ -23,6 +19,7 @@ using OnlyT.Services.Timer;
 using OnlyT.Utils;
 using OnlyT.ViewModel;
 using OnlyT.WebServer;
+using Sentry;
 using Serilog;
 using Serilog.Events;
 using System;
@@ -43,6 +40,11 @@ namespace OnlyT
         private Mutex? _appMutex;
         private static readonly Lazy<CommandLineService> CommandLineServiceInstance = new();
 
+        public App()
+        {
+            InitSentry(); // Sentry docs require it to be in the ctor rather than in OnStartup
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             _appMutex?.Dispose();
@@ -55,8 +57,6 @@ namespace OnlyT
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ConfigureAppCenter();
-
             ConfigureServices();
 
             if (AnotherInstanceRunning())
@@ -69,12 +69,6 @@ namespace OnlyT
             }
 
             Current.DispatcherUnhandledException += CurrentDispatcherUnhandledException;
-        }
-
-        [Conditional("USE_APP_CENTER")]
-        private static void ConfigureAppCenter()
-        {
-            AppCenterInit.Execute();
         }
 
         private void CurrentDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -157,8 +151,6 @@ namespace OnlyT
             catch (Exception ex)
             {
                 // logging won't work but silently fails
-                EventTracker.Error(ex, "Logging cannot be configured");
-
                 // "no-op" logger
                 Log.Logger = new LoggerConfiguration().CreateLogger();
             }
@@ -178,6 +170,24 @@ namespace OnlyT
 
             _appMutex = new Mutex(true, _appString, out var newInstance);
             return !newInstance;
+        }
+
+        private static void InitSentry()
+        {
+            // https://soundbox.sentry.io/
+            // https://docs.sentry.io/platforms/dotnet/guides/wpf/
+            SentrySdk.Init(o =>
+            {
+                // Tells which project in Sentry to send events to:
+                o.Dsn = "https://a507dcd971e89dc9b69a630090030ba7@o4509644339281920.ingest.de.sentry.io/4509753015926864";
+
+#if DEBUG
+                o.Debug = true;
+#endif
+                o.IsGlobalModeEnabled = true;
+
+                // o.TracesSampleRate = 1.0; // Adjust for performance monitoring. 1.0 means 100% of messages are sent.
+            });
         }
     }
 }

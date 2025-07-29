@@ -1,11 +1,11 @@
-﻿using System.Windows;
+﻿using OnlyT.EventTracking;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using NAudio.Wave;
 using System;
 using System.IO;
 using Serilog;
-using OnlyT.EventTracking;
 
 namespace OnlyT.Services.Bell;
 

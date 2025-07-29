@@ -22,8 +22,6 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="FluentCommandLineParser-netstandard" Version="1.4.3.13" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.7" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.7" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="NAudio" Version="2.2.1" />
@@ -31,6 +29,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUglify" Version="1.21.15" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
+    <PackageReference Include="Sentry" Version="5.13.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
     <PackageReference Include="ToastNotifications.Messages.Net5" Version="3.0.1" />
