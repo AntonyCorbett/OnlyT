@@ -437,7 +437,7 @@ namespace OnlyT.Tests
 
         private static void AssertTimeSpansAboutEqual(TimeSpan ts1, TimeSpan ts2)
         {
-            Assert.IsTrue(Math.Abs(ts1.TotalSeconds - ts2.TotalSeconds) < 2);
+            Assert.IsLessThan(2, Math.Abs(ts1.TotalSeconds - ts2.TotalSeconds));
         }
     }
 }
