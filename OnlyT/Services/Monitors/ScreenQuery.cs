@@ -1,38 +1,38 @@
-﻿#pragma warning disable S101 // Types should be named in PascalCase
-#pragma warning disable S1144
-#pragma warning disable S2344
-#pragma warning disable U2U1004 // Should implement IEquatable
-#pragma warning disable RCS1169 // Make field read-only
-
-// ReSharper disable FieldCanBeMadeReadOnly.Local
-// ReSharper disable FieldCanBeMadeReadOnly.Global
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable UnusedMember.Global
-// ReSharper disable InconsistentNaming
-// ReSharper disable IdentifierTypo
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using OnlyT.EventTracking;
 using Serilog;
+
+// ReSharper disable UnusedMember.Global
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+
+#pragma warning disable U2U1004
 
 namespace OnlyT.Services.Monitors;
 
 //// see https://stackoverflow.com/a/28257839/8576725
 
-public static class ScreenQuery
+public static partial class ScreenQuery
 {
+#pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
+#pragma warning disable SA1202 // Elements must be ordered by access
+#pragma warning disable SA1313 // Parameter names must begin with lower-case letter
 #pragma warning disable IDE0044 // Add readonly modifier
+#pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1712 // Do not prefix enum values with type name
     private const int ErrorSuccess = 0;
+    private const int ErrorInvalidParameter = 87;
+    private const int ErrorInsufficientBuffer = 122;
 
     public enum QUERY_DEVICE_CONFIG_FLAGS : uint
     {
         QDC_ALL_PATHS = 0x00000001,
         QDC_ONLY_ACTIVE_PATHS = 0x00000002,
-        QDC_DATABASE_CURRENT = 0x00000004
+        QDC_DATABASE_CURRENT = 0x00000004,
     }
 
     public enum DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY : uint
@@ -55,7 +55,7 @@ public static class ScreenQuery
         DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST = 15,
         DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL = 0x80000000,
 #pragma warning disable CA1069 // Enums values should not be duplicated
-        DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32 = 0xFFFFFFFF
+        DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32 = 0xFFFFFFFF,
 #pragma warning restore CA1069 // Enums values should not be duplicated
     }
 
@@ -66,7 +66,7 @@ public static class ScreenQuery
         DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED = 2,
         DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_UPPERFIELDFIRST = DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED,
         DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST = 3,
-        DISPLAYCONFIG_SCANLINE_ORDERING_FORCE_UINT32 = 0xFFFFFFFF
+        DISPLAYCONFIG_SCANLINE_ORDERING_FORCE_UINT32 = 0xFFFFFFFF,
     }
 
     public enum DISPLAYCONFIG_ROTATION : uint
@@ -75,7 +75,7 @@ public static class ScreenQuery
         DISPLAYCONFIG_ROTATION_ROTATE90 = 2,
         DISPLAYCONFIG_ROTATION_ROTATE180 = 3,
         DISPLAYCONFIG_ROTATION_ROTATE270 = 4,
-        DISPLAYCONFIG_ROTATION_FORCE_UINT32 = 0xFFFFFFFF
+        DISPLAYCONFIG_ROTATION_FORCE_UINT32 = 0xFFFFFFFF,
     }
 
     public enum DISPLAYCONFIG_SCALING : uint
@@ -86,7 +86,7 @@ public static class ScreenQuery
         DISPLAYCONFIG_SCALING_ASPECTRATIOCENTEREDMAX = 4,
         DISPLAYCONFIG_SCALING_CUSTOM = 5,
         DISPLAYCONFIG_SCALING_PREFERRED = 128,
-        DISPLAYCONFIG_SCALING_FORCE_UINT32 = 0xFFFFFFFF
+        DISPLAYCONFIG_SCALING_FORCE_UINT32 = 0xFFFFFFFF,
     }
 
     public enum DISPLAYCONFIG_PIXELFORMAT : uint
@@ -96,14 +96,14 @@ public static class ScreenQuery
         DISPLAYCONFIG_PIXELFORMAT_24BPP = 3,
         DISPLAYCONFIG_PIXELFORMAT_32BPP = 4,
         DISPLAYCONFIG_PIXELFORMAT_NONGDI = 5,
-        DISPLAYCONFIG_PIXELFORMAT_FORCE_UINT32 = 0xffffffff
+        DISPLAYCONFIG_PIXELFORMAT_FORCE_UINT32 = 0xffffffff,
     }
 
     public enum DISPLAYCONFIG_MODE_INFO_TYPE : uint
     {
         DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE = 1,
         DISPLAYCONFIG_MODE_INFO_TYPE_TARGET = 2,
-        DISPLAYCONFIG_MODE_INFO_TYPE_FORCE_UINT32 = 0xFFFFFFFF
+        DISPLAYCONFIG_MODE_INFO_TYPE_FORCE_UINT32 = 0xFFFFFFFF,
     }
 
     public enum DISPLAYCONFIG_DEVICE_INFO_TYPE : uint
@@ -114,9 +114,9 @@ public static class ScreenQuery
         DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME = 4,
         DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE = 5,
         DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE = 6,
-        DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32 = 0xFFFFFFFF
+        DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32 = 0xFFFFFFFF,
     }
-        
+
     [StructLayout(LayoutKind.Sequential)]
     public struct LUID
     {
@@ -144,8 +144,12 @@ public static class ScreenQuery
         private DISPLAYCONFIG_SCALING scaling;
         private DISPLAYCONFIG_RATIONAL refreshRate;
         private DISPLAYCONFIG_SCANLINE_ORDERING scanLineOrdering;
-        public bool targetAvailable;
+
+        // IMPORTANT: BOOL in Win32 is 4 bytes. Was 'bool' previously (incorrect layout).
+        private int targetAvailable; // marshals Win32 BOOL
         public uint statusFlags;
+
+        public bool TargetAvailable => targetAvailable != 0;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -255,21 +259,25 @@ public static class ScreenQuery
         public string monitorDevicePath;
     }
 
-    [DllImport("user32.dll")]
-    internal static extern int GetDisplayConfigBufferSizes(
+    [LibraryImport("user32.dll", EntryPoint = "GetDisplayConfigBufferSizes", SetLastError = false, StringMarshalling = StringMarshalling.Utf16)]
+    private static partial int GetDisplayConfigBufferSizes(
         QUERY_DEVICE_CONFIG_FLAGS flags, out uint numPathArrayElements, out uint numModeInfoArrayElements);
 
+#pragma warning disable SYSLIB1054 // not possible to use LibraryImport since DISPLAYCONFIG_PATH_INFO and DISPLAYCONFIG_MODE_INFO are not blittable
     [DllImport("user32.dll")]
-    internal static extern int QueryDisplayConfig(
+    private static extern int QueryDisplayConfig(
         QUERY_DEVICE_CONFIG_FLAGS flags,
         ref uint numPathArrayElements,
         [Out] DISPLAYCONFIG_PATH_INFO[] PathInfoArray,
-        ref uint numModeInfoArrayElements, 
+        ref uint numModeInfoArrayElements,
         [Out] DISPLAYCONFIG_MODE_INFO[] ModeInfoArray,
         IntPtr currentTopologyId);
+#pragma warning restore SYSLIB1054
 
+#pragma warning disable SYSLIB1054 // not possible to use LibraryImport since DISPLAYCONFIG_TARGET_DEVICE_NAME is not blittable
     [DllImport("user32.dll")]
-    internal static extern int DisplayConfigGetDeviceInfo(ref DISPLAYCONFIG_TARGET_DEVICE_NAME deviceName);
+    private static extern int DisplayConfigGetDeviceInfo(ref DISPLAYCONFIG_TARGET_DEVICE_NAME deviceName);
+#pragma warning restore SYSLIB1054
 
     private static string MonitorFriendlyName(LUID adapterId, uint targetId)
     {
@@ -277,12 +285,13 @@ public static class ScreenQuery
         {
             header =
             {
-                size = (uint)Marshal.SizeOf(typeof(DISPLAYCONFIG_TARGET_DEVICE_NAME)),
+                size = (uint)Marshal.SizeOf<DISPLAYCONFIG_TARGET_DEVICE_NAME>(),
                 adapterId = adapterId,
                 id = targetId,
-                type = DISPLAYCONFIG_DEVICE_INFO_TYPE.DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME
-            }
+                type = DISPLAYCONFIG_DEVICE_INFO_TYPE.DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
+            },
         };
+
         var error = DisplayConfigGetDeviceInfo(ref deviceName);
         if (error != ErrorSuccess)
         {
@@ -292,35 +301,109 @@ public static class ScreenQuery
         return deviceName.monitorFriendlyDeviceName;
     }
 
+    // Attempts to acquire current display configuration with limited retries to
+    // tolerate topology changes between buffer size and query calls.
+    private static bool TryAcquireDisplayConfig(out DISPLAYCONFIG_MODE_INFO[] modes)
+    {
+        modes = [];
+
+        const int maxAttempts = 5;
+        for (var attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            var err = GetDisplayConfigBufferSizes(QUERY_DEVICE_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS, out var pathCount, out var modeCount);
+            if (err != ErrorSuccess)
+            {
+                if (err == ErrorInvalidParameter || err == ErrorInsufficientBuffer)
+                {
+                    continue;
+                }
+
+                throw new Win32Exception(err);
+            }
+
+            if (pathCount == 0 && modeCount == 0)
+            {
+                return true;
+            }
+
+            var localPaths = new DISPLAYCONFIG_PATH_INFO[pathCount];
+            var localModes = new DISPLAYCONFIG_MODE_INFO[modeCount];
+
+            var pc = pathCount;
+            var mc = modeCount;
+            err = QueryDisplayConfig(
+                QUERY_DEVICE_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS,
+                ref pc,
+                localPaths,
+                ref mc,
+                localModes,
+                IntPtr.Zero);
+
+            if (err == ErrorSuccess)
+            {
+                // Trim if API returned fewer than allocated.
+                if (pc != pathCount)
+                {
+                    Array.Resize(ref localPaths, (int)pc);
+                }
+
+                if (mc != modeCount)
+                {
+                    Array.Resize(ref localModes, (int)mc);
+                }
+
+                modes = localModes;
+                return true;
+            }
+
+            if (err == ErrorInsufficientBuffer || err == ErrorInvalidParameter)
+            {
+                // Topology likely changed in-between; retry.
+                continue;
+            }
+
+            // Unexpected error.
+            throw new Win32Exception(err);
+        }
+
+        return false;
+    }
+
     private static IEnumerable<string> GetAllMonitorsFriendlyNames()
     {
-        var error = GetDisplayConfigBufferSizes(QUERY_DEVICE_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS, out var pathCount, out var modeCount);
-        if (error != ErrorSuccess)
-        {
-            throw new Win32Exception(error);
-        }
+        DISPLAYCONFIG_MODE_INFO[] displayModes;
 
-        var displayPaths = new DISPLAYCONFIG_PATH_INFO[pathCount];
-        var displayModes = new DISPLAYCONFIG_MODE_INFO[modeCount];
-        error = QueryDisplayConfig(
-            QUERY_DEVICE_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS,
-            ref pathCount, 
-            displayPaths, 
-            ref modeCount, 
-            displayModes, 
-            IntPtr.Zero);
-
-        if (error != ErrorSuccess)
+        try
         {
-            throw new Win32Exception(error);
-        }
-
-        for (var i = 0; i < modeCount; i++)
-        {
-            var dm = displayModes[i];
-            if (dm.infoType == DISPLAYCONFIG_MODE_INFO_TYPE.DISPLAYCONFIG_MODE_INFO_TYPE_TARGET)
+            if (!TryAcquireDisplayConfig(out displayModes))
             {
-                yield return MonitorFriendlyName(dm.adapterId, dm.id);
+                yield break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Debug(ex, "Failed to acquire display configuration");
+            yield break;
+        }
+
+        foreach (var displayMode in displayModes)
+        {
+            if (displayMode.infoType == DISPLAYCONFIG_MODE_INFO_TYPE.DISPLAYCONFIG_MODE_INFO_TYPE_TARGET)
+            {
+                string? name = null;
+                try
+                {
+                    name = MonitorFriendlyName(displayMode.adapterId, displayMode.id);
+                }
+                catch (Exception ex)
+                {
+                    Log.Logger.Debug(ex, "Failed to get friendly name for display target {Id}", displayMode.id);
+                }
+
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    yield return name;
+                }
             }
         }
     }
@@ -330,31 +413,31 @@ public static class ScreenQuery
         try
         {
             var allFriendlyNames = GetAllMonitorsFriendlyNames().ToArray();
-
             for (var index = 0; index < Screen.AllScreens.Length; index++)
             {
                 if (Equals(screen, Screen.AllScreens[index]))
                 {
-                    return allFriendlyNames[index];
+                    if (index < allFriendlyNames.Length)
+                    {
+                        return allFriendlyNames[index];
+                    }
+
+                    break;
                 }
             }
         }
         catch (Exception ex)
         {
-            const string errMsg = "Could not get monitor friendly names";
-            EventTracker.Error(ex, errMsg);
-
-            Log.Logger.Warning(ex, errMsg);
+            Log.Logger.Warning(ex, "Could not get monitor friendly names");
         }
 
         return null;
     }
 
+#pragma warning restore CA1712 // Do not prefix enum values with type name
+#pragma warning restore CA1707 // Identifiers should not contain underscores
 #pragma warning restore IDE0044 // Add readonly modifier
+#pragma warning restore SA1313 // Parameter names must begin with lower-case letter
+#pragma warning restore SA1202 // Elements must be ordered by access
+#pragma warning restore SA1307 // Accessible fields must begin with upper-case letter
 }
-
-#pragma warning restore RCS1169 // Make field read-only
-#pragma warning restore U2U1004 // Should implement IEquatable
-#pragma warning restore S2344 
-#pragma warning restore S1144 
-#pragma warning restore S101 // Types should be named in PascalCase

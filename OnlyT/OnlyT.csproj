@@ -1,101 +1,102 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Nullable>Enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationIcon>icon4.ico</ApplicationIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<Nullable>Enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ApplicationIcon>icon4.ico</ApplicationIcon>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="FluentCommandLineParser-netstandard" Version="1.4.3.13" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
-    <PackageReference Include="NAudio" Version="2.2.1" />
-    <PackageReference Include="NAudio.Lame" Version="2.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NUglify" Version="1.21.17" />
-    <PackageReference Include="QRCoder" Version="1.6.0" />
-    <PackageReference Include="Sentry" Version="5.13.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
-    <PackageReference Include="ToastNotifications.Messages.Net5" Version="3.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="FluentCommandLineParser-netstandard" Version="1.4.3.13" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+		<PackageReference Include="NAudio" Version="2.2.1" />
+		<PackageReference Include="NAudio.Lame" Version="2.1.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="NUglify" Version="1.21.17" />
+		<PackageReference Include="QRCoder" Version="1.6.0" />
+		<PackageReference Include="Sentry" Version="5.13.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
+		<PackageReference Include="ToastNotifications.Messages.Net5" Version="3.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OnlyT.AnalogueClock\OnlyT.AnalogueClock.csproj" />
-    <ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj" />
-    <ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj" />
-    <ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\OnlyT.AnalogueClock\OnlyT.AnalogueClock.csproj" />
+		<ProjectReference Include="..\OnlyT.Common\OnlyT.Common.csproj" />
+		<ProjectReference Include="..\OnlyT.CountdownTimer\OnlyT.CountdownTimer.csproj" />
+		<ProjectReference Include="..\OnlyT.Report\OnlyT.Report.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="NDILibDotNetCore">
-      <HintPath>..\NDILibDotNetCore.dll</HintPath>
-    </Reference>
-    <Reference Include="NDILibDotNetCoreWpf">
-      <HintPath>..\NDILibDotNetCoreWpf.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="NDILibDotNetCore">
+			<HintPath>..\NDILibDotNetCore.dll</HintPath>
+		</Reference>
+		<Reference Include="NDILibDotNetCoreWpf">
+			<HintPath>..\NDILibDotNetCoreWpf.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DependentUpon>Resources.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="bell.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="icon4.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Processing.NDI.Lib.Licenses.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Processing.NDI.Lib.x64.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="bell.mp3">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="icon4.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Processing.NDI.Lib.Licenses.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Processing.NDI.Lib.x64.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="copy &quot;$(ProjectDir)Properties\Resources.jv-ID.resx&quot; &quot;$(ProjectDir)Properties\Resources.jv-Latn-ID.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.no-NO.resx&quot; &quot;$(ProjectDir)Properties\Resources.no.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.pap-PAP.resx&quot; &quot;$(ProjectDir)Properties\Resources.pap.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.tl-PH.resx&quot; &quot;$(ProjectDir)Properties\Resources.fil-PH.resx&quot;&#xD;&#xA;&#xD;&#xA;" />
-  </Target>
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="copy &quot;$(ProjectDir)Properties\Resources.jv-ID.resx&quot; &quot;$(ProjectDir)Properties\Resources.jv-Latn-ID.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.no-NO.resx&quot; &quot;$(ProjectDir)Properties\Resources.no.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.pap-PAP.resx&quot; &quot;$(ProjectDir)Properties\Resources.pap.resx&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Properties\Resources.tl-PH.resx&quot; &quot;$(ProjectDir)Properties\Resources.fil-PH.resx&quot;&#xD;&#xA;&#xD;&#xA;" />
+	</Target>
 
-  <ItemGroup>
-    <NativeLibs Remove="Processing.NDI.Lib.x64.dll" />
-  </ItemGroup>
+	<ItemGroup>
+		<NativeLibs Remove="Processing.NDI.Lib.x64.dll" />
+	</ItemGroup>
 
 </Project>
