@@ -108,8 +108,10 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Send(new NavigateMessage(null, OperatorPageViewModel.PageName, null));
 
         // (fire and forget)
-        Task.Run(LaunchTimerWindowAsync);
-        
+        Task.Run(LaunchTimerWindowAsync).ContinueWith(
+            t => Log.Logger.Error(t.Exception, "Error launching timer window"),
+            TaskContinuationOptions.OnlyOnFaulted);
+
         InitHeartbeatTimer();
     }
 
@@ -341,10 +343,14 @@ public class MainViewModel : ObservableObject
     {
         if (_optionsService.CanDisplayTimerWindow)
         {
-            // on launch we display the timer window after a short delay (for aesthetics only)
+            // on launch, we display the timer window after a short delay (for aesthetics only)
             await Task.Delay(1000).ConfigureAwait(true);
 
-            await Application.Current.Dispatcher.BeginInvoke(OpenTimerWindow);
+            if (Application.Current != null)
+            {
+                // protect against shut down race condition
+                await Application.Current.Dispatcher.BeginInvoke(OpenTimerWindow);
+            }
         }
     }
 
