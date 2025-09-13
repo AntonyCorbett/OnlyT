@@ -92,7 +92,7 @@
         public void Start(int secsElapsed)
         {
             _start = GetNowUtc().AddSeconds(-secsElapsed);
-            _timer!.Start();
+            _timer?.Start();
         }
 
         public void Stop()
@@ -104,7 +104,7 @@
                     return;
                 }
 
-                _timer!.Stop();
+                _timer?.Stop();
 
                 Animations.FadeOut(
                     this,
@@ -165,7 +165,7 @@
 
         private void TimerFire(object? sender, EventArgs e)
         {
-            _timer!.Stop();
+            _timer?.Stop();
 
             if (_start != default)
             {
@@ -180,7 +180,7 @@
 
                     if (!Dispatcher.HasShutdownStarted)
                     {
-                        _timer!.Start();
+                        _timer?.Start();
                     }
                 }
                 else
@@ -195,7 +195,7 @@
             }
             else
             {
-                _timer!.Start();
+                _timer?.Start();
             }
         }
 
@@ -568,6 +568,11 @@
 
         private void DisposeLogic()
         {
+            if (_timer == null)
+            {
+                return;
+            }
+
             // clear the handler 
             _timer!.Tick -= TimerFire;
 
