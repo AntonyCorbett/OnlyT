@@ -5,12 +5,12 @@
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:OnlyT.Behaviours"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resx="clr-namespace:OnlyT.Properties"
     xmlns:utils="clr-namespace:OnlyT.Utils"
     xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
+    xmlns:models="clr-namespace:OnlyT.Models"
     d:DesignHeight="300"
     d:DesignWidth="395"
     Background="{DynamicResource MaterialDesignPaper}"
@@ -27,7 +27,7 @@
         <valueConverters:BoolToCursorConverter x:Key="ToCursorConverter" />
         <valueConverters:ButtonGlyphSizeConverter x:Key="ButtonGlyphSizeConverter" />
 
-        <DataTemplate x:Key="SelectedTalkTemplate">
+        <DataTemplate x:Key="SelectedTalkTemplate" DataType="models:TalkScheduleItem">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="45" />
@@ -45,7 +45,7 @@
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="DropDownTalkTemplate">
+        <DataTemplate x:Key="DropDownTalkTemplate" DataType="models:TalkScheduleItem">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="45" />

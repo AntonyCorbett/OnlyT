@@ -26,7 +26,7 @@ namespace OnlyT.Report.Database
 
             using var ctx = new LocalDatabaseContext(_localDbFilePath);
             var timings = ctx.Db.GetCollection<MeetingTimes>(CollectionNameMtgTimes);
-            timings.Insert(mtgTimes);
+            timings.Upsert(mtgTimes);
         }
 
         public MeetingTimes GetMeetingTimes(Guid session)
