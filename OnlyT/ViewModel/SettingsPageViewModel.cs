@@ -832,6 +832,19 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool AllowMouseWheelTimerAdjust
+    {
+        get => _optionsService.Options.AllowMouseWheelTimerAdjust;
+        set
+        {
+            if (_optionsService.Options.AllowMouseWheelTimerAdjust != value)
+            {
+                _optionsService.Options.AllowMouseWheelTimerAdjust = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool ClockIsFlat
     {
         get => _optionsService.Options.ClockIsFlat;

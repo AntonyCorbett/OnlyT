@@ -154,6 +154,8 @@
 
         public bool ShowMousePointerInTimerDisplay { get; set; }
 
+        public bool AllowMouseWheelTimerAdjust { get; set; }
+
         public string? Culture { get; set; }
 
         public bool GenerateTimingReports { get; set; }

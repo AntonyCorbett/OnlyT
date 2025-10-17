@@ -173,6 +173,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
 
+    public bool AllowMouseWheelTimerAdjust => _optionsService.Options.AllowMouseWheelTimerAdjust;
+
     public string CountUpOrDownTooltip => _countUp
         ? Properties.Resources.COUNTING_UP
         : Properties.Resources.COUNTING_DOWN;

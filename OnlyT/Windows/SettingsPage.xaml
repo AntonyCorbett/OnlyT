@@ -550,6 +550,11 @@
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            Content="{x:Static resx:Resources.ALLOW_MOUSE_WHEEL_TIMER_ADJUST}"
+                            IsChecked="{Binding AllowMouseWheelTimerAdjust, Mode=TwoWay}"
+                            Style="{StaticResource SettingsCheckBox}" />
+
+                        <CheckBox
                             Content="{x:Static resx:Resources.ALWAYS_ON_TOP}"
                             IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />

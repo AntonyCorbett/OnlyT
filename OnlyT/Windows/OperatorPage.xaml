@@ -219,6 +219,30 @@
                     Padding="10"
                     Background="Black"
                     CornerRadius="10">
+                    <Border.ToolTip>
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="Click timer display area to focus" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AllowMouseWheelTimerAdjust}" Value="True">
+                                            <Setter Property="Text" Value="Use mouse wheel to adjust timer: Scroll = ±1 min, Ctrl+Scroll = ±15 sec, Shift+Scroll = ±5 min" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Border.ToolTip>
+                    <b:Interaction.Behaviors>
+                        <behaviours:MouseWheelTimerAdjustBehaviour
+                            IsEnabled="{Binding AllowMouseWheelTimerAdjust}"
+                            IncrementCommand="{Binding IncrementTimerCommand}"
+                            DecrementCommand="{Binding DecrementTimerCommand}"
+                            Increment15SecCommand="{Binding IncrementTimer15Command}"
+                            Decrement15SecCommand="{Binding DecrementTimer15Command}"
+                            Increment5MinCommand="{Binding IncrementTimer5Command}"
+                            Decrement5MinCommand="{Binding DecrementTimer5Command}" />
+                    </b:Interaction.Behaviors>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
