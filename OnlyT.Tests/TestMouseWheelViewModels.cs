@@ -18,12 +18,12 @@ namespace OnlyT.Tests
             mockOptionsService.Setup(x => x.Options).Returns(options);
 
             var viewModel = new SettingsPageViewModel(
-                mockOptionsService.Object,
-                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.Monitors.IMonitorsService>(),
                 Mock.Of<OnlyT.Services.Bell.IBellService>(),
-                Mock.Of<OnlyT.Services.CountdownTimer.ICountdownTimerTriggerService>(),
+                mockOptionsService.Object,
                 Mock.Of<OnlyT.Services.Snackbar.ISnackbarService>(),
+                Mock.Of<OnlyT.Services.CountdownTimer.ICountdownTimerTriggerService>(),
+                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.CommandLine.ICommandLineService>());
 
             // Test initial value
@@ -55,15 +55,16 @@ namespace OnlyT.Tests
 
             // Create minimal mocks for OperatorPageViewModel dependencies
             var viewModel = new OperatorPageViewModel(
-                Mock.Of<OnlyT.Services.TalkSchedule.ITalkScheduleService>(),
                 Mock.Of<OnlyT.Services.Timer.ITalkTimerService>(),
+                Mock.Of<OnlyT.Services.TalkSchedule.ITalkScheduleService>(),
                 Mock.Of<OnlyT.Services.Timer.IAdaptiveTimerService>(),
                 mockOptionsService.Object,
                 Mock.Of<OnlyT.Services.CommandLine.ICommandLineService>(),
                 Mock.Of<OnlyT.Services.Bell.IBellService>(),
-                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.Report.ILocalTimingDataStoreService>(),
                 Mock.Of<OnlyT.Services.Snackbar.ISnackbarService>(),
+                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
+                Mock.Of<OnlyT.Common.Services.DateTime.IQueryWeekendService>(),
                 Mock.Of<OnlyT.Services.OverrunNotificationService.IOverrunService>());
 
             // Test initial value (should reflect options)
@@ -89,12 +90,12 @@ namespace OnlyT.Tests
             mockOptionsService.Setup(x => x.Options).Returns(options);
 
             var viewModel = new SettingsPageViewModel(
-                mockOptionsService.Object,
-                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.Monitors.IMonitorsService>(),
                 Mock.Of<OnlyT.Services.Bell.IBellService>(),
-                Mock.Of<OnlyT.Services.CountdownTimer.ICountdownTimerTriggerService>(),
+                mockOptionsService.Object,
                 Mock.Of<OnlyT.Services.Snackbar.ISnackbarService>(),
+                Mock.Of<OnlyT.Services.CountdownTimer.ICountdownTimerTriggerService>(),
+                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.CommandLine.ICommandLineService>());
 
             bool propertyChangedFired = false;
@@ -123,12 +124,12 @@ namespace OnlyT.Tests
             mockOptionsService.Setup(x => x.Options).Returns(options);
 
             var viewModel = new SettingsPageViewModel(
-                mockOptionsService.Object,
-                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.Monitors.IMonitorsService>(),
                 Mock.Of<OnlyT.Services.Bell.IBellService>(),
-                Mock.Of<OnlyT.Services.CountdownTimer.ICountdownTimerTriggerService>(),
+                mockOptionsService.Object,
                 Mock.Of<OnlyT.Services.Snackbar.ISnackbarService>(),
+                Mock.Of<OnlyT.Services.CountdownTimer.ICountdownTimerTriggerService>(),
+                Mock.Of<OnlyT.Common.Services.DateTime.IDateTimeService>(),
                 Mock.Of<OnlyT.Services.CommandLine.ICommandLineService>());
 
             bool propertyChangedFired = false;
