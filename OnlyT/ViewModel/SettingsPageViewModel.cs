@@ -841,6 +841,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
             {
                 _optionsService.Options.AllowMouseWheelTimerAdjust = value;
                 OnPropertyChanged();
+                WeakReferenceMessenger.Default.Send(new MouseWheelTimerAdjustChangedMessage());
             }
         }
     }
