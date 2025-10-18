@@ -226,7 +226,7 @@
                                     <Setter Property="Text" Value="Click timer display area to focus" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding AllowMouseWheelTimerAdjust}" Value="True">
-                                            <Setter Property="Text" Value="Use mouse wheel to adjust timer: Scroll = ±1 min, Ctrl+Scroll = ±15 sec, Shift+Scroll = ±5 min" />
+                                            <Setter Property="Text" Value="Use mouse wheel to adjust timer: Scroll = ±1 min, Ctrl+Scroll = ±15 sec" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
