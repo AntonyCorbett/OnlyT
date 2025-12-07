@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Bell azali na mosala .</value>
+    <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
+    <value>Moko te</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
+    <value>Nzela moko .</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
+    <value>Nzela mibale .</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="APP_VER" xml:space="preserve">
+    <value>Version ya logiciel {0}</value>
+    <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="CLOCK_FORMAT_12" xml:space="preserve">
+    <value>12-HOURE .</value>
+    <comment>The 12-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
+    <value>ngonga 12 (ya liboso ya zéro) .</value>
+    <comment>The 12-hour clock format with a leading zero where appropriate</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24" xml:space="preserve">
+    <value>24-HOURE .</value>
+    <comment>The 24-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
+    <value>24-HOURE (Reading Zero) .</value>
+    <comment>The 24-hour clock format with leading zero where appropriate</comment>
+  </data>
+  <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
+    <value>Ekoki te kosala dossier {0}</value>
+    <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <data name="DURATION_ADAPTED" xml:space="preserve">
+    <value>Bolai oyo ebongisami .</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_MODIFIED" xml:space="preserve">
+    <value>Bolai oyo ebongisami .</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_ORIGINAL" xml:space="preserve">
+    <value>Bolai ya ebandeli .</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
+    <value>Analogue .</value>
+    <comment>i.e. an analogue clock (with face and hands)</comment>
+  </data>
+  <data name="FULL_SCREEN_BOTH" xml:space="preserve">
+    <value>Analogique na numérique .</value>
+  </data>
+  <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
+    <value>Digital .</value>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Bell azali inactif .</value>
+  </data>
+  <data name="MIDWEEK" xml:space="preserve">
+    <value>Na katikati ya pɔsɔ .</value>
+  </data>
+  <data name="MINISTRY1" xml:space="preserve">
+    <value>Ministère - Eloko 1 .</value>
+  </data>
+  <data name="MINISTRY2" xml:space="preserve">
+    <value>Ministère - Eloko 2 .</value>
+  </data>
+  <data name="MINISTRY3" xml:space="preserve">
+    <value>Ministère - Eloko 3 .</value>
+  </data>
+  <data name="OP_MODE_AUTO" xml:space="preserve">
+    <value>Automatique .</value>
+  </data>
+  <data name="OP_MODE_FILE" xml:space="preserve">
+    <value>Basé na ba fichiers .</value>
+  </data>
+  <data name="OP_MODE_MANUAL" xml:space="preserve">
+    <value>Mokanda</value>
+  </data>
+  <data name="TALK_CONCLUDING" xml:space="preserve">
+    <value>Masolo ya kosukisa .</value>
+  </data>
+  <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
+    <value>Conclusion ya ba commentaires .</value>
+  </data>
+  <data name="TALK_CONG_STUDY" xml:space="preserve">
+    <value>Boyekoli ya Biblia ya lisangá .</value>
+  </data>
+  <data name="TALK_DIGGING" xml:space="preserve">
+    <value>Bijoux ya molimo .</value>
+  </data>
+  <data name="TALK_LIVING1" xml:space="preserve">
+    <value>Kofanda - Eteni ya 1 .</value>
+  </data>
+  <data name="TALK_LIVING2" xml:space="preserve">
+    <value>Kofanda - Eteni ya 2 .</value>
+  </data>
+  <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
+    <value>Ba commentaires ya kofungola .</value>
+  </data>
+  <data name="TALK_PRESENTATIONS" xml:space="preserve">
+    <value>Ba présentations ya sanza oyo .</value>
+  </data>
+  <data name="TALK_PUBLIC" xml:space="preserve">
+    <value>Lisolo ya bato nyonso .</value>
+  </data>
+  <data name="TALK_READING" xml:space="preserve">
+    <value>Botangi ya Biblia .</value>
+  </data>
+  <data name="TALK_SERVICE" xml:space="preserve">
+    <value>Lisolo ya mosala .</value>
+  </data>
+  <data name="TALK_TREASURES" xml:space="preserve">
+    <value>Masolo ya biloko ya motuya .</value>
+  </data>
+  <data name="TALK_WT" xml:space="preserve">
+    <value>Boyekoli ya ndako ya bamontre .</value>
+  </data>
+  <data name="WEEKEND" xml:space="preserve">
+    <value>Wikende</value>
+  </data>
+  <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
+    <value>ngonga 12 (am/pm)</value>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
+    <value>12-heures (kokamba zéro &amp; AM/PM)</value>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="MONITOR_NONE" xml:space="preserve">
+    <value>Moko te</value>
+  </data>
+  <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
+    <value>Paramètres Ezali te ntango Timer ezali kosala!</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Paramètres .</value>
+  </data>
+  <data name="SECTION_TREASURES" xml:space="preserve">
+    <value>Biloko ya motuya .</value>
+  </data>
+  <data name="SECTION_MINISTRY" xml:space="preserve">
+    <value>Ministère .</value>
+  </data>
+  <data name="SECTION_LIVING" xml:space="preserve">
+    <value>Kozala na bomoi</value>
+  </data>
+  <data name="SECTION_WEEKEND" xml:space="preserve">
+    <value>Wikende</value>
+  </data>
+  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
+    <value>Paramètres désactivés par administrateur!</value>
+    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
+  </data>
+  <data name="MINISTRY4" xml:space="preserve">
+    <value>Ministère - Eloko 4 .</value>
+  </data>
+  <data name="CIRCUIT_VISIT" xml:space="preserve">
+    <value>Visite ya circuit .</value>
+  </data>
+  <data name="CLOSE_COUNTDOWN" xml:space="preserve">
+    <value>Close Countdown .</value>
+    <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Lisalisi</value>
+  </data>
+  <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
+    <value>[Botali ya CIrCuit].</value>
+  </data>
+  <data name="NEW_VERSION" xml:space="preserve">
+    <value>Version ya sika ezali!</value>
+  </data>
+  <data name="MAIN_SECTION" xml:space="preserve">
+    <value>YA MONENE</value>
+    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
+  </data>
+  <data name="ACCESS_CODE" xml:space="preserve">
+    <value>Code ya accès .</value>
+    <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
+  </data>
+  <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
+    <value>Mode adaptatif ya kati ya poso .</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
+    <value>Mode adaptatif ya wikende .</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
+    <value>Tika ba toggle ya count-up .</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALWAYS_ON_TOP" xml:space="preserve">
+    <value>Toujours na likolo .</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="APPS_SECTION" xml:space="preserve">
+    <value>Ba apps ya mosika .</value>
+    <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
+  </data>
+  <data name="AUTO_SECTION" xml:space="preserve">
+    <value>Mode automatique .</value>
+    <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
+  </data>
+  <data name="BELL_SECTION" xml:space="preserve">
+    <value>Ngonga .</value>
+    <comment>Title for Settings, BELL section. Please keep capitals</comment>
+  </data>
+  <data name="CLOCK_SECTION" xml:space="preserve">
+    <value>Montre ya web .</value>
+    <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
+  </data>
+  <data name="COUNTDOWN_SECTION" xml:space="preserve">
+    <value>Kotánga ya likita .</value>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="CO_VISIT_TOGGLE" xml:space="preserve">
+    <value>Visite ya circuit Toggle .</value>
+  </data>
+  <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
+    <value>Format ya montre numérique .</value>
+  </data>
+  <data name="ENABLED" xml:space="preserve">
+    <value>Efungolami .</value>
+    <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
+  </data>
+  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
+    <value>Mode ya montre ya écran mobimba .</value>
+  </data>
+  <data name="IP_ADDRESS" xml:space="preserve">
+    <value>Addresse IP .</value>
+    <comment>Network address</comment>
+  </data>
+  <data name="MEETING" xml:space="preserve">
+    <value>Likita</value>
+    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
+  </data>
+  <data name="MEETING_STARTS" xml:space="preserve">
+    <value>Ntango ya kobanda likita (1 na molɔngɔ moko) .</value>
+  </data>
+  <data name="MISC_SECTION" xml:space="preserve">
+    <value>MOSUSU</value>
+    <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
+  </data>
+  <data name="MONITOR" xml:space="preserve">
+    <value>Kolandela</value>
+  </data>
+  <data name="MOUSE_PTR" xml:space="preserve">
+    <value>Lakisa pointeur ya souris .</value>
+  </data>
+  <data name="MTG_START_NOTES1" xml:space="preserve">
+    <value>Tia ngonga ya kobanda moko na moko na molongo ya sika.</value>
+  </data>
+  <data name="MTG_START_NOTES2" xml:space="preserve">
+    <value>Salelá format ya ntango nyonso oyo olingaka!</value>
+  </data>
+  <data name="MTG_START_NOTES3" xml:space="preserve">
+    <value>Na bolingi na yo, ezali na mokolo moko, p.ex. "Bato 19:15".</value>
+  </data>
+  <data name="NOTES" xml:space="preserve">
+    <value>Maloba ya ntina:</value>
+  </data>
+  <data name="OPEN_PORT" xml:space="preserve">
+    <value>Port ya polele .</value>
+    <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="OP_MODE" xml:space="preserve">
+    <value>Mode .</value>
+    <comment>The operating mode (i.e. manual, auto or file-based)</comment>
+  </data>
+  <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
+    <value>Ntango ya moyekoli ya kotingama .</value>
+    <comment>All the monitor to display the final student time for a little longer than normal</comment>
+  </data>
+  <data name="PERSIST_TALK_DURATION" xml:space="preserve">
+    <value>Bolai ya masolo ya kotingama .</value>
+    <comment>How long the talk timer is shown after the end of the item</comment>
+  </data>
+  <data name="PORT" xml:space="preserve">
+    <value>Ekuke</value>
+    <comment>i.e. the TCP (networking) "port"</comment>
+  </data>
+  <data name="REMOTE_SECTION" xml:space="preserve">
+    <value>Accès à distance .</value>
+    <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
+  </data>
+  <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
+    <value>Secteur ya kolakisa na montre analogique .</value>
+    <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
+  </data>
+  <data name="SPLIT_WIDTH" xml:space="preserve">
+    <value>Bolai ya écran ya kokabwana:</value>
+  </data>
+  <data name="TEST" xml:space="preserve">
+    <value>KOMEKA</value>
+    <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="THROTTLED" xml:space="preserve">
+    <value>Na nzela ya throttled .</value>
+    <comment>Communication is deliberately limited to prevent overloading</comment>
+  </data>
+  <data name="TIMER_COUNT_UP" xml:space="preserve">
+    <value>Timer etangami likolo .</value>
+    <comment>Counts up rather than down</comment>
+  </data>
+  <data name="TIMER_WIN_SECTION" xml:space="preserve">
+    <value>Fenêtre ya timer .</value>
+    <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
+  </data>
+  <data name="TIME_UNDER_TIMER" xml:space="preserve">
+    <value>Ntango ya mokolo na nse ya Timer .</value>
+    <comment>Show time of day underneath the timer</comment>
+  </data>
+  <data name="VOLUME" xml:space="preserve">
+    <value>Volime:</value>
+    <comment>Label for the volume control in the Bell settings</comment>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Lokota</value>
+  </data>
+  <data name="RESTART_LANGUAGE" xml:space="preserve">
+    <value>Svp bo restarter kakat après ko changer langue.</value>
+  </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Bokitisaka 1m .
+CTRL - ekiti 15S .
+shift - kokitisa 5m .</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Bobakisa 1M .
+CTRL - Bobakisi 15s .
+Bobongwani - Bobakisi 5m .</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Mode manuel .</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Kotánga na nse .</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Kotánga likoló .</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="X_SECONDS" xml:space="preserve">
+    <value>{0} segɔnde .</value>
+    <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
+  </data>
+  <data name="ENABLED_API" xml:space="preserve">
+    <value>Efungolami .</value>
+  </data>
+  <data name="ENABLED_BELL" xml:space="preserve">
+    <value>Efungolami .</value>
+  </data>
+  <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
+    <value>Efungolami .</value>
+  </data>
+  <data name="SHOW_SECONDS" xml:space="preserve">
+    <value>Lakisa ba secondes .</value>
+    <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
+  </data>
+  <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
+    <value>Cadre ya kolakisa .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
+    <value>Cadre ya montre .</value>
+    <comment>See Settings =&gt;Timer window</comment>
+  </data>
+  <data name="COUNTDOWN_ZOOM" xml:space="preserve">
+    <value>Niveau ya zoom:</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="LOCATION_ON_SCREEN" xml:space="preserve">
+    <value>Esika</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
+    <value>Nse</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
+    <value>Na nse na lobɔkɔ ya mwasi .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
+    <value>Na nse na lobɔkɔ ya mobali .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
+    <value>Katikati</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
+    <value>Loboko ya mwasi</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
+    <value>Malamu</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
+    <value>Likolo</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
+    <value>Likolo na lobɔkɔ ya mwasi .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
+    <value>Top na lobɔkɔ ya mobali .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Caption of the button that closes the snackbar</comment>
+  </data>
+  <data name="PORT_OPENED" xml:space="preserve">
+    <value>Port efungolami mpe réservation esalemi .</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
+  </data>
+  <data name="PORT_OPEN_FAILED" xml:space="preserve">
+    <value>Ekoki te kofungola libongo (tala Log)!</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
+  </data>
+  <data name="GENERATING_REPORT" xml:space="preserve">
+    <value>Rapport ya timing oyo esalemi .</value>
+    <comment>Displayed in the notification bar when the timing report is created</comment>
+  </data>
+  <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
+    <value>Bosala ba rapports .</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="CONCLUDING_SEGMENT" xml:space="preserve">
+    <value>Eteni ya kosukisa .</value>
+    <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTERIM_SEGMENT" xml:space="preserve">
+    <value>Eteni ya mwa ntango moke .</value>
+    <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTRO_SEGMENT" xml:space="preserve">
+    <value>Eteni ya bobandi .</value>
+    <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="LOGGING_LEVEL" xml:space="preserve">
+    <value>Niveau ya bokati banzete .</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
+    <value>Debug .</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
+    <value>Libunga</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
+    <value>Mabe</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
+    <value>Nsango</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
+    <value>Verbose .</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
+    <value>Likebisi</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
+    <value>Ko analyser ba données ya chronomètres ya réunion .</value>
+    <comment>Displayed in the notification bar before a timing report is generated</comment>
+  </data>
+  <data name="NO_REPORT" xml:space="preserve">
+    <value>Rapport esalemi te!</value>
+    <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
+  </data>
+  <data name="VIEW_REPORT" xml:space="preserve">
+    <value>KOTALA</value>
+    <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
+  </data>
+  <data name="AUTO_BELL" xml:space="preserve">
+    <value>Koyokana na ndenge ya automatique .</value>
+    <comment>See Settings =&gt; Bell</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Cliquez to sound Bell .</value>
+    <comment>Tooltip displayed for manual bell button</comment>
+  </data>
+  <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
+    <value>Bolai (Mins) .</value>
+    <comment>See Settings =&gt;Countdown section</comment>
+  </data>
+  <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
+    <value>Ba éléments .</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="DIAL" xml:space="preserve">
+    <value>Dial .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIAL_AND_DIGITAL" xml:space="preserve">
+    <value>Dial na numérique .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIGITAL" xml:space="preserve">
+    <value>Digital .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
+    <value>Background ya transparent .</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
+    <value>Boyeba ete monitore ezali contrôlée na paramètre ya ligne de commande .</value>
+    <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
+  </data>
+  <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Timer Background Gradient .</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Gradient ya fond ya montre .</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="SHOW_TIMER_FRAME" xml:space="preserve">
+    <value>Cadre ya timer .</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="FLAT_CLOCK" xml:space="preserve">
+    <value>Montre ya plat .</value>
+    <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
+  </data>
+  <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
+    <value>Wikende esangisi mokolo ya mitano .</value>
+    <comment>See Settings =&gt; Automatic mode</comment>
+  </data>
+  <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
+    <value>na lininisa .</value>
+    <comment>See Settings =&gt; Main</comment>
+  </data>
+  <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
+    <value>na lininisa .</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
+    <value>Fenêtre ya Countdown ya penepene .</value>
+    <comment>Tooltip for main window button</comment>
+  </data>
+  <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
+    <value>Ekoki te kofungola transparent "windowed" countdown .</value>
+    <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
+  </data>
+  <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\timershtmltemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WEB_LINK_CLOCK" xml:space="preserve">
+    <value>Montre</value>
+    <comment>Link to clock on web interface</comment>
+  </data>
+  <data name="WEB_LINK_TIMERS" xml:space="preserve">
+    <value>Ba timers .</value>
+    <comment>Link to timers on web interface</comment>
+  </data>
+  <data name="WEB_OFFLINE" xml:space="preserve">
+    <value>Offline...</value>
+    <comment>Text displayed in web interface</comment>
+  </data>
+  <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
+    <value>Kokita na minimise .</value>
+    <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
+  </data>
+  <data name="PRIMARY_MONITOR" xml:space="preserve">
+    <value>ya liboso</value>
+    <comment>Used to designate the primary monitor</comment>
+  </data>
+  <data name="TIMER_ON_NDI" xml:space="preserve">
+    <value>Boyeba ete bobimisi etiamaki na NDI na nzela ya paramètre ya ligne de commande.</value>
+    <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>Osengelaki kobanda ntango oyo esengelaki?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Ba rappels ya pop-up .</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
+  </data>
+  <data name="OVERRUN_MSG" xml:space="preserve">
+    <value>Bokutani ezali kosala {0} miniti na ngonga ya kobakisama .</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="UNDERRUN_MSG" xml:space="preserve">
+    <value>Bokutani ezali kosala {0} miniti ya kosilisa mosala .</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
+    <value>Ba notifications ya Overrun/Underrun .</value>
+    <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
+  </data>
+  <data name="DARK_MODE" xml:space="preserve">
+    <value>Mode ya molili .</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="BTN_CLOSE" xml:space="preserve">
+    <value>Kokanga</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_SAVE" xml:space="preserve">
+    <value>Kobikisa</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_REFRESH" xml:space="preserve">
+    <value>Kozongisa sika .</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_CONFIGURE" xml:space="preserve">
+    <value>Configurer .</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_REQUEST_ACCESS" xml:space="preserve">
+    <value>Sɛngá nzela ya kokɔta .</value>
+    <comment>Button label for macOS network access request</comment>
+  </data>
+  <data name="BTN_DISMISS" xml:space="preserve">
+    <value>Kolongola</value>
+    <comment>Button label for dismissing notifications</comment>
+  </data>
+  <data name="MSG_MEETING_STARTS_IN" xml:space="preserve">
+    <value>Likita ebandi na .</value>
+    <comment>Message shown on countdown window and web clock</comment>
+  </data>
+  <data name="MSG_SCAN_QR_CODE" xml:space="preserve">
+    <value>Scan na appareil mobile mpo na kotala montre web .</value>
+    <comment>Instructions shown near QR code in settings</comment>
+  </data>
+  <data name="LBL_PLATFORM" xml:space="preserve">
+    <value>Esika:</value>
+    <comment>Label for platform display in network settings</comment>
+  </data>
+  <data name="LBL_STATUS" xml:space="preserve">
+    <value>Statut:</value>
+    <comment>Label for status display</comment>
+  </data>
+  <data name="LBL_FULL_SCREEN_MODE" xml:space="preserve">
+    <value>Mode ya écran mobimba .</value>
+    <comment>Checkbox label in main settings</comment>
+  </data>
+  <data name="TIP_INCREASE_TIME" xml:space="preserve">
+    <value>Bobakisa ntango (+1 min). Finá na lobɔkɔ ya mobali mpo na koyeba makambo mosusu.</value>
+    <comment>Tooltip for increase time button</comment>
+  </data>
+  <data name="TIP_DECREASE_TIME" xml:space="preserve">
+    <value>Bokitisaka ntango (-1 min). Finá na lobɔkɔ ya mobali mpo na koyeba makambo mosusu.</value>
+    <comment>Tooltip for decrease time button</comment>
+  </data>
+  <data name="TIP_GENERATE_REPORT" xml:space="preserve">
+    <value>Generer rapport ya timing (PDF) .</value>
+    <comment>Tooltip for report generation button</comment>
+  </data>
+  <data name="TIP_SHOW_COUNTDOWN" xml:space="preserve">
+    <value>Lakisa ntango ya kotánga ntango oyo .</value>
+    <comment>Tooltip for countdown button</comment>
+  </data>
+  <data name="TIP_NEW_VERSION" xml:space="preserve">
+    <value>Version ya sika ezali .</value>
+    <comment>Tooltip for new version indicator</comment>
+  </data>
+  <data name="TIP_SETTINGS" xml:space="preserve">
+    <value>Paramètres .</value>
+    <comment>Tooltip for settings button</comment>
+  </data>
+  <data name="TIP_HELP" xml:space="preserve">
+    <value>Lisalisi</value>
+    <comment>Tooltip for help button</comment>
+  </data>
+  <data name="TIP_SHRINK" xml:space="preserve">
+    <value>Kokita na mode compact .</value>
+    <comment>Tooltip for shrink/minimize button</comment>
+  </data>
+  <data name="MENU_PLUS_15_SEC" xml:space="preserve">
+    <value>+15 secondes .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_PLUS_1_MIN" xml:space="preserve">
+    <value>+1MINUTE .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_PLUS_5_MIN" xml:space="preserve">
+    <value>+5 minutes .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_MINUS_15_SEC" xml:space="preserve">
+    <value>-15 secondes .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_MINUS_1_MIN" xml:space="preserve">
+    <value>-1 minute .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_MINUS_5_MIN" xml:space="preserve">
+    <value>-5 minutes .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="SECTION_NETWORK" xml:space="preserve">
+    <value>Ndingisa ya réseau .</value>
+    <comment>Title for Settings, NETWORK PERMISSIONS section. Please keep capitals</comment>
+  </data>
+  <data name="TIMER_FLASH_OVERTIME" xml:space="preserve">
+    <value>Flash timer na boumeli ya ngonga ya kobakisama .</value>
+    <comment>Checkbox label in timer window settings</comment>
+  </data>
+  <data name="TIMER_BELL_OVERTIME" xml:space="preserve">
+    <value>Bande Bell tango ba heures supplémentaires .</value>
+    <comment>Checkbox label in timer window settings</comment>
+  </data>
+  <data name="STATUS_READY" xml:space="preserve">
+    <value>Ya kobongama</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_RUNNING" xml:space="preserve">
+    <value>Kopota mbango</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_PAUSED" xml:space="preserve">
+    <value>Paused .</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_OVERTIME" xml:space="preserve">
+    <value>Ba heures supplémentaires .</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_STOPPED" xml:space="preserve">
+    <value>Etelemi .</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="WATERMARK_ACCESS_CODE" xml:space="preserve">
+    <value>Kotisa code ya accès...</value>
+    <comment>Watermark/placeholder text for access code input</comment>
+  </data>
+  <data name="UNIT_MIN" xml:space="preserve">
+    <value>Min .</value>
+    <comment>Abbreviation for minute(s)</comment>
+  </data>
+  <data name="STATUS_CONFIGURED" xml:space="preserve">
+    <value>Configuré .</value>
+    <comment>Firewall/network status indicator</comment>
+  </data>
+  <data name="STATUS_NOT_CONFIGURED" xml:space="preserve">
+    <value>Ezali na Configuré te .</value>
+    <comment>Firewall/network status indicator</comment>
+  </data>
+  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
+    <value>Verbose .</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
+    <value>Debug .</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
+    <value>Nsango</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
+    <value>Likebisi</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
+    <value>Libunga</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
+    <value>Mabe</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Cliquez to sound Bell .</value>
+    <comment>Tooltip for bell during overtime</comment>
+  </data>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Bell azali na mosala .</value>
+    <comment>Tooltip when bell is enabled</comment>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Bell azali inactif .</value>
+    <comment>Tooltip when bell is disabled</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Kotánga likoló .</value>
+    <comment>Timer mode tooltip</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Kotánga na nse .</value>
+    <comment>Timer mode tooltip</comment>
+  </data>
+</root>

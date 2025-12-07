@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Bell ukax activo ukhamawa .</value>
+    <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
+    <value>Janiwkhitisa</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
+    <value>Mä-way .</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
+    <value>Pä thakhi .</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="APP_VER" xml:space="preserve">
+    <value>Software ukax {0}.</value>
+    <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ClockHtmlTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="CLOCK_FORMAT_12" xml:space="preserve">
+    <value>12 horanaka .</value>
+    <comment>The 12-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
+    <value>12 horanaka (Cero nayrïr) .</value>
+    <comment>The 12-hour clock format with a leading zero where appropriate</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24" xml:space="preserve">
+    <value>24-hora .</value>
+    <comment>The 24-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
+    <value>24 horanaka (Cero nayrïr) .</value>
+    <comment>The 24-hour clock format with leading zero where appropriate</comment>
+  </data>
+  <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
+    <value>Janiw carpeta lurañjamäkänti {0} .</value>
+    <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <data name="DURATION_ADAPTED" xml:space="preserve">
+    <value>adaptado duración ukaxa 1.1.</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_MODIFIED" xml:space="preserve">
+    <value>Ukax mayjt’ayatawa.</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_ORIGINAL" xml:space="preserve">
+    <value>Original ukax kuna pachas .</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
+    <value>Analógico ukax 1.1.</value>
+    <comment>i.e. an analogue clock (with face and hands)</comment>
+  </data>
+  <data name="FULL_SCREEN_BOTH" xml:space="preserve">
+    <value>Analógico ukat Digital .</value>
+  </data>
+  <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
+    <value>Digital ukax 1.1.</value>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Bell ukax inactivo ukhamawa .</value>
+  </data>
+  <data name="MIDWEEK" xml:space="preserve">
+    <value>chika semanajj .</value>
+  </data>
+  <data name="MINISTRY1" xml:space="preserve">
+    <value>Ministerio - 1ri t’aqaxa 1.1.</value>
+  </data>
+  <data name="MINISTRY2" xml:space="preserve">
+    <value>Ministerio - 2 t’aqa.</value>
+  </data>
+  <data name="MINISTRY3" xml:space="preserve">
+    <value>Ministerio - 3ri t’aqa.</value>
+  </data>
+  <data name="OP_MODE_AUTO" xml:space="preserve">
+    <value>Automático ukax 1.1.</value>
+  </data>
+  <data name="OP_MODE_FILE" xml:space="preserve">
+    <value>Archivo-based .</value>
+  </data>
+  <data name="OP_MODE_MANUAL" xml:space="preserve">
+    <value>Amparampi</value>
+  </data>
+  <data name="TALK_CONCLUDING" xml:space="preserve">
+    <value>Tukuyañataki parlaña .</value>
+  </data>
+  <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
+    <value>Tukuyañatakix comentarios ukanakaw utji.</value>
+  </data>
+  <data name="TALK_CONG_STUDY" xml:space="preserve">
+    <value>Congregación Bibliat yatxataña .</value>
+  </data>
+  <data name="TALK_DIGGING" xml:space="preserve">
+    <value>Ajayun gemas ukanakax .</value>
+  </data>
+  <data name="TALK_LIVING1" xml:space="preserve">
+    <value>Jakaña - Parte 1 .</value>
+  </data>
+  <data name="TALK_LIVING2" xml:space="preserve">
+    <value>Jakaña - Parte 2 .</value>
+  </data>
+  <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
+    <value>Jist’araña Comentarios .</value>
+  </data>
+  <data name="TALK_PRESENTATIONS" xml:space="preserve">
+    <value>Aka phaxsin uñacht’äwinakax .</value>
+  </data>
+  <data name="TALK_PUBLIC" xml:space="preserve">
+    <value>Jaqinakan aruskipaña .</value>
+  </data>
+  <data name="TALK_READING" xml:space="preserve">
+    <value>Bibliat liytʼaña .</value>
+  </data>
+  <data name="TALK_SERVICE" xml:space="preserve">
+    <value>Servicio tuqit parltʼañäni .</value>
+  </data>
+  <data name="TALK_TREASURES" xml:space="preserve">
+    <value>Tesoros parlañ .</value>
+  </data>
+  <data name="TALK_WT" xml:space="preserve">
+    <value>WatchTower ukan yatxatäwipa .</value>
+  </data>
+  <data name="WEEKEND" xml:space="preserve">
+    <value>Siman tukuya</value>
+  </data>
+  <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
+    <value>12 horanak (am/pm) .</value>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
+    <value>12 horanaka (Cero &amp; AM/PM nayrïr kuti) .</value>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="MONITOR_NONE" xml:space="preserve">
+    <value>Janiwkhitisa</value>
+  </data>
+  <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
+    <value>¡Ajustes ukax janiw utjkiti kunawsatix Timer ukax luraski ukhaxa!</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Ukaxa utt’ayatawa.</value>
+  </data>
+  <data name="SECTION_TREASURES" xml:space="preserve">
+    <value>Tesoronaka .</value>
+  </data>
+  <data name="SECTION_MINISTRY" xml:space="preserve">
+    <value>Ministerio ukaxa 1.1.</value>
+  </data>
+  <data name="SECTION_LIVING" xml:space="preserve">
+    <value>Jakaña</value>
+  </data>
+  <data name="SECTION_WEEKEND" xml:space="preserve">
+    <value>Siman tukuya</value>
+  </data>
+  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
+    <value>¡Ajustes ukanakax Administrador ukan jan ch’amanchatawa!</value>
+    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
+  </data>
+  <data name="MINISTRY4" xml:space="preserve">
+    <value>Ministerio - 4 t’aqa.</value>
+  </data>
+  <data name="CIRCUIT_VISIT" xml:space="preserve">
+    <value>Circuito ukar visittʼañataki .</value>
+  </data>
+  <data name="CLOSE_COUNTDOWN" xml:space="preserve">
+    <value>Jist’antaña Countdown .</value>
+    <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Yanapa</value>
+  </data>
+  <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
+    <value>[Circuito ukar visitt’aña].</value>
+  </data>
+  <data name="NEW_VERSION" xml:space="preserve">
+    <value>¡Machaq versión ukaw utji!</value>
+  </data>
+  <data name="MAIN_SECTION" xml:space="preserve">
+    <value>WAKISKIRI</value>
+    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
+  </data>
+  <data name="ACCESS_CODE" xml:space="preserve">
+    <value>Código ukar mantaña .</value>
+    <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
+  </data>
+  <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
+    <value>Medio Semanario ukax mä modo adaptativo ukhamawa.</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
+    <value>Modo adaptativo de semana ukax 1.1.</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
+    <value>Permitir count-up toggle .</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALWAYS_ON_TOP" xml:space="preserve">
+    <value>Sapa kutiw patat .</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="APPS_SECTION" xml:space="preserve">
+    <value>Jayankir Apps .</value>
+    <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
+  </data>
+  <data name="AUTO_SECTION" xml:space="preserve">
+    <value>Modo automático ukaxa 1.1.</value>
+    <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
+  </data>
+  <data name="BELL_SECTION" xml:space="preserve">
+    <value>Campana .</value>
+    <comment>Title for Settings, BELL section. Please keep capitals</comment>
+  </data>
+  <data name="CLOCK_SECTION" xml:space="preserve">
+    <value>Web Reloj ukax 1.1.</value>
+    <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
+  </data>
+  <data name="COUNTDOWN_SECTION" xml:space="preserve">
+    <value>Tantachäwi Countdown .</value>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="CO_VISIT_TOGGLE" xml:space="preserve">
+    <value>Circuito Visita Toggle ukax mä jach’a uñacht’äwiwa.</value>
+  </data>
+  <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
+    <value>Reloj digital ukax mä formato ukhamawa.</value>
+  </data>
+  <data name="ENABLED" xml:space="preserve">
+    <value>Ukax ch’amanchatawa .</value>
+    <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
+  </data>
+  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
+    <value>Modo de reloj de pantalla completa ukax 1.1.</value>
+  </data>
+  <data name="IP_ADDRESS" xml:space="preserve">
+    <value>IP uñt’ayawi .</value>
+    <comment>Network address</comment>
+  </data>
+  <data name="MEETING" xml:space="preserve">
+    <value>Tantachäwi</value>
+    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
+  </data>
+  <data name="MEETING_STARTS" xml:space="preserve">
+    <value>Tantachäwi qalltaña pachanaka (1 sapa línea) .</value>
+  </data>
+  <data name="MISC_SECTION" xml:space="preserve">
+    <value>MISILANYAS</value>
+    <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
+  </data>
+  <data name="MONITOR" xml:space="preserve">
+    <value>Pantalla</value>
+  </data>
+  <data name="MOUSE_PTR" xml:space="preserve">
+    <value>Uñacht’ayaña ch’uqi ch’uqi .</value>
+  </data>
+  <data name="MTG_START_NOTES1" xml:space="preserve">
+    <value>Sapa qalltaña pacha machaq chiqaru uchaña.</value>
+  </data>
+  <data name="MTG_START_NOTES2" xml:space="preserve">
+    <value>¡Kuna pachas formato ukax jumatakix wali askiwa!</value>
+  </data>
+  <data name="MTG_START_NOTES3" xml:space="preserve">
+    <value>Opcionalmente ukax mä uruw uñt’ayasi, e.g. "Thu 19:15".</value>
+  </data>
+  <data name="NOTES" xml:space="preserve">
+    <value>Notas: 1.1.</value>
+  </data>
+  <data name="OPEN_PORT" xml:space="preserve">
+    <value>Jist’arat puerto .</value>
+    <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="OP_MODE" xml:space="preserve">
+    <value>Ukax mä juk’a pachanakanwa.</value>
+    <comment>The operating mode (i.e. manual, auto or file-based)</comment>
+  </data>
+  <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
+    <value>Yatiqirin pachapax jan jaytjañawa .</value>
+    <comment>All the monitor to display the final student time for a little longer than normal</comment>
+  </data>
+  <data name="PERSIST_TALK_DURATION" xml:space="preserve">
+    <value>Persist parlañ duración .</value>
+    <comment>How long the talk timer is shown after the end of the item</comment>
+  </data>
+  <data name="PORT" xml:space="preserve">
+    <value>Puyrtu</value>
+    <comment>i.e. the TCP (networking) "port"</comment>
+  </data>
+  <data name="REMOTE_SECTION" xml:space="preserve">
+    <value>Jayapacha mantañaxa .</value>
+    <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
+  </data>
+  <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
+    <value>Sector uñacht’ayaña Reloj analógico ukan .</value>
+    <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
+  </data>
+  <data name="SPLIT_WIDTH" xml:space="preserve">
+    <value>Pantalla jaljata ancho: .</value>
+  </data>
+  <data name="TEST" xml:space="preserve">
+    <value>YANT'A</value>
+    <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="THROTTLED" xml:space="preserve">
+    <value>Ukax throttled satawa.</value>
+    <comment>Communication is deliberately limited to prevent overloading</comment>
+  </data>
+  <data name="TIMER_COUNT_UP" xml:space="preserve">
+    <value>Timer ukax jakthapitawa .</value>
+    <comment>Counts up rather than down</comment>
+  </data>
+  <data name="TIMER_WIN_SECTION" xml:space="preserve">
+    <value>Timer ukax mä ventana .</value>
+    <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
+  </data>
+  <data name="TIME_UNDER_TIMER" xml:space="preserve">
+    <value>Tiempo tiempon urupanjja .</value>
+    <comment>Show time of day underneath the timer</comment>
+  </data>
+  <data name="VOLUME" xml:space="preserve">
+    <value>Wulumina:</value>
+    <comment>Label for the volume control in the Bell settings</comment>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Aru</value>
+  </data>
+  <data name="RESTART_LANGUAGE" xml:space="preserve">
+    <value>Aru mayjt’ayañ tukuyatatx ​​mäkiw wasitat qalltañama.</value>
+  </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Jisk’achaña 1m .
+Ctrl - Jisk’a 15S .
+turno - Jisk’a 5m .</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Jiltawi 1m .
+CTRL - Jiltawi 15s .
+SHIFT - Jiltawi 5m .</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Manual ukaxa mä modalidad ukhamawa.</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Jakhuña .</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Jakhuña .</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="X_SECONDS" xml:space="preserve">
+    <value>{0} Segundos .</value>
+    <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
+  </data>
+  <data name="ENABLED_API" xml:space="preserve">
+    <value>Ukax ch’amanchatawa .</value>
+  </data>
+  <data name="ENABLED_BELL" xml:space="preserve">
+    <value>Ukax ch’amanchatawa .</value>
+  </data>
+  <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
+    <value>Ukax ch’amanchatawa .</value>
+  </data>
+  <data name="SHOW_SECONDS" xml:space="preserve">
+    <value>Uñacht’ayaña Segundos .</value>
+    <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
+  </data>
+  <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
+    <value>Uñacht’ayaña marco .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
+    <value>Reloj marco ukax .</value>
+    <comment>See Settings =&gt;Timer window</comment>
+  </data>
+  <data name="COUNTDOWN_ZOOM" xml:space="preserve">
+    <value>Nivel de Zoom ukax: 1.1.</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="LOCATION_ON_SCREEN" xml:space="preserve">
+    <value>Kawkhachiqa</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
+    <value>Aynacha</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
+    <value>Ukax ch’iqa .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
+    <value>Uka manqhaxa ch’iqa .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
+    <value>Chika</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
+    <value>Ch'iqa</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
+    <value>Waliki</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
+    <value>Alaya</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
+    <value>Uka pata ch’iqa .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
+    <value>Uka patax ch’iqa .</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>WALIKI</value>
+    <comment>Caption of the button that closes the snackbar</comment>
+  </data>
+  <data name="PORT_OPENED" xml:space="preserve">
+    <value>Puerto jist’arata ukat reserva lurata .</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
+  </data>
+  <data name="PORT_OPEN_FAILED" xml:space="preserve">
+    <value>¡Janiw puerto jist’arañjamäkänti (Log uñxatt’aña)!</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
+  </data>
+  <data name="GENERATING_REPORT" xml:space="preserve">
+    <value>generado informe de tiempo .</value>
+    <comment>Displayed in the notification bar when the timing report is created</comment>
+  </data>
+  <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
+    <value>Yatiyawinak uñstayaña .</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="CONCLUDING_SEGMENT" xml:space="preserve">
+    <value>Tukuyañataki segmento .</value>
+    <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTERIM_SEGMENT" xml:space="preserve">
+    <value>segmento interino ukaxa 1.1.</value>
+    <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTRO_SEGMENT" xml:space="preserve">
+    <value>Segmento introductorio ukax 1.1.</value>
+    <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="LOGGING_LEVEL" xml:space="preserve">
+    <value>Nivel de registro ukax 1.1.</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
+    <value>Debug ukax .</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
+    <value>Pantja</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
+    <value>Sint'ata</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
+    <value>Yatiyäwi</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
+    <value>Verbose .</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
+    <value>Yatiyawi</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
+    <value>Tantachäwi pachan yatiyawinak uñakipaña .</value>
+    <comment>Displayed in the notification bar before a timing report is generated</comment>
+  </data>
+  <data name="NO_REPORT" xml:space="preserve">
+    <value>Yatiyäwix janiw generadokiti!</value>
+    <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
+  </data>
+  <data name="VIEW_REPORT" xml:space="preserve">
+    <value>NAYRA</value>
+    <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
+  </data>
+  <data name="AUTO_BELL" xml:space="preserve">
+    <value>Ukax mä juk’a pachanakanwa. .</value>
+    <comment>See Settings =&gt; Bell</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Sound Bell ukar ch’iqt’am .</value>
+    <comment>Tooltip displayed for manual bell button</comment>
+  </data>
+  <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
+    <value>Duración (mins) ukax mä jach’a yatiqañ utawa.</value>
+    <comment>See Settings =&gt;Countdown section</comment>
+  </data>
+  <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
+    <value>Elementos ukax 1.1.</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="DIAL" xml:space="preserve">
+    <value>Dial .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIAL_AND_DIGITAL" xml:space="preserve">
+    <value>Dial ukat Digital .</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIGITAL" xml:space="preserve">
+    <value>Digital ukax 1.1.</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
+    <value>Transparente ukaxa mä juk’a pachanakwa lurasi.</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
+    <value>Qhanacht’añatakix monitor ukax mä kamachi-línea ukan apnaqatawa .</value>
+    <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
+  </data>
+  <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Timer ukax gradiente .</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Reloj fondo gradiente .</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="SHOW_TIMER_FRAME" xml:space="preserve">
+    <value>Ukax mä marco de tiempo .</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="FLAT_CLOCK" xml:space="preserve">
+    <value>Ukax mä reloj plano satawa.</value>
+    <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
+  </data>
+  <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
+    <value>Semana tukuyanx viernes uruw uñt'ayasi.</value>
+    <comment>See Settings =&gt; Automatic mode</comment>
+  </data>
+  <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
+    <value>Ukax mä ventanawa.</value>
+    <comment>See Settings =&gt; Main</comment>
+  </data>
+  <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
+    <value>Ukax mä ventanawa.</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
+    <value>Jist’antaña Countdown ventana .</value>
+    <comment>Tooltip for main window button</comment>
+  </data>
+  <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
+    <value>Janiw transparente "Windowed" uka jakhüwi jist'arañjamäkiti.</value>
+    <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
+  </data>
+  <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\timershtmltemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WEB_LINK_CLOCK" xml:space="preserve">
+    <value>Riluju</value>
+    <comment>Link to clock on web interface</comment>
+  </data>
+  <data name="WEB_LINK_TIMERS" xml:space="preserve">
+    <value>Timers .</value>
+    <comment>Link to timers on web interface</comment>
+  </data>
+  <data name="WEB_OFFLINE" xml:space="preserve">
+    <value>Ukax mä juk’a pachanakanwa...</value>
+    <comment>Text displayed in web interface</comment>
+  </data>
+  <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
+    <value>Ukax mä jisk’a jisk’a .</value>
+    <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
+  </data>
+  <data name="PRIMARY_MONITOR" xml:space="preserve">
+    <value>nayriri</value>
+    <comment>Used to designate the primary monitor</comment>
+  </data>
+  <data name="TIMER_ON_NDI" xml:space="preserve">
+    <value>Qhanacht’añatakix mistuwix NDI ukarux mä kamachi-linea ukan utt’ayatawa.</value>
+    <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>¿Uka tiempor qalltañajj wakisispati?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Pop-up ukax amtayirinakawa.</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
+  </data>
+  <data name="OVERRUN_MSG" xml:space="preserve">
+    <value>Tantachäwix t’ijt’aski {0} minutos extra .</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="UNDERRUN_MSG" xml:space="preserve">
+    <value>Tantachäwix t’ijt’aski {0} Minutos Undertime .</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
+    <value>Overrun/Underrun ukan yatiyawipa .</value>
+    <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
+  </data>
+  <data name="DARK_MODE" xml:space="preserve">
+    <value>Ch’amaka Modo .</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="BTN_CLOSE" xml:space="preserve">
+    <value>Jist'antaña</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_SAVE" xml:space="preserve">
+    <value>Imaña</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_REFRESH" xml:space="preserve">
+    <value>Refresco ukax 1.1.</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_CONFIGURE" xml:space="preserve">
+    <value>Configurar .</value>
+    <comment>Button label</comment>
+  </data>
+  <data name="BTN_REQUEST_ACCESS" xml:space="preserve">
+    <value>Mayt’aña mantaña .</value>
+    <comment>Button label for macOS network access request</comment>
+  </data>
+  <data name="BTN_DISMISS" xml:space="preserve">
+    <value>Khitanukuña</value>
+    <comment>Button label for dismissing notifications</comment>
+  </data>
+  <data name="MSG_MEETING_STARTS_IN" xml:space="preserve">
+    <value>Tantachäwix qalltasiwayi .</value>
+    <comment>Message shown on countdown window and web clock</comment>
+  </data>
+  <data name="MSG_SCAN_QR_CODE" xml:space="preserve">
+    <value>Dispositivo móvil ukampi escanear reloj web uñakipañataki .</value>
+    <comment>Instructions shown near QR code in settings</comment>
+  </data>
+  <data name="LBL_PLATFORM" xml:space="preserve">
+    <value>Palataphurma:</value>
+    <comment>Label for platform display in network settings</comment>
+  </data>
+  <data name="LBL_STATUS" xml:space="preserve">
+    <value>Istaru:</value>
+    <comment>Label for status display</comment>
+  </data>
+  <data name="LBL_FULL_SCREEN_MODE" xml:space="preserve">
+    <value>Modo de pantalla completa ukaxa 1.1.</value>
+    <comment>Checkbox label in main settings</comment>
+  </data>
+  <data name="TIP_INCREASE_TIME" xml:space="preserve">
+    <value>Jiltawi pacha (+1 min). Ch’iqa tuqiru ch’iqt’aña juk’ampi amtawinakataki.</value>
+    <comment>Tooltip for increase time button</comment>
+  </data>
+  <data name="TIP_DECREASE_TIME" xml:space="preserve">
+    <value>Jisk’a pacha (-1 min). Ch’iqa tuqiru ch’iqt’aña juk’ampi amtawinakataki.</value>
+    <comment>Tooltip for decrease time button</comment>
+  </data>
+  <data name="TIP_GENERATE_REPORT" xml:space="preserve">
+    <value>Generar informe de tiempo (PDF) ukax mä jach’a uñacht’äwiwa.</value>
+    <comment>Tooltip for report generation button</comment>
+  </data>
+  <data name="TIP_SHOW_COUNTDOWN" xml:space="preserve">
+    <value>Uñacht’ayaña Countdown Timer .</value>
+    <comment>Tooltip for countdown button</comment>
+  </data>
+  <data name="TIP_NEW_VERSION" xml:space="preserve">
+    <value>Machaq versión ukaw utji .</value>
+    <comment>Tooltip for new version indicator</comment>
+  </data>
+  <data name="TIP_SETTINGS" xml:space="preserve">
+    <value>Ukaxa utt’ayatawa.</value>
+    <comment>Tooltip for settings button</comment>
+  </data>
+  <data name="TIP_HELP" xml:space="preserve">
+    <value>Yanapa</value>
+    <comment>Tooltip for help button</comment>
+  </data>
+  <data name="TIP_SHRINK" xml:space="preserve">
+    <value>Modo Compacto ukar jisk’achaña .</value>
+    <comment>Tooltip for shrink/minimize button</comment>
+  </data>
+  <data name="MENU_PLUS_15_SEC" xml:space="preserve">
+    <value>+15 Segundos .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_PLUS_1_MIN" xml:space="preserve">
+    <value>+1 minuto .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_PLUS_5_MIN" xml:space="preserve">
+    <value>+5 minutonaka .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_MINUS_15_SEC" xml:space="preserve">
+    <value>-15 Segundos .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_MINUS_1_MIN" xml:space="preserve">
+    <value>-1 minuto 1.1.</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="MENU_MINUS_5_MIN" xml:space="preserve">
+    <value>-5 minutonaka .</value>
+    <comment>Context menu item for time adjustment</comment>
+  </data>
+  <data name="SECTION_NETWORK" xml:space="preserve">
+    <value>Red ukan permisonakapa .</value>
+    <comment>Title for Settings, NETWORK PERMISSIONS section. Please keep capitals</comment>
+  </data>
+  <data name="TIMER_FLASH_OVERTIME" xml:space="preserve">
+    <value>Flash Timer ukax horas extras ukanx .</value>
+    <comment>Checkbox label in timer window settings</comment>
+  </data>
+  <data name="TIMER_BELL_OVERTIME" xml:space="preserve">
+    <value>Campana anillo ukax horas extras .</value>
+    <comment>Checkbox label in timer window settings</comment>
+  </data>
+  <data name="STATUS_READY" xml:space="preserve">
+    <value>Waliki</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_RUNNING" xml:space="preserve">
+    <value>Jalaña</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_PAUSED" xml:space="preserve">
+    <value>Paused .</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_OVERTIME" xml:space="preserve">
+    <value>Tiempo extra .</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="STATUS_STOPPED" xml:space="preserve">
+    <value>sayt’ayata .</value>
+    <comment>Timer status message</comment>
+  </data>
+  <data name="WATERMARK_ACCESS_CODE" xml:space="preserve">
+    <value>Ukax mä código de acceso...</value>
+    <comment>Watermark/placeholder text for access code input</comment>
+  </data>
+  <data name="UNIT_MIN" xml:space="preserve">
+    <value>Min .</value>
+    <comment>Abbreviation for minute(s)</comment>
+  </data>
+  <data name="STATUS_CONFIGURED" xml:space="preserve">
+    <value>Configurado ukaxa 1.1.</value>
+    <comment>Firewall/network status indicator</comment>
+  </data>
+  <data name="STATUS_NOT_CONFIGURED" xml:space="preserve">
+    <value>Janiw Configurado .</value>
+    <comment>Firewall/network status indicator</comment>
+  </data>
+  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
+    <value>Verbose .</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
+    <value>Debug ukax .</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
+    <value>Yatiyäwi</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
+    <value>Yatiyawi</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
+    <value>Pantja</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
+    <value>Sint'ata</value>
+    <comment>Log level display name</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Sound Bell ukar ch’iqt’am .</value>
+    <comment>Tooltip for bell during overtime</comment>
+  </data>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Bell ukax activo ukhamawa .</value>
+    <comment>Tooltip when bell is enabled</comment>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Bell ukax inactivo ukhamawa .</value>
+    <comment>Tooltip when bell is disabled</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Jakhuña .</value>
+    <comment>Timer mode tooltip</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Jakhuña .</value>
+    <comment>Timer mode tooltip</comment>
+  </data>
+</root>
