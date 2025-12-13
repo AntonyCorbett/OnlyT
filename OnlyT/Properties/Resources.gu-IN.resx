@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -887,49 +887,4 @@ Ctrl - 15 સે વધારો
   <data name="STATUS_NOT_CONFIGURED" xml:space="preserve">
     <value>રૂપરેખાંકિત નથી</value>
     <comment>Firewall/network status indicator</comment>
-  </data>
-  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
-    <value>વિગતવાર</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
-    <value>ડીબગ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
-    <value>માહિતી</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
-    <value>ચેતવણી</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
-    <value>ભૂલ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
-    <value>ઘાતક</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="SOUND_BELL" xml:space="preserve">
-    <value>ઘંટડી વગાડવા માટે ક્લિક કરો</value>
-    <comment>Tooltip for bell during overtime</comment>
-  </data>
-  <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>ઘંટડી સક્રિય છે</value>
-    <comment>Tooltip when bell is enabled</comment>
-  </data>
-  <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>ઘંટડી નિષ્ક્રિય છે</value>
-    <comment>Tooltip when bell is disabled</comment>
-  </data>
-  <data name="COUNTING_UP" xml:space="preserve">
-    <value>સીધી ગણતરી</value>
-    <comment>Timer mode tooltip</comment>
-  </data>
-  <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>ઉલટી ગણતરી</value>
-    <comment>Timer mode tooltip</comment>
-  </data>
-</root>
+  </data></root>

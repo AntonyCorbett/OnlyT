@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -887,49 +887,4 @@ Ctrl - 15 ಸೆಗಳನ್ನು ಹೆಚ್ಚಿಸಿ
   <data name="STATUS_NOT_CONFIGURED" xml:space="preserve">
     <value>ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿಲ್ಲ</value>
     <comment>Firewall/network status indicator</comment>
-  </data>
-  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
-    <value>ಮೌಖಿಕ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
-    <value>ಡೀಬಗ್ ಮಾಡಿ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
-    <value>ಮಾಹಿತಿ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
-    <value>ಎಚ್ಚರಿಕೆ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
-    <value>ದೋಷ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
-    <value>ಮಾರಕ</value>
-    <comment>Log level display name</comment>
-  </data>
-  <data name="SOUND_BELL" xml:space="preserve">
-    <value>ಬೆಲ್ ಅನ್ನು ಧ್ವನಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ</value>
-    <comment>Tooltip for bell during overtime</comment>
-  </data>
-  <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>ಬೆಲ್ ಸಕ್ರಿಯವಾಗಿದೆ</value>
-    <comment>Tooltip when bell is enabled</comment>
-  </data>
-  <data name="INACTIVE_BELL" xml:space="preserve">
-    <value>ಬೆಲ್ ನಿಷ್ಕ್ರಿಯವಾಗಿದೆ</value>
-    <comment>Tooltip when bell is disabled</comment>
-  </data>
-  <data name="COUNTING_UP" xml:space="preserve">
-    <value>ಎಣಿಸಲಾಗುತ್ತಿದೆ</value>
-    <comment>Timer mode tooltip</comment>
-  </data>
-  <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>ಎಣಿಸುತ್ತಿದೆ</value>
-    <comment>Timer mode tooltip</comment>
-  </data>
-</root>
+  </data></root>
