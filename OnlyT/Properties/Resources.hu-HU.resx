@@ -740,4 +740,8 @@ Shift - Increase 5m</value>
     <value>Sötét mód</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
+  <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
+    <value>Allow mouse wheel to adjust timer</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
 </root>
