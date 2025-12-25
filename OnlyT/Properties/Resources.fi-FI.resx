@@ -741,7 +741,7 @@ Vaihto - Lisää 5M</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Allow mouse wheel to adjust timer</value>
+    <value>Salli hiiren rullan säätää ajastinta</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
