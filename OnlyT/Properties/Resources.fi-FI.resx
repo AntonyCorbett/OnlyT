@@ -740,4 +740,8 @@ Vaihto - Lisää 5M</value>
     <value>Tumma tila</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
+  <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
+    <value>Salli hiiren rullan säätää ajastinta</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
 </root>

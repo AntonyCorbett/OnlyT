@@ -740,4 +740,8 @@ Shift - Öka 5m</value>
     <value>Mörkt läge</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
+  <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
+    <value>Tillåt att mushjulet justerar timern</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
 </root>
