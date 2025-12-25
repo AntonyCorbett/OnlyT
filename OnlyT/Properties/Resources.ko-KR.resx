@@ -187,7 +187,7 @@
     <value>벨소리가 비활성화되었습니다.</value>
   </data>
   <data name="MIDWEEK" xml:space="preserve">
-    <value>주중 집회</value>
+    <value>평일집회</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
     <value>야외 봉사에 힘쓰십시오 - 첫번째</value>
@@ -299,7 +299,7 @@
     <value>[순회 방문]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
-    <value>새로운 업데이트가 있습니다!</value>
+    <value>새로운 버전 업데이트가 있습니다!</value>
   </data>
   <data name="MAIN_SECTION" xml:space="preserve">
     <value>메인</value>
@@ -310,11 +310,11 @@
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
-    <value>Midweek adaptive mode</value>
+    <value>평일집회 적응형 모드</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
-    <value>Weekend adaptive mode</value>
+    <value>주말집회 적응형 모드</value>
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>집회 시작 시간 (1줄 씩)</value>
+    <value>집회 시작 시간 (한 줄씩 입력)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>기타</value>
@@ -380,13 +380,13 @@
     <value>마우스 포인터 표시</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>새로운 줄에 각각의 시작 시간을 기입하십시오.</value>
+    <value>각 집회 시작 시간을 한줄씩 입력하세요.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>원하는 시간 포맷을 사용하십시오!</value>
+    <value>원하는 시간 형식으로 입력하세요!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Optionally include a day, e.g. "Thu 19:15"</value>
+    <value>다음과 같이 축약형으로 요일을 입력할 수 있습니다: "목 19:15"</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>참고 사항</value>
@@ -400,11 +400,11 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>학생과제 시간 보여주기</value>
+    <value>학생과제 시간 띄우기</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>연설 시간 보여주기</value>
+    <value>연설 시간 띄우기</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -416,7 +416,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>아날로그 시계에 시간영역 표시</value>
+    <value>아날로그 시계에 시간 영역 표시</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
@@ -427,19 +427,19 @@
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Throttled</value>
+    <value>제한됨</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>카운트 업</value>
+    <value>타이머 카운트 업</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>타이머 표시</value>
+    <value>타이머 창</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>타이머 하단에 현재 시각 표시</value>
+    <value>타이머 하단에 현재시각 표시</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
@@ -453,11 +453,15 @@
     <value>언어를 변경한 후 OnlyT를 재시작 하십시오.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>시간 줄이기</value>
+    <value>1분 줄이기
+Ctrl - 15초 줄이기
+Shift - 5분 줄이기</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>시간 늘리기</value>
+    <value>1분 늘리기
+Ctrl - 15초 늘리기
+Shift - 5분 늘리기</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -465,11 +469,11 @@
     <comment>Title displayed at the top of the main page when in manual mode</comment>
   </data>
   <data name="COUNTING_DOWN" xml:space="preserve">
-    <value>카운트 다운</value>
+    <value>카운트 다운 사용중</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="COUNTING_UP" xml:space="preserve">
-    <value>카운트 업</value>
+    <value>카운트 업 사용중</value>
     <comment>Tooltip on the Operator page "up/down" glyph</comment>
   </data>
   <data name="X_SECONDS" xml:space="preserve">
@@ -494,7 +498,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>시계 프레임 보이기</value>
+    <value>시계 프레임 표시</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -518,7 +522,7 @@
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
-    <value>센터</value>
+    <value>가운데</value>
     <comment>See Settings =&gt; Countdown =&gt; Location</comment>
   </data>
   <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
@@ -554,7 +558,7 @@
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>시간 기록표 생성</value>
+    <value>타이머 기록표 생성완료</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
@@ -562,7 +566,7 @@
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
-    <value>마치는 노래와 기도</value>
+    <value>맺음말</value>
     <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="INTERIM_SEGMENT" xml:space="preserve">
@@ -574,31 +578,31 @@
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
-    <value>Logging level</value>
+    <value>로깅 레벨</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
-    <value>Debug</value>
+    <value>디버그</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_ERROR" xml:space="preserve">
-    <value>Error</value>
+    <value>에러</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_FATAL" xml:space="preserve">
-    <value>Fatal</value>
+    <value>심각</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
-    <value>Information</value>
+    <value>정보</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
-    <value>Verbose</value>
+    <value>상세</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_WARNING" xml:space="preserve">
-    <value>Warning</value>
+    <value>경고</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
@@ -618,15 +622,15 @@
     <comment>See Settings =&gt; Bell</comment>
   </data>
   <data name="SOUND_BELL" xml:space="preserve">
-    <value>벨 소리</value>
+    <value>벨소리 울리기</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duration (mins)</value>
+    <value>지속시간 (분)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
   <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
-    <value>Elements</value>
+    <value>구성요소</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="DIAL" xml:space="preserve">
@@ -634,7 +638,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="DIAL_AND_DIGITAL" xml:space="preserve">
-    <value>Dial and digital</value>
+    <value>아날로그 &amp; 디지털</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="DIGITAL" xml:space="preserve">
@@ -642,7 +646,7 @@
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
-    <value>Transparent background</value>
+    <value>투명 배경</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
@@ -666,7 +670,7 @@
     <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
   </data>
   <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
-    <value>주말에 금요일을 포함</value>
+    <value>금요일을 포함한 주말</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
@@ -674,15 +678,15 @@
     <comment>See Settings =&gt; Main</comment>
   </data>
   <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
-    <value>Windowed</value>
+    <value>별도 창</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
-    <value/>
+    <value>카운트 창 닫기</value>
     <comment>Tooltip for main window button</comment>
   </data>
   <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
-    <value>카운트다운 스타일 적용안됨</value>
+    <value>투명 "창" 카운트다운을 열 수 없습니다</value>
     <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
   </data>
   <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -701,7 +705,7 @@
     <comment>Text displayed in web interface</comment>
   </data>
   <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
-    <value>Shrink on minimise</value>
+    <value>최소화</value>
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
@@ -709,31 +713,35 @@
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>커맨드라인을 통해 출력이 NDI로 설정되어 있음에 주의하세요.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
   <data name="TIMER_REMINDER_MSG" xml:space="preserve">
-    <value>Should you have started the timer?</value>
+    <value>타이머를 시작하셨나요?</value>
     <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
   </data>
   <data name="TIMER_REMINDER" xml:space="preserve">
-    <value>Pop-up reminders</value>
+    <value>팝업 리마인더</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
   <data name="OVERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes overtime</value>
+    <value>집회시간이 {0} 분 초과했습니다</value>
     <comment>Notification message</comment>
   </data>
   <data name="UNDERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes undertime</value>
+    <value>집회시간이 {0} 분 늦게 끝났습니다</value>
     <comment>Notification message</comment>
   </data>
   <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
-    <value>Overrun/Underrun notifications</value>
+    <value>늦게끝남/일찍끝남 알림</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
   <data name="DARK_MODE" xml:space="preserve">
     <value>다크모드</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
+    <value>Allow mouse wheel to adjust timer</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
