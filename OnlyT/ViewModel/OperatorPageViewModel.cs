@@ -137,6 +137,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Register<AutoBellSettingChangedMessage>(this, OnAutoBellSettingChanged);
         WeakReferenceMessenger.Default.Register<RefreshScheduleMessage>(this, OnRefreshSchedule);
         WeakReferenceMessenger.Default.Register<MainWindowSizeChangedMessage>(this, OnWindowSizeChanged);
+        WeakReferenceMessenger.Default.Register<MouseWheelTimerAdjustChangedMessage>(this, OnMouseWheelTimerAdjustChanged);
 
         GetVersionData();
 
@@ -172,6 +173,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
     }
 
     public bool AllowCountUpDownToggle => _optionsService.Options.AllowCountUpToggle;
+
+    public bool AllowMouseWheelTimerAdjust => _optionsService.Options.AllowMouseWheelTimerAdjust;
 
     public string CountUpOrDownTooltip => _countUp
         ? Properties.Resources.COUNTING_UP
@@ -1277,6 +1280,11 @@ public class OperatorPageViewModel : ObservableObject, IPage
             // auto schedule for the midweek mtg, so try again...
             RefreshSchedule();
         }
+    }
+
+    private void OnMouseWheelTimerAdjustChanged(object recipient, MouseWheelTimerAdjustChangedMessage message)
+    {
+        OnPropertyChanged(nameof(AllowMouseWheelTimerAdjust));
     }
 
     private bool ShouldRefreshMidWeekSchedule()

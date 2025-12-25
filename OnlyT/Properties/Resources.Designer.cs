@@ -133,6 +133,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow mouse wheel timer adjust.
+        /// </summary>
+        public static string ALLOW_MOUSE_WHEEL_TIMER_ADJUST {
+            get {
+                return ResourceManager.GetString("ALLOW_MOUSE_WHEEL_TIMER_ADJUST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always on top.
         /// </summary>
         public static string ALWAYS_ON_TOP {

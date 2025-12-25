@@ -265,3 +265,6 @@ __pycache__/
 /OnlyT.ndproj
 /OnlyT/Properties/launchSettings.json
 /Installer/Staging
+
+# VS Code settings
+.vscode/
