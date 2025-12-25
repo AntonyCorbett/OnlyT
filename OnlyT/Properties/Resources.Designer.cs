@@ -133,7 +133,7 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow mouse wheel timer adjust.
+        ///   Looks up a localized string similar to Allow mouse wheel to adjust timer.
         /// </summary>
         public static string ALLOW_MOUSE_WHEEL_TIMER_ADJUST {
             get {

@@ -22,10 +22,11 @@ namespace OnlyT.Tests
         public void TestAllowMouseWheelTimerAdjustCanBeEnabled()
         {
             // Arrange
-            var options = new Options();
-
-            // Act
-            options.AllowMouseWheelTimerAdjust = true;
+            var options = new Options
+            {
+                // Act
+                AllowMouseWheelTimerAdjust = true
+            };
 
             // Assert
             Assert.IsTrue(options.AllowMouseWheelTimerAdjust, 

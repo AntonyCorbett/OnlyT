@@ -25,10 +25,12 @@ namespace OnlyT.Tests
         public void TestMouseWheelOptionCanBeToggled()
         {
             // Arrange
-            var options = new Options();
+            var options = new Options
+            {
+                // Act & Assert - Enable
+                AllowMouseWheelTimerAdjust = true
+            };
 
-            // Act & Assert - Enable
-            options.AllowMouseWheelTimerAdjust = true;
             Assert.IsTrue(options.AllowMouseWheelTimerAdjust, 
                 "Should be able to enable mouse wheel timer adjustment");
 

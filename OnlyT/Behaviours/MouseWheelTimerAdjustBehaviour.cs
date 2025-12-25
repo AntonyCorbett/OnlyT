@@ -139,7 +139,7 @@ public class MouseWheelTimerAdjustBehaviour : Behavior<FrameworkElement>
         var isCtrlPressed = Keyboard.Modifiers.HasFlag(ModifierKeys.Control);
         var isShiftPressed = Keyboard.Modifiers.HasFlag(ModifierKeys.Shift);
 
-        ICommand? commandToExecute = null;
+        ICommand? commandToExecute;
 
         if (isShiftPressed)
         {

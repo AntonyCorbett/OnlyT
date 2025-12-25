@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,13 +10,13 @@ namespace OnlyT.Tests
     [TestClass]
     public class TestMouseWheelBehaviour
     {
-        private MouseWheelTimerAdjustBehaviour _behaviour;
-        private Mock<ICommand> _incrementCommand;
-        private Mock<ICommand> _decrementCommand;
-        private Mock<ICommand> _increment15SecCommand;
-        private Mock<ICommand> _decrement15SecCommand;
-        private Mock<ICommand> _increment5MinCommand;
-        private Mock<ICommand> _decrement5MinCommand;
+        private MouseWheelTimerAdjustBehaviour? _behaviour;
+        private Mock<ICommand>? _incrementCommand;
+        private Mock<ICommand>? _decrementCommand;
+        private Mock<ICommand>? _increment15SecCommand;
+        private Mock<ICommand>? _decrement15SecCommand;
+        private Mock<ICommand>? _increment5MinCommand;
+        private Mock<ICommand>? _decrement5MinCommand;
 
         [TestInitialize]
         public void Setup()
@@ -50,6 +51,8 @@ namespace OnlyT.Tests
         [TestMethod]
         public void TestCanEnableBehaviour()
         {
+            ArgumentNullException.ThrowIfNull(_behaviour);
+
             // Arrange & Act
             _behaviour.IsEnabled = true;
 
@@ -60,6 +63,14 @@ namespace OnlyT.Tests
         [TestMethod]
         public void TestCommandPropertiesCanBeSet()
         {
+            ArgumentNullException.ThrowIfNull(_behaviour);
+            ArgumentNullException.ThrowIfNull(_increment15SecCommand);
+            ArgumentNullException.ThrowIfNull(_increment5MinCommand);
+            ArgumentNullException.ThrowIfNull(_incrementCommand);
+            ArgumentNullException.ThrowIfNull(_decrement15SecCommand);
+            ArgumentNullException.ThrowIfNull(_decrement5MinCommand);
+            ArgumentNullException.ThrowIfNull(_decrementCommand);
+
             // Assert
             Assert.AreEqual(_incrementCommand.Object, _behaviour.IncrementCommand);
             Assert.AreEqual(_decrementCommand.Object, _behaviour.DecrementCommand);

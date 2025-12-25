@@ -7,10 +7,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:OnlyT.Models"
     xmlns:resx="clr-namespace:OnlyT.Properties"
     xmlns:utils="clr-namespace:OnlyT.Utils"
     xmlns:valueConverters="clr-namespace:OnlyT.ValueConverters"
-    xmlns:models="clr-namespace:OnlyT.Models"
     d:DesignHeight="300"
     d:DesignWidth="395"
     Background="{DynamicResource MaterialDesignPaper}"
@@ -218,30 +218,17 @@
                     Grid.ColumnSpan="{Binding TimeDisplayColumnSpan}"
                     Padding="10"
                     Background="Black"
-                    CornerRadius="10">
-                    <Border.ToolTip>
-                        <TextBlock>
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Click timer display area to focus" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding AllowMouseWheelTimerAdjust}" Value="True">
-                                            <Setter Property="Text" Value="Use mouse wheel to adjust timer: Scroll = ±1 min, Ctrl+Scroll = ±15 sec" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </Border.ToolTip>
+                    CornerRadius="10"
+                    Focusable="True">
                     <b:Interaction.Behaviors>
                         <behaviours:MouseWheelTimerAdjustBehaviour
-                            IsEnabled="{Binding AllowMouseWheelTimerAdjust}"
-                            IncrementCommand="{Binding IncrementTimerCommand}"
+                            Decrement15SecCommand="{Binding DecrementTimer15Command}"
+                            Decrement5MinCommand="{Binding DecrementTimer5Command}"
                             DecrementCommand="{Binding DecrementTimerCommand}"
                             Increment15SecCommand="{Binding IncrementTimer15Command}"
-                            Decrement15SecCommand="{Binding DecrementTimer15Command}"
                             Increment5MinCommand="{Binding IncrementTimer5Command}"
-                            Decrement5MinCommand="{Binding DecrementTimer5Command}" />
+                            IncrementCommand="{Binding IncrementTimerCommand}"
+                            IsEnabled="{Binding AllowMouseWheelTimerAdjust}" />
                     </b:Interaction.Behaviors>
 
                     <Grid>
