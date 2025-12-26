@@ -741,7 +741,7 @@ Shift - Adicionar 5m</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Allow mouse wheel to adjust timer</value>
+    <value>Permitir ajustar o temporizador com a roda do rato</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
