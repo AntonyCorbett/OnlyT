@@ -741,7 +741,7 @@ Mayús - Aumentar 5m</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Allow mouse wheel to adjust timer</value>
+    <value>Permitir ajustar el temporizador con la rueda del ratón</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
