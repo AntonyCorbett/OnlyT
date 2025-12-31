@@ -4,6 +4,4 @@
 /// When the Operating mode is changed in the Settings page
 /// (e.g. from Automatic to File-based)
 /// </summary>
-internal sealed class OperatingModeChangedMessage
-{
-}
+internal sealed class OperatingModeChangedMessage;

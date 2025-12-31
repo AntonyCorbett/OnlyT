@@ -107,13 +107,11 @@ public class OperatorPageViewModel : ObservableObject, IPage
         _timerService.TimerChangedEvent += TimerChangedHandler;
         _countUp = _optionsService.Options.CountUp;
 
-        SelectFirstTalk();
-
         _timerService.TimerStartStopFromApiEvent += HandleTimerStartStopFromApi;
 
         // commands...
         StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
-        StopCommand = new RelayCommand(StopTimer, () => IsRunning);
+        StopCommand = new AsyncRelayCommand(StopTimerAsync, () => IsRunning);
         SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
         CloseAppCommand = new RelayCommand(CloseApp, () => IsNotRunning);
         ExpandFromShrinkCommand = new RelayCommand(ExpandFromShrink);
@@ -128,6 +126,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
         BellToggleCommand = new RelayCommand(BellToggle);
         CountUpToggleCommand = new RelayCommand(CountUpToggle);
         CloseCountdownCommand = new RelayCommand(CloseCountdownWindow);
+
+        SelectFirstTalk();
 
         // subscriptions...
         WeakReferenceMessenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
@@ -207,7 +207,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     public RelayCommand StartCommand { get; }
 
-    public RelayCommand StopCommand { get; }
+    public AsyncRelayCommand StopCommand { get; }
 
     public RelayCommand SettingsCommand { get; }
 
@@ -274,7 +274,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     public string? Duration1String
     {
         get => _duration1String;
-        set
+        private set
         {
             _duration1String = value;
             OnPropertyChanged();
@@ -284,7 +284,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     public string? Duration2String
     {
         get => _duration2String;
-        set
+        private set
         {
             _duration2String = value;
 
@@ -297,7 +297,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     public string? Duration3String
     {
         get => _duration3String;
-        set
+        private set
         {
             _duration3String = value;
 
@@ -307,7 +307,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
     }
 
-    public bool IsOvertime
+    private bool IsOvertime
     {
         get => _isOvertime;
         set
@@ -325,7 +325,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     public Brush TextColor
     {
         get => _textColor;
-        set
+        private set
         {
             _textColor = value;
             OnPropertyChanged();
@@ -353,7 +353,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 OnPropertyChanged(nameof(ShowUpDownButton));
 
                 RaiseCanExecuteIncrementDecrementChanged();
-                StartCommand?.NotifyCanExecuteChanged();
+                StartCommand.NotifyCanExecuteChanged();
                 SetDurationStringAttributes(talk);
 
                 IsOvertime = false;
@@ -718,7 +718,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         return talk?.GetPlannedDurationSeconds() ?? 0;
     }
         
-    private void TimerChangedHandler(object? sender, OnlyT.EventArgs.TimerChangedEventArgs e)
+    private void TimerChangedHandler(object? sender, EventArgs.TimerChangedEventArgs e)
     {
         TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs, e.ClosingSecs);
         _secondsElapsed = e.ElapsedSecs;
@@ -961,9 +961,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
     }
 
-#pragma warning disable S3168 // "async" methods should not return "void"
-    private async void StopTimer()
-#pragma warning restore S3168 // "async" methods should not return "void"
+    private async Task StopTimerAsync()
     {
         if (Log.IsEnabled(LogEventLevel.Debug))
         {
@@ -1104,7 +1102,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
     }
 
-    private void HandleTimerStartStopFromApi(object? sender, OnlyT.EventArgs.TimerStartStopEventArgs e)
+    private void HandleTimerStartStopFromApi(object? sender, EventArgs.TimerStartStopEventArgs e)
     {
         Application.Current.Dispatcher.Invoke(() =>
         {
@@ -1141,12 +1139,9 @@ public class OperatorPageViewModel : ObservableObject, IPage
                             if (success)
                             {
                                 // fire and forget
-                                StopTimer();
+                                _ = StopTimerAsync();
                             }
 
-                            break;
-
-                        default:
                             break;
                     }
                 }
@@ -1170,13 +1165,13 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void RaiseCanExecuteIncrementDecrementChanged()
     {
-        IncrementTimerCommand?.NotifyCanExecuteChanged();
-        IncrementTimer5Command?.NotifyCanExecuteChanged();
-        IncrementTimer15Command?.NotifyCanExecuteChanged();
+        IncrementTimerCommand.NotifyCanExecuteChanged();
+        IncrementTimer5Command.NotifyCanExecuteChanged();
+        IncrementTimer15Command.NotifyCanExecuteChanged();
 
-        DecrementTimerCommand?.NotifyCanExecuteChanged();
-        DecrementTimer5Command?.NotifyCanExecuteChanged();
-        DecrementTimer15Command?.NotifyCanExecuteChanged();
+        DecrementTimerCommand.NotifyCanExecuteChanged();
+        DecrementTimer5Command.NotifyCanExecuteChanged();
+        DecrementTimer15Command.NotifyCanExecuteChanged();
     }
 
     private async Task GenerateTimingReportAsync()

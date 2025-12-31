@@ -1,5 +1,3 @@
 ﻿namespace OnlyT.ViewModel.Messages;
 
-internal sealed class RefreshScheduleMessage
-{
-}
+internal sealed class RefreshScheduleMessage;

@@ -1,5 +1,3 @@
 ﻿namespace OnlyT.ViewModel.Messages;
 
-internal sealed class CountdownElementsChangedMessage
-{
-}
+internal sealed class CountdownElementsChangedMessage;

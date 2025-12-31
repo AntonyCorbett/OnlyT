@@ -1,5 +1,3 @@
 ﻿namespace OnlyT.ViewModel.Messages;
 
-internal sealed class BringMainWindowToFrontMessage
-{
-}
+internal sealed class BringMainWindowToFrontMessage;
