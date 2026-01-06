@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACTIVE_BELL" xml:space="preserve">
-    <value>Zvonec je aktiven</value>
+    <value>Zvonenje je aktivno</value>
     <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
   </data>
   <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
@@ -202,7 +202,7 @@
     <value>Avtomatičen</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Na osnovi datoteke</value>
+    <value>Na podlagi datoteke</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Ročno</value>
