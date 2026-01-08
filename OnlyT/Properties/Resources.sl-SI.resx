@@ -244,7 +244,7 @@
     <value>Zakladi — govor</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
-    <value>Preučevanje stražnega stolpa</value>
+    <value>Preučevanje Stražnega stolpa</value>
   </data>
   <data name="WEEKEND" xml:space="preserve">
     <value>Konec tedna</value>
@@ -404,7 +404,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Trajanje začasnega prikaza ure</value>
+    <value>Trajanje začasnega prikaza časomera</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -498,7 +498,7 @@ Shift — podaljšaj 5 min</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Prikaz okvirja ure</value>
+    <value>Okvir ure</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -662,7 +662,7 @@ Shift — podaljšaj 5 min</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Okvir okrog časomera</value>
+    <value>Okvir časomera</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
