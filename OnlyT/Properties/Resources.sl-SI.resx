@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Omogoči </value>
+    <value>Dovoli spreminjanje načina štetja časa</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -352,7 +352,7 @@
     <value>Zapis digitalne ure</value>
   </data>
   <data name="ENABLED" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Omogočeno</value>
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
@@ -392,7 +392,7 @@
     <value>Opombe:</value>
   </data>
   <data name="OPEN_PORT" xml:space="preserve">
-    <value>OPEN PORT</value>
+    <value>Odprta vrata</value>
     <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
   </data>
   <data name="OP_MODE" xml:space="preserve">
@@ -450,7 +450,7 @@
     <value>Jezik</value>
   </data>
   <data name="RESTART_LANGUAGE" xml:space="preserve">
-    <value>Please restart OnlyT after changing the language.</value>
+    <value>Prosimo, da po spremembi jezika ponovno zaženete OnlyT.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
     <value>Decrease 1m
@@ -481,7 +481,7 @@ Shift - Increase 5m</value>
     <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
   </data>
   <data name="ENABLED_API" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Omogočeno</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
     <value>Omogočeno</value>
@@ -578,7 +578,7 @@ Shift - Increase 5m</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
-    <value>Logging level</value>
+    <value>Raven beleženja</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
@@ -594,7 +594,7 @@ Shift - Increase 5m</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
-    <value>Informacija</value>
+    <value>Informacije</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
@@ -741,7 +741,7 @@ Shift - Increase 5m</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Dovoli spreminjanje časa z miškinim koleščkom</value>
+    <value>Dovoli spreminjanje časa s koleščkom</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
