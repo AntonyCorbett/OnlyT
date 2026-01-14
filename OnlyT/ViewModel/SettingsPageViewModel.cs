@@ -1141,6 +1141,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
             CreateLanguageItem("ro-RO"),
             CreateLanguageItem("ru-RU"),
             CreateLanguageItem("sk-SK"),
+            CreateLanguageItem("sl-SI"),
             CreateLanguageItem("sv-SE"),
             CreateLanguageItem("tl-PH"),
             CreateLanguageItem("tr-TR"),
