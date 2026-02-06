@@ -10,6 +10,8 @@
 
         event EventHandler<TimerStartStopEventArgs> TimerStartStopFromApiEvent;
 
+        event EventHandler<TimerDurationChangeEventArgs> TimerDurationChangeFromApiEvent;
+
         int CurrentSecondsElapsed { get; set; }
 
         bool IsRunning { get; }
@@ -27,5 +29,7 @@
         TimerStartStopEventArgs StartTalkTimerFromApi(int talkId);
 
         TimerStartStopEventArgs StopTalkTimerFromApi(int talkId);
+
+        TimerDurationChangeEventArgs ChangeDurationFromApi(int talkId, int deltaSeconds);
     }
 }

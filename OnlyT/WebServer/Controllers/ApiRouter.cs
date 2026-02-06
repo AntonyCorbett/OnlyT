@@ -19,6 +19,7 @@ internal sealed class ApiRouter : BaseApiController
     private readonly ApiThrottler _apiThrottler;
     private readonly IOptionsService _optionsService;
     private readonly IDateTimeService _dateTimeService;
+    private readonly ITalkTimerService _timerService;
 
     private readonly Lazy<TimersApiController> _timersApiController;
     private readonly Lazy<DateTimeApiController> _dateTimeApiController;
@@ -36,6 +37,7 @@ internal sealed class ApiRouter : BaseApiController
         _apiThrottler = apiThrottler;
         _optionsService = optionsService;
         _dateTimeService = dateTimeService;
+        _timerService = timerService;
 
         _timersApiController = new Lazy<TimersApiController>(() => 
             new TimersApiController(timerService, talksService, _optionsService, _apiThrottler));
@@ -87,7 +89,24 @@ internal sealed class ApiRouter : BaseApiController
                 switch (segment)
                 {
                     case "timers":
-                        _timersApiController.Value.Handler(request, response);
+                        if (request.Url?.Segments.Length == 6 &&
+                            request.Url.Segments[5].TrimEnd('/').Equals("duration", StringComparison.OrdinalIgnoreCase) &&
+                            IsMethodPost(request))
+                        {
+                            _apiThrottler.CheckRateLimit(ApiRequestType.TimerDurationChange, request);
+
+                            if (int.TryParse(request.Url.Segments[4].TrimEnd('/'), out var durationTalkId))
+                            {
+                                var body = ReadRequestBody<Models.TimerDurationChangeRequest>(request);
+                                var result = _timerService.ChangeDurationFromApi(durationTalkId, body.DeltaSeconds);
+                                WriteResponse(response, result);
+                            }
+                        }
+                        else
+                        {
+                            _timersApiController.Value.Handler(request, response);
+                        }
+
                         break;
 
                     case "webhooks":

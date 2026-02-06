@@ -108,6 +108,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         _countUp = _optionsService.Options.CountUp;
 
         _timerService.TimerStartStopFromApiEvent += HandleTimerStartStopFromApi;
+        _timerService.TimerDurationChangeFromApiEvent += HandleTimerDurationChangeFromApi;
 
         // commands...
         StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
@@ -1154,6 +1155,45 @@ public class OperatorPageViewModel : ObservableObject, IPage
             }
 
             e.Success = success;
+        });
+    }
+
+    private void HandleTimerDurationChangeFromApi(object? sender, EventArgs.TimerDurationChangeEventArgs e)
+    {
+        Application.Current.Dispatcher.Invoke(() =>
+        {
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Handling timer duration change from API");
+            }
+
+            CheckTalkExists(e.TalkId);
+
+            var talk = _scheduleService.GetTalkScheduleItem(e.TalkId);
+            if (talk?.Editable != true)
+            {
+                throw new WebServerException(WebServerErrorCode.TimerNotEditable);
+            }
+
+            if (IsRunning)
+            {
+                e.Success = false;
+                return;
+            }
+
+            TalkId = e.TalkId;
+
+            var newSecs = Math.Max(TargetSeconds + e.DeltaSeconds, 0);
+            if (newSecs > MaxTimerSecs)
+            {
+                newSecs = MaxTimerSecs;
+            }
+
+            TargetSeconds = newSecs;
+            AdjustTalkTimeForThisSession();
+
+            e.Success = true;
+            e.NewDurationSecs = TargetSeconds;
         });
     }
 
