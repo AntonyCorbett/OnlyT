@@ -64,19 +64,19 @@
         SubscriptionPortNotSpecified,
 
         /// <summary>
+        /// The request failed because of api throttling.
+        /// </summary>
+        Throttled = 1163,
+
+        /// <summary>
         /// Bad request body.
         /// </summary>
-        BadRequestBody = 1160,
+        BadRequestBody,
 
         /// <summary>
         /// Timer is not editable.
         /// </summary>
         TimerNotEditable,
-
-        /// <summary>
-        /// The request failed because of api throttling.
-        /// </summary>
-        Throttled = 1163,
 
         /// <summary>
         /// An unknown error.

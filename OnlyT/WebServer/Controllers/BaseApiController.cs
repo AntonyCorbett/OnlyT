@@ -94,10 +94,20 @@
         {
             try
             {
-                using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
+                using var reader = new StreamReader(request.InputStream, request.ContentEncoding ?? Encoding.UTF8);
                 var json = reader.ReadToEnd();
+
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    throw new WebServerException(WebServerErrorCode.BadRequestBody);
+                }
+
                 var result = JsonConvert.DeserializeObject<T>(json);
                 return result ?? throw new WebServerException(WebServerErrorCode.BadRequestBody);
+            }
+            catch (IOException)
+            {
+                throw new WebServerException(WebServerErrorCode.BadRequestBody);
             }
             catch (JsonException)
             {
