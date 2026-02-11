@@ -66,7 +66,7 @@
         /// <summary>
         /// The request failed because of api throttling.
         /// </summary>
-        Throttled = 1163,
+        Throttled,
 
         /// <summary>
         /// Bad request body.
