@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31019.35
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlyT", "OnlyT\OnlyT.csproj", "{4A02D18A-0956-40FA-A4EC-9CB27A72B455}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -28,6 +28,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0F5CD26-9074-4352-9E20-686CDD60A2B0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpTests", "HttpTests", "{80B19C40-0701-420D-919E-847A3BA09AB5}"
+	ProjectSection(SolutionItems) = preProject
+		api-cors-and-options.http = api-cors-and-options.http
+		api-error-cases.http = api-error-cases.http
+		api-v4-bell.http = api-v4-bell.http
+		api-v4-datetime.http = api-v4-datetime.http
+		api-v4-system.http = api-v4-system.http
+		api-v4-timers.http = api-v4-timers.http
+		api-web-clock-pages.http = api-web-clock-pages.http
+		http-client.env.json = http-client.env.json
 	EndProjectSection
 EndProject
 Global

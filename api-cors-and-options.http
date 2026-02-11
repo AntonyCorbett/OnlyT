@@ -1,0 +1,14 @@
+### Preflight Request - Timers
+OPTIONS {{baseUrl}}/api/{{apiVersion}}/timers
+Origin: http://localhost:3000
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: x-api-code
+
+### Preflight Request - System
+OPTIONS {{baseUrl}}/api/{{apiVersion}}/system
+Origin: http://localhost:3000
+
+### Preflight Request - Bell
+OPTIONS {{baseUrl}}/api/{{apiVersion}}/bell
+Origin: http://external-domain.com
+Access-Control-Request-Method: POST
