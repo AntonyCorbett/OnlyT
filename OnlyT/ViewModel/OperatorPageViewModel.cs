@@ -1119,8 +1119,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
             CheckTalkExists(e.TalkId);
 
-            var success = TalkId == e.TalkId || IsNotRunning;
-                
+            var success = TalkId == e.TalkId || (IsNotRunning && e.Command == StartStopTimerCommands.Start);
+            
             if (success)
             {
                 TalkId = e.TalkId;
