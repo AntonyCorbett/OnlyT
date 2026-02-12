@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpTests", "HttpTests", "{
 		api-v4-bell.http = api-v4-bell.http
 		api-v4-datetime.http = api-v4-datetime.http
 		api-v4-system.http = api-v4-system.http
+		api-v4-timers-duration.http = api-v4-timers-duration.http
 		api-v4-timers.http = api-v4-timers.http
 		api-web-clock-pages.http = api-web-clock-pages.http
 		http-client.env.json = http-client.env.json

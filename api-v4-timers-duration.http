@@ -1,0 +1,21 @@
+### Change Timer Duration
+# POST request to change the timer duration by a delta value (in seconds)
+# Should return 200 with json body containing success flag and the new duration
+POST {{baseUrl}}/api/{{apiVersion}}/timers/1000/duration
+x-api-code: {{apiCode}}
+Content-Type: application/json
+
+{
+  "deltaSeconds": 30
+}
+
+### Change Timer Duration (decrease)
+# Negative deltaSeconds to decrease the duration.
+# Note that you should be prevented from going below 0 secs duration
+POST {{baseUrl}}/api/{{apiVersion}}/timers/1000/duration
+x-api-code: {{apiCode}}
+Content-Type: application/json
+
+{
+  "deltaSeconds": -15
+}

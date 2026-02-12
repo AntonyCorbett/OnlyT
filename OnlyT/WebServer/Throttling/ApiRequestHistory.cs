@@ -65,6 +65,10 @@ internal sealed class ApiRequestHistory
             ApiRequestType.TimerControlStop => 500,
             ApiRequestType.ClockData => 500,
             ApiRequestType.Version => 1000,
+            // allow TimerDurationChange to be used frequently
+            // in case the client needs to reduce the timer duration in
+            // many small increments
+            ApiRequestType.TimerDurationChange => 200,
             ApiRequestType.ClockPage => 1000,
             ApiRequestType.Bell => 1000,
             ApiRequestType.DateTime => 1000,
