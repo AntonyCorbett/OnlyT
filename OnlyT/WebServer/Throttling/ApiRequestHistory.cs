@@ -1,12 +1,16 @@
-﻿namespace OnlyT.WebServer.Throttling;
+﻿// ReSharper disable RedundantSwitchExpressionArms
 
-using System.Collections.Concurrent;
+namespace OnlyT.WebServer.Throttling;
+
 using ErrorHandling;
+using System.Collections.Concurrent;
+using System.Linq;
 
 internal sealed class ApiRequestHistory
 {
     private readonly ConcurrentDictionary<ApiClientIdAndRequestType, long> _clientHistory;
 
+    // ReSharper disable once ConvertConstructorToMemberInitializers
     public ApiRequestHistory()
     {
         _clientHistory = new ConcurrentDictionary<ApiClientIdAndRequestType, long>();
@@ -20,17 +24,35 @@ internal sealed class ApiRequestHistory
         }
 
         var key = new ApiClientIdAndRequestType(clientId, requestType);
-        var found = _clientHistory.TryGetValue(key, out var stamp);
-        _clientHistory.AddOrUpdate(key, currentStamp, (_, _) => currentStamp);
+        var minIntervalMillisecs = GetMinCallingInterval(requestType);
 
-        if (found)
-        {
-            var minIntervalMillisecs = GetMinCallingInterval(requestType);
-
-            if (currentStamp - stamp < minIntervalMillisecs)
+        _clientHistory.AddOrUpdate(
+            key,
+            // Add factory - first request from this client/endpoint
+            addValueFactory: _ => currentStamp,
+            // Update factory - subsequent request
+            updateValueFactory: (_, previousStamp) =>
             {
-                throw new WebServerException(WebServerErrorCode.Throttled);
-            }
+                if (currentStamp - previousStamp < minIntervalMillisecs)
+                {
+                    throw new WebServerException(WebServerErrorCode.Throttled);
+                }
+                return currentStamp;
+            });
+    }
+
+    public void Cleanup(long currentStamp, long maxAgeMillisecs = 300000) // 5 minutes
+    {
+        var threshold = currentStamp - maxAgeMillisecs;
+        var keysToRemove = _clientHistory
+            .Where(kvp => kvp.Value < threshold)
+            .Select(kvp => kvp.Key).ToArray();
+
+#pragma warning disable U2U1203
+        foreach (var key in keysToRemove)
+#pragma warning restore U2U1203
+        {
+            _clientHistory.TryRemove(key, out _);
         }
     }
 

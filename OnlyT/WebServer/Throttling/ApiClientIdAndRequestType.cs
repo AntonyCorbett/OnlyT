@@ -1,17 +1,5 @@
-﻿namespace OnlyT.WebServer.Throttling
-{
-    // ReSharper disable MemberCanBePrivate.Global
-    // ReSharper disable UnusedAutoPropertyAccessor.Global
-    internal readonly struct ApiClientIdAndRequestType
-    {
-        public ApiClientIdAndRequestType(string clientId, ApiRequestType requestType)
-        {
-            ClientId = clientId;
-            RequestType = requestType;
-        }
+﻿namespace OnlyT.WebServer.Throttling;
 
-        public string ClientId { get; }
-
-        public ApiRequestType RequestType { get; }
-    }
-}
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+internal readonly record struct ApiClientIdAndRequestType(string ClientId, ApiRequestType RequestType);

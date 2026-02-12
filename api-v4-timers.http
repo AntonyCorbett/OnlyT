@@ -1,20 +1,23 @@
 ### Get Timer Information
-### Should return 200 with json body containing info for all talks
+# Should return 200 with json body containing info for all talks
 GET {{baseUrl}}/api/{{apiVersion}}/timers
 x-api-code: {{apiCode}}
 
 ### Get Timer Information for talk 1000
-### Should return 200 with json body containing info for all talks
+# Should return 200 with json body containing info for all talks
 GET {{baseUrl}}/api/{{apiVersion}}/timers/1000
 x-api-code: {{apiCode}}
 
 ### Start Timer (POST) for the first talk ("1000")
-### should return 200 with json body showing talk 1000 data
+# should return 200 with json body showing talk 1000 and
+# containing success flag to indicate if the timer was 
+# stopped successfully
 POST {{baseUrl}}/api/{{apiVersion}}/timers/1000
 x-api-code: {{apiCode}}
 
 ### Stop the above Timer (DELETE)
-### Should return 200 with json body
+# Should return 200 with json body containing success flag to indicate if
+# the timer was stopped successfully
 DELETE {{baseUrl}}/api/{{apiVersion}}/timers/1000
 x-api-code: {{apiCode}}
 

@@ -1,8 +1,8 @@
-### CORS (Cross-Origin Resource Sharing) preflight 
-### tests. They verify that your API allows requests 
-### from web clients running on different origins.
-### Should return 200 OK with appropriate CORS headers 
-### if configured correctly.
+# CORS (Cross-Origin Resource Sharing) preflight 
+# tests. They verify that your API allows requests 
+# from web clients running on different origins.
+# Should return 200 OK with appropriate CORS headers 
+# if configured correctly.
 
 ### Preflight Request - Timers
 OPTIONS {{baseUrl}}/api/{{apiVersion}}/timers

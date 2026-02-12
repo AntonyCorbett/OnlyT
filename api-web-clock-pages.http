@@ -1,11 +1,14 @@
 ### Get Clock Web Page
+# Should return 200 and html markup of web clock page
 GET {{baseUrl}}/index/
 Accept: text/html
 
 ### Get Timers Web Page
+# Should return 200 and html markup of web clock timers page
 GET {{baseUrl}}/timers/
 Accept: text/html
 
 ### Get Timer Data (JSON)
+# Should return 200 and xml body containing basic time info
 GET {{baseUrl}}/data/
 Accept: application/json
