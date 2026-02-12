@@ -1,8 +1,10 @@
 ### Get Current DateTime
+### Should return 200 and a json body with the current date and time
 GET {{baseUrl}}/api/{{apiVersion}}/datetime
 x-api-code: {{apiCode}}
 
-### Get DateTime with No Cache
+### Get DateTime with "No Cache" (ensure we don't get a cached response)
+### Should return 200 and a json body with the current date and time
 GET {{baseUrl}}/api/{{apiVersion}}/datetime
 x-api-code: {{apiCode}}
 Cache-Control: no-cache

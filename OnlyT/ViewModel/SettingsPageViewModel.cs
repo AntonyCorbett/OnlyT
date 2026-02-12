@@ -1052,7 +1052,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
 
     private void TestBell()
     {
-        _bellService.Play(_optionsService.Options.BellVolumePercent);
+        _bellService.Play(true, _optionsService.Options.BellVolumePercent);
     }
 
     private static AutoMeetingTime[] GetAutoMeetingTimes()

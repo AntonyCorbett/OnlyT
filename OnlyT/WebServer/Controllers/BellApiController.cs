@@ -35,7 +35,7 @@ internal sealed class BellApiController : BaseApiController
         if (!_bellService.IsPlaying)
         {
             responseData.Success = true;
-            _bellService.Play(_optionsService.Options.BellVolumePercent);
+            _bellService.Play(_optionsService.Options.IsBellEnabled, _optionsService.Options.BellVolumePercent);
         }
         else
         {

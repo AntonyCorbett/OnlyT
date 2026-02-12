@@ -1,11 +1,14 @@
 ### Missing API Code
+### Should be OK since GET requests ignore the API code
 GET {{baseUrl}}/api/{{apiVersion}}/timers
 
 ### Invalid API Code
+### Should be OK since GET requests ignore the API code
 GET {{baseUrl}}/api/{{apiVersion}}/timers
 x-api-code: {{badApiCode}}
 
 ### Invalid API Version
+### Should return 400 Bad Request with error code 1138 "Api version not supported""
 GET {{baseUrl}}/api/v99/timers
 x-api-code: {{apiCode}}
 
@@ -14,17 +17,25 @@ GET {{baseUrl}}/api/{{apiVersion}}/invalid
 x-api-code: {{apiCode}}
 
 ### Unsupported HTTP Method
+### Should return 405 Method not allowed with error code 1135 "Wrong http method used"
 PATCH {{baseUrl}}/api/{{apiVersion}}/timers
 x-api-code: {{apiCode}}
 
-### Malformed URI (Too Few Segments)
-GET {{baseUrl}}/api
+### Malformed URI (Too Many Segments)
+### Should return 400 Bad Request with error code 1130 "Malformed URI"
+GET {{baseUrl}}/api/v4/timers/ABC/123/ABC
 
-### Malformed JSON Payload
+### Malformed URI Posting to timers with too few segments
+### Should return 400 Bas Request with error code 1130 "Malformed URI"
 POST {{baseUrl}}/api/{{apiVersion}}/timers
 x-api-code: {{apiCode}}
-Content-Type: application/json
 
-{
-  invalid json
-}
+### Try to start a timer with a bad Talk ID
+### Should return 404 Not Found with error code 1129 "Timer does not exist"
+POST {{baseUrl}}/api/{{apiVersion}}/timers/1234
+x-api-code: {{apiCode}}
+
+### Try to stop a timer with a bad Talk ID
+### Should return 404 Not Found with error code 1129 "Timer does not exist"
+DELETE {{baseUrl}}/api/{{apiVersion}}/timers/1234
+x-api-code: {{apiCode}}

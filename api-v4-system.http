@@ -6,7 +6,9 @@ GET {{baseUrl}}/api/{{apiVersion}}/system
 Cache-Control: no-cache
 
 ### Preflight Request
+### Should return 200 with CORS headers
 OPTIONS {{baseUrl}}/api/{{apiVersion}}/system
 
 ### Check Supported API Versions
+### Should return 200 with lowVersion and highVersion in body
 GET {{baseUrl}}/api/

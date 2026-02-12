@@ -732,9 +732,11 @@ public class OperatorPageViewModel : ObservableObject, IPage
             IsOvertime = true;
 
             var talk = GetCurrentTalk();
-            if (talk != null && _optionsService.Options.IsBellEnabled && talk.BellApplicable && talk.AutoBell)
+            if (talk != null && talk.BellApplicable && talk.AutoBell)
             {
-                _bellService.Play(_optionsService.Options.BellVolumePercent);
+                _bellService.Play(
+                    _optionsService.Options.IsBellEnabled,
+                    _optionsService.Options.BellVolumePercent);
             }
         }
     }
@@ -1091,7 +1093,9 @@ public class OperatorPageViewModel : ObservableObject, IPage
             if (_isOvertime)
             {
                 // manually sound the bell
-                _bellService.Play(_optionsService.Options.BellVolumePercent);
+                _bellService.Play(
+                    _optionsService.Options.IsBellEnabled,
+                    _optionsService.Options.BellVolumePercent);
             }
             else
             {

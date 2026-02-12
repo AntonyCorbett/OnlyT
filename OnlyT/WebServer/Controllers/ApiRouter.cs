@@ -14,6 +14,9 @@ using Throttling;
 internal sealed class ApiRouter : BaseApiController
 {
     private const int OldestSupportedApiVer = 1;
+
+    // Only increase this version number if we are making breaking changes to existing API endpoints.
+    // Adding new endpoints does not require a version increase.
     private const int CurrentApiVer = 4;
 
     private readonly ApiThrottler _apiThrottler;
@@ -74,7 +77,10 @@ internal sealed class ApiRouter : BaseApiController
                 var apiVerStr = request.Url.Segments[2].TrimEnd('/').ToLower();
                 var segment = request.Url.Segments[3].TrimEnd('/').ToLower();
 
-                // may use this at some point
+                // may use this at some point.
+                // Currently, the API version is validated but discarded — it's not used for routing decisions.
+                // All requests to v1, v2, v3, or v4 currently behave identically. The version in the URI is
+                // essentially documentation at this point.
                 _ = GetApiVerFromStr(apiVerStr);
 
                 if (!segment.Equals("system"))
@@ -135,13 +141,20 @@ internal sealed class ApiRouter : BaseApiController
     {
         response.StatusCode = (int)HttpStatusCode.OK;
 
+        // Always add CORS headers for OPTIONS requests, regardless of whether the client sends the Access-Control-Request-Headers:
+        response.AddHeader("Access-Control-Allow-Origin", "*");
+        response.AddHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+
         var corsHeaders = request.Headers["Access-Control-Request-Headers"];
 
         if (corsHeaders != null)
         {
             response.AddHeader("Access-Control-Allow-Headers", corsHeaders);
-            response.AddHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-            response.AddHeader("Access-Control-Allow-Origin", "*");
+        }
+        else
+        {
+            // Default headers if not specified
+            response.AddHeader("Access-Control-Allow-Headers", "Content-Type, x-api-code");
         }
     }
 

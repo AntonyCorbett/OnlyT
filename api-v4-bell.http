@@ -1,8 +1,16 @@
+### Tests the Bell API endpoint for ringing the bell. Note that it should be enabled in
+### the OnlyT Options if you need to hear it! If it's not enabled, the API will still 
+### be successful.
+
 ### Ring Bell
+### Should return 200 OK with a JSON body containing "success": true
 POST {{baseUrl}}/api/{{apiVersion}}/bell
 x-api-code: {{apiCode}}
 
 ### Ring Bell with Cache Control
+### Should return 200 OK with a JSON body containing "success": true
+### Make sure we still ring the bell even if the client is asking 
+### not to cache the response.
 POST {{baseUrl}}/api/{{apiVersion}}/bell
 x-api-code: {{apiCode}}
 Cache-Control: no-cache

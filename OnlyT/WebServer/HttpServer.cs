@@ -7,7 +7,7 @@ using ErrorHandling;
 using EventArgs;
 using Models;
 using OnlyT.Common.Services.DateTime;
-using OnlyT.Services.CommandLine;
+using Services.CommandLine;
 using Serilog;
 using Services.Bell;
 using Services.Options;
@@ -164,37 +164,33 @@ internal sealed class HttpServer : IHttpServer, IDisposable
                 var context = _listener.EndGetContext(result);
 
                 // Obtain a response object.
-                using (response = context.Response)
+                response = context.Response;
+                
+                // Construct a response. 
+                if (context.Request.Url?.Segments.Length > 1)
                 {
-                    // Construct a response. 
-                    if (context.Request.Url?.Segments.Length > 1)
+                    // segments: "/" ...
+                    if (_listener.IsListening)
                     {
-                        // segments: "/" ...
-                        if (_listener.IsListening)
+                        var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+
+                        switch (segment)
                         {
-                            var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+                            case "data":
+                                HandleRequestForClockWebPageTimerData(context.Request, response);
+                                break;
 
-                            switch (segment)
-                            {
-                                case "data":
-                                    HandleRequestForClockWebPageTimerData(context.Request, response);
-                                    break;
+                            case "index":
+                                HandleRequestForClockWebPage(context.Request, response);
+                                break;
 
-                                case "index":
-                                    HandleRequestForClockWebPage(context.Request, response);
-                                    break;
+                            case "timers":
+                                HandleRequestForTimersWebPage(context.Request, response);
+                                break;
 
-                                case "timers":
-                                    HandleRequestForTimersWebPage(context.Request, response);
-                                    break;
-
-                                case "api":
-                                    HandleApiRequest(context.Request, response);
-                                    break;
-
-                                default:
-                                    break;
-                            }
+                            case "api":
+                                HandleApiRequest(context.Request, response);
+                                break;
                         }
                     }
                 }
@@ -214,6 +210,10 @@ internal sealed class HttpServer : IHttpServer, IDisposable
             {
                 _dedupLogger.LogErrorDedup(ex, "Web server error");
                 WriteApiErrorResponse(response, WebServerErrorCode.UnknownError);                   
+            }
+            finally
+            {
+                (response as IDisposable)?.Dispose();
             }
         }
     }

@@ -17,8 +17,13 @@ public class BellService : IBellService
 
     public bool IsPlaying => _bell.IsPlaying;
 
-    public void Play(int volumePercent)
+    public void Play(bool isEnabled, int volumePercent)
     {
+        if (!isEnabled)
+        {
+            return;
+        }
+
         Task.Run(() => _bell.Play(volumePercent));
     }
 }
