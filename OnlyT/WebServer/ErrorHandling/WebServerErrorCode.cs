@@ -69,6 +69,16 @@
         Throttled,
 
         /// <summary>
+        /// Bad request body.
+        /// </summary>
+        BadRequestBody,
+
+        /// <summary>
+        /// Timer is not editable.
+        /// </summary>
+        TimerNotEditable,
+
+        /// <summary>
         /// An unknown error.
         /// </summary>
         UnknownError = 5128

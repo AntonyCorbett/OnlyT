@@ -70,4 +70,7 @@ internal sealed class TimerInfo
 
     [JsonProperty(PropertyName = "closingSecs")]
     public int ClosingSecs { get; set; }
+
+    [JsonProperty(PropertyName = "editable")]
+    public bool Editable { get; set; }
 }
