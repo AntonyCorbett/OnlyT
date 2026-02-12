@@ -1,0 +1,11 @@
+### Get Clock Web Page
+GET {{baseUrl}}/index/
+Accept: text/html
+
+### Get Timers Web Page
+GET {{baseUrl}}/timers/
+Accept: text/html
+
+### Get Timer Data (JSON)
+GET {{baseUrl}}/data/
+Accept: application/json

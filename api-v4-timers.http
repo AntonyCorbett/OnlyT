@@ -1,0 +1,20 @@
+### Get Timer Information
+GET {{baseUrl}}/api/{{apiVersion}}/timers
+x-api-code: {{apiCode}}
+
+### Start Timer (POST)
+POST {{baseUrl}}/api/{{apiVersion}}/timers
+x-api-code: {{apiCode}}
+Content-Type: application/json
+
+{
+  "talkId": 1000
+}
+
+### Stop Timer (DELETE)
+DELETE {{baseUrl}}/api/{{apiVersion}}/timers
+x-api-code: {{apiCode}}
+
+### Get Timer - Paginated or Filtered
+GET {{baseUrl}}/api/{{apiVersion}}/timers?format=json
+x-api-code: {{apiCode}}

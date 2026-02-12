@@ -1,0 +1,30 @@
+### Missing API Code
+GET {{baseUrl}}/api/{{apiVersion}}/timers
+
+### Invalid API Code
+GET {{baseUrl}}/api/{{apiVersion}}/timers
+x-api-code: {{badApiCode}}
+
+### Invalid API Version
+GET {{baseUrl}}/api/v99/timers
+x-api-code: {{apiCode}}
+
+### Invalid Endpoint
+GET {{baseUrl}}/api/{{apiVersion}}/invalid
+x-api-code: {{apiCode}}
+
+### Unsupported HTTP Method
+PATCH {{baseUrl}}/api/{{apiVersion}}/timers
+x-api-code: {{apiCode}}
+
+### Malformed URI (Too Few Segments)
+GET {{baseUrl}}/api
+
+### Malformed JSON Payload
+POST {{baseUrl}}/api/{{apiVersion}}/timers
+x-api-code: {{apiCode}}
+Content-Type: application/json
+
+{
+  invalid json
+}

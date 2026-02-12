@@ -1,0 +1,8 @@
+### Get Current DateTime
+GET {{baseUrl}}/api/{{apiVersion}}/datetime
+x-api-code: {{apiCode}}
+
+### Get DateTime with No Cache
+GET {{baseUrl}}/api/{{apiVersion}}/datetime
+x-api-code: {{apiCode}}
+Cache-Control: no-cache

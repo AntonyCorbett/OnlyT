@@ -1,0 +1,8 @@
+### Ring Bell
+POST {{baseUrl}}/api/{{apiVersion}}/bell
+x-api-code: {{apiCode}}
+
+### Ring Bell with Cache Control
+POST {{baseUrl}}/api/{{apiVersion}}/bell
+x-api-code: {{apiCode}}
+Cache-Control: no-cache

@@ -1,0 +1,12 @@
+### Get System Info (No API Code Required)
+GET {{baseUrl}}/api/{{apiVersion}}/system
+
+### Get System Info with Cache Control
+GET {{baseUrl}}/api/{{apiVersion}}/system
+Cache-Control: no-cache
+
+### Preflight Request
+OPTIONS {{baseUrl}}/api/{{apiVersion}}/system
+
+### Check Supported API Versions
+GET {{baseUrl}}/api/
