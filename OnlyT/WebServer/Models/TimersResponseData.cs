@@ -66,7 +66,8 @@ internal sealed class TimersResponseData
             UsesBell = talk.BellApplicable,
             CompletedTimeSecs = talk.CompletedTimeSecs,
             CountUp = talk.CountUp ?? countUpByDefault,
-            ClosingSecs = talk.ClosingSecs
+            ClosingSecs = talk.ClosingSecs,
+            Editable = talk.Editable
         };
     }
 }

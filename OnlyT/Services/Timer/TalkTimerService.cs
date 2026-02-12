@@ -32,6 +32,8 @@
 
         public event EventHandler<TimerStartStopEventArgs>? TimerStartStopFromApiEvent;
 
+        public event EventHandler<TimerDurationChangeEventArgs>? TimerDurationChangeFromApiEvent;
+
         /// <summary>
         /// Gets a value indicating whether the timer is running
         /// </summary>
@@ -175,9 +177,26 @@
             CurrentTimeElapsed = _stopWatch.Elapsed;
         }
 
+        public TimerDurationChangeEventArgs ChangeDurationFromApi(int talkId, int deltaSeconds)
+        {
+            var result = new TimerDurationChangeEventArgs
+            {
+                TalkId = talkId,
+                DeltaSeconds = deltaSeconds
+            };
+
+            OnTimerDurationChangeFromApiEvent(result);
+            return result;
+        }
+
         private void OnTimerStartStopFromApiEvent(TimerStartStopEventArgs e)
         {
             TimerStartStopFromApiEvent?.Invoke(this, e);
+        }
+
+        private void OnTimerDurationChangeFromApiEvent(TimerDurationChangeEventArgs e)
+        {
+            TimerDurationChangeFromApiEvent?.Invoke(this, e);
         }
     }
 }

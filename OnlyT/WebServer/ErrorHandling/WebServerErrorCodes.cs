@@ -20,6 +20,8 @@
                 WebServerErrorCode.ApiNotEnabled => "API is not enabled",
                 WebServerErrorCode.SubscriptionAddressNotFound => "Subscription address not found",
                 WebServerErrorCode.SubscriptionPortNotSpecified => "Subscription port not found",
+                WebServerErrorCode.BadRequestBody => "Invalid request body",
+                WebServerErrorCode.TimerNotEditable => "Timer is not editable",
                 WebServerErrorCode.Throttled => "Client throttled",
                 // ReSharper disable once RedundantCaseLabel
                 WebServerErrorCode.UnknownError => "Unknown error",
@@ -39,6 +41,8 @@
                 WebServerErrorCode.NotAvailableInApiVersion => HttpStatusCode.BadRequest,
                 WebServerErrorCode.SubscriptionAddressNotFound => HttpStatusCode.BadRequest,
                 WebServerErrorCode.SubscriptionPortNotSpecified => HttpStatusCode.BadRequest,
+                WebServerErrorCode.BadRequestBody => HttpStatusCode.BadRequest,
+                WebServerErrorCode.TimerNotEditable => HttpStatusCode.Forbidden,
 
                 // should be 429 but not yet available in HttpStatusCode
                 WebServerErrorCode.Throttled => HttpStatusCode.ServiceUnavailable,

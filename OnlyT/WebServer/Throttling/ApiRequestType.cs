@@ -50,6 +50,11 @@
         /// <summary>
         /// System information request.
         /// </summary>
-        System
+        System,
+
+        /// <summary>
+        /// Timer duration change request.
+        /// </summary>
+        TimerDurationChange
     }
 }

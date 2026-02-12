@@ -3,6 +3,7 @@
 namespace OnlyT.WebServer.Controllers;
 
 using System.Net;
+using ErrorHandling;
 using Models;
 using Services.Options;
 using Services.TalkSchedule;
@@ -30,6 +31,15 @@ internal sealed class TimersApiController : BaseApiController
 
     public void Handler(HttpListenerRequest request, HttpListenerResponse response)
     {
+        // duration sub-path: /api/v4/timers/{talkId}/duration
+        if (request.Url?.Segments.Length == 6 &&
+            request.Url.Segments[5].TrimEnd('/').Equals("duration", StringComparison.OrdinalIgnoreCase))
+        {
+            CheckMethodPost(request);
+            HandlePostTimerDurationApi(request, response);
+            return;
+        }
+
         CheckMethodGetPostOrDelete(request);
 
         if (IsMethodGet(request))
@@ -105,6 +115,24 @@ internal sealed class TimersApiController : BaseApiController
     private TimersResponseData GetTimerInfo(int talkId)
     {
         return new TimersResponseData(_talkScheduleService, _timerService, _optionsService, talkId);
+    }
+
+    private void HandlePostTimerDurationApi(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        _apiThrottler.CheckRateLimit(ApiRequestType.TimerDurationChange, request);
+
+        if (int.TryParse(request.Url?.Segments[4].TrimEnd('/'), out var talkId))
+        {
+            var body = ReadRequestBody<TimerDurationChangeRequest>(request);
+
+            if (body.DeltaSeconds == null)
+            {
+                throw new WebServerException(WebServerErrorCode.BadRequestBody);
+            }
+
+            var result = _timerService.ChangeDurationFromApi(talkId, body.DeltaSeconds.Value);
+            WriteResponse(response, result);
+        }
     }
 
     private TimersResponseData GetTimersInfo()
