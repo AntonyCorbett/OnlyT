@@ -784,6 +784,7 @@
         {
             if (QueryDateTimeEvent == null)
             {
+                // fallback
                 e.DateTime = DateTime.Now;
             }
 

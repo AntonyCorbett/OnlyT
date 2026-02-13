@@ -546,6 +546,7 @@
         {
             if (QueryUtcDateTimeEvent == null)
             {
+                // fallback
                 e.UtcDateTime = DateTime.UtcNow;
             }
 

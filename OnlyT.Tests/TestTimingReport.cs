@@ -55,6 +55,7 @@ public class TestTimingReport
             lastMtgTimes, 
             historicalTimes,
             queryWeekendService,
+            dateTimeService,
             false,
             Path.GetTempPath());
 

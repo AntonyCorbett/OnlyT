@@ -25,8 +25,9 @@ internal sealed class TimesFeed
 
     public Meeting? GetMeetingDataForToday(IDateTimeService dateTimeService)
     {
-        LoadFile(dateTimeService.Now().Date);
-        return GetMeetingDataForTodayInternal(_meetingData);
+        var today = dateTimeService.Now().Date;
+        LoadFile(today);
+        return GetMeetingDataForTodayInternal(_meetingData, today);
     }
 
     public static Meeting GetSampleMidweekMeetingDataForTesting(DateTime theDate)
@@ -103,7 +104,7 @@ internal sealed class TimesFeed
             try
             {
                 result = JsonConvert.DeserializeObject<List<Meeting>>(File.ReadAllText(_localFeedFile));
-                if (result == null || result.Count == 0 || GetMeetingDataForTodayInternal(result) == null)
+                if (result == null || result.Count == 0 || GetMeetingDataForTodayInternal(result, today) == null)
                 {
                     needRefresh = true;
                 }
@@ -135,9 +136,9 @@ internal sealed class TimesFeed
         return result;
     }
 
-    private static Meeting? GetMeetingDataForTodayInternal(List<Meeting>? meetingData)
+    private static Meeting? GetMeetingDataForTodayInternal(List<Meeting>? meetingData, DateTime today)
     {
-        var monday = DateUtils.GetMondayOfThisWeek();
+        var monday = DateUtils.GetMondayOfWeek(today);
         return meetingData?.FirstOrDefault(x => x.Date.Date.Equals(monday));
     }
 }

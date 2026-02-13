@@ -29,6 +29,7 @@ namespace OnlyT.Report.Pdf
         private readonly HistoricalMeetingTimes? _historicalASummary;
 
         private readonly IQueryWeekendService _queryWeekendService;
+        private readonly IDateTimeService _dateTimeService;
         private readonly bool _weekendIncludesFriday;
 
         private XFont? _titleFont;
@@ -43,11 +44,12 @@ namespace OnlyT.Report.Pdf
         private double _currentY;
         private double _rightX;
         private double _rightXIndent;
-        
+
         public PdfTimingReport(
             MeetingTimes data, 
             HistoricalMeetingTimes? historicalASummary, 
             IQueryWeekendService queryWeekendService,
+            IDateTimeService dateTimeService,
             bool weekendIncludesFriday,
             string outputFolder)
         {
@@ -56,6 +58,7 @@ namespace OnlyT.Report.Pdf
             _queryWeekendService = queryWeekendService;
             _weekendIncludesFriday = weekendIncludesFriday;
             _outputFolder = outputFolder;
+            _dateTimeService = dateTimeService;
         }
 
         private enum ChartMeetingType
@@ -602,7 +605,7 @@ namespace OnlyT.Report.Pdf
 
         private string GetOutputFileName()
         {
-            var today = DateTime.Today;
+            var today = _dateTimeService.Now().Date;
             var result = Path.Combine(_outputFolder, $"{today.Year}-{today.Month:D2}-{today.Day:D2}.pdf");
 
             var counter = 1;

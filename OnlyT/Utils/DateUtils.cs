@@ -4,11 +4,6 @@
 
     public static class DateUtils
     {
-        public static DateTime GetMondayOfThisWeek()
-        {
-            return GetMondayOfWeek(DateTime.Today);
-        }
-
         public static DateTime GetMondayOfWeek(DateTime theDate)
         {
             var daysToDeduct = (7 + (theDate.DayOfWeek - DayOfWeek.Monday)) % 7;

@@ -54,6 +54,7 @@ namespace OnlyT.Services.Report
                             data, 
                             historicalTimes,
                             queryWeekendService,
+                            dateTimeService,
                             weekendIncludesFriday,
                             yearFolder);
 
