@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using OnlyT.EventTracking;
 using OnlyT.AutoUpdates;
 using OnlyT.Common.Services.DateTime;
+using OnlyT.EventTracking;
 using OnlyT.Services.Bell;
 using OnlyT.Services.CommandLine;
 using OnlyT.Services.CountdownTimer;
@@ -16,6 +16,7 @@ using OnlyT.Services.Report;
 using OnlyT.Services.Snackbar;
 using OnlyT.Services.TalkSchedule;
 using OnlyT.Services.Timer;
+using OnlyT.Services.TimeValidationService;
 using OnlyT.Utils;
 using OnlyT.ViewModel;
 using OnlyT.WebServer;
@@ -25,6 +26,7 @@ using Serilog.Events;
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -39,6 +41,7 @@ namespace OnlyT
         private readonly string _appString = "OnlyTMeetingTimer";
         private Mutex? _appMutex;
         private static readonly Lazy<CommandLineService> CommandLineServiceInstance = new();
+        private DateTime? _validatedDateTime;
 
         public App()
         {
@@ -57,8 +60,12 @@ namespace OnlyT
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ConfigureServices();
+            // Validate system time BEFORE configuring services
+            var timeValidationService = new TimeValidationService();
+            _validatedDateTime = timeValidationService.GetValidatedTime();
 
+            ConfigureServices();
+            
             if (AnotherInstanceRunning())
             {
                 Shutdown();
@@ -128,7 +135,8 @@ namespace OnlyT
         private IDateTimeService DateTimeServiceFactory(IServiceProvider arg)
 #pragma warning restore U2U1011 // Return types should be specific
         {
-            return new DateTimeService(CommandLineServiceInstance.Value.DateTimeOnLaunch);
+            var dateTimeToUse = CommandLineServiceInstance.Value.DateTimeOnLaunch ?? _validatedDateTime ?? DateTime.Now;
+            return new DateTimeService(dateTimeToUse);
         }
 
         private static void ConfigureLogger()
