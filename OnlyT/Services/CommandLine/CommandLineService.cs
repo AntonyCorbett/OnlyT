@@ -51,6 +51,15 @@ internal sealed class CommandLineService : ICommandLineService
                 {
                     DateTimeOnLaunch = result;
                 }
+                else if (DateTime.TryParseExact(
+                             s,
+                             "yyyy-MM-dd:HH:mm:s",
+                             CultureInfo.InvariantCulture,
+                             DateTimeStyles.None,
+                             out var result2))
+                {
+                    DateTimeOnLaunch = result2;
+                }
             });
 
         p.Setup<bool>("covisit")
