@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using Serilog;
 
 namespace OnlyT.Services.TimeValidationService;
 
 /// <summary>
-/// Service to validate system time against an NTP time server.
+/// Service to validate system time against an NTP server.
 /// </summary>
 
-internal sealed class TimeValidationService : ITimeValidationService
+internal static class TimeValidationService
 {
     private const string NtpServer = "pool.ntp.org";
     private const int NtpPort = 123;
-    private const int Timeout = 5000; // 5 seconds
-    private const long MaxTimeDifference = 3600000; // 1 hour in milliseconds
+    private const int Timeout = 3000; // 3 seconds
+    private const long MaxTimeDifferenceMs = 15000; // 15 secs
 
     /// <summary>
     /// Validates system time against NTP server. Returns corrected time if difference exceeds threshold,
     /// otherwise returns null to use system time.
     /// </summary>
-    public DateTime? GetValidatedTime()
+    public static DateTime? GetValidatedTime()
     {
         try
         {
@@ -31,10 +30,11 @@ internal sealed class TimeValidationService : ITimeValidationService
                 return null;
             }
 
+            // NB - don't use the DateTimeService below!
             var systemTime = DateTime.UtcNow;
             var difference = Math.Abs((ntpTime.Value - systemTime).TotalMilliseconds);
 
-            if (difference > MaxTimeDifference)
+            if (difference > MaxTimeDifferenceMs)
             {
                 Log.Logger.Warning("System time differs from NTP by {DifferenceMs}ms. Using NTP time instead.", difference);
                 return ntpTime.Value.ToLocalTime();

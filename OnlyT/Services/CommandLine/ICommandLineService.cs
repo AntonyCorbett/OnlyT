@@ -12,6 +12,8 @@ public interface ICommandLineService
 
     bool Automate { get; set; }
 
+    bool Ntp { get; set; }
+
     int TimerMonitorIndex { get; set; }
 
     int CountdownMonitorIndex { get; set; }

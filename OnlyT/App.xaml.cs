@@ -26,7 +26,6 @@ using Serilog.Events;
 using System;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -41,8 +40,7 @@ namespace OnlyT
         private readonly string _appString = "OnlyTMeetingTimer";
         private Mutex? _appMutex;
         private static readonly Lazy<CommandLineService> CommandLineServiceInstance = new();
-        private DateTime? _validatedDateTime;
-
+        
         public App()
         {
             InitSentry(); // Sentry docs require it to be in the ctor rather than in OnStartup
@@ -60,10 +58,6 @@ namespace OnlyT
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            // Validate system time BEFORE configuring services
-            var timeValidationService = new TimeValidationService();
-            _validatedDateTime = timeValidationService.GetValidatedTime();
-
             ConfigureServices();
             
             if (AnotherInstanceRunning())
@@ -135,7 +129,11 @@ namespace OnlyT
         private IDateTimeService DateTimeServiceFactory(IServiceProvider arg)
 #pragma warning restore U2U1011 // Return types should be specific
         {
-            var dateTimeToUse = CommandLineServiceInstance.Value.DateTimeOnLaunch ?? _validatedDateTime ?? DateTime.Now;
+            DateTime dateTimeToUse =
+                CommandLineServiceInstance.Value.DateTimeOnLaunch ??
+                (CommandLineServiceInstance.Value.Ntp ? TimeValidationService.GetValidatedTime() : null) ??
+                DateTime.Now;
+            
             return new DateTimeService(dateTimeToUse);
         }
 
