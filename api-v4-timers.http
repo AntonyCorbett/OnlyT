@@ -1,3 +1,5 @@
+# Use TalkId=7000 for PublicTalk or 1000 for OpeningComments
+
 ### Get Timer Information
 # Should return 200 with json body containing info for all talks
 GET {{baseUrl}}/api/{{apiVersion}}/timers

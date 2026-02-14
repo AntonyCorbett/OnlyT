@@ -1,3 +1,5 @@
+# Use TalkId=7000 for PublicTalk or 1000 for OpeningComments
+
 ### Change Timer Duration
 # POST request to change the timer duration by a delta value (in seconds)
 # Should return 200 with json body containing success flag and the new duration
