@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpTests", "HttpTests", "{
 		http-client.env.json = http-client.env.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlyT.WebClient", "OnlyT.WebClient\OnlyT.WebClient.csproj", "{952935C8-29A4-4961-86F5-A29FDCB54F66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,18 @@ Global
 		{4C312217-BCB6-4CAF-8191-F9583866F4E3}.Release|x64.Build.0 = Release|Any CPU
 		{4C312217-BCB6-4CAF-8191-F9583866F4E3}.Release|x86.ActiveCfg = Release|x86
 		{4C312217-BCB6-4CAF-8191-F9583866F4E3}.Release|x86.Build.0 = Release|x86
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Debug|x64.Build.0 = Debug|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Debug|x86.Build.0 = Debug|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Release|x64.ActiveCfg = Release|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Release|x64.Build.0 = Release|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Release|x86.ActiveCfg = Release|Any CPU
+		{952935C8-29A4-4961-86F5-A29FDCB54F66}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,7 +14,7 @@ x-api-code: {{apiCode}}
 # should return 200 with json body showing talk 1000 and
 # containing success flag to indicate if the timer was 
 # stopped successfully
-POST {{baseUrl}}/api/{{apiVersion}}/timers/1000
+POST {{baseUrl}}/api/{{apiVersion}}/timers/7000
 x-api-code: {{apiCode}}
 
 ### Stop the above Timer (DELETE)
