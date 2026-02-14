@@ -769,9 +769,19 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private void AdjustTalkTimeForThisSession()
     {
         var talk = GetCurrentTalk();
-        if (talk?.Editable == true)
+        if (talk == null)
         {
-            var modifiedDuration = TimeSpan.FromSeconds(TargetSeconds);
+            return;
+        }
+
+        AdjustTalkTime(talk, TargetSeconds, IsManualMode);
+    }
+
+    private void AdjustTalkTime(TalkScheduleItem talk, int targetSecs, bool manualMode)
+    {
+        if (talk.Editable == true)
+        {
+            var modifiedDuration = TimeSpan.FromSeconds(targetSecs);
 
             if (Log.IsEnabled(LogEventLevel.Debug))
             {
@@ -781,7 +791,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                     modifiedDuration);
             }
 
-            if (IsManualMode)
+            if (manualMode)
             {
                 talk.OriginalDuration = modifiedDuration;
             }
@@ -789,8 +799,14 @@ public class OperatorPageViewModel : ObservableObject, IPage
             {
                 talk.ModifiedDuration = modifiedDuration;
             }
-                
-            SetDurationStringAttributes(talk);
+
+            var isCurrentTalk = TalkId == talk.Id;
+
+            if (isCurrentTalk) 
+            {
+                TargetSeconds = targetSecs;
+                SetDurationStringAttributes(talk);
+            }
 
             _scheduleService.SetModifiedDuration(talk.Id, talk.ModifiedDuration);
         }
@@ -1179,25 +1195,23 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 throw new WebServerException(WebServerErrorCode.TimerNotEditable);
             }
 
-            if (IsRunning)
+            if (IsRunning && TalkId == e.TalkId)
             {
+                // can't modify the duration of currently running talk
                 e.Success = false;
                 return;
             }
-
-            TalkId = e.TalkId;
-
-            var newSecs = Math.Max(TargetSeconds + e.DeltaSeconds, 0);
+            
+            var newSecs = Math.Max(talk.GetPlannedDurationSeconds() + e.DeltaSeconds, 0);
             if (newSecs > MaxTimerSecs)
             {
                 newSecs = MaxTimerSecs;
             }
 
-            TargetSeconds = newSecs;
-            AdjustTalkTimeForThisSession();
+            AdjustTalkTime(talk, newSecs, IsManualMode);
 
             e.Success = true;
-            e.NewDurationSecs = TargetSeconds;
+            e.NewDurationSecs = newSecs;
         });
     }
 
