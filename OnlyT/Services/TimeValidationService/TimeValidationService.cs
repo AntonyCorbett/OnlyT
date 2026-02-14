@@ -14,7 +14,7 @@ internal static class TimeValidationService
     private const string NtpServer = "pool.ntp.org";
     private const int NtpPort = 123;
     private const int Timeout = 3000; // 3 seconds
-    private const long MaxTimeDifferenceMs = 15000; // 15 secs
+    private const long MaxTimeDifferenceMs = 10000; // 10 secs
 
     /// <summary>
     /// Validates system time against NTP server. Returns corrected time if difference exceeds threshold,
