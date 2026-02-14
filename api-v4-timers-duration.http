@@ -14,7 +14,7 @@ Content-Type: application/json
 ### Change Timer Duration (decrease)
 # Negative deltaSeconds to decrease the duration.
 # Note that you should be prevented from going below 0 secs duration
-POST {{baseUrl}}/api/{{apiVersion}}/timers/8000/duration
+POST {{baseUrl}}/api/{{apiVersion}}/timers/1000/duration
 x-api-code: {{apiCode}}
 Content-Type: application/json
 
