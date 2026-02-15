@@ -147,7 +147,7 @@ function createTimerCard(timer, runningTimerId, isAnyRunning) {
                 <span class="value">${duration}</span>
             </div>
             <div class="timer-info">
-                <span class="label">Completed:</span>
+                <span class="label">Timer:</span>
                 <span class="timer-elapsed" class="value">${elapsed}</span>
             </div>
         </div>
@@ -212,12 +212,11 @@ function updateElapsedTimes() {
 
     const timerCards = document.querySelectorAll('.timer-card');
     timerCards.forEach(card => {
-        const isRunning = card.dataset.isRunning === 'true';
-        const baseElapsed = parseInt(card.dataset.completedTimeSecs || 0);
-        const currentElapsed = isRunning ? baseElapsed + elapsedSecs : baseElapsed;
-
         const elapsedSpan = card.querySelector('.timer-elapsed');
         if (elapsedSpan) {
+            const isRunning = card.dataset.isRunning === 'true';
+            const currentElapsed = isRunning ? elapsedSecs : 0;
+
             elapsedSpan.textContent = formatDuration(currentElapsed);
         }
     });
@@ -247,9 +246,18 @@ function hideLoading() {
 }
 
 // Event handlers
-// Event handlers
 async function handleStartTimer(talkId) {
+    const timerCard = document.getElementById(`timer-${talkId}`);
+    if (!timerCard) return;
+
+    // Disable both buttons immediately to prevent double-clicks
+    const buttons = timerCard.querySelectorAll('.timer-controls button');
+    buttons.forEach(btn => btn.disabled = true);
+
     try {
+        // Wait 1500ms before making the API call to let any pending operations settle
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
         const result = await startTimer(talkId);
         console.log('Start timer response:', result);
 
@@ -286,14 +294,28 @@ async function handleStartTimer(talkId) {
         } else {
             console.warn('Start timer failed:', result);
             showError('Failed to start timer');
+            // Re-enable buttons on failure
+            buttons[0].disabled = false; // Start button
         }
     } catch (error) {
         showError(`Failed to start timer: ${error.message}`);
+        // Re-enable buttons on error
+        buttons[0].disabled = false; // Start button
     }
 }
 
 async function handleStopTimer(talkId) {
+    const timerCard = document.getElementById(`timer-${talkId}`);
+    if (!timerCard) return;
+
+    // Disable both buttons immediately to prevent double-clicks
+    const buttons = timerCard.querySelectorAll('.timer-controls button');
+    buttons.forEach(btn => btn.disabled = true);
+
     try {
+        // Wait 1500ms before making the API call to let any pending operations settle
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
         const result = await stopTimer(talkId);
         console.log('Stop timer response:', result);
 
@@ -329,52 +351,13 @@ async function handleStopTimer(talkId) {
         } else {
             console.warn('Stop timer failed:', result);
             showError('Failed to stop timer');
+            // Re-enable buttons on failure
+            buttons[1].disabled = false; // Stop button
         }
     } catch (error) {
         showError(`Failed to stop timer: ${error.message}`);
-    }
-}
-
-async function handleStopTimer(talkId) {
-    try {
-        const result = await stopTimer(talkId);
-        console.log('Stop timer response:', result);
-
-        if (result && result.success) {
-            // Use currentStatus from the response
-            const currentStatus = result.currentStatus;
-
-            // Fetch all timers to get timerInfo, but update status from currentStatus
-            const fullData = await getAllTimers();
-
-            if (fullData && fullData.timerInfo) {
-                // Override the status with the authoritative currentStatus from the stop response
-                fullData.status = {
-                    talkId: currentStatus.talkId,
-                    targetSeconds: currentStatus.targetSeconds,
-                    isRunning: false, // We just stopped it, so it's definitely not running
-                    timeElapsed: currentStatus.timeElapsed,
-                    closingSecs: currentStatus.closingSecs
-                };
-
-                // Update local state with all timers
-                allTimersData = fullData;
-                lastUpdateTime = Date.now();
-
-                // Update just this timer's card
-                const timer = fullData.timerInfo.find(t => t.talkId === talkId);
-                if (timer) {
-                    updateTimerCard(timer, fullData.status);
-                } else {
-                    console.warn('Timer not found in response:', talkId);
-                }
-            }
-        } else {
-            console.warn('Stop timer failed:', result);
-            showError('Failed to stop timer');
-        }
-    } catch (error) {
-        showError(`Failed to stop timer: ${error.message}`);
+        // Re-enable buttons on error
+        buttons[1].disabled = false; // Stop button
     }
 }
 
