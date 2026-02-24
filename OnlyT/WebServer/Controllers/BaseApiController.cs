@@ -28,7 +28,7 @@
                 response.ContentEncoding = Encoding.UTF8;
 
                 // allow cross-domain access (so that clients can use JS in a browser)
-                response.Headers.Add("Access-Control-Allow-Origin: *");
+                response.Headers.Add("Access-Control-Allow-Origin", "*");
 
                 var jsonStr = JsonConvert.SerializeObject(info);
                 var buffer = Encoding.UTF8.GetBytes(jsonStr);
