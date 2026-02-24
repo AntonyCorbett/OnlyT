@@ -1,4 +1,4 @@
-# OnlyT <img src="https://ci.appveyor.com/api/projects/status/d0wra2jk7o23fagx?svg=true">
+# OnlyT
 
 Windows Meeting Timer using C#, WPF and custom analogue clock control. Designed for use in Kingdom Halls where the meeting format is predefined, but has a "manual" and "file-based" mode that can be used to configure the timers as required (and so can be used in other settings too).
 
