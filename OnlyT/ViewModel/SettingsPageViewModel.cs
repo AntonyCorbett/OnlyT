@@ -1123,6 +1123,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
             CreateLanguageItem("fi-FI"),
             CreateLanguageItem("fil-PH"),
             CreateLanguageItem("fr-FR"),
+            CreateLanguageItem("gl-ES"),
             CreateLanguageItem("hr-HR"),
             CreateLanguageItem("hu-HU"),
             CreateLanguageItem("id-ID"),
@@ -1150,8 +1151,6 @@ public class SettingsPageViewModel : ObservableObject, IPage
         };
 
         Array.Sort(result, (x, y) => string.CompareOrdinal(x.LanguageName, y.LanguageName));
-        
-        //result.Sort((x, y) => string.CompareOrdinal(x.LanguageName, y.LanguageName));
 
         return result;
     }
