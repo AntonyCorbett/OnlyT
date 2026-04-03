@@ -229,7 +229,7 @@
     <value>Comentarios de introdución</value>
   </data>
   <data name="TALK_PRESENTATIONS" xml:space="preserve">
-    <value>This Month's Presentations</value>
+    <value>Presentacións deste mes</value>
   </data>
   <data name="TALK_PUBLIC" xml:space="preserve">
     <value>Discurso público</value>
@@ -650,7 +650,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
-    <value>Ten en conta que a pantalla está controlada por unha configuración de liña de comandos</value>
+    <value>A pantalla está controlada a través da liña de comandos</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
   <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
@@ -697,51 +697,51 @@ Shift - Aumentar 5min</value>
     <comment>Link to clock on web interface</comment>
   </data>
   <data name="WEB_LINK_TIMERS" xml:space="preserve">
-    <value>Timers</value>
+    <value>Tódolos tempos</value>
     <comment>Link to timers on web interface</comment>
   </data>
   <data name="WEB_OFFLINE" xml:space="preserve">
-    <value>offline...</value>
+    <value>sen conexión...</value>
     <comment>Text displayed in web interface</comment>
   </data>
   <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
-    <value>Shrink on minimise</value>
+    <value>Reducir o tamaño da ventá ó minimizar</value>
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>primary</value>
+    <value>principal</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>A saída está configurada en NDI a través da liña de comandos.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
   <data name="TIMER_REMINDER_MSG" xml:space="preserve">
-    <value>Should you have started the timer?</value>
+    <value>Deberías iniciar o cronómetro?</value>
     <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
   </data>
   <data name="TIMER_REMINDER" xml:space="preserve">
-    <value>Pop-up reminders</value>
+    <value>Recordatorio emerxente</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
   <data name="OVERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes overtime</value>
+    <value>A reunión leva {0} minutos de atraso</value>
     <comment>Notification message</comment>
   </data>
   <data name="UNDERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes undertime</value>
+    <value>A reunión leva {0} minutos de adianto</value>
     <comment>Notification message</comment>
   </data>
   <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
-    <value>Overrun/Underrun notifications</value>
+    <value>Notificacións de atraso/adianto</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
   <data name="DARK_MODE" xml:space="preserve">
-    <value>Dark mode</value>
+    <value>Modo escuro</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Allow mouse wheel to adjust timer</value>
+    <value>Permitir axustar o tempo coa roda do rato</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
 </root>
