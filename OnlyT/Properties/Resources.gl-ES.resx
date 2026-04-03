@@ -498,7 +498,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Mostrar marco do reloxo</value>
+    <value>Marco do reloxo</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -646,54 +646,54 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
-    <value>Transparent background</value>
+    <value>Fondo transparente</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
-    <value>Note that the monitor is controlled by a command-line setting</value>
+    <value>Ten en conta que a pantalla está controlada por unha configuración de liña de comandos</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
   <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
-    <value>Timer background gradient</value>
+    <value>Cronómetro co fondo degradado</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
-    <value>Clock background gradient</value>
+    <value>Reloxo co fondo degradado</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Timer frame</value>
+    <value>Marco do cronómetro</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
-    <value>Flat clock</value>
+    <value>Desactivar efectos 3D no reloxo</value>
     <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
   </data>
   <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
-    <value>Weekend includes Friday</value>
+    <value>O fin de semana inclúe o venres</value>
     <comment>See Settings =&gt; Automatic mode</comment>
   </data>
   <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
-    <value>Windowed</value>
+    <value>Mostrar nunha ventá</value>
     <comment>See Settings =&gt; Main</comment>
   </data>
   <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
-    <value>Windowed</value>
+    <value>Mostrar nunha ventá</value>
     <comment>See Settings =&gt; Countdown</comment>
   </data>
   <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
-    <value>Close Countdown Window</value>
+    <value>Pechar a ventá</value>
     <comment>Tooltip for main window button</comment>
   </data>
   <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
-    <value>Cannot open transparent "windowed" countdown</value>
+    <value>Non podes marcar "Mostrar nunha ventá" se o fondo transparente está activado</value>
     <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
   </data>
   <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\timershtmltemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="WEB_LINK_CLOCK" xml:space="preserve">
-    <value>Clock</value>
+    <value>Reloxo</value>
     <comment>Link to clock on web interface</comment>
   </data>
   <data name="WEB_LINK_TIMERS" xml:space="preserve">
