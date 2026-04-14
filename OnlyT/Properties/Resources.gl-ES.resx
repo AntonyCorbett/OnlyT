@@ -261,7 +261,7 @@
     <value>Ningún</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Non se pode acceder á configuración mentres o cronómetro está en uso!</value>
+    <value>Non se pode acceder á configuración mentres o temporizador está en uso!</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Configuración</value>
@@ -286,7 +286,7 @@
     <value>Sexamos mellores mestres | Asignación 4</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Visita do superintendente de circuíto</value>
+    <value>Visita do SC</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>PECHAR CONTA ATRÁS</value>
@@ -435,11 +435,11 @@
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
-    <value>CRONÓMETRO</value>
+    <value>TEMPORIZADOR</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Mostrar a hora debaixo do cronómetro</value>
+    <value>Mostrar a hora debaixo do temporizador</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
@@ -654,7 +654,7 @@ Shift - Aumentar 5min</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
   <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
-    <value>Cronómetro co fondo degradado</value>
+    <value>Temporizador co fondo degradado</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
@@ -662,7 +662,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Marco do cronómetro</value>
+    <value>Marco do temporizador</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
@@ -717,7 +717,7 @@ Shift - Aumentar 5min</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
   <data name="TIMER_REMINDER_MSG" xml:space="preserve">
-    <value>Deberías iniciar o cronómetro?</value>
+    <value>Deberías iniciar o temporizador?</value>
     <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
   </data>
   <data name="TIMER_REMINDER" xml:space="preserve">
