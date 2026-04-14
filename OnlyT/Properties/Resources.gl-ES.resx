@@ -359,7 +359,7 @@
     <value>Modo de reloxo a pantalla completa</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
-    <value>Enderezo IP</value>
+    <value>IP</value>
     <comment>Network address</comment>
   </data>
   <data name="MEETING" xml:space="preserve">
@@ -427,7 +427,7 @@
     <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
   </data>
   <data name="THROTTLED" xml:space="preserve">
-    <value>Limitar</value>
+    <value>Limitar o seu uso</value>
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
@@ -498,7 +498,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Marco do reloxo</value>
+    <value>Mostrar marco do reloxo</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -662,7 +662,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Marco do temporizador</value>
+    <value>Mostrar marco do temporizador</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
