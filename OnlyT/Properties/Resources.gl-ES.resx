@@ -286,7 +286,7 @@
     <value>Cuarta asignación</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Visita do superintendente de circuíto (SC)</value>
+    <value>Visita do SC</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>PECHAR CONTA ATRÁS</value>
@@ -606,7 +606,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
   </data>
   <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
-    <value>Analizando os tempos</value>
+    <value>Analizando os tempos das asignacións...</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
