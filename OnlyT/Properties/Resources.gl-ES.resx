@@ -190,13 +190,13 @@
     <value>Entre semana</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Mellores mestres | Primeira asignación</value>
+    <value>Primeira asignación</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Mellores mestres | Segunda asignación</value>
+    <value>Segunda asignación</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Mellores mestres | Terceira asignación</value>
+    <value>Terceira asignación</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automático</value>
@@ -220,10 +220,10 @@
     <value>Xoias espirituais</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Vida Cristiá | Primeira asignación</value>
+    <value>Primeira asignación</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Vida Cristiá | Segunda asignación</value>
+    <value>Segunda asignación</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Comentarios de introdución</value>
@@ -241,7 +241,7 @@
     <value>Discurso de servizo</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Tesouros da Biblia | Discurso</value>
+    <value>Discurso</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Estudo de A Atalaia</value>
@@ -283,10 +283,10 @@
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Sexamos mellores mestres | Asignación 4</value>
+    <value>Cuarta asignación</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
-    <value>Visita do SC</value>
+    <value>Visita do superintendente de circuíto (SC)</value>
   </data>
   <data name="CLOSE_COUNTDOWN" xml:space="preserve">
     <value>PECHAR CONTA ATRÁS</value>
@@ -296,7 +296,7 @@
     <value>Axuda (en inglés)</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[visita do superintendente de circuíto]</value>
+    <value>[visita do SC]</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
     <value>Nova versión dispoñible!</value>
@@ -318,7 +318,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permitir o cambio entre conta ascendente e descendente</value>
+    <value>Permitir cronómetro e conta atrás</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -342,11 +342,11 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>CONTA ATRÁS PARA INICIO DE REUNIÓN</value>
+    <value>CONTA ATRÁS DE INICIO DE REUNIÓN</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Botón para a visita do superintendente de circuíto</value>
+    <value>Botón para a visita do SC</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Formato do reloxo dixital</value>
@@ -367,7 +367,7 @@
     <comment>Type of meeting (i.e. weeked or mid-week)</comment>
   </data>
   <data name="MEETING_STARTS" xml:space="preserve">
-    <value>Hora de inicio de reunións (unha por liña)</value>
+    <value>Hora de inicio das reunións (unha por liña)</value>
   </data>
   <data name="MISC_SECTION" xml:space="preserve">
     <value>VARIOS</value>
@@ -380,13 +380,13 @@
     <value>Mostrar o punteiro do rato</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
-    <value>Pon cada hora de inicio nunha liña nova.</value>
+    <value>Pon cada hora de inicio nunha liña.</value>
   </data>
   <data name="MTG_START_NOTES2" xml:space="preserve">
-    <value>Usa o formato de hora que prefiras!</value>
+    <value>Usa o formato de hora que prefiras.</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Podes incluír un día (por exemplo, "mér 20:45")</value>
+    <value>Podes incluír o día (por exemplo, "mér 20:45")</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
@@ -431,7 +431,7 @@
     <comment>Communication is deliberately limited to prevent overloading</comment>
   </data>
   <data name="TIMER_COUNT_UP" xml:space="preserve">
-    <value>Modo ascendente</value>
+    <value>Modo cronómetro</value>
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
@@ -626,7 +626,7 @@ Shift - Aumentar 5min</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duración (mins)</value>
+    <value>Duración (minutos)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
   <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
@@ -666,7 +666,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
-    <value>Desactivar efectos 3D no reloxo</value>
+    <value>Desactivar efectos 3D do reloxo</value>
     <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
   </data>
   <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
