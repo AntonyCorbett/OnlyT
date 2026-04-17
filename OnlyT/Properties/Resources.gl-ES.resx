@@ -162,15 +162,15 @@
     <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
   </data>
   <data name="DURATION_ADAPTED" xml:space="preserve">
-    <value>Duración adaptada</value>
+    <value>Tempo adaptado</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_MODIFIED" xml:space="preserve">
-    <value>Duración modificada</value>
+    <value>Tempo modificado</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="DURATION_ORIGINAL" xml:space="preserve">
-    <value>Duración orixinal</value>
+    <value>Tempo orixinal</value>
     <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
   </data>
   <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
@@ -190,25 +190,25 @@
     <value>Entre semana</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Primeira asignación</value>
+    <value>(SMM) Primeira asignación</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Segunda asignación</value>
+    <value>(SMM) Segunda asignación</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Terceira asignación</value>
+    <value>(SMM) Terceira asignación</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automático</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Baseado en ficheiro</value>
+    <value>Ficheiro personalizado</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Discurso final</value>
+    <value>Discurso de servizo</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Comentarios de conclusión</value>
@@ -217,13 +217,13 @@
     <value>Estudo bíblico de congregación</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
-    <value>Xoias espirituais</value>
+    <value>(TB) Xoias espirituais</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>Primeira asignación</value>
+    <value>(ANC) Primeira asignación</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>Segunda asignación</value>
+    <value>(ANC) Segunda asignación</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Comentarios de introdución</value>
@@ -235,13 +235,13 @@
     <value>Discurso público</value>
   </data>
   <data name="TALK_READING" xml:space="preserve">
-    <value>Lectura da Biblia</value>
+    <value>(TB) Lectura da Biblia</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
     <value>Discurso de servizo</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
-    <value>Discurso</value>
+    <value>(TB) Discurso</value>
   </data>
   <data name="TALK_WT" xml:space="preserve">
     <value>Estudo de A Atalaia</value>
@@ -261,7 +261,7 @@
     <value>Ningunha</value>
   </data>
   <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
-    <value>Non se pode acceder á configuración mentres o temporizador está en uso!</value>
+    <value>Non se pode acceder á configuración mentres o temporizador está en uso</value>
   </data>
   <data name="SETTINGS" xml:space="preserve">
     <value>Configuración</value>
@@ -279,11 +279,11 @@
     <value>Fin de semana</value>
   </data>
   <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
-    <value>A configuración está desactivada polo administrador!</value>
+    <value>A configuración está desactivada polo administrador</value>
     <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
   </data>
   <data name="MINISTRY4" xml:space="preserve">
-    <value>Cuarta asignación</value>
+    <value>(SMM) Cuarta asignación</value>
   </data>
   <data name="CIRCUIT_VISIT" xml:space="preserve">
     <value>Visita do SC</value>
@@ -306,7 +306,7 @@
     <comment>Title for Settings, MAIN section. Please keep capitals</comment>
   </data>
   <data name="ACCESS_CODE" xml:space="preserve">
-    <value>Código de acceso</value>
+    <value>Contrasinal</value>
     <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
   </data>
   <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
@@ -342,7 +342,7 @@
     <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
   </data>
   <data name="COUNTDOWN_SECTION" xml:space="preserve">
-    <value>CONTA ATRÁS DE INICIO DE REUNIÓN</value>
+    <value>CONTA ATRÁS PARA INICIO DA REUNIÓN</value>
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
@@ -356,7 +356,7 @@
     <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
   </data>
   <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
-    <value>Modo de reloxo a pantalla completa</value>
+    <value>Modo do reloxo a pantalla completa</value>
   </data>
   <data name="IP_ADDRESS" xml:space="preserve">
     <value>IP</value>
