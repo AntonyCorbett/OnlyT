@@ -208,22 +208,22 @@
     <value>Manual</value>
   </data>
   <data name="TALK_CONCLUDING" xml:space="preserve">
-    <value>Discurso de servizo</value>
+    <value>(SC) Discurso de servizo</value>
   </data>
   <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
     <value>Comentarios de conclusión</value>
   </data>
   <data name="TALK_CONG_STUDY" xml:space="preserve">
-    <value>(ANC) Estudo bíblico de congregación</value>
+    <value>(NVC) Estudo bíblico de congregación</value>
   </data>
   <data name="TALK_DIGGING" xml:space="preserve">
     <value>(TB) Xoias espirituais</value>
   </data>
   <data name="TALK_LIVING1" xml:space="preserve">
-    <value>(ANC) Primeira asignación</value>
+    <value>(NVC) Primeira asignación</value>
   </data>
   <data name="TALK_LIVING2" xml:space="preserve">
-    <value>(ANC) Segunda asignación</value>
+    <value>(NVC) Segunda asignación</value>
   </data>
   <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
     <value>Comentarios de introdución</value>
@@ -238,7 +238,7 @@
     <value>(TB) Lectura da Biblia</value>
   </data>
   <data name="TALK_SERVICE" xml:space="preserve">
-    <value>Discurso de servizo</value>
+    <value>(SC) Discurso de servizo</value>
   </data>
   <data name="TALK_TREASURES" xml:space="preserve">
     <value>(TB) Discurso</value>
@@ -296,7 +296,7 @@
     <value>Axuda (en inglés)</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[visita do SC]</value>
+    <value>(visita do SC)</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
     <value>Nova versión dispoñible!</value>
