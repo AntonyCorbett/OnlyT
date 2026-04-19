@@ -386,7 +386,7 @@
     <value>Usa o formato de hora que prefiras.</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Podes incluír o día (por exemplo, "mér 20:45")</value>
+    <value>Podes incluír o día (por exemplo, "mér 20:00")</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Notas:</value>
@@ -416,7 +416,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Mostrar un sector sobre o reloxo analóxico</value>
+    <value>Mostrar sector sobre o reloxo analóxico</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
@@ -558,7 +558,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Informe de tempos creado correctamente</value>
+    <value>Informe dos tempos creado correctamente</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
@@ -578,7 +578,7 @@ Shift - Aumentar 5min</value>
     <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
   </data>
   <data name="LOGGING_LEVEL" xml:space="preserve">
-    <value>Nivel de rexistro (log)</value>
+    <value>Nivel de rexistro</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
@@ -610,7 +610,7 @@ Shift - Aumentar 5min</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
-    <value>Non se puido crear o informe de tempos</value>
+    <value>Non se puido crear o informe dos tempos</value>
     <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
   </data>
   <data name="VIEW_REPORT" xml:space="preserve">
