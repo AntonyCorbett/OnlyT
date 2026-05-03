@@ -106,7 +106,6 @@
 			const pageLoadStamp = Date.now();
 			let use24HrClockFormat = false;
 			let transitioning = false;
-			let testAnimating = false;
 
 			function shouldDelayNameplateDisplay() {
 				return (Date.now() - pageLoadStamp) < NAMEPLATE_DISPLAY_DELAY_MS;
@@ -141,26 +140,6 @@
 			async function fadeTo(targetOpacity) {
 				textElem.style.opacity = targetOpacity;
 				await waitForOpacityTransition();
-			}
-
-			async function runStaticTextAnimation() {
-				if (testAnimating) {
-					return;
-				}
-				testAnimating = true;
-				textElem.classList.remove('clockstyle');
-				textElem.classList.add('clockstyle_yellow');
-				await waitForOpacityTransition();
-				textElem.classList.remove('clockstyle_yellow');
-				textElem.classList.add('clockstyle_green');
-				await waitForOpacityTransition();
-				textElem.classList.remove('clockstyle_green');
-				textElem.classList.add('clockstyle_red');
-				await waitForOpacityTransition();
-				textElem.classList.remove('clockstyle_red');
-				textElem.classList.add('clockstyle');
-				await waitForOpacityTransition();
-				testAnimating = false;
 			}
 
 			async function getOnlyTData() {
@@ -257,7 +236,7 @@
 				try {
 					textElem.style.opacity = '1';
 					void textElem.offsetWidth;
-					await fadeTo('0');
+					await fadeTo(0);
 
 					if (currentMode === 'Nameplate' && shouldDelayNameplateDisplay()) {
 						textElem.textContent = '';
@@ -269,7 +248,7 @@
 					updateTextSize();
 
 					void textElem.offsetWidth;
-					await fadeTo('1');
+					await fadeTo(1);
 				} finally {
 					transitioning = false;
 				}
