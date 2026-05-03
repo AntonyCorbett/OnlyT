@@ -82,6 +82,8 @@
 
         <Button
             Grid.Row="0"
+            AutomationProperties.AutomationId="NavigateBackButton"
+            AutomationProperties.Name="{x:Static resx:Resources.BACK_TO_OPERATOR}"
             Command="{Binding NavigateOperatorCommand}"
             Style="{StaticResource MaterialDesignRaisedDarkButton}">
             <materialDesign:PackIcon
@@ -107,7 +109,7 @@
                                 Style="{StaticResource MiscNotesStyle}"
                                 Text="{x:Static resx:Resources.CONTROLLED_BY_CMD_LINE}"
                                 TextWrapping="Wrap"
-                                Visibility="{Binding Path=ShouldShowTimerMonitorCommandLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                Visibility="{Binding Path=ShouldShowTimerMonitorCommandLineNote, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                             <TextBlock
                                 Width="305"
@@ -120,6 +122,8 @@
 
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
+                                AutomationProperties.AutomationId="MainMonitorComboBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.MONITOR}"
                                 DisplayMemberPath="NameForDisplayInUI"
                                 IsEnabled="{Binding AllowMainMonitorSelection}"
                                 ItemsSource="{Binding Monitors}"
@@ -128,6 +132,8 @@
                                 Style="{StaticResource SettingsComboStyle}" />
 
                             <CheckBox
+                                AutomationProperties.AutomationId="MainMonitorWindowedCheckBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.MONITOR_IS_WINDOWED}"
                                 Content="{x:Static resx:Resources.MONITOR_IS_WINDOWED}"
                                 IsChecked="{Binding MainMonitorIsWindowed, Mode=TwoWay}"
                                 IsEnabled="{Binding AllowWindowedModeSelection}"
@@ -135,6 +141,8 @@
 
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.OP_MODE}"
+                                AutomationProperties.AutomationId="OperatingModeComboBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.OP_MODE}"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding OperatingModes}"
                                 SelectedValue="{Binding OperatingMode, Mode=TwoWay}"
@@ -143,6 +151,8 @@
 
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.DIGITAL_CLOCK_FORMAT}"
+                                AutomationProperties.AutomationId="ClockHourFormatComboBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.DIGITAL_CLOCK_FORMAT}"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding ClockHourFormats}"
                                 SelectedValue="{Binding ClockHourFormat, Mode=TwoWay}"
@@ -150,6 +160,8 @@
                                 Style="{StaticResource SettingsComboStyle}" />
 
                             <CheckBox
+                                AutomationProperties.AutomationId="ShowSecondsCheckBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.SHOW_SECONDS}"
                                 Content="{x:Static resx:Resources.SHOW_SECONDS}"
                                 IsChecked="{Binding ShowDigitalSeconds, Mode=TwoWay}"
                                 IsEnabled="{Binding ShouldEnableShowSeconds}"
@@ -169,6 +181,8 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING}"
+                            AutomationProperties.AutomationId="MeetingTypeComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.MEETING}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding AutoMeetingTimes}"
                             SelectedValue="{Binding MidWeekOrWeekend, Mode=TwoWay}"
@@ -177,6 +191,8 @@
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.ADAPTIVE_MIDWEEK}"
+                            AutomationProperties.AutomationId="MidWeekAdaptiveModeComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ADAPTIVE_MIDWEEK}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding AdaptiveModes}"
                             SelectedValue="{Binding MidWeekAdaptiveMode, Mode=TwoWay}"
@@ -185,6 +201,8 @@
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.ADAPTIVE_WEEKEND}"
+                            AutomationProperties.AutomationId="WeekendAdaptiveModeComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ADAPTIVE_WEEKEND}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding AdaptiveModes}"
                             SelectedValue="{Binding WeekendAdaptiveMode, Mode=TwoWay}"
@@ -192,27 +210,37 @@
                             Style="{StaticResource SettingsComboStyle}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="WeekendIncludesFridayCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.WEEKEND_INCLUDES_FRIDAY}"
                             Content="{x:Static resx:Resources.WEEKEND_INCLUDES_FRIDAY}"
                             IsChecked="{Binding WeekendIncludesFriday, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="CircuitVisitCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.CIRCUIT_VISIT}"
                             Content="{x:Static resx:Resources.CIRCUIT_VISIT}"
                             IsChecked="{Binding IsCircuitVisit, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowCircuitVisitToggleCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.CO_VISIT_TOGGLE}"
                             Content="{x:Static resx:Resources.CO_VISIT_TOGGLE}"
                             IsChecked="{Binding ShowCircuitVisitToggle, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="PersistStudentTimeCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.PERSIST_STUDENT_TIME}"
                             Content="{x:Static resx:Resources.PERSIST_STUDENT_TIME}"
                             IsChecked="{Binding PersistStudentTime, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <StackPanel Orientation="Horizontal">
                             <CheckBox
+                                AutomationProperties.AutomationId="GenerateReportsCheckBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.SHOULD_GENERATE_REPORTS}"
                                 Content="{x:Static resx:Resources.SHOULD_GENERATE_REPORTS}"
                                 IsChecked="{Binding ShouldGenerateReports, Mode=TwoWay}"
                                 Style="{StaticResource SettingsCheckBox}" />
@@ -233,17 +261,23 @@
                 <GroupBox Header="{x:Static resx:Resources.BELL_SECTION}" Style="{StaticResource GroupBoxStyle}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox
+                            AutomationProperties.AutomationId="BellEnabledCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ENABLED_BELL}"
                             Content="{x:Static resx:Resources.ENABLED_BELL}"
                             IsChecked="{Binding IsBellEnabled, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="AutoBellCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.AUTO_BELL}"
                             Content="{x:Static resx:Resources.AUTO_BELL}"
                             IsChecked="{Binding AutoBell, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <Label Content="{x:Static resx:Resources.VOLUME}" Style="{StaticResource LabelStyle}" />
                         <Slider
+                            AutomationProperties.AutomationId="BellVolumeSlider"
+                            AutomationProperties.Name="{x:Static resx:Resources.VOLUME}"
                             LargeChange="10"
                             Maximum="100"
                             SmallChange="1"
@@ -255,6 +289,8 @@
                             Height="32"
                             Margin="0,20,0,0"
                             HorizontalAlignment="Left"
+                            AutomationProperties.AutomationId="TestBellButton"
+                            AutomationProperties.Name="{x:Static resx:Resources.TEST}"
                             Command="{Binding TestBellCommand}"
                             Content="{x:Static resx:Resources.TEST}"
                             Style="{StaticResource MaterialDesignRaisedLightButton}" />
@@ -265,6 +301,8 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.FULL_SCREEN_CLOCK}"
+                            AutomationProperties.AutomationId="TimeOfDayModeComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.FULL_SCREEN_CLOCK}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding TimeOfDayModes}"
                             SelectedValue="{Binding TimeOfDayMode, Mode=TwoWay}"
@@ -274,6 +312,8 @@
                         <Label Content="{x:Static resx:Resources.SPLIT_WIDTH}" Style="{StaticResource LabelStyle}" />
                         <Slider
                             Margin="0,0,0,20"
+                            AutomationProperties.AutomationId="AnalogueClockWidthSlider"
+                            AutomationProperties.Name="{x:Static resx:Resources.SPLIT_WIDTH}"
                             LargeChange="10"
                             Maximum="100"
                             SmallChange="1"
@@ -282,52 +322,72 @@
                             Value="{Binding AnalogueClockWidthPercent}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowClockFrameCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.SHOW_CLOCK_FRAME}"
                             Content="{x:Static resx:Resources.SHOW_CLOCK_FRAME}"
                             IsChecked="{Binding ShowClockFrame, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowTimerFrameCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.SHOW_TIMER_FRAME}"
                             Content="{x:Static resx:Resources.SHOW_TIMER_FRAME}"
                             IsChecked="{Binding ShowTimerFrame, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowBackgroundOnClockCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.CLOCK_BACKGROUND_COLOUR}"
                             Content="{x:Static resx:Resources.CLOCK_BACKGROUND_COLOUR}"
                             IsChecked="{Binding ShowBackgroundOnClock, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowBackgroundOnTimerCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.TIMER_BACKGROUND_COLOUR}"
                             Content="{x:Static resx:Resources.TIMER_BACKGROUND_COLOUR}"
                             IsChecked="{Binding ShowBackgroundOnTimer, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowTimeOfDayUnderTimerCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.TIME_UNDER_TIMER}"
                             Content="{x:Static resx:Resources.TIME_UNDER_TIMER}"
                             IsChecked="{Binding ShowTimeOfDayUnderTimer, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="CountUpCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.TIMER_COUNT_UP}"
                             Content="{x:Static resx:Resources.TIMER_COUNT_UP}"
                             IsChecked="{Binding CountUp, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowDurationSectorCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.SECTOR_ANALOG_CLOCK}"
                             Content="{x:Static resx:Resources.SECTOR_ANALOG_CLOCK}"
                             IsChecked="{Binding ShowDurationSector, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowMousePointerCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.MOUSE_PTR}"
                             Content="{x:Static resx:Resources.MOUSE_PTR}"
                             IsChecked="{Binding ShowMousePointerInTimerDisplay, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="FlatClockCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.FLAT_CLOCK}"
                             Content="{x:Static resx:Resources.FLAT_CLOCK}"
                             IsChecked="{Binding ClockIsFlat, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.PERSIST_TALK_DURATION}"
+                            AutomationProperties.AutomationId="PersistDurationComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.PERSIST_TALK_DURATION}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding PersistDurationItems}"
                             SelectedValue="{Binding PersistDurationSecs, Mode=TwoWay}"
@@ -341,6 +401,8 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.PORT}"
+                            AutomationProperties.AutomationId="RemoteAccessPortComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.PORT}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding Ports}"
                             SelectedValue="{Binding Port, Mode=TwoWay}"
@@ -352,6 +414,8 @@
                             Height="32"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Left"
+                            AutomationProperties.AutomationId="OpenPortButton"
+                            AutomationProperties.Name="{x:Static resx:Resources.OPEN_PORT}"
                             Command="{Binding OpenPortCommand}"
                             Style="{StaticResource MaterialDesignRaisedLightButton}">
                             <StackPanel Orientation="Horizontal">
@@ -366,12 +430,18 @@
                 <GroupBox Header="{x:Static resx:Resources.CLOCK_SECTION}" Style="{StaticResource GroupBoxStyle}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox
+                            AutomationProperties.AutomationId="WebClockEnabledCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ENABLED_WEB_CLOCK}"
                             Content="{x:Static resx:Resources.ENABLED_WEB_CLOCK}"
                             IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <TextBlock>
-                            <Hyperlink Command="{Binding WebClockUrlLinkCommand}" Foreground="{DynamicResource HyperlinkForegroundBrush}">
+                            <Hyperlink
+                                AutomationProperties.AutomationId="WebClockUrlLink"
+                                AutomationProperties.Name="{Binding WebClockUrl, Mode=OneWay}"
+                                Command="{Binding WebClockUrlLinkCommand}"
+                                Foreground="{DynamicResource HyperlinkForegroundBrush}">
                                 <TextBlock Text="{Binding WebClockUrl, Mode=OneWay}" />
                             </Hyperlink>
                         </TextBlock>
@@ -387,17 +457,23 @@
                 <GroupBox Header="{x:Static resx:Resources.APPS_SECTION}" Style="{StaticResource GroupBoxStyle}">
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
                         <CheckBox
+                            AutomationProperties.AutomationId="ApiEnabledCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ENABLED_API}"
                             Content="{x:Static resx:Resources.ENABLED_API}"
                             IsChecked="{Binding IsApiEnabled, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ApiThrottledCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.THROTTLED}"
                             Content="{x:Static resx:Resources.THROTTLED}"
                             IsChecked="{Binding IsApiThrottled, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <TextBox
                             Margin="0,5,0,0"
+                            AutomationProperties.AutomationId="IpAddressTextBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.IP_ADDRESS}"
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.IP_ADDRESS}"
                             IsReadOnly="True"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -405,6 +481,8 @@
 
                         <TextBox
                             Margin="0,5,0,0"
+                            AutomationProperties.AutomationId="ApiPortTextBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.PORT}"
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.PORT}"
                             IsReadOnly="True"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -412,6 +490,8 @@
 
                         <TextBox
                             Margin="0,5,0,0"
+                            AutomationProperties.AutomationId="ApiCodeTextBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ACCESS_CODE}"
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.ACCESS_CODE}"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding ApiCode, Mode=TwoWay}" />
@@ -433,6 +513,8 @@
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.MONITOR}"
+                            AutomationProperties.AutomationId="CountdownMonitorComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.MONITOR}"
                             DisplayMemberPath="NameForDisplayInUI"
                             IsEnabled="{Binding AllowCountdownMonitorSelection}"
                             ItemsSource="{Binding Monitors}"
@@ -441,12 +523,16 @@
                             Style="{StaticResource SettingsComboStyle}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="CountdownWindowedCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.COUNTDOWN_IS_WINDOWED}"
                             Content="{x:Static resx:Resources.COUNTDOWN_IS_WINDOWED}"
                             IsChecked="{Binding CountdownMonitorIsWindowed, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.LOCATION_ON_SCREEN}"
+                            AutomationProperties.AutomationId="CountdownScreenLocationComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.LOCATION_ON_SCREEN}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding ScreenLocationItems}"
                             SelectedValue="{Binding CountdownScreenLocation, Mode=TwoWay}"
@@ -456,6 +542,8 @@
                         <Label Content="{x:Static resx:Resources.COUNTDOWN_ZOOM}" Style="{StaticResource LabelStyle}" />
                         <Slider
                             Margin="0,0,0,20"
+                            AutomationProperties.AutomationId="CountdownZoomSlider"
+                            AutomationProperties.Name="{x:Static resx:Resources.COUNTDOWN_ZOOM}"
                             LargeChange="10"
                             Maximum="100"
                             Minimum="10"
@@ -465,17 +553,23 @@
                             Value="{Binding CountdownZoomPercent}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowCountdownFrameCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}"
                             Content="{x:Static resx:Resources.SHOW_COUNTDOWN_FRAME}"
                             IsChecked="{Binding ShowCountdownFrame, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="CountdownTransparentCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.COUNTDOWN_TRANSPARENT}"
                             Content="{x:Static resx:Resources.COUNTDOWN_TRANSPARENT}"
                             IsChecked="{Binding IsCountdownWindowTransparent, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_ELEMENTS}"
+                            AutomationProperties.AutomationId="CountdownElementsComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.COUNTDOWN_ELEMENTS}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding CountdownElementsToShowItems}"
                             SelectedValue="{Binding CountdownElementsToShow, Mode=TwoWay}"
@@ -484,6 +578,8 @@
 
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.COUNTDOWN_DURATION_MINS}"
+                            AutomationProperties.AutomationId="CountdownDurationComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.COUNTDOWN_DURATION_MINS}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding CountdownDurationItems}"
                             SelectedValue="{Binding CountdownDurationMins, Mode=TwoWay}"
@@ -493,6 +589,8 @@
                         <TextBox
                             Height="120"
                             VerticalContentAlignment="Top"
+                            AutomationProperties.AutomationId="MeetingStartTimesTextBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.MEETING_STARTS}"
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.MEETING_STARTS}"
                             AcceptsReturn="True"
                             AcceptsTab="False"
@@ -540,36 +638,50 @@
                     <StackPanel Style="{StaticResource SettingsStackPanel}">
 
                         <CheckBox
+                            AutomationProperties.AutomationId="DarkModeCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.DARK_MODE}"
                             Content="{x:Static resx:Resources.DARK_MODE}"
                             IsChecked="{Binding DarkModeToggle, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="AllowCountUpToggleCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ALLOW_COUNT_UP_TOGGLE}"
                             Content="{x:Static resx:Resources.ALLOW_COUNT_UP_TOGGLE}"
                             IsChecked="{Binding AllowCountUpToggle, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="AllowMouseWheelCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ALLOW_MOUSE_WHEEL_TIMER_ADJUST}"
                             Content="{x:Static resx:Resources.ALLOW_MOUSE_WHEEL_TIMER_ADJUST}"
                             IsChecked="{Binding AllowMouseWheelTimerAdjust, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="AlwaysOnTopCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.ALWAYS_ON_TOP}"
                             Content="{x:Static resx:Resources.ALWAYS_ON_TOP}"
                             IsChecked="{Binding AlwaysOnTop, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShrinkOnMinimiseCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.SHRINK_ON_MINIMISE}"
                             Content="{x:Static resx:Resources.SHRINK_ON_MINIMISE}"
                             IsChecked="{Binding ShrinkOnMinimise, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="TimerRemindersCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.TIMER_REMINDER}"
                             Content="{x:Static resx:Resources.TIMER_REMINDER}"
                             IsChecked="{Binding TimerReminders, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="OverrunNotificationsCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.OVERRUN_NOTIFICATIONS}"
                             Content="{x:Static resx:Resources.OVERRUN_NOTIFICATIONS}"
                             IsChecked="{Binding OverrunNotifications, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
@@ -577,6 +689,8 @@
                         <ComboBox
                             materialDesign:HintAssist.Hint="{x:Static resx:Resources.LOGGING_LEVEL}"
                             materialDesign:HintAssist.IsFloating="True"
+                            AutomationProperties.AutomationId="LoggingLevelComboBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.LOGGING_LEVEL}"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding LoggingLevels}"
                             SelectedValue="{Binding LogEventLevel, Mode=TwoWay}"
@@ -592,6 +706,8 @@
                                 Kind="Translate" />
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.LANGUAGE}"
+                                AutomationProperties.AutomationId="LanguageComboBox"
+                                AutomationProperties.Name="{x:Static resx:Resources.LANGUAGE}"
                                 DisplayMemberPath="LanguageName"
                                 ItemsSource="{Binding Languages}"
                                 SelectedValue="{Binding LanguageId, Mode=TwoWay}"

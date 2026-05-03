@@ -95,6 +95,24 @@
 
 
         <Style x:Key="ChromelessBtn" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle
+                                        Margin="2"
+                                        SnapsToDevicePixels="True"
+                                        Stroke="{DynamicResource MaterialDesignBody}"
+                                        StrokeDashArray="1 2"
+                                        StrokeThickness="1" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -146,8 +164,11 @@
                     Grid.Column="1"
                     Margin="0,-12,0,0"
                     HorizontalAlignment="Right"
+                    AutomationProperties.AutomationId="ShrinkSettingsButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.SETTINGS}"
                     Command="{Binding SettingsCommand}"
-                    Style="{StaticResource ChromelessBtn}">
+                    Style="{StaticResource ChromelessBtn}"
+                    ToolTip="{x:Static resx:Resources.SETTINGS}">
                     <materialDesign:PackIcon
                         Width="42"
                         Height="42"
@@ -160,8 +181,11 @@
                     Grid.Column="2"
                     Margin="0,-12,0,0"
                     HorizontalAlignment="Right"
+                    AutomationProperties.AutomationId="ExpandWindowButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.EXPAND_WINDOW}"
                     Command="{Binding ExpandFromShrinkCommand}"
-                    Style="{StaticResource ChromelessBtn}">
+                    Style="{StaticResource ChromelessBtn}"
+                    ToolTip="{x:Static resx:Resources.EXPAND_WINDOW}">
                     <materialDesign:PackIcon
                         Width="42"
                         Height="42"
@@ -175,8 +199,11 @@
                     Grid.Column="3"
                     Margin="0,-12,0,0"
                     HorizontalAlignment="Right"
+                    AutomationProperties.AutomationId="CloseAppButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.CLOSE_APP}"
                     Command="{Binding CloseAppCommand}"
-                    Style="{StaticResource ChromelessBtn}">
+                    Style="{StaticResource ChromelessBtn}"
+                    ToolTip="{x:Static resx:Resources.CLOSE_APP}">
                     <materialDesign:PackIcon
                         Width="42"
                         Height="42"
@@ -189,6 +216,8 @@
 
             <Grid Grid.Row="0" Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ComboBox
+                    AutomationProperties.AutomationId="TalkSelectorComboBox"
+                    AutomationProperties.Name="{x:Static resx:Resources.TALK_SELECTOR}"
                     FontSize="14"
                     IsEnabled="{Binding IsNotRunning}"
                     ItemTemplateSelector="{utils:ComboBoxTemplateSelector SelectedItemTemplate={StaticResource SelectedTalkTemplate},
@@ -217,9 +246,11 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="{Binding TimeDisplayColumnSpan}"
                     Padding="10"
+                    AutomationProperties.Name="{x:Static resx:Resources.TIMER_DISPLAY}"
+                    AutomationProperties.LiveSetting="Polite"
                     Background="Black"
-                    CornerRadius="10"
-                    Focusable="True">
+                    CornerRadius="10">
+
                     <b:Interaction.Behaviors>
                         <behaviours:MouseWheelTimerAdjustBehaviour
                             Decrement15SecCommand="{Binding DecrementTimer15Command}"
@@ -240,17 +271,19 @@
                         <!--  Bell icon  -->
                         <Button
                             Grid.Column="0"
+                            AutomationProperties.AutomationId="BellToggleButton"
+                            AutomationProperties.Name="{Binding BellTooltip, Mode=OneWay}"
                             Command="{Binding BellToggleCommand}"
                             Style="{StaticResource ChromelessBtn}"
-                            Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            ToolTip="{Binding BellTooltip, Mode=OneWay}"
+                            Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
                             <Path
                                 VerticalAlignment="Top"
                                 Cursor="Hand"
                                 Data="M11.945504,0.99398804C10.951509,0.99398804,10.156516,1.8880005,10.156516,2.9809875L10.156516,3.2799988 10.156516,3.3789978 10.45451,3.3789978C10.85251,3.3789978 11.24951,3.2799988 11.647502,3.2799988 12.243499,3.2799988 12.740497,3.2799988 13.237495,3.3789978L13.535489,3.3789978 13.535489,3.2799988 13.535489,2.9809875C13.734485,1.8880005,12.939492,0.99398804,11.945504,0.99398804z M11.945504,0C13.436491,0,14.628484,1.2919922,14.628484,2.9809875L14.628484,3.5780029 14.42948,3.5780029 14.628484,3.677002C17.80846,4.5709839 20.193438,6.8569946 20.193438,9.7389832 20.193438,10.634003 19.995442,11.428986 19.597449,12.123993 19.398445,14.807007 19.398445,18.881989 21.485436,20.869995 24.765412,23.850983 23.870413,26.036987 23.473414,26.733002L13.237495,26.733002 12.343496,26.733002 12.343496,29.117981 12.442495,29.117981C12.939492,29.316986 13.336493,29.813995 13.336493,30.509003 13.336493,31.303986 12.641499,32 11.846506,32 11.051506,32 10.355512,31.303986 10.355512,30.509003 10.355512,29.912994 10.752512,29.415985 11.24951,29.117981L11.349508,29.117981 11.349508,26.733002 10.45451,26.733002 0.41758832,26.733002C0.020587989,26.036987 -0.87440217,23.751984 2.4055731,20.869995 4.7905499,18.78299 4.5915539,13.912994 4.2935597,11.328979 4.094556,10.733002 3.9955575,10.136993 3.9955575,9.6399841 3.9955575,6.8569946 5.9825427,4.4719849 9.0635216,3.5780029L9.3615238,3.4779968 9.3615238,3.3789978 9.3615238,2.9809875C9.3615238,1.2919922,10.554508,0,11.945504,0z"
                                 Fill="{Binding BellColour}"
                                 Stretch="Uniform"
-                                ToolTip="{Binding BellTooltip, Mode=OneWay}"
-                                Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+                                ToolTip="{Binding BellTooltip, Mode=OneWay}" />
                         </Button>
 
                         <TextBlock
@@ -348,8 +381,11 @@
                             Margin="0,0,0,-5"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
+                            AutomationProperties.AutomationId="CountUpDownToggleButton"
+                            AutomationProperties.Name="{Binding CountUpOrDownTooltip, Mode=OneWay}"
                             Command="{Binding CountUpToggleCommand}"
                             Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
+                            Focusable="{Binding AllowCountUpDownToggle, Mode=OneWay}"
                             IsEnabled="{Binding IsNotRunning}"
                             Style="{StaticResource ChromelessBtn}"
                             ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
@@ -375,6 +411,8 @@
                         Margin="0,0,0,2"
                         Padding="0"
                         VerticalAlignment="Top"
+                        AutomationProperties.AutomationId="IncrementTimerButton"
+                        AutomationProperties.Name="{x:Static resx:Resources.TIME_INCREASE}"
                         Command="{Binding IncrementTimerCommand}"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         ToolTip="{x:Static resx:Resources.TIME_INCREASE}">
@@ -394,6 +432,8 @@
                         Margin="0,2,0,0"
                         Padding="0"
                         VerticalAlignment="Bottom"
+                        AutomationProperties.AutomationId="DecrementTimerButton"
+                        AutomationProperties.Name="{x:Static resx:Resources.TIME_DECREASE}"
                         Command="{Binding DecrementTimerCommand}"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         ToolTip="{x:Static resx:Resources.TIME_DECREASE}">
@@ -416,6 +456,8 @@
                 Grid.Row="2"
                 Grid.RowSpan="{Binding StartStopButtonRowSpan}"
                 Height="{Binding StartStopButtonHeight}"
+                AutomationProperties.AutomationId="StartTimerButton"
+                AutomationProperties.Name="{x:Static resx:Resources.START_TIMER}"
                 Command="{Binding StartCommand}"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 Visibility="{Binding Path=IsNotRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
@@ -433,6 +475,8 @@
                 Grid.Row="2"
                 Grid.RowSpan="{Binding StartStopButtonRowSpan}"
                 Height="{Binding StartStopButtonHeight}"
+                AutomationProperties.AutomationId="StopTimerButton"
+                AutomationProperties.Name="{x:Static resx:Resources.STOP_TIMER}"
                 Command="{Binding StopCommand}"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 Visibility="{Binding Path=IsRunning, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
@@ -466,6 +510,8 @@
                         Margin="5,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
+                        AutomationProperties.AutomationId="CircuitVisitToggle"
+                        AutomationProperties.Name="{x:Static resx:Resources.CIRCUIT_VISIT}"
                         IsChecked="{Binding IsCircuitVisit}"
                         Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" />
 
@@ -476,6 +522,8 @@
                 <Button
                     Grid.Column="0"
                     Margin="0,0,10,0"
+                    AutomationProperties.AutomationId="CloseCountdownButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.CLOSE_COUNTDOWN}"
                     Command="{Binding CloseCountdownCommand}"
                     Content="{x:Static resx:Resources.CLOSE_COUNTDOWN}"
                     FontSize="14"
@@ -485,6 +533,8 @@
 
                 <Button
                     Grid.Column="3"
+                    AutomationProperties.AutomationId="SettingsButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.SETTINGS}"
                     Command="{Binding SettingsCommand}"
                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                     ToolTip="{Binding SettingsHint, Mode=OneWay}"
@@ -497,6 +547,8 @@
 
                 <Button
                     Grid.Column="2"
+                    AutomationProperties.AutomationId="HelpButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.HELP}"
                     Command="{Binding HelpCommand}"
                     Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                     ToolTip="{x:Static resx:Resources.HELP}"
@@ -509,6 +561,8 @@
 
                 <Button
                     Grid.Column="1"
+                    AutomationProperties.AutomationId="NewVersionButton"
+                    AutomationProperties.Name="{x:Static resx:Resources.NEW_VERSION}"
                     Command="{Binding NewVersionCommand}"
                     Style="{StaticResource DownloadButtonStyle}"
                     ToolTip="{x:Static resx:Resources.NEW_VERSION}"

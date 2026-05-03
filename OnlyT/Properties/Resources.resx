@@ -747,4 +747,36 @@ Shift - Increase 5m</value>
     <value>Allow mouse wheel to adjust timer</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
+  <data name="START_TIMER" xml:space="preserve">
+    <value>Start timer</value>
+    <comment>Accessible name for the Start button on the operator page</comment>
+  </data>
+  <data name="STOP_TIMER" xml:space="preserve">
+    <value>Stop timer</value>
+    <comment>Accessible name for the Stop button on the operator page</comment>
+  </data>
+  <data name="EXPAND_WINDOW" xml:space="preserve">
+    <value>Expand window</value>
+    <comment>Accessible name for the expand button shown in shrink mode</comment>
+  </data>
+  <data name="CLOSE_APP" xml:space="preserve">
+    <value>Close application</value>
+    <comment>Accessible name for the close application button shown in shrink mode</comment>
+  </data>
+  <data name="TIMER_DISPLAY" xml:space="preserve">
+    <value>Timer display</value>
+    <comment>Accessible name for the timer display area on the operator page</comment>
+  </data>
+  <data name="BELL_TOGGLE" xml:space="preserve">
+    <value>Toggle bell</value>
+    <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
+  </data>
+  <data name="TALK_SELECTOR" xml:space="preserve">
+    <value>Select talk</value>
+    <comment>Accessible name for the talk selector combo box on the operator page</comment>
+  </data>
+  <data name="BACK_TO_OPERATOR" xml:space="preserve">
+    <value>Back to operator page</value>
+    <comment>Accessible name for the back navigation button on the settings page</comment>
+  </data>
 </root>
