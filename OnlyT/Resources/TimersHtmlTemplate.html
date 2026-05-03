@@ -165,114 +165,96 @@
         let timersLoaded = false;
         let onlineToOfflineCount = 0;
 
-        function getOnlyTJson() {
-            let clientDate = new Date();
+        async function getOnlyTJson() {
+            const clientDate = new Date();
+            try {
+                const resp = await fetch('../api/v3/timers', { cache: 'no-store', signal: AbortSignal.timeout(2000) });
+                if (resp.ok) {
+                    const responseDate = new Date();
+                    const jsondata = await resp.json();
 
-            let myGetRequest = new XMLHttpRequest();
-            myGetRequest.overrideMimeType("application/json");
+                    if (!timersLoaded) {
+                        const keys = ["talkId", "talkTitle"];
+                        const sectionHtml = `<tr class="section {section}"><td colspan="2">{name}</td></tr>`;
+                        const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td{colour}>{timer}</td></tr>`;
+                        const parts = [];
+                        let currentSection = null;
+                        for (let i = 0; i < jsondata.timerInfo.length; i++) {
+                            const timerInfo = jsondata.timerInfo[i];
+                            if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
+                                currentSection = timerInfo.meetingSectionNameInternal;
+                                parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replaceAll(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
+                            }
+                            let currPart = talkHtml;
+                            keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
+                            const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
+                            const timerText = timerInfo.countUp ?
+                                                getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
+                                                getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
+                            currPart = currPart.replace('{timer}', timerText);
+                            if (timerInfo.completedTimeSecs != null) {
+                                const talkRow = { className: null };
+                                setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, talkRow);
+                                currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
+                                currPart = currPart.replace('"talk_info"', '"talk_info completed"');
+                            } else {
+                                currPart = currPart.replace('{colour}', '');
+                            }
+                            parts.push(currPart);
+                        }
+                        const table = document.createElement("table");
+                        table.id = "timers";
+                        table.className = 'talk_timers';
+                        table.innerHTML = parts.join("\n");
+                        mainDiv.appendChild(table);
+                        timersLoaded = true;
+                    }
 
-            myGetRequest.onreadystatechange = function () {
-                let responseDate = new Date();
+                    if (jsondata.status.isRunning) {
+                        currentMode = "Timer";
+                        const requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
+                        const timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
 
-                if (myGetRequest.readyState === 4) {
-                    if ((myGetRequest.status === 200 || window.location.href.indexOf("http") === -1) && !!myGetRequest.responseText) {
-                        const jsondata = JSON.parse(myGetRequest.responseText);
+                        const currentTalkData = jsondata.timerInfo.find(t => t.talkId === jsondata.status.talkId);
+                        currentTalk = document.getElementById(`talk_${currentTalkData.talkId}`);
+                        const timeElapsedParts = jsondata.status.timeElapsed.split(":");
+                        const currentTimerHours = parseInt(timeElapsedParts[0], 10);
+                        const currentTimerMins = parseInt(timeElapsedParts[1], 10) + (currentTimerHours * 60);
+                        const currentTimerSecs = parseFloat(timeElapsedParts[2]);
+                        currentTargetSecs = parseInt(jsondata.status.targetSeconds, 10);
+                        closingSecs = parseInt(jsondata.status.closingSecs, 10);
+                        currentlyCountingUp = currentTalkData.countUp;
 
-                        if (!timersLoaded) {
-                            const keys = ["talkId", "talkTitle"];
-                            const sectionHtml = `<tr class="section {section}"><td colspan="2">{name}</td></tr>`;
-                            const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td{colour}>{timer}</td></tr>`;
-                            // Load the timers list
-                            const parts = [];
-                            let currentSection = null;
-                            for (let i = 0; i < jsondata.timerInfo.length; i++) {
-                                const timerInfo = jsondata.timerInfo[i];
-                                if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
-                                    currentSection = timerInfo.meetingSectionNameInternal;
-                                    parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replaceAll(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
-                                }
-                                let currPart = talkHtml;
-                                keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
+                        const serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000);
+                        const diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
+
+                        if (Math.abs(diffMillisecs) > 100) {
+                            timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
+                        }
+                    } else {
+                        currentTalk = null;
+                        currentMode = "Timers";
+                        for (let i = 0; i < jsondata.timerInfo.length; i++) {
+                            const timerInfo = jsondata.timerInfo[i];
+                            if (timerInfo.completedTimeSecs != null) {
                                 const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
                                 const timerText = timerInfo.countUp ?
                                                     getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
                                                     getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
-
-                                currPart = currPart.replace('{timer}', timerText);
-                                if (timerInfo.completedTimeSecs != null) {
-                                    const talkRow = { className: null };
-                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, talkRow);
-                                    currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
-                                    currPart = currPart.replace('"talk_info"', '"talk_info completed"');
-                                } else {
-                                    currPart = currPart.replace('{colour}', '');
-                                }
-                                parts.push(currPart);
-                            }
-                            const table = document.createElement("table");
-                            table.id = "timers";
-                            table.className = 'talk_timers';
-                            table.innerHTML = parts.join("\n");
-                            mainDiv.appendChild(table);
-                            timersLoaded = true;
-                        }
-
-                        if (jsondata.status.isRunning) {
-                            currentMode = "Timer";
-                            const requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
-                            const timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
-
-                            const currentTalkData = jsondata.timerInfo.find(t => t.talkId === jsondata.status.talkId);
-                            currentTalk = document.getElementById(`talk_${currentTalkData.talkId}`);
-                            const timeElapsedParts = jsondata.status.timeElapsed.split(":");
-                            const currentTimerHours = parseInt(timeElapsedParts[0], 10);
-                            const currentTimerMins = parseInt(timeElapsedParts[1], 10) + (currentTimerHours * 60);
-                            const currentTimerSecs = parseFloat(timeElapsedParts[2]);
-                            currentTargetSecs = parseInt(jsondata.status.targetSeconds, 10);
-                            closingSecs = parseInt(jsondata.status.closingSecs, 10);
-                            currentlyCountingUp = currentTalkData.countUp;
-
-                            const serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000);
-                            const diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
-
-                            if (Math.abs(diffMillisecs) > 100) {
-                                // client timer out by more than 1/10 sec so adjust the timerStart
-                                timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
-                            }
-                        } else {
-                            currentTalk = null;
-                            currentMode = "Timers";
-                            // Adjust timer colors for completed parts
-                            for (let i = 0; i < jsondata.timerInfo.length; i++) {
-                                const timerInfo = jsondata.timerInfo[i];
-                                if (timerInfo.completedTimeSecs != null) {
-                                    const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
-                                    const timerText = timerInfo.countUp ?
-                                                        getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
-                                                        getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
-                                    const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
-                                    talkRow.className = "talk_info completed";
-                                    const timerCell = talkRow.getElementsByTagName('td')[1];
-                                    timerCell.textContent = timerText;
-                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, timerCell);
-                                }
+                                const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
+                                talkRow.className = "talk_info completed";
+                                const timerCell = talkRow.getElementsByTagName('td')[1];
+                                timerCell.textContent = timerText;
+                                setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, timerCell);
                             }
                         }
                     }
-                    else {
-                        currentMode = "Offline";
-                    }
+                } else {
+                    currentMode = "Offline";
                 }
-            }
-
-            myGetRequest.ontimeout = function (e) {
+            } catch {
                 currentMode = "Offline";
-            };
-
-            const url = `../api/v3/timers?${clientDate.getTime()}`;	// unique uri to prevent reuse of cached json
-            myGetRequest.open("GET", url, true);
-            myGetRequest.timeout = 2000;
-            myGetRequest.send(null);
+            }
 
             setTimeout(getOnlyTJson, POLLING_INTERVAL_SECS * 1000);
         }
@@ -328,8 +310,8 @@
                 }
 
                 default:
+                    onlineToOfflineCount++;
                     if (!timersLoaded || onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT) {
-                        onlineToOfflineCount++;
                         offlineTextElem.style.display = "";
                         if (timersLoaded) {
                             document.getElementById("timers").remove();
