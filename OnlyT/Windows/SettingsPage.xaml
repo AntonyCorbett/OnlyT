@@ -107,7 +107,7 @@
                                 Style="{StaticResource MiscNotesStyle}"
                                 Text="{x:Static resx:Resources.CONTROLLED_BY_CMD_LINE}"
                                 TextWrapping="Wrap"
-                                Visibility="{Binding Path=ShouldShowTimerMonitorCommandLineNote, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                Visibility="{Binding Path=ShouldShowTimerMonitorCommandLine, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                             <TextBlock
                                 Width="305"
