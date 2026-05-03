@@ -324,7 +324,16 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("ClockHtmlTemplate", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string for shared clock JavaScript functions.
+        /// </summary>
+        public static string SharedClockJs {
+            get {
+                return ResourceManager.GetString("SharedClockJs", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to CLOSE COUNTDOWN.
         /// </summary>

@@ -1,0 +1,46 @@
+<script>
+"use strict";
+
+function formatMajorMinor(major, minor) {
+    return String(major).padStart(2, '0') + ':' + String(minor).padStart(2, '0');
+}
+
+function getTimeDisplayStringCountingUp(elapsedSecs) {
+    let integralSecs = Math.abs(Math.floor(elapsedSecs % 60));
+    let integralMins = Math.abs(Math.floor(elapsedSecs / 60));
+
+    if (integralSecs === 60) {
+        integralSecs = 0;
+        ++integralMins;
+    }
+
+    return formatMajorMinor(integralMins, integralSecs);
+}
+
+function getTimeDisplayStringCountingDown(elapsedSecs, targetSecs) {
+    let remainingSecs = targetSecs - elapsedSecs;
+    let integralSecs = Math.abs(Math.ceil(remainingSecs % 60));
+    let integralMins = Math.abs(Math.floor(remainingSecs / 60));
+
+    if (integralSecs === 60) {
+        integralSecs = 0;
+        ++integralMins;
+    }
+
+    if (remainingSecs < 0 && integralMins > 0) {
+        --integralMins;
+    }
+
+    return formatMajorMinor(integralMins, integralSecs);
+}
+
+function setClockColour(remainingSecs, closingSecs, targetElem) {
+    if (remainingSecs <= 0) {
+        targetElem.className = 'clockstyle_red';
+    } else if (remainingSecs <= closingSecs) {
+        targetElem.className = 'clockstyle_yellow';
+    } else {
+        targetElem.className = 'clockstyle_green';
+    }
+}
+</script>

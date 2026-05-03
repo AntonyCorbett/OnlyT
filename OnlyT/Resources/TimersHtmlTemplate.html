@@ -1,34 +1,33 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyT Timers</title>
-    <style type="text/css">
+    {SHARED_JS}
+    <style>
         html {
             font-family: sans-serif;
             background: #000000;
-            display: block;
-            height: 100%;
             margin: 0;
             padding: 0;
+            height: 100%;
         }
 
         body {
-            display: table;
-            width: 100%;
-            height: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
             margin: 0;
             padding: 0;
         }
 
         .main {
-            display: table-cell;
-            width: 100%;
-            height: 97%;
-            vertical-align: middle;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding-bottom: 5px;
         }
 
         #maintext {
@@ -62,8 +61,6 @@
         }
 
         .link_container {
-            display: table-row;
-            width: 99%;
             text-align: right;
             padding: 5px;
         }
@@ -150,7 +147,7 @@
     </div>
     <div class="link_container"><a href="./index">{WEB_LINK_CLOCK}</a></div>
 
-    <script type="text/javascript">
+    <script>
         "use strict";
 
         const mainDiv = document.getElementById("main");
@@ -195,7 +192,7 @@
                                 const timerInfo = jsondata.timerInfo[i];
                                 if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
                                     currentSection = timerInfo.meetingSectionNameInternal;
-                                    parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replace(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
+                                    parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replaceAll(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
                                 }
                                 let currPart = talkHtml;
                                 keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
@@ -289,22 +286,6 @@
             return (milliSecsNow - clientStartMilliSecs);
         }
 
-        function formatMajorMinor(major, minor) {
-            return `${("0" + major).slice(-2)}:${("0" + minor).slice(-2)}`;
-        }
-
-        function setClockColour(remainingSecs, closingSecs, targetElem) {
-            if (remainingSecs <= 0) {
-                targetElem.className = "clockstyle_red";
-            }
-            else if (remainingSecs <= closingSecs) {
-                targetElem.className = "clockstyle_yellow";
-            }
-            else {
-                targetElem.className = "clockstyle_green";
-            }
-        }
-
         function getDisplayString() {
             modeTransition = (currentDisplayMode != currentMode);
 
@@ -324,7 +305,7 @@
 
                     let timerCell = null;
                     if (!!currentTalk && !!(timerCell = currentTalk.getElementsByTagName('td')[1])) {
-                        currentTalk.className = 'talk_info';                        
+                        currentTalk.className = 'talk_info';
                         setClockColour(remainingSecs, closingSecs, timerCell);
                     }
                     currentDisplayMode = currentMode;
@@ -349,46 +330,15 @@
             }
         }
 
-        function getTimeDisplayStringCountingUp(elapsedSecs) {
-            let integralSecs = Math.abs(Math.floor(elapsedSecs % 60));
-            let integralMins = Math.abs(Math.floor(elapsedSecs / 60));
-
-            if (integralSecs === 60) {
-                integralSecs = 0;
-                ++integralMins;
-            }
-
-            return formatMajorMinor(integralMins, integralSecs);
-        }
-
-        function getTimeDisplayStringCountingDown(elapsedSecs, targetSecs) {
-            let remainingSecs = targetSecs - elapsedSecs;
-            let integralSecs = Math.abs(Math.ceil(remainingSecs % 60));
-            let integralMins = Math.abs(Math.floor(remainingSecs / 60));
-
-            if (integralSecs === 60) {
-                integralSecs = 0;
-                ++integralMins;
-            }
-
-            if (remainingSecs < 0 && integralMins > 0) {
-                --integralMins;
-            }
-
-            return formatMajorMinor(integralMins, integralSecs);
-        }
-
         function updateTimer() {
             let s = getDisplayString();
-            if (s != "stet") {
-                if (!!currentTalk) {
-                    currentTalk.getElementsByTagName("td")[1].innerHTML = s;
-                } else {
-                    textNode.data = s;
-                }
+            if (!!currentTalk) {
+                currentTalk.getElementsByTagName("td")[1].innerHTML = s;
+            } else {
+                textNode.data = s;
             }
 
-            setTimeout(updateTimer, 100); // every 1/100 sec
+            setTimeout(updateTimer, 100); // every 1/10 sec
         }
 
         getOnlyTJson();

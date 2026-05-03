@@ -66,9 +66,8 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         if (port > 0)
         {
             _listener = new HttpListener();
-               
             _port = port;
-            Task.Factory.StartNew((_) => StartListening(), TaskCreationOptions.LongRunning);
+            _ = Task.Run(StartListeningAsync);
         }
     }
 
@@ -115,13 +114,13 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         _listener.Prefixes.Add($"http://{ipAddress}:{_port}/api/");
     }
 
-    private void StartListening()
+    private async Task StartListeningAsync()
     {
         try
         {
             StartListener();
 
-            if(_listener == null)
+            if (_listener == null)
             {
                 Log.Logger.Warning("Could not create listener");
                 return;
@@ -131,19 +130,17 @@ internal sealed class HttpServer : IHttpServer, IDisposable
             {
                 try
                 {
-                    IAsyncResult? result = null;
-
-                    if (_listener.IsListening)
-                    {
-                        result = _listener.BeginGetContext(ListenerCallback, _listener);
-                    }
-
-                    // Waiting for request to be processed
-                    result?.AsyncWaitHandle.WaitOne();
+                    var context = await _listener.GetContextAsync();
+                    _ = Task.Run(() => HandleContext(context));
+                }
+                catch (HttpListenerException ex) when (ex.ErrorCode == 995)
+                {
+                    // Listener was stopped (shutdown or reconfiguration).
+                    break;
                 }
                 catch (Exception ex)
                 {
-                    Log.Logger.Error(ex, "Could not start listening");
+                    Log.Logger.Error(ex, "Could not get context");
                 }
             }
         }
@@ -153,68 +150,51 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         }
     }
 
-    private void ListenerCallback(IAsyncResult result)
+    private void HandleContext(HttpListenerContext context)
     {
-        if (_listener?.IsListening ?? false)
+        HttpListenerResponse? response = null;
+        try
         {
-            HttpListenerResponse? response = null;
-            try
+            response = context.Response;
+
+            if (context.Request.Url?.Segments.Length > 1 && (_listener?.IsListening ?? false))
             {
-                // Call EndGetContext to complete the asynchronous operation...
-                var context = _listener.EndGetContext(result);
+                var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
 
-                // Obtain a response object.
-                response = context.Response;
-                
-                // Construct a response. 
-                if (context.Request.Url?.Segments.Length > 1)
+                switch (segment)
                 {
-                    // segments: "/" ...
-                    if (_listener.IsListening)
-                    {
-                        var segment = context.Request.Url.Segments[1].TrimEnd('/').ToLower();
+                    case "data":
+                        HandleRequestForClockWebPageTimerData(context.Request, response);
+                        break;
 
-                        switch (segment)
-                        {
-                            case "data":
-                                HandleRequestForClockWebPageTimerData(context.Request, response);
-                                break;
+                    case "index":
+                        HandleRequestForClockWebPage(context.Request, response);
+                        break;
 
-                            case "index":
-                                HandleRequestForClockWebPage(context.Request, response);
-                                break;
+                    case "timers":
+                        HandleRequestForTimersWebPage(context.Request, response);
+                        break;
 
-                            case "timers":
-                                HandleRequestForTimersWebPage(context.Request, response);
-                                break;
-
-                            case "api":
-                                HandleApiRequest(context.Request, response);
-                                break;
-                        }
-                    }
+                    case "api":
+                        HandleApiRequest(context.Request, response);
+                        break;
                 }
             }
-            catch (HttpListenerException ex) when (ex.ErrorCode == 995)
-            {
-                // Listener was stopped, e.g. during shutdown or
-                // when manually reconfiguring the listener.
-                // Ignore this exception.
-            }
-            catch (WebServerException ex)
-            {
-                _dedupLogger.LogErrorDedup(ex, "Web server error");
-                WriteApiErrorResponse(response, ex.Code);
-            }
-            catch (Exception ex)
-            {
-                _dedupLogger.LogErrorDedup(ex, "Web server error");
-                WriteApiErrorResponse(response, WebServerErrorCode.UnknownError);                   
-            }
-            finally
-            {
-                (response as IDisposable)?.Dispose();
-            }
+        }
+        catch (HttpListenerException ex) when (ex.ErrorCode == 995) { }
+        catch (WebServerException ex)
+        {
+            _dedupLogger.LogErrorDedup(ex, "Web server error");
+            WriteApiErrorResponse(response, ex.Code);
+        }
+        catch (Exception ex)
+        {
+            _dedupLogger.LogErrorDedup(ex, "Web server error");
+            WriteApiErrorResponse(response, WebServerErrorCode.UnknownError);
+        }
+        finally
+        {
+            (response as IDisposable)?.Dispose();
         }
     }
 
@@ -238,10 +218,21 @@ internal sealed class HttpServer : IHttpServer, IDisposable
 
     private void HandleApiRequest(HttpListenerRequest request, HttpListenerResponse response)
     {
-        if (_optionsService.Options.IsApiEnabled)
+        if (_optionsService.Options.IsApiEnabled || IsWebClockTimersGetRequest(request))
         {
             _apiRouter.HandleRequest(request, response);
         }
+    }
+
+    // Allows the Timers web page to fetch schedule data even when Remote Apps is disabled.
+    // The timers list GET is read-only and requires the same IsWebClockEnabled flag as the page itself.
+    private bool IsWebClockTimersGetRequest(HttpListenerRequest request)
+    {
+        if (!_optionsService.Options.IsWebClockEnabled) return false;
+        if (!request.HttpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase)) return false;
+        var segments = request.Url?.Segments;
+        return segments?.Length >= 4
+            && segments[3].TrimEnd('/').Equals("timers", StringComparison.OrdinalIgnoreCase);
     }
 
     private void HandleRequestForClockWebPage(HttpListenerRequest request, HttpListenerResponse response)
@@ -249,9 +240,7 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         if (_optionsService.Options.IsWebClockEnabled)
         {
             _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
-
-            var controller = new WebPageController(WebPageTypes.Clock);
-            controller.HandleRequestForWebPage(response);
+            WebPageController.HandleRequestForWebPage(response, WebPageTypes.Clock);
         }
     }
 
@@ -260,9 +249,7 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         if (_optionsService.Options.IsWebClockEnabled)
         {
             _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
-
-            var controller = new WebPageController(WebPageTypes.Timers);
-            controller.HandleRequestForWebPage(response);
+            WebPageController.HandleRequestForWebPage(response, WebPageTypes.Timers);
         }
     }
 
