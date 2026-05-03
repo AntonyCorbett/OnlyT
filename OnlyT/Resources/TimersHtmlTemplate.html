@@ -310,6 +310,9 @@
                 }
 
                 default:
+                    if (currentMode === "Nameplate") {
+                        break;
+                    }
                     onlineToOfflineCount++;
                     if (!timersLoaded || onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT) {
                         offlineTextElem.style.display = "";
