@@ -152,8 +152,6 @@
 
         const mainDiv = document.getElementById("main");
         const offlineTextElem = document.getElementById("maintext");
-        const textNode = document.createTextNode("");
-        offlineTextElem.appendChild(textNode);
 
         const POLLING_INTERVAL_SECS = 4;
         const MAX_OFFLINE_TO_OFFLINE_COUNT = 3;
@@ -255,7 +253,7 @@
                                     const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
                                     talkRow.className = "talk_info completed";
                                     const timerCell = talkRow.getElementsByTagName('td')[1];
-                                    timerCell.innerHTML = timerText;
+                                    timerCell.textContent = timerText;
                                     setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, timerCell);
                                 }
                             }
@@ -288,31 +286,49 @@
         function getDisplayString() {
             switch (currentMode) {
                 case "Timers":
+                    return "";
+                case "Timer": {
+                    const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
+                    return currentlyCountingUp
+                        ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
+                        : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+                }
+                default:
+                    return currentMode !== "Nameplate" ? "{WEB_OFFLINE}" : "OnlyT";
+            }
+        }
+
+        function updateTimer() {
+            const s = getDisplayString();
+
+            switch (currentMode) {
+                case "Timers":
                     onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
-                    return "";
+                    currentDisplayMode = currentMode;
+                    break;
 
-                case "Timer":
+                case "Timer": {
                     onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
                     const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
                     const remainingSecs = currentTargetSecs - clientTimerTotalElapsedSecs;
-
-                    let timerCell = null;
-                    if (!!currentTalk && !!(timerCell = currentTalk.getElementsByTagName('td')[1])) {
-                        currentTalk.className = 'talk_info';
-                        setClockColour(remainingSecs, closingSecs, timerCell);
+                    if (currentTalk) {
+                        const timerCell = currentTalk.getElementsByTagName('td')[1];
+                        if (timerCell) {
+                            currentTalk.className = 'talk_info';
+                            setClockColour(remainingSecs, closingSecs, timerCell);
+                            timerCell.textContent = s;
+                        }
                     }
                     currentDisplayMode = currentMode;
-
-                    return currentlyCountingUp
-                        ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
-                        : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+                    break;
+                }
 
                 default:
-                    if (!timersLoaded || (timersLoaded && onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT)) {
+                    if (!timersLoaded || onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT) {
                         onlineToOfflineCount++;
                         offlineTextElem.style.display = "";
                         if (timersLoaded) {
@@ -323,16 +339,8 @@
                         currentDisplayMode = currentMode;
                         offlineTextElem.className = "clockstyle_dim";
                     }
-                    return currentMode !== "Nameplate" ? "{WEB_OFFLINE}" : "OnlyT";
-            }
-        }
-
-        function updateTimer() {
-            let s = getDisplayString();
-            if (!!currentTalk) {
-                currentTalk.getElementsByTagName("td")[1].innerHTML = s;
-            } else {
-                textNode.data = s;
+                    offlineTextElem.textContent = s;
+                    break;
             }
 
             setTimeout(updateTimer, 100); // every 1/10 sec
