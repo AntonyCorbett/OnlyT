@@ -163,7 +163,6 @@
         let closingSecs = 30;
         let currentlyCountingUp = false;
         let timerStartDateTime = new Date();
-        let modeTransition = false;
         let currentTalk = null;
         let timersLoaded = false;
         let onlineToOfflineCount = 0;
@@ -177,8 +176,8 @@
             myGetRequest.onreadystatechange = function () {
                 let responseDate = new Date();
 
-                if (myGetRequest.readyState == 4) {
-                    if ((myGetRequest.status == 200 || window.location.href.indexOf("http") == -1) && !!myGetRequest.responseText) {
+                if (myGetRequest.readyState === 4) {
+                    if ((myGetRequest.status === 200 || window.location.href.indexOf("http") === -1) && !!myGetRequest.responseText) {
                         const jsondata = JSON.parse(myGetRequest.responseText);
 
                         if (!timersLoaded) {
@@ -188,7 +187,7 @@
                             // Load the timers list
                             const parts = [];
                             let currentSection = null;
-                            for (var i = 0; i < jsondata.timerInfo.length; i++) {
+                            for (let i = 0; i < jsondata.timerInfo.length; i++) {
                                 const timerInfo = jsondata.timerInfo[i];
                                 if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
                                     currentSection = timerInfo.meetingSectionNameInternal;
@@ -202,7 +201,7 @@
                                                     getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
 
                                 currPart = currPart.replace('{timer}', timerText);
-                                if (!!timerInfo.completedTimeSecs) {
+                                if (timerInfo.completedTimeSecs != null) {
                                     const talkRow = { className: null };
                                     setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, talkRow);
                                     currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
@@ -228,11 +227,11 @@
                             const currentTalkData = jsondata.timerInfo.find(t => t.talkId === jsondata.status.talkId);
                             currentTalk = document.getElementById(`talk_${currentTalkData.talkId}`);
                             const timeElapsedParts = jsondata.status.timeElapsed.split(":");
-                            const currentTimerHours = parseInt(timeElapsedParts[0]);
-                            const currentTimerMins = parseInt(timeElapsedParts[1]) + (currentTimerHours * 60);
+                            const currentTimerHours = parseInt(timeElapsedParts[0], 10);
+                            const currentTimerMins = parseInt(timeElapsedParts[1], 10) + (currentTimerHours * 60);
                             const currentTimerSecs = parseFloat(timeElapsedParts[2]);
-                            currentTargetSecs = parseInt(jsondata.status.targetSeconds);
-                            closingSecs = parseInt(jsondata.status.closingSecs);
+                            currentTargetSecs = parseInt(jsondata.status.targetSeconds, 10);
+                            closingSecs = parseInt(jsondata.status.closingSecs, 10);
                             currentlyCountingUp = currentTalkData.countUp;
 
                             const serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000);
@@ -246,9 +245,9 @@
                             currentTalk = null;
                             currentMode = "Timers";
                             // Adjust timer colors for completed parts
-                            for (var i = 0; i < jsondata.timerInfo.length; i++) {
+                            for (let i = 0; i < jsondata.timerInfo.length; i++) {
                                 const timerInfo = jsondata.timerInfo[i];
-                                if (!!timerInfo.completedTimeSecs) {
+                                if (timerInfo.completedTimeSecs != null) {
                                     const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
                                     const timerText = timerInfo.countUp ?
                                                         getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
@@ -287,8 +286,6 @@
         }
 
         function getDisplayString() {
-            modeTransition = (currentDisplayMode != currentMode);
-
             switch (currentMode) {
                 case "Timers":
                     onlineToOfflineCount = 0;
