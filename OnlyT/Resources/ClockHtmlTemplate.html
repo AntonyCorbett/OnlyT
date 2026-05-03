@@ -58,26 +58,31 @@
 				color: #668080;
 			}
 
-			a,
-			a:visited {
-				color: white;
-				font-weight: bold;
-			}
-
-			a:hover {
-				color: silver;
-			}
-
 			.link_container {
 				text-align: right;
-				padding: 5px;
+				padding: 12px 16px;
 			}
 
-			.link_container a {
-				margin-right: 5px;
-				padding: 5px;
-				background-color: gray;
+			.link_container a,
+			.link_container a:visited {
+				display: inline-block;
+				margin-left: 8px;
+				padding: 7px 18px;
+				border: 1px solid #4a4a4a;
+				border-radius: 999px;
+				color: #888;
+				font-weight: normal;
+				font-size: 0.75em;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
 				text-decoration: none;
+				transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+			}
+
+			.link_container a:hover {
+				color: #ddd;
+				border-color: #888;
+				background-color: rgba(255, 255, 255, 0.06);
 			}
 		</style>
 	</head>

@@ -7,7 +7,7 @@
     {SHARED_JS}
     <style>
         html {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: #000000;
             margin: 0;
             padding: 0;
@@ -62,76 +62,92 @@
 
         .link_container {
             text-align: right;
-            padding: 5px;
+            padding: 12px 16px;
         }
 
-        .link_container a {
-            margin-right: 5px;
-            padding: 5px;
-            background-color: gray;
+        .link_container a,
+        .link_container a:visited {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 7px 18px;
+            border: 1px solid #4a4a4a;
+            border-radius: 999px;
+            color: #888;
+            font-weight: normal;
+            font-size: 0.75em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             text-decoration: none;
+            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .link_container a:hover {
+            color: #ddd;
+            border-color: #888;
+            background-color: rgba(255, 255, 255, 0.06);
         }
 
         .talk_timers {
             min-width: 50%;
             margin: 0 auto;
-            font-size: 2em;
+            font-size: 1.9em;
+            border-collapse: separate;
+            border-spacing: 0 4px;
         }
 
         tr.talk_info {
-            color: #ffffff;
-            margin: 0 10px;
+            color: #e0e0e0;
         }
 
         .talk_info td {
-            padding: 10px;
+            padding: 12px 16px;
+            vertical-align: middle;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         .talk_info td:first-child {
             min-width: 80%;
             text-align: left;
-            background-color: white;
-            color: black;
-        }
-
-        .talk_info.completed td:first-child {
-            color: #8d8d8d;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            border-radius: 6px 0 0 6px;
         }
 
         .talk_info td:last-child {
             text-align: center;
-            background-color: #191818;
+            background-color: #1e1e1e;
+            border-radius: 0 6px 6px 0;
+            font-weight: bold;
+            font-kerning: none;
+            font-variant-numeric: tabular-nums;
+            transition: color 0.3s ease, background-color 0.4s ease;
+        }
+
+        .talk_info.completed td:first-child {
+            color: #6a6a6a;
+            background-color: #1e1e1e;
+        }
+
+        .talk_info.completed td:last-child {
+            background-color: #161616;
+            opacity: 0.55;
         }
 
         .section td {
-            color: white;
+            color: rgba(255, 255, 255, 0.85);
             text-align: left;
-            padding: 5px;
+            padding: 10px 14px;
+            vertical-align: middle;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.55em;
+            letter-spacing: 0.18em;
+            border-radius: 4px;
         }
 
-        .treasures td {
-            background-color: #5a6a70;
-        }
-
-        .ministry td {
-            background-color: #c18626;
-        }
-
-        .living td {
-            background-color: #961526;
-        }
-
-        a,
-        a:visited {
-            color: white;
-            font-weight: bold;
-        }
-
-        a:hover {
-            color: silver;
-        }
+        .treasures td { background-color: #5a6a70; }
+        .ministry td  { background-color: #c18626; }
+        .living td    { background-color: #961526; }
 
         @media (max-width: 700px) {
             .talk_timers {
