@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\" -Force | Select-Object Name, @{Name=\"IsDir\";Expression={$_.PSIsContainer}} | Format-Table -AutoSize)"
+    ]
+  }
+}
