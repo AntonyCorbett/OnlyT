@@ -492,6 +492,10 @@ Shift - Increase 5m</value>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
     <value>Aktivert</value>
   </data>
+  <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
+    <value>Show seconds in time of day</value>
+    <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
+  </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
     <value>Vis sekunder</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
