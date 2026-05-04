@@ -84,7 +84,8 @@ internal sealed class WebPageController
                 Mins = (now.Hour * 60) + now.Minute,
                 Secs = now.Second,
                 Ms = now.Millisecond,
-                Use24Hr = timerInfo.Use24HrFormat
+                Use24Hr = timerInfo.Use24HrFormat,
+                ShowSecs = timerInfo.ShowTimeOfDaySeconds
             },
             ClockServerMode.Timer => new ClockData
             {
@@ -112,5 +113,6 @@ internal sealed class WebPageController
         public int ClosingSecs { get; set; }
         public bool CountUp { get; set; }
         public bool Use24Hr { get; set; }
+        public bool ShowSecs { get; set; }
     }
 }

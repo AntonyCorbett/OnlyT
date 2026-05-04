@@ -637,6 +637,15 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("ENABLED_WEB_CLOCK", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show seconds in time of day.
+        /// </summary>
+        public static string WEB_CLOCK_SHOW_TOD_SECONDS {
+            get {
+                return ResourceManager.GetString("WEB_CLOCK_SHOW_TOD_SECONDS", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Flat clock.

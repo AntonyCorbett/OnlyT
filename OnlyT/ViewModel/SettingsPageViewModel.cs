@@ -789,6 +789,19 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool WebClockShowTimeOfDaySeconds
+    {
+        get => _optionsService.Options.WebClockShowTimeOfDaySeconds;
+        set
+        {
+            if (_optionsService.Options.WebClockShowTimeOfDaySeconds != value)
+            {
+                _optionsService.Options.WebClockShowTimeOfDaySeconds = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool IsApiEnabled
     {
         get => _optionsService.Options.IsApiEnabled;

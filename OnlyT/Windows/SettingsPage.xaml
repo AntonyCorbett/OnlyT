@@ -436,6 +436,13 @@
                             IsChecked="{Binding IsWebClockEnabled, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
+                        <CheckBox
+                            AutomationProperties.AutomationId="WebClockShowTodSecondsCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.WEB_CLOCK_SHOW_TOD_SECONDS}"
+                            Content="{x:Static resx:Resources.WEB_CLOCK_SHOW_TOD_SECONDS}"
+                            IsChecked="{Binding WebClockShowTimeOfDaySeconds, Mode=TwoWay}"
+                            Style="{StaticResource SettingsCheckBox}" />
+
                         <TextBlock>
                             <Hyperlink
                                 AutomationProperties.AutomationId="WebClockUrlLink"
