@@ -141,6 +141,9 @@
   <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClockHtmlTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
+  <data name="SharedClockJs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SharedClockJsTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
     <value>12 hores (0:00)</value>
     <comment>The 12-hour clock format</comment>
@@ -489,6 +492,10 @@ Shift - Augmenta 5m</value>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
     <value>Habilitat</value>
   </data>
+  <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
+    <value>Show seconds in time of day</value>
+    <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
+  </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
     <value>Mostra els segons</value>
     <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
@@ -743,5 +750,37 @@ Shift - Augmenta 5m</value>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
     <value>Allow mouse wheel to adjust timer</value>
     <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="START_TIMER" xml:space="preserve">
+    <value>Start timer</value>
+    <comment>Accessible name for the Start button on the operator page</comment>
+  </data>
+  <data name="STOP_TIMER" xml:space="preserve">
+    <value>Stop timer</value>
+    <comment>Accessible name for the Stop button on the operator page</comment>
+  </data>
+  <data name="EXPAND_WINDOW" xml:space="preserve">
+    <value>Expand window</value>
+    <comment>Accessible name for the expand button shown in shrink mode</comment>
+  </data>
+  <data name="CLOSE_APP" xml:space="preserve">
+    <value>Close application</value>
+    <comment>Accessible name for the close application button shown in shrink mode</comment>
+  </data>
+  <data name="TIMER_DISPLAY" xml:space="preserve">
+    <value>Timer display</value>
+    <comment>Accessible name for the timer display area on the operator page</comment>
+  </data>
+  <data name="BELL_TOGGLE" xml:space="preserve">
+    <value>Toggle bell</value>
+    <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
+  </data>
+  <data name="TALK_SELECTOR" xml:space="preserve">
+    <value>Select talk</value>
+    <comment>Accessible name for the talk selector combo box on the operator page</comment>
+  </data>
+  <data name="BACK_TO_OPERATOR" xml:space="preserve">
+    <value>Back to operator page</value>
+    <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
 </root>
