@@ -19,7 +19,8 @@
             flex-direction: column;
             min-height: 100%;
             margin: 0;
-            padding: 0;
+            padding: 0 0 56px;
+            box-sizing: border-box;
         }
 
         .main {
@@ -61,8 +62,11 @@
         }
 
         .link_container {
+            position: fixed;
+            right: 16px;
+            bottom: 12px;
             text-align: right;
-            padding: 12px 16px;
+            z-index: 10;
         }
 
         .link_container a,
