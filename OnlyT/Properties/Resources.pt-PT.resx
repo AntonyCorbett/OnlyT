@@ -493,7 +493,7 @@ Shift - Adicionar 5m</value>
     <value>Ativado</value>
   </data>
   <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
-    <value>Show seconds in time of day</value>
+    <value>Mostrar segundos na hora do dia</value>
     <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
