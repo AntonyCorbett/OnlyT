@@ -112,7 +112,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
         // commands...
         StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
-        StopCommand = new AsyncRelayCommand(StopTimerAsync, () => IsRunning);
+        StopCommand = new RelayCommand(StopTimer, () => IsRunning);
         SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
         CloseAppCommand = new RelayCommand(CloseApp, () => IsNotRunning);
         ExpandFromShrinkCommand = new RelayCommand(ExpandFromShrink);
@@ -139,6 +139,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Register<RefreshScheduleMessage>(this, OnRefreshSchedule);
         WeakReferenceMessenger.Default.Register<MainWindowSizeChangedMessage>(this, OnWindowSizeChanged);
         WeakReferenceMessenger.Default.Register<MouseWheelTimerAdjustChangedMessage>(this, OnMouseWheelTimerAdjustChanged);
+        WeakReferenceMessenger.Default.Register<EndOfMeetingMessage>(this, OnEndOfMeeting);
 
         GetVersionData();
 
@@ -208,7 +209,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     public RelayCommand StartCommand { get; }
 
-    public AsyncRelayCommand StopCommand { get; }
+    public RelayCommand StopCommand { get; }
 
     public RelayCommand SettingsCommand { get; }
 
@@ -779,7 +780,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void AdjustTalkTime(TalkScheduleItem talk, int targetSecs, bool manualMode)
     {
-        if (talk.Editable == true)
+        if (talk.Editable)
         {
             var modifiedDuration = TimeSpan.FromSeconds(targetSecs);
 
@@ -980,7 +981,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Send(new NavigateMessage(PageName, SettingsPageViewModel.PageName, null));
     }
 
-    private async Task StopTimerAsync()
+    private void StopTimer()
     {
         if (Log.IsEnabled(LogEventLevel.Debug))
         {
@@ -1022,12 +1023,25 @@ public class OperatorPageViewModel : ObservableObject, IPage
         if (TalkId == 0)
         {
             // end of the meeting.
-            StoreEndOfMeetingData();
-            await GenerateTimingReportAsync().ConfigureAwait(false);
+            WeakReferenceMessenger.Default.Send(new EndOfMeetingMessage());
         }
         else
         {
             NotifyOfBadTimingIfRequired();
+        }
+    }
+
+    private void OnEndOfMeeting(object recipient, EndOfMeetingMessage message)
+    {
+        StoreEndOfMeetingData();
+
+        try
+        {
+            _ = GenerateTimingReportAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error(ex, "Error handling EndOfMeetingMessage");
         }
     }
 
@@ -1159,8 +1173,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                             success = IsRunning;
                             if (success)
                             {
-                                // fire and forget
-                                _ = StopTimerAsync();
+                                StopTimer();
                             }
 
                             break;

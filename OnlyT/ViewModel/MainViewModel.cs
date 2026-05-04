@@ -98,6 +98,7 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<AlwaysOnTopChangedMessage>(this, OnAlwaysOnTopChanged);
         WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
         WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
+        WeakReferenceMessenger.Default.Register<EndOfMeetingMessage>(this, OnEndOfMeeting);
 
         InitHttpServer();
 
@@ -135,7 +136,7 @@ public class MainViewModel : ObservableObject
         _timerOutputDisplayService.IsWindowVisible() ||
         _countdownDisplayService.IsWindowVisible();
 
-    public string? CurrentPageName { get; set; }
+    public string? CurrentPageName { get; private set; }
 
     private bool CountDownActive => _countdownDisplayService.IsCountingDown;
 
@@ -228,6 +229,7 @@ public class MainViewModel : ObservableObject
     /// <summary>
     /// Responds to change in the application's "Always on top" option.
     /// </summary>
+    /// <param name="recipient">The recipient of the message (this).</param>
     /// <param name="message">AlwaysOnTopChangedMessage message.</param>
     private void OnAlwaysOnTopChanged(object recipient, AlwaysOnTopChangedMessage message)
     {
@@ -237,6 +239,7 @@ public class MainViewModel : ObservableObject
     /// <summary>
     /// Responds to a change in timer monitor.
     /// </summary>
+    /// <param name="recipient">The recipient of the message (this).</param>
     /// <param name="message">TimerMonitorChangedMessage message.</param>
     private void OnTimerMonitorChanged(object recipient, TimerMonitorChangedMessage message)
     {
@@ -270,7 +273,7 @@ public class MainViewModel : ObservableObject
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
             }
 
             if (CountDownActive)
@@ -293,6 +296,7 @@ public class MainViewModel : ObservableObject
     /// <summary>
     /// Responds to a change in countdown monitor.
     /// </summary>
+    /// <param name="recipient">The recipient of the message (this).</param>
     /// <param name="message">CountdownMonitorChangedMessage message.</param>
     private void OnCountdownMonitorChanged(object recipient, CountdownMonitorChangedMessage message)
     {
@@ -326,7 +330,7 @@ public class MainViewModel : ObservableObject
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
             }
 
             OnPropertyChanged(nameof(AlwaysOnTop));
@@ -408,10 +412,16 @@ public class MainViewModel : ObservableObject
     {
         _countdownDisplayService.Stop(true);
     }
-        
+
+    private void OnEndOfMeeting(object recipient, EndOfMeetingMessage message)
+    {
+        _countdownDisplayService.ResetCountdownDone();
+    }
+
     /// <summary>
     /// Responds to the NavigateMessage and swaps out one page for another.
     /// </summary>
+    /// <param name="recipient"></param>
     /// <param name="message">NavigateMessage message.</param>
     private void OnNavigate(object recipient, NavigateMessage message)
     {

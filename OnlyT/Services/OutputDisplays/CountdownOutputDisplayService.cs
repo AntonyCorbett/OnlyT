@@ -165,6 +165,11 @@ internal sealed class CountdownOutputDisplayService : OutputDisplayServiceBase, 
         Task.Delay(1000).ContinueWith(_ => Application.Current.Dispatcher.BeginInvoke(new Action(Close)));
     }
 
+    public void ResetCountdownDone()
+    {
+        IsCountdownDone = false;
+    }
+
     public void Close()
     {
         try

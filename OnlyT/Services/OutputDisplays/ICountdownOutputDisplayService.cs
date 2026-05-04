@@ -22,6 +22,8 @@
 
         void Stop(bool manuallyStopped);
 
+        void ResetCountdownDone();
+
         void Hide();
 
         void Close();
