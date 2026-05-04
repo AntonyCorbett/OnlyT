@@ -78,6 +78,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private DateTime? _meetingStartTimeFromCountdown;
     private bool _isOvertime;
     private bool _isShrunk;
+    private bool _isEditingTimerDuration;
+    private string _editableTimerDuration = string.Empty;
 
     public OperatorPageViewModel(
         ITalkTimerService timerService,
@@ -111,7 +113,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         _timerService.TimerDurationChangeFromApiEvent += HandleTimerDurationChangeFromApi;
 
         // commands...
-        StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk);
+        StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk && !IsEditingTimerDuration);
         StopCommand = new RelayCommand(StopTimer, () => IsRunning);
         SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
         CloseAppCommand = new RelayCommand(CloseApp, () => IsNotRunning);
@@ -124,6 +126,9 @@ public class OperatorPageViewModel : ObservableObject, IPage
         DecrementTimerCommand = new RelayCommand(DecrementTimer, CanDecreaseTimerValue);
         DecrementTimer15Command = new RelayCommand(DecrementTimer15Secs, CanDecreaseTimerValue);
         DecrementTimer5Command = new RelayCommand(DecrementTimer5Mins, CanDecreaseTimerValue);
+        StartManualDurationEditCommand = new RelayCommand(StartManualDurationEdit, CanEditTimerValue);
+        AcceptManualDurationEditCommand = new RelayCommand(AcceptManualDurationEdit, () => IsEditingTimerDuration);
+        CancelManualDurationEditCommand = new RelayCommand(CancelManualDurationEdit, () => IsEditingTimerDuration);
         BellToggleCommand = new RelayCommand(BellToggle);
         CountUpToggleCommand = new RelayCommand(CountUpToggle);
         CloseCountdownCommand = new RelayCommand(CloseCountdownWindow);
@@ -233,11 +238,50 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     public RelayCommand DecrementTimer5Command { get; }
 
+    public RelayCommand StartManualDurationEditCommand { get; }
+
+    public RelayCommand AcceptManualDurationEditCommand { get; }
+
+    public RelayCommand CancelManualDurationEditCommand { get; }
+
     public RelayCommand BellToggleCommand { get; }
 
     public RelayCommand CountUpToggleCommand { get; }
 
     public RelayCommand CloseCountdownCommand { get; }
+
+    public bool IsEditingTimerDuration
+    {
+        get => _isEditingTimerDuration;
+        private set
+        {
+            if (_isEditingTimerDuration != value)
+            {
+                _isEditingTimerDuration = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsNotEditingTimerDuration));
+                RaiseCanExecuteIncrementDecrementChanged();
+                AcceptManualDurationEditCommand.NotifyCanExecuteChanged();
+                CancelManualDurationEditCommand.NotifyCanExecuteChanged();
+                StartCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
+
+    public bool IsNotEditingTimerDuration => !IsEditingTimerDuration;
+
+    public string EditableTimerDuration
+    {
+        get => _editableTimerDuration;
+        set
+        {
+            if (_editableTimerDuration != value)
+            {
+                _editableTimerDuration = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public bool RunFlashAnimation
     {
@@ -341,6 +385,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         {
             if (_talkId != value)
             {
+                CancelManualDurationEdit();
                 _talkId = value;
 
                 var talk = GetCurrentTalk();
@@ -845,7 +890,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private bool CanIncreaseTimerValue()
     {
-        if (IsRunning || TargetSeconds >= MaxTimerSecs)
+        if (IsRunning || IsEditingTimerDuration || TargetSeconds >= MaxTimerSecs)
         {
             return false;
         }
@@ -855,7 +900,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private bool CanDecreaseTimerValue()
     {
-        if (IsRunning || TargetSeconds <= 0)
+        if (IsRunning || IsEditingTimerDuration || TargetSeconds <= 0)
         {
             return false;
         }
@@ -866,6 +911,66 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private bool CurrentTalkTimerIsEditable()
     {
         return GetCurrentTalk()?.Editable == true;
+    }
+
+    private bool CanEditTimerValue()
+    {
+        return IsNotRunning && !IsEditingTimerDuration && CurrentTalkTimerIsEditable();
+    }
+
+    private static bool TryParseTimerDuration(string? value, out int totalSecs)
+    {
+        totalSecs = 0;
+
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return false;
+        }
+
+        var parts = value.Trim().Split([':', ' '], StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length is < 1 or > 2)
+        {
+            return false;
+        }
+
+        if (!int.TryParse(parts[0], out var mins) || mins < 0 || mins > MaxTimerMins)
+        {
+            return false;
+        }
+
+        var secs = 0;
+        if (parts.Length == 2 && (!int.TryParse(parts[1], out secs) || secs < 0 || secs > 59))
+        {
+            return false;
+        }
+
+        totalSecs = (mins * 60) + secs;
+        return totalSecs <= MaxTimerSecs;
+    }
+
+    private void StartManualDurationEdit()
+    {
+        EditableTimerDuration = TimeFormatter.FormatTimerDisplayString(TargetSeconds);
+        IsEditingTimerDuration = true;
+    }
+
+    private void AcceptManualDurationEdit()
+    {
+        if (!TryParseTimerDuration(EditableTimerDuration, out var newSecs))
+        {
+            _snackbarService.Enqueue(Properties.Resources.ENTER_VALID_DURATION);
+            return;
+        }
+
+        TargetSeconds = newSecs;
+        AdjustTalkTimeForThisSession();
+        IsEditingTimerDuration = false;
+    }
+
+    private void CancelManualDurationEdit()
+    {
+        EditableTimerDuration = TimeFormatter.FormatTimerDisplayString(TargetSeconds);
+        IsEditingTimerDuration = false;
     }
 
     private void OnAutoMeetingChanged(object recipient, AutoMeetingChangedMessage message)
@@ -1243,6 +1348,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         DecrementTimerCommand.NotifyCanExecuteChanged();
         DecrementTimer5Command.NotifyCanExecuteChanged();
         DecrementTimer15Command.NotifyCanExecuteChanged();
+        StartManualDurationEditCommand.NotifyCanExecuteChanged();
     }
 
     private async Task GenerateTimingReportAsync()

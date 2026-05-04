@@ -305,10 +305,17 @@
                             Foreground="{Binding TextColor}"
                             Text="{Binding CurrentTimerValueString}"
                             TextWrapping="NoWrap">
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding StartManualDurationEditCommand}" Gesture="LeftDoubleClick" />
+                            </TextBlock.InputBindings>
 
                             <TextBlock.Style>
-                                <Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Visible" />
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEditingTimerDuration}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding RunFlashAnimation}" Value="True">
                                             <DataTrigger.EnterActions>
                                                 <BeginStoryboard>
@@ -339,6 +346,37 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
+
+                        <TextBox
+                            x:Name="ManualDurationTextBox"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            MaxLength="5"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CaretBrush="White"
+                            FontSize="64"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            HorizontalContentAlignment="Center"
+                            IsVisibleChanged="ManualDurationTextBox_IsVisibleChanged"
+                            KeyDown="ManualDurationTextBox_KeyDown"
+                            Text="{Binding EditableTimerDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextAlignment="Center"
+                            VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEditingTimerDuration}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
 
                         <StackPanel
                             Grid.Column="0"
@@ -387,10 +425,22 @@
                             Cursor="{Binding Path=AllowCountUpDownToggle, Converter={StaticResource ToCursorConverter}}"
                             Focusable="{Binding AllowCountUpDownToggle, Mode=OneWay}"
                             IsEnabled="{Binding IsNotRunning}"
-                            Style="{StaticResource ChromelessBtn}"
                             ToolTip="{Binding CountUpOrDownTooltip, Mode=OneWay}"
-                            ToolTipService.ShowOnDisabled="True"
-                            Visibility="{Binding Path=ShowUpDownButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            ToolTipService.ShowOnDisabled="True">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ChromelessBtn}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding ShowUpDownButton}" Value="True" />
+                                                <Condition Binding="{Binding IsEditingTimerDuration}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                             <Path
                                 Data="{Binding CountUpOrDownImageData}"
                                 Fill="#f3dcbc"
@@ -402,12 +452,12 @@
 
                 <StackPanel
                     Grid.Column="1"
-                    Margin="10,5,0,5"
+                    Margin="10,0,0,0"
                     VerticalAlignment="Center"
                     Orientation="Vertical"
                     Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Button
-                        Height="35"
+                        Height="32"
                         Margin="0,0,0,2"
                         Padding="0"
                         VerticalAlignment="Top"
@@ -423,12 +473,12 @@
                             <MouseBinding Command="{Binding IncrementTimer5Command}" Gesture="Shift+LeftDoubleClick" />
                         </Button.InputBindings>
                         <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
+                            Width="22"
+                            Height="22"
                             Kind="Plus" />
                     </Button>
                     <Button
-                        Height="35"
+                        Height="32"
                         Margin="0,2,0,0"
                         Padding="0"
                         VerticalAlignment="Bottom"
@@ -444,10 +494,40 @@
                             <MouseBinding Command="{Binding DecrementTimer5Command}" Gesture="Shift+LeftDoubleClick" />
                         </Button.InputBindings>
                         <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
+                            Width="22"
+                            Height="22"
                             Kind="Minus" />
                     </Button>
+                    <Grid Margin="0,12,0,0">
+                        <Button
+                            Height="32"
+                            Padding="0"
+                            AutomationProperties.AutomationId="EditTimerButton"
+                            AutomationProperties.Name="{x:Static resx:Resources.EDIT_DURATION}"
+                            Command="{Binding StartManualDurationEditCommand}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="{x:Static resx:Resources.EDIT_DURATION}"
+                            Visibility="{Binding Path=IsNotEditingTimerDuration, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <materialDesign:PackIcon
+                                Width="22"
+                                Height="22"
+                                Kind="Pencil" />
+                        </Button>
+                        <Button
+                            Height="32"
+                            Padding="0"
+                            AutomationProperties.AutomationId="AcceptTimerEditButton"
+                            AutomationProperties.Name="{x:Static resx:Resources.ACCEPT_DURATION}"
+                            Command="{Binding AcceptManualDurationEditCommand}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="{x:Static resx:Resources.ACCEPT_DURATION}"
+                            Visibility="{Binding Path=IsEditingTimerDuration, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <materialDesign:PackIcon
+                                Width="22"
+                                Height="22"
+                                Kind="Check" />
+                        </Button>
+                    </Grid>
                 </StackPanel>
             </Grid>
 
