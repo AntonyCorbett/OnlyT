@@ -1,47 +1,33 @@
-﻿namespace OnlyT.WebServer.Controllers;
+namespace OnlyT.WebServer.Controllers;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Resources;
 using System.Text;
+using System.Text.Json;
 using EventArgs;
 using NUglify;
 
 internal sealed class WebPageController
 {
-    private static readonly Dictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = [];
-    private readonly WebPageTypes _webPageType;
+    private static readonly ConcurrentDictionary<WebPageTypes, Lazy<byte[]>> WebPageHtml = new();
 
-    public WebPageController(WebPageTypes webPageType)
+    private static readonly JsonSerializerOptions JsonOptions = new()
     {
-        _webPageType = webPageType;
-        lock (WebPageHtml)
-        {
-            if (!WebPageHtml.ContainsKey(_webPageType))
-            {
-                string webPageTemplate = _webPageType switch
-                {
-                    WebPageTypes.Clock => Properties.Resources.ClockHtmlTemplate,
-                    WebPageTypes.Timers => Properties.Resources.TimersHtmlTemplate,
-                    _ => throw new NotSupportedException()
-                };
-
-                WebPageHtml.Add(_webPageType, new Lazy<byte[]>(() => GenerateWebPageHtml(webPageTemplate)));
-            }
-        }
-    }
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 
     public static void HandleRequestForTimerData(
-        HttpListenerResponse response, 
+        HttpListenerResponse response,
         TimerInfoEventArgs timerInfo,
         DateTime now)
     {
-        response.ContentType = "text/xml";
+        response.ContentType = "application/json";
         response.ContentEncoding = Encoding.UTF8;
+        response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
 
-        var responseString = CreateXml(timerInfo, now);
+        var responseString = CreateJson(timerInfo, now);
         var buffer = Encoding.UTF8.GetBytes(responseString);
 
         response.ContentLength64 = buffer.Length;
@@ -49,60 +35,84 @@ internal sealed class WebPageController
         output.Write(buffer, 0, buffer.Length);
     }
 
-    public void HandleRequestForWebPage(
-        HttpListenerResponse response)
+    public static void HandleRequestForWebPage(HttpListenerResponse response, WebPageTypes webPageType)
     {
         response.ContentType = "text/html";
         response.ContentEncoding = Encoding.UTF8;
-            
-        response.ContentLength64 = WebPageHtml[_webPageType].Value.Length;
+        response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
+
+        var html = WebPageHtml.GetOrAdd(webPageType, t => new Lazy<byte[]>(() => GenerateWebPageHtml(t)));
+        var bytes = html.Value;
+        response.ContentLength64 = bytes.Length;
         using var output = response.OutputStream;
-        output.Write(WebPageHtml[_webPageType].Value, 0, WebPageHtml[_webPageType].Value.Length);
+        output.Write(bytes, 0, bytes.Length);
+    }
+
+    private static byte[] GenerateWebPageHtml(WebPageTypes webPageType)
+    {
+        var template = webPageType switch
+        {
+            WebPageTypes.Clock => Properties.Resources.ClockHtmlTemplate,
+            WebPageTypes.Timers => Properties.Resources.TimersHtmlTemplate,
+            _ => throw new NotSupportedException()
+        };
+
+        return GenerateWebPageHtml(template);
     }
 
     private static byte[] GenerateWebPageHtml(string content)
     {
+        content = content.Replace("{SHARED_JS}", Properties.Resources.SharedClockJs);
+
         var resourceKeys = new[] { "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
         var resourceMan = new ResourceManager(typeof(Properties.Resources));
 
-#pragma warning disable U2U1210 // Do not materialize an IEnumerable<T> unnecessarily
-        resourceKeys.ToList().ForEach(k => content = content.Replace($"{{{k}}}", resourceMan.GetString(k)));
-#pragma warning restore U2U1210 // Do not materialize an IEnumerable<T> unnecessarily
+        foreach (var k in resourceKeys)
+            content = content.Replace($"{{{k}}}", resourceMan.GetString(k));
 
         return Encoding.UTF8.GetBytes(Uglify.Html(content).Code);
     }
 
-    private static string CreateXml(TimerInfoEventArgs timerInfo, DateTime now)
+    private static string CreateJson(TimerInfoEventArgs timerInfo, DateTime now)
     {
-        var sb = new StringBuilder();
-           
-        sb.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        sb.AppendLine("<root>");
-
-        switch (timerInfo.Mode)
+        var data = timerInfo.Mode switch
         {
-            case ClockServerMode.Nameplate:
-                sb.AppendLine(" <clock mode=\"Nameplate\" mins=\"0\" secs=\"0\" ms=\"0\" targetSecs=\"0\" />");
-                break;
+            ClockServerMode.Nameplate => new ClockData { Mode = "Nameplate" },
+            ClockServerMode.TimeOfDay => new ClockData
+            {
+                Mode = "TimeOfDay",
+                Mins = (now.Hour * 60) + now.Minute,
+                Secs = now.Second,
+                Ms = now.Millisecond,
+                Use24Hr = timerInfo.Use24HrFormat,
+                ShowSecs = timerInfo.ShowTimeOfDaySeconds
+            },
+            ClockServerMode.Timer => new ClockData
+            {
+                Mode = "Timer",
+                Mins = timerInfo.Mins,
+                Secs = timerInfo.Secs,
+                Ms = timerInfo.Millisecs,
+                TargetSecs = timerInfo.TargetSecs,
+                ClosingSecs = timerInfo.ClosingSecs,
+                CountUp = timerInfo.IsCountingUp
+            },
+            _ => throw new NotSupportedException()
+        };
 
-            case ClockServerMode.TimeOfDay:
-                // in this mode mins and secs hold the total offset time into the day
-                var use24Hrs = timerInfo.Use24HrFormat ? 1 : 0;
-                sb.AppendLine(
-                    $" <clock mode=\"TimeOfDay\" mins=\"{(now.Hour * 60) + now.Minute}\" secs=\"{now.Second}\" ms=\"{now.Millisecond}\" targetSecs=\"0\" use24Hr=\"{use24Hrs}\"/>");
-                break;
+        return JsonSerializer.Serialize(data, JsonOptions);
+    }
 
-            case ClockServerMode.Timer:
-                var countingUp = timerInfo.IsCountingUp ? 1 : 0;
-                sb.AppendLine(
-                    $" <clock mode=\"Timer\" mins=\"{timerInfo.Mins}\" secs=\"{timerInfo.Secs}\" ms=\"{timerInfo.Millisecs}\" targetSecs=\"{timerInfo.TargetSecs}\" countUp=\"{countingUp}\" closingSecs=\"{timerInfo.ClosingSecs}\"/>");
-                break;
-
-            default:
-                throw new NotSupportedException();
-        }
-
-        sb.AppendLine("</root>");
-        return sb.ToString();
+    private sealed class ClockData
+    {
+        public string Mode { get; set; } = "Nameplate";
+        public int Mins { get; set; }
+        public int Secs { get; set; }
+        public int Ms { get; set; }
+        public int TargetSecs { get; set; }
+        public int ClosingSecs { get; set; }
+        public bool CountUp { get; set; }
+        public bool Use24Hr { get; set; }
+        public bool ShowSecs { get; set; }
     }
 }

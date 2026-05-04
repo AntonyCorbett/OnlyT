@@ -1,34 +1,34 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyT Timers</title>
-    <style type="text/css">
+    {SHARED_JS}
+    <style>
         html {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: #000000;
-            display: block;
-            height: 100%;
             margin: 0;
             padding: 0;
+            height: 100%;
         }
 
         body {
-            display: table;
-            width: 100%;
-            height: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
             margin: 0;
-            padding: 0;
+            padding: 0 0 56px;
+            box-sizing: border-box;
         }
 
         .main {
-            display: table-cell;
-            width: 100%;
-            height: 97%;
-            vertical-align: middle;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding-bottom: 5px;
         }
 
         #maintext {
@@ -62,79 +62,96 @@
         }
 
         .link_container {
-            display: table-row;
-            width: 99%;
+            position: fixed;
+            right: 16px;
+            bottom: 12px;
             text-align: right;
-            padding: 5px;
+            z-index: 10;
         }
 
-        .link_container a {
-            margin-right: 5px;
-            padding: 5px;
-            background-color: gray;
+        .link_container a,
+        .link_container a:visited {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 7px 18px;
+            border: 1px solid #4a4a4a;
+            border-radius: 999px;
+            color: #888;
+            font-weight: normal;
+            font-size: 0.75em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             text-decoration: none;
+            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .link_container a:hover {
+            color: #ddd;
+            border-color: #888;
+            background-color: rgba(255, 255, 255, 0.06);
         }
 
         .talk_timers {
             min-width: 50%;
             margin: 0 auto;
-            font-size: 2em;
+            font-size: 1.9em;
+            border-collapse: separate;
+            border-spacing: 0 4px;
         }
 
         tr.talk_info {
-            color: #ffffff;
-            margin: 0 10px;
+            color: #e0e0e0;
         }
 
         .talk_info td {
-            padding: 10px;
+            padding: 12px 16px;
+            vertical-align: middle;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         .talk_info td:first-child {
             min-width: 80%;
             text-align: left;
-            background-color: white;
-            color: black;
-        }
-
-        .talk_info.completed td:first-child {
-            color: #8d8d8d;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            border-radius: 6px 0 0 6px;
         }
 
         .talk_info td:last-child {
             text-align: center;
-            background-color: #191818;
+            background-color: #1e1e1e;
+            border-radius: 0 6px 6px 0;
+            font-weight: bold;
+            font-kerning: none;
+            font-variant-numeric: tabular-nums;
+            transition: color 0.3s ease, background-color 0.4s ease;
+        }
+
+        .talk_info.completed td:first-child {
+            color: #6a6a6a;
+            background-color: #1e1e1e;
+        }
+
+        .talk_info.completed td:last-child {
+            background-color: #161616;
+            opacity: 0.55;
         }
 
         .section td {
-            color: white;
+            color: rgba(255, 255, 255, 0.85);
             text-align: left;
-            padding: 5px;
+            padding: 10px 14px;
+            vertical-align: middle;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.55em;
+            letter-spacing: 0.18em;
+            border-radius: 4px;
         }
 
-        .treasures td {
-            background-color: #5a6a70;
-        }
-
-        .ministry td {
-            background-color: #c18626;
-        }
-
-        .living td {
-            background-color: #961526;
-        }
-
-        a,
-        a:visited {
-            color: white;
-            font-weight: bold;
-        }
-
-        a:hover {
-            color: silver;
-        }
+        .treasures td { background-color: #5a6a70; }
+        .ministry td  { background-color: #c18626; }
+        .living td    { background-color: #961526; }
 
         @media (max-width: 700px) {
             .talk_timers {
@@ -150,13 +167,11 @@
     </div>
     <div class="link_container"><a href="./index">{WEB_LINK_CLOCK}</a></div>
 
-    <script type="text/javascript">
+    <script>
         "use strict";
 
         const mainDiv = document.getElementById("main");
         const offlineTextElem = document.getElementById("maintext");
-        const textNode = document.createTextNode("");
-        offlineTextElem.appendChild(textNode);
 
         const POLLING_INTERVAL_SECS = 4;
         const MAX_OFFLINE_TO_OFFLINE_COUNT = 3;
@@ -166,119 +181,100 @@
         let closingSecs = 30;
         let currentlyCountingUp = false;
         let timerStartDateTime = new Date();
-        let modeTransition = false;
         let currentTalk = null;
         let timersLoaded = false;
         let onlineToOfflineCount = 0;
 
-        function getOnlyTJson() {
-            let clientDate = new Date();
+        async function getOnlyTJson() {
+            const clientDate = new Date();
+            try {
+                const resp = await fetch('../api/v3/timers', { cache: 'no-store', signal: AbortSignal.timeout(2000) });
+                if (resp.ok) {
+                    const responseDate = new Date();
+                    const jsondata = await resp.json();
 
-            let myGetRequest = new XMLHttpRequest();
-            myGetRequest.overrideMimeType("application/json");
+                    if (!timersLoaded) {
+                        const keys = ["talkId", "talkTitle"];
+                        const sectionHtml = `<tr class="section {section}"><td colspan="2">{name}</td></tr>`;
+                        const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td{colour}>{timer}</td></tr>`;
+                        const parts = [];
+                        let currentSection = null;
+                        for (let i = 0; i < jsondata.timerInfo.length; i++) {
+                            const timerInfo = jsondata.timerInfo[i];
+                            if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
+                                currentSection = timerInfo.meetingSectionNameInternal;
+                                parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replaceAll(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
+                            }
+                            let currPart = talkHtml;
+                            keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
+                            const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
+                            const timerText = timerInfo.countUp ?
+                                                getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
+                                                getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
+                            currPart = currPart.replace('{timer}', timerText);
+                            if (timerInfo.completedTimeSecs != null) {
+                                const talkRow = { className: null };
+                                setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, talkRow);
+                                currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
+                                currPart = currPart.replace('"talk_info"', '"talk_info completed"');
+                            } else {
+                                currPart = currPart.replace('{colour}', '');
+                            }
+                            parts.push(currPart);
+                        }
+                        const table = document.createElement("table");
+                        table.id = "timers";
+                        table.className = 'talk_timers';
+                        table.innerHTML = parts.join("\n");
+                        mainDiv.appendChild(table);
+                        timersLoaded = true;
+                    }
 
-            myGetRequest.onreadystatechange = function () {
-                let responseDate = new Date();
+                    if (jsondata.status.isRunning) {
+                        currentMode = "Timer";
+                        const requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
+                        const timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
 
-                if (myGetRequest.readyState == 4) {
-                    if ((myGetRequest.status == 200 || window.location.href.indexOf("http") == -1) && !!myGetRequest.responseText) {
-                        const jsondata = JSON.parse(myGetRequest.responseText);
+                        const currentTalkData = jsondata.timerInfo.find(t => t.talkId === jsondata.status.talkId);
+                        currentTalk = document.getElementById(`talk_${currentTalkData.talkId}`);
+                        const timeElapsedParts = jsondata.status.timeElapsed.split(":");
+                        const currentTimerHours = parseInt(timeElapsedParts[0], 10);
+                        const currentTimerMins = parseInt(timeElapsedParts[1], 10) + (currentTimerHours * 60);
+                        const currentTimerSecs = parseFloat(timeElapsedParts[2]);
+                        currentTargetSecs = parseInt(jsondata.status.targetSeconds, 10);
+                        closingSecs = parseInt(jsondata.status.closingSecs, 10);
+                        currentlyCountingUp = currentTalkData.countUp;
 
-                        if (!timersLoaded) {
-                            const keys = ["talkId", "talkTitle"];
-                            const sectionHtml = `<tr class="section {section}"><td colspan="2">{name}</td></tr>`;
-                            const talkHtml = `<tr class="talk_info" id="talk_{${keys[0]}}"><td>{${keys[1]}}</td><td{colour}>{timer}</td></tr>`;
-                            // Load the timers list
-                            const parts = [];
-                            let currentSection = null;
-                            for (var i = 0; i < jsondata.timerInfo.length; i++) {
-                                const timerInfo = jsondata.timerInfo[i];
-                                if (currentSection !== timerInfo.meetingSectionNameInternal && timerInfo.meetingSectionNameInternal !== 'Weekend') {
-                                    currentSection = timerInfo.meetingSectionNameInternal;
-                                    parts.push(sectionHtml.replace('{section}', currentSection.trim().toLowerCase().replace(' ', '_')).replace('{name}', timerInfo.meetingSectionNameLocalised));
-                                }
-                                let currPart = talkHtml;
-                                keys.forEach(k => currPart = currPart.replace(`{${k}}`, timerInfo[k]));
+                        const serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000);
+                        const diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
+
+                        if (Math.abs(diffMillisecs) > 100) {
+                            timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
+                        }
+                    } else {
+                        currentTalk = null;
+                        currentMode = "Timers";
+                        for (let i = 0; i < jsondata.timerInfo.length; i++) {
+                            const timerInfo = jsondata.timerInfo[i];
+                            if (timerInfo.completedTimeSecs != null) {
                                 const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
                                 const timerText = timerInfo.countUp ?
                                                     getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
                                                     getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
-
-                                currPart = currPart.replace('{timer}', timerText);
-                                if (!!timerInfo.completedTimeSecs) {
-                                    const talkRow = { className: null };
-                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, talkRow);
-                                    currPart = currPart.replace('{colour}', ` class="${talkRow.className}"`);
-                                    currPart = currPart.replace('"talk_info"', '"talk_info completed"');
-                                } else {
-                                    currPart = currPart.replace('{colour}', '');
-                                }
-                                parts.push(currPart);
-                            }
-                            const table = document.createElement("table");
-                            table.id = "timers";
-                            table.className = 'talk_timers';
-                            table.innerHTML = parts.join("\n");
-                            mainDiv.appendChild(table);
-                            timersLoaded = true;
-                        }
-
-                        if (jsondata.status.isRunning) {
-                            currentMode = "Timer";
-                            const requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
-                            const timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
-
-                            const currentTalkData = jsondata.timerInfo.find(t => t.talkId === jsondata.status.talkId);
-                            currentTalk = document.getElementById(`talk_${currentTalkData.talkId}`);
-                            const timeElapsedParts = jsondata.status.timeElapsed.split(":");
-                            const currentTimerHours = parseInt(timeElapsedParts[0]);
-                            const currentTimerMins = parseInt(timeElapsedParts[1]) + (currentTimerHours * 60);
-                            const currentTimerSecs = parseFloat(timeElapsedParts[2]);
-                            currentTargetSecs = parseInt(jsondata.status.targetSeconds);
-                            closingSecs = parseInt(jsondata.status.closingSecs);
-                            currentlyCountingUp = currentTalkData.countUp;
-
-                            const serverTimerElapsedMillisecs = (currentTimerMins * 60000) + (currentTimerSecs * 1000);
-                            const diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
-
-                            if (Math.abs(diffMillisecs) > 100) {
-                                // client timer out by more than 1/10 sec so adjust the timerStart
-                                timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
-                            }
-                        } else {
-                            currentTalk = null;
-                            currentMode = "Timers";
-                            // Adjust timer colors for completed parts
-                            for (var i = 0; i < jsondata.timerInfo.length; i++) {
-                                const timerInfo = jsondata.timerInfo[i];
-                                if (!!timerInfo.completedTimeSecs) {
-                                    const targetSecs = timerInfo.adaptedDurationSecs || timerInfo.actualDurationSecs || timerInfo.modifiedDurationSecs || timerInfo.originalDurationSecs;
-                                    const timerText = timerInfo.countUp ?
-                                                        getTimeDisplayStringCountingUp(timerInfo.completedTimeSecs) :
-                                                        getTimeDisplayStringCountingDown(timerInfo.completedTimeSecs, targetSecs);
-                                    const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
-                                    talkRow.className = "talk_info completed";
-                                    const timerCell = talkRow.getElementsByTagName('td')[1];
-                                    timerCell.innerHTML = timerText;
-                                    setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, timerCell);
-                                }
+                                const talkRow = document.getElementById(`talk_${timerInfo.talkId}`);
+                                talkRow.className = "talk_info completed";
+                                const timerCell = talkRow.getElementsByTagName('td')[1];
+                                timerCell.textContent = timerText;
+                                setClockColour(targetSecs - timerInfo.completedTimeSecs, timerInfo.closingSecs, timerCell);
                             }
                         }
                     }
-                    else {
-                        currentMode = "Offline";
-                    }
+                } else {
+                    currentMode = "Offline";
                 }
-            }
-
-            myGetRequest.ontimeout = function (e) {
+            } catch {
                 currentMode = "Offline";
-            };
-
-            const url = `../api/v3/timers?${clientDate.getTime()}`;	// unique uri to prevent reuse of cached json
-            myGetRequest.open("GET", url, true);
-            myGetRequest.timeout = 2000;
-            myGetRequest.send(null);
+            }
 
             setTimeout(getOnlyTJson, POLLING_INTERVAL_SECS * 1000);
         }
@@ -289,53 +285,56 @@
             return (milliSecsNow - clientStartMilliSecs);
         }
 
-        function formatMajorMinor(major, minor) {
-            return `${("0" + major).slice(-2)}:${("0" + minor).slice(-2)}`;
-        }
-
-        function setClockColour(remainingSecs, closingSecs, targetElem) {
-            if (remainingSecs <= 0) {
-                targetElem.className = "clockstyle_red";
-            }
-            else if (remainingSecs <= closingSecs) {
-                targetElem.className = "clockstyle_yellow";
-            }
-            else {
-                targetElem.className = "clockstyle_green";
-            }
-        }
-
         function getDisplayString() {
-            modeTransition = (currentDisplayMode != currentMode);
+            switch (currentMode) {
+                case "Timers":
+                    return "";
+                case "Timer": {
+                    const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
+                    return currentlyCountingUp
+                        ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
+                        : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+                }
+                default:
+                    return currentMode !== "Nameplate" ? "{WEB_OFFLINE}" : "OnlyT";
+            }
+        }
+
+        function updateTimer() {
+            const s = getDisplayString();
 
             switch (currentMode) {
                 case "Timers":
                     onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
-                    return "";
+                    currentDisplayMode = currentMode;
+                    break;
 
-                case "Timer":
+                case "Timer": {
                     onlineToOfflineCount = 0;
                     offlineTextElem.style.display = "none";
                     document.getElementById("timers").style.display = "";
                     const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
                     const remainingSecs = currentTargetSecs - clientTimerTotalElapsedSecs;
-
-                    let timerCell = null;
-                    if (!!currentTalk && !!(timerCell = currentTalk.getElementsByTagName('td')[1])) {
-                        currentTalk.className = 'talk_info';                        
-                        setClockColour(remainingSecs, closingSecs, timerCell);
+                    if (currentTalk) {
+                        const timerCell = currentTalk.getElementsByTagName('td')[1];
+                        if (timerCell) {
+                            currentTalk.className = 'talk_info';
+                            setClockColour(remainingSecs, closingSecs, timerCell);
+                            timerCell.textContent = s;
+                        }
                     }
                     currentDisplayMode = currentMode;
-
-                    return currentlyCountingUp
-                        ? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
-                        : getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+                    break;
+                }
 
                 default:
-                    if (!timersLoaded || (timersLoaded && onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT)) {
-                        onlineToOfflineCount++;
+                    if (currentMode === "Nameplate") {
+                        break;
+                    }
+                    onlineToOfflineCount++;
+                    if (!timersLoaded || onlineToOfflineCount >= MAX_OFFLINE_TO_OFFLINE_COUNT) {
                         offlineTextElem.style.display = "";
                         if (timersLoaded) {
                             document.getElementById("timers").remove();
@@ -345,50 +344,11 @@
                         currentDisplayMode = currentMode;
                         offlineTextElem.className = "clockstyle_dim";
                     }
-                    return currentMode !== "Nameplate" ? "{WEB_OFFLINE}" : "OnlyT";
-            }
-        }
-
-        function getTimeDisplayStringCountingUp(elapsedSecs) {
-            let integralSecs = Math.abs(Math.floor(elapsedSecs % 60));
-            let integralMins = Math.abs(Math.floor(elapsedSecs / 60));
-
-            if (integralSecs === 60) {
-                integralSecs = 0;
-                ++integralMins;
+                    offlineTextElem.textContent = s;
+                    break;
             }
 
-            return formatMajorMinor(integralMins, integralSecs);
-        }
-
-        function getTimeDisplayStringCountingDown(elapsedSecs, targetSecs) {
-            let remainingSecs = targetSecs - elapsedSecs;
-            let integralSecs = Math.abs(Math.ceil(remainingSecs % 60));
-            let integralMins = Math.abs(Math.floor(remainingSecs / 60));
-
-            if (integralSecs === 60) {
-                integralSecs = 0;
-                ++integralMins;
-            }
-
-            if (remainingSecs < 0 && integralMins > 0) {
-                --integralMins;
-            }
-
-            return formatMajorMinor(integralMins, integralSecs);
-        }
-
-        function updateTimer() {
-            let s = getDisplayString();
-            if (s != "stet") {
-                if (!!currentTalk) {
-                    currentTalk.getElementsByTagName("td")[1].innerHTML = s;
-                } else {
-                    textNode.data = s;
-                }
-            }
-
-            setTimeout(updateTimer, 100); // every 1/100 sec
+            setTimeout(updateTimer, 100); // every 1/10 sec
         }
 
         getOnlyTJson();

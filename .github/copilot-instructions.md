@@ -10,3 +10,4 @@
 
 ## Project-Specific Rules
 - Implement custom requirements specific to your project needs.
+- Changes to HTML resource template files (for example `OnlyT/Resources/ClockHtmlTemplate.html`) require a full rebuild to be reflected in generated resources; incremental build may not show updates.

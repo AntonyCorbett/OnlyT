@@ -205,6 +205,7 @@ public class MainViewModel : ObservableObject
         var info = _timerService.GetClockRequestInfo();
 
         timerData.Use24HrFormat = _optionsService.Use24HrClockFormat();
+        timerData.ShowTimeOfDaySeconds = _optionsService.Options.WebClockShowTimeOfDaySeconds;
 
         if (!info.IsRunning)
         {

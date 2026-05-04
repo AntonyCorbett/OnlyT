@@ -19,7 +19,7 @@ namespace OnlyT.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -317,14 +317,84 @@ namespace OnlyT.Properties {
         ///				font-family: sans-serif;
         ///				font-weight: bold;
         ///				color: #FFFF66;
-        ///		 [rest of string was truncated]&quot;;.
+        ///			}
+        ///			.clockstyle_red
+        ///			{
+        ///				font-family: sans-serif;
+        ///				font-weight: bold;
+        ///				color: #FF6666;
+        ///			}
+        ///			.clockstyle_green
+        ///			{
+        ///				font-family: sans-serif;
+        ///				font-weight: bold;
+        ///				color: #66FF66;
+        ///			}
+        ///			.clockstyle_cyan
+        ///			{
+        ///				font-family: sans-serif;
+        ///				font-weight: bold;
+        ///				color: #66FFFF;
+        ///			}
+        ///			.clockstyle_blue
+        ///			{
+        ///				font-family: sans-serif;
+        ///				font-weight: bold;
+        ///				color: #6666FF;
+        ///			}
+        ///			
+        ///			@keyframes fader {
+        ///				0% { opacity: 0.0; }
+        ///				50% { opacity: 1.0; }
+        ///				100% { opacity: 0.0; }
+        ///			}
+        ///		
+        ///		&lt;/style&gt;
+        ///	&lt;/head&gt;
+        ///	&lt;body&gt;
+        ///		&lt;div style=&quot;height:100%;&quot;&gt;
+        ///			&lt;div style=&quot;display:flex; justify-content:center; align-items:center; height:100%&quot;&gt;
+        ///				&lt;div style=&quot;text-align:center;&quot;&gt;
+        ///				
+        ///					&lt;div style=&quot;font-size: 64px; line-height: 72px;&quot; class=&quot;clockstyle&quot;&gt;
+        ///					&lt;/div&gt;
+        ///
+        ///					&lt;div style=&quot;font-size: 36px; line-height: 44px;&quot; class=&quot;clockstyle_yellow&quot;&gt;
+        ///					&lt;/div&gt;
+        ///
+        ///					&lt;div style=&quot;font-size: 24px; line-height: 32px;&quot; class=&quot;clockstyle_red&quot;&gt;
+        ///					&lt;/div&gt;
+        ///
+        ///					&lt;div style=&quot;font-size: 16px; line-height: 24px;&quot; class=&quot;clockstyle_green&quot;&gt;
+        ///					&lt;/div&gt;
+        ///
+        ///					&lt;div style=&quot;font-size: 12px; line-height: 20px;&quot; class=&quot;clockstyle_cyan&quot;&gt;
+        ///					&lt;/div&gt;
+        ///
+        ///					&lt;div style=&quot;font-size: 10px; line-height: 18px;&quot; class=&quot;clockstyle_blue&quot;&gt;
+        ///					&lt;/div&gt;
+        ///
+        ///				&lt;/div&gt;
+        ///			&lt;/div&gt;
+        ///		&lt;/div&gt;
+        ///	&lt;/body&gt;
+        ///&lt;/html&gt;.
         /// </summary>
         public static string ClockHtmlTemplate {
             get {
                 return ResourceManager.GetString("ClockHtmlTemplate", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string for shared clock JavaScript functions.
+        /// </summary>
+        public static string SharedClockJs {
+            get {
+                return ResourceManager.GetString("SharedClockJs", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to CLOSE COUNTDOWN.
         /// </summary>
@@ -565,6 +635,15 @@ namespace OnlyT.Properties {
         public static string ENABLED_WEB_CLOCK {
             get {
                 return ResourceManager.GetString("ENABLED_WEB_CLOCK", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Show seconds in time of day.
+        /// </summary>
+        public static string WEB_CLOCK_SHOW_TOD_SECONDS {
+            get {
+                return ResourceManager.GetString("WEB_CLOCK_SHOW_TOD_SECONDS", resourceCulture);
             }
         }
         
@@ -1536,7 +1615,78 @@ namespace OnlyT.Properties {
         ///
         ///        body {
         ///            display: table;
-        ///            width [rest of string was truncated]&quot;;.
+        ///            width: 100%;
+        ///            height: 100%;
+        ///            margin: 0;
+        ///            padding: 0;
+        ///            color: #FFFFFF;
+        ///            text-align: center;
+        ///        }
+        ///
+        ///        h1 {
+        ///            font-size: 36px;
+        ///            margin: 0;
+        ///            padding: 0;
+        ///        }
+        ///
+        ///        h2 {
+        ///            font-size: 24px;
+        ///            margin: 0;
+        ///            padding: 0;
+        ///        }
+        ///
+        ///        h3 {
+        ///            font-size: 18px;
+        ///            margin: 0;
+        ///            padding: 0;
+        ///        }
+        ///
+        ///        p {
+        ///            font-size: 14px;
+        ///            margin: 10px 0;
+        ///            padding: 0;
+        ///        }
+        ///
+        ///        @keyframes fadeIn {
+        ///            from { opacity: 0; }
+        ///            to { opacity: 1; }
+        ///        }
+        ///
+        ///        @keyframes fadeOut {
+        ///            from { opacity: 1; }
+        ///            to { opacity: 0; }
+        ///        }
+        ///
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div style=&quot;height:100%;&quot;&gt;
+        ///        &lt;div style=&quot;display:flex; justify-content:center; align-items:center; height:100%&quot;&gt;
+        ///            &lt;div style=&quot;text-align:center;&quot;&gt;
+        ///
+        ///                &lt;div style=&quot;font-size: 64px; line-height: 72px;&quot; class=&quot;clockstyle&quot;&gt;
+        ///                &lt;/div&gt;
+        ///
+        ///                &lt;div style=&quot;font-size: 36px; line-height: 44px;&quot; class=&quot;clockstyle_yellow&quot;&gt;
+        ///                &lt;/div&gt;
+        ///
+        ///                &lt;div style=&quot;font-size: 24px; line-height: 32px;&quot; class=&quot;clockstyle_red&quot;&gt;
+        ///                &lt;/div&gt;
+        ///
+        ///                &lt;div style=&quot;font-size: 16px; line-height: 24px;&quot; class=&quot;clockstyle_green&quot;&gt;
+        ///                &lt;/div&gt;
+        ///
+        ///                &lt;div style=&quot;font-size: 12px; line-height: 20px;&quot; class=&quot;clockstyle_cyan&quot;&gt;
+        ///                &lt;/div&gt;
+        ///
+        ///                &lt;div style=&quot;font-size: 10px; line-height: 18px;&quot; class=&quot;clockstyle_blue&quot;&gt;
+        ///                &lt;/div&gt;
+        ///
+        ///            &lt;/div&gt;
+        ///        &lt;/div&gt;
+        ///    &lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
         /// </summary>
         public static string TimersHtmlTemplate {
             get {
@@ -1622,6 +1772,78 @@ namespace OnlyT.Properties {
         public static string X_SECONDS {
             get {
                 return ResourceManager.GetString("X_SECONDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start timer.
+        /// </summary>
+        public static string START_TIMER {
+            get {
+                return ResourceManager.GetString("START_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop timer.
+        /// </summary>
+        public static string STOP_TIMER {
+            get {
+                return ResourceManager.GetString("STOP_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand window.
+        /// </summary>
+        public static string EXPAND_WINDOW {
+            get {
+                return ResourceManager.GetString("EXPAND_WINDOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close application.
+        /// </summary>
+        public static string CLOSE_APP {
+            get {
+                return ResourceManager.GetString("CLOSE_APP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer display.
+        /// </summary>
+        public static string TIMER_DISPLAY {
+            get {
+                return ResourceManager.GetString("TIMER_DISPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle bell.
+        /// </summary>
+        public static string BELL_TOGGLE {
+            get {
+                return ResourceManager.GetString("BELL_TOGGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select talk.
+        /// </summary>
+        public static string TALK_SELECTOR {
+            get {
+                return ResourceManager.GetString("TALK_SELECTOR", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Back to operator page.
+        /// </summary>
+        public static string BACK_TO_OPERATOR {
+            get {
+                return ResourceManager.GetString("BACK_TO_OPERATOR", resourceCulture);
             }
         }
     }

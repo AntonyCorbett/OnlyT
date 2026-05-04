@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>OnlyT Clock</title>
+		{SHARED_JS}
+		<style>
+			html {
+				font-family: sans-serif;
+				background: #000000;
+				margin: 0;
+				height: 100%;
+			}
+
+			body {
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				margin: 0;
+			}
+
+			#main {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			#clocktext {
+				font-size: 24pt;
+				font-kerning: none;
+				opacity: 1;
+				transition: color 0.3s ease, opacity 0.4s ease;
+			}
+
+			.clockstyle {
+				font-weight: bold;
+				color: #FFFFFF;
+			}
+
+			.clockstyle_yellow {
+				font-weight: bold;
+				color: #FFFF66;
+			}
+
+			.clockstyle_green {
+				font-weight: bold;
+				color: #00FF00;
+			}
+
+			.clockstyle_red {
+				font-weight: bold;
+				color: #FF0000;
+			}
+
+			.clockstyle_dim {
+				color: #668080;
+			}
+
+            .tod_seconds {
+                font-size: 0.7em;
+                vertical-align: text-top;
+                position: relative;
+                top: 0.08em;
+                margin-left: 0.1em;
+                color: #b3b3b3;
+            }
+
+			.link_container {
+				text-align: right;
+				padding: 12px 16px;
+			}
+
+			.link_container a,
+			.link_container a:visited {
+				display: inline-block;
+				margin-left: 8px;
+				padding: 7px 18px;
+				border: 1px solid #4a4a4a;
+				border-radius: 999px;
+				color: #888;
+				font-weight: normal;
+				font-size: 0.75em;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				text-decoration: none;
+				transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+			}
+
+			.link_container a:hover {
+				color: #ddd;
+				border-color: #888;
+				background-color: rgba(255, 255, 255, 0.06);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="main">
+			<span id="clocktext" onclick="location.reload(); return false" class="clockstyle"></span>
+		</div>
+		<div class="link_container"><a href="./timers">{WEB_LINK_TIMERS}</a></div>
+
+		<script>
+			"use strict";
+
+			const textElem = document.getElementById("clocktext");
+
+			let currentMode = "Nameplate";
+			let currentDisplayMode = "Nameplate";
+			let currentTargetSecs = 0;
+			let closingSecs = 30;
+			let currentlyCountingUp = false;
+			let timerStartDateTime = new Date();
+			let serverTimeOfDayAdjustment = 0;
+			const POLLING_INTERVAL_SECS = 4;
+			const FADE_DURATION_MS = 400;
+			const NAMEPLATE_DISPLAY_DELAY_MS = 1000;
+			const pageLoadStamp = Date.now();
+			let use24HrClockFormat = false;
+			let showTimeOfDaySeconds = false;
+			let transitioning = false;
+
+			function shouldDelayNameplateDisplay() {
+				return (Date.now() - pageLoadStamp) < NAMEPLATE_DISPLAY_DELAY_MS;
+			}
+
+			function waitForElementOpacityTransition(elem) {
+				return new Promise(resolve => {
+					let done = false;
+					const finish = () => {
+						if (done) {
+							return;
+						}
+						done = true;
+						elem.removeEventListener('transitionend', onTransitionEnd);
+						resolve();
+					};
+					const onTransitionEnd = evt => {
+						if (evt.target === elem && evt.propertyName === 'opacity') {
+							finish();
+						}
+					};
+
+					elem.addEventListener('transitionend', onTransitionEnd);
+					setTimeout(finish, FADE_DURATION_MS + 100);
+				});
+			}
+
+			function waitForOpacityTransition() {
+				return waitForElementOpacityTransition(textElem);
+			}
+
+			async function fadeTo(targetOpacity) {
+				textElem.style.opacity = targetOpacity;
+				await waitForOpacityTransition();
+			}
+
+			async function getOnlyTData() {
+				const clientDate = new Date();
+				try {
+					const resp = await fetch('../data/', { cache: 'no-store', signal: AbortSignal.timeout(2000) });
+					if (resp.ok) {
+						const responseDate = new Date();
+						const data = await resp.json();
+
+						currentMode = data.mode;
+
+						switch (data.mode) {
+							case 'Timer': {
+								const requestLatencyMillisecs = responseDate.getTime() - clientDate.getTime();
+								const timerElapsedMillisecs = getClientTimerElapsedMilliSecs();
+
+								currentTargetSecs = data.targetSecs;
+								closingSecs = data.closingSecs;
+								currentlyCountingUp = data.countUp;
+
+								const serverTimerElapsedMillisecs = (data.mins * 60000) + (data.secs * 1000) + data.ms;
+								const diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
+
+								if (Math.abs(diffMillisecs) > 100) {
+									timerStartDateTime.setTime(timerStartDateTime.getTime() - diffMillisecs);
+								}
+								break;
+							}
+
+							case 'TimeOfDay': {
+								use24HrClockFormat = data.use24Hr;
+								showTimeOfDaySeconds = data.showSecs;
+								const serverStamp = new Date(clientDate.getTime());
+								serverStamp.setHours(data.mins / 60, data.mins % 60, data.secs);
+								serverTimeOfDayAdjustment = serverStamp - clientDate;
+								break;
+							}
+						}
+					} else {
+						currentMode = 'Offline';
+					}
+				} catch {
+					currentMode = 'Offline';
+				}
+
+				setTimeout(getOnlyTData, POLLING_INTERVAL_SECS * 1000);
+			}
+
+			function getClientTimerElapsedMilliSecs() {
+				return new Date().getTime() - timerStartDateTime.getTime();
+			}
+
+			function formatTimeOfDay(hrs, mins, secs) {
+				let base;
+				if (use24HrClockFormat) {
+					base = formatMajorMinor(hrs, mins);
+				} else {
+					base = formatMajorMinor(hrs === 0 ? 12 : hrs > 12 ? hrs - 12 : hrs, mins);
+				}
+				if (showTimeOfDaySeconds) {
+					return { main: base, secs: String(secs).padStart(2, '0') };
+				}
+				return { main: base, secs: null };
+			}
+
+			function setClockDisplay(display) {
+				if (display.secs !== null && display.secs !== undefined) {
+					textElem.innerHTML = display.main + '<span class="tod_seconds">' + display.secs + '</span>';
+				} else {
+					textElem.textContent = typeof display === 'string' ? display : display.main;
+				}
+			}
+
+			function getDisplayString() {
+				switch (currentMode) {
+					case 'TimeOfDay': {
+						const d = new Date();
+						d.setTime(d.getTime() + serverTimeOfDayAdjustment);
+						textElem.className = 'clockstyle';
+						currentDisplayMode = currentMode;
+						return formatTimeOfDay(d.getHours(), d.getMinutes(), d.getSeconds());
+					}
+
+					case 'Timer': {
+						const clientTimerTotalElapsedSecs = getClientTimerElapsedMilliSecs() / 1000;
+						const remainingSecs = currentTargetSecs - clientTimerTotalElapsedSecs;
+						setClockColour(remainingSecs, closingSecs, textElem);
+						currentDisplayMode = currentMode;
+						return currentlyCountingUp
+							? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
+							: getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+					}
+
+					case 'Nameplate':
+						textElem.className = 'clockstyle_dim';
+						currentDisplayMode = currentMode;
+						return 'OnlyT';
+
+					default:
+						textElem.className = 'clockstyle_dim';
+						currentDisplayMode = currentMode;
+						return '{WEB_OFFLINE}';
+				}
+			}
+
+			async function runFadeTransition() {
+				try {
+					textElem.style.opacity = '1';
+					void textElem.offsetWidth;
+					await fadeTo(0);
+
+					if (currentMode === 'Nameplate' && shouldDelayNameplateDisplay()) {
+						textElem.textContent = '';
+						textElem.className = 'clockstyle_dim';
+					} else {
+						setClockDisplay(getDisplayString());
+					}
+					currentDisplayMode = currentMode;
+					updateTextSize();
+
+					void textElem.offsetWidth;
+					await fadeTo(1);
+				} finally {
+					transitioning = false;
+				}
+			}
+
+			function updateClock() {
+				if (!transitioning) {
+					if (currentDisplayMode !== currentMode) {
+						transitioning = true;
+						runFadeTransition();
+					} else {
+						if (currentMode === 'Nameplate' && shouldDelayNameplateDisplay()) {
+							textElem.textContent = '';
+							textElem.className = 'clockstyle_dim';
+						} else {
+							const newDisplay = getDisplayString();
+							const newText = typeof newDisplay === 'string' ? newDisplay : newDisplay.main + (newDisplay.secs ?? '');
+							const prevLength = textElem.innerText.length;
+							setClockDisplay(newDisplay);
+							if (newText.length !== prevLength) {
+								updateTextSize();
+							}
+						}
+						currentDisplayMode = currentMode;
+					}
+				}
+				setTimeout(updateClock, 100); // every 1/10 sec
+			}
+
+			function updateTextSize() {
+				let curFontSize = 24;
+				const targetWidth = 0.9;
+				for (let i = 0; i < 3; i++) {
+					const newFontSize = textElem.parentNode.offsetWidth * targetWidth / textElem.offsetWidth * curFontSize;
+					textElem.style.fontSize = newFontSize.toFixed(3) + 'pt';
+					curFontSize = newFontSize;
+				}
+			}
+
+			getOnlyTData();
+			updateClock();
+			updateTextSize();
+
+			window.addEventListener("resize", updateTextSize);
+		</script>
+	</body>
+</html>

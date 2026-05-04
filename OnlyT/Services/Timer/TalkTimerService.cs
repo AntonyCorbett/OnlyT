@@ -20,7 +20,7 @@
         private int? _talkId;
         private TimeSpan _currentTimeElapsed = TimeSpan.Zero;
         private int _currentSecondsElapsed;
-        private bool _isCountingUp;
+        private volatile bool _isCountingUp;
 
         public TalkTimerService()
         {
