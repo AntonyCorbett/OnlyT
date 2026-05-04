@@ -175,7 +175,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         get
         {
             var talk = GetCurrentTalk();
-            return talk != null && talk.BellApplicable && _optionsService.Options.IsBellEnabled;
+            return talk != null && talk.BellApplicable && _optionsService.Options.IsBellEnabled && !InShrinkMode;
         }
     }
 
@@ -1442,6 +1442,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         OnPropertyChanged(nameof(StartStopButtonHeight));
         OnPropertyChanged(nameof(TimeDisplayColumnSpan));
         OnPropertyChanged(nameof(ShowUpDownButton));
+        OnPropertyChanged(nameof(IsBellVisible));
     }
 
     private void OnRefreshSchedule(object recipient, RefreshScheduleMessage message)

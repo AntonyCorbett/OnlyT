@@ -274,9 +274,21 @@
                             AutomationProperties.AutomationId="BellToggleButton"
                             AutomationProperties.Name="{Binding BellTooltip, Mode=OneWay}"
                             Command="{Binding BellToggleCommand}"
-                            Style="{StaticResource ChromelessBtn}"
-                            ToolTip="{Binding BellTooltip, Mode=OneWay}"
-                            Visibility="{Binding Path=IsBellVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                            ToolTip="{Binding BellTooltip, Mode=OneWay}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource ChromelessBtn}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsBellVisible}" Value="True" />
+                                                <Condition Binding="{Binding IsEditingTimerDuration}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                             <Path
                                 VerticalAlignment="Top"
                                 Cursor="Hand"
