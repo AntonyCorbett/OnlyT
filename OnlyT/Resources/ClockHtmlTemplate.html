@@ -58,10 +58,14 @@
 				color: #668080;
 			}
 
-			.tod_seconds {
-				font-size: 0.6em;
-				vertical-align: middle;
-			}
+            .tod_seconds {
+                font-size: 0.7em;
+                vertical-align: text-top;
+                position: relative;
+                top: 0.08em;
+                margin-left: 0.1em;
+                color: #b3b3b3;
+            }
 
 			.link_container {
 				text-align: right;
@@ -212,7 +216,7 @@
 					base = formatMajorMinor(hrs === 0 ? 12 : hrs > 12 ? hrs - 12 : hrs, mins);
 				}
 				if (showTimeOfDaySeconds) {
-					return { main: base, secs: ':' + String(secs).padStart(2, '0') };
+					return { main: base, secs: String(secs).padStart(2, '0') };
 				}
 				return { main: base, secs: null };
 			}
