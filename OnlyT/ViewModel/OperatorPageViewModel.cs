@@ -79,6 +79,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private bool _isOvertime;
     private bool _isShrunk;
     private bool _isEditingTimerDuration;
+    private bool _isPaused;
+    private int _pausedElapsedSecs;
     private string _editableTimerDuration = string.Empty;
 
     public OperatorPageViewModel(
@@ -113,10 +115,10 @@ public class OperatorPageViewModel : ObservableObject, IPage
         _timerService.TimerDurationChangeFromApiEvent += HandleTimerDurationChangeFromApi;
 
         // commands...
-        StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk && !IsEditingTimerDuration);
+        StartCommand = new RelayCommand(StartTimer, () => (IsNotRunning || _isPaused) && IsValidTalk && !IsEditingTimerDuration);
         StopCommand = new RelayCommand(StopTimer, () => IsRunning);
         PauseCommand = new RelayCommand(PauseTimer, () => IsRunning);
-        SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
+        SettingsCommand = new RelayCommand(NavigateSettings, () => (IsNotRunning || _isPaused) && !_commandLineService.NoSettings);
         CloseAppCommand = new RelayCommand(CloseApp, () => IsNotRunning);
         ExpandFromShrinkCommand = new RelayCommand(ExpandFromShrink);
         HelpCommand = new RelayCommand(LaunchHelp);
@@ -399,6 +401,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
             {
                 CancelManualDurationEdit();
                 _talkId = value;
+                _isPaused = false;
+                _pausedElapsedSecs = 0;
 
                 var talk = GetCurrentTalk();
                 RefreshCountUpFlag(talk);
@@ -489,7 +493,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     public bool IsNotManualMode => _optionsService.Options.OperatingMode != OperatingMode.Manual;
         
-    public bool IsRunning => _timerService.IsRunning || _isStarting;
+    public bool IsRunning => (_timerService.IsRunning || _isStarting) && !_isPaused;
 
     public bool IsNotRunning => !IsRunning;
 
@@ -539,6 +543,17 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void StartTimer()
     {
+        if (_isPaused)
+        {
+            ResumeTimer();
+            return;
+        }
+
+        StartNewTimer();
+    }
+
+    private void StartNewTimer()
+    {
         if (Log.IsEnabled(LogEventLevel.Debug))
         {
             Log.Logger.Debug("Starting timer");
@@ -580,6 +595,54 @@ public class OperatorPageViewModel : ObservableObject, IPage
             }
 
             Application.Current.Dispatcher.Invoke(RaiseCanExecuteChanged);
+        });
+    }
+
+    private void ResumeTimer()
+    {
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Resuming timer");
+        }
+
+        EventTracker.AddBreadcrumb(EventName.StartingTimer, "timer:resuming");
+
+        _isPaused = false;
+        _isStarting = true;
+
+        RunFlashAnimation = false;
+        RunFlashAnimation = true;
+
+        OnPropertyChanged(nameof(IsRunning));
+        OnPropertyChanged(nameof(IsNotRunning));
+        OnPropertyChanged(nameof(SettingsHint));
+
+        RaiseCanExecuteChanged();
+
+        var talkId = TalkId;
+        var resumedTargetSecs = _targetSeconds;
+
+        WeakReferenceMessenger.Default.Send(new TimerStartMessage(resumedTargetSecs, _countUp, talkId));
+
+        Task.Run(() =>
+        {
+            var ms = _dateTimeService.Now().Millisecond;
+            if (ms > 100)
+            {
+                // sync to the second
+                Task.Delay(1000 - ms).Wait();
+            }
+
+            if (_isStarting)
+            {
+                _timerService.Start(resumedTargetSecs, talkId, _countUp);
+            }
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _pausedElapsedSecs = 0;
+                RaiseCanExecuteChanged();
+            });
         });
     }
 
@@ -785,6 +848,9 @@ public class OperatorPageViewModel : ObservableObject, IPage
         
     private void TimerChangedHandler(object? sender, EventArgs.TimerChangedEventArgs e)
     {
+        _isPaused = false;
+        _pausedElapsedSecs = 0;
+
         TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs, e.ClosingSecs);
         _secondsElapsed = e.ElapsedSecs;
         SetSecondsRemaining(e.RemainingSecs);
@@ -1129,6 +1195,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
             
         _timerService.Stop();
         _isStarting = false;
+        _isPaused = false;
+        _pausedElapsedSecs = 0;
 
         StoreTimerStopData();
 
@@ -1156,7 +1224,35 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     private void PauseTimer()
     {
-        // UI placeholder only. Pause functionality to be implemented separately.
+        if (Log.IsEnabled(LogEventLevel.Debug))
+        {
+            Log.Logger.Debug("Pausing timer");
+        }
+
+        EventTracker.AddBreadcrumb(EventName.StoppingTimer, "timer:pausing");
+
+        var elapsedSecs = _timerService.CurrentSecondsElapsed;
+        var pauseDurationSecs = _countUp
+            ? elapsedSecs
+            : Math.Max(_targetSeconds - elapsedSecs, 0);
+
+        _timerService.Stop();
+
+        _isStarting = false;
+        _isPaused = true;
+        _pausedElapsedSecs = elapsedSecs;
+        _secondsElapsed = 0;
+        TargetSeconds = pauseDurationSecs;
+
+        IsOvertime = false;
+        TextColor = WhiteBrush;
+
+        OnPropertyChanged(nameof(IsRunning));
+        OnPropertyChanged(nameof(IsNotRunning));
+        OnPropertyChanged(nameof(SettingsHint));
+
+        WeakReferenceMessenger.Default.Send(new TimerStopMessage(TalkId, elapsedSecs, false, true));
+        RaiseCanExecuteChanged();
     }
 
     private void OnShowPauseButtonChanged(object recipient, ShowPauseButtonChangedMessage message)

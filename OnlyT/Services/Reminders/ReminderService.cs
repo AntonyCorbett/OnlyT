@@ -101,6 +101,11 @@ public class ReminderService : IReminderService
 
     private void OnTalkTimerStop(object recipient, TimerStopMessage message)
     {
+        if (message.IsPaused)
+        {
+            return;
+        }
+
         _lastTalkTimeStopped = _dateTimeService.Now();
         _lastTalkStopped = _talkScheduleService.GetTalkScheduleItem(message.TalkId);
         _nextTalkIdToStart = _talkScheduleService.GetNext(message.TalkId);

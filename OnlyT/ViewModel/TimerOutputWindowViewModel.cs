@@ -93,7 +93,7 @@ public class TimerOutputWindowViewModel : ObservableObject
             }
         }
     }
-        
+
     public DurationSector? DurationSector
     {
         get => _durationSector;
@@ -119,7 +119,7 @@ public class TimerOutputWindowViewModel : ObservableObject
             }
         }
     }
-        
+    
     public bool IsRunning
     {
         get => _isRunning;
@@ -226,6 +226,11 @@ public class TimerOutputWindowViewModel : ObservableObject
 
     private void OnTimerStopped(object recipient, TimerStopMessage obj)
     {
+        if (obj.IsPaused)
+        {
+            return;
+        }
+
         IsRunning = false;
         DurationSector = null;
     }
