@@ -39,6 +39,8 @@
         /// </summary>
         public bool IsRunning => _stopWatch.IsRunning;
 
+        public bool IsPaused { get; set; }
+
         /// <summary>
         /// Gets or sets the current number of seconds elapsed
         /// </summary>
@@ -143,6 +145,7 @@
                 TalkId = _talkId,
                 TargetSeconds = _targetSecs,
                 IsRunning = IsRunning,
+                IsPaused = IsPaused,
                 TimeElapsed = CurrentTimeElapsed,
                 ClosingSecs = _closingSecs
             };

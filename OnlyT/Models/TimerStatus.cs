@@ -14,6 +14,9 @@ public class TimerStatus
     [JsonProperty(PropertyName = "isRunning")]
     public bool IsRunning { get; set; }
 
+    [JsonProperty(PropertyName = "isPaused")]
+    public bool IsPaused { get; set; }
+
     [JsonProperty(PropertyName = "timeElapsed")]
     public TimeSpan TimeElapsed { get; set; }
 

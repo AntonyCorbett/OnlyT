@@ -16,6 +16,8 @@
 
         bool IsRunning { get; }
 
+        bool IsPaused { get; set; }
+
         void Start(int targetSecs, int talkId, bool isCountingUp);
 
         void Stop();

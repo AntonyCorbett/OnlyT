@@ -403,6 +403,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 _talkId = value;
                 _isPaused = false;
                 _pausedElapsedSecs = 0;
+                _timerService.IsPaused = false;
 
                 var talk = GetCurrentTalk();
                 RefreshCountUpFlag(talk);
@@ -563,6 +564,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
         _isStarting = true;
         _secondsElapsed = 0;
+        _timerService.IsPaused = false;
 
         RunFlashAnimation = false;
         RunFlashAnimation = true;
@@ -609,6 +611,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
         _isPaused = false;
         _isStarting = true;
+        _timerService.IsPaused = false;
 
         RunFlashAnimation = false;
         RunFlashAnimation = true;
@@ -850,6 +853,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     {
         _isPaused = false;
         _pausedElapsedSecs = 0;
+        _timerService.IsPaused = false;
 
         TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs, e.ClosingSecs);
         _secondsElapsed = e.ElapsedSecs;
@@ -1189,14 +1193,15 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
 
         var msg = new TimerStopMessage(
-            TalkId, 
-            _timerService.CurrentSecondsElapsed, 
+            TalkId,
+            _timerService.CurrentSecondsElapsed,
             _optionsService.Options.PersistStudentTime && talk.PersistFinalTimerValue);
             
         _timerService.Stop();
         _isStarting = false;
         _isPaused = false;
         _pausedElapsedSecs = 0;
+        _timerService.IsPaused = false;
 
         StoreTimerStopData();
 
@@ -1242,6 +1247,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         _isPaused = true;
         _pausedElapsedSecs = elapsedSecs;
         _secondsElapsed = 0;
+        _timerService.IsPaused = true;
         TargetSeconds = pauseDurationSecs;
 
         IsOvertime = false;
