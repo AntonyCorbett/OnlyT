@@ -493,7 +493,7 @@ Maiusc - Aggiungi 5m</value>
     <value>Attivato</value>
   </data>
   <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
-    <value>Show seconds in time of day</value>
+    <value>Mostra i secondi nell'ora del giorno</value>
     <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
@@ -752,15 +752,15 @@ Maiusc - Aggiungi 5m</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="START_TIMER" xml:space="preserve">
-    <value>Start timer</value>
+    <value>Avvia timer</value>
     <comment>Accessible name for the Start button on the operator page</comment>
   </data>
   <data name="STOP_TIMER" xml:space="preserve">
-    <value>Stop timer</value>
+    <value>Ferma timer</value>
     <comment>Accessible name for the Stop button on the operator page</comment>
   </data>
   <data name="EXPAND_WINDOW" xml:space="preserve">
-    <value>Expand window</value>
+    <value>Espandi finestra</value>
     <comment>Accessible name for the expand button shown in shrink mode</comment>
   </data>
   <data name="CLOSE_APP" xml:space="preserve">
