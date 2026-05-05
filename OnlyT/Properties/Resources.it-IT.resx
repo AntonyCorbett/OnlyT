@@ -776,27 +776,27 @@ Maiusc - Aggiungi 5m</value>
     <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
   </data>
   <data name="TALK_SELECTOR" xml:space="preserve">
-    <value>Select talk</value>
+    <value>Seleziona discorso</value>
     <comment>Accessible name for the talk selector combo box on the operator page</comment>
   </data>
   <data name="BACK_TO_OPERATOR" xml:space="preserve">
-    <value>Back to operator page</value>
+    <value>Torna alla pagina operatore</value>
     <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
   <data name="ENTER_VALID_DURATION" xml:space="preserve">
-    <value>Please enter a valid duration.</value>
+    <value>Per favore inserisci una durata valida.</value>
     <comment>Error msg displayed when manually entering a bad duration</comment>
   </data>
   <data name="ACCEPT_DURATION" xml:space="preserve">
-    <value>Accept duration</value>
+    <value>Accetta durata</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
-    <value>Edit duration</value>
+    <value>Modifica durata</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Metti in pausa timer</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Mostra pulsante pausa</value>
   </data>
 </root>
