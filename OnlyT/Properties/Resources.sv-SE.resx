@@ -791,12 +791,12 @@ Shift - Öka 5m</value>
     <value>Bekräfta</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
-    <value>Edit duration</value>
+    <value>Redigera</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Pausa timer</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Visa paus-knapp</value>
   </data>
 </root>
