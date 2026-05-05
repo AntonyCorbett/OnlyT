@@ -661,7 +661,7 @@ Shift - Adicionar 5m</value>
     <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
   </data>
   <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
-    <value>Gradação do fundo do temporizador</value>
+    <value>Gradação do fundo do cronómetro</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
@@ -669,7 +669,7 @@ Shift - Adicionar 5m</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Moldura do temporizador</value>
+    <value>Moldura do cronómetro</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
@@ -693,7 +693,7 @@ Shift - Adicionar 5m</value>
     <comment>Tooltip for main window button</comment>
   </data>
   <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
-    <value>Não foi possível abrir o temporizador numa janela transparente</value>
+    <value>Não foi possível abrir o cronómetro numa janela transparente</value>
     <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
   </data>
   <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -704,7 +704,7 @@ Shift - Adicionar 5m</value>
     <comment>Link to clock on web interface</comment>
   </data>
   <data name="WEB_LINK_TIMERS" xml:space="preserve">
-    <value>Temporizadores</value>
+    <value>Cronómetros</value>
     <comment>Link to timers on web interface</comment>
   </data>
   <data name="WEB_OFFLINE" xml:space="preserve">
@@ -748,15 +748,15 @@ Shift - Adicionar 5m</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Permitir ajustar o temporizador com a roda do rato</value>
+    <value>Permitir ajustar o cronómetro com a roda do rato</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="START_TIMER" xml:space="preserve">
-    <value>Iniciar temporizador</value>
+    <value>Iniciar cronómetro</value>
     <comment>Accessible name for the Start button on the operator page</comment>
   </data>
   <data name="STOP_TIMER" xml:space="preserve">
-    <value>Parar temporizador</value>
+    <value>Parar cronómetro</value>
     <comment>Accessible name for the Stop button on the operator page</comment>
   </data>
   <data name="EXPAND_WINDOW" xml:space="preserve">
@@ -768,7 +768,7 @@ Shift - Adicionar 5m</value>
     <comment>Accessible name for the close application button shown in shrink mode</comment>
   </data>
   <data name="TIMER_DISPLAY" xml:space="preserve">
-    <value>Exibição do temporizador</value>
+    <value>Exibição do cronómetro</value>
     <comment>Accessible name for the timer display area on the operator page</comment>
   </data>
   <data name="BELL_TOGGLE" xml:space="preserve">
@@ -794,9 +794,9 @@ Shift - Adicionar 5m</value>
     <value>Editar duração</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Pausar cronómetro</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Mostrar botão de pausa</value>
   </data>
 </root>
