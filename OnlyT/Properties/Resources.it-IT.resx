@@ -764,15 +764,15 @@ Maiusc - Aggiungi 5m</value>
     <comment>Accessible name for the expand button shown in shrink mode</comment>
   </data>
   <data name="CLOSE_APP" xml:space="preserve">
-    <value>Close application</value>
+    <value>Chiudi applicazione</value>
     <comment>Accessible name for the close application button shown in shrink mode</comment>
   </data>
   <data name="TIMER_DISPLAY" xml:space="preserve">
-    <value>Timer display</value>
+    <value>Display timer</value>
     <comment>Accessible name for the timer display area on the operator page</comment>
   </data>
   <data name="BELL_TOGGLE" xml:space="preserve">
-    <value>Toggle bell</value>
+    <value>Attiva/disattiva campanella</value>
     <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
   </data>
   <data name="TALK_SELECTOR" xml:space="preserve">
