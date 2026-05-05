@@ -659,6 +659,13 @@
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowPauseButtonCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.SHOW_PAUSE}"
+                            Content="{x:Static resx:Resources.SHOW_PAUSE}"
+                            IsChecked="{Binding ShowPauseButton, Mode=TwoWay}"
+                            Style="{StaticResource SettingsCheckBox}" />
+
+                        <CheckBox
                             AutomationProperties.AutomationId="AllowMouseWheelCheckBox"
                             AutomationProperties.Name="{x:Static resx:Resources.ALLOW_MOUSE_WHEEL_TIMER_ADJUST}"
                             Content="{x:Static resx:Resources.ALLOW_MOUSE_WHEEL_TIMER_ADJUST}"

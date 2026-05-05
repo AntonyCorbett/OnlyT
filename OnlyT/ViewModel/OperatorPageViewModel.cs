@@ -115,6 +115,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         // commands...
         StartCommand = new RelayCommand(StartTimer, () => IsNotRunning && IsValidTalk && !IsEditingTimerDuration);
         StopCommand = new RelayCommand(StopTimer, () => IsRunning);
+        PauseCommand = new RelayCommand(PauseTimer, () => IsRunning);
         SettingsCommand = new RelayCommand(NavigateSettings, () => IsNotRunning && !_commandLineService.NoSettings);
         CloseAppCommand = new RelayCommand(CloseApp, () => IsNotRunning);
         ExpandFromShrinkCommand = new RelayCommand(ExpandFromShrink);
@@ -140,6 +141,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Register<AutoMeetingChangedMessage>(this, OnAutoMeetingChanged);
         WeakReferenceMessenger.Default.Register<CountdownWindowStatusChangedMessage>(this, OnCountdownWindowStatusChanged);
         WeakReferenceMessenger.Default.Register<ShowCircuitVisitToggleChangedMessage>(this, OnShowCircuitVisitToggleChanged);
+        WeakReferenceMessenger.Default.Register<ShowPauseButtonChangedMessage>(this, OnShowPauseButtonChanged);
         WeakReferenceMessenger.Default.Register<AutoBellSettingChangedMessage>(this, OnAutoBellSettingChanged);
         WeakReferenceMessenger.Default.Register<RefreshScheduleMessage>(this, OnRefreshSchedule);
         WeakReferenceMessenger.Default.Register<MainWindowSizeChangedMessage>(this, OnWindowSizeChanged);
@@ -210,11 +212,21 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
     public int StartStopButtonHeight => InShrinkMode ? 110 : 54;
 
+    public Thickness StartStopButtonMargin => ShouldShowPauseButton
+        ? new Thickness(0, 0, 51, 0)
+        : new Thickness(0);
+
     public int TimeDisplayColumnSpan => InShrinkMode ? 2 : 1;
+
+    public bool ShowPauseButton => _optionsService.Options.ShowPauseButton;
+
+    public bool ShouldShowPauseButton => ShowPauseButton && NotInShrinkMode;
 
     public RelayCommand StartCommand { get; }
 
     public RelayCommand StopCommand { get; }
+
+    public RelayCommand PauseCommand { get; }
 
     public RelayCommand SettingsCommand { get; }
 
@@ -520,6 +532,9 @@ public class OperatorPageViewModel : ObservableObject, IPage
         OnPropertyChanged(nameof(AllowCountUpDownToggle));
         OnPropertyChanged(nameof(IsBellVisible));
         OnPropertyChanged(nameof(IsCircuitVisit));
+        OnPropertyChanged(nameof(ShowPauseButton));
+        OnPropertyChanged(nameof(ShouldShowPauseButton));
+        OnPropertyChanged(nameof(StartStopButtonMargin));
     }
 
     private void StartTimer()
@@ -563,6 +578,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
             {
                 _timerService.Start(_targetSeconds, talkId, _countUp);
             }
+
+            Application.Current.Dispatcher.Invoke(RaiseCanExecuteChanged);
         });
     }
 
@@ -742,6 +759,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
     {
         StartCommand.NotifyCanExecuteChanged();
         StopCommand.NotifyCanExecuteChanged();
+        PauseCommand.NotifyCanExecuteChanged();
         SettingsCommand.NotifyCanExecuteChanged();
 
         RaiseCanExecuteIncrementDecrementChanged();
@@ -1136,6 +1154,18 @@ public class OperatorPageViewModel : ObservableObject, IPage
         }
     }
 
+    private void PauseTimer()
+    {
+        // UI placeholder only. Pause functionality to be implemented separately.
+    }
+
+    private void OnShowPauseButtonChanged(object recipient, ShowPauseButtonChangedMessage message)
+    {
+        OnPropertyChanged(nameof(ShowPauseButton));
+        OnPropertyChanged(nameof(ShouldShowPauseButton));
+        OnPropertyChanged(nameof(StartStopButtonMargin));
+    }
+
     private void OnEndOfMeeting(object recipient, EndOfMeetingMessage message)
     {
         StoreEndOfMeetingData();
@@ -1440,9 +1470,12 @@ public class OperatorPageViewModel : ObservableObject, IPage
         OnPropertyChanged(nameof(NotInShrinkMode));
         OnPropertyChanged(nameof(StartStopButtonRowSpan));
         OnPropertyChanged(nameof(StartStopButtonHeight));
+        OnPropertyChanged(nameof(StartStopButtonMargin));
         OnPropertyChanged(nameof(TimeDisplayColumnSpan));
         OnPropertyChanged(nameof(ShowUpDownButton));
         OnPropertyChanged(nameof(IsBellVisible));
+        OnPropertyChanged(nameof(ShowPauseButton));
+        OnPropertyChanged(nameof(ShouldShowPauseButton));
     }
 
     private void OnRefreshSchedule(object recipient, RefreshScheduleMessage message)

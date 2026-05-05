@@ -469,6 +469,7 @@
                     Orientation="Vertical"
                     Visibility="{Binding Path=NotInShrinkMode, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Button
+                        x:Name="IncrementTimerButton"
                         Height="32"
                         Margin="0,0,0,2"
                         Padding="0"
@@ -548,6 +549,7 @@
                 Grid.Row="2"
                 Grid.RowSpan="{Binding StartStopButtonRowSpan}"
                 Height="{Binding StartStopButtonHeight}"
+                Margin="{Binding StartStopButtonMargin}"
                 AutomationProperties.AutomationId="StartTimerButton"
                 AutomationProperties.Name="{x:Static resx:Resources.START_TIMER}"
                 Command="{Binding StartCommand}"
@@ -567,6 +569,7 @@
                 Grid.Row="2"
                 Grid.RowSpan="{Binding StartStopButtonRowSpan}"
                 Height="{Binding StartStopButtonHeight}"
+                Margin="{Binding StartStopButtonMargin}"
                 AutomationProperties.AutomationId="StopTimerButton"
                 AutomationProperties.Name="{x:Static resx:Resources.STOP_TIMER}"
                 Command="{Binding StopCommand}"
@@ -579,6 +582,24 @@
                     Width="{Binding ActualHeight, ElementName=StopBtn, Mode=OneWay, Converter={StaticResource ButtonGlyphSizeConverter}}"
                     Height="{Binding ActualHeight, ElementName=StopBtn, Mode=OneWay, Converter={StaticResource ButtonGlyphSizeConverter}}"
                     Kind="Stop" />
+            </Button>
+
+            <Button
+                Grid.Row="2"
+                Padding="0,0"
+                Width="{Binding ActualWidth, ElementName=IncrementTimerButton, Mode=OneWay}"
+                Height="{Binding StartStopButtonHeight}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                AutomationProperties.AutomationId="PauseTimerButton"
+                AutomationProperties.Name="{x:Static resx:Resources.PAUSE_TIMER}"
+                Command="{Binding PauseCommand}"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Visibility="{Binding Path=ShouldShowPauseButton, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                <materialDesign:PackIcon
+                    Width="22"
+                    Height="22"
+                    Kind="Pause" />
             </Button>
 
             <Grid

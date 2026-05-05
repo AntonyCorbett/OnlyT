@@ -557,6 +557,20 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool ShowPauseButton
+    {
+        get => _optionsService.Options.ShowPauseButton;
+        set
+        {
+            if (_optionsService.Options.ShowPauseButton != value)
+            {
+                _optionsService.Options.ShowPauseButton = value;
+                OnPropertyChanged();
+                WeakReferenceMessenger.Default.Send(new ShowPauseButtonChangedMessage());
+            }
+        }
+    }
+
     public IEnumerable<LoggingLevel> LoggingLevels => _loggingLevels;
 
     public LogEventLevel LogEventLevel

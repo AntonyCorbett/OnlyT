@@ -146,6 +146,8 @@
         
         public bool AllowCountUpToggle { get; set; }
 
+        public bool ShowPauseButton { get; set; }
+
         public MeetingStartTimes.MeetingStartTimes MeetingStartTimes { get; set; }
 
         public bool IsApiEnabled { get; set; }

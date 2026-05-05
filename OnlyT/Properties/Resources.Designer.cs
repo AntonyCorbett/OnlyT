@@ -1088,6 +1088,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pause timer.
+        /// </summary>
+        public static string PAUSE_TIMER {
+            get {
+                return ResourceManager.GetString("PAUSE_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Persist student time.
         /// </summary>
         public static string PERSIST_STUDENT_TIME {
@@ -1346,6 +1355,15 @@ namespace OnlyT.Properties {
         public static string SHOW_COUNTDOWN_FRAME {
             get {
                 return ResourceManager.GetString("SHOW_COUNTDOWN_FRAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show pause button.
+        /// </summary>
+        public static string SHOW_PAUSE {
+            get {
+                return ResourceManager.GetString("SHOW_PAUSE", resourceCulture);
             }
         }
         
