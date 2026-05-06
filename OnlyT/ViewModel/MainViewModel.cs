@@ -106,6 +106,8 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
         WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
         WeakReferenceMessenger.Default.Register<EndOfMeetingMessage>(this, OnEndOfMeeting);
+        WeakReferenceMessenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
+        WeakReferenceMessenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
         WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
 
         InitHttpServer();
@@ -218,11 +220,6 @@ public class MainViewModel : ObservableObject
 
         if (info.IsRunning)
         {
-            // Cache these so they're available for the persist window after the timer stops
-            _persistTargetSecs = info.TargetSeconds;
-            _persistClosingSecs = info.ClosingSecs;
-            _persistCountUp = info.IsCountingUp;
-
             timerData.Mode = ClockServerMode.Timer;
             timerData.TargetSecs = info.TargetSeconds;
             timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
@@ -247,6 +244,17 @@ public class MainViewModel : ObservableObject
         {
             timerData.Mode = ClockServerMode.TimeOfDay;
         }
+    }
+
+    private void OnTimerStarted(object recipient, TimerStartMessage msg)
+    {
+        _persistTargetSecs = msg.TargetSeconds;
+        _persistCountUp = msg.CountUp;
+    }
+
+    private void OnTimerChanged(object recipient, TimerChangedMessage msg)
+    {
+        _persistClosingSecs = msg.ClosingSecs;
     }
 
     private void OnTimerStopped(object recipient, TimerStopMessage msg)
