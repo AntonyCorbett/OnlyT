@@ -1097,6 +1097,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show persist countdown bar.
+        /// </summary>
+        public static string PERSIST_COUNTDOWN_BAR {
+            get {
+                return ResourceManager.GetString("PERSIST_COUNTDOWN_BAR", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Persist student time.
         /// </summary>
         public static string PERSIST_STUDENT_TIME {

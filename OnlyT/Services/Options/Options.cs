@@ -96,6 +96,8 @@
 
         public bool PersistStudentTime { get; set; }
 
+        public bool ShowPersistCountdown { get; set; }
+
         public bool AlwaysOnTop { get; set; }
 
         public bool ShrinkOnMinimise { get; set; }

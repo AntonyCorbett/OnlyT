@@ -104,7 +104,10 @@ internal sealed class WebPageController
                 Secs = timerInfo.Secs,
                 TargetSecs = timerInfo.TargetSecs,
                 ClosingSecs = timerInfo.ClosingSecs,
-                CountUp = timerInfo.IsCountingUp
+                CountUp = timerInfo.IsCountingUp,
+                ShowPersistBar = timerInfo.ShowPersistBar,
+                PersistRemainingMs = timerInfo.PersistRemainingMs,
+                PersistTotalMs = timerInfo.PersistTotalMs
             },
             _ => throw new NotSupportedException()
         };
@@ -123,5 +126,8 @@ internal sealed class WebPageController
         public bool CountUp { get; set; }
         public bool Use24Hr { get; set; }
         public bool ShowSecs { get; set; }
+        public bool ShowPersistBar { get; set; }
+        public int PersistRemainingMs { get; set; }
+        public int PersistTotalMs { get; set; }
     }
 }

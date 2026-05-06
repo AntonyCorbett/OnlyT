@@ -111,33 +111,58 @@
                 CornerRadius="20"
                 Opacity="0">
 
-                <Viewbox VerticalAlignment="Top">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*" />
-                            <RowDefinition Height="2*" />
-                        </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                        <TextBlock
-                            Grid.Row="0"
-                            HorizontalAlignment="Center"
-                            FontSize="40"
-                            FontWeight="Bold"
-                            Foreground="{Binding TextColor}"
-                            Text="{Binding TimeString}" />
+                    <Viewbox Grid.Row="0" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
 
-                        <TextBlock
-                            Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Run
-                                FontSize="28"
+                            <TextBlock
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                FontSize="40"
                                 FontWeight="Bold"
-                                Foreground="White"
-                                Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
-                        </TextBlock>
-                    </Grid>
-                </Viewbox>
+                                Foreground="{Binding TextColor}"
+                                Text="{Binding TimeString}" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Visibility="{Binding ShowTimeOfDayUnderTimer, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Run
+                                    FontSize="28"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="{Binding CurrentTimeHrMin, ElementName=TheClock, Mode=OneWay}" />
+                            </TextBlock>
+                        </Grid>
+                    </Viewbox>
+
+                    <Border
+                        x:Name="PersistBarHost"
+                        Grid.Row="1"
+                        Margin="0,10,0,0"
+                        Height="18"
+                        Background="#444444"
+                        CornerRadius="9"
+                        Visibility="Collapsed">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="PersistFillCol" Width="1*" />
+                                <ColumnDefinition x:Name="PersistEmptyCol" Width="0*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Background="White" CornerRadius="9" />
+                        </Grid>
+                    </Border>
+
+                </Grid>
 
             </Border>
 

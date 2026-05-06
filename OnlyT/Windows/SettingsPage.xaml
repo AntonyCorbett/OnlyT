@@ -237,6 +237,13 @@
                             IsChecked="{Binding PersistStudentTime, Mode=TwoWay}"
                             Style="{StaticResource SettingsCheckBox}" />
 
+                        <CheckBox
+                            AutomationProperties.AutomationId="ShowPersistCountdownCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.PERSIST_COUNTDOWN_BAR}"
+                            Content="{x:Static resx:Resources.PERSIST_COUNTDOWN_BAR}"
+                            IsChecked="{Binding ShowPersistCountdown, Mode=TwoWay}"
+                            Style="{StaticResource SettingsCheckBox}" />
+
                         <StackPanel Orientation="Horizontal">
                             <CheckBox
                                 AutomationProperties.AutomationId="GenerateReportsCheckBox"

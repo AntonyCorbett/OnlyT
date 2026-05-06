@@ -67,6 +67,25 @@
                 color: #b3b3b3;
             }
 
+			#persist-bar-container {
+				display: none;
+				padding: 0 5% 6px 5%;
+			}
+
+			#persist-bar-track {
+				height: 18px;
+				background: #444444;
+				border-radius: 9px;
+				overflow: hidden;
+			}
+
+			#persist-bar-fill {
+				height: 100%;
+				width: 100%;
+				background: #ffffff;
+				border-radius: 9px;
+			}
+
 			.link_container {
 				text-align: right;
 				padding: 12px 16px;
@@ -100,6 +119,11 @@
 		<div id="main">
 			<span id="clocktext" onclick="location.reload(); return false" class="clockstyle"></span>
 		</div>
+		<div id="persist-bar-container">
+			<div id="persist-bar-track">
+				<div id="persist-bar-fill"></div>
+			</div>
+		</div>
 		<div class="link_container"><a href="./timers">{WEB_LINK_TIMERS}</a></div>
 
 		<script>
@@ -125,6 +149,12 @@
 			let persistTargetSecs = 0;
 			let persistClosingSecs = 30;
 			let persistCountUp = false;
+			let persistEndTime = 0;
+			let persistTotalMs = 1;
+			let persistBarVisible = false;
+
+			const persistBarContainer = document.getElementById('persist-bar-container');
+			const persistBarFill = document.getElementById('persist-bar-fill');
 
 			function shouldDelayNameplateDisplay() {
 				return (Date.now() - pageLoadStamp) < NAMEPLATE_DISPLAY_DELAY_MS;
@@ -203,6 +233,12 @@
 								persistTargetSecs = data.targetSecs;
 								persistClosingSecs = data.closingSecs;
 								persistCountUp = data.countUp;
+								if (data.showPersistBar && data.persistTotalMs > 0) {
+									persistEndTime = Date.now() + data.persistRemainingMs;
+									persistTotalMs = data.persistTotalMs;
+								} else {
+									persistEndTime = 0;
+								}
 								break;
 							}
 						}
@@ -325,7 +361,23 @@
 						currentDisplayMode = currentMode;
 					}
 				}
+				updatePersistBar();
 				setTimeout(updateClock, 100); // every 1/10 sec
+			}
+
+			function updatePersistBar() {
+				if (currentMode === 'Persist' && persistEndTime > 0) {
+					const remaining = Math.max(0, persistEndTime - Date.now());
+					const scale = remaining / persistTotalMs;
+					persistBarFill.style.width = (scale * 100) + '%';
+					if (!persistBarVisible) {
+						persistBarContainer.style.display = 'block';
+						persistBarVisible = true;
+					}
+				} else if (persistBarVisible) {
+					persistBarContainer.style.display = 'none';
+					persistBarVisible = false;
+				}
 			}
 
 			function updateTextSize() {

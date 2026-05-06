@@ -239,6 +239,9 @@ public class MainViewModel : ObservableObject
             timerData.TargetSecs = _persistTargetSecs;
             timerData.ClosingSecs = _persistClosingSecs;
             timerData.IsCountingUp = _persistCountUp;
+            timerData.ShowPersistBar = _optionsService.Options.ShowPersistCountdown;
+            timerData.PersistRemainingMs = (int)(_persistUntil - _dateTimeService.Now()).TotalMilliseconds;
+            timerData.PersistTotalMs = _optionsService.Options.PersistDurationSecs * 1000;
         }
         else
         {

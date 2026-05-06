@@ -92,9 +92,47 @@ namespace OnlyT.Windows
             if (_persistingTalkDuration)
             {
                 _persistingTalkDuration = false;
+                StopPersistBar();
                 AdjustDisplayOnTimerStop();
                 _persistTimer.Stop();
             }
+        }
+
+        private void StartPersistBar()
+        {
+            if (!_optionsService.Options.ShowPersistCountdown)
+            {
+                return;
+            }
+
+            PersistFillCol.BeginAnimation(ColumnDefinition.WidthProperty, null);
+            PersistEmptyCol.BeginAnimation(ColumnDefinition.WidthProperty, null);
+            PersistFillCol.Width = new GridLength(1, GridUnitType.Star);
+            PersistEmptyCol.Width = new GridLength(0, GridUnitType.Star);
+            PersistBarHost.Visibility = Visibility.Visible;
+
+            var duration = new Duration(TimeSpan.FromSeconds(_optionsService.Options.PersistDurationSecs));
+
+            PersistFillCol.BeginAnimation(ColumnDefinition.WidthProperty, new GridLengthAnimation
+            {
+                From = new GridLength(1, GridUnitType.Star),
+                To = new GridLength(0, GridUnitType.Star),
+                Duration = duration
+            });
+
+            PersistEmptyCol.BeginAnimation(ColumnDefinition.WidthProperty, new GridLengthAnimation
+            {
+                From = new GridLength(0, GridUnitType.Star),
+                To = new GridLength(1, GridUnitType.Star),
+                Duration = duration
+            });
+        }
+
+        private void StopPersistBar()
+        {
+            PersistFillCol.BeginAnimation(ColumnDefinition.WidthProperty, null);
+            PersistEmptyCol.BeginAnimation(ColumnDefinition.WidthProperty, null);
+            PersistBarHost.Visibility = Visibility.Collapsed;
         }
 
         private void OnNavigate(object recipient, NavigateMessage message)
@@ -122,9 +160,11 @@ namespace OnlyT.Windows
                 _persistingTalkDuration = true;
                 _persistTimer.Interval = TimeSpan.FromSeconds(_optionsService.Options.PersistDurationSecs);
                 _persistTimer.Start();
+                StartPersistBar();
             }
             else
             {
+                StopPersistBar();
                 AdjustDisplayOnTimerStop();
             }
         }
@@ -240,16 +280,21 @@ namespace OnlyT.Windows
         private void OnTimerStarted(object recipient, TimerStartMessage msg)
         {
             var model = (TimerOutputWindowViewModel)DataContext;
-            if (!model.SplitAndFullScreenModeIdentical() && !_persistingTalkDuration)
+            model.TextColor = GreenYellowRedSelector.GetGreenBrush();
+
+            if (_persistingTalkDuration)
             {
-                model.TextColor = GreenYellowRedSelector.GetGreenBrush();
-                
+                _persistingTalkDuration = false;
+                _persistTimer.Stop();
+                StopPersistBar();
+                // Timer panel is already visible during persist — no split-screen animation needed
+            }
+            else if (!model.SplitAndFullScreenModeIdentical())
+            {
                 // only animate if the user has configured different display
                 // layout for timer mode and full-screen mode
                 DisplaySplitScreen();
             }
-
-            _persistingTalkDuration = false;
         }
 
         private void DisplaySplitScreen()

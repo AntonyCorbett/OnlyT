@@ -377,6 +377,19 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool ShowPersistCountdown
+    {
+        get => _optionsService.Options.ShowPersistCountdown;
+        set
+        {
+            if (_optionsService.Options.ShowPersistCountdown != value)
+            {
+                _optionsService.Options.ShowPersistCountdown = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool IsCircuitVisit
     {
         get => _optionsService.Options.IsCircuitVisit;
