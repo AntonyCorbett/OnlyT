@@ -411,7 +411,7 @@
     <comment>Show a progress bar during the persist period that indicates how long remains</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Mantieni durata parte</value>
+    <value>Mantieni durata discorso</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
