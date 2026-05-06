@@ -121,6 +121,10 @@
 			let use24HrClockFormat = false;
 			let showTimeOfDaySeconds = false;
 			let transitioning = false;
+			let persistElapsedSecs = 0;
+			let persistTargetSecs = 0;
+			let persistClosingSecs = 30;
+			let persistCountUp = false;
 
 			function shouldDelayNameplateDisplay() {
 				return (Date.now() - pageLoadStamp) < NAMEPLATE_DISPLAY_DELAY_MS;
@@ -193,6 +197,14 @@
 								serverTimeOfDayAdjustment = serverStamp - clientDate;
 								break;
 							}
+
+							case 'Persist': {
+								persistElapsedSecs = (data.mins * 60) + data.secs;
+								persistTargetSecs = data.targetSecs;
+								persistClosingSecs = data.closingSecs;
+								persistCountUp = data.countUp;
+								break;
+							}
 						}
 					} else {
 						currentMode = 'Offline';
@@ -247,6 +259,15 @@
 						return currentlyCountingUp
 							? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
 							: getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
+					}
+
+					case 'Persist': {
+						const remainingSecs = persistTargetSecs - persistElapsedSecs;
+						setClockColour(remainingSecs, persistClosingSecs, textElem);
+						currentDisplayMode = currentMode;
+						return persistCountUp
+							? getTimeDisplayStringCountingUp(persistElapsedSecs)
+							: getTimeDisplayStringCountingDown(persistElapsedSecs, persistTargetSecs);
 					}
 
 					case 'Nameplate':

@@ -97,6 +97,15 @@ internal sealed class WebPageController
                 ClosingSecs = timerInfo.ClosingSecs,
                 CountUp = timerInfo.IsCountingUp
             },
+            ClockServerMode.Persist => new ClockData
+            {
+                Mode = "Persist",
+                Mins = timerInfo.Mins,
+                Secs = timerInfo.Secs,
+                TargetSecs = timerInfo.TargetSecs,
+                ClosingSecs = timerInfo.ClosingSecs,
+                CountUp = timerInfo.IsCountingUp
+            },
             _ => throw new NotSupportedException()
         };
 

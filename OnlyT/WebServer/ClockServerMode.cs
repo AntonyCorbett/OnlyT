@@ -15,6 +15,11 @@
         /// <summary>
         /// The timer.
         /// </summary>
-        Timer
+        Timer,
+
+        /// <summary>
+        /// Persisting the final student time after the timer has stopped.
+        /// </summary>
+        Persist
     }
 }

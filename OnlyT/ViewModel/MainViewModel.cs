@@ -56,6 +56,13 @@ public class MainViewModel : ObservableObject
     private FrameworkElement? _currentPage;
     private DateTime _lastRefreshedSchedule = DateTime.MinValue;
 
+    // Persist-student-time state for the web clock
+    private DateTime _persistUntil = DateTime.MinValue;
+    private int _persistElapsedSecs;
+    private int _persistTargetSecs;
+    private int _persistClosingSecs;
+    private bool _persistCountUp;
+
     public MainViewModel(
         IReminderService reminderService,
         IOverrunService overrunService,
@@ -99,6 +106,7 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<HttpServerChangedMessage>(this, OnHttpServerChanged);
         WeakReferenceMessenger.Default.Register<StopCountDownMessage>(this, OnStopCountdown);
         WeakReferenceMessenger.Default.Register<EndOfMeetingMessage>(this, OnEndOfMeeting);
+        WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
 
         InitHttpServer();
 
@@ -208,21 +216,44 @@ public class MainViewModel : ObservableObject
         timerData.Use24HrFormat = _optionsService.Use24HrClockFormat();
         timerData.ShowTimeOfDaySeconds = _optionsService.Options.WebClockShowTimeOfDaySeconds;
 
-        if (!info.IsRunning)
+        if (info.IsRunning)
         {
-            timerData.Mode = ClockServerMode.TimeOfDay;
-        }
-        else
-        {
-            timerData.Mode = ClockServerMode.Timer;
+            // Cache these so they're available for the persist window after the timer stops
+            _persistTargetSecs = info.TargetSeconds;
+            _persistClosingSecs = info.ClosingSecs;
+            _persistCountUp = info.IsCountingUp;
 
+            timerData.Mode = ClockServerMode.Timer;
             timerData.TargetSecs = info.TargetSeconds;
             timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
             timerData.Secs = info.ElapsedTime.Seconds;
             timerData.Millisecs = info.ElapsedTime.Milliseconds;
             timerData.ClosingSecs = info.ClosingSecs;
-
             timerData.IsCountingUp = info.IsCountingUp;
+        }
+        else if (_dateTimeService.Now() < _persistUntil)
+        {
+            timerData.Mode = ClockServerMode.Persist;
+            timerData.Mins = _persistElapsedSecs / 60;
+            timerData.Secs = _persistElapsedSecs % 60;
+            timerData.TargetSecs = _persistTargetSecs;
+            timerData.ClosingSecs = _persistClosingSecs;
+            timerData.IsCountingUp = _persistCountUp;
+        }
+        else
+        {
+            timerData.Mode = ClockServerMode.TimeOfDay;
+        }
+    }
+
+    private void OnTimerStopped(object recipient, TimerStopMessage msg)
+    {
+        _persistUntil = DateTime.MinValue;
+
+        if (msg.PersistFinalTimerValue && !msg.IsPaused)
+        {
+            _persistElapsedSecs = msg.ElapsedSecs;
+            _persistUntil = _dateTimeService.Now().AddSeconds(_optionsService.Options.PersistDurationSecs);
         }
     }
 
