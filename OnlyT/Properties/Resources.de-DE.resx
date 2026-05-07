@@ -798,9 +798,9 @@ Shift - Increase 5m</value>
     <value>Edit duration</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Timer pausieren</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Pause Button anzeigen</value>
   </data>
 </root>
