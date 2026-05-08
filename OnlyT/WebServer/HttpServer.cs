@@ -26,12 +26,14 @@ internal sealed class HttpServer : IHttpServer, IDisposable
     private readonly ApiThrottler _apiThrottler;
     private readonly ICommandLineService _commandLineService;
     private readonly ApiRouter _apiRouter;
+    private readonly ITalkTimerService _timerService;
+    private readonly ITalkScheduleService _talksService;
     private HttpListener? _listener;
     private int _port;
     private readonly DedupLogger _dedupLogger = new(); // prevents excessive logging of the same error
 
     public HttpServer(
-        IOptionsService optionsService, 
+        IOptionsService optionsService,
         IBellService bellService,
         ITalkTimerService timerService,
         ICommandLineService commandLineService,
@@ -41,6 +43,8 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         _optionsService = optionsService;
         _dateTimeService = dateTimeService;
         _commandLineService = commandLineService;
+        _timerService = timerService;
+        _talksService = talksService;
 
         _apiThrottler = new ApiThrottler(optionsService);
 
@@ -111,6 +115,7 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         _listener.Prefixes.Add($"http://{ipAddress}:{_port}/index/");
         _listener.Prefixes.Add($"http://{ipAddress}:{_port}/timers/");
         _listener.Prefixes.Add($"http://{ipAddress}:{_port}/data/");
+        _listener.Prefixes.Add($"http://{ipAddress}:{_port}/schedule/");
         _listener.Prefixes.Add($"http://{ipAddress}:{_port}/api/");
     }
 
@@ -173,6 +178,10 @@ internal sealed class HttpServer : IHttpServer, IDisposable
 
                     case "timers":
                         HandleRequestForTimersWebPage(context.Request, response);
+                        break;
+
+                    case "schedule":
+                        HandleRequestForTimersScheduleData(context.Request, response);
                         break;
 
                     case "api":
@@ -253,14 +262,22 @@ internal sealed class HttpServer : IHttpServer, IDisposable
         }
     }
 
+    // Serves timer schedule data for the timers web page without throttling.
+    // This path is exclusively for the page's own polling; remote apps use /api/*/timers which is throttled.
+    private void HandleRequestForTimersScheduleData(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        if (_optionsService.Options.IsWebClockEnabled)
+        {
+            BaseApiController.WriteResponse(response, new TimersResponseData(_talksService, _timerService, _optionsService));
+        }
+    }
+
     private void HandleRequestForClockWebPageTimerData(
         HttpListenerRequest request,
         HttpListenerResponse response)
     {
         if (_optionsService.Options.IsWebClockEnabled)
         {
-            _apiThrottler.CheckRateLimit(ApiRequestType.ClockData, request);
-
             var timerInfo = new TimerInfoEventArgs();
             OnRequestForTimerDataEvent(timerInfo);
                 

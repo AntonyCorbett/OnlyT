@@ -188,7 +188,7 @@
         async function getOnlyTJson() {
             const clientDate = new Date();
             try {
-                const resp = await fetch('../api/v3/timers', { cache: 'no-store', signal: AbortSignal.timeout(2000) });
+                const resp = await fetch('../schedule/', { cache: 'no-store', signal: AbortSignal.timeout(2000) });
                 if (resp.ok) {
                     const responseDate = new Date();
                     const jsondata = await resp.json();
