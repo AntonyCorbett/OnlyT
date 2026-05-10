@@ -407,7 +407,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_COUNTDOWN_BAR" xml:space="preserve">
-    <value>Show persist countdown bar</value>
+    <value>Mostrar a barra de progreso durante o consello</value>
     <comment>Show a progress bar during the persist period that indicates how long remains</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -756,15 +756,15 @@ Shift - Aumentar 5min</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="START_TIMER" xml:space="preserve">
-    <value>Start timer</value>
+    <value>Iniciar temporizador</value>
     <comment>Accessible name for the Start button on the operator page</comment>
   </data>
   <data name="STOP_TIMER" xml:space="preserve">
-    <value>Stop timer</value>
+    <value>Deter temporizador</value>
     <comment>Accessible name for the Stop button on the operator page</comment>
   </data>
   <data name="EXPAND_WINDOW" xml:space="preserve">
-    <value>Expand window</value>
+    <value>Ampliar ventá</value>
     <comment>Accessible name for the expand button shown in shrink mode</comment>
   </data>
   <data name="CLOSE_APP" xml:space="preserve">
@@ -772,11 +772,11 @@ Shift - Aumentar 5min</value>
     <comment>Accessible name for the close application button shown in shrink mode</comment>
   </data>
   <data name="TIMER_DISPLAY" xml:space="preserve">
-    <value>Timer display</value>
+    <value>Tempo do temporizador</value>
     <comment>Accessible name for the timer display area on the operator page</comment>
   </data>
   <data name="BELL_TOGGLE" xml:space="preserve">
-    <value>Toggle bell</value>
+    <value>Activar ou desactivar o timbre</value>
     <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
   </data>
   <data name="TALK_SELECTOR" xml:space="preserve">
@@ -784,21 +784,21 @@ Shift - Aumentar 5min</value>
     <comment>Accessible name for the talk selector combo box on the operator page</comment>
   </data>
   <data name="BACK_TO_OPERATOR" xml:space="preserve">
-    <value>Back to operator page</value>
+    <value>Volver á ventá do operador</value>
     <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
   <data name="ENTER_VALID_DURATION" xml:space="preserve">
-    <value>Please enter a valid duration.</value>
+    <value>Introduce unha duración válida.</value>
     <comment>Error msg displayed when manually entering a bad duration</comment>
   </data>
   <data name="ACCEPT_DURATION" xml:space="preserve">
-    <value>Accept duration</value>
+    <value>Aceptar duración</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
     <value>Editar duración</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Poñer en pausa o temporizador</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
     <value>Mostrar o botón de pausa</value>
