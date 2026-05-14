@@ -407,7 +407,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_COUNTDOWN_BAR" xml:space="preserve">
-    <value>Show persist countdown bar</value>
+    <value>Mostra barra tempo residuo vista timer</value>
     <comment>Show a progress bar during the persist period that indicates how long remains</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -491,7 +491,7 @@ Maiusc - Aggiungi 5m</value>
     <value>Attivate</value>
   </data>
   <data name="ENABLED_BELL" xml:space="preserve">
-    <value>Attivato</value>
+    <value>Attivata</value>
   </data>
   <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
     <value>Attivato</value>
