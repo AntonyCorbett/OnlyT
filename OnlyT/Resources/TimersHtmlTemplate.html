@@ -32,7 +32,6 @@
         }
 
         #maintext {
-            font-size: 10em;
             cursor: pointer;
         }
 
@@ -163,6 +162,7 @@
     <div id="main" class="main">
         <span id="maintext" onclick="location.reload(); return false" style="display:none;"></span>
     </div>
+    {SNACKBAR}
 
     <script>
         "use strict";
@@ -267,6 +267,12 @@
                         }
                     }
                 } else {
+                    let message = `HTTP ${resp.status}`;
+                    try {
+                        const err = await resp.json();
+                        if (err.errorMessage) { message = err.errorMessage; }
+                    } catch { /* ignore */ }
+                    showSnackbar(message);
                     currentMode = "Offline";
                 }
             } catch {
@@ -339,7 +345,7 @@
                         currentTalk = null;
                         timersLoaded = false;
                         currentDisplayMode = currentMode;
-                        offlineTextElem.className = "clockstyle_dim";
+                        offlineTextElem.className = "offline-indicator";
                     }
                     offlineTextElem.textContent = s;
                     break;

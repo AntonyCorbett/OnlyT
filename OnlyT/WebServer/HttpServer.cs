@@ -248,7 +248,6 @@ internal sealed class HttpServer : IHttpServer, IDisposable
     {
         if (_optionsService.Options.IsWebClockEnabled)
         {
-            _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
             WebPageController.HandleRequestForWebPage(response, WebPageTypes.Clock);
         }
     }
@@ -257,7 +256,6 @@ internal sealed class HttpServer : IHttpServer, IDisposable
     {
         if (_optionsService.Options.IsWebClockEnabled)
         {
-            _apiThrottler.CheckRateLimit(ApiRequestType.ClockPage, request);
             WebPageController.HandleRequestForWebPage(response, WebPageTypes.Timers);
         }
     }

@@ -63,6 +63,7 @@ internal sealed class WebPageController
     private static byte[] GenerateWebPageHtml(string content)
     {
         content = content.Replace("{SHARED_JS}", Properties.Resources.SharedClockJs);
+        content = content.Replace("{SNACKBAR}", Properties.Resources.SharedSnackbar);
 
         var resourceKeys = new[] { "WEB_OFFLINE", "WEB_LINK_TIMERS", "WEB_LINK_CLOCK" };
         var resourceMan = new ResourceManager(typeof(Properties.Resources));

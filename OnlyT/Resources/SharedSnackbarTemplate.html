@@ -1,0 +1,62 @@
+<style>
+#snackbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+    max-width: 80%;
+    background-color: rgba(40, 40, 40, 0.96);
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    font-size: 0.75em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+#snackbar.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+#snackbar-close {
+    flex-shrink: 0;
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+}
+#snackbar-close:hover {
+    color: #fff;
+}
+.offline-indicator {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #3a5252;
+    font-weight: 400;
+    cursor: pointer;
+}
+.offline-indicator::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #3a5252;
+    flex-shrink: 0;
+}
+</style>
+<div id="snackbar"><span id="snackbar-msg"></span><button id="snackbar-close" onclick="hideSnackbar()" aria-label="Dismiss">&#x2715;</button></div>

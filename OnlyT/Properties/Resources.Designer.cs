@@ -1339,7 +1339,16 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("SharedClockJs", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to the shared snackbar HTML and CSS.
+        /// </summary>
+        public static string SharedSnackbar {
+            get {
+                return ResourceManager.GetString("SharedSnackbar", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Generate reports.
         /// </summary>

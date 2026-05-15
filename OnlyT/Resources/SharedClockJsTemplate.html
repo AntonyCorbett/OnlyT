@@ -43,4 +43,17 @@ function setClockColour(remainingSecs, closingSecs, targetElem) {
         targetElem.className = 'clockstyle_green';
     }
 }
+
+let snackbarTimer = null;
+function showSnackbar(message) {
+    const bar = document.getElementById('snackbar');
+    document.getElementById('snackbar-msg').textContent = message;
+    bar.classList.add('show');
+    clearTimeout(snackbarTimer);
+    snackbarTimer = setTimeout(() => bar.classList.remove('show'), 5000);
+}
+function hideSnackbar() {
+    clearTimeout(snackbarTimer);
+    document.getElementById('snackbar').classList.remove('show');
+}
 </script>

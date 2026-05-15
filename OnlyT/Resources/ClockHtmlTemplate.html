@@ -117,6 +117,7 @@
 				border-color: #888;
 				background-color: rgba(255, 255, 255, 0.06);
 			}
+
 		</style>
 	</head>
 
@@ -130,6 +131,7 @@
 			</div>
 		</div>
 		<div class="link_container"><a href="./timers">{WEB_LINK_TIMERS}</a></div>
+		{SNACKBAR}
 
 		<script>
 			"use strict";
@@ -248,6 +250,12 @@
 							}
 						}
 					} else {
+						let message = `HTTP ${resp.status}`;
+						try {
+							const err = await resp.json();
+							if (err.errorMessage) { message = err.errorMessage; }
+						} catch { /* ignore */ }
+						showSnackbar(message);
 						currentMode = 'Offline';
 					}
 				} catch {
@@ -317,7 +325,7 @@
 						return 'OnlyT';
 
 					default:
-						textElem.className = 'clockstyle_dim';
+						textElem.className = 'offline-indicator';
 						currentDisplayMode = currentMode;
 						return '{WEB_OFFLINE}';
 				}
@@ -386,6 +394,10 @@
 			}
 
 			function updateTextSize() {
+				if (currentMode === 'Offline') {
+					textElem.style.fontSize = '';
+					return;
+				}
 				let curFontSize = 24;
 				const target = 0.9;
 				for (let i = 0; i < 3; i++) {

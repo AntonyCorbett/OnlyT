@@ -13,7 +13,10 @@
       "Bash(dotnet fsi *)",
       "Bash(cat)",
       "Bash(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\" -Directory)",
-      "PowerShell(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\\\\OnlyT.WebClient\" -Recurse -File | Where-Object {$_.Extension -in @\\('.html', '.css', '.js', '.ts', '.tsx'\\)} | Select-Object FullName)"
+      "PowerShell(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\\\\OnlyT.WebClient\" -Recurse -File | Where-Object {$_.Extension -in @\\('.html', '.css', '.js', '.ts', '.tsx'\\)} | Select-Object FullName)",
+      "Bash(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "Bash(Format-Table FullName)"
     ]
   }
 }
