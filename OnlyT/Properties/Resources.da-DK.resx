@@ -1,0 +1,806 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACTIVE_BELL" xml:space="preserve">
+    <value>Klokke er aktiv</value>
+    <comment>This is the tooltip text displayed for the Bell icon when the automatic bell is active</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_NONE" xml:space="preserve">
+    <value>Ingen</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_ONE_WAY" xml:space="preserve">
+    <value>En-vejs</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_MODE_TWO_WAY" xml:space="preserve">
+    <value>To-vejs</value>
+    <comment>One of the drop-down options in Settings, Automatic Mode</comment>
+  </data>
+  <data name="APP_VER" xml:space="preserve">
+    <value>Software version {0}</value>
+    <comment>See Settings, Main. Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+  <data name="ClockHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ClockHtmlTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="SharedClockJs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SharedClockJsTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="CLOCK_FORMAT_12" xml:space="preserve">
+    <value>12-timers</value>
+    <comment>The 12-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12Z" xml:space="preserve">
+    <value>12-timers (førende nul)</value>
+    <comment>The 12-hour clock format with a leading zero where appropriate</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24" xml:space="preserve">
+    <value>24-timers</value>
+    <comment>The 24-hour clock format</comment>
+  </data>
+  <data name="CLOCK_FORMAT_24Z" xml:space="preserve">
+    <value>24-timers (førende nul)</value>
+    <comment>The 24-hour clock format with leading zero where appropriate</comment>
+  </data>
+  <data name="CREATE_FOLDER_ERROR" xml:space="preserve">
+    <value>Kunne ikke oprette mappe {0}</value>
+    <comment>Please keep the curly braces and thier contents - these are placeholders for text that is inserted at run-time.</comment>
+  </data>
+  <data name="DURATION_ADAPTED" xml:space="preserve">
+    <value>Automatisk tilpasset varighed</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_MODIFIED" xml:space="preserve">
+    <value>Tilpasset varighed</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="DURATION_ORIGINAL" xml:space="preserve">
+    <value>Oprindelig varighed</value>
+    <comment>Tooltip describing the time that is shown bottom left of the black panel in the main page.</comment>
+  </data>
+  <data name="FULL_SCREEN_ANALOGUE" xml:space="preserve">
+    <value>Analog</value>
+    <comment>i.e. an analogue clock (with face and hands)</comment>
+  </data>
+  <data name="FULL_SCREEN_BOTH" xml:space="preserve">
+    <value>Analog og Digital</value>
+  </data>
+  <data name="FULL_SCREEN_DIGITAL" xml:space="preserve">
+    <value>Digital</value>
+  </data>
+  <data name="INACTIVE_BELL" xml:space="preserve">
+    <value>Klokke er inaktiv</value>
+  </data>
+  <data name="MIDWEEK" xml:space="preserve">
+    <value>Midtugemøde</value>
+  </data>
+  <data name="MINISTRY1" xml:space="preserve">
+    <value>Forkyndelsen - Punkt 1</value>
+  </data>
+  <data name="MINISTRY2" xml:space="preserve">
+    <value>Forkyndelsen - Punkt 2</value>
+  </data>
+  <data name="MINISTRY3" xml:space="preserve">
+    <value>Forkyndelsen - Punkt 3</value>
+  </data>
+  <data name="OP_MODE_AUTO" xml:space="preserve">
+    <value>Automatisk</value>
+  </data>
+  <data name="OP_MODE_FILE" xml:space="preserve">
+    <value>Filbaseret</value>
+  </data>
+  <data name="OP_MODE_MANUAL" xml:space="preserve">
+    <value>Manuel</value>
+  </data>
+  <data name="TALK_CONCLUDING" xml:space="preserve">
+    <value>Afsluttende bemærkninger</value>
+  </data>
+  <data name="TALK_CONCLUDING_COMMENTS" xml:space="preserve">
+    <value>Afsluttende bemærkninger</value>
+  </data>
+  <data name="TALK_CONG_STUDY" xml:space="preserve">
+    <value>Menighedsbibelstudiet</value>
+  </data>
+  <data name="TALK_DIGGING" xml:space="preserve">
+    <value>Åndelige perler</value>
+  </data>
+  <data name="TALK_LIVING1" xml:space="preserve">
+    <value>Livet som kristne - del 1</value>
+  </data>
+  <data name="TALK_LIVING2" xml:space="preserve">
+    <value>Livet som kristne - del 2</value>
+  </data>
+  <data name="TALK_OPENING_COMMENTS" xml:space="preserve">
+    <value>Indledende bemærkninger</value>
+  </data>
+  <data name="TALK_PRESENTATIONS" xml:space="preserve">
+    <value>Denne Måneds Præsentationer</value>
+  </data>
+  <data name="TALK_PUBLIC" xml:space="preserve">
+    <value>Offentlig foredrag</value>
+  </data>
+  <data name="TALK_READING" xml:space="preserve">
+    <value>Oplæsning fra bibelen</value>
+  </data>
+  <data name="TALK_SERVICE" xml:space="preserve">
+    <value>Foredrag</value>
+  </data>
+  <data name="TALK_TREASURES" xml:space="preserve">
+    <value>Perler fra guds ord</value>
+  </data>
+  <data name="TALK_WT" xml:space="preserve">
+    <value>Vagttårnsstudiet</value>
+  </data>
+  <data name="WEEKEND" xml:space="preserve">
+    <value>Weekend</value>
+  </data>
+  <data name="CLOCK_FORMAT_12AMPM" xml:space="preserve">
+    <value>12-timers (am/pm)</value>
+    <comment>The 12-hour clock format with "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="CLOCK_FORMAT_12ZAMPM" xml:space="preserve">
+    <value>12-timers (førende nul &amp; am/pm)</value>
+    <comment>The 12-hour clock format with a leading zero and "am" or "pm" appended. If your language doesn't use "am" and "pm" you can leave this item untranslated</comment>
+  </data>
+  <data name="MONITOR_NONE" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="NOT_AVAIL_TIMER_RUNNING" xml:space="preserve">
+    <value>Indstillinger ikke tilgængelige, mens timeren kører!</value>
+  </data>
+  <data name="SETTINGS" xml:space="preserve">
+    <value>Indstillinger</value>
+  </data>
+  <data name="SECTION_TREASURES" xml:space="preserve">
+    <value>Åndelige perler</value>
+  </data>
+  <data name="SECTION_MINISTRY" xml:space="preserve">
+    <value>Forkyndelsen</value>
+  </data>
+  <data name="SECTION_LIVING" xml:space="preserve">
+    <value>Livet som kristne</value>
+  </data>
+  <data name="SECTION_WEEKEND" xml:space="preserve">
+    <value>Weekend</value>
+  </data>
+  <data name="NOT_AVAIL_ADMIN" xml:space="preserve">
+    <value>Indstillinger deaktiveret af administrator!</value>
+    <comment>This text is used as the Settings button tooltip when the Settings page has been disabled by the administrator.</comment>
+  </data>
+  <data name="MINISTRY4" xml:space="preserve">
+    <value>Forkyndelsen - Punkt 4</value>
+  </data>
+  <data name="CIRCUIT_VISIT" xml:space="preserve">
+    <value>Besøg af kredstilsynsmand</value>
+  </data>
+  <data name="CLOSE_COUNTDOWN" xml:space="preserve">
+    <value>LUK NEDTÆLLING</value>
+    <comment>Title of the CLOSE COUNTDOWN button on the main page. Please keep the capitals. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Hjælp</value>
+  </data>
+  <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
+    <value>[Besøg af kredstilsynsmand]</value>
+  </data>
+  <data name="NEW_VERSION" xml:space="preserve">
+    <value>Ny version tilgængelig!</value>
+  </data>
+  <data name="MAIN_SECTION" xml:space="preserve">
+    <value>HOVEDINDSTILLINGER</value>
+    <comment>Title for Settings, MAIN section. Please keep capitals</comment>
+  </data>
+  <data name="ACCESS_CODE" xml:space="preserve">
+    <value>Adgangskode</value>
+    <comment>See Settings, Remote Apps. Similar to a PIN or a password</comment>
+  </data>
+  <data name="ADAPTIVE_MIDWEEK" xml:space="preserve">
+    <value>Midtugemøde adaptiv tilstand</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ADAPTIVE_WEEKEND" xml:space="preserve">
+    <value>Weekendmøde adaptiv tilstand</value>
+    <comment>See Settings, Automatic Mode</comment>
+  </data>
+  <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
+    <value>Tillad tæl-op knap</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALWAYS_ON_TOP" xml:space="preserve">
+    <value>Altid øverst</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="APPS_SECTION" xml:space="preserve">
+    <value>REMOTE APPS</value>
+    <comment>Title for Settings, REMOTE APPS section. Please keep capitals</comment>
+  </data>
+  <data name="AUTO_SECTION" xml:space="preserve">
+    <value>AUTOMATISK MODE</value>
+    <comment>Title for Settings, AUTOMATIC MODE  section. Please keep capitals</comment>
+  </data>
+  <data name="BELL_SECTION" xml:space="preserve">
+    <value>KLOKKE</value>
+    <comment>Title for Settings, BELL section. Please keep capitals</comment>
+  </data>
+  <data name="CLOCK_SECTION" xml:space="preserve">
+    <value>WEB UR</value>
+    <comment>Title for Settings, WEB CLOCK section. Please keep capitals</comment>
+  </data>
+  <data name="COUNTDOWN_SECTION" xml:space="preserve">
+    <value>MØDE NEDTÆLLING</value>
+    <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
+  </data>
+  <data name="CO_VISIT_TOGGLE" xml:space="preserve">
+    <value>Besøg af kredstilsynsmand knap</value>
+  </data>
+  <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
+    <value>Digitalt ur format</value>
+  </data>
+  <data name="ENABLED" xml:space="preserve">
+    <value>Aktiveret</value>
+    <comment>This item is no longer used. Please see "ENABLED_XYZ"</comment>
+  </data>
+  <data name="FULL_SCREEN_CLOCK" xml:space="preserve">
+    <value>Fuld skærm ur tilstand</value>
+  </data>
+  <data name="IP_ADDRESS" xml:space="preserve">
+    <value>IP-adresse</value>
+    <comment>Network address</comment>
+  </data>
+  <data name="MEETING" xml:space="preserve">
+    <value>Møde</value>
+    <comment>Type of meeting (i.e. weeked or mid-week)</comment>
+  </data>
+  <data name="MEETING_STARTS" xml:space="preserve">
+    <value>Møde starttider (1 per linje)</value>
+  </data>
+  <data name="MISC_SECTION" xml:space="preserve">
+    <value>DIVERSE</value>
+    <comment>Title for Settings, MISCELLANEOUS section. Please keep capitals</comment>
+  </data>
+  <data name="MONITOR" xml:space="preserve">
+    <value>Skærm</value>
+  </data>
+  <data name="MOUSE_PTR" xml:space="preserve">
+    <value>Vis musemarkøren</value>
+  </data>
+  <data name="MTG_START_NOTES1" xml:space="preserve">
+    <value>Sæt hver starttid på en ny linje.</value>
+  </data>
+  <data name="MTG_START_NOTES2" xml:space="preserve">
+    <value>Brug lige den tids-format du vil!</value>
+  </data>
+  <data name="MTG_START_NOTES3" xml:space="preserve">
+    <value>Eventuelt inkludér en dag, f.eks. "Thu 19:15"</value>
+  </data>
+  <data name="NOTES" xml:space="preserve">
+    <value>Bemærkninger:</value>
+  </data>
+  <data name="OPEN_PORT" xml:space="preserve">
+    <value>ÅBN PORT</value>
+    <comment>Caption for the "open port" button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="OP_MODE" xml:space="preserve">
+    <value>Tilstand</value>
+    <comment>The operating mode (i.e. manual, auto or file-based)</comment>
+  </data>
+  <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
+    <value>Forsæt med at vise elevens tid</value>
+    <comment>All the monitor to display the final student time for a little longer than normal</comment>
+  </data>
+  <data name="PERSIST_COUNTDOWN_BAR" xml:space="preserve">
+    <value>Vis nedtællingsbar ved "fortsæt med at vise elevens tid"</value>
+    <comment>Show a progress bar during the persist period that indicates how long remains</comment>
+  </data>
+  <data name="PERSIST_TALK_DURATION" xml:space="preserve">
+    <value>Fortsæt med at vise elevens tid - længde</value>
+    <comment>How long the talk timer is shown after the end of the item</comment>
+  </data>
+  <data name="PORT" xml:space="preserve">
+    <value>Port</value>
+    <comment>i.e. the TCP (networking) "port"</comment>
+  </data>
+  <data name="REMOTE_SECTION" xml:space="preserve">
+    <value>FJERNADGANG</value>
+    <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
+  </data>
+  <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
+    <value>Vis sektor på analogt ur</value>
+    <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
+  </data>
+  <data name="SPLIT_WIDTH" xml:space="preserve">
+    <value>Split-screen bredde:</value>
+  </data>
+  <data name="TEST" xml:space="preserve">
+    <value>TEST</value>
+    <comment>Caption for the Bell test button in settings. Please keep the capitals</comment>
+  </data>
+  <data name="THROTTLED" xml:space="preserve">
+    <value>Begrænset</value>
+    <comment>Communication is deliberately limited to prevent overloading</comment>
+  </data>
+  <data name="TIMER_COUNT_UP" xml:space="preserve">
+    <value>Timeren tæller op</value>
+    <comment>Counts up rather than down</comment>
+  </data>
+  <data name="TIMER_WIN_SECTION" xml:space="preserve">
+    <value>TIMER VINDUE</value>
+    <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
+  </data>
+  <data name="TIME_UNDER_TIMER" xml:space="preserve">
+    <value>Tidspunkt på dagen under timer</value>
+    <comment>Show time of day underneath the timer</comment>
+  </data>
+  <data name="VOLUME" xml:space="preserve">
+    <value>Lydstyrke:</value>
+    <comment>Label for the volume control in the Bell settings</comment>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Sprog</value>
+  </data>
+  <data name="RESTART_LANGUAGE" xml:space="preserve">
+    <value>Venligst genstart OnlyT efter ændring af sproget.</value>
+  </data>
+  <data name="TIME_DECREASE" xml:space="preserve">
+    <value>Minus 1m
+Ctrl - Minus 15s
+Shift - Minus 5m</value>
+    <comment>Tooltip displayed on "Minus" button to reduce time</comment>
+  </data>
+  <data name="TIME_INCREASE" xml:space="preserve">
+    <value>Plus 1m
+Ctrl - Plus 15s
+Shift - Plus 5m</value>
+    <comment>Tooltip displayed on "Plus" button to increase time</comment>
+  </data>
+  <data name="MANUAL_MODE" xml:space="preserve">
+    <value>Manuel tilstand</value>
+    <comment>Title displayed at the top of the main page when in manual mode</comment>
+  </data>
+  <data name="COUNTING_DOWN" xml:space="preserve">
+    <value>Tæller ned i øjeblikket</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="COUNTING_UP" xml:space="preserve">
+    <value>Tæller op i øjeblikket</value>
+    <comment>Tooltip on the Operator page "up/down" glyph</comment>
+  </data>
+  <data name="X_SECONDS" xml:space="preserve">
+    <value>{0} sekunder</value>
+    <comment>See Settings =&gt; Timer window =&gt; Persist talk duration</comment>
+  </data>
+  <data name="ENABLED_API" xml:space="preserve">
+    <value>Aktiveret</value>
+  </data>
+  <data name="ENABLED_BELL" xml:space="preserve">
+    <value>Aktiveret</value>
+  </data>
+  <data name="ENABLED_WEB_CLOCK" xml:space="preserve">
+    <value>Aktiveret</value>
+  </data>
+  <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
+    <value>Vis sekunder i tid på dagen</value>
+    <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
+  </data>
+  <data name="SHOW_SECONDS" xml:space="preserve">
+    <value>Vis sekunder</value>
+    <comment>See Settings, Main. Determines if settings are shown when displaying the digital clock (time of day) </comment>
+  </data>
+  <data name="SHOW_COUNTDOWN_FRAME" xml:space="preserve">
+    <value>Vis ramme</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
+    <value>Ur ramme</value>
+    <comment>See Settings =&gt;Timer window</comment>
+  </data>
+  <data name="COUNTDOWN_ZOOM" xml:space="preserve">
+    <value>Zoomniveau:</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="LOCATION_ON_SCREEN" xml:space="preserve">
+    <value>Lokation</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM" xml:space="preserve">
+    <value>Bund</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_LEFT" xml:space="preserve">
+    <value>Venstre bund</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_BOTTOM_RIGHT" xml:space="preserve">
+    <value>Højre Bund</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_CENTRE" xml:space="preserve">
+    <value>Center</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_LEFT" xml:space="preserve">
+    <value>Venstre</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_RIGHT" xml:space="preserve">
+    <value>Højre</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP" xml:space="preserve">
+    <value>Top</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_LEFT" xml:space="preserve">
+    <value>Venstre Top</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="SCREEN_LOCATION_TOP_RIGHT" xml:space="preserve">
+    <value>Højre Top</value>
+    <comment>See Settings =&gt; Countdown =&gt; Location</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Caption of the button that closes the snackbar</comment>
+  </data>
+  <data name="PORT_OPENED" xml:space="preserve">
+    <value>Port åbnet og reservation foretaget</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port is successfully opened.</comment>
+  </data>
+  <data name="PORT_OPEN_FAILED" xml:space="preserve">
+    <value>Kunne ikke åbne porten (se log)!</value>
+    <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
+  </data>
+  <data name="GENERATING_REPORT" xml:space="preserve">
+    <value>Tidsrapport genereret</value>
+    <comment>Displayed in the notification bar when the timing report is created</comment>
+  </data>
+  <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
+    <value>Generer rapport</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="CONCLUDING_SEGMENT" xml:space="preserve">
+    <value>Afsluttende Segment</value>
+    <comment>Title of the song and prayer segment at the end of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTERIM_SEGMENT" xml:space="preserve">
+    <value>Midtens Segment</value>
+    <comment>Title of the song segment in the middle of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="INTRO_SEGMENT" xml:space="preserve">
+    <value>Indledende Segment</value>
+    <comment>Title of the song and prayer segment at the beginning of a meeting (as it appears in the timing report)</comment>
+  </data>
+  <data name="LOGGING_LEVEL" xml:space="preserve">
+    <value>Logging level</value>
+    <comment>See Settings =&gt; Misc</comment>
+  </data>
+  <data name="LOG_LEVEL_DEBUG" xml:space="preserve">
+    <value>Debug</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_ERROR" xml:space="preserve">
+    <value>Fejl</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_FATAL" xml:space="preserve">
+    <value>Alvorlig</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_INFORMATION" xml:space="preserve">
+    <value>Information</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_VERBOSE" xml:space="preserve">
+    <value>Detaljeret</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="LOG_LEVEL_WARNING" xml:space="preserve">
+    <value>Advarsel</value>
+    <comment>See Settings =&gt; Miscellaneous =&gt; Logging level</comment>
+  </data>
+  <data name="ANALYSING_REPORT_DATA" xml:space="preserve">
+    <value>Analysere mødetimer-data</value>
+    <comment>Displayed in the notification bar before a timing report is generated</comment>
+  </data>
+  <data name="NO_REPORT" xml:space="preserve">
+    <value>Rapport IKKE genereret!</value>
+    <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
+  </data>
+  <data name="VIEW_REPORT" xml:space="preserve">
+    <value>VIS</value>
+    <comment>The caption of the button on the notification bar when a report has been created. Allows the user to display the report.</comment>
+  </data>
+  <data name="AUTO_BELL" xml:space="preserve">
+    <value>Lyd automatisk</value>
+    <comment>See Settings =&gt; Bell</comment>
+  </data>
+  <data name="SOUND_BELL" xml:space="preserve">
+    <value>Lyd klokken</value>
+    <comment>Tooltip displayed for manual bell button</comment>
+  </data>
+  <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
+    <value>Varighed (min.)</value>
+    <comment>See Settings =&gt;Countdown section</comment>
+  </data>
+  <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
+    <value>Elementer</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="DIAL" xml:space="preserve">
+    <value>Urskive</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIAL_AND_DIGITAL" xml:space="preserve">
+    <value>Urskive og digital</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="DIGITAL" xml:space="preserve">
+    <value>Digital</value>
+    <comment>See Settings =&gt;Countdown</comment>
+  </data>
+  <data name="COUNTDOWN_TRANSPARENT" xml:space="preserve">
+    <value>Transparant baggrund</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CONTROLLED_BY_CMD_LINE" xml:space="preserve">
+    <value>Bemærk, at skærmen styres af en kommandolinjeindstilling</value>
+    <comment>In Settings page. Displayed above the monitor name when it has been specified via the command-line)</comment>
+  </data>
+  <data name="TIMER_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Timer baggrund farve</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="CLOCK_BACKGROUND_COLOUR" xml:space="preserve">
+    <value>Timer baggrund farve</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="SHOW_TIMER_FRAME" xml:space="preserve">
+    <value>Timer ramme</value>
+    <comment>See Settings =&gt; Timer window</comment>
+  </data>
+  <data name="FLAT_CLOCK" xml:space="preserve">
+    <value>Fladt ur</value>
+    <comment>See Settings =&gt; Timer window. Refres to whether the analogue clock is flat or 3D</comment>
+  </data>
+  <data name="WEEKEND_INCLUDES_FRIDAY" xml:space="preserve">
+    <value>Weekend inkluderer fredag</value>
+    <comment>See Settings =&gt; Automatic mode</comment>
+  </data>
+  <data name="MONITOR_IS_WINDOWED" xml:space="preserve">
+    <value>I vindue</value>
+    <comment>See Settings =&gt; Main</comment>
+  </data>
+  <data name="COUNTDOWN_IS_WINDOWED" xml:space="preserve">
+    <value>I vindue</value>
+    <comment>See Settings =&gt; Countdown</comment>
+  </data>
+  <data name="CLOSE_COUNTDOWN_TOOLTIP" xml:space="preserve">
+    <value>Luk Nedtællingsvindue</value>
+    <comment>Tooltip for main window button</comment>
+  </data>
+  <data name="COUNTDOWN_STYLE_CONFLICT" xml:space="preserve">
+    <value>Kan ikke åbne transparent "i vindue" nedtælling</value>
+    <comment>Warning displayed when the user attempts to open the countdown timer in windowed mode with Transparency turned on.</comment>
+  </data>
+  <data name="TimersHtmlTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\timershtmltemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WEB_LINK_CLOCK" xml:space="preserve">
+    <value>Ur</value>
+    <comment>Link to clock on web interface</comment>
+  </data>
+  <data name="WEB_LINK_TIMERS" xml:space="preserve">
+    <value>Timere</value>
+    <comment>Link to timers on web interface</comment>
+  </data>
+  <data name="WEB_OFFLINE" xml:space="preserve">
+    <value>offline ...</value>
+    <comment>Text displayed in web interface</comment>
+  </data>
+  <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
+    <value>Gør mindre ved minimering</value>
+    <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
+  </data>
+  <data name="PRIMARY_MONITOR" xml:space="preserve">
+    <value>primær</value>
+    <comment>Used to designate the primary monitor</comment>
+  </data>
+  <data name="TIMER_ON_NDI" xml:space="preserve">
+    <value>Bemærk, at output er indstillet til NDI via en kommandolinjeindstilling.</value>
+    <comment>"NDI" is a proprietary video streaming technology.</comment>
+  </data>
+  <data name="TIMER_REMINDER_MSG" xml:space="preserve">
+    <value>Har du glemt at starte timeren?</value>
+    <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
+  </data>
+  <data name="TIMER_REMINDER" xml:space="preserve">
+    <value>Pop op-påmindelser</value>
+    <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
+  </data>
+  <data name="OVERRUN_MSG" xml:space="preserve">
+    <value>Mødet kører {0} minutter over tid</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="UNDERRUN_MSG" xml:space="preserve">
+    <value>Mødet kører {0} minutter foran tid</value>
+    <comment>Notification message</comment>
+  </data>
+  <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
+    <value>Over tid/Foran tid notifikationer</value>
+    <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
+  </data>
+  <data name="DARK_MODE" xml:space="preserve">
+    <value>Mørk tilstand</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
+    <value>Tillad musehjulet at justere timeren</value>
+    <comment>See Settings, Miscellaneous</comment>
+  </data>
+  <data name="START_TIMER" xml:space="preserve">
+    <value>Start timer</value>
+    <comment>Accessible name for the Start button on the operator page</comment>
+  </data>
+  <data name="STOP_TIMER" xml:space="preserve">
+    <value>Stop timer</value>
+    <comment>Accessible name for the Stop button on the operator page</comment>
+  </data>
+  <data name="EXPAND_WINDOW" xml:space="preserve">
+    <value>Udvid vindue</value>
+    <comment>Accessible name for the expand button shown in shrink mode</comment>
+  </data>
+  <data name="CLOSE_APP" xml:space="preserve">
+    <value>Luk programmet</value>
+    <comment>Accessible name for the close application button shown in shrink mode</comment>
+  </data>
+  <data name="TIMER_DISPLAY" xml:space="preserve">
+    <value>Timer skærm</value>
+    <comment>Accessible name for the timer display area on the operator page</comment>
+  </data>
+  <data name="BELL_TOGGLE" xml:space="preserve">
+    <value>Skift klokke</value>
+    <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
+  </data>
+  <data name="TALK_SELECTOR" xml:space="preserve">
+    <value>Vælg punkt</value>
+    <comment>Accessible name for the talk selector combo box on the operator page</comment>
+  </data>
+  <data name="BACK_TO_OPERATOR" xml:space="preserve">
+    <value>Tilbage til kontrolvinduet</value>
+    <comment>Accessible name for the back navigation button on the settings page</comment>
+  </data>
+  <data name="ENTER_VALID_DURATION" xml:space="preserve">
+    <value>Indtast venligst en gyldig varighed.</value>
+    <comment>Error msg displayed when manually entering a bad duration</comment>
+  </data>
+  <data name="ACCEPT_DURATION" xml:space="preserve">
+    <value>Accepter varighed</value>
+  </data>
+  <data name="EDIT_DURATION" xml:space="preserve">
+    <value>Rediger varighed</value>
+  </data>
+  <data name="PAUSE_TIMER" xml:space="preserve">
+    <value>Sæt timer på pause</value>
+  </data>
+  <data name="SHOW_PAUSE" xml:space="preserve">
+    <value>Vis pauseknap</value>
+  </data>
+</root>
