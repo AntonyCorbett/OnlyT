@@ -19,7 +19,7 @@
             flex-direction: column;
             min-height: 100%;
             margin: 0;
-            padding: 0 0 56px;
+            padding: 0;
             box-sizing: border-box;
         }
 
@@ -62,11 +62,8 @@
         }
 
         .link_container {
-            position: fixed;
-            right: 16px;
-            bottom: 12px;
             text-align: right;
-            z-index: 10;
+            padding: 12px 16px;
         }
 
         .link_container a,
@@ -162,10 +159,10 @@
 </head>
 
 <body>
+    <div class="link_container"><a href="./index">{WEB_LINK_CLOCK}</a></div>
     <div id="main" class="main">
         <span id="maintext" onclick="location.reload(); return false" style="display:none;"></span>
     </div>
-    <div class="link_container"><a href="./index">{WEB_LINK_CLOCK}</a></div>
 
     <script>
         "use strict";

@@ -11,17 +11,22 @@
 				background: #000000;
 				margin: 0;
 				height: 100%;
+				overflow: hidden;
 			}
 
 			body {
 				display: flex;
 				flex-direction: column;
 				height: 100%;
+				height: 100dvh;
+				overflow: hidden;
 				margin: 0;
 			}
 
 			#main {
 				flex: 1;
+				min-height: 0;
+				overflow: hidden;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -382,19 +387,31 @@
 
 			function updateTextSize() {
 				let curFontSize = 24;
-				const targetWidth = 0.9;
+				const target = 0.9;
 				for (let i = 0; i < 3; i++) {
-					const newFontSize = textElem.parentNode.offsetWidth * targetWidth / textElem.offsetWidth * curFontSize;
+					const parent = textElem.parentNode;
+					const byWidth = parent.offsetWidth * target / textElem.offsetWidth * curFontSize;
+					const byHeight = parent.offsetHeight * target / textElem.offsetHeight * curFontSize;
+					const newFontSize = Math.min(byWidth, byHeight);
 					textElem.style.fontSize = newFontSize.toFixed(3) + 'pt';
 					curFontSize = newFontSize;
 				}
 			}
 
+			function fitToViewport() {
+				const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+				document.body.style.height = h + 'px';
+				updateTextSize();
+			}
+
 			getOnlyTData();
 			updateClock();
-			updateTextSize();
+			fitToViewport();
 
-			window.addEventListener("resize", updateTextSize);
+			window.addEventListener('resize', fitToViewport);
+			if (window.visualViewport) {
+				window.visualViewport.addEventListener('resize', fitToViewport);
+			}
 		</script>
 	</body>
 </html>

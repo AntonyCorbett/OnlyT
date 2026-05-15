@@ -11,7 +11,9 @@
       "Bash(dotnet test *)",
       "Bash(dotnet script *)",
       "Bash(dotnet fsi *)",
-      "Bash(cat)"
+      "Bash(cat)",
+      "Bash(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\" -Directory)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\ProjectsPersonal\\\\OnlyT\\\\OnlyT.WebClient\" -Recurse -File | Where-Object {$_.Extension -in @\\('.html', '.css', '.js', '.ts', '.tsx'\\)} | Select-Object FullName)"
     ]
   }
 }
