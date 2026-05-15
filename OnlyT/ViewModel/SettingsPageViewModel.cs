@@ -1155,6 +1155,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
             // other supported languages
             CreateLanguageItem("ca-ES"),
             CreateLanguageItem("cs-CZ"),
+            CreateLanguageItem("da-DK"),
             CreateLanguageItem("de-DE"),
             CreateLanguageItem("el-GR"),
             CreateLanguageItem("en-US"),
