@@ -144,6 +144,9 @@
   <data name="SharedClockJs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SharedClockJsTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
+  <data name="SharedSnackbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SharedSnackbarTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
     <value>12-timers</value>
     <comment>The 12-hour clock format</comment>
@@ -571,6 +574,15 @@ Shift - Increase 5m</value>
   <data name="GENERATING_REPORT" xml:space="preserve">
     <value>Generert tidtakerrapport</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
+  </data>
+  <data name="SCHEDULE_FILE" xml:space="preserve">
+    <value>Schedule file</value>
+  </data>
+  <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
+    <value>Abandon current meeting and switch schedule file?</value>
+  </data>
+  <data name="SWITCH" xml:space="preserve">
+    <value>SWITCH</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Lag tidtakerrapport</value>
