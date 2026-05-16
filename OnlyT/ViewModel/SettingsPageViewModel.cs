@@ -1,28 +1,29 @@
 ﻿// ReSharper disable CatchAllClause
-using System.Diagnostics;
-using OnlyT.AutoUpdates;
-using OnlyT.Models;
-using OnlyT.Services.Bell;
-using OnlyT.Services.CountdownTimer;
-using OnlyT.Services.Monitors;
-using OnlyT.Services.Options;
-using OnlyT.Utils;
-using OnlyT.ViewModel.Messages;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Windows.Media.Imaging;
-using OnlyT.Common.Services.DateTime;
-using OnlyT.CountdownTimer;
-using OnlyT.Services.Snackbar;
-using Serilog;
-using Serilog.Events;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using OnlyT.AutoUpdates;
+using OnlyT.Common.Services.DateTime;
+using OnlyT.CountdownTimer;
+using OnlyT.Models;
+using OnlyT.Services.Bell;
 using OnlyT.Services.CommandLine;
+using OnlyT.Services.CountdownTimer;
+using OnlyT.Services.Monitors;
+using OnlyT.Services.Options;
+using OnlyT.Services.Snackbar;
+using OnlyT.Utils;
+using OnlyT.ViewModel.Messages;
+using Serilog;
+using Serilog.Events;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace OnlyT.ViewModel;
 
@@ -62,7 +63,8 @@ public class SettingsPageViewModel : ObservableObject, IPage
         // subscriptions...
         WeakReferenceMessenger.Default.Register<ShutDownMessage>(this, OnShutDown);
         WeakReferenceMessenger.Default.Register<BellStatusChangedMessage>(this, OnBellChanged);
-        
+        WeakReferenceMessenger.Default.Register<ScheduleFileNotFoundMessage>(this, OnScheduleFileNotFound);
+
         _optionsService = optionsService;
         _snackbarService = snackbarService;
         _monitorsService = monitorsService;
@@ -91,6 +93,15 @@ public class SettingsPageViewModel : ObservableObject, IPage
         TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
         OpenPortCommand = new RelayCommand(ReserveAndOpenPort);
         WebClockUrlLinkCommand = new RelayCommand(OpenWebClockLink);
+    }
+
+    private void OnScheduleFileNotFound(object recipient, ScheduleFileNotFoundMessage message)
+    {
+        Application.Current.Dispatcher.BeginInvoke(() =>
+        {
+            OnPropertyChanged(nameof(OperatingMode));
+            OnPropertyChanged(nameof(IsScheduleFileModeSelected));
+        });
     }
 
     public static string PageName => "SettingsPage";

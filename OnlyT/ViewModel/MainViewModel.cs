@@ -25,6 +25,7 @@ using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -109,6 +110,8 @@ public class MainViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<TimerStartMessage>(this, OnTimerStarted);
         WeakReferenceMessenger.Default.Register<TimerChangedMessage>(this, OnTimerChanged);
         WeakReferenceMessenger.Default.Register<TimerStopMessage>(this, OnTimerStopped);
+        WeakReferenceMessenger.Default.Register<OperatingModeChangedMessage>(this, OnOperatingModeChanged);
+        WeakReferenceMessenger.Default.Register<ScheduleFileChangedMessage>(this, OnScheduleFileChanged);
 
         InitHttpServer();
 
@@ -126,7 +129,30 @@ public class MainViewModel : ObservableObject
         InitHeartbeatTimer();
     }
 
+    private void OnScheduleFileChanged(object recipient, ScheduleFileChangedMessage message)
+    {
+        OnPropertyChanged(nameof(WindowTitle));
+    }
+
+    private void OnOperatingModeChanged(object recipient, OperatingModeChangedMessage message)
+    {
+        OnPropertyChanged(nameof(WindowTitle));
+    }
+
     public ISnackbarMessageQueue TheSnackbarMessageQueue => _snackbarService.TheSnackbarMessageQueue;
+
+    public string WindowTitle
+    {
+        get
+        {
+            if (_optionsService.Options.OperatingMode == OperatingMode.ScheduleFile)
+            {
+                return "OnlyT - " + Path.GetFileNameWithoutExtension(_optionsService.Options.ScheduleFile);
+            }
+
+            return "OnlyT";
+        }
+    }
 
     public FrameworkElement? CurrentPage
     {

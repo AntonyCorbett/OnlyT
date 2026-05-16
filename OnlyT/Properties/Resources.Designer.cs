@@ -1186,6 +1186,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schedule file not found - switching to manual mode.
+        /// </summary>
+        public static string SCHEDULE_FILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("SCHEDULE_FILE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bottom.
         /// </summary>
         public static string SCREEN_LOCATION_BOTTOM {

@@ -150,6 +150,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Register<MouseWheelTimerAdjustChangedMessage>(this, OnMouseWheelTimerAdjustChanged);
         WeakReferenceMessenger.Default.Register<EndOfMeetingMessage>(this, OnEndOfMeeting);
         WeakReferenceMessenger.Default.Register<ScheduleFileChangedMessage>(this, OnScheduleFileChanged);
+        WeakReferenceMessenger.Default.Register<ScheduleFileNotFoundMessage>(this, OnScheduleFileNotFound);
         
         GetVersionData();
 
@@ -1077,6 +1078,13 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
             Log.Logger.Error(ex, errMsg);
         }
+    }
+
+    private void OnScheduleFileNotFound(object recipient, ScheduleFileNotFoundMessage message)
+    {
+        _optionsService.Options.OperatingMode = OperatingMode.Manual;
+        WeakReferenceMessenger.Default.Send(new OperatingModeChangedMessage());
+        _snackbarService.Enqueue(Properties.Resources.SCHEDULE_FILE_NOT_FOUND);
     }
 
     private void OnAutoMeetingChanged(object recipient, AutoMeetingChangedMessage message)

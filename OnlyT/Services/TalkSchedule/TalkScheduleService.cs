@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using OnlyT.Services.CommandLine;
+using Serilog;
 
 namespace OnlyT.Services.TalkSchedule
 {
@@ -73,6 +74,17 @@ namespace OnlyT.Services.TalkSchedule
 
         public IEnumerable<TalkScheduleItem> GetTalkScheduleItems()
         {
+            if (_optionsService.Options.OperatingMode == OperatingMode.ScheduleFile)
+            {
+                var filePath = GetScheduleFilePath();
+                if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
+                {
+                    Log.Logger.Warning("Schedule file not found: {FilePath}. Reverting to manual mode.", filePath);
+                    WeakReferenceMessenger.Default.Send(new ScheduleFileNotFoundMessage());
+                    return _manualSchedule.Value;
+                }
+            }
+
             return _optionsService.Options.OperatingMode switch
             {
                 OperatingMode.ScheduleFile => _fileBasedSchedule.Value,
