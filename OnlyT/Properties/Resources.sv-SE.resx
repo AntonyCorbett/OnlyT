@@ -576,16 +576,16 @@ Shift - Öka 5m</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>Schemaläggningsfil</value>
   </data>
   <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
-    <value>Schedule file not found - switching to manual mode</value>
+    <value>Schemaläggningsfil hittades inte – växlar till manuellt läge</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandon current meeting and switch schedule file?</value>
+    <value>Avsluta pågående möte och byta schemaläggningsfil?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
-    <value>SWITCH</value>
+    <value>BYTA</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Skapa tidrapport</value>
