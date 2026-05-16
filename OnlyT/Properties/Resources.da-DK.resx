@@ -144,6 +144,9 @@
   <data name="SharedClockJs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SharedClockJsTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
+  <data name="SharedSnackbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SharedSnackbarTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
   <data name="CLOCK_FORMAT_12" xml:space="preserve">
     <value>12-timers</value>
     <comment>The 12-hour clock format</comment>
@@ -193,13 +196,13 @@
     <value>Midtugemøde</value>
   </data>
   <data name="MINISTRY1" xml:space="preserve">
-    <value>Forkyndelsen - Punkt 1</value>
+    <value>Bliv dygtigere forkyndere - Del 1</value>
   </data>
   <data name="MINISTRY2" xml:space="preserve">
-    <value>Forkyndelsen - Punkt 2</value>
+    <value>Bliv dygtigere forkyndere - Del 2</value>
   </data>
   <data name="MINISTRY3" xml:space="preserve">
-    <value>Forkyndelsen - Punkt 3</value>
+    <value>Bliv dygtigere forkyndere - Del 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
     <value>Automatisk</value>
@@ -321,7 +324,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Tillad tæl-op knap</value>
+    <value>Vis tæl-op knap</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -349,7 +352,7 @@
     <comment>Title for Settings, MEETING COUNTDOWN section. Please keep capitals. 	CLOSE_COUNTDOWN	CLOSE COUNTDOWN	Title of the CLOSE COUNTDOWN button on the main page. "Countdown" refers to the function that displays a countdown timer before the start of the meeting</comment>
   </data>
   <data name="CO_VISIT_TOGGLE" xml:space="preserve">
-    <value>Besøg af kredstilsynsmand knap</value>
+    <value>Vis besøg af kredstilsynsmand knap</value>
   </data>
   <data name="DIGITAL_CLOCK_FORMAT" xml:space="preserve">
     <value>Digitalt ur format</value>
@@ -403,15 +406,15 @@
     <comment>The operating mode (i.e. manual, auto or file-based)</comment>
   </data>
   <data name="PERSIST_STUDENT_TIME" xml:space="preserve">
-    <value>Forsæt med at vise elevens tid</value>
+    <value>Vis elevens tid efter opgave</value>
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_COUNTDOWN_BAR" xml:space="preserve">
-    <value>Vis nedtællingsbar ved "fortsæt med at vise elevens tid"</value>
+    <value>Vis nedtællingsbar ved ↑↑↑</value>
     <comment>Show a progress bar during the persist period that indicates how long remains</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
-    <value>Fortsæt med at vise elevens tid - længde</value>
+    <value>Vis elevens tid efter opgave - hvor længe</value>
     <comment>How long the talk timer is shown after the end of the item</comment>
   </data>
   <data name="PORT" xml:space="preserve">
@@ -446,7 +449,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Tidspunkt på dagen under timer</value>
+    <value>Vis ur under timer</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
