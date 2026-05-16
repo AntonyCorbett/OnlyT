@@ -576,13 +576,13 @@ Shift - Plus 5m</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>Tidsplan fil</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandon current meeting and switch schedule file?</value>
+    <value>Forlad nuværende møde og skift tidsplan fil?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
-    <value>SWITCH</value>
+    <value>SKIFT</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Generer rapport</value>
