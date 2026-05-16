@@ -578,6 +578,9 @@ Shift - Palielināt 5 min</value>
   <data name="SCHEDULE_FILE" xml:space="preserve">
     <value>Schedule file</value>
   </data>
+  <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
+    <value>Schedule file not found - switching to manual mode</value>
+  </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
     <value>Abandon current meeting and switch schedule file?</value>
   </data>
