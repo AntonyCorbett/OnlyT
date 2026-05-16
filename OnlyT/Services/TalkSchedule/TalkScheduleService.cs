@@ -131,10 +131,15 @@ namespace OnlyT.Services.TalkSchedule
             var fileName = _optionsService.Options.ScheduleFile;
             if (!string.IsNullOrEmpty(fileName))
             {
-                return Path.Combine(FileUtils.GetSchedulesFolderPath(), fileName);
+                var result = Path.Combine(FileUtils.GetSchedulesFolderPath(), fileName);
+                if (File.Exists(result))
+                {
+                    return result;
+                }
             }
 
-            return null;
+            var legacyPath = FileUtils.GetTalkSchedulePath();
+            return File.Exists(legacyPath) ? legacyPath : null;
         }
 
         private void OnTimerStopped(object recipient, TimerStopMessage message)
