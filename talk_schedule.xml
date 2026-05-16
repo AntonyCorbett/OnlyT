@@ -1,12 +1,15 @@
 <meeting>
 
+  <!--Create these files in your "Documents/OnlyT/TalkSchedules" folder. Give them descriptive names
+  so you can select them in the Settings page (Use Mode="file-based")-->
+
   <!--"name" is a mandatory descriptive name for the talk (it appears in a combobox at the top of the 
   main window)-->
 
   <!--"section" is an optional identifier referring to the section of the meeting in which the talk is 
-  scheduled. It's not used directly by OnlyT but remote control apps may use it-->
+  scheduled. It's not used directly by OnlyT, but remote control apps may use it-->
 
-  <!--"duration" is mandatory and specified the duration of the talk. The format is hr:mm:ss-->
+  <!--"duration" is mandatory and specifies the duration of the talk. The format is hr:mm:ss-->
 
   <!--"editable" is an optional attribute to determine whether the user can manually modify the item's
   duration  (false by default)-->
@@ -15,7 +18,7 @@
   duration (false by default)-->
 
   <!--Use the optional "countup" attribute to specify whether the timer should count up (true) or 
-  down (false). If you leave it empty or remove the attribute then the timer will use the value 
+  down (false). If you leave it empty or remove the attribute, then the timer will use the value 
   specified in the OnlyT Settings page-->
 
   <!--Use the optional "persist" attribute to specify that a timer value should remain on-screen after 
