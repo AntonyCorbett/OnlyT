@@ -139,7 +139,35 @@ namespace OnlyT.Services.TalkSchedule
             }
 
             var legacyPath = FileUtils.GetTalkSchedulePath();
-            return File.Exists(legacyPath) ? legacyPath : null;
+            if (File.Exists(legacyPath))
+            {
+                var legacyFileName = Path.GetFileName(legacyPath);
+                UpdateActiveScheduleFile(legacyFileName);
+                return legacyPath;
+            }
+
+            var schedulesFolder = FileUtils.GetSchedulesFolderPath();
+            var fallbackFile = Directory.GetFiles(schedulesFolder, "*.xml")
+                .Select(Path.GetFileName)
+                .OrderBy(n => n)
+                .FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(fallbackFile))
+            {
+                UpdateActiveScheduleFile(fallbackFile);
+                return Path.Combine(schedulesFolder, fallbackFile);
+            }
+
+            return null;
+        }
+
+        private void UpdateActiveScheduleFile(string fileName)
+        {
+            if (!string.Equals(_optionsService.Options.ScheduleFile, fileName, StringComparison.OrdinalIgnoreCase))
+            {
+                _optionsService.Options.ScheduleFile = fileName;
+                WeakReferenceMessenger.Default.Send(new ScheduleFileChangedMessage());
+            }
         }
 
         private void OnTimerStopped(object recipient, TimerStopMessage message)
