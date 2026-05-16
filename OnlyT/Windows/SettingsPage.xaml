@@ -149,16 +149,30 @@
                                 SelectedValuePath="Mode"
                                 Style="{StaticResource SettingsComboStyle}" />
 
-                            <ComboBox
-                                materialDesign:HintAssist.Hint="{x:Static resx:Resources.SCHEDULE_FILE}"
-                                AutomationProperties.AutomationId="ScheduleFileComboBox"
-                                AutomationProperties.Name="{x:Static resx:Resources.SCHEDULE_FILE}"
-                                DisplayMemberPath="DisplayName"
-                                ItemsSource="{Binding ScheduleFiles}"
-                                SelectedValue="{Binding ScheduleFile, Mode=TwoWay}"
-                                SelectedValuePath="FileName"
-                                Style="{StaticResource SettingsComboStyle}"
-                                Visibility="{Binding IsScheduleFileModeSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <StackPanel Orientation="Horizontal" >
+                                <ComboBox
+                                    materialDesign:HintAssist.Hint="{x:Static resx:Resources.SCHEDULE_FILE}"
+                                    AutomationProperties.AutomationId="ScheduleFileComboBox"
+                                    AutomationProperties.Name="{x:Static resx:Resources.SCHEDULE_FILE}"
+                                    DisplayMemberPath="DisplayName"
+                                    ItemsSource="{Binding ScheduleFiles}"
+                                    Width="282"
+                                    SelectedValue="{Binding ScheduleFile, Mode=TwoWay}"
+                                    SelectedValuePath="FileName"
+                                    Style="{StaticResource SettingsComboStyle}"
+                                    Visibility="{Binding IsScheduleFileModeSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                                <materialDesign:PackIcon
+                                    Width="18"
+                                    Height="18"
+                                    Margin="10,15"
+                                    VerticalAlignment="Top"
+                                    Cursor="Hand"
+                                    Kind="FolderOpen"
+                                    Visibility="{Binding IsScheduleFileModeSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    MouseLeftButtonDown="ScheduleFolderIconMouseLeftButtonDown" />
+
+                            </StackPanel>
 
                             <ComboBox
                                 materialDesign:HintAssist.Hint="{x:Static resx:Resources.DIGITAL_CLOCK_FORMAT}"

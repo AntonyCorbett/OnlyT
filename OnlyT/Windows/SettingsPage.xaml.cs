@@ -29,5 +29,17 @@ namespace OnlyT.Windows
 
             Process.Start(psi);
         }
+
+        private void ScheduleFolderIconMouseLeftButtonDown(
+            object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = FileUtils.GetSchedulesFolderPath(),
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
+        }
     }
 }

@@ -49,7 +49,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
     private readonly WebClockPortItem[] _ports;
     private readonly PersistDurationItem[] _persistDurationItems;
     private readonly LoggingLevel[] _loggingLevels;
-    private readonly ScheduleFileItem[] _scheduleFiles;
+    private readonly List<ScheduleFileItem> _scheduleFiles;
     
     public SettingsPageViewModel(
         IMonitorsService monitorsService,
@@ -86,7 +86,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
         _ports = GetPorts().ToArray();
         _persistDurationItems = Options.GetPersistDurationItems();
         _loggingLevels = GetLoggingLevels();
-        _scheduleFiles = GetScheduleFiles();
+        _scheduleFiles = GetScheduleFiles().ToList();
         
         // commands...
         NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
@@ -99,6 +99,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
     {
         Application.Current.Dispatcher.BeginInvoke(() =>
         {
+            RefreshScheduleFiles();
             OnPropertyChanged(nameof(OperatingMode));
             OnPropertyChanged(nameof(IsScheduleFileModeSelected));
         });
@@ -1003,6 +1004,16 @@ public class SettingsPageViewModel : ObservableObject, IPage
     {
         // may be changed on operator page...
         OnPropertyChanged(nameof(IsCircuitVisit));
+
+        // re-read schedule files in case they've changed...
+        RefreshScheduleFiles();
+    }
+
+    private void RefreshScheduleFiles()
+    {
+        var files = GetScheduleFiles();
+        _scheduleFiles.Clear();
+        _scheduleFiles.AddRange(files);
     }
 
     private void OnShutDown(object recipient, ShutDownMessage obj)
