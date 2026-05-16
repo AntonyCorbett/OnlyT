@@ -149,7 +149,8 @@ public class OperatorPageViewModel : ObservableObject, IPage
         WeakReferenceMessenger.Default.Register<MainWindowSizeChangedMessage>(this, OnWindowSizeChanged);
         WeakReferenceMessenger.Default.Register<MouseWheelTimerAdjustChangedMessage>(this, OnMouseWheelTimerAdjustChanged);
         WeakReferenceMessenger.Default.Register<EndOfMeetingMessage>(this, OnEndOfMeeting);
-
+        WeakReferenceMessenger.Default.Register<ScheduleFileChangedMessage>(this, OnScheduleFileChanged);
+        
         GetVersionData();
 
         if (commandLineService.Automate)
@@ -1059,6 +1060,26 @@ public class OperatorPageViewModel : ObservableObject, IPage
     {
         EditableTimerDuration = TimeFormatter.FormatTimerDisplayString(TargetSeconds);
         IsEditingTimerDuration = false;
+    }
+
+    private void OnScheduleFileChanged(object recipient, ScheduleFileChangedMessage message)
+    {
+        try
+        {
+            if (Log.IsEnabled(LogEventLevel.Debug))
+            {
+                Log.Logger.Debug("Meeting schedule file changing");
+            }
+
+            RefreshSchedule();
+        }
+        catch (Exception ex)
+        {
+            const string errMsg = "Could not handle change of meeting schedule file";
+            EventTracker.Error(ex, errMsg);
+
+            Log.Logger.Error(ex, errMsg);
+        }
     }
 
     private void OnAutoMeetingChanged(object recipient, AutoMeetingChangedMessage message)

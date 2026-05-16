@@ -335,22 +335,21 @@ namespace OnlyT.Properties {
         ///				background: #000000;
         ///				margin: 0;
         ///				height: 100%;
+        ///				overflow: hidden;
         ///			}
         ///
         ///			body {
         ///				display: flex;
         ///				flex-direction: column;
         ///				height: 100%;
+        ///				height: 100dvh;
+        ///				overflow: hidden;
         ///				margin: 0;
         ///			}
         ///
         ///			#main {
         ///				flex: 1;
-        ///				display: flex;
-        ///				align-items: center;
-        ///				justify-content: center;
-        ///			}
-        ///        /// [rest of string was truncated]&quot;;.
+        ///				min-height:  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ClockHtmlTemplate {
             get {
@@ -1104,7 +1103,7 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("PERSIST_COUNTDOWN_BAR", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Persist student time.
         /// </summary>
@@ -1174,6 +1173,15 @@ namespace OnlyT.Properties {
         public static string RESTART_LANGUAGE {
             get {
                 return ResourceManager.GetString("RESTART_LANGUAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule file.
+        /// </summary>
+        public static string SCHEDULE_FILE {
+            get {
+                return ResourceManager.GetString("SCHEDULE_FILE", resourceCulture);
             }
         }
         
@@ -1339,16 +1347,38 @@ namespace OnlyT.Properties {
                 return ResourceManager.GetString("SharedClockJs", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to the shared snackbar HTML and CSS.
+        ///   Looks up a localized string similar to &lt;style&gt;
+        ///#snackbar {
+        ///    display: flex;
+        ///    align-items: center;
+        ///    gap: 8px;
+        ///    min-width: 200px;
+        ///    max-width: 80%;
+        ///    background-color: rgba(40, 40, 40, 0.96);
+        ///    color: #fff;
+        ///    border-radius: 8px;
+        ///    padding: 10px 14px;
+        ///    position: fixed;
+        ///    bottom: 50px;
+        ///    left: 50%;
+        ///    transform: translateX(-50%);
+        ///    z-index: 1000;
+        ///    font-size: 0.75em;
+        ///    border: 1px solid rgba(255, 255, 255, 0.12);
+        ///    opacity: 0;
+        ///    pointer-events: none;
+        ///    transition: opacity 0.3s ease;
+        ///}
+        ///#s [rest of string was truncated]&quot;;.
         /// </summary>
         public static string SharedSnackbar {
             get {
                 return ResourceManager.GetString("SharedSnackbar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Generate reports.
         /// </summary>
@@ -1445,6 +1475,24 @@ namespace OnlyT.Properties {
         public static string STOP_TIMER {
             get {
                 return ResourceManager.GetString("STOP_TIMER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SWITCH.
+        /// </summary>
+        public static string SWITCH {
+            get {
+                return ResourceManager.GetString("SWITCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abandon current meeting and switch schedule file?.
+        /// </summary>
+        public static string SWITCH_SCHEDULE_CONFIRM {
+            get {
+                return ResourceManager.GetString("SWITCH_SCHEDULE_CONFIRM", resourceCulture);
             }
         }
         

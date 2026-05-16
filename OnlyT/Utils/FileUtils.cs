@@ -15,6 +15,7 @@
         private static readonly string TimingReportsDatabaseFolderName = "TimingReportsDatabase";
         private static readonly string CachedFeedFileName = "feed.json";
         private static readonly string TalkScheduleFileName = "talk_schedule.xml";
+        private static readonly string TalkSchedulesFolderName = "TalkSchedules";
 
         private static string? _documentFolderOverride = null;
         
@@ -99,6 +100,17 @@
         public static string GetTalkSchedulePath()
         {
             return Path.Combine(GetOnlyTMyDocsFolder(), TalkScheduleFileName);
+        }
+
+        /// <summary>
+        /// Gets the folder that contains user-defined talk schedule files.
+        /// </summary>
+        /// <returns>Folder path (created if it doesn't exist).</returns>
+        public static string GetSchedulesFolderPath()
+        {
+            var folder = Path.Combine(GetOnlyTMyDocsFolder(), TalkSchedulesFolderName);
+            Directory.CreateDirectory(folder);
+            return folder;
         }
 
         public static void OverrideDocumentFolder(string? value)

@@ -5,9 +5,11 @@ namespace OnlyT.Services.TalkSchedule
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using Models;
     using OnlyT.Common.Services.DateTime;
+    using OnlyT.Utils;
     using Options;
     using ViewModel.Messages;
 
@@ -50,7 +52,7 @@ namespace OnlyT.Services.TalkSchedule
         {
             var feedUri = _commandLineService.FeedUri;
 
-            _fileBasedSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleFileBased.Read(_optionsService.Options.AutoBell));
+            _fileBasedSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleFileBased.Read(_optionsService.Options.AutoBell, GetScheduleFilePath()));
             _autoSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleAuto.Read(_optionsService, _dateTimeService, feedUri, _isJanuary2020OrLater));
             _manualSchedule = new Lazy<IEnumerable<TalkScheduleItem>>(() => TalkScheduleManual.Read(_optionsService));
         }
@@ -110,6 +112,17 @@ namespace OnlyT.Services.TalkSchedule
             }
 
             return 0;
+        }
+
+        private string? GetScheduleFilePath()
+        {
+            var fileName = _optionsService.Options.ScheduleFile;
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                return Path.Combine(FileUtils.GetSchedulesFolderPath(), fileName);
+            }
+
+            return null;
         }
 
         private void OnTimerStopped(object recipient, TimerStopMessage message)

@@ -11,6 +11,8 @@ using OnlyT.ViewModel.Messages;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Windows.Media.Imaging;
 using OnlyT.Common.Services.DateTime;
 using OnlyT.CountdownTimer;
@@ -46,7 +48,8 @@ public class SettingsPageViewModel : ObservableObject, IPage
     private readonly WebClockPortItem[] _ports;
     private readonly PersistDurationItem[] _persistDurationItems;
     private readonly LoggingLevel[] _loggingLevels;
-        
+    private readonly ScheduleFileItem[] _scheduleFiles;
+    
     public SettingsPageViewModel(
         IMonitorsService monitorsService,
         IBellService bellService,
@@ -59,7 +62,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
         // subscriptions...
         WeakReferenceMessenger.Default.Register<ShutDownMessage>(this, OnShutDown);
         WeakReferenceMessenger.Default.Register<BellStatusChangedMessage>(this, OnBellChanged);
-
+        
         _optionsService = optionsService;
         _snackbarService = snackbarService;
         _monitorsService = monitorsService;
@@ -81,7 +84,8 @@ public class SettingsPageViewModel : ObservableObject, IPage
         _ports = GetPorts().ToArray();
         _persistDurationItems = Options.GetPersistDurationItems();
         _loggingLevels = GetLoggingLevels();
-
+        _scheduleFiles = GetScheduleFiles();
+        
         // commands...
         NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
         TestBellCommand = new RelayCommand(TestBell, IsNotPlayingBell);
@@ -112,6 +116,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    // ReSharper disable once InconsistentNaming
     public bool IsTimerMonitorOnNDI => _commandLineService.IsTimerNdi;
 
     public bool IsTimerMonitorViaCommandLine => _optionsService.IsTimerMonitorSetByCommandLine;
@@ -266,7 +271,24 @@ public class SettingsPageViewModel : ObservableObject, IPage
             {
                 _optionsService.Options.OperatingMode = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsScheduleFileModeSelected));
                 WeakReferenceMessenger.Default.Send(new OperatingModeChangedMessage());
+            }
+        }
+    }
+
+    public bool IsScheduleFileModeSelected => _optionsService.Options.OperatingMode == OperatingMode.ScheduleFile;
+
+    public string? ScheduleFile
+    {
+        get => _optionsService.Options.ScheduleFile;
+        set
+        {
+            if (_optionsService.Options.ScheduleFile != value)
+            {
+                _optionsService.Options.ScheduleFile = value;
+                OnPropertyChanged();
+                WeakReferenceMessenger.Default.Send(new ScheduleFileChangedMessage());
             }
         }
     }
@@ -585,6 +607,8 @@ public class SettingsPageViewModel : ObservableObject, IPage
     }
 
     public IEnumerable<LoggingLevel> LoggingLevels => _loggingLevels;
+
+    public IEnumerable<ScheduleFileItem> ScheduleFiles => _scheduleFiles;
 
     public LogEventLevel LogEventLevel
     {
@@ -1078,6 +1102,23 @@ public class SettingsPageViewModel : ObservableObject, IPage
         result.Add(new ClockHourFormatItem(Properties.Resources.CLOCK_FORMAT_24Z, ClockHourFormat.Format24LeadingZero));
 
         return result.ToArray();
+    }
+
+    private static ScheduleFileItem[] GetScheduleFiles()
+    {
+        try
+        {
+            var folder = FileUtils.GetSchedulesFolderPath();
+            return Directory.GetFiles(folder, "*.xml")
+                .Select(f => new ScheduleFileItem(Path.GetFileName(f)))
+                .OrderBy(f => f.DisplayName)
+                .ToArray();
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error(ex, "Could not read schedule files from TalkSchedules folder");
+            return [];
+        }
     }
 
     private void OnBellChanged(object recipient, BellStatusChangedMessage message)

@@ -86,6 +86,8 @@
 
         public OperatingMode OperatingMode { get; set; }
 
+        public string? ScheduleFile { get; set; }
+
         public ScreenLocation CountdownScreenLocation { get; set; }
 
         public MidWeekOrWeekend MidWeekOrWeekend { get; set; }

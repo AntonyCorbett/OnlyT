@@ -15,13 +15,13 @@ internal static class TalkScheduleFileBased
 {
     private static readonly int StartId = 5000;
 
-    public static List<TalkScheduleItem> Read(bool autoBell)
+    public static List<TalkScheduleItem> Read(bool autoBell, string? fullPath = null)
     {
         var result = new List<TalkScheduleItem>();
 
-        if (Exists())
+        var path = fullPath ?? GetFullPath();
+        if (File.Exists(path))
         {
-            var path = GetFullPath();
             try
             {
                 var x = XDocument.Load(path);
@@ -64,11 +64,6 @@ internal static class TalkScheduleFileBased
     private static string GetFullPath()
     {
         return FileUtils.GetTalkSchedulePath();
-    }
-
-    private static bool Exists()
-    {
-        return File.Exists(GetFullPath());
     }
 
     private static bool? AttributeToNullableBool(XAttribute? attribute, bool? defaultValue)
