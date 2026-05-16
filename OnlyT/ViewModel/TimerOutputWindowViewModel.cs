@@ -228,6 +228,7 @@ public class TimerOutputWindowViewModel : ObservableObject
     {
         if (obj.IsPaused)
         {
+            DurationSector = null;
             return;
         }
 
@@ -242,11 +243,12 @@ public class TimerOutputWindowViewModel : ObservableObject
     
     private void OnTimerStarted(object recipient, TimerStartMessage message)
     {
-        TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp 
+        TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp
             ? 0
             : message.TargetSeconds);
 
         IsRunning = true;
+        DurationSector = null;
         InitOverallDurationSector(0, message.TargetSeconds);
     }
 

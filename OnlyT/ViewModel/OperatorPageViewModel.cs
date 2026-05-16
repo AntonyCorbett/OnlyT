@@ -404,6 +404,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 _talkId = value;
                 _isPaused = false;
                 _pausedElapsedSecs = 0;
+                _secondsElapsed = 0;
                 _timerService.IsPaused = false;
 
                 var talk = GetCurrentTalk();
@@ -565,6 +566,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
         _isStarting = true;
         _secondsElapsed = 0;
+        OnPropertyChanged(nameof(CurrentTimerValueString));
         _timerService.IsPaused = false;
 
         RunFlashAnimation = false;
@@ -642,11 +644,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
                 _timerService.Start(resumedTargetSecs, talkId, _countUp);
             }
 
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                _pausedElapsedSecs = 0;
-                RaiseCanExecuteChanged();
-            });
+            Application.Current.Dispatcher.Invoke(RaiseCanExecuteChanged);
         });
     }
 
@@ -853,14 +851,13 @@ public class OperatorPageViewModel : ObservableObject, IPage
     private void TimerChangedHandler(object? sender, EventArgs.TimerChangedEventArgs e)
     {
         _isPaused = false;
-        _pausedElapsedSecs = 0;
         _timerService.IsPaused = false;
 
         TextColor = GreenYellowRedSelector.GetBrushForTimeRemaining(e.RemainingSecs, e.ClosingSecs);
-        _secondsElapsed = e.ElapsedSecs;
+        _secondsElapsed = _pausedElapsedSecs + e.ElapsedSecs;
         SetSecondsRemaining(e.RemainingSecs);
 
-        WeakReferenceMessenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, e.ElapsedSecs, e.IsRunning, e.ClosingSecs, _countUp));
+        WeakReferenceMessenger.Default.Send(new TimerChangedMessage(e.RemainingSecs, _pausedElapsedSecs + e.ElapsedSecs, e.IsRunning, e.ClosingSecs, _countUp));
 
         if (e.RemainingSecs == 0)
         {
@@ -1213,15 +1210,16 @@ public class OperatorPageViewModel : ObservableObject, IPage
             return;
         }
 
+        var totalElapsed = _pausedElapsedSecs + _timerService.CurrentSecondsElapsed;
         var msg = new TimerStopMessage(
             TalkId,
-            _timerService.CurrentSecondsElapsed,
+            totalElapsed,
             _optionsService.Options.PersistStudentTime && talk.PersistFinalTimerValue);
-            
+
+        _pausedElapsedSecs = 0;  // clear before Stop() so its synchronous TimerChangedHandler sees 0
         _timerService.Stop();
         _isStarting = false;
         _isPaused = false;
-        _pausedElapsedSecs = 0;
         _timerService.IsPaused = false;
 
         StoreTimerStopData();
@@ -1258,18 +1256,18 @@ public class OperatorPageViewModel : ObservableObject, IPage
         EventTracker.AddBreadcrumb(EventName.StoppingTimer, "timer:pausing");
 
         var elapsedSecs = _timerService.CurrentSecondsElapsed;
-        var pauseDurationSecs = _countUp
-            ? elapsedSecs
-            : Math.Max(_targetSeconds - elapsedSecs, 0);
+        var remainingSecs = Math.Max(_targetSeconds - elapsedSecs, 0);
+
+        // Accumulate before Stop() so TimerChangedHandler sees the correct value when
+        // Stop() fires the event synchronously (freezing the display at the right point).
+        _pausedElapsedSecs += elapsedSecs;
 
         _timerService.Stop();
 
         _isStarting = false;
         _isPaused = true;
-        _pausedElapsedSecs = elapsedSecs;
-        _secondsElapsed = 0;
         _timerService.IsPaused = true;
-        TargetSeconds = pauseDurationSecs;
+        TargetSeconds = remainingSecs;
 
         IsOvertime = false;
         TextColor = WhiteBrush;
@@ -1278,7 +1276,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         OnPropertyChanged(nameof(IsNotRunning));
         OnPropertyChanged(nameof(SettingsHint));
 
-        WeakReferenceMessenger.Default.Send(new TimerStopMessage(TalkId, elapsedSecs, false, true));
+        WeakReferenceMessenger.Default.Send(new TimerStopMessage(TalkId, _pausedElapsedSecs, false, true));
         RaiseCanExecuteChanged();
     }
 
