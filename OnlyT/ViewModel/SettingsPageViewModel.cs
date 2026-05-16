@@ -18,12 +18,14 @@ using Serilog;
 using Serilog.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace OnlyT.ViewModel;
 
@@ -49,7 +51,8 @@ public class SettingsPageViewModel : ObservableObject, IPage
     private readonly WebClockPortItem[] _ports;
     private readonly PersistDurationItem[] _persistDurationItems;
     private readonly LoggingLevel[] _loggingLevels;
-    private readonly List<ScheduleFileItem> _scheduleFiles;
+    private readonly ObservableCollection<ScheduleFileItem> _scheduleFiles;
+    private FileSystemWatcher? _scheduleFileWatcher;
     
     public SettingsPageViewModel(
         IMonitorsService monitorsService,
@@ -86,7 +89,7 @@ public class SettingsPageViewModel : ObservableObject, IPage
         _ports = GetPorts().ToArray();
         _persistDurationItems = Options.GetPersistDurationItems();
         _loggingLevels = GetLoggingLevels();
-        _scheduleFiles = GetScheduleFiles().ToList();
+        _scheduleFiles = new ObservableCollection<ScheduleFileItem>(GetScheduleFiles());
         
         // commands...
         NavigateOperatorCommand = new RelayCommand(NavigateOperatorPage);
@@ -99,7 +102,6 @@ public class SettingsPageViewModel : ObservableObject, IPage
     {
         Application.Current.Dispatcher.BeginInvoke(() =>
         {
-            RefreshScheduleFiles();
             OnPropertyChanged(nameof(OperatingMode));
             OnPropertyChanged(nameof(IsScheduleFileModeSelected));
         });
@@ -1005,15 +1007,86 @@ public class SettingsPageViewModel : ObservableObject, IPage
         // may be changed on operator page...
         OnPropertyChanged(nameof(IsCircuitVisit));
 
-        // re-read schedule files in case they've changed...
-        RefreshScheduleFiles();
+        StartScheduleFileWatcher();
+    }
+
+    public void Deactivated()
+    {
+        StopScheduleFileWatcher();
+    }
+
+    private void StartScheduleFileWatcher()
+    {
+        if (_scheduleFileWatcher != null)
+        {
+            return;
+        }
+
+        var folder = FileUtils.GetSchedulesFolderPath();
+        _scheduleFileWatcher = new FileSystemWatcher(folder, "*.xml")
+        {
+            NotifyFilter = NotifyFilters.FileName,
+            EnableRaisingEvents = true
+        };
+
+        _scheduleFileWatcher.Created += OnScheduleFolderChanged;
+        _scheduleFileWatcher.Deleted += OnScheduleFolderChanged;
+        _scheduleFileWatcher.Renamed += OnScheduleFolderChanged;
+    }
+
+    private void StopScheduleFileWatcher()
+    {
+        if (_scheduleFileWatcher == null)
+        {
+            return;
+        }
+
+        _scheduleFileWatcher.EnableRaisingEvents = false;
+        _scheduleFileWatcher.Created -= OnScheduleFolderChanged;
+        _scheduleFileWatcher.Deleted -= OnScheduleFolderChanged;
+        _scheduleFileWatcher.Renamed -= OnScheduleFolderChanged;
+        _scheduleFileWatcher.Dispose();
+        _scheduleFileWatcher = null;
+    }
+
+    private void OnScheduleFolderChanged(object sender, FileSystemEventArgs e)
+    {
+        Application.Current?.Dispatcher.BeginInvoke(
+            DispatcherPriority.Background,
+            new Action(RefreshScheduleFiles));
     }
 
     private void RefreshScheduleFiles()
     {
+        var selectedScheduleFile = _optionsService.Options.ScheduleFile;
         var files = GetScheduleFiles();
-        _scheduleFiles.Clear();
-        _scheduleFiles.AddRange(files);
+        var selectionStillExists = !string.IsNullOrEmpty(selectedScheduleFile) && files.Any(f => f.FileName == selectedScheduleFile);
+        var contentsChanged = _scheduleFiles.Count != files.Length || !_scheduleFiles.SequenceEqual(files);
+
+        if (contentsChanged)
+        {
+            _scheduleFiles.Clear();
+
+            foreach (var file in files)
+            {
+                _scheduleFiles.Add(file);
+            }
+
+            OnPropertyChanged(nameof(ScheduleFiles));
+        }
+
+        if (selectionStillExists)
+        {
+            _optionsService.Options.ScheduleFile = selectedScheduleFile;
+            OnPropertyChanged(nameof(ScheduleFile));
+            WeakReferenceMessenger.Default.Send(new ScheduleFileChangedMessage());
+        }
+        else if (!string.IsNullOrEmpty(selectedScheduleFile))
+        {
+            _optionsService.Options.ScheduleFile = null;
+            OnPropertyChanged(nameof(ScheduleFile));
+            WeakReferenceMessenger.Default.Send(new ScheduleFileChangedMessage());
+        }
     }
 
     private void OnShutDown(object recipient, ShutDownMessage obj)
