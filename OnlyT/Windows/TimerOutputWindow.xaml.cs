@@ -141,15 +141,21 @@ namespace OnlyT.Windows
             {
                 // when the settings page is displayed we ensure that the 
                 // display is split so that we can easily adjust the split 
-                // position...
-                var model = (TimerOutputWindowViewModel)DataContext;
-                model.TimeString = TimeFormatter.FormatTimerDisplayString(0);
-                DisplaySplitScreen();
+                // position... unless we're currently persisting
+                if (!_persistingTalkDuration)
+                {
+                    var model = (TimerOutputWindowViewModel)DataContext;
+                    model.TimeString = TimeFormatter.FormatTimerDisplayString(0);
+                    DisplaySplitScreen();
+                }
             }
             else if (message.OriginalPageName.Equals(SettingsPageViewModel.PageName))
             {
-                // restore to full screen time of day...
-                DisplayFullScreenTimeOfDay();
+                // restore to full screen time of day... unless we're currently persisting
+                if (!_persistingTalkDuration)
+                {
+                    DisplayFullScreenTimeOfDay();
+                }
             }
         }
 
@@ -287,7 +293,8 @@ namespace OnlyT.Windows
                 _persistingTalkDuration = false;
                 _persistTimer.Stop();
                 StopPersistBar();
-                // Timer panel is already visible during persist — no split-screen animation needed
+                // Ensure TimerPanel is visible after persist ends
+                TimerPanel.Opacity = 1.0;
             }
             else if (!model.SplitAndFullScreenModeIdentical())
             {
@@ -422,7 +429,7 @@ namespace OnlyT.Windows
             }
         }
 
-        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var isWindowed = ((TimerOutputWindowViewModel)DataContext).WindowedOperation;
 
