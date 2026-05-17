@@ -41,7 +41,7 @@ namespace OnlyT.Windows
             if (commandLineService.IsTimerNdi)
             {
                 NdiSender.IsSendPaused = false;
-                NdiSender.NdiName = "OnlyT"; // required to trigger initilisation of NDI
+                NdiSender.NdiName = "OnlyT"; // required to trigger initialisation of NDI
             }
 #pragma warning restore CA1416
 
