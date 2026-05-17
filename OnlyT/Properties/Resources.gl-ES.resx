@@ -324,7 +324,7 @@
     <comment>See Settings, Automatic Mode</comment>
   </data>
   <data name="ALLOW_COUNT_UP_TOGGLE" xml:space="preserve">
-    <value>Permitir cronómetro e conta atrás</value>
+    <value>Permitir o cronómetro e a conta atrás</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALWAYS_ON_TOP" xml:space="preserve">
@@ -383,7 +383,7 @@
     <value>Pantalla</value>
   </data>
   <data name="MOUSE_PTR" xml:space="preserve">
-    <value>Mostrar o punteiro do rato</value>
+    <value>Punteiro do rato</value>
   </data>
   <data name="MTG_START_NOTES1" xml:space="preserve">
     <value>Pon cada hora de inicio nunha liña.</value>
@@ -410,7 +410,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_COUNTDOWN_BAR" xml:space="preserve">
-    <value>Mostrar a barra de progreso durante o consello</value>
+    <value>Barra de progreso durante o consello</value>
     <comment>Show a progress bar during the persist period that indicates how long remains</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -426,7 +426,7 @@
     <comment>Title for Settings, REMOTE ACCESS section. Please keep capitals</comment>
   </data>
   <data name="SECTOR_ANALOG_CLOCK" xml:space="preserve">
-    <value>Mostrar o sector sobre o reloxo analóxico</value>
+    <value>Sector sobre o reloxo analóxico</value>
     <comment>The "sector" is the light green quadrant that appears on the analogue clock face to denote a talk duration</comment>
   </data>
   <data name="SPLIT_WIDTH" xml:space="preserve">
@@ -449,7 +449,7 @@
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
   </data>
   <data name="TIME_UNDER_TIMER" xml:space="preserve">
-    <value>Mostrar a hora debaixo do temporizador</value>
+    <value>Hora debaixo do temporizador</value>
     <comment>Show time of day underneath the timer</comment>
   </data>
   <data name="VOLUME" xml:space="preserve">
@@ -500,7 +500,7 @@ Shift - Aumentar 5min</value>
     <value>Activado</value>
   </data>
   <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
-    <value>Mostrar os segundos na hora do día</value>
+    <value>Segundos na hora do día</value>
     <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
@@ -512,7 +512,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt;Countdown</comment>
   </data>
   <data name="SHOW_CLOCK_FRAME" xml:space="preserve">
-    <value>Mostrar o marco do reloxo</value>
+    <value>Marco do reloxo</value>
     <comment>See Settings =&gt;Timer window</comment>
   </data>
   <data name="COUNTDOWN_ZOOM" xml:space="preserve">
@@ -576,13 +576,13 @@ Shift - Aumentar 5min</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>Ficheiro de programación</value>
   </data>
   <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
-    <value>Schedule file not found - switching to manual mode</value>
+    <value>Non se atopou o ficheiro de programación. Activouse o modo manual</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandonar a reunión actual e cambiar de ficheiro?</value>
+    <value>Abandonar a reunión actual e cambiar de ficheiro de programación?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
     <value>CAMBIAR</value>
@@ -688,7 +688,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="SHOW_TIMER_FRAME" xml:space="preserve">
-    <value>Mostrar o marco do temporizador</value>
+    <value>Marco do temporizador</value>
     <comment>See Settings =&gt; Timer window</comment>
   </data>
   <data name="FLAT_CLOCK" xml:space="preserve">
@@ -816,6 +816,6 @@ Shift - Aumentar 5min</value>
     <value>Poñer en pausa o temporizador</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Mostrar o botón de pausa</value>
+    <value>Botón de pausa</value>
   </data>
 </root>
