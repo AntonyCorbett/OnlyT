@@ -582,10 +582,10 @@ Shift - Aumentar 5min</value>
     <value>Schedule file not found - switching to manual mode</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandon current meeting and switch schedule file?</value>
+    <value>Abandonar a reunión actual e cambiar de ficheiro?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
-    <value>SWITCH</value>
+    <value>CAMBIAR</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Crear informes dos tempos</value>
