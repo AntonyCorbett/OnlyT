@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace OnlyT.ViewModel;
@@ -16,7 +17,7 @@ using Utils;
 // ReSharper disable once ClassNeverInstantiated.Global
 public class TimerOutputWindowViewModel : ObservableObject
 {
-    private static readonly int _secsPerHour = 60 * 60;
+    private static readonly int SecsPerHour = 60 * 60;
     private readonly IOptionsService _optionsService;
     private readonly IDateTimeService _dateTimeService;
     
@@ -256,7 +257,7 @@ public class TimerOutputWindowViewModel : ObservableObject
     {
         if (DurationSector == null && 
             _optionsService.Options.ShowDurationSector && 
-            remainingSecs < _secsPerHour)
+            remainingSecs < SecsPerHour)
         {
             // can't display duration sector effectively when >= 1 hr
 
@@ -272,7 +273,7 @@ public class TimerOutputWindowViewModel : ObservableObject
                 EndAngle = endAngle,
                 CurrentAngle = startAngle,
                 IsOvertime = false,
-                ShowElapsedSector = (elapsedSecs + remainingSecs) < _secsPerHour
+                ShowElapsedSector = (elapsedSecs + remainingSecs) < SecsPerHour
             };
         }
     }
@@ -307,7 +308,7 @@ public class TimerOutputWindowViewModel : ObservableObject
                     var d = DurationSector.Clone();
                     d.CurrentAngle = currentAngle;
                     d.IsOvertime = message.RemainingSecs < 0;
-                    d.ShowElapsedSector = (message.ElapsedSecs + message.RemainingSecs) <= _secsPerHour;
+                    d.ShowElapsedSector = (message.ElapsedSecs + message.RemainingSecs) <= SecsPerHour;
 
                     DurationSector = d;
                 }

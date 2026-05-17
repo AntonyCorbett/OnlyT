@@ -148,17 +148,17 @@
                     <Border
                         x:Name="PersistBarHost"
                         Grid.Row="1"
-                        Margin="0,10,0,0"
-                        Height="18"
+                        Margin="0,10,0,50"
+                        Height="36"
                         Background="#444444"
-                        CornerRadius="9"
+                        CornerRadius="18"
                         Visibility="Collapsed">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="PersistFillCol" Width="1*" />
                                 <ColumnDefinition x:Name="PersistEmptyCol" Width="0*" />
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Background="White" CornerRadius="9" />
+                            <Border Grid.Column="0" Background="White" CornerRadius="18" />
                         </Grid>
                     </Border>
 
