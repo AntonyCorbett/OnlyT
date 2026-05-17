@@ -152,7 +152,8 @@
                         Height="36"
                         Background="#444444"
                         CornerRadius="18"
-                        Visibility="Collapsed">
+                        Visibility="Hidden">
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="PersistFillCol" Width="1*" />
@@ -160,6 +161,7 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" Background="White" CornerRadius="18" />
                         </Grid>
+
                     </Border>
 
                 </Grid>

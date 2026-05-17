@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.Messaging;
@@ -111,6 +112,13 @@ namespace OnlyT.Windows
             PersistEmptyCol.Width = new GridLength(0, GridUnitType.Star);
             PersistBarHost.Visibility = Visibility.Visible;
 
+            // Apply rounded rectangle clip to mask the inner border within the outer border's shape
+            var persistGrid = (Grid)PersistBarHost.Child;
+            var clipGeometry = new RectangleGeometry(
+                new Rect(0, 0, PersistBarHost.ActualWidth, PersistBarHost.ActualHeight),
+                18, 18); // CornerRadius matches the Border's CornerRadius
+            persistGrid.Clip = clipGeometry;
+
             var duration = new Duration(TimeSpan.FromSeconds(_optionsService.Options.PersistDurationSecs));
 
             PersistFillCol.BeginAnimation(ColumnDefinition.WidthProperty, new GridLengthAnimation
@@ -132,7 +140,7 @@ namespace OnlyT.Windows
         {
             PersistFillCol.BeginAnimation(ColumnDefinition.WidthProperty, null);
             PersistEmptyCol.BeginAnimation(ColumnDefinition.WidthProperty, null);
-            PersistBarHost.Visibility = Visibility.Collapsed;
+            PersistBarHost.Visibility = Visibility.Hidden;
         }
 
         private void OnNavigate(object recipient, NavigateMessage message)
