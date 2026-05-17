@@ -576,16 +576,16 @@ Shift - dodaj 5 minut</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>Plik harmonogramu</value>
   </data>
   <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
-    <value>Schedule file not found - switching to manual mode</value>
+    <value>Nie znaleziono pliku harmonogramu – przechodzę do trybu ręcznego</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandon current meeting and switch schedule file?</value>
+    <value>Czy chcesz przerwać i przełączyć się na plik harmonogramu?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
-    <value>SWITCH</value>
+    <value>PRZEŁĄCZ</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Generuj raport pomiaru czasu</value>
@@ -795,25 +795,25 @@ Shift - dodaj 5 minut</value>
     <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
   </data>
   <data name="TALK_SELECTOR" xml:space="preserve">
-    <value>Select talk</value>
+    <value>Wybierz rozmowę</value>
     <comment>Accessible name for the talk selector combo box on the operator page</comment>
   </data>
   <data name="BACK_TO_OPERATOR" xml:space="preserve">
-    <value>Back to operator page</value>
+    <value>Powrót do strony operatora</value>
     <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
   <data name="ENTER_VALID_DURATION" xml:space="preserve">
-    <value>Please enter a valid duration.</value>
+    <value>Wprowadź prawidłowy czas trwania.</value>
     <comment>Error msg displayed when manually entering a bad duration</comment>
   </data>
   <data name="ACCEPT_DURATION" xml:space="preserve">
-    <value>Accept duration</value>
+    <value>Akceptuj czas trwania</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
-    <value>Edit duration</value>
+    <value>Edytuj czas trwania</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Wstrzymaj minutnik</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
     <value>Pokaż przycisk wstrzymania</value>
