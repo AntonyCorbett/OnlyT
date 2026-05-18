@@ -205,10 +205,10 @@
     <value>Ministero - Parte 3</value>
   </data>
   <data name="OP_MODE_AUTO" xml:space="preserve">
-    <value>Automatico</value>
+    <value>Automatica</value>
   </data>
   <data name="OP_MODE_FILE" xml:space="preserve">
-    <value>Basato su file</value>
+    <value>Basata su file</value>
   </data>
   <data name="OP_MODE_MANUAL" xml:space="preserve">
     <value>Manuale</value>
@@ -576,16 +576,16 @@ Maiusc - Aggiungi 5m</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>File di programmazione</value>
   </data>
   <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
-    <value>Schedule file not found - switching to manual mode</value>
+    <value>File di programmazione non trovato - passaggio alla modalità manuale</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandon current meeting and switch schedule file?</value>
+    <value>Abbandonare l'adunanza corrente e cambiare file di programmazione?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
-    <value>SWITCH</value>
+    <value>CAMBIA</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Genera rapporti</value>
