@@ -1,48 +1,23 @@
-﻿namespace OnlyT.Common.Services.DateTime
+namespace OnlyT.Common.Services.DateTime
 {
     using System;
+    using System.Diagnostics;
 
     // ReSharper disable once ClassNeverInstantiated.Global
     public class DateTimeService : IDateTimeService
     {
-        private readonly DateTime _localDateTimeAtStart;
-        private readonly DateTime? _forcedDateTimeAtStart;
-        
+        private readonly DateTime _baseTime;
+        private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
+
         public DateTimeService(DateTime? forceDateTimeAtStart)
         {
-            _forcedDateTimeAtStart = forceDateTimeAtStart;
-            _localDateTimeAtStart = DateTime.Now;
+            _baseTime = forceDateTimeAtStart ?? DateTime.Now;
         }
 
-        public DateTime Now()
-        {
-            if (_forcedDateTimeAtStart != null)
-            {
-                var interval = DateTime.Now - _localDateTimeAtStart;
-                return _forcedDateTimeAtStart.Value + interval;
-            }
+        public DateTime Now() => _baseTime + _stopwatch.Elapsed;
 
-            return DateTime.Now;
-        }
+        public DateTime UtcNow() => Now().ToUniversalTime();
 
-        public DateTime UtcNow()
-        {
-            if (_forcedDateTimeAtStart != null)
-            {
-                return Now().ToUniversalTime();
-            }
-
-            return DateTime.UtcNow;
-        }
-
-        public DateTime Today()
-        {
-            if (_forcedDateTimeAtStart != null)
-            {
-                return Now().Date;
-            }
-
-            return DateTime.Today;
-        }
+        public DateTime Today() => Now().Date;
     }
 }
