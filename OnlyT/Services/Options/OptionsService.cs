@@ -251,7 +251,30 @@ internal sealed class OptionsService : IOptionsService
             CommandLineMonitorOverride();
             CommandLineNdiOverride(_options);
 
+            ClearUnrecognisedMonitorIds(_options);
+
             SetCulture();
+        }
+    }
+
+    private void ClearUnrecognisedMonitorIds(Options options)
+    {
+        if (!options.MainMonitorIsWindowed && !string.IsNullOrEmpty(options.TimerMonitorId))
+        {
+            if (_monitorsService.GetMonitorItem(options.TimerMonitorId) == null)
+            {
+                Log.Logger.Warning("Timer monitor {MonitorId} not found; resetting to None", options.TimerMonitorId);
+                options.TimerMonitorId = null;
+            }
+        }
+
+        if (!options.CountdownMonitorIsWindowed && !string.IsNullOrEmpty(options.CountdownMonitorId))
+        {
+            if (_monitorsService.GetMonitorItem(options.CountdownMonitorId) == null)
+            {
+                Log.Logger.Warning("Countdown monitor {MonitorId} not found; resetting to None", options.CountdownMonitorId);
+                options.CountdownMonitorId = null;
+            }
         }
     }
 
