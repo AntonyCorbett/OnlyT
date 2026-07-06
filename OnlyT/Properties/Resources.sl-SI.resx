@@ -779,43 +779,43 @@ Shift — podaljšaj 5 min</value>
     <comment>Accessible name for the Stop button on the operator page</comment>
   </data>
   <data name="EXPAND_WINDOW" xml:space="preserve">
-    <value>Expand window</value>
+    <value>Razširi okno</value>
     <comment>Accessible name for the expand button shown in shrink mode</comment>
   </data>
   <data name="CLOSE_APP" xml:space="preserve">
-    <value>Close application</value>
+    <value>Zapri aplikacijo</value>
     <comment>Accessible name for the close application button shown in shrink mode</comment>
   </data>
   <data name="TIMER_DISPLAY" xml:space="preserve">
-    <value>Timer display</value>
+    <value>Prikaz časomera</value>
     <comment>Accessible name for the timer display area on the operator page</comment>
   </data>
   <data name="BELL_TOGGLE" xml:space="preserve">
-    <value>Toggle bell</value>
+    <value>Prikaz gumba za zvočni signal</value>
     <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
   </data>
   <data name="TALK_SELECTOR" xml:space="preserve">
-    <value>Select talk</value>
+    <value>Izberi govor</value>
     <comment>Accessible name for the talk selector combo box on the operator page</comment>
   </data>
   <data name="BACK_TO_OPERATOR" xml:space="preserve">
-    <value>Back to operator page</value>
+    <value>Nazaj na stran upravljanja</value>
     <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
   <data name="ENTER_VALID_DURATION" xml:space="preserve">
-    <value>Please enter a valid duration.</value>
+    <value>Prosimo vnesite veljavno trajanje.</value>
     <comment>Error msg displayed when manually entering a bad duration</comment>
   </data>
   <data name="ACCEPT_DURATION" xml:space="preserve">
-    <value>Accept duration</value>
+    <value>Potrdi trajanje</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
-    <value>Edit duration</value>
+    <value>Nastavi trajanje</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Pavziraj časomer</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Prikaži gumb za pavzo</value>
   </data>
 </root>
