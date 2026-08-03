@@ -302,7 +302,7 @@
     <value>Pomoč</value>
   </data>
   <data name="CIRCUIT_VISIT_BRACKETS" xml:space="preserve">
-    <value>[obisk okrajnega]</value>
+    <value>(obisk okrajnega)</value>
   </data>
   <data name="NEW_VERSION" xml:space="preserve">
     <value>Na voljo je nova različica!</value>
@@ -392,7 +392,7 @@
     <value>Uporabite katerikoli časovni format želite!</value>
   </data>
   <data name="MTG_START_NOTES3" xml:space="preserve">
-    <value>Dodate lahko ime dneva npr. "Tor. 19.15"</value>
+    <value>Dodate lahko ime dneva npr. »Tor. 19.15«</value>
   </data>
   <data name="NOTES" xml:space="preserve">
     <value>Opombe:</value>
