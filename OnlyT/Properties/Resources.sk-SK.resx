@@ -463,15 +463,15 @@
     <value>Reštartujte OnlyT po zmene jazyka.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease 1m
-Ctrl - Decrease 15s
-Shift - Decrease 5m</value>
+    <value>Mínus 1m
+Ctrl - Mínus 15s
+Shift - Mínus 5m</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase 1m
-Ctrl - Increase 15s
-Shift - Increase 5m</value>
+    <value>Plus 1m
+Ctrl - Plus 15s
+Shift - Plus 5m</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -500,7 +500,7 @@ Shift - Increase 5m</value>
     <value>Povoliť</value>
   </data>
   <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
-    <value>Show seconds in time of day</value>
+    <value>Zobraziť sekundy v dennej dobe</value>
     <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
@@ -576,10 +576,10 @@ Shift - Increase 5m</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>Súbor plánu</value>
   </data>
   <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
-    <value>Schedule file not found - switching to manual mode</value>
+    <value>Súbor plánu sa nenašiel - prepnutie do manuálneho režimu</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
     <value>Abandon current meeting and switch schedule file?</value>
@@ -739,11 +739,11 @@ Shift - Increase 5m</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>Výstup nastavený na NDI cez príkazový riadok.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
   <data name="TIMER_REMINDER_MSG" xml:space="preserve">
-    <value>Should you have started the timer?</value>
+    <value>Mali ste spustiť časovač?</value>
     <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
   </data>
   <data name="TIMER_REMINDER" xml:space="preserve">
@@ -751,15 +751,15 @@ Shift - Increase 5m</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
   <data name="OVERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes overtime</value>
+    <value>Zhromaždenie trvá o {0} minút viac</value>
     <comment>Notification message</comment>
   </data>
   <data name="UNDERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes undertime</value>
+    <value>Zhromaždenie trvá o {0} minút menej</value>
     <comment>Notification message</comment>
   </data>
   <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
-    <value>Overrun/Underrun notifications</value>
+    <value>Upozornenia na prekročenie/skrátenie</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
   <data name="DARK_MODE" xml:space="preserve">
@@ -771,19 +771,19 @@ Shift - Increase 5m</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="START_TIMER" xml:space="preserve">
-    <value>Start timer</value>
+    <value>Spustiť časovač</value>
     <comment>Accessible name for the Start button on the operator page</comment>
   </data>
   <data name="STOP_TIMER" xml:space="preserve">
-    <value>Stop timer</value>
+    <value>Zastaviť časovač</value>
     <comment>Accessible name for the Stop button on the operator page</comment>
   </data>
   <data name="EXPAND_WINDOW" xml:space="preserve">
-    <value>Expand window</value>
+    <value>Rozbaliť okno</value>
     <comment>Accessible name for the expand button shown in shrink mode</comment>
   </data>
   <data name="CLOSE_APP" xml:space="preserve">
-    <value>Close application</value>
+    <value>Ukončiť aplikáciu</value>
     <comment>Accessible name for the close application button shown in shrink mode</comment>
   </data>
   <data name="TIMER_DISPLAY" xml:space="preserve">
@@ -803,19 +803,19 @@ Shift - Increase 5m</value>
     <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
   <data name="ENTER_VALID_DURATION" xml:space="preserve">
-    <value>Please enter a valid duration.</value>
+    <value>Zadajte platnú dobu trvania.</value>
     <comment>Error msg displayed when manually entering a bad duration</comment>
   </data>
   <data name="ACCEPT_DURATION" xml:space="preserve">
     <value>Accept duration</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
-    <value>Edit duration</value>
+    <value>Upraviť trvanie</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Pozastaviť časovač</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Zobraziť tlačidlo pauzy</value>
   </data>
 </root>
