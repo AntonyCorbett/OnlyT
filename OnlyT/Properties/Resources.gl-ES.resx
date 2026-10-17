@@ -500,7 +500,7 @@ Shift - Aumentar 5min</value>
     <value>Activado</value>
   </data>
   <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
-    <value>Segundos na hora do día</value>
+    <value>Segundos na hora</value>
     <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
@@ -572,7 +572,7 @@ Shift - Aumentar 5min</value>
     <comment>See Settings =&gt; Remote Access. This is the message displayed in the snackbar when the port could not be opened.</comment>
   </data>
   <data name="GENERATING_REPORT" xml:space="preserve">
-    <value>Informe dos tempos creado correctamente</value>
+    <value>Informe de tempos creado correctamente</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
@@ -588,7 +588,7 @@ Shift - Aumentar 5min</value>
     <value>CAMBIAR</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
-    <value>Crear informes dos tempos</value>
+    <value>Crear informes de tempos</value>
     <comment>See Settings =&gt; Misc</comment>
   </data>
   <data name="CONCLUDING_SEGMENT" xml:space="preserve">
@@ -636,7 +636,7 @@ Shift - Aumentar 5min</value>
     <comment>Displayed in the notification bar before a timing report is generated</comment>
   </data>
   <data name="NO_REPORT" xml:space="preserve">
-    <value>Non se puido crear o informe dos tempos</value>
+    <value>Non se puido crear o informe de tempos</value>
     <comment>Displayed in the notification bar when there is insufficient timing data to create a report.</comment>
   </data>
   <data name="VIEW_REPORT" xml:space="preserve">
@@ -652,7 +652,7 @@ Shift - Aumentar 5min</value>
     <comment>Tooltip displayed for manual bell button</comment>
   </data>
   <data name="COUNTDOWN_DURATION_MINS" xml:space="preserve">
-    <value>Duración (minutos)</value>
+    <value>Duración (mins)</value>
     <comment>See Settings =&gt;Countdown section</comment>
   </data>
   <data name="COUNTDOWN_ELEMENTS" xml:space="preserve">
