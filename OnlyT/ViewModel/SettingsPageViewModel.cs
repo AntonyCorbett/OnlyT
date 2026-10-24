@@ -772,6 +772,20 @@ public class SettingsPageViewModel : ObservableObject, IPage
         }
     }
 
+    public bool ShowCountUpTarget
+    {
+        get => _optionsService.Options.ShowCountUpTarget;
+        set
+        {
+            if (_optionsService.Options.ShowCountUpTarget != value)
+            {
+                _optionsService.Options.ShowCountUpTarget = value;
+                OnPropertyChanged();
+                WeakReferenceMessenger.Default.Send(new ShowCountUpTargetChangedMessage());
+            }
+        }
+    }
+
     public int AnalogueClockWidthPercent
     {
         get => _optionsService.Options.AnalogueClockWidthPercent;

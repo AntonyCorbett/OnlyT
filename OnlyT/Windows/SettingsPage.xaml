@@ -396,6 +396,13 @@
                             Style="{StaticResource SettingsCheckBox}" />
 
                         <CheckBox
+                            AutomationProperties.AutomationId="ShowCountUpTargetCheckBox"
+                            AutomationProperties.Name="{x:Static resx:Resources.TIMER_COUNT_UP_SHOW_TARGET}"
+                            Content="{x:Static resx:Resources.TIMER_COUNT_UP_SHOW_TARGET}"
+                            IsChecked="{Binding ShowCountUpTarget, Mode=TwoWay}"
+                            Style="{StaticResource SettingsCheckBox}" />
+
+                        <CheckBox
                             AutomationProperties.AutomationId="ShowDurationSectorCheckBox"
                             AutomationProperties.Name="{x:Static resx:Resources.SECTOR_ANALOG_CLOCK}"
                             Content="{x:Static resx:Resources.SECTOR_ANALOG_CLOCK}"

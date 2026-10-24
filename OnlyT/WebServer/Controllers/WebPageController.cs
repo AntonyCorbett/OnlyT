@@ -96,7 +96,8 @@ internal sealed class WebPageController
                 Ms = timerInfo.Millisecs,
                 TargetSecs = timerInfo.TargetSecs,
                 ClosingSecs = timerInfo.ClosingSecs,
-                CountUp = timerInfo.IsCountingUp
+                CountUp = timerInfo.IsCountingUp,
+                ShowCountUpTarget = timerInfo.ShowCountUpTarget
             },
             ClockServerMode.Persist => new ClockData
             {
@@ -106,6 +107,7 @@ internal sealed class WebPageController
                 TargetSecs = timerInfo.TargetSecs,
                 ClosingSecs = timerInfo.ClosingSecs,
                 CountUp = timerInfo.IsCountingUp,
+                ShowCountUpTarget = timerInfo.ShowCountUpTarget,
                 ShowPersistBar = timerInfo.ShowPersistBar,
                 PersistRemainingMs = timerInfo.PersistRemainingMs,
                 PersistTotalMs = timerInfo.PersistTotalMs
@@ -125,6 +127,7 @@ internal sealed class WebPageController
         public int TargetSecs { get; set; }
         public int ClosingSecs { get; set; }
         public bool CountUp { get; set; }
+        public bool ShowCountUpTarget { get; set; }
         public bool Use24Hr { get; set; }
         public bool ShowSecs { get; set; }
         public bool ShowPersistBar { get; set; }

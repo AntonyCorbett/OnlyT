@@ -1699,6 +1699,15 @@ namespace OnlyT.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show target duration when counting up.
+        /// </summary>
+        public static string TIMER_COUNT_UP_SHOW_TARGET {
+            get {
+                return ResourceManager.GetString("TIMER_COUNT_UP_SHOW_TARGET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Timer display.
         /// </summary>
         public static string TIMER_DISPLAY {

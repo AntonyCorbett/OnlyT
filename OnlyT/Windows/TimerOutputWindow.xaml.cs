@@ -154,6 +154,7 @@ namespace OnlyT.Windows
                 {
                     var model = (TimerOutputWindowViewModel)DataContext;
                     model.TimeString = TimeFormatter.FormatTimerDisplayString(0);
+                    model.ClearCountUpTarget();
                     DisplaySplitScreen();
                 }
             }

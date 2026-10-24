@@ -34,6 +34,7 @@
 
 			#clocktext {
 				font-size: 24pt;
+				text-align: center;
 				font-kerning: none;
 				opacity: 1;
 				transition: color 0.3s ease, opacity 0.4s ease;
@@ -71,6 +72,13 @@
                 margin-left: 0.1em;
                 color: #b3b3b3;
             }
+
+			.count_up_target {
+				display: block;
+				font-size: 0.4em;
+				font-weight: normal;
+				color: #b3b3b3;
+			}
 
 			#persist-bar-container {
 				display: none;
@@ -143,6 +151,8 @@
 			let currentTargetSecs = 0;
 			let closingSecs = 30;
 			let currentlyCountingUp = false;
+			let showCountUpTarget = false;
+			let displayedText = '';
 			let timerStartDateTime = new Date();
 			let serverTimeOfDayAdjustment = 0;
 			const POLLING_INTERVAL_SECS = 1;
@@ -216,6 +226,7 @@
 								currentTargetSecs = data.targetSecs;
 								closingSecs = data.closingSecs;
 								currentlyCountingUp = data.countUp;
+								showCountUpTarget = data.showCountUpTarget;
 
 								const serverTimerElapsedMillisecs = (data.mins * 60000) + (data.secs * 1000) + data.ms;
 								const diffMillisecs = serverTimerElapsedMillisecs - timerElapsedMillisecs + (requestLatencyMillisecs / 2);
@@ -240,6 +251,7 @@
 								persistTargetSecs = data.targetSecs;
 								persistClosingSecs = data.closingSecs;
 								persistCountUp = data.countUp;
+								showCountUpTarget = data.showCountUpTarget;
 								if (data.showPersistBar && data.persistTotalMs > 0) {
 									persistEndTime = Date.now() + data.persistRemainingMs;
 									persistTotalMs = data.persistTotalMs;
@@ -282,9 +294,29 @@
 				return { main: base, secs: null };
 			}
 
+			function getCountUpDisplay(elapsedSecs, targetSecs) {
+				return {
+					main: getTimeDisplayStringCountingUp(elapsedSecs),
+					secs: null,
+					target: showCountUpTarget ? '\u21E5 ' + getTimeDisplayStringCountingUp(targetSecs) : null
+				};
+			}
+
+			function getDisplayText(display) {
+				return typeof display === 'string'
+					? display
+					: display.main + (display.secs ?? '') + (display.target ?? '');
+			}
+
 			function setClockDisplay(display) {
+				// remembered for change detection (the element's innerText isn't
+				// comparable since it includes a line break before the target)
+				displayedText = getDisplayText(display);
+
 				if (display.secs !== null && display.secs !== undefined) {
 					textElem.innerHTML = display.main + '<span class="tod_seconds">' + display.secs + '</span>';
+				} else if (display.target) {
+					textElem.innerHTML = display.main + '<span class="count_up_target">' + display.target + '</span>';
 				} else {
 					textElem.textContent = typeof display === 'string' ? display : display.main;
 				}
@@ -306,7 +338,7 @@
 						setClockColour(remainingSecs, closingSecs, textElem);
 						currentDisplayMode = currentMode;
 						return currentlyCountingUp
-							? getTimeDisplayStringCountingUp(clientTimerTotalElapsedSecs)
+							? getCountUpDisplay(clientTimerTotalElapsedSecs, currentTargetSecs)
 							: getTimeDisplayStringCountingDown(clientTimerTotalElapsedSecs, currentTargetSecs);
 					}
 
@@ -315,7 +347,7 @@
 						setClockColour(remainingSecs, persistClosingSecs, textElem);
 						currentDisplayMode = currentMode;
 						return persistCountUp
-							? getTimeDisplayStringCountingUp(persistElapsedSecs)
+							? getCountUpDisplay(persistElapsedSecs, persistTargetSecs)
 							: getTimeDisplayStringCountingDown(persistElapsedSecs, persistTargetSecs);
 					}
 
@@ -364,8 +396,8 @@
 							textElem.className = 'clockstyle_dim';
 						} else {
 							const newDisplay = getDisplayString();
-							const newText = typeof newDisplay === 'string' ? newDisplay : newDisplay.main + (newDisplay.secs ?? '');
-							const prevLength = textElem.innerText.length;
+							const newText = getDisplayText(newDisplay);
+							const prevLength = displayedText.length;
 							setClockDisplay(newDisplay);
 							if (newText.length !== prevLength) {
 								updateTextSize();

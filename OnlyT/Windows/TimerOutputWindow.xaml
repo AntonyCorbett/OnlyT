@@ -124,13 +124,24 @@
                                 <RowDefinition Height="2*" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock
-                                Grid.Row="0"
-                                HorizontalAlignment="Center"
-                                FontSize="40"
-                                FontWeight="Bold"
-                                Foreground="{Binding TextColor}"
-                                Text="{Binding TimeString}" />
+                            <StackPanel Grid.Row="0">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="40"
+                                    FontWeight="Bold"
+                                    Foreground="{Binding TextColor}"
+                                    Text="{Binding TimeString}" />
+
+                                <!--  target duration when counting up ("end at" arrow + duration)  -->
+                                <TextBlock
+                                    Margin="0,-4,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="16"
+                                    Foreground="#FFB3B3B3"
+                                    Visibility="{Binding IsCountUpTargetVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Run Text="&#x21E5; " /><Run Text="{Binding CountUpTargetString, Mode=OneWay}" />
+                                </TextBlock>
+                            </StackPanel>
 
                             <TextBlock
                                 Grid.Row="1"

@@ -35,6 +35,7 @@
             CountdownDurationMins = DefaultCountdownDurationMins;
             FullScreenClockMode = FullScreenClockMode.AnalogueAndDigital;
             ShowDurationSector = true;
+            ShowCountUpTarget = true;
             HttpServerPort = DefaultPort;
             PersistDurationSecs = 90;
             IsApiThrottled = true;
@@ -137,6 +138,8 @@
         public bool ShowDurationSector { get; set; }
 
         public bool CountUp { get; set; }
+
+        public bool ShowCountUpTarget { get; set; }
 
         public int HttpServerPort { get; set; }
 

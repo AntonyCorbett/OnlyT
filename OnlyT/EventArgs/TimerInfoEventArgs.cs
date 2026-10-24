@@ -20,6 +20,8 @@ public class TimerInfoEventArgs : System.EventArgs
 
     public bool IsCountingUp { get; set; }
 
+    public bool ShowCountUpTarget { get; set; }
+
     public int ClosingSecs { get; set; }
 
     public bool ShowPersistBar { get; set; }

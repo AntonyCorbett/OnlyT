@@ -259,6 +259,7 @@ public class MainViewModel : ObservableObject
             timerData.Millisecs = elapsed.Milliseconds;
             timerData.ClosingSecs = info.ClosingSecs;
             timerData.IsCountingUp = info.IsCountingUp;
+            timerData.ShowCountUpTarget = _optionsService.Options.ShowCountUpTarget;
         }
         else if (_dateTimeService.Now() < _persistUntil)
         {
@@ -268,6 +269,7 @@ public class MainViewModel : ObservableObject
             timerData.TargetSecs = _persistTargetSecs;
             timerData.ClosingSecs = _persistClosingSecs;
             timerData.IsCountingUp = _persistCountUp;
+            timerData.ShowCountUpTarget = _optionsService.Options.ShowCountUpTarget;
             timerData.ShowPersistBar = _optionsService.Options.ShowPersistCountdown;
             timerData.PersistRemainingMs = (int)(_persistUntil - _dateTimeService.Now()).TotalMilliseconds;
             timerData.PersistTotalMs = _optionsService.Options.PersistDurationSecs * 1000;

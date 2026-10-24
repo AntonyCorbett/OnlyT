@@ -23,6 +23,9 @@ public class TimerOutputWindowViewModel : ObservableObject
     
     private int _analogueClockColumnWidthPercentage = -1;
     private string? _timeString;
+    private string? _countUpTargetString;
+    private bool _isCountingUp;
+    private int _totalTargetSecs;
     private bool _isRunning;
     private Brush _textColor = GreenYellowRedSelector.GetGreenBrush();
     private DurationSector? _durationSector;
@@ -47,6 +50,7 @@ public class TimerOutputWindowViewModel : ObservableObject
         WeakReferenceMessenger.Default.Register<ClockHourFormatChangedMessage>(this, OnDigitalClockFormatChanged);
         WeakReferenceMessenger.Default.Register<AnalogueClockWidthChangedMessage>(this, OnAnalogueClockWidthChanged);
         WeakReferenceMessenger.Default.Register<ShowTimeOfDayUnderTimerChangedMessage>(this, OnShowTimeOfDayUnderTimerChanged);
+        WeakReferenceMessenger.Default.Register<ShowCountUpTargetChangedMessage>(this, OnShowCountUpTargetChanged);
         WeakReferenceMessenger.Default.Register<MousePointerInTimerDisplayChangedMessage>(this, OnMousePointerChanged);
         WeakReferenceMessenger.Default.Register<TimerFrameChangedMessage>(this, OnTimerFrameChanged);
         WeakReferenceMessenger.Default.Register<ClockIsFlatChangedMessage>(this, OnClockIsFlatChanged);
@@ -94,6 +98,24 @@ public class TimerOutputWindowViewModel : ObservableObject
             }
         }
     }
+
+    // shown under the timer value when counting up so the speaker
+    // knows when the talk should end, or null if not shown
+    public string? CountUpTargetString
+    {
+        get => _countUpTargetString;
+        private set
+        {
+            if (_countUpTargetString != value)
+            {
+                _countUpTargetString = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsCountUpTargetVisible));
+            }
+        }
+    }
+
+    public bool IsCountUpTargetVisible => CountUpTargetString != null;
 
     public DurationSector? DurationSector
     {
@@ -202,6 +224,12 @@ public class TimerOutputWindowViewModel : ObservableObject
         return _optionsService.Options.AnalogueClockWidthPercent == 100;
     }
 
+    public void ClearCountUpTarget()
+    {
+        _isCountingUp = false;
+        UpdateCountUpTargetString();
+    }
+
     private void OnShutDown(object recipient, ShutDownMessage obj)
     {
         ApplicationClosing = true;
@@ -210,6 +238,18 @@ public class TimerOutputWindowViewModel : ObservableObject
     private void OnShowTimeOfDayUnderTimerChanged(object recipient, ShowTimeOfDayUnderTimerChangedMessage message)
     {
         ShowTimeOfDayUnderTimer = _optionsService.Options.ShowTimeOfDayUnderTimer;
+    }
+
+    private void OnShowCountUpTargetChanged(object recipient, ShowCountUpTargetChangedMessage message)
+    {
+        UpdateCountUpTargetString();
+    }
+
+    private void UpdateCountUpTargetString()
+    {
+        CountUpTargetString = _isCountingUp && _optionsService.Options.ShowCountUpTarget
+            ? TimeFormatter.FormatTimerDisplayString(_totalTargetSecs)
+            : null;
     }
 
     private void OnAnalogueClockWidthChanged(object recipient, AnalogueClockWidthChangedMessage obj)
@@ -244,13 +284,18 @@ public class TimerOutputWindowViewModel : ObservableObject
     
     private void OnTimerStarted(object recipient, TimerStartMessage message)
     {
+        // when resuming after a pause, TargetSeconds is the time remaining
         TimeString = TimeFormatter.FormatTimerDisplayString(message.CountUp
-            ? 0
+            ? message.ElapsedSecs
             : message.TargetSeconds);
+
+        _isCountingUp = message.CountUp;
+        _totalTargetSecs = message.ElapsedSecs + message.TargetSeconds;
+        UpdateCountUpTargetString();
 
         IsRunning = true;
         DurationSector = null;
-        InitOverallDurationSector(0, message.TargetSeconds);
+        InitOverallDurationSector(message.ElapsedSecs, message.TargetSeconds);
     }
 
     private void InitOverallDurationSector(int elapsedSecs, int remainingSecs)
