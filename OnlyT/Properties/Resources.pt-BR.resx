@@ -410,7 +410,7 @@
     <comment>All the monitor to display the final student time for a little longer than normal</comment>
   </data>
   <data name="PERSIST_COUNTDOWN_BAR" xml:space="preserve">
-    <value>Show persist countdown bar</value>
+    <value>Mostrar barra de contagem regressiva persistente</value>
     <comment>Show a progress bar during the persist period that indicates how long remains</comment>
   </data>
   <data name="PERSIST_TALK_DURATION" xml:space="preserve">
@@ -445,7 +445,7 @@
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_COUNT_UP_SHOW_TARGET" xml:space="preserve">
-    <value>Show target duration when counting up</value>
+    <value>Mostrar duração em progressiva</value>
     <comment>When the timer counts up, also show the duration it is counting up to</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
@@ -467,15 +467,15 @@
     <value>Por favor reinicie o OnlyT depois de mudar o idioma.</value>
   </data>
   <data name="TIME_DECREASE" xml:space="preserve">
-    <value>Decrease 1m
-Ctrl - Decrease 15s
-Shift - Decrease 5m</value>
+    <value>Diminuir 1m
+Ctrl - Diminuir 15s
+Shift - Diminuir 5m</value>
     <comment>Tooltip displayed on "Minus" button to reduce time</comment>
   </data>
   <data name="TIME_INCREASE" xml:space="preserve">
-    <value>Increase 1m
-Ctrl - Increase 15s
-Shift - Increase 5m</value>
+    <value>Aumenta 1m
+Ctrl - Aumenta 15s
+Shift - Aumento 5m</value>
     <comment>Tooltip displayed on "Plus" button to increase time</comment>
   </data>
   <data name="MANUAL_MODE" xml:space="preserve">
@@ -504,7 +504,7 @@ Shift - Increase 5m</value>
     <value>Habilitado</value>
   </data>
   <data name="WEB_CLOCK_SHOW_TOD_SECONDS" xml:space="preserve">
-    <value>Show seconds in time of day</value>
+    <value>Mostrar segundos na hora do dia</value>
     <comment>See Settings, Clock section. Determines if seconds are shown in the web clock when displaying time of day.</comment>
   </data>
   <data name="SHOW_SECONDS" xml:space="preserve">
@@ -580,16 +580,16 @@ Shift - Increase 5m</value>
     <comment>Displayed in the notification bar when the timing report is created</comment>
   </data>
   <data name="SCHEDULE_FILE" xml:space="preserve">
-    <value>Schedule file</value>
+    <value>Arquivo de cronograma</value>
   </data>
   <data name="SCHEDULE_FILE_NOT_FOUND" xml:space="preserve">
-    <value>Schedule file not found - switching to manual mode</value>
+    <value>Arquivo de cronograma não encontrado - alternando para o modo manual</value>
   </data>
   <data name="SWITCH_SCHEDULE_CONFIRM" xml:space="preserve">
-    <value>Abandon current meeting and switch schedule file?</value>
+    <value>Abandonar reunião atual e trocar para arquivo de cronograma?</value>
   </data>
   <data name="SWITCH" xml:space="preserve">
-    <value>SWITCH</value>
+    <value>TROCAR</value>
   </data>
   <data name="SHOULD_GENERATE_REPORTS" xml:space="preserve">
     <value>Gerar relatórios</value>
@@ -735,91 +735,91 @@ Shift - Increase 5m</value>
     <comment>Text displayed in web interface</comment>
   </data>
   <data name="SHRINK_ON_MINIMISE" xml:space="preserve">
-    <value>Shrink on minimise</value>
+    <value>Diminuir ao minimizar</value>
     <comment>See Settings =&gt; Misc =&gt; Shrink on minimise</comment>
   </data>
   <data name="PRIMARY_MONITOR" xml:space="preserve">
-    <value>primary</value>
+    <value>principal</value>
     <comment>Used to designate the primary monitor</comment>
   </data>
   <data name="TIMER_ON_NDI" xml:space="preserve">
-    <value>Note that output is set to NDI via a command-line setting.</value>
+    <value>Note que a saída está definida como NDI através de uma configuração de linha de comando.</value>
     <comment>"NDI" is a proprietary video streaming technology.</comment>
   </data>
   <data name="TIMER_REMINDER_MSG" xml:space="preserve">
-    <value>Should you have started the timer?</value>
+    <value>Você esqueceu de iniciar o cronômetro?</value>
     <comment>Reminder msg that pops up if OnlyT thinks you may have forgotten!</comment>
   </data>
   <data name="TIMER_REMINDER" xml:space="preserve">
-    <value>Pop-up reminders</value>
+    <value>Lembretes por pop-up</value>
     <comment>See Settings =&gt; Misc =&gt; Pop-up reminders</comment>
   </data>
   <data name="OVERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes overtime</value>
+    <value>A reunião esta executando {0} minutos extra</value>
     <comment>Notification message</comment>
   </data>
   <data name="UNDERRUN_MSG" xml:space="preserve">
-    <value>The meeting is running {0} minutes undertime</value>
+    <value>A reunião está executando {0} minutos antes do horário</value>
     <comment>Notification message</comment>
   </data>
   <data name="OVERRUN_NOTIFICATIONS" xml:space="preserve">
-    <value>Overrun/Underrun notifications</value>
+    <value>Notificações de Tempo Excedido/Restante</value>
     <comment>See Settings =&gt; Misc =&gt; Overrun</comment>
   </data>
   <data name="DARK_MODE" xml:space="preserve">
-    <value>Dark mode</value>
+    <value>Modo escuro</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="ALLOW_MOUSE_WHEEL_TIMER_ADJUST" xml:space="preserve">
-    <value>Allow mouse wheel to adjust timer</value>
+    <value>Permitir a roda do mouse para ajustar o temporizador</value>
     <comment>See Settings, Miscellaneous</comment>
   </data>
   <data name="START_TIMER" xml:space="preserve">
-    <value>Start timer</value>
+    <value>Iniciar cronômetro</value>
     <comment>Accessible name for the Start button on the operator page</comment>
   </data>
   <data name="STOP_TIMER" xml:space="preserve">
-    <value>Stop timer</value>
+    <value>Parar cronômetro</value>
     <comment>Accessible name for the Stop button on the operator page</comment>
   </data>
   <data name="EXPAND_WINDOW" xml:space="preserve">
-    <value>Expand window</value>
+    <value>Expandir janela</value>
     <comment>Accessible name for the expand button shown in shrink mode</comment>
   </data>
   <data name="CLOSE_APP" xml:space="preserve">
-    <value>Close application</value>
+    <value>Fechar aplicativo</value>
     <comment>Accessible name for the close application button shown in shrink mode</comment>
   </data>
   <data name="TIMER_DISPLAY" xml:space="preserve">
-    <value>Timer display</value>
+    <value>Exibição do cronômetro</value>
     <comment>Accessible name for the timer display area on the operator page</comment>
   </data>
   <data name="BELL_TOGGLE" xml:space="preserve">
-    <value>Toggle bell</value>
+    <value>Alternar sinal sonoro</value>
     <comment>Accessible name for the bell toggle button when no specific tooltip is available</comment>
   </data>
   <data name="TALK_SELECTOR" xml:space="preserve">
-    <value>Select talk</value>
+    <value>Selecionar discurso</value>
     <comment>Accessible name for the talk selector combo box on the operator page</comment>
   </data>
   <data name="BACK_TO_OPERATOR" xml:space="preserve">
-    <value>Back to operator page</value>
+    <value>Voltar para a página do operador</value>
     <comment>Accessible name for the back navigation button on the settings page</comment>
   </data>
   <data name="ENTER_VALID_DURATION" xml:space="preserve">
-    <value>Please enter a valid duration.</value>
+    <value>Por favor, insira uma duração válida.</value>
     <comment>Error msg displayed when manually entering a bad duration</comment>
   </data>
   <data name="ACCEPT_DURATION" xml:space="preserve">
-    <value>Accept duration</value>
+    <value>Aceitar duração</value>
   </data>
   <data name="EDIT_DURATION" xml:space="preserve">
-    <value>Edit duration</value>
+    <value>Editar duração</value>
   </data>
   <data name="PAUSE_TIMER" xml:space="preserve">
-    <value>Pause timer</value>
+    <value>Pausar cronômetro</value>
   </data>
   <data name="SHOW_PAUSE" xml:space="preserve">
-    <value>Show pause button</value>
+    <value>Mostrar controle de pausa</value>
   </data>
 </root>
