@@ -64,6 +64,10 @@ public class MainViewModel : ObservableObject
     private int _persistClosingSecs;
     private bool _persistCountUp;
 
+    // time elapsed before the current timer run (non-zero after a pause), which
+    // the timer service doesn't know about
+    private int _timerElapsedOffsetSecs;
+
     public MainViewModel(
         IReminderService reminderService,
         IOverrunService overrunService,
@@ -247,10 +251,12 @@ public class MainViewModel : ObservableObject
         if (info.IsRunning)
         {
             timerData.Mode = ClockServerMode.Timer;
-            timerData.TargetSecs = info.TargetSeconds;
-            timerData.Mins = (int)info.ElapsedTime.TotalMinutes;
-            timerData.Secs = info.ElapsedTime.Seconds;
-            timerData.Millisecs = info.ElapsedTime.Milliseconds;
+            var elapsed = info.ElapsedTime + TimeSpan.FromSeconds(_timerElapsedOffsetSecs);
+
+            timerData.TargetSecs = info.TargetSeconds + _timerElapsedOffsetSecs;
+            timerData.Mins = (int)elapsed.TotalMinutes;
+            timerData.Secs = elapsed.Seconds;
+            timerData.Millisecs = elapsed.Milliseconds;
             timerData.ClosingSecs = info.ClosingSecs;
             timerData.IsCountingUp = info.IsCountingUp;
         }
@@ -274,7 +280,8 @@ public class MainViewModel : ObservableObject
 
     private void OnTimerStarted(object recipient, TimerStartMessage msg)
     {
-        _persistTargetSecs = msg.TargetSeconds;
+        _timerElapsedOffsetSecs = msg.ElapsedSecs;
+        _persistTargetSecs = msg.ElapsedSecs + msg.TargetSeconds;
         _persistCountUp = msg.CountUp;
     }
 

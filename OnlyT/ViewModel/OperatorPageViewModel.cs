@@ -582,7 +582,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
 
         var talkId = TalkId;
 
-        WeakReferenceMessenger.Default.Send(new TimerStartMessage(_targetSeconds, _countUp, talkId));
+        WeakReferenceMessenger.Default.Send(new TimerStartMessage(_targetSeconds, 0, _countUp, talkId));
         StoreTimerStartData();
 
         Task.Run(() =>
@@ -629,7 +629,7 @@ public class OperatorPageViewModel : ObservableObject, IPage
         var talkId = TalkId;
         var resumedTargetSecs = _targetSeconds;
 
-        WeakReferenceMessenger.Default.Send(new TimerStartMessage(resumedTargetSecs, _countUp, talkId));
+        WeakReferenceMessenger.Default.Send(new TimerStartMessage(resumedTargetSecs, _pausedElapsedSecs, _countUp, talkId));
 
         Task.Run(() =>
         {
