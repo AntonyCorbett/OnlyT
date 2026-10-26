@@ -445,7 +445,7 @@
     <comment>Counts up rather than down</comment>
   </data>
   <data name="TIMER_COUNT_UP_SHOW_TARGET" xml:space="preserve">
-    <value>Show target duration when counting up</value>
+    <value>Vis varighed ved optælling</value>
     <comment>When the timer counts up, also show the duration it is counting up to</comment>
   </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
