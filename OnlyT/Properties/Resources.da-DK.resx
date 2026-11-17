@@ -444,6 +444,10 @@
     <value>Timeren tæller op</value>
     <comment>Counts up rather than down</comment>
   </data>
+  <data name="TIMER_COUNT_UP_SHOW_TARGET" xml:space="preserve">
+    <value>Vis varighed ved optælling</value>
+    <comment>When the timer counts up, also show the duration it is counting up to</comment>
+  </data>
   <data name="TIMER_WIN_SECTION" xml:space="preserve">
     <value>TIMER VINDUE</value>
     <comment>Title for Settings, TIMER WINDOW section. Please keep capitals</comment>
